@@ -1,5 +1,5 @@
 ---
-name: "\U0001F6E0 Task"
+name: Task
 about: Task template
 title: ''
 labels: ''
