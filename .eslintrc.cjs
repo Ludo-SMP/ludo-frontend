@@ -16,7 +16,7 @@ module.exports = {
     // 중첩된 삼항연삼자 사용 금지
     'no-nested-ternary': 0,
     // 반복문으로 생성하는 요소에 key 강제
-    'react/jsx-key': 'warn',
+    'react/jsx-key': 'off',
     // 디버그 허용
     'no-debugger': 'off',
   },
