@@ -1,0 +1,9 @@
+.eslintrc.cjs
+package.json
+build
+public
+scripts
+*.d.ts
+
+tsconfig.json
+vite.config.ts
