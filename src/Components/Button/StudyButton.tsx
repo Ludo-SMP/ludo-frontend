@@ -6,7 +6,7 @@ export const StudyButton = () => {
 
 const StudyContainer = styled.button`
   border-radius: 8px;
-  background-color: #f2f3f3;
+  background-color: ${({ theme }) => theme.color.gray4};
   text-align: center;
   width: 156px;
   height: 46px;

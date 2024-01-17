@@ -5,7 +5,7 @@ export const FilterButton = () => {
 };
 
 const FilterContainer = styled.button`
-  border-radius: 8px;
+  border-radius: 24px;
   background-color: #f2f3f3;
   text-align: center;
   width: 156px;

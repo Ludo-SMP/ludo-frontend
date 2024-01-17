@@ -1,14 +1,15 @@
 import { DefaultTheme } from 'styled-components';
 
-const color = {
+export const color = {
   white: '#ffffff',
   black: '#000000',
   gray1: '#F2F3F3',
   gray2: '#D9D9D9',
   gray3: '#262D31',
+  gray4: '#858585',
 };
 
-const font = {
+export const font = {
   xxsmall: '0.5rem',
   xsmall: '0.75rem',
   small: '1rem',
