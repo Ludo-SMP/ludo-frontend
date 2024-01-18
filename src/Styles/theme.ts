@@ -13,6 +13,7 @@ export const color = {
 export const font = {
   xxsmall: '0.5rem',
   xsmall: '0.75rem',
+  small1: '18px',
   small: '1rem',
   medium: '1.25rem',
   large: '1.5rem',
