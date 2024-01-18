@@ -1,3 +1,10 @@
+import StudyCard from '../Components/StudyCard';
+import { studyCardInfoDummy } from '../Shared/dummy';
+
 export const Main = () => {
-  return <div>메인페이지!!</div>;
+  return (
+    <div>
+      <StudyCard {...studyCardInfoDummy} />
+    </div>
+  );
 };
