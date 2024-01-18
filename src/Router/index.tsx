@@ -14,7 +14,7 @@ export const Router = createBrowserRouter([
     element: <Login />,
   },
   {
-    path: ROUTER_PATH.my,
+    path: ROUTER_PATH.mypage,
     element: <My />,
   },
   //  라우터 추가할려면 path와 element 쓰면 됨
