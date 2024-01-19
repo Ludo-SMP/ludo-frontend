@@ -6,7 +6,7 @@ export interface BannerProps {
   src?: any;
   id?: number;
 }
-export const Banner: React.FC<BannerProps> = ({ src, brief, title }) => {
+const Banner: React.FC<BannerProps> = ({ src, brief, title }) => {
   return (
     <BannerWrapper>
       <div className="banner__contents">
@@ -70,3 +70,5 @@ const BannerWrapper = styled.div`
     }
   }
 `;
+
+export default Banner;
