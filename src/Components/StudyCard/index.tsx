@@ -1,11 +1,10 @@
 import styled from 'styled-components';
+import ActivityPosition, { Position } from './Position';
+import Tool from './Tool';
 
-type Position = '백엔드' | '프론트엔드' | '디자이너' | '기획';
-type Tool = 'React' | 'Java' | 'Spring' | 'Figma';
-type StudyType = '알고리즘' | '모의면접' | '프로젝트';
 type ActivityType = '온라인' | '오프라인' | '미정';
-
-export interface StudyInfoProps {
+export type StudyType = '알고리즘' | '모의 면접' | '프로젝트';
+export interface StudyInfo {
   studyType: StudyType;
   recruitDeadLine: string;
   studyName: string;
@@ -18,7 +17,7 @@ export interface StudyInfoProps {
   views: number;
 }
 
-export const StudyCard: React.FC<StudyInfoProps> = ({
+const StudyCard: React.FC<StudyInfo> = ({
   studyType,
   recruitDeadLine,
   studyName,
@@ -33,14 +32,16 @@ export const StudyCard: React.FC<StudyInfoProps> = ({
   return (
     <StudyCardWrapper>
       <StudyRecruitInfoWrapper>
-        <div className="study__type">{studyType}</div>
-        <div className="recruit__deadline">{recruitDeadLine}</div>
-        <div>마감</div>
+        <div className="study__type">[{studyType}]</div>
+        <div className="recruit__deadline">
+          <div>모집 마감일</div>
+          <span>{recruitDeadLine}</span>
+        </div>
       </StudyRecruitInfoWrapper>
       <StudyActivityInfoWrapper>
         <div className="study__name">{studyName}</div>
         <div>
-          <span className="title">프로젝트 진행기간</span>
+          <span className="title">진행기간</span>
           <span className="study__period">{studyPeriod}</span>
         </div>
         <div>
@@ -48,15 +49,14 @@ export const StudyCard: React.FC<StudyInfoProps> = ({
           <span className="activity__type">{activityType}</span>
         </div>
         <div className="activity__positions">
-          <span className="activity__position">{activityPositions[0]}</span>
-          <span className="activity__position">{activityPositions[1]}</span>
-          <span className="activity__position">{activityPositions[2]}</span>
-          <div></div>
+          {activityPositions?.map((activityPosition: Position) => {
+            return <ActivityPosition position={activityPosition} />;
+          })}
         </div>
         <div className="activity__tools">
-          <span className="activity__tool"></span>
-          <span className="activity__tool"></span>
-          <span className="activity__tool"></span>
+          {tools.map(() => {
+            return <Tool />;
+          })}
         </div>
       </StudyActivityInfoWrapper>
       <StudyAdditionalInfoWrapper>
@@ -76,19 +76,19 @@ export const StudyCard: React.FC<StudyInfoProps> = ({
 
 const StudyCardWrapper = styled.div`
   display: flex;
-  padding: 2rem 2.5rem;
+  padding: 1rem 1.5rem;
   flex-direction: column;
   align-items: flex-start;
   border-radius: 20px;
   border-color: ${(props) => props.theme.color.baseBlackAlpha10};
   background: ${(props) => props.theme.color.backgroundBgSurface};
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
-  width: 392px;
-  height: 368px;
+  width: 320px;
+  height: 300px;
 
   & .title {
     color: ${(props) => props.theme.color.fontTextActive};
-    font-size: 20px;
+    font-size: ${(props) => props.theme.font.medium};
     font-style: normal;
     font-weight: 500;
     line-height: 40px;
@@ -97,12 +97,16 @@ const StudyCardWrapper = styled.div`
 
 const StudyRecruitInfoWrapper = styled.div`
   display: flex;
-  gap: 0.75rem;
+  gap: 1.5rem;
   align-items: center;
   align-self: stretch;
-  margin-bottom: 0.75rem;
   font-size: ${(props) => props.theme.font.small};
   color: ${(props) => props.theme.color.fontTextMuted};
+
+  & > :last-child {
+    display: flex;
+    gap: 0.4rem;
+  }
 `;
 
 const StudyActivityInfoWrapper = styled.div`
@@ -111,7 +115,7 @@ const StudyActivityInfoWrapper = styled.div`
   align-items: flex-start;
   align-self: stretch;
   margin-bottom: 1.25rem;
-  gap: 0.25rem;
+  gap: 0.125rem;
   
   & > div {
     display: flex;
@@ -122,9 +126,9 @@ const StudyActivityInfoWrapper = styled.div`
   .activity {
     &__type {
       font-size: ${(props) => props.theme.font.medium};
-    font-weight: 500;
-    line-height: 2.5rem;
-    color: ${(props) => props.theme.color.fontTextMuted};
+      font-weight: 500;
+      line-height: 2.5rem;
+      color: ${(props) => props.theme.color.fontTextMuted};
     }
 
     &__positions {
@@ -134,33 +138,11 @@ const StudyActivityInfoWrapper = styled.div`
       gap: 0.5rem;
     }
 
-    &__position {
-      display: flex;
-      aligin-items: center;
-      text-align: center;
-      padding: 0.25rem 0.75rem;
-      border: 1px solid ${(props) => props.theme.color.baseBlackAlpha45};
-      border-radius: 1.5rem;
-      font-size: ${(props) => props.theme.font.xsmall};
-      font-weight: 600;
-      line-height: 1.5rem;
-      background: ${(props) => props.theme.color.backgroundBgSurface};
-      background-blend-mode: multiply;
-      color: rgba(0, 0, 0, 0.45);
-      
-    }
-
     &__tools {
       display; flex;
       justify-content: flex-start;
       padding: 0.25rem 0;
       gap: 1rem;
-    }
-
-    &__tool {
-      width: 32px;
-      height: 32px;
-      background-color: ${(props) => props.theme.color.gray2};
     }
   }  
   .study {
@@ -170,7 +152,6 @@ const StudyActivityInfoWrapper = styled.div`
       font-size: ${(props) => props.theme.font.large};
       font-weight: 700;
       line-height: 44px;
-      margin-bottom: 0.75rem;
       letter-spacing: -0.2px;
     }
 
