@@ -22,19 +22,18 @@ const FooterContainer = styled.section`
   background-color: ${({ theme }) => theme.color.gray1};
 `;
 
-const FooterWrapper = styled.div`
-  padding-left: 348px;
-  padding-top: 40px;
-  height: 204px;
-  flex-direction: row;
-`;
-
 const BorderBox = styled.span`
   width: 100%;
   height: 104px;
   border-bottom: 1px solid #444444;
   padding-bottom: 140px;
   align-items: center;
+`;
+const FooterWrapper = styled.div`
+  padding-left: 348px;
+  padding-top: 40px;
+  height: 204px;
+  flex-direction: row;
 `;
 
 const FooterText = styled.span`
@@ -44,8 +43,3 @@ const FooterText = styled.span`
   font-weight: 600;
   line-height: 18px;
 `;
-
-// const LineWrapper = styled.line`
-//   border-bottom: 10px solid #444444;
-//   padding-bottom: 100px;
-// `;
