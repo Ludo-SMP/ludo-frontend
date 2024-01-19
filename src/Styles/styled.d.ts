@@ -11,6 +11,12 @@ declare module 'styled-components' {
       gray2: string;
       gray3: string;
       gray4: string;
+      baseBlackAlpha10: string;
+      baseBlackAlpha85: string;
+      baseBlackAlpha45: string;
+      backgroundBgSurface: string;
+      fontTextMuted: string;
+      fontTextActive: string;
     };
 
     font: {

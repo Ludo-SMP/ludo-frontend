@@ -9,6 +9,12 @@ export const color = {
   gray2: '#D9D9D9',
   gray3: '#262D31',
   gray4: '#858585',
+  baseBlackAlpha10: 'rgba(0, 0, 0, 0.10))',
+  baseBlackAlpha85: `rgba(0, 0, 0, 0.85)`,
+  baseBlackAlpha45: 'rgba(0, 0, 0, 0.45)',
+  backgroundBgSurface: '#FFF',
+  fontTextMuted: 'rgba(0, 0, 0, 0.45)',
+  fontTextActive: `rgba(0, 0, 0, 0.85)`,
 };
 
 export const font = {
