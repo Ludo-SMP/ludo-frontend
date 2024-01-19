@@ -16,7 +16,7 @@ export const StudyButton = ({ children, onClick }: StudyProps) => {
 
 const StudyContainer = styled.button`
   border-radius: 24px;
-  background-color: ${({ theme }) => theme.color.white1};
+  background-color: ${({ theme }) => theme.color.white2};
   text-align: center;
   width: 148px;
   height: 46px;

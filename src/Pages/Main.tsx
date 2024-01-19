@@ -1,7 +1,7 @@
-import { FilterButton } from '../Components/Button/FilterButton';
-import { StudyButton } from '../Components/Button/StudyButton';
-import { Hamberger } from '../Assets/Hamberger';
-import { Alarm } from '../Assets/Alarm';
+// import { FilterButton } from '../Components/Button/FilterButton';
+// import { StudyButton } from '../Components/Button/StudyButton';
+// import { Hamberger } from '../Assets/Hamberger';
+// import { Alarm } from '../Assets/Alarm';
 import styled from 'styled-components';
 
 export const Main = () => {
