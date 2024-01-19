@@ -18,7 +18,7 @@ const StudyContainer = styled.button`
   border-radius: 24px;
   background-color: ${({ theme }) => theme.color.white1};
   text-align: center;
-  width: 160px;
+  width: 148px;
   height: 46px;
 `;
 
