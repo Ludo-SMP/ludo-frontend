@@ -4,6 +4,7 @@ import { My } from '../Pages/My';
 import { Login } from '../Pages/Login';
 import { CreateStudy } from '../Pages/Studies/CreateStudy';
 import { ModifyStudy } from '../Pages/Studies/ModifyStudy';
+import { GatherStudy } from '../Pages/Studies/GatherStudy';
 
 import App from '../App';
 
@@ -27,6 +28,10 @@ export const Router = createBrowserRouter([
   {
     path: ROUTER_PATH.ModifyStudy,
     element: <ModifyStudy />,
+  },
+  {
+    path: ROUTER_PATH.GatherStudy,
+    element: <GatherStudy />,
   },
   //  라우터 추가할려면 path와 element 쓰면 됨
 ]);

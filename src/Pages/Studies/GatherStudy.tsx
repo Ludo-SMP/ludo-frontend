@@ -5,7 +5,7 @@ import { StackButton } from '../../Components/Button/Studies/StackButton';
 import { Titlearea } from '../../Components/Textarea/Titlearea';
 import { Mainarea } from '../../Components/Textarea/Mainarea';
 import { SubmitButton } from '../../Components/Button/Studies/SubmitButton';
-export const ModifyStudy = () => {
+export const GatherStudy = () => {
   return (
     <>
       <BackHeader />
