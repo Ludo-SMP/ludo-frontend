@@ -7,5 +7,6 @@ export const ROUTER_PATH = {
   recruitments: '/studies/{study-id}/recruitments', //모집공고 상세 페이지
   study: '/studies/{study-id}', //스터디상세페이지
   CreateStudy: '/studies/create', //스터디생성페이지
+  ModifyStudy: 'studies/modify',
   decativate: '/deactivate', //회원탈퇴 페이지
 } as const;
