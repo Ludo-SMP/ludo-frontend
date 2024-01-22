@@ -11,7 +11,6 @@ export const BackHeader = () => {
 };
 
 const BackHeaderContainer = styled.section`
-  width: 100%;
   height: 160px;
   background-color: gray;
 `;
