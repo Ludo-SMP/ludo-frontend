@@ -26,7 +26,8 @@ export const font = {
   large: '1.5rem',
   xlarge: '1.75rem',
   xxlarge: '2rem',
-  xxxlarge: '3rem',
+  xxxlarge: '2.5rem',
+  xxxxlarge: '3rem',
 };
 
 const mediaQuery = (maxWidth: number): string => `@media (max-width: ${maxWidth}px)`;
