@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { ColumnDivider } from '../Common/Divider/ColumnDivider';
 
-export interface MemberProfileProps {
+type MemberProfileProps = {
   imgUrl?: string;
   nickName: string;
   email: string;
@@ -9,10 +9,10 @@ export interface MemberProfileProps {
   skillPosition: string;
 }
 
-const MemberProfile = ({ nickName, email, teamPosition, skillPosition }: MemberProfileProps) => {
+const MemberProfile = ({ imgUrl, nickName, email, teamPosition, skillPosition }: MemberProfileProps) => {
   return (
     <MemberProfileWrapper>
-      <div className="member__img"></div>
+      <div className="member__img">{imgUrl}</div>
       <div className="member__nickname">{nickName}</div>
       <div className="member__email">{email}</div>
       <div className="member__positions">
@@ -34,9 +34,8 @@ const MemberProfileWrapper = styled.div`
   height: 350px;
   border-radius: 20px;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  background: #fff
+  background: #fff;
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
-
   .member {
     &__img {
       width: 140px;

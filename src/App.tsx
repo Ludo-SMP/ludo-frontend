@@ -7,6 +7,7 @@ import { Footer } from './Components/Footer/Footer';
 import { RouterProvider } from 'react-router-dom';
 import { Router } from './Router/index.tsx';
 
+
 const App = () => {
   return (
     <ThemeProvider theme={theme}>

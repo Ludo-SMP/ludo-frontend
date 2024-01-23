@@ -5,7 +5,7 @@ import { InfoField } from '../../Components/Common/InfoField';
 import { RowDivider } from '../../Components/Common/Divider/RowDivider';
 import MemberProfile from '../../Components/MemberProfile';
 
-export const StudyDetail: React.FC = () => {
+export const StudyDetail = () => {
   return (
     <StudyDetailWrapper>
       <div className="study__detail__summary">
@@ -26,7 +26,7 @@ export const StudyDetail: React.FC = () => {
       </div>
       <div className="study__detail__infos">
         <div>
-          <BlankSquare />
+          <BlankSquare width="40px" />
           <div>스터디 정보</div>
         </div>
 
@@ -46,7 +46,7 @@ export const StudyDetail: React.FC = () => {
       </div>
       <div className="member__infos">
         <div>
-          <BlankSquare />
+          <BlankSquare width="40px" />
           <div>구성원</div>
         </div>
 
@@ -58,9 +58,27 @@ export const StudyDetail: React.FC = () => {
         </div>
         <RowDivider />
         <div className="member__profiles">
-          <MemberProfile nickName="Hyun" email="ksci195@hanmail.net" teamPosition="팀원" skillPosition="FE" />
-          <MemberProfile nickName="Hyun" email="ksci195@hanmail.net" teamPosition="팀장" skillPosition="BE" />
-          <MemberProfile nickName="Hyun" email="ksci195@hanmail.net" teamPosition="팀원" skillPosition="디자이너" />
+          <MemberProfile
+            nickName="Hyun"
+            email="ksci195@hanmail.net"
+            teamPosition="팀원"
+            skillPosition="FE"
+            position={''}
+          />
+          <MemberProfile
+            nickName="Hyun"
+            email="ksci195@hanmail.net"
+            teamPosition="팀장"
+            skillPosition="BE"
+            position={''}
+          />
+          <MemberProfile
+            nickName="Hyun"
+            email="ksci195@hanmail.net"
+            teamPosition="팀원"
+            skillPosition="디자이너"
+            position={''}
+          />
         </div>
       </div>
       <div className="study__btns">
@@ -128,7 +146,7 @@ const StudyDetailWrapper = styled.div`
     & > div:first-child {
       font-size: 1.5rem;
       font-weight: 800;
-      font-color: rgba(0, 0, 0, 0.85);
+      color: rgba(0, 0, 0, 0.85);
     }
 
     .button__section {
@@ -137,7 +155,7 @@ const StudyDetailWrapper = styled.div`
       padding: 5px 0;
       width: 280px;
       background-color: #f2f3f3;
-      radius: 8px;
+      border-radius: 8px;
     }
     button {
       color: inherit;
