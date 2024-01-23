@@ -2,9 +2,13 @@ import styled from 'styled-components';
 import { BackHeader } from '../../Components/Header/BackHeader';
 import { ContactButton } from '../../Components/Button/Studies/ContactButton';
 import { StackButton } from '../../Components/Button/Studies/StackButton';
+import { ProgressButton } from '../../Components/Button/Studies/ProgressButton';
+import { PlatformButton } from '../../Components/Button/Studies/PlatformButton';
 import { Titlearea } from '../../Components/Textarea/Titlearea';
 import { Mainarea } from '../../Components/Textarea/Mainarea';
 import { SubmitButton } from '../../Components/Button/Studies/SubmitButton';
+import { CalendarButton } from '../../Components/Button/Studies/CalendarButton';
+
 export const ModifyStudy = () => {
   return (
     <>
@@ -14,28 +18,28 @@ export const ModifyStudy = () => {
         <TopBox>
           <StudyTopInfo>
             <StudyWrapper>
-              진행방식
+              <ContentText>연락방법</ContentText>
               <ContactButton />
             </StudyWrapper>
             <StudyWrapper>
-              진행방식
-              <ContactButton />
+              <ContentText>진행방식</ContentText>
+              <ProgressButton />
             </StudyWrapper>
             <StudyWrapper>
-              진행방식
-              <ContactButton />
+              <ContentText>진행플랫폼</ContentText>
+              <PlatformButton />
             </StudyWrapper>
             <StudyWrapper>
-              진행방식
-              <ContactButton />
+              <ContentText>모집마감일</ContentText>
+              <CalendarButton />
             </StudyWrapper>
             <StudyWrapper>
-              진행방식
-              <ContactButton />
+              <ContentText>시작예정일</ContentText>
+              <CalendarButton />
             </StudyWrapper>
             <StudyWrapper>
-              진행방식
-              <ContactButton />
+              <ContentText>진행기간</ContentText>
+              <CalendarButton />
             </StudyWrapper>
           </StudyTopInfo>
         </TopBox>
@@ -43,19 +47,19 @@ export const ModifyStudy = () => {
         <MiddleBox>
           <StudyMiddleInfo>
             <StudyWrapper>
-              카테고리
+              <ContentText>카테고리</ContentText>
               <StackButton />
             </StudyWrapper>
             <StudyWrapper>
-              카테고리
+              <ContentText>기술스택</ContentText>
               <StackButton />
             </StudyWrapper>
             <StudyWrapper>
-              카테고리
+              <ContentText> 포지션</ContentText>
               <StackButton />
             </StudyWrapper>
             <StudyWrapper>
-              카테고리
+              <ContentText>모집인원</ContentText>
               <StackButton />
             </StudyWrapper>
           </StudyMiddleInfo>
@@ -63,11 +67,11 @@ export const ModifyStudy = () => {
         <StudyTitle>스터디 상세 안내</StudyTitle>
         <BottomBox>
           <BottomWrapper>
-            제목
+            <ContentText>제목</ContentText>
             <Titlearea />
           </BottomWrapper>
           <BottomWrapper>
-            내용
+            <ContentText>내용</ContentText>
             <Mainarea />
           </BottomWrapper>
         </BottomBox>
@@ -87,6 +91,7 @@ const StudyContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: left;
 `;
 const TopBox = styled.div`
   height: 306px;
@@ -100,6 +105,7 @@ const StudyTopInfo = styled.div`
   grid-template-columns: 392px 392px 392px;
   grid-template-rows: 150px 150px;
   gap: 24px 24px;
+  padding-bottom: 10px;
 `;
 
 const MiddleBox = styled.div`
@@ -147,4 +153,8 @@ const StudyTitle = styled.p`
   font-size: 28px;
   font-weight: bold;
   align-items: left;
+`;
+
+const ContentText = styled.p`
+  padding-bottom: 10px;
 `;
