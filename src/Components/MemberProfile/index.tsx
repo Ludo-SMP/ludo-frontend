@@ -30,8 +30,8 @@ const MemberProfileWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  width: 225px;
-  height: 260px;
+  width: 300px;
+  height: 350px;
   border-radius: 20px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   background: #fff
@@ -41,8 +41,9 @@ const MemberProfileWrapper = styled.div`
     &__img {
       width: 140px;
       height: 140px;
-      background-color: #F2F3F3;
-      border-radius: 70px;
+      border-radius: 50%;
+      background-color: ${(props) => props.theme.color.gray1};
+      
     }
 
     &__nickname {
