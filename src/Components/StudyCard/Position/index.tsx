@@ -1,27 +1,25 @@
 import styled from 'styled-components';
-export type Position = '백엔드' | '프론트엔드' | '기획' | '디자이너';
+export type PositionType = '백엔드' | '프론트엔드' | '기획' | '디자이너';
 
-export type PositionProps = { position?: Position };
+export type PositionProps = { position?: PositionType };
 
-const ActivityPosition: React.FC<PositionProps> = ({ position }) => {
-  return <ActivityPositionWrapper>{position}</ActivityPositionWrapper>;
+const Position = ({ position }: PositionProps) => {
+  return <PositionWrapper>{position}</PositionWrapper>;
 };
 
-const ActivityPositionWrapper = styled.div`
+const PositionWrapper = styled.div`
   display: flex;
-  aligin-items: center;
+  padding: 4px 12px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 24px;
+  border: 1px solid ${(props) => props.theme.color.gray5};
+  background: ${(props) => props.theme.color.gray5};
+  color: ${(props) => props.theme.color.white};
   text-align: center;
-  padding: 0.25rem 0.75rem;
-  border: 1px solid ${(props) => props.theme.color.baseBlackAlpha45};
-  border-radius: 1.5rem;
-  font-size: ${(props) => props.theme.font.xsmall};
-  font-weight: 600;
-  line-height: 1.5rem;
-  background: ${(props) => props.theme.color.backgroundBgSurface};
-  background-blend-mode: multiply;
-  color: rgba(0, 0, 0, 0.45);
-  & > div:first-child {
-  }
+  font-size: ${(props) => props.theme.font.small};
+  font-weight: 500;
+  line-height: 30px;
 `;
 
-export default ActivityPosition;
+export default Position;
