@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-interface BlankSquareProps {
-  width?: string;
+type BlankSquareProps = {
+  width: string;
   height?: string;
   color?: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 export const BlankSquare = ({ children }: BlankSquareProps) => {
