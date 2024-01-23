@@ -6,7 +6,7 @@ interface BlankSquareProps {
   color?: string;
 }
 
-export const BlankSquare: React.FC<BlankSquareProps> = ({ width, height, color }) => {
+export const BlankSquare: React.FC<BlankSquareProps> = () => {
   return <BlankSquareWrapper></BlankSquareWrapper>;
 };
 
