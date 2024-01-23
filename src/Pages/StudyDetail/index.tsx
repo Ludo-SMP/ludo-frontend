@@ -5,7 +5,7 @@ import { InfoField } from '../../Components/Common/InfoField';
 import { RowDivider } from '../../Components/Common/Divider/RowDivider';
 import MemberProfile from '../../Components/MemberProfile';
 
-export const StudyDetail: React.FC = () => {
+export const StudyDetail = () => {
   return (
     <StudyDetailWrapper>
       <div className="study__detail__summary">
@@ -146,7 +146,7 @@ const StudyDetailWrapper = styled.div`
     & > div:first-child {
       font-size: 1.5rem;
       font-weight: 800;
-      font-color: rgba(0, 0, 0, 0.85);
+      color: rgba(0, 0, 0, 0.85);
     }
 
     .button__section {
@@ -155,7 +155,7 @@ const StudyDetailWrapper = styled.div`
       padding: 5px 0;
       width: 280px;
       background-color: #f2f3f3;
-      radius: 8px;
+      border-radius: 8px;
     }
     button {
       color: inherit;

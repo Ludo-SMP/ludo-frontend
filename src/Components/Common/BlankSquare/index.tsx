@@ -7,7 +7,7 @@ type BlankSquareProps = {
   children?: React.ReactNode;
 };
 
-export const BlankSquare: React.FC<BlankSquareProps> = ({ children }: BlankSquareProps) => {
+export const BlankSquare = ({ children }: BlankSquareProps) => {
   return <BlankSquareWrapper>{children}</BlankSquareWrapper>;
 };
 

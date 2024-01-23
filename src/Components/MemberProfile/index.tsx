@@ -10,13 +10,7 @@ type MemberProfileProps = {
   skillPosition: any;
 };
 
-const MemberProfile: React.FC<MemberProfileProps> = ({
-  imgUrl,
-  nickName,
-  email,
-  teamPosition,
-  skillPosition,
-}: MemberProfileProps) => {
+const MemberProfile = ({ imgUrl, nickName, email, teamPosition, skillPosition }: MemberProfileProps) => {
   return (
     <MemberProfileWrapper>
       <div className="member__img">{imgUrl}</div>
