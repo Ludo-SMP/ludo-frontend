@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const ColumnDivider: React.FC = () => {
+export const ColumnDivider = () => {
   return <ColumnDividerWrapper></ColumnDividerWrapper>;
 };
 

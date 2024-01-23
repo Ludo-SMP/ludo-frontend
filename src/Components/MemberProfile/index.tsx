@@ -9,7 +9,7 @@ export interface MemberProfileProps {
   skillPosition: string;
 }
 
-const MemberProfile: React.FC<MemberProfileProps> = ({ nickName, email, teamPosition, skillPosition }) => {
+const MemberProfile = ({ nickName, email, teamPosition, skillPosition }: MemberProfileProps) => {
   return (
     <MemberProfileWrapper>
       <div className="member__img"></div>
