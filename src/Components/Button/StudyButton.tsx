@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export type StudyProps = {
-  // onClick: React.MouseEventHandler<HTMLButtonElement>;
   onClick: () => void;
   children?: React.ReactNode;
 };
