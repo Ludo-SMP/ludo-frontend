@@ -5,7 +5,7 @@ export const ROUTER_PATH = {
   mypage: '/mypage', //마이페이지
   recruitmentsCreate: '/studies/{study-id}/recruitments/create', //모집공고 생성
   recruitments: '/studies/{study-id}/recruitments', //모집공고 상세 페이지
-  study: '/studies/{study-id}', //스터디상세페이지
+  study: '/studies/:studyId', //스터디상세페이지
   CreateStudy: '/studies/create', //스터디생성페이지
   ModifyStudy: 'studies/modify',
   GatherStudy: 'studies/gather',
