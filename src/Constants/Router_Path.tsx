@@ -10,7 +10,7 @@ export const ROUTER_PATH = {
   login: '/login', //로그인페이지
   signup: '/signup', //회원가입
   mypage: '/mypage', //마이페이지
-  recruitmentsCreate: '/studies/{study-id}/recruitments/create', //모집공고 생성
+  recruitmentsCreate: '/studies/:studyId/recruitments/create', //모집공고 생성
   recruitments: '/studies/{study-id}/recruitments', //모집공고 상세 페이지
   study: '/studies/:studyId', //스터디상세페이지
   createStudy: '/studies/create', //스터디생성페이지

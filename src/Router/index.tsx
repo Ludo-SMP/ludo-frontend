@@ -4,6 +4,7 @@ import { MyPage } from '../Pages/MyPage';
 import { Login } from '../Pages/Login';
 import { StudyDetail } from '../Pages/StudyDetail';
 import { Main } from '../Pages/Main';
+import { Recruitment } from '../Pages/Recruitment';
 
 export const Router = createBrowserRouter([
   {
@@ -21,5 +22,9 @@ export const Router = createBrowserRouter([
   {
     path: ROUTER_PATH.study,
     element: <StudyDetail />,
+  },
+  {
+    path: ROUTER_PATH.recruitmentsCreate,
+    element: <Recruitment />,
   },
 ]);
