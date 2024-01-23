@@ -1,10 +1,9 @@
 import styled from 'styled-components';
-import { BlankSquare } from '../../Components/Common/BlankSquare';
 import { InfoField } from '../../Components/Common/InfoField';
 import { RowDivider } from '../../Components/Common/Divider/RowDivider';
 import { ColumnDivider } from '../../Components/Common/Divider/ColumnDivider';
 
-export const Recruitment: React.FC = () => {
+export const Recruitment = () => {
   return (
     <RecruitmentWrapper>
       <div className="study__title">

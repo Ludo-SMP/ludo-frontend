@@ -4,10 +4,11 @@ interface BlankSquareProps {
   width?: string;
   height?: string;
   color?: string;
+  children: React.ReactNode;
 }
 
-export const BlankSquare: React.FC<BlankSquareProps> = () => {
-  return <BlankSquareWrapper></BlankSquareWrapper>;
+export const BlankSquare = ({ children }: BlankSquareProps) => {
+  return <BlankSquareWrapper>{children}</BlankSquareWrapper>;
 };
 
 const BlankSquareWrapper = styled.div<{ width?: string; font?: string }>`
