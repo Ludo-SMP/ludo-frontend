@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 type Tool = 'React' | 'Java' | 'Spring' | 'Figma' | 'Java' | 'Javascript';
 
-const Tool: React.FC = () => {
+const Tool = () => {
   return <ToolWrapper></ToolWrapper>;
 };
 

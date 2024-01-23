@@ -1,16 +1,16 @@
 import styled from 'styled-components';
-import StudyCard, { StudyInfo, StudyType } from '../StudyCard';
+import StudyCard, { StudyInfo, StudyCategory } from '../StudyCard';
 
 export interface StudyCardListProps {
   studyInfos?: StudyInfo[];
-  studyType?: StudyType;
+  studyCategory?: StudyCategory;
 }
 
-const StudyCardList: React.FC<StudyCardListProps> = ({ studyType, studyInfos }) => {
+const StudyCardList: React.FC<StudyCardListProps> = ({ studyCategory, studyInfos }) => {
   return (
     <StudyCardListWrapper>
       <div className="studyList__info">
-        <div className="studylist__title">{`인기있는 ${studyType} 스터디`}</div>
+        <div className="studylist__title">{`인기있는 ${studyCategory} 스터디`}</div>
         <div className="more__button">더보기</div>
       </div>
       <div className="studyList">
