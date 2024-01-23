@@ -26,7 +26,7 @@ export const StudyDetail: React.FC = () => {
       </div>
       <div className="study__detail__infos">
         <div>
-          <BlankSquare />
+          <BlankSquare width="40px" />
           <div>스터디 정보</div>
         </div>
 
@@ -46,7 +46,7 @@ export const StudyDetail: React.FC = () => {
       </div>
       <div className="member__infos">
         <div>
-          <BlankSquare />
+          <BlankSquare width="40px" />
           <div>구성원</div>
         </div>
 
@@ -58,9 +58,27 @@ export const StudyDetail: React.FC = () => {
         </div>
         <RowDivider />
         <div className="member__profiles">
-          <MemberProfile nickName="Hyun" email="ksci195@hanmail.net" teamPosition="팀원" skillPosition="FE" />
-          <MemberProfile nickName="Hyun" email="ksci195@hanmail.net" teamPosition="팀장" skillPosition="BE" />
-          <MemberProfile nickName="Hyun" email="ksci195@hanmail.net" teamPosition="팀원" skillPosition="디자이너" />
+          <MemberProfile
+            nickName="Hyun"
+            email="ksci195@hanmail.net"
+            teamPosition="팀원"
+            skillPosition="FE"
+            position={''}
+          />
+          <MemberProfile
+            nickName="Hyun"
+            email="ksci195@hanmail.net"
+            teamPosition="팀장"
+            skillPosition="BE"
+            position={''}
+          />
+          <MemberProfile
+            nickName="Hyun"
+            email="ksci195@hanmail.net"
+            teamPosition="팀원"
+            skillPosition="디자이너"
+            position={''}
+          />
         </div>
       </div>
       <div className="study__btns">

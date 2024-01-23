@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 
-interface BlankSquareProps {
-  width?: string;
+type BlankSquareProps = {
+  width: string;
   height?: string;
   color?: string;
-}
+  children?: React.ReactNode;
+};
 
-export const BlankSquare: React.FC<BlankSquareProps> = ({ width, height, color }) => {
-  return <BlankSquareWrapper></BlankSquareWrapper>;
+export const BlankSquare: React.FC<BlankSquareProps> = ({ children }: BlankSquareProps) => {
+  return <BlankSquareWrapper>{children}</BlankSquareWrapper>;
 };
 
 const BlankSquareWrapper = styled.div<{ width?: string; font?: string }>`

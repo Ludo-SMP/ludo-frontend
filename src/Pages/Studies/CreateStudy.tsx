@@ -17,8 +17,12 @@ export const CreateStudy = () => {
         <TopBox>
           <StudyTopInfo>
             <StudyWrapper>
-              <ContentText>연락방법</ContentText>
-              연락방법
+              <ContentText>카테고리</ContentText>
+              <StackButton />
+            </StudyWrapper>
+            <StudyWrapper>
+              <ContentText>스터디 최대인원</ContentText>
+              <ProgressButton />
             </StudyWrapper>
             <StudyWrapper>
               <ContentText>진행방식</ContentText>
@@ -29,40 +33,15 @@ export const CreateStudy = () => {
               <PlatformButton />
             </StudyWrapper>
             <StudyWrapper>
-              <ContentText>모집마감일</ContentText>
-              <CalendarButton />
-            </StudyWrapper>
-            <StudyWrapper>
               <ContentText>시작예정일</ContentText>
               <CalendarButton />
             </StudyWrapper>
             <StudyWrapper>
               <ContentText>진행기간</ContentText>
-              진행기간
+              <CalendarButton />
             </StudyWrapper>
           </StudyTopInfo>
         </TopBox>
-        <StudyTitle>스터디 구성 안내</StudyTitle>
-        <MiddleBox>
-          <StudyMiddleInfo>
-            <StudyWrapper>
-              <ContentText>카테고리</ContentText>
-              <StackButton />
-            </StudyWrapper>
-            <StudyWrapper>
-              <ContentText>기술스택</ContentText>
-              기술스택
-            </StudyWrapper>
-            <StudyWrapper>
-              <ContentText> 포지션</ContentText>
-              포지션
-            </StudyWrapper>
-            <StudyWrapper>
-              <ContentText>스터디 최대인원</ContentText>
-              <StackButton />
-            </StudyWrapper>
-          </StudyMiddleInfo>
-        </MiddleBox>
         <StudyTitle>스터디 상세 안내</StudyTitle>
         <BottomBox>
           <BottomWrapper>
@@ -93,7 +72,7 @@ const StudyContainer = styled.div`
   text-align: left;
 `;
 const TopBox = styled.div`
-  height: 306px;
+  height: 600px;
   border-bottom: 1px solid #444444;
   padding-bottom: 40px;
   text-align: left;
@@ -101,24 +80,10 @@ const TopBox = styled.div`
 
 const StudyTopInfo = styled.div`
   display: grid;
-  grid-template-columns: 392px 392px 392px;
-  grid-template-rows: 150px 150px;
+  grid-template-columns: 600px 600px;
+  grid-template-rows: 150px 150px 150px;
   gap: 24px 24px;
   padding-bottom: 10px;
-`;
-
-const MiddleBox = styled.div`
-  height: 306px;
-  border-bottom: 1px solid #444444;
-  padding-bottom: 40px;
-  align-items: center;
-`;
-
-const StudyMiddleInfo = styled.div`
-  display: grid;
-  grid-template-columns: 600px 600px;
-  grid-template-rows: 150px 150px;
-  gap: 24px 24px;
 `;
 
 const BottomBox = styled.div`
