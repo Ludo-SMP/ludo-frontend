@@ -1,20 +1,20 @@
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from './Styles/globalStyles';
 import { theme } from './Styles/theme';
-import { Main } from './Pages/Main';
 import { MainLayout } from './Layout/MainLayout';
 import { Header } from './Components/Header/Header';
 import { Footer } from './Components/Footer/Footer';
-// import { BackHeader } from './Components/Header/BackHeader';
+import { RouterProvider } from 'react-router-dom';
+import { Router } from './Router/index.tsx';
+
 
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <MainLayout>
-        {/* <BackHeader /> */}
         <Header />
-        <Main />
+        <RouterProvider router={Router} />
         <Footer />
       </MainLayout>
     </ThemeProvider>

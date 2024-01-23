@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import StudyCardList from '../Components/StudyCardList';
+import StudyCardList from '../../Components/StudyCardList';
 import {
   bannerDummy,
   algorithmStudyCardListPropsDummy,
   interviewStudyCardListPropsDummy,
   projectStudyCardListPropsDummy,
-} from '../Shared/dummy';
-import Banner from '../Components/Banner';
+} from '../../Shared/dummy';
+import Banner from '../../Components/Banner';
 
 export const Main = () => {
   return (

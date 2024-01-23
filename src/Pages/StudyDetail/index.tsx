@@ -162,7 +162,6 @@ const StudyDetailWrapper = styled.div`
       font: inherit;
       margin: 0;
       background: inherit;
-      border: none;
       display: flex;
       align-items: center;
       padding: 0 12px;
@@ -214,14 +213,14 @@ const StudyDetailWrapper = styled.div`
 
     &__btn {
       display: flex;
-      width: 480px;
+      width: 460px;
       padding: 12px 12px;
       justify-content: center;
       align-items: center;
       border-radius: 8px;
-      border: none;
-      background: #f2f3f3;
-      color: rgba(0, 0, 0, 0.65);
+      background: ${(props) => props.theme.color.gray2};
+      color: ${(props) => props.theme.color.baseBlackAlpha65};
+      font-size: ${(props) => props.theme.font.small};
       gap: 8px;
     }
   }

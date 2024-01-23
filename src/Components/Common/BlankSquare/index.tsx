@@ -5,7 +5,7 @@ type BlankSquareProps = {
   height?: string;
   color?: string;
   children?: React.ReactNode;
-};
+}
 
 export const BlankSquare = ({ children }: BlankSquareProps) => {
   return <BlankSquareWrapper>{children}</BlankSquareWrapper>;
