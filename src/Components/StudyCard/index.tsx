@@ -203,16 +203,7 @@ const StudyAdditionalInfoWrapper = styled.div`
     border: 1px solid rgba(38, 45, 49, 0.2);
   }
 
-  .views {
-    & {
-      color: ${(props) => props.theme.color.fontTextMuted};
-      font-size: 14px;
-      font-weight: 500;
-    }
-
-    &__info {
-      padding: 0.2rem 0;
-    }
+  
   }
 `;
 

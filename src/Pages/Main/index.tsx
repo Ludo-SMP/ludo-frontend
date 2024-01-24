@@ -23,5 +23,5 @@ const ContentsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 40px;
-  margin: 40px 188px 80px 348px;
+  margin: 40px 348px 80px 348px;
 `;
