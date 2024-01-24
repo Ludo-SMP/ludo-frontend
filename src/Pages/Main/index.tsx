@@ -7,10 +7,12 @@ import {
   projectStudyCardListPropsDummy,
 } from '../../Shared/dummy';
 import Banner from '../../Components/Banner';
+import Gnb from '../../Components/Gnb';
 
 export const Main = () => {
   return (
     <ContentsWrapper>
+      <Gnb />
       <Banner {...bannerDummy} />
       <StudyCardList {...algorithmStudyCardListPropsDummy} />
       <StudyCardList {...interviewStudyCardListPropsDummy} />
