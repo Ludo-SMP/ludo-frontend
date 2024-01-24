@@ -58,27 +58,9 @@ export const StudyDetail = () => {
         </div>
         <RowDivider />
         <div className="member__profiles">
-          <MemberProfile
-            nickName="Hyun"
-            email="ksci195@hanmail.net"
-            teamPosition="팀원"
-            skillPosition="FE"
-            position={''}
-          />
-          <MemberProfile
-            nickName="Hyun"
-            email="ksci195@hanmail.net"
-            teamPosition="팀장"
-            skillPosition="BE"
-            position={''}
-          />
-          <MemberProfile
-            nickName="Hyun"
-            email="ksci195@hanmail.net"
-            teamPosition="팀원"
-            skillPosition="디자이너"
-            position={''}
-          />
+          <MemberProfile nickName="Hyun" email="ksci195@hanmail.net" teamPosition="팀원" skillPosition="FE" />
+          <MemberProfile nickName="Hyun" email="ksci195@hanmail.net" teamPosition="팀장" skillPosition="BE" />
+          <MemberProfile nickName="Hyun" email="ksci195@hanmail.net" teamPosition="팀원" skillPosition="디자이너" />
         </div>
       </div>
       <div className="study__btns">
@@ -219,7 +201,7 @@ const StudyDetailWrapper = styled.div`
       align-items: center;
       border-radius: 8px;
       background: ${(props) => props.theme.color.gray2};
-      color: ${(props) => props.theme.color.baseBlackAlpha65};
+      color: ${(props) => props.theme.color.black4};
       font-size: ${(props) => props.theme.font.small};
       gap: 8px;
     }
