@@ -6,7 +6,7 @@ export interface BannerProps {
   src?: any;
   id?: number;
 }
-const Banner: React.FC<BannerProps> = ({ src, brief, title }) => {
+const Banner = ({ src, brief, title }: BannerProps) => {
   return (
     <BannerWrapper>
       <div className="banner__contents">
