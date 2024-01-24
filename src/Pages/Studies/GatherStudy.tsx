@@ -59,7 +59,7 @@ export const GatherStudy = () => {
           </StudyMiddleInfo>
         </MiddleBox>
         <StudyMidBottom>
-          <StudyTitle>기본구성</StudyTitle>
+          <StudyTitle>스터디 기본구성</StudyTitle>
           <MiddleBottomWrapper>
             <ContentText>스터디 제목</ContentText>
             스터디 제목
@@ -69,15 +69,15 @@ export const GatherStudy = () => {
               <ContentText>카테고리</ContentText>
               카테고리
             </MiddleBottomWrapper>
-            <StudyWrapper>
+            <MiddleBottomWrapper>
               <ContentText>스터디 최대 인원</ContentText>
               스터디 최대 인원
-            </StudyWrapper>
+            </MiddleBottomWrapper>
           </MiddleBottomInfo>
         </StudyMidBottom>
 
         <BottomBox>
-          <StudyTitle>스터디 상세 안내</StudyTitle>
+          <StudyTitle>스터디 팀원 모집 공고 제목</StudyTitle>
           <BottomWrapper>
             <ContentText>제목</ContentText>
             <Titlearea />
@@ -112,7 +112,7 @@ const StudyTitle = styled.p`
 `;
 
 const ContentText = styled.p`
-  padding-bottom: 10px;
+  padding-bottom: 16px;
   font-weight: 500;
   line-height: 40px;
   font-size: 20px;
@@ -128,35 +128,34 @@ const StudyContainer = styled.div`
   text-align: left;
 `;
 const TopBox = styled.div`
-  height: 306px;
+  height: 310px;
   border-bottom: 1px solid #444444;
   padding-top: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 40px;
+  margin-bottom: 40px;
   text-align: left;
-  /* align-items: center;
-  padding-right: 200px; */
 `;
 
 const StudyTopInfo = styled.div`
   display: grid;
   grid-template-columns: 392px 392px 392px;
-  grid-template-rows: 90px 90px;
-  row-gap: 10px;
-  column-gap: 10px;
-  padding-bottom: 10px;
+  grid-template-rows: 100px 100px;
+  row-gap: 24px;
+  column-gap: 24px;
+  padding-bottom: 4px;
 `;
 
 const MiddleBox = styled.div`
-  height: 306px;
+  height: 200px;
   border-bottom: 1px solid #444444;
-  padding-top: 20px;
+  /* padding-top: 20px; */
   align-items: center;
 `;
 
 const StudyMiddleInfo = styled.div`
   display: grid;
   grid-template-columns: 392px 392px 392px;
-  grid-template-rows: 85px;
+  grid-template-rows: 50px;
 `;
 
 // 중간마지막
@@ -164,16 +163,16 @@ const StudyMiddleInfo = styled.div`
 const StudyMidBottom = styled.div`
   height: 340px;
   border-bottom: 1px solid #444444;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 40px;
+  padding-bottom: 40px;
   align-items: center;
   font-size: 20px;
 `;
 
 const MiddleBottomInfo = styled.div`
   display: grid;
-  grid-template-columns: 392px 392px;
-  grid-template-rows: 100px;
+  grid-template-columns: 600px 600px;
+  grid-template-rows: 80px;
   font-size: 20px;
   row-gap: 16px 16px;
   column-gap: 16px 16px;
@@ -185,7 +184,7 @@ const MiddleBottomWrapper = styled.section`
 `;
 
 const BottomBox = styled.div`
-  padding-top: 10px;
+  padding-top: 40px;
   align-items: left;
 `;
 
@@ -202,6 +201,7 @@ const StudyWrapper = styled.section`
 `;
 
 const ButtonBox = styled.div`
+  padding-top: 60px;
   display: flex;
   flex-direction: row;
   gap: 24px;

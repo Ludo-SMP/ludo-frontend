@@ -62,18 +62,18 @@ export const CreateStudy = () => {
 };
 
 const StudyContainer = styled.div`
-  height: 1500px;
-  padding-left: 320px;
-  padding-right: 320px;
+  height: 2000px;
+  padding-left: 348px;
+  padding-right: 348px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   text-align: left;
 `;
 const TopBox = styled.div`
-  height: 600px;
+  height: 310px;
   border-bottom: 1px solid #444444;
-  padding-bottom: 40px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   text-align: left;
 `;
 
