@@ -81,7 +81,7 @@ const StudyContainer = styled.div`
 const TopBox = styled.div`
   height: 250px;
   border-bottom: 1px solid #444444;
-  padding-top: 20px;
+  padding-top: 40px;
   padding-bottom: 20px;
   text-align: left;
 `;
@@ -90,12 +90,14 @@ const MiddleBox = styled.div`
   height: 300px;
   /* padding-top: 20px; */
   align-items: center;
+  padding-top: 40px;
 `;
 
 const MiddleCenterBox = styled.div`
   height: 250px;
   /* padding-top: 20px; */
   align-items: center;
+  padding-top: 40px;
 `;
 
 const StudyMiddleInfo = styled.div`

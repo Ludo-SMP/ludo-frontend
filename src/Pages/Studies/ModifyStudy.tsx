@@ -81,7 +81,7 @@ const StudyContainer = styled.div`
 const TopBox = styled.div`
   height: 250px;
   border-bottom: 1px solid #444444;
-  padding-top: 20px;
+  padding-top: 40px;
   padding-bottom: 20px;
   text-align: left;
 `;
@@ -90,12 +90,14 @@ const MiddleBox = styled.div`
   height: 300px;
   /* padding-top: 20px; */
   align-items: center;
+  padding-top: 40px;
 `;
 
 const MiddleCenterBox = styled.div`
   height: 250px;
   /* padding-top: 20px; */
   align-items: center;
+  padding-top: 40px;
 `;
 
 const StudyMiddleInfo = styled.div`
@@ -124,7 +126,8 @@ const MiddleBottomWrapper = styled.section`
 const MiddleWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding-bottom: 16px;
+  padding-bottom: 40px;
+  padding-top: 40px;
   font-size: 20px;
   border-bottom: 1px solid #444444;
 `;
@@ -156,6 +159,7 @@ const StudyTitle = styled.p`
   align-items: left;
   font-weight: 800;
   line-height: 50px;
+  padding-bottom: 16px;
 `;
 
 const ContentText = styled.p`
