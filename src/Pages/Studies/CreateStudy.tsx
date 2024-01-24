@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { BackHeader } from '../../Components/Header/BackHeader';
+// import { BackHeader } from '../../Components/Header/BackHeader';
 import { StackButton } from '../../Components/Button/Studies/StackButton';
 import { ProgressButton } from '../../Components/Button/Studies/ProgressButton';
 import { PlatformButton } from '../../Components/Button/Studies/PlatformButton';
@@ -11,7 +11,6 @@ import { CalendarButton } from '../../Components/Button/Studies/CalendarButton';
 export const CreateStudy = () => {
   return (
     <>
-      <BackHeader />
       <StudyContainer>
         <StudyTitle>스터디 기본 안내</StudyTitle>
         <TopBox>

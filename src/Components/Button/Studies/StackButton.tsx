@@ -18,7 +18,7 @@ export const StackButton = () => {
 };
 
 const ButtonConTainer = styled.select`
-  width: 600px;
+  width: 392px;
   height: 44px;
   background-color: gray;
   border-radius: 8px;

@@ -5,19 +5,15 @@ declare module 'styled-components' {
     color: {
       white: string;
       white1: string;
-      white2: string;
       black: string;
+      black1: string;
+      black2: string;
+      black3: string;
+      black4: string;
       gray1: string;
       gray2: string;
       gray3: string;
       gray4: string;
-      baseBlackAlpha10: string;
-      baseBlackAlpha45: string;
-      baseBlackAlpha65: string;
-      baseBlackAlpha85: string;
-      backgroundBgSurface: string;
-      fontTextMuted: string;
-      fontTextActive: string;
     };
 
     font: {

@@ -35,7 +35,7 @@ const InputText = styled.p`
 
 const Input = styled.textarea`
   width: 1153px;
-  height: 14px;
+  height: 24px;
   background-color: gray;
   align-items: center;
   align-self: stretch;
