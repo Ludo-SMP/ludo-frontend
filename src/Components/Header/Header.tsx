@@ -1,9 +1,9 @@
+//header.tsx
 import styled from 'styled-components';
 import { FilterButton } from '../Button/FilterButton';
 import { StudyButton } from '../Button/StudyButton';
 import { Alarm } from '../../Assets/Alarm';
 import { Hamberger } from '../../Assets/Hamberger';
-import { Profile } from '../Profile/Profile';
 
 export const Header = () => {
   return (
@@ -21,9 +21,6 @@ export const Header = () => {
           </HeadTopItem>
           <HeadTopItem>
             <Alarm />
-          </HeadTopItem>
-          <HeadTopItem>
-            <Profile />
           </HeadTopItem>
         </HeadTopWrapper>
       </HeadTopBox>
@@ -55,6 +52,7 @@ const HeaderContainer = styled.section`
   background-color: ${({ theme }) => theme.color.white1};
   display: flex;
   flex-direction: column;
+  margin-bottom: 40px;
 `;
 // Header 윗부분
 const HeadTopBox = styled.span`
@@ -67,7 +65,8 @@ const HeadTopBox = styled.span`
   /* padding-top: 60px; */
 `;
 const HeadTopWrapper = styled.div`
-  flex-direction: row-reverse;
+  display: flex;
+  align-items: center;
   width: 100%;
   height: 60px;
   padding-top: 30px;

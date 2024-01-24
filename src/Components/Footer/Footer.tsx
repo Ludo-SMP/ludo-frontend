@@ -19,6 +19,7 @@ const FooterContainer = styled.section`
   display: flex;
   height: 308px;
   flex-direction: row;
+  margin-top: 80px;
   background-color: ${({ theme }) => theme.color.gray1};
 `;
 
