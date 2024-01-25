@@ -4,7 +4,7 @@ import Tool from './Tool';
 import { BlankSquare } from '../Common/BlankSquare';
 
 type ActivityType = '온라인' | '오프라인' | '미정';
-export type StudyCategory = '알고리즘' | '모의 면접' | '프로젝트';
+export type StudyCategory = '알고리즘' | '모의 면접' | '프로젝트' | 'All';
 export interface StudyInfo {
   studyCategory: StudyCategory;
   recruitDeadLine: string;
