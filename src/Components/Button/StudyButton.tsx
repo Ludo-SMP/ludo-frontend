@@ -27,5 +27,5 @@ const StudyText = styled.text`
   line-height: 44px;
   font-size: ${({ theme }) => theme.font.xsmall};
   color: ${({ theme }) => theme.color.gray3};
-  padding: 4px 12px;
+  padding: 4px 8px;
 `;

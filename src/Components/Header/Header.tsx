@@ -13,10 +13,10 @@ export const Header = () => {
             <StudyButton onClick={() => onclick}>내가 지원한 스터디</StudyButton>
           </HeadTopItem>
           <HeadTopItem>
-            <StudyButton onClick={() => onclick}>참여중인 스터디</StudyButton>
+            <StudyButton onClick={() => onclick}>진행 중인 스터디</StudyButton>
           </HeadTopItem>
           <HeadTopItem>
-            <StudyButton onClick={() => onclick}>완료한 스터디</StudyButton>
+            <StudyButton onClick={() => onclick}>진행 완료된 스터디</StudyButton>
           </HeadTopItem>
           <HeadTopItem>
             <Alarm />
