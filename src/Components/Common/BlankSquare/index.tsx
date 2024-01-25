@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 type BlankSquareProps = {
-  width: string;
+  width?: string;
   height?: string;
   color?: string;
   children?: React.ReactNode;
