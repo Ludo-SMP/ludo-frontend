@@ -7,8 +7,6 @@ export const Footer = () => {
           <FooterText>서비스소개</FooterText>
           <FooterText>이용약관</FooterText>
           <FooterText>개인정보처리방침</FooterText>
-          <FooterText>오류문의 및 신고</FooterText>
-          <FooterText>더보기</FooterText>
         </FooterWrapper>
       </BorderBox>
     </FooterContainer>
