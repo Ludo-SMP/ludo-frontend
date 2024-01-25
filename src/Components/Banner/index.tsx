@@ -6,7 +6,7 @@ export interface BannerProps {
   src?: any;
   id?: number;
 }
-const Banner: React.FC<BannerProps> = ({ src, brief, title }) => {
+const Banner = ({ src, brief, title }: BannerProps) => {
   return (
     <BannerWrapper>
       <div className="banner__contents">
@@ -28,12 +28,12 @@ const BannerWrapper = styled.div`
   flex-direction: column;
   justify-content: flex-end;
   width: 100%;
-  height: 240px;
-  background-color: ${(props) => props.theme.color.gray1};
-  padding: 1.25rem, 1.5rem;
-
+  height: 320px;
+  background-color: ${(props) => props.theme.color.gray5};
+  padding: 20px 24px;
   .banner {
     &__contents {
+      height: 256px;
       padding: 2rem 6rem;
     }
 
@@ -41,27 +41,28 @@ const BannerWrapper = styled.div`
       font-size: ${(props) => props.theme.font.medium};
       font-weight: 500;
       line-height: 2.5rem;
-      color: ${(props) => props.theme.color.fontTextMuted};
+      color: ${(props) => props.theme.color.black2};
     }
 
     &__title {
       font-size: ${(props) => props.theme.font.xlarge};
       font-weight: 900;
       line-height: 2.5rem;
-      color: ${(props) => props.theme.color.baseBlackAlpha85};
+      color: ${(props) => props.theme.color.black4};
     }
 
     &__button {
       display: flex;
       justify-content: flex-end;
-      padding: 1rem;
     }
+
     &__button__text {
-      padding: 1px 0.75rem;
-      font-size: ${(props) => props.theme.font.xsmall};
-      border-radius: 1.25rem;
-      border: 1px solid rgba(38, 45, 49, 0.1);
-      background: rgba(38, 45, 49, 0.2);
+      display: flex;
+      padding: 4px 12px;
+      justify-content: center;
+      align-items: center;
+      gap: 4px;
+      font-size: ${(props) => props.theme.font.small};
       color: ${(props) => props.theme.color.white};
     }
 

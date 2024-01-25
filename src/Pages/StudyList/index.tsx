@@ -1,30 +1,27 @@
 import styled from 'styled-components';
 import StudyCardList from '../../Components/StudyCardList';
-import {
-  bannerDummy,
-  algorithmStudyCardListPropsDummy,
-  interviewStudyCardListPropsDummy,
-  projectStudyCardListPropsDummy,
-} from '../../Shared/dummy';
+import { bannerDummy, StudyCardListPropsDummy } from '../../Shared/dummy';
 import Banner from '../../Components/Banner';
 import Gnb from '../../Components/Gnb';
 import CreateButton from '../../Components/Button/CreateButton';
 import BlankCircle from '../../Components/Common/BlankCirecle';
+import MoveToTopButton from '../../Components/Button/MoveToTopButton';
+import { UpBold } from '../../Assets/icons/UpBold';
 
-export const Main = () => {
+const StudyList = () => {
   return (
     <ContentsWrapper>
       <Gnb />
       <ButtonsWrapper>
+        <MoveToTopButton>
+          <UpBold />
+        </MoveToTopButton>
         <CreateButton>
           <BlankCircle />
         </CreateButton>
       </ButtonsWrapper>
-
       <Banner {...bannerDummy} />
-      <StudyCardList {...algorithmStudyCardListPropsDummy} />
-      <StudyCardList {...interviewStudyCardListPropsDummy} />
-      <StudyCardList {...projectStudyCardListPropsDummy} />
+      <StudyCardList {...StudyCardListPropsDummy} />
     </ContentsWrapper>
   );
 };
@@ -40,6 +37,11 @@ const ButtonsWrapper = styled.span`
   position: fixed;
   right: 188px;
   bottom: 80px;
+  display: flex;
+  flex-direction: column;
   background-color: none;
   padding: 40px;
+  gap: 20px;
 `;
+
+export default StudyList;
