@@ -202,9 +202,6 @@ const StudyAdditionalInfoWrapper = styled.div`
     transform: rotate(90deg);
     border: 1px solid rgba(38, 45, 49, 0.2);
   }
-
-  
-  }
 `;
 
 export default StudyCard;
