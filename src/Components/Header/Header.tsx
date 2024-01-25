@@ -4,7 +4,6 @@ import { StudyButton } from '../Button/StudyButton';
 import { Alarm } from '../../Assets/Alarm';
 import { Profile } from '../../Assets/Profile';
 
-
 export const Header = () => {
   return (
     <HeaderContainer>
@@ -21,6 +20,9 @@ export const Header = () => {
           </HeadTopItem>
           <HeadTopItem>
             <Alarm />
+          </HeadTopItem>
+          <HeadTopItem>
+            <Profile />
           </HeadTopItem>
         </HeadTopWrapper>
       </HeadTopBox>

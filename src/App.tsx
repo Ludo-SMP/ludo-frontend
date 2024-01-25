@@ -12,9 +12,9 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <MainLayout>
-        {/* <Header /> */}
+        <Header />
         <RouterProvider router={Router} />
-        {/* <Footer /> */}
+        <Footer />
       </MainLayout>
     </ThemeProvider>
   );
