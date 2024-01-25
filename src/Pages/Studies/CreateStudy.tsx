@@ -68,7 +68,6 @@ const StudyMain = styled.p`
   line-height: 60px;
   padding-bottom: 60px;
   padding-top: 40px;
-  /* padding-bottom: 60px; */
 `;
 
 const StudyContainer = styled.div`
@@ -95,7 +94,6 @@ const MiddleBox = styled.div`
 
 const MiddleCenterBox = styled.div`
   height: 250px;
-  /* padding-top: 20px; */
   align-items: center;
   padding-top: 20px;
 `;
@@ -112,13 +110,13 @@ const MiddleBottomInfo = styled.div`
   display: grid;
   grid-template-columns: 630px 630px;
   grid-template-rows: 80px;
-  font-size: 20px;
+  font-size: ${(props) => props.theme.font.medium};
   row-gap: 24px 24px;
   column-gap: 24px 24px;
   padding-bottom: 40px;
 `;
 const MiddleBottomWrapper = styled.section`
-  font-size: 20px;
+  font-size: ${(props) => props.theme.font.medium};
   flex-direction: row;
   padding-top: 40px;
 `;
@@ -127,7 +125,7 @@ const MiddleWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding-bottom: 40px;
-  font-size: 20px;
+  font-size: ${(props) => props.theme.font.medium};
   border-bottom: 1px solid #444444;
 `;
 
@@ -135,11 +133,11 @@ const BottomWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding-bottom: 16px;
-  font-size: 20px;
+  font-size: ${(props) => props.theme.font.medium};
 `;
 
 const StudyWrapper = styled.section`
-  font-size: 20px;
+  font-size: ${(props) => props.theme.font.medium};
   padding-bottom: 14px;
   flex-direction: row;
   padding-right: 24px;
@@ -153,7 +151,7 @@ const ButtonBox = styled.div`
 `;
 
 const StudyTitle = styled.p`
-  font-size: 28px;
+  font-size: ${(props) => props.theme.font.xlarge};
   font-weight: bold;
   align-items: left;
   font-weight: 800;

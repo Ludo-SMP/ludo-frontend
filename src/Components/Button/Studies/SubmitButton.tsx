@@ -22,6 +22,6 @@ const StudyContainer = styled.button`
 
 const StudyText = styled.text`
   text-align: center;
-  font-size: 14px;
+  font-size: ${(props) => props.theme.font.small1};
   padding: 4px 12px;
 `;

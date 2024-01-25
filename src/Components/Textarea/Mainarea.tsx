@@ -32,6 +32,7 @@ const InputText = styled.p`
   align-items: center;
   background: '#f2f3f3';
   color: '#262D31';
+  padding-right: 16px;
 `;
 const Input = styled.textarea`
   width: 1112px;
@@ -39,7 +40,7 @@ const Input = styled.textarea`
   align-items: center;
   background-color: gray;
   align-items: center;
-  gap: var(--Spacing-8, 8px);
+  gap: 8px;
   align-self: stretch;
   padding-left: 16px;
   align-items: center;

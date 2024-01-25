@@ -15,7 +15,7 @@ export const StudyButton = ({ children, onClick }: StudyProps) => {
 
 const StudyContainer = styled.button`
   border-radius: 24px;
-  background-color: ${({ theme }) => theme.color.white2};
+  background-color: ${({ theme }) => theme.color.gray5};
   text-align: center;
   width: 148px;
   height: 46px;
@@ -23,6 +23,8 @@ const StudyContainer = styled.button`
 
 const StudyText = styled.text`
   text-align: center;
+  font-weight: 600;
+  line-height: 44px;
   font-size: ${({ theme }) => theme.font.xsmall};
   color: ${({ theme }) => theme.color.gray3};
   padding: 4px 12px;

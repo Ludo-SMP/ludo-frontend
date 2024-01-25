@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 import { ContactButton } from '../../Components/Button/Studies/ContactButton';
+import { ContactUrlInput } from '../../Components/Textarea/ContactUrlInput';
 import { StackButton } from '../../Components/Button/Studies/StackButton';
 import { SubmitButton } from '../../Components/Button/Studies/SubmitButton';
 import { CalendarButton } from '../../Components/Button/Studies/CalendarButton';
-import { PlatformButton } from '../../Components/Button/Studies/PlatformButton';
+import { PositionButton } from '../../Components/Button/Studies/PositionButton';
 import { Mainarea } from '../../Components/Textarea/Mainarea';
 import { Titlearea } from '../../Components/Textarea/Titlearea';
 import { GatherButton } from '../../Components/Button/Studies/GatherButton';
@@ -26,7 +27,7 @@ export const GatherStudy = () => {
             </StudyWrapper>
             <StudyWrapper>
               <ContentText>포지션</ContentText>
-              <PlatformButton />
+              <PositionButton />
             </StudyWrapper>
             <StudyWrapper>
               <ContentText>기술스택</ContentText>
@@ -38,7 +39,7 @@ export const GatherStudy = () => {
             </StudyWrapper>
             <StudyWrapper>
               <ContentText>연결url</ContentText>
-              <ContactButton />
+              <ContactUrlInput />
             </StudyWrapper>
           </StudyTopInfo>
         </TopBox>
@@ -106,7 +107,7 @@ const StudyMain = styled.p`
 `;
 
 const StudyTitle = styled.p`
-  font-size: 28px;
+  font-size: ${(props) => props.theme.font.xlarge};
   font-weight: bold;
   align-items: left;
   padding-bottom: 16px;
@@ -116,7 +117,7 @@ const ContentText = styled.p`
   padding-bottom: 16px;
   font-weight: 500;
   line-height: 40px;
-  font-size: 20px;
+  font-size: ${(props) => props.theme.font.medium};
 `;
 
 const SubContentTitle = styled.p`
@@ -154,7 +155,6 @@ const StudyTopInfo = styled.div`
 const MiddleBox = styled.div`
   height: 200px;
   border-bottom: 1px solid #444444;
-  /* padding-top: 20px; */
   align-items: center;
 `;
 
@@ -172,19 +172,19 @@ const StudyMidBottom = styled.div`
   padding-top: 40px;
   padding-bottom: 40px;
   align-items: center;
-  font-size: 20px;
+  font-size: ${(props) => props.theme.font.medium};
 `;
 
 const MiddleBottomInfo = styled.div`
   display: grid;
   grid-template-columns: 600px 600px;
   grid-template-rows: 80px;
-  font-size: 20px;
+  font-size: ${(props) => props.theme.font.medium};
   row-gap: 16px 16px;
   column-gap: 16px 16px;
 `;
 const MiddleBottomWrapper = styled.section`
-  font-size: 20px;
+  font-size: ${(props) => props.theme.font.medium};
   flex-direction: row;
   padding-top: 20px;
 `;
@@ -198,11 +198,11 @@ const BottomWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding-bottom: 16px;
-  font-size: 20px;
+  font-size: ${(props) => props.theme.font.medium};
 `;
 
 const StudyWrapper = styled.section`
-  font-size: 20px;
+  font-size: ${(props) => props.theme.font.medium};
   flex-direction: row;
 `;
 

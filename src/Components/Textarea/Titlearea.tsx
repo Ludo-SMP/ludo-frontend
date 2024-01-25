@@ -33,6 +33,7 @@ const InputText = styled.p`
   align-items: left;
   background: #f2f3f3;
   color: '#262D31';
+  padding-right: 16px;
 `;
 
 const Input = styled.textarea`
