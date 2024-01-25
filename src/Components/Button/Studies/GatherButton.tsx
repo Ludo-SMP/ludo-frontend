@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 
-export const ProgressButton = () => {
+export const GatherButton = () => {
   return (
-    <ButtonConTainer name="Progress" className="select">
+    <ButtonConTainer name="contact" className="select">
       <Textwrapper disabled selected>
-        진행방식
+        모집인원
       </Textwrapper>
-      <Textwrapper value="gathertown">온라인</Textwrapper>
-      <Textwrapper value="googlemeet">오프라인</Textwrapper>
+      <Textwrapper value="3명">3명</Textwrapper>
+      <Textwrapper value="6명">6명</Textwrapper>
+      <Textwrapper value="8명">8명</Textwrapper>
     </ButtonConTainer>
   );
 };
