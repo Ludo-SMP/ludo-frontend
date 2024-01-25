@@ -5,7 +5,7 @@ export const color = {
   white: '#ffffff',
   white1: '#D8D8D8',
   black: '#000000',
-  black1: 'rgba(0, 0, 0, 0.10))',
+  black1: 'rgba(0, 0, 0, 0.10)',
   black2: 'rgba(0, 0, 0, 0.45)',
   black3: 'rgba(0, 0, 0, 0.65)',
   black4: `rgba(0, 0, 0, 0.85)`,
@@ -17,9 +17,9 @@ export const color = {
 };
 
 export const font = {
-  xxsmall: '8px',
-  xsmall: '12px',
-  small1: '14px',
+  xxxsmall: '8px',
+  xxsmall: '12px',
+  xsmall: '14px',
   small: '16px',
   medium: '20px',
   large: '24px',

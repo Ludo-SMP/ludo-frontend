@@ -3,39 +3,54 @@ import styled from 'styled-components';
 export interface InfoFieldProps {
   title: string;
   content: string;
+  width?: string;
+  titleWidth?: string;
+  contentWidth?: string;
+  flexDirection?: string;
+  gap?: string;
 }
 
-export const InfoField: React.FC<InfoFieldProps> = ({ title, content }) => {
+export const InfoField = ({ width, titleWidth, contentWidth, title, content, flexDirection, gap }: InfoFieldProps) => {
   return (
-    <InfoFieldWrapper>
+    <InfoFieldWrapper
+      width={width}
+      titleWidth={titleWidth}
+      contentWidth={contentWidth}
+      flexDirection={flexDirection}
+      gap={gap}
+    >
       <div className="field__title">{title}</div>
       <div className="field__content">{content}</div>
     </InfoFieldWrapper>
   );
 };
 
-const InfoFieldWrapper = styled.div`
+const InfoFieldWrapper = styled.div<{
+  width?: string;
+  titleWidth?: string;
+  contentWidth?: string;
+  flexDirection?: string;
+  gap?: string;
+}>`
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 50%;
-  padding: 5px 0;
+  flex-direction: ${(props) => props.flexDirection || 'row'};
+  width: ${(props) => props.width};
+  text-align: start;
+  gap: ${(props) => props.gap || '24px'};
+  font-size: ${(props) => props.theme.font.medium};
+  font-weight: 500;
+  line-height: 40px;
 
   .field {
     &__title {
-      width: 35%;
-      font-size: 18px;
-      font-weight: 500;
-      color: rgba(0, 0, 0, 0.85);
-      line-height: 40px;
+      text-align: start;
+      width: ${(props) => (props.flexDirection ? 'column' : props.width || '184px')};
+      color: ${(props) => props.theme.color.black4};
     }
 
     &__content {
-      width: 60%;
-      font-size: 18px;
-      font-weight: 500;
-      color: rgba(0, 0, 0, 0.45);
-      line-height: 40px;
+      width: ${(props) => (props.flexDirection ? 'column' : props.width || '392px')};
+      color: ${(props) => props.theme.color.black2};
     }
   }
 `;

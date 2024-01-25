@@ -18,10 +18,11 @@ declare module 'styled-components' {
     };
 
     font: {
+      xxxsmall: string;
       xxsmall: string;
       xsmall: string;
+      xsmall: string;
       small: string;
-      small1: string;
       medium: string;
       large: string;
       xlarge: string;
