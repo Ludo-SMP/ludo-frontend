@@ -77,30 +77,6 @@ const StudyDetailWrapper = styled.div`
   padding: 40px 348px 80px 348px;
   align-items: flex-start;
   gap: 40px;
-
-  .study {
-    &__btns {
-      display: flex;
-      justify-content: center;
-      width: 100%;
-      align-items: flex-start;
-      gap: 24px;
-      align-self: stretch;
-    }
-
-    &__btn {
-      display: flex;
-      width: 460px;
-      padding: 12px 12px;
-      justify-content: center;
-      align-items: center;
-      border-radius: 8px;
-      background: ${(props) => props.theme.color.gray2};
-      color: ${(props) => props.theme.color.black4};
-      font-size: ${(props) => props.theme.font.small};
-      gap: 8px;
-    }
-  }
 `;
 
 const StudyTitleWrapper = styled.div`
