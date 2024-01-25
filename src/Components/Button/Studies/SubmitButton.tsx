@@ -14,7 +14,7 @@ export const SubmitButton = ({ children }: SubmitProps) => {
 
 const StudyContainer = styled.button`
   border-radius: 8px;
-  background-color: #cbcdd1;
+  background-color: ${(props) => props.theme.color.gray1};
   text-align: center;
   width: 600px;
   height: 44px;
@@ -22,6 +22,6 @@ const StudyContainer = styled.button`
 
 const StudyText = styled.text`
   text-align: center;
-  font-size: 14px;
+  font-size: ${(props) => props.theme.font.small1};
   padding: 4px 12px;
 `;
