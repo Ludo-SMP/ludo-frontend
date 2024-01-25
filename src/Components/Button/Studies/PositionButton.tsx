@@ -1,13 +1,15 @@
 import styled from 'styled-components';
 
-export const ProgressButton = () => {
+export const PositionButton = () => {
   return (
-    <ButtonConTainer name="Progress" className="select">
+    <ButtonConTainer name="contact" className="select">
       <Textwrapper disabled selected>
-        진행방식
+        포지션
       </Textwrapper>
-      <Textwrapper value="gathertown">온라인</Textwrapper>
-      <Textwrapper value="googlemeet">오프라인</Textwrapper>
+      <Textwrapper value="frontend">프론트엔드</Textwrapper>
+      <Textwrapper value="backend">백엔드</Textwrapper>
+      <Textwrapper value="pm">기획자</Textwrapper>
+      <Textwrapper value="designer">디자이너</Textwrapper>
     </ButtonConTainer>
   );
 };

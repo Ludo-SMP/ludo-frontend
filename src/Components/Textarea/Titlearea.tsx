@@ -19,31 +19,37 @@ const InputContainer = styled.section`
   height: 44px;
   display: flex;
   flex-direction: row;
-  background-color: gray;
+  background-color: ${(props) => props.theme.color.gray3};
   border-radius: 8px;
   border: 1px solid #cbcdd1;
-  background: #f2f3f3;
+  background: ${(props) => props.theme.color.gray1};
+  align-items: center;
+  align-self: stretch;
 `;
 
 const InputText = styled.p`
   font-size: 14px;
   gap: 2px;
-  align-items: center;
-  background: #f2f3f3;
-  color: '#262D31';
+  align-items: left;
+  background: ${(props) => props.theme.color.gray1};
+  color: ${(props) => props.theme.color.black2};
+  padding-right: 16px;
 `;
 
 const Input = styled.textarea`
   width: 1153px;
-  height: 14px;
-  background-color: gray;
+  height: 24px;
+  background-color: ${(props) => props.theme.color.gray3};
   align-items: center;
   align-self: stretch;
   align-items: center;
   border: 1px solid #cbcdd1;
   border-width: 0;
-  background: #f2f3f3;
+  background: ${(props) => props.theme.color.gray1};
   resize: none;
   flex: 1 0 0;
-  margin-top: 16px;
+  margin-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 16px;
+  padding-left: 16px;
 `;
