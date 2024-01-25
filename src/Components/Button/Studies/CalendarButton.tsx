@@ -13,16 +13,15 @@ export const CalendarButton = () => {
 const ButtonConTainer = styled.button`
   width: 392px;
   height: 44px;
-  background-color: gray;
   border-radius: 8px;
   border: 1px solid #cbcdd1;
-  background: #f2f3f3;
-  color: gray;
+  background: ${(props) => props.theme.color.gray1};
+  color: ${(props) => props.theme.color.gray3};
   padding-left: 16px;
 `;
 
 const Textwrapper = styled.span`
-  background: #f2f3f3;
-  color: gray;
+  background: ${(props) => props.theme.color.gray1};
+  color: ${(props) => props.theme.color.gray3};
   padding-left: 330px;
 `;

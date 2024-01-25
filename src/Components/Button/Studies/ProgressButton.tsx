@@ -15,16 +15,16 @@ export const ProgressButton = () => {
 const ButtonConTainer = styled.select`
   width: 392px;
   height: 44px;
-  background-color: gray;
+  background-color: ${(props) => props.theme.color.gray3};
   border-radius: 8px;
   border: 1px solid #cbcdd1;
-  background: #f2f3f3;
-  color: gray;
+  background: ${(props) => props.theme.color.gray1};
+  color: ${(props) => props.theme.color.gray3};
   padding-left: 16px;
 `;
 
 const Textwrapper = styled.option`
-  background: #f2f3f3;
-  color: gray;
+  background: ${(props) => props.theme.color.gray1};
+  color: ${(props) => props.theme.color.gray3};
   padding-left: 16px;
 `;

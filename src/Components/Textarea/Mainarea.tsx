@@ -19,10 +19,10 @@ const MainContainer = styled.section`
   height: 354px;
   display: flex;
   flex-direction: row;
-  background-color: gray;
+  background-color: ${(props) => props.theme.color.gray3};
   border-radius: 8px;
   border: 1px solid #cbcdd1;
-  background: #f2f3f3;
+  background: ${(props) => props.theme.color.gray1};
 `;
 
 const InputText = styled.p`
@@ -30,15 +30,15 @@ const InputText = styled.p`
   gap: 2px;
   padding-top: 300px;
   align-items: center;
-  background: '#f2f3f3';
-  color: '#262D31';
+  background: ${(props) => props.theme.color.gray1};
+  color: ${(props) => props.theme.color.black2};
   padding-right: 16px;
 `;
 const Input = styled.textarea`
   width: 1112px;
   height: 322px;
   align-items: center;
-  background-color: gray;
+  background-color: ${(props) => props.theme.color.gray3};
   align-items: center;
   gap: 8px;
   align-self: stretch;
@@ -46,7 +46,7 @@ const Input = styled.textarea`
   align-items: center;
   border: 1px solid #cbcdd1;
   border-width: 0;
-  background: #f2f3f3;
+  background: ${(props) => props.theme.color.gray1};
   resize: none;
   flex: 1 0 0;
   margin-top: 16px;
