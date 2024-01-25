@@ -8,6 +8,7 @@ import { GatherStudy } from '../Pages/Studies/GatherStudy';
 import { StudyDetail } from '../Pages/StudyDetail';
 import { Main } from '../Pages/Main';
 import { Recruitment } from '../Pages/Recruitment';
+import StudyList from '../Pages/StudyList';
 
 export const Router = createBrowserRouter([
   {
@@ -42,5 +43,9 @@ export const Router = createBrowserRouter([
   {
     path: ROUTER_PATH.recruitmentsCreate,
     element: <Recruitment />,
+  },
+  {
+    path: ROUTER_PATH.studyList,
+    element: <StudyList />,
   },
 ]);

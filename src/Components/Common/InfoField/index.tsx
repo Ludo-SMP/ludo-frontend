@@ -3,39 +3,36 @@ import styled from 'styled-components';
 export interface InfoFieldProps {
   title: string;
   content: string;
+  titleWidth?: string;
+  contentWidth?: string;
 }
 
-export const InfoField: React.FC<InfoFieldProps> = ({ title, content }) => {
+export const InfoField = ({ titleWidth, contentWidth, title, content }: InfoFieldProps) => {
   return (
-    <InfoFieldWrapper>
+    <InfoFieldWrapper titleWidth={titleWidth} contentWidth={contentWidth}>
       <div className="field__title">{title}</div>
       <div className="field__content">{content}</div>
     </InfoFieldWrapper>
   );
 };
 
-const InfoFieldWrapper = styled.div`
+const InfoFieldWrapper = styled.div<{ titleWidth?: string; contentWidth?: string }>`
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 50%;
-  padding: 5px 0;
+  gap: 24px;
+  font-size: ${(props) => props.theme.font.medium};
+  font-weight: 500;
+  line-height: 40px;
 
   .field {
     &__title {
-      width: 35%;
-      font-size: 18px;
-      font-weight: 500;
-      color: rgba(0, 0, 0, 0.85);
-      line-height: 40px;
+      width: ${(props) => props.titleWidth || '184px'};
+      color: ${(props) => props.theme.color.black4};
     }
 
     &__content {
-      width: 60%;
-      font-size: 18px;
-      font-weight: 500;
-      color: rgba(0, 0, 0, 0.45);
-      line-height: 40px;
+      width: ${(props) => props.contentWidth || '392px'};
+      color: ${(props) => props.theme.color.black2};
     }
   }
 `;
