@@ -5,14 +5,14 @@ export type StudyProps = {
   children?: React.ReactNode;
 };
 
-export const BigCategoryButton = () => {
+export const MaxPeopleButton = () => {
   return (
     <ButtonConTainer>
       <Textwrapper disabled selected>
-        카테고리
+        스터디 최대인원
       </Textwrapper>
-      <Textwrapper value="algorithm">알고리즘</Textwrapper>
-      <Textwrapper value="project">프로젝트</Textwrapper>
+      <Textwrapper value="algorithm">6명</Textwrapper>
+      <Textwrapper value="8명">8명</Textwrapper>
     </ButtonConTainer>
   );
 };
@@ -23,7 +23,7 @@ const ButtonConTainer = styled.select`
   background-color: ${(props) => props.theme.color.gray1};
   border-radius: 8px;
   border: 1px solid #cbcdd1;
-  background: ${(props) => props.theme.color.gray1};
+  background: #f2f3f3;
   color: ${(props) => props.theme.color.gray3};
   padding-left: 16px;
 `;

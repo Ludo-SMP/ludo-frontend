@@ -6,6 +6,7 @@ import { CalendarButton } from '../../Components/Button/Studies/CalendarButton';
 import { PlatformButton } from '../../Components/Button/Studies/PlatformButton';
 import { Mainarea } from '../../Components/Textarea/Mainarea';
 import { Titlearea } from '../../Components/Textarea/Titlearea';
+import { GatherButton } from '../../Components/Button/Studies/GatherButton';
 
 export const GatherStudy = () => {
   return (
@@ -17,7 +18,7 @@ export const GatherStudy = () => {
           <StudyTopInfo>
             <StudyWrapper>
               <ContentText>모집인원</ContentText>
-              <ContactButton />
+              <GatherButton />
             </StudyWrapper>
             <StudyWrapper>
               <ContentText>모집마감일</ContentText>
@@ -46,15 +47,15 @@ export const GatherStudy = () => {
           <StudyMiddleInfo>
             <StudyWrapper>
               <ContentText>진행방식</ContentText>
-              진행방식
+              <SubContentTitle>진행방식</SubContentTitle>
             </StudyWrapper>
             <StudyWrapper>
               <ContentText>진행 플랫폼</ContentText>
-              진행 플랫폼
+              <SubContentTitle>진행 플랫폼</SubContentTitle>
             </StudyWrapper>
             <StudyWrapper>
               <ContentText> 진행기간</ContentText>
-              진행기간
+              <SubContentTitle>진행기간</SubContentTitle>
             </StudyWrapper>
           </StudyMiddleInfo>
         </MiddleBox>
@@ -62,16 +63,16 @@ export const GatherStudy = () => {
           <StudyTitle>스터디 기본구성</StudyTitle>
           <MiddleBottomWrapper>
             <ContentText>스터디 제목</ContentText>
-            스터디 제목
+            <SubContentTitle> 스터디 제목</SubContentTitle>
           </MiddleBottomWrapper>
           <MiddleBottomInfo>
             <MiddleBottomWrapper>
               <ContentText>카테고리</ContentText>
-              카테고리
+              <SubContentTitle>카테고리</SubContentTitle>
             </MiddleBottomWrapper>
             <MiddleBottomWrapper>
               <ContentText>스터디 최대 인원</ContentText>
-              스터디 최대 인원
+              <SubContentTitle>스터디 최대 인원</SubContentTitle>
             </MiddleBottomWrapper>
           </MiddleBottomInfo>
         </StudyMidBottom>
@@ -101,14 +102,14 @@ const StudyMain = styled.p`
   text-align: left;
   font-weight: 800;
   line-height: 60px;
-  /* padding-bottom: 60px; */
+  padding-bottom: 60px;
 `;
 
 const StudyTitle = styled.p`
   font-size: 28px;
   font-weight: bold;
   align-items: left;
-  padding-bottom: 10px;
+  padding-bottom: 16px;
 `;
 
 const ContentText = styled.p`
@@ -116,6 +117,11 @@ const ContentText = styled.p`
   font-weight: 500;
   line-height: 40px;
   font-size: 20px;
+`;
+
+const SubContentTitle = styled.p`
+  color: ${(props) => props.theme.color.gray4};
+  font-weight: 500;
 `;
 
 const StudyContainer = styled.div`

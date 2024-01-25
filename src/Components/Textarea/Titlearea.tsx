@@ -23,12 +23,14 @@ const InputContainer = styled.section`
   border-radius: 8px;
   border: 1px solid #cbcdd1;
   background: #f2f3f3;
+  align-items: center;
+  align-self: stretch;
 `;
 
 const InputText = styled.p`
   font-size: 14px;
   gap: 2px;
-  align-items: center;
+  align-items: left;
   background: #f2f3f3;
   color: '#262D31';
 `;
@@ -45,5 +47,8 @@ const Input = styled.textarea`
   background: #f2f3f3;
   resize: none;
   flex: 1 0 0;
-  margin-top: 16px;
+  margin-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 16px;
+  padding-left: 16px;
 `;

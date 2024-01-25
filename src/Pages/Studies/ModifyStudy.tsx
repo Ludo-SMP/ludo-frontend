@@ -95,9 +95,8 @@ const MiddleBox = styled.div`
 
 const MiddleCenterBox = styled.div`
   height: 250px;
-  /* padding-top: 20px; */
   align-items: center;
-  padding-top: 40px;
+  padding-top: 20px;
 `;
 
 const StudyMiddleInfo = styled.div`
@@ -127,7 +126,6 @@ const MiddleWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding-bottom: 40px;
-  padding-top: 40px;
   font-size: 20px;
   border-bottom: 1px solid #444444;
 `;

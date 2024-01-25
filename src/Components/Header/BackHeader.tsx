@@ -12,7 +12,7 @@ export const BackHeader = () => {
 
 const BackHeaderContainer = styled.section`
   height: 160px;
-  background-color: gray;
+  background-color: ${(props) => props.theme.color.gray1};
 `;
 const BackWrapper = styled.div`
   padding-top: 82px;

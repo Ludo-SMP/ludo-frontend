@@ -6,6 +6,7 @@ import { Titlearea } from '../../Components/Textarea/Titlearea';
 import { SubmitButton } from '../../Components/Button/Studies/SubmitButton';
 import { CalendarButton } from '../../Components/Button/Studies/CalendarButton';
 import { BigCategoryButton } from '../../Components/Button/Studies/BigCategoryButton';
+import { MaxPeopleButton } from '../../Components/Button/Studies/MaxPeopleButton';
 
 export const CreateStudy = () => {
   return (
@@ -29,7 +30,7 @@ export const CreateStudy = () => {
               </MiddleBottomWrapper>
               <MiddleBottomWrapper>
                 <ContentText>스터디 최대 인원</ContentText>
-                <BigCategoryButton />
+                <MaxPeopleButton />
               </MiddleBottomWrapper>
             </MiddleBottomInfo>
           </MiddleWrapper>
@@ -88,7 +89,6 @@ const TopBox = styled.div`
 
 const MiddleBox = styled.div`
   height: 300px;
-  /* padding-top: 20px; */
   align-items: center;
   padding-top: 40px;
 `;
@@ -97,7 +97,7 @@ const MiddleCenterBox = styled.div`
   height: 250px;
   /* padding-top: 20px; */
   align-items: center;
-  padding-top: 40px;
+  padding-top: 20px;
 `;
 
 const StudyMiddleInfo = styled.div`
@@ -127,7 +127,6 @@ const MiddleWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding-bottom: 40px;
-  padding-top: 40px;
   font-size: 20px;
   border-bottom: 1px solid #444444;
 `;

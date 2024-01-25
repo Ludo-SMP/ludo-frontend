@@ -1,26 +1,22 @@
 import styled from 'styled-components';
 
-export type StudyProps = {
-  onClick: () => void;
-  children?: React.ReactNode;
-};
-
-export const BigCategoryButton = () => {
+export const GatherButton = () => {
   return (
-    <ButtonConTainer>
+    <ButtonConTainer name="contact" className="select">
       <Textwrapper disabled selected>
-        카테고리
+        모집인원
       </Textwrapper>
-      <Textwrapper value="algorithm">알고리즘</Textwrapper>
-      <Textwrapper value="project">프로젝트</Textwrapper>
+      <Textwrapper value="3명">3명</Textwrapper>
+      <Textwrapper value="6명">6명</Textwrapper>
+      <Textwrapper value="8명">8명</Textwrapper>
     </ButtonConTainer>
   );
 };
 
 const ButtonConTainer = styled.select`
-  width: 600px;
+  width: 392px;
   height: 44px;
-  background-color: ${(props) => props.theme.color.gray1};
+  background-color: ${(props) => props.theme.color.gray3};
   border-radius: 8px;
   border: 1px solid #cbcdd1;
   background: ${(props) => props.theme.color.gray1};
@@ -31,5 +27,5 @@ const ButtonConTainer = styled.select`
 const Textwrapper = styled.option`
   background: ${(props) => props.theme.color.gray1};
   color: ${(props) => props.theme.color.gray3};
-  padding-left: 330px;
+  padding-left: 16px;
 `;
