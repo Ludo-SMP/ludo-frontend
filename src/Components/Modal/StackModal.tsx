@@ -1,35 +1,31 @@
 // 기술스택모달
-// import { MouseEventHandler, PropsWithChildren } from 'react';
-// import { PropsWithChildren } from 'react';
-import { useState, useEffect, useRef } from 'react';
-import { createPortal } from 'react-dom';
+import { useState } from 'react';
 import { ModalContent } from './ModalContent/ModalContent';
 import { StackButton } from '../Button/Studies/StackButton';
 
 // type ModalProps = {
 //   closeModal?: () => void;
+//   open: () => void;
 // };
 
-// {}: PropsWithChildren<ModalProps>
+//
 export const StackModal = () => {
-  const modalRef = useRef<HTMLDivElement>(null);
   const [showModal, setShowModal] = useState(false);
+  const onClickButton = () => {
+    setShowModal(true);
+  };
 
-  useEffect(() => {
-    const clickOutside = (e: any) => {
-      if (showModal && !modalRef.current?.contains(e.target)) {
-        setShowModal(false);
-      }
-    };
-    document.addEventListener('mousedown', clickOutside);
-    return () => {
-      document.removeEventListener('mousedown', clickOutside);
-    };
-  }, [showModal]);
   return (
-    <div ref={modalRef}>
-      <StackButton onClick={() => setShowModal(true)}>ex) Typescript</StackButton>
-      {showModal && createPortal(<ModalContent />, document.body)}
+    <div className="Modals">
+      <StackButton onClick={onClickButton}>ex) Typescript</StackButton>
+      {showModal && (
+        <ModalContent
+          open={showModal}
+          onClose={() => {
+            setShowModal(false);
+          }}
+        />
+      )}
     </div>
   );
 };
