@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 import { ContactButton } from '../../Components/Button/Studies/ContactButton';
 import { ContactUrlInput } from '../../Components/Textarea/ContactUrlInput';
-import { StackButton } from '../../Components/Button/Studies/StackButton';
 import { SubmitButton } from '../../Components/Button/Studies/SubmitButton';
 import { CalendarButton } from '../../Components/Button/Studies/CalendarButton';
 import { PositionButton } from '../../Components/Button/Studies/PositionButton';
 import { Mainarea } from '../../Components/Textarea/Mainarea';
 import { Titlearea } from '../../Components/Textarea/Titlearea';
 import { GatherButton } from '../../Components/Button/Studies/GatherButton';
+import { StackModal } from '../../Components/Modal/StackModal';
 
 export const GatherStudy = () => {
   return (
@@ -31,7 +31,7 @@ export const GatherStudy = () => {
             </StudyWrapper>
             <StudyWrapper>
               <ContentText>기술스택</ContentText>
-              <StackButton />
+              <StackModal />
             </StudyWrapper>
             <StudyWrapper>
               <ContentText>연락방법</ContentText>

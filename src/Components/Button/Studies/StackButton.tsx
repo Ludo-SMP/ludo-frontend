@@ -1,23 +1,25 @@
 import styled from 'styled-components';
 
+// export type StudyProps = {
+//   onClick: () => void;
+//   closeModal?: () => void;
+//   children?: React.ReactNode;
+// };
+
 export type StudyProps = {
   onClick: () => void;
   children?: React.ReactNode;
 };
 
-export const StackButton = () => {
+export const StackButton = ({ children, onClick }: StudyProps) => {
   return (
-    <ButtonConTainer>
-      <Textwrapper disabled selected>
-        카테고리
-      </Textwrapper>
-      <Textwrapper value="algorithm">알고리즘</Textwrapper>
-      <Textwrapper value="project">프로젝트</Textwrapper>
+    <ButtonConTainer onClick={onClick}>
+      <StudyText>{children}</StudyText>
     </ButtonConTainer>
   );
 };
 
-const ButtonConTainer = styled.select`
+const ButtonConTainer = styled.button`
   width: 392px;
   height: 44px;
   background-color: ${(props) => props.theme.color.gray3};
@@ -28,8 +30,9 @@ const ButtonConTainer = styled.select`
   padding-left: 16px;
 `;
 
-const Textwrapper = styled.option`
+const StudyText = styled.option`
   background: #f2f3f3;
   color: gray;
-  padding-left: 330px;
+  text-align: left;
+  /* padding-left: 150px; */
 `;
