@@ -8,6 +8,7 @@ import { Mainarea } from '../../Components/Textarea/Mainarea';
 import { Titlearea } from '../../Components/Textarea/Titlearea';
 import { GatherButton } from '../../Components/Button/Studies/GatherButton';
 import { StackModal } from '../../Components/Modal/StackModal';
+import { EndDate } from '../../Components/Calendar/EndDate';
 
 export const GatherStudy = () => {
   return (
@@ -23,7 +24,9 @@ export const GatherStudy = () => {
             </StudyWrapper>
             <StudyWrapper>
               <ContentText>모집마감일</ContentText>
-              <CalendarButton />
+              <CalendarButton>
+                <EndDate />
+              </CalendarButton>
             </StudyWrapper>
             <StudyWrapper>
               <ContentText>포지션</ContentText>
