@@ -2,6 +2,11 @@ import styled from 'styled-components';
 import { ModalContainer } from './ModalContainer';
 import { useOutSideClick } from '../../../Hooks/useOutsideClick';
 import { useRef } from 'react';
+import { SearchBar } from './SearchBar';
+import { FilterContent } from './FilterContent';
+import { StackContent } from './StackContent';
+import { CancelButton } from './ModalButton/CancelButton';
+import { SelectButton } from './ModalButton/SelectButton';
 
 type ModalProps = {
   onClose: () => void;
@@ -13,6 +18,7 @@ export const ModalContent = ({ onClose }: ModalProps) => {
   const ModalRef = useRef(null);
   const handleClose = () => {
     onClose?.();
+    document.body.style.overflow = 'unset';
   };
 
   useOutSideClick(ModalRef, handleClose);
@@ -24,6 +30,13 @@ export const ModalContent = ({ onClose }: ModalProps) => {
           <Modal ref={ModalRef}>
             <ModalContainers>
               <ModalTitle>기술스택</ModalTitle>
+              <SearchBar />
+              <FilterContent />
+              <StackContent />
+              <ButtonWrapper>
+                <CancelButton>선택취소</CancelButton>
+                <SelectButton>선택완료</SelectButton>
+              </ButtonWrapper>
             </ModalContainers>
           </Modal>
         </Overlay>
@@ -63,6 +76,16 @@ const ModalContainers = styled.section`
   align-items: flex-start;
   width: 1200px;
   height: 882px;
+`;
+
+const ButtonWrapper = styled.section`
+  width: 720px;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 24px;
+  flex-direction: row;
+  /* margin-left: 240px; */
+  margin: auto;
 `;
 
 const ModalTitle = styled.p`

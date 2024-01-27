@@ -13,6 +13,7 @@ export const StackModal = () => {
   const [showModal, setShowModal] = useState(false);
   const onClickButton = () => {
     setShowModal(true);
+    document.body.style.overflow = 'hidden';
   };
 
   return (
