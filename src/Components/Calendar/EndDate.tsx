@@ -12,6 +12,7 @@ export const EndDate = () => {
       dateFormat="yy.MM.dd"
       onChange={(date: any) => setStartDate(date)}
       placeholderText="ex)24.01.07"
+      isClearable={true}
     />
   );
 };
