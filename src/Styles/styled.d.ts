@@ -30,6 +30,10 @@ declare module 'styled-components' {
       xxxlarge: string;
       xxxxlarge: string;
     };
+    buttonsize: {
+      small: string;
+      medium: string;
+    };
   }
 
   const mediaQuery = (maxWidth: number): string => `@media (max-width: ${maxWidth}px)`;
@@ -44,5 +48,6 @@ declare module 'styled-components' {
   export const theme: DefaultTheme = {
     color,
     font,
+    buttonsize,
   };
 }
