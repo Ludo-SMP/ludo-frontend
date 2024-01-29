@@ -1,14 +1,27 @@
 import styled from 'styled-components';
 import StudyCardList from '../../Components/StudyCardList';
-import { bannerDummy, StudyCardListPropsDummy } from '../../Shared/dummy';
+import { bannerDummy } from '../../Shared/dummy';
 import Banner from '../../Components/Banner';
 import Gnb from '../../Components/Gnb';
 import CreateButton from '../../Components/Button/CreateButton';
 import BlankCircle from '../../Components/Common/BlankCirecle';
 import MoveToTopButton from '../../Components/Button/MoveToTopButton';
 import { UpBold } from '../../Assets/icons/UpBold';
+import { fetchStudyListInfo } from '../../Apis/study';
+import { useEffect, useState } from 'react';
 
 const StudyList = () => {
+  const [studyList, setStudyList] = useState([]);
+
+  const getStudyList = async () => {
+    const data = await fetchStudyListInfo();
+    setStudyList(data?.studyList);
+  };
+
+  useEffect(() => {
+    getStudyList();
+  }, []);
+
   return (
     <ContentsWrapper>
       <Gnb />
@@ -21,7 +34,7 @@ const StudyList = () => {
         </CreateButton>
       </ButtonsWrapper>
       <Banner {...bannerDummy} />
-      <StudyCardList {...StudyCardListPropsDummy} />
+      <StudyCardList studyCategory="All" studyInfos={studyList} />
     </ContentsWrapper>
   );
 };
