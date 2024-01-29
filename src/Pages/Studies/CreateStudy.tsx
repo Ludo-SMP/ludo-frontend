@@ -7,6 +7,7 @@ import { SubmitButton } from '../../Components/Button/Studies/SubmitButton';
 import { CalendarButton } from '../../Components/Button/Studies/CalendarButton';
 import { BigCategoryButton } from '../../Components/Button/Studies/BigCategoryButton';
 import { MaxPeopleButton } from '../../Components/Button/Studies/MaxPeopleButton';
+import { ProgressPeriod } from '../../Components/Calendar/ProgressPeriod';
 
 export const CreateStudy = () => {
   return (
@@ -48,7 +49,9 @@ export const CreateStudy = () => {
             </StudyWrapper>
             <StudyWrapper>
               <ContentText> 진행기간</ContentText>
-              <CalendarButton />
+              <CalendarButton>
+                <ProgressPeriod />
+              </CalendarButton>
             </StudyWrapper>
           </StudyMiddleInfo>
         </MiddleCenterBox>
