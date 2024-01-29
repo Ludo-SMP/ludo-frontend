@@ -29,6 +29,11 @@ export const font = {
   xxxxlarge: '40px',
 };
 
+export const Buttonsize = {
+  small: '73px',
+  medium: '184px',
+};
+
 const mediaQuery = (maxWidth: number): string => `@media (max-width: ${maxWidth}px)`;
 
 export const device = {
@@ -41,4 +46,8 @@ export const device = {
 export const theme: DefaultTheme = {
   color,
   font,
+  buttonsize: {
+    small: '73px',
+    medium: '184px',
+  },
 };

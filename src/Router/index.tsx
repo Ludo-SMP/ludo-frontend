@@ -10,7 +10,7 @@ import { Main } from '../Pages/Main';
 import { RecruitmentDetail } from '../Pages/RecruitmentDetail';
 import StudyList from '../Pages/StudyList';
 
-export const Router = createBrowserRouter([
+export const RouterPath = createBrowserRouter([
   {
     path: ROUTER_PATH.main,
     element: <Main />,

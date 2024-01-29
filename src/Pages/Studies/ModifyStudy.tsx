@@ -6,6 +6,7 @@ import { Titlearea } from '../../Components/Textarea/Titlearea';
 import { SubmitButton } from '../../Components/Button/Studies/SubmitButton';
 import { CalendarButton } from '../../Components/Button/Studies/CalendarButton';
 import { BigCategoryButton } from '../../Components/Button/Studies/BigCategoryButton';
+import { ProgressPeriod } from '../../Components/Calendar/ProgressPeriod';
 
 export const ModifyStudy = () => {
   return (
@@ -47,7 +48,9 @@ export const ModifyStudy = () => {
             </StudyWrapper>
             <StudyWrapper>
               <ContentText> 진행기간</ContentText>
-              <CalendarButton />
+              <CalendarButton>
+                <ProgressPeriod />
+              </CalendarButton>
             </StudyWrapper>
           </StudyMiddleInfo>
         </MiddleCenterBox>
