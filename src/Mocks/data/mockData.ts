@@ -1,5 +1,42 @@
 import { StudyInfo } from '../../Components/StudyCard';
+import { CreateInfo } from '../../Pages/Studies/CreateStudy';
+import { GatherInfo } from '../../Pages/Studies/GatherStudy';
 
+// 스터디 생성
+export const CreateStudyData: CreateInfo[] = [
+  {
+    studyName: '스터디 제목제목',
+    studyCategory: '프로젝트',
+    maxMember: '5명',
+    ActivityType: '온라인',
+    studyPeriod: '24.01.16-24.01.31',
+  },
+];
+// 스터디 수정
+export const ModifyStudyData: CreateInfo[] = [
+  {
+    studyName: '스터디 제목제목',
+    studyCategory: '프로젝트',
+    maxMember: '3명',
+    ActivityType: '오프라인',
+    studyPeriod: '24.01.16-24.01.31',
+  },
+];
+
+export const GatherStudyData: GatherInfo[] = [
+  {
+    gatherMember: '5명',
+    recruitDeadLine: '24.1.31',
+    positions: ['백엔드', '디자이너', '프론트엔드'],
+    tools: ['React', 'Figma', 'Spring'],
+    contact: '카카오톡',
+    url: 'dsadasdasdasdasd',
+    title: '제목제목제목',
+    detail: '내용내용',
+  },
+];
+
+// 스터디 리스트
 export const StudyListMockData: StudyInfo[] = [
   {
     studyCategory: '프로젝트',

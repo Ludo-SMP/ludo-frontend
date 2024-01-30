@@ -9,8 +9,38 @@ import { Titlearea } from '../../Components/Textarea/Titlearea';
 import { GatherButton } from '../../Components/Button/Studies/GatherButton';
 import { StackModal } from '../../Components/Modal/StackModal';
 import { EndDate } from '../../Components/Calendar/EndDate';
+import { useState } from 'react';
+import { GatherStudies } from '../../Apis/study';
+
+export type ActivityType = '온라인' | '오프라인' | '미정';
+export type StudyCategory = '알고리즘' | '모의 면접' | '프로젝트' | 'All';
+export type Tool = 'React' | 'Java' | 'Spring' | 'Figma' | 'Java' | 'Javascript';
+export type PositionType = '백엔드' | '프론트엔드' | '기획' | '디자이너';
+export interface GatherInfo {
+  gatherMember: string;
+  recruitDeadLine: string;
+  positions: PositionType[];
+  tools: Tool[];
+  contact: string;
+  url: string;
+  title: string;
+  detail: string;
+}
 
 export const GatherStudy = () => {
+  const [create, setCreate] = useState([] as any);
+
+  const modifyStudy = async () => {
+    const { data } = await GatherStudies();
+    setCreate(data?.studyList);
+    console.log(data?.studyList);
+    console.log(create);
+  };
+  // useEffect(() => {
+  //   modifyStudy();
+  // }, [create]);
+  console.log(modifyStudy);
+
   return (
     <>
       <StudyContainer>

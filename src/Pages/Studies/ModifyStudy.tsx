@@ -7,8 +7,23 @@ import { SubmitButton } from '../../Components/Button/Studies/SubmitButton';
 import { CalendarButton } from '../../Components/Button/Studies/CalendarButton';
 import { BigCategoryButton } from '../../Components/Button/Studies/BigCategoryButton';
 import { ProgressPeriod } from '../../Components/Calendar/ProgressPeriod';
+import { useState } from 'react';
+import { ModifyStudies } from '../../Apis/study';
 
 export const ModifyStudy = () => {
+  const [create, setCreate] = useState([] as any);
+
+  const modifyStudy = async () => {
+    const { data } = await ModifyStudies();
+    setCreate(data?.studyList);
+    console.log(data?.studyList);
+    console.log(create);
+  };
+  // useEffect(() => {
+  //   modifyStudy();
+  // }, [create]);
+  console.log(modifyStudy);
+
   return (
     <>
       <StudyContainer>

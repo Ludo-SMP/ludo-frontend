@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-// import { BackHeader } from '../../Components/Header/BackHeader';
 import { ProgressButton } from '../../Components/Button/Studies/ProgressButton';
 import { PlatformButton } from '../../Components/Button/Studies/PlatformButton';
 import { Titlearea } from '../../Components/Textarea/Titlearea';
@@ -8,8 +7,36 @@ import { CalendarButton } from '../../Components/Button/Studies/CalendarButton';
 import { BigCategoryButton } from '../../Components/Button/Studies/BigCategoryButton';
 import { MaxPeopleButton } from '../../Components/Button/Studies/MaxPeopleButton';
 import { ProgressPeriod } from '../../Components/Calendar/ProgressPeriod';
+import { CreateStudies } from '../../Apis/study';
+import { useState, useEffect } from 'react';
+import { useAtom } from 'jotai';
+import { atomWithStorage } from 'jotai/utils';
+
+export type ActivityType = '온라인' | '오프라인' | '미정';
+export type StudyCategory = '알고리즘' | '모의 면접' | '프로젝트' | 'All';
+export interface CreateInfo {
+  studyName: string;
+  studyCategory: StudyCategory;
+  recruitDeadLine?: string;
+  maxMember: string;
+  ActivityType: string;
+  studyPeriod: string;
+}
 
 export const CreateStudy = () => {
+  const [create, setCreate] = useState([] as any);
+  const saveAtom = atomWithStorage(create, false);
+  const [save, setSave] = useAtom(saveAtom);
+
+  const postStudy = async () => {
+    const { data } = await CreateStudies();
+    setCreate(data?.studyList);
+    console.log(setCreate(data?.studyList));
+  };
+  useEffect(() => {
+    postStudy();
+  }, []);
+
   return (
     <>
       <StudyContainer>
@@ -56,8 +83,8 @@ export const CreateStudy = () => {
           </StudyMiddleInfo>
         </MiddleCenterBox>
         <ButtonBox>
-          <SubmitButton>임시저장</SubmitButton>
-          <SubmitButton>등록하기</SubmitButton>
+          <SubmitButton onClick={() => setSave(!save)}>임시저장</SubmitButton>
+          <SubmitButton onClick={() => create}>등록하기</SubmitButton>
         </ButtonBox>
       </StudyContainer>
     </>
@@ -73,7 +100,7 @@ const StudyMain = styled.p`
   padding-top: 40px;
 `;
 
-const StudyContainer = styled.div`
+const StudyContainer = styled.form`
   height: 1300px;
   padding-left: 348px;
   padding-right: 348px;
