@@ -3,9 +3,10 @@ import Position, { PositionType } from './Position';
 import Tool from './Tool';
 import { BlankSquare } from '../Common/BlankSquare';
 
-type ActivityType = '온라인' | '오프라인' | '미정';
-export type StudyCategory = '알고리즘' | '모의 면접' | '프로젝트' | 'All';
+export type ActivityType = '온라인' | '오프라인' | '미정';
+export type StudyCategory = '코딩 테스트' | '모의 면접' | '프로젝트' | 'All';
 export interface StudyInfo {
+  studyId: number;
   studyCategory: StudyCategory;
   recruitDeadLine: string;
   studyName: string;
@@ -18,7 +19,8 @@ export interface StudyInfo {
   views: number;
 }
 
-const StudyCard: React.FC<StudyInfo> = ({
+const StudyCard = ({
+  studyId,
   studyCategory,
   recruitDeadLine,
   studyName,
@@ -29,7 +31,7 @@ const StudyCard: React.FC<StudyInfo> = ({
   creator,
   createdAt,
   views,
-}) => {
+}: StudyInfo) => {
   return (
     <StudyCardWrapper>
       <StudyRecruitInfoWrapper>

@@ -8,6 +8,7 @@ export const bannerDummy: BannerProps = {
 };
 
 export const studyInfoDummy: StudyInfo = {
+  studyId: 1,
   studyCategory: '프로젝트',
   recruitDeadLine: '24. 03. 01',
   studyName: 'Ludo Study',
@@ -22,7 +23,8 @@ export const studyInfoDummy: StudyInfo = {
 
 export const algorithmStudyInfosDummy: StudyInfo[] = [
   {
-    studyCategory: '알고리즘',
+    studyId: 1,
+    studyCategory: '코딩 테스트',
     recruitDeadLine: '24.03.01',
     studyName: 'Ludo Algorithm 1',
     studyPeriod: '3개월',
@@ -34,7 +36,8 @@ export const algorithmStudyInfosDummy: StudyInfo[] = [
     views: 1234,
   },
   {
-    studyCategory: '알고리즘',
+    studyId: 2,
+    studyCategory: '코딩 테스트',
     recruitDeadLine: '24.02.22',
     studyName: 'Ludo Algorithm 2',
     studyPeriod: '0.5개월',
@@ -46,7 +49,8 @@ export const algorithmStudyInfosDummy: StudyInfo[] = [
     views: 230,
   },
   {
-    studyCategory: '알고리즘',
+    studyId: 3,
+    studyCategory: '코딩 테스트',
     recruitDeadLine: '24.04.23',
     studyName: 'Ludo Algorithm 3',
     studyPeriod: '4개월',
@@ -61,6 +65,7 @@ export const algorithmStudyInfosDummy: StudyInfo[] = [
 
 export const interviewStudyInfosDummy: StudyInfo[] = [
   {
+    studyId: 4,
     studyCategory: '모의 면접',
     recruitDeadLine: '24.02.01',
     studyName: 'Ludo Interview 1',
@@ -73,6 +78,7 @@ export const interviewStudyInfosDummy: StudyInfo[] = [
     views: 24,
   },
   {
+    studyId: 5,
     studyCategory: '모의 면접',
     recruitDeadLine: '24.02.22',
     studyName: 'Ludo Interview 2',
@@ -85,6 +91,7 @@ export const interviewStudyInfosDummy: StudyInfo[] = [
     views: 1111,
   },
   {
+    studyId: 6,
     studyCategory: '모의 면접',
     recruitDeadLine: '24.03.13',
     studyName: 'Ludo Interview 3',
@@ -100,6 +107,7 @@ export const interviewStudyInfosDummy: StudyInfo[] = [
 
 export const projectStudyInfosDummy: StudyInfo[] = [
   {
+    studyId: 7,
     studyCategory: '프로젝트',
     recruitDeadLine: '24.03.12',
     studyName: 'Ludo Study Project 1',
@@ -112,6 +120,7 @@ export const projectStudyInfosDummy: StudyInfo[] = [
     views: 3333,
   },
   {
+    studyId: 8,
     studyCategory: '프로젝트',
     recruitDeadLine: '24.02.22',
     studyName: 'Ludo Study Project 2',
@@ -124,6 +133,7 @@ export const projectStudyInfosDummy: StudyInfo[] = [
     views: 5555,
   },
   {
+    studyId: 9,
     studyCategory: '프로젝트',
     recruitDeadLine: '24.03.01',
     studyName: 'Ludo Study Project 3',
@@ -139,6 +149,7 @@ export const projectStudyInfosDummy: StudyInfo[] = [
 
 const StudyInfosDummy: StudyInfo[] = [
   {
+    studyId: 10,
     studyCategory: '프로젝트',
     recruitDeadLine: '24.03.12',
     studyName: 'Ludo Study Project 1',
@@ -151,6 +162,7 @@ const StudyInfosDummy: StudyInfo[] = [
     views: 3333,
   },
   {
+    studyId: 11,
     studyCategory: '프로젝트',
     recruitDeadLine: '24.02.22',
     studyName: 'Ludo Study Project 2',
@@ -163,6 +175,7 @@ const StudyInfosDummy: StudyInfo[] = [
     views: 5555,
   },
   {
+    studyId: 12,
     studyCategory: '프로젝트',
     recruitDeadLine: '24.03.01',
     studyName: 'Ludo Study Project 3',
@@ -175,7 +188,8 @@ const StudyInfosDummy: StudyInfo[] = [
     views: 12346789,
   },
   {
-    studyCategory: '알고리즘',
+    studyId: 13,
+    studyCategory: '코딩 테스트',
     recruitDeadLine: '24.03.01',
     studyName: 'Ludo Algorithm 1',
     studyPeriod: '3개월',
@@ -187,7 +201,8 @@ const StudyInfosDummy: StudyInfo[] = [
     views: 1234,
   },
   {
-    studyCategory: '알고리즘',
+    studyId: 14,
+    studyCategory: '코딩 테스트',
     recruitDeadLine: '24.02.22',
     studyName: 'Ludo Algorithm 2',
     studyPeriod: '0.5개월',
@@ -199,7 +214,8 @@ const StudyInfosDummy: StudyInfo[] = [
     views: 230,
   },
   {
-    studyCategory: '알고리즘',
+    studyId: 15,
+    studyCategory: '코딩 테스트',
     recruitDeadLine: '24.04.23',
     studyName: 'Ludo Algorithm 3',
     studyPeriod: '4개월',
@@ -211,6 +227,7 @@ const StudyInfosDummy: StudyInfo[] = [
     views: 999999,
   },
   {
+    studyId: 16,
     studyCategory: '모의 면접',
     recruitDeadLine: '24.02.01',
     studyName: 'Ludo Interview 1',
@@ -223,6 +240,7 @@ const StudyInfosDummy: StudyInfo[] = [
     views: 24,
   },
   {
+    studyId: 17,
     studyCategory: '모의 면접',
     recruitDeadLine: '24.02.22',
     studyName: 'Ludo Interview 2',
@@ -235,6 +253,7 @@ const StudyInfosDummy: StudyInfo[] = [
     views: 1111,
   },
   {
+    studyId: 18,
     studyCategory: '모의 면접',
     recruitDeadLine: '24.03.13',
     studyName: 'Ludo Interview 3',
@@ -247,7 +266,8 @@ const StudyInfosDummy: StudyInfo[] = [
     views: 1234,
   },
   {
-    studyCategory: '알고리즘',
+    studyId: 19,
+    studyCategory: '코딩 테스트',
     recruitDeadLine: '24.04.23',
     studyName: 'Ludo Algorithm 3',
     studyPeriod: '4개월',
@@ -259,6 +279,7 @@ const StudyInfosDummy: StudyInfo[] = [
     views: 999999,
   },
   {
+    studyId: 20,
     studyCategory: '모의 면접',
     recruitDeadLine: '24.02.01',
     studyName: 'Ludo Interview 1',
@@ -271,6 +292,7 @@ const StudyInfosDummy: StudyInfo[] = [
     views: 24,
   },
   {
+    studyId: 21,
     studyCategory: '모의 면접',
     recruitDeadLine: '24.02.22',
     studyName: 'Ludo Interview 2',
@@ -283,6 +305,7 @@ const StudyInfosDummy: StudyInfo[] = [
     views: 1111,
   },
   {
+    studyId: 22,
     studyCategory: '모의 면접',
     recruitDeadLine: '24.03.13',
     studyName: 'Ludo Interview 3',
@@ -295,7 +318,8 @@ const StudyInfosDummy: StudyInfo[] = [
     views: 1234,
   },
   {
-    studyCategory: '알고리즘',
+    studyId: 23,
+    studyCategory: '코딩 테스트',
     recruitDeadLine: '24.04.23',
     studyName: 'Ludo Algorithm 3',
     studyPeriod: '4개월',
@@ -307,6 +331,7 @@ const StudyInfosDummy: StudyInfo[] = [
     views: 999999,
   },
   {
+    studyId: 24,
     studyCategory: '모의 면접',
     recruitDeadLine: '24.02.01',
     studyName: 'Ludo Interview 1',
@@ -319,6 +344,7 @@ const StudyInfosDummy: StudyInfo[] = [
     views: 24,
   },
   {
+    studyId: 25,
     studyCategory: '모의 면접',
     recruitDeadLine: '24.02.22',
     studyName: 'Ludo Interview 2',
@@ -331,6 +357,7 @@ const StudyInfosDummy: StudyInfo[] = [
     views: 1111,
   },
   {
+    studyId: 26,
     studyCategory: '모의 면접',
     recruitDeadLine: '24.03.13',
     studyName: 'Ludo Interview 3',
@@ -345,7 +372,7 @@ const StudyInfosDummy: StudyInfo[] = [
 ];
 
 export const algorithmStudyCardListPropsDummy: StudyCardListProps = {
-  studyCategory: '알고리즘',
+  studyCategory: '코딩 테스트',
   studyInfos: algorithmStudyInfosDummy,
 };
 
