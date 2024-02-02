@@ -8,6 +8,7 @@ import BlankCircle from '../../Components/Common/BlankCirecle';
 import { PopularRecruitment, getPopularRecruitments } from '@/Apis/study';
 import { useEffect, useState } from 'react';
 import { StudyCategory, StudyInfo } from '@/Components/StudyCard';
+import { dateFormatter } from '@/Utils/date';
 
 const convertRecruitmentDataToStudyCardProps = (
   studyCategory: StudyCategory,
@@ -24,7 +25,7 @@ const convertRecruitmentDataToStudyCardProps = (
     createdDateTime: createdAt,
     hits: views,
   } = recruitment;
-  const studyPeriod: string = recruitment.startDateTime + ' ~ ' + recruitment.endDateTime;
+  const studyPeriod: string = dateFormatter(recruitment.startDateTime) + ' ~ ' + dateFormatter(recruitment.endDateTime);
 
   return {
     studyId,
@@ -70,8 +71,8 @@ const Main = () => {
 
   useEffect(() => {
     getPopularRecruitmentResult();
-    console.log(JSON.parse(localStorage.getItem('recruitments')));
-    setRecruitments({ ...JSON.parse(localStorage.getItem('recruitments')) });
+    console.log(JSON.parse(localStorage.getItem('recruitments') || ''));
+    setRecruitments({ ...JSON.parse(localStorage.getItem('recruitments') || '') });
   }, []);
 
   return (

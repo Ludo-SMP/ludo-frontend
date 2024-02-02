@@ -7,7 +7,7 @@ import { ModifyStudy } from '../Pages/Studies/ModifyStudy';
 import { GatherStudy } from '../Pages/Studies/GatherStudy';
 import { StudyDetail } from '../Pages/StudyDetail';
 import Main from '../Pages/Main';
-import { RecruitmentDetail } from '../Pages/RecruitmentDetail';
+import RecruitmentDetail from '../Pages/RecruitmentDetail';
 import StudyList from '../Pages/StudyList';
 
 export const RouterPath = createBrowserRouter([

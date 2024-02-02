@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import Position, { PositionType } from './Position';
 import Tool from './Tool';
 import { BlankSquare } from '../Common/BlankSquare';
+import { Link } from 'react-router-dom';
 
 export type ActivityType = '온라인' | '오프라인' | '미정';
 export type StudyCategory = '코딩 테스트' | '모의 면접' | '프로젝트' | 'All';
@@ -33,49 +34,51 @@ const StudyCard = ({
   views,
 }: StudyInfo) => {
   return (
-    <StudyCardWrapper>
-      <StudyRecruitInfoWrapper>
-        <div className="study__category">[{studyCategory}]</div>
-        <div className="recruit__deadline">
-          <div>모집 마감일</div>
-          <span>{recruitDeadLine}</span>
-        </div>
-      </StudyRecruitInfoWrapper>
-      <StudyNameWrapper>
-        <div className="study__name">{studyName}</div>
-      </StudyNameWrapper>
-      <StudyDetailInfoWrapper>
-        <div>
-          <span className="title">진행기간</span>
-          <span className="study__period">{studyPeriod}</span>
-        </div>
-        <div>
-          <span className="title">진행방식</span>
-          <span className="study__type">{activityType}</span>
-        </div>
-        <div className="study__positions">
-          {positions?.map((position: PositionType) => {
-            return <Position position={position} />;
-          })}
-        </div>
-        <div className="study__tools">
-          {tools.map(() => {
-            return <BlankSquare width="32px" height="32px" />;
-          })}
-        </div>
-      </StudyDetailInfoWrapper>
-      <StudyAdditionalInfoWrapper>
-        <div className="creation__info">
-          <div className="study__creator">{creator}</div>
-          <div className="division-line"></div>
-          <div className="study__createdAt">{createdAt}</div>
-        </div>
-        <div className="views__info">
-          <BlankSquare width="18px" height="18px" />
-          <span className="views">{views}</span>
-        </div>
-      </StudyAdditionalInfoWrapper>
-    </StudyCardWrapper>
+    <Link to={`/studies/${studyId}/recruitment`} state={{ studyId }}>
+      <StudyCardWrapper>
+        <StudyRecruitInfoWrapper>
+          <div className="s tudy__category">[{studyCategory}]</div>
+          <div className="recruit__deadline">
+            <div>모집 마감일</div>
+            <span>{recruitDeadLine}</span>
+          </div>
+        </StudyRecruitInfoWrapper>
+        <StudyNameWrapper>
+          <div className="study__name">{studyName}</div>
+        </StudyNameWrapper>
+        <StudyDetailInfoWrapper>
+          <div>
+            <span className="title">진행기간</span>
+            <span className="study__period">{studyPeriod}</span>
+          </div>
+          <div>
+            <span className="title">진행방식</span>
+            <span className="study__type">{activityType}</span>
+          </div>
+          <div className="study__positions">
+            {positions?.map((position: PositionType) => {
+              return <Position key={position} position={position} />;
+            })}
+          </div>
+          <div className="study__tools">
+            {tools.map((tool) => {
+              return <BlankSquare key={tool} width="32px" height="32px" />;
+            })}
+          </div>
+        </StudyDetailInfoWrapper>
+        <StudyAdditionalInfoWrapper>
+          <div className="creation__info">
+            <div className="study__creator">{creator}</div>
+            <div className="division-line"></div>
+            <div className="study__createdAt">{createdAt.slice(2)}</div>
+          </div>
+          <div className="views__info">
+            <BlankSquare width="18px" height="18px" />
+            <span className="views">{views}</span>
+          </div>
+        </StudyAdditionalInfoWrapper>
+      </StudyCardWrapper>
+    </Link>
   );
 };
 
@@ -163,8 +166,8 @@ const StudyDetailInfoWrapper = styled.div`
 const StudyAdditionalInfoWrapper = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 132px;
+  justify-content: space-between;
+  gap: 120px;
   align-self: stretch;
   font-size: ${(props) => props.theme.font.xsmall};
   font-weight: 500;
@@ -174,7 +177,7 @@ const StudyAdditionalInfoWrapper = styled.div`
     display: flex;
     padding: 2px 0px;
     align-items: center;
-    width: 113px;
+    width: 1000px;
     gap: 12px;
   }
 
