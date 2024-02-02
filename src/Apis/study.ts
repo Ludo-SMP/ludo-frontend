@@ -2,8 +2,9 @@ import axios, { AxiosInstance } from 'axios';
 import { SuccessResponse } from '@/Types/response';
 import Tool from '@/Components/StudyCard/Tool';
 import { PositionType } from '@/Components/StudyCard/Position';
-import { ActivityType } from '@/Components/StudyCard';
+import { ActivityType, StudyCategory } from '@/Components/StudyCard';
 
+import { useQuery } from '@tanstack/react-query';
 const apiRequester: AxiosInstance = axios.create({ baseURL: import.meta.env.API_URL });
 
 export interface PopularRecruitment {
@@ -17,7 +18,14 @@ export interface PopularRecruitment {
   endDateTime: string;
   recruitmentEndDateTime: string;
   createdDateTime: string;
-  hits: number;
+  hits?: number;
+}
+
+export interface RecruitmentDetailType extends PopularRecruitment {
+  category: StudyCategory;
+  applicantCount: number;
+  platformUrl: string;
+  content: string;
 }
 
 export interface PopularRecruitments {
@@ -34,6 +42,19 @@ export const getPopularRecruitments = () =>
   });
 
 export const fetchStudyListInfo = () =>
-  apiRequester.get('/studies').then((res) => {
+  apiRequester.get('/recruitments').then((res) => {
     return res.data;
   });
+
+export const getRecruitmentDetail = (studyId: number) =>
+  apiRequester.get(`/recruitments/${studyId}`).then((res) => {
+    return res.data;
+  });
+
+export const useRecruitmentDetail = (studyId: number) => {
+  console.log('userRecruitmentDetail', studyId);
+  return useQuery({
+    queryKey: ['recruitmentDetail'],
+    queryFn: () => getRecruitmentDetail(studyId),
+  });
+};

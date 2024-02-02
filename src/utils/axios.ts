@@ -16,12 +16,14 @@ const fetchWrapper = async ({
       baseURL: import.meta.env.API_URL,
       params,
     };
+
     const { data } =
       (method === 'get' && (await axios.get(url, config))) ||
       (method === 'post' && (await axios.post(url, body, config))) ||
       (method === 'patch' && (await axios.patch(url, body, config))) ||
       (method === 'delete' && (await axios.delete(url, config))) ||
       {};
+
     return data;
   } catch (error) {
     console.log(error);

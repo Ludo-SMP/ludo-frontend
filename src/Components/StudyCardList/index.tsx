@@ -3,6 +3,8 @@ import StudyCard, { StudyInfo, StudyCategory } from '../StudyCard';
 import { RightBold } from '../../Assets/icons/RightBold';
 import Filter from '../Filter';
 import { DownBold } from '../../Assets/icons/DownBold';
+import MoreButton from '../Button/MoreButton';
+import { useNavigate } from 'react-router-dom';
 
 export interface StudyCardListProps {
   studyInfos?: StudyInfo[];
@@ -10,6 +12,7 @@ export interface StudyCardListProps {
 }
 
 const StudyCardList = ({ studyCategory, studyInfos }: StudyCardListProps) => {
+  const navigate = useNavigate();
   return (
     <StudyCardListWrapper studyCategory={studyCategory}>
       <div className="studylist__info">
@@ -40,15 +43,15 @@ const StudyCardList = ({ studyCategory, studyInfos }: StudyCardListProps) => {
             </Filter>
           </div>
         ) : (
-          <button className="more__btn">
+          <MoreButton onClick={() => navigate('/studies')}>
             <div>더보기</div>
             <RightBold />
-          </button>
+          </MoreButton>
         )}
       </div>
       <div className="studylist__cards">
         {studyInfos?.map((studyInfo: StudyInfo) => (
-          <StudyCard {...studyInfo} />
+          <StudyCard key={studyInfo.studyId} {...studyInfo} />
         ))}
       </div>
     </StudyCardListWrapper>
@@ -83,25 +86,6 @@ const StudyCardListWrapper = styled.div<{ studyCategory?: StudyCategory }>`
       align-items: flex-start;
       align-content: flex-start;
       gap: 21px;
-    }
-  }
-
-  .more__btn {
-    display: flex;
-    padding: 0 12px;
-    justify-content: center;
-    align-items: center;
-    border-radius: 8px;
-    opacity: 0.65;
-    gap: 8px;
-
-    & > div:first-child {
-      height: 100%;
-      color: ${(props) => props.theme.color.black4};
-      text-align: center;
-      font-size: ${(props) => props.theme.font.xsmall};
-      font-weight: 600;
-      line-height: 44px;
     }
   }
 
