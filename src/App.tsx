@@ -14,7 +14,11 @@ import { API } from './Apis/study.ts';
 const Comp = () => {
   async function fn() {
     console.log('A');
-    const { data } = await axios.post('http://localhost:3001/api/test', {});
+    const { data } = await axios.post('http://localhost:3000/api/test', {
+      name: 'a',
+      email: 'a@aa.a',
+      title: '타이틀',
+    });
 
     console.log(data);
   }
