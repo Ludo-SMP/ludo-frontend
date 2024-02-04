@@ -4,15 +4,18 @@ import { StrictMode } from 'react';
 
 import App from './App.tsx';
 
-if (import.meta.env.DEV) {
+const enableMocking = async () => {
+  if (import.meta.env.DEV === false) return;
   const { worker } = await import('./mocks/browser');
-  worker.start();
-}
+  return worker.start();
+};
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <Provider>
-      <App />
-    </Provider>
-  </StrictMode>,
+enableMocking().then(() =>
+  ReactDOM.createRoot(document.getElementById('root')!).render(
+    <StrictMode>
+      <Provider>
+        <App />
+      </Provider>
+    </StrictMode>,
+  ),
 );

@@ -5,7 +5,7 @@ import { PositionType } from '@/Components/StudyCard/Position';
 import { ActivityType, StudyCategory } from '@/Components/StudyCard';
 
 import { useQuery } from '@tanstack/react-query';
-const apiRequester: AxiosInstance = axios.create({ baseURL: import.meta.env.API_URL });
+const apiRequester: AxiosInstance = axios.create({ baseURL: import.meta.env.VITE_API_URL });
 
 export interface PopularRecruitment {
   id: number;
@@ -26,6 +26,9 @@ export interface RecruitmentDetailType extends PopularRecruitment {
   applicantCount: number;
   platformUrl: string;
   content: string;
+  platform: string;
+  maxMemberNum: number;
+  cotnact: string;
 }
 
 export interface PopularRecruitments {
@@ -47,14 +50,11 @@ export const fetchStudyListInfo = () =>
   });
 
 export const getRecruitmentDetail = (studyId: number) =>
-  apiRequester.get(`/recruitments/${studyId}`).then((res) => {
-    return res.data;
-  });
+  apiRequester.get(`/recruitments/${studyId}`).then((res) => res.data);
 
 export const useRecruitmentDetail = (studyId: number) => {
-  console.log('userRecruitmentDetail', studyId);
   return useQuery({
-    queryKey: ['recruitmentDetail'],
+    queryKey: ['recruitmentDetail', studyId],
     queryFn: () => getRecruitmentDetail(studyId),
   });
 };
