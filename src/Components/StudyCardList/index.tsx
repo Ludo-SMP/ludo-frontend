@@ -1,17 +1,18 @@
 import styled from 'styled-components';
-import StudyCard, { StudyInfo, StudyCategory } from '../StudyCard';
+import StudyCard, { StudyCardProps } from '../StudyCard';
 import { RightBold } from '../../Assets/icons/RightBold';
 import Filter from '../Filter';
 import { DownBold } from '../../Assets/icons/DownBold';
 import MoreButton from '../Button/MoreButton';
 import { useNavigate } from 'react-router-dom';
+import { StudyCategoryType } from '@/Types/study';
 
 export interface StudyCardListProps {
-  studyInfos?: StudyInfo[];
-  studyCategory?: StudyCategory;
+  studyCardsProps?: StudyCardProps[];
+  studyCategory?: StudyCategoryType;
 }
 
-const StudyCardList = ({ studyCategory, studyInfos }: StudyCardListProps) => {
+const StudyCardList = ({ studyCategory, studyCardsProps }: StudyCardListProps) => {
   const navigate = useNavigate();
   return (
     <StudyCardListWrapper studyCategory={studyCategory}>
@@ -50,15 +51,15 @@ const StudyCardList = ({ studyCategory, studyInfos }: StudyCardListProps) => {
         )}
       </div>
       <div className="studylist__cards">
-        {studyInfos?.map((studyInfo: StudyInfo) => (
-          <StudyCard key={studyInfo.studyId} {...studyInfo} />
+        {studyCardsProps?.map((studyCardProps: StudyCardProps) => (
+          <StudyCard key={studyCardProps.recruitmentId} {...studyCardProps} />
         ))}
       </div>
     </StudyCardListWrapper>
   );
 };
 
-const StudyCardListWrapper = styled.div<{ studyCategory?: StudyCategory }>`
+const StudyCardListWrapper = styled.div<{ studyCategory?: StudyCategoryType }>`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -67,8 +68,8 @@ const StudyCardListWrapper = styled.div<{ studyCategory?: StudyCategory }>`
   .studylist {
     &__info {
       display: flex;
-      justify-content: ${(props) => (props.studyCategory === 'All' ? 'flex-start' : 'space-between')};
-      gap: ${(props) => (props.studyCategory === 'All' ? '40px' : 0)};
+      justify-content: 'flex-start';
+      gap: ${(props) => (props.studyCategory === 'All' ? '40px' : '820px')};
       align-items: center;
       align-self: stretch;
     }

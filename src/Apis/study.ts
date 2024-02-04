@@ -1,28 +1,10 @@
 import axios, { AxiosInstance } from 'axios';
-import { SuccessResponse } from '@/Types/response';
-import Tool from '@/Components/StudyCard/Tool';
-import { PositionType } from '@/Components/StudyCard/Position';
-import { ActivityType, StudyCategory } from '@/Components/StudyCard';
-
+import { StudyCategoryType } from '@/Types/study';
 import { useQuery } from '@tanstack/react-query';
 const apiRequester: AxiosInstance = axios.create({ baseURL: import.meta.env.VITE_API_URL });
 
-export interface PopularRecruitment {
-  id: number;
-  title: string;
-  stacks: Tool[];
-  positions: PositionType[];
-  ownerNickname: string;
-  way: ActivityType;
-  startDateTime: string;
-  endDateTime: string;
-  recruitmentEndDateTime: string;
-  createdDateTime: string;
-  hits?: number;
-}
-
 export interface RecruitmentDetailType extends PopularRecruitment {
-  category: StudyCategory;
+  category: StudyCategoryType;
   applicantCount: number;
   platformUrl: string;
   content: string;
@@ -31,18 +13,13 @@ export interface RecruitmentDetailType extends PopularRecruitment {
   cotnact: string;
 }
 
-export interface PopularRecruitments {
-  popularCodingRecruitments: PopularRecruitment[];
-  popularInterviewRecruitments: PopularRecruitment[];
-  popularProjectRecruitments: PopularRecruitment[];
-}
-
-export type GetPopularRecruitmentsResponse = SuccessResponse<PopularRecruitments>;
-
-export const getPopularRecruitments = () =>
-  apiRequester.get('/').then((res) => {
-    return res.data;
+export const getPopularRecruitments = () => apiRequester.get('/').then((res) => res.data);
+export const usePopularRecruitments = () => {
+  return useQuery({
+    queryKey: ['popularRecruitments'],
+    queryFn: () => getPopularRecruitments(),
   });
+};
 
 export const fetchStudyListInfo = () =>
   apiRequester.get('/recruitments').then((res) => {

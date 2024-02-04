@@ -21,9 +21,18 @@ const FilterWrapper = styled.button<{ checked?: boolean }>`
   align-items: center;
   gap: 8px;
   border-radius: 24px;
-  color: ${(props) => (props.checked ? props.theme.color.white : props.theme.color.black2)};
-  border: 1px solid ${(props) => (props.checked ? props.theme.color.gray5 : props.theme.color.black2)};
-  background: ${(props) => (props.checked ? props.theme.color.gray5 : props.theme.color.white)};
+  color: ${(props) => (props.checked ? props.theme.color.orange2 : props.theme.color.black3)};
+  border: 1px solid ${(props) => (props.checked ? props.theme.color.orange2 : props.theme.color.black2)};
+  background: ${(props) => (props.checked ? props.theme.color.white : props.theme.color.white)};
+
+  &:hover {
+    color: ${(props) => props.theme.color.white};
+    background: ${(props) => props.theme.color.orange2};
+    border: 1px solid ${(props) => props.theme.color.orange1};
+    & > svg {
+      color: yellow;
+    }
+  }
 `;
 
 export default Filter;

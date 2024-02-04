@@ -1,3 +1,3 @@
-import recruitmentHandler from './study';
+import studyHandler from './study';
 
-export const handlers = [...recruitmentHandler];
+export const handlers = [...studyHandler];

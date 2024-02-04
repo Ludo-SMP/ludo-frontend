@@ -1,59 +1,71 @@
 import styled from 'styled-components';
-import Position, { PositionType } from './Position';
-import Tool from './Tool';
+import Position from './Position';
+import {
+  PositionType,
+  ActivityType,
+  ToolType,
+  StudyCategoryType,
+  RecruitmentInfoType,
+  StudyBasicInfoType,
+  ProgressInfoType,
+} from '@/Types/study';
 import { BlankSquare } from '../Common/BlankSquare';
 import { Link } from 'react-router-dom';
+import { dateFormatter } from '@/Utils/date';
 
-export type ActivityType = '온라인' | '오프라인' | '미정';
-export type StudyCategory = '코딩 테스트' | '모의 면접' | '프로젝트' | 'All';
+export type StudyCardProps = Pick<StudyBasicInfoType, 'category'> &
+  Omit<RecruitmentInfoType, 'applicantCnt' | 'contact' | 'platfromUrl' | 'detail' | 'isModified'> &
+  Omit<ProgressInfoType, 'platform'>;
+
 export interface StudyInfo {
-  studyId: number;
-  studyCategory: StudyCategory;
-  recruitDeadLine: string;
-  studyName: string;
-  studyPeriod: string;
-  activityType: ActivityType;
-  positions: PositionType[];
-  tools: Tool[];
-  creator?: string;
-  createdAt: string;
-  views: number;
+  studyId: number; // recruitmentId;
+  studyName: string; // recruitmentTitle
+  studyCategory: StudyCategoryType; // category
+  recruitDeadLine: string; // recruitmentEndDate
+  studyPeriod: string; // startDate, endDate
+  activityType: ActivityType; // progressMethod
+  positions: PositionType[]; // positions
+  tools: ToolType[]; // stacks
+  creator?: string; // creator
+  createdAt: string; // createdAt
+  views: number; // views
 }
 
 const StudyCard = ({
-  studyId,
-  studyCategory,
-  recruitDeadLine,
-  studyName,
-  studyPeriod,
-  activityType,
+  recruitmentId,
+  recruitmentTitle,
   positions,
-  tools,
+  stacks,
   creator,
   createdAt,
+  recruitmentEndDate,
   views,
-}: StudyInfo) => {
+  category,
+  startDate,
+  endDate,
+  progressMethod,
+}: StudyCardProps) => {
   return (
-    <Link to={`/studies/${studyId}/recruitment`} state={{ studyId }}>
+    <Link to={`/studies/${recruitmentId}/recruitment`}>
       <StudyCardWrapper>
         <StudyRecruitInfoWrapper>
-          <div className="s tudy__category">[{studyCategory}]</div>
+          <div className="s tudy__category">[{category}]</div>
           <div className="recruit__deadline">
             <div>모집 마감일</div>
-            <span>{recruitDeadLine}</span>
+            <span>{recruitmentEndDate}</span>
           </div>
         </StudyRecruitInfoWrapper>
         <StudyNameWrapper>
-          <div className="study__name">{studyName}</div>
+          <div className="study__name">{recruitmentTitle}</div>
         </StudyNameWrapper>
         <StudyDetailInfoWrapper>
           <div>
             <span className="title">진행기간</span>
-            <span className="study__period">{studyPeriod}</span>
+            <span className="study__period">{`${dateFormatter(startDate)} ~ ${dateFormatter(endDate)}`}</span>
           </div>
           <div>
             <span className="title">진행방식</span>
-            <span className="study__type">{activityType}</span>
+            <span className="study__type">{progressMethod}</span>
           </div>
           <div className="study__positions">
             {positions?.map((position: PositionType) => {
@@ -61,8 +73,8 @@ const StudyCard = ({
             })}
           </div>
           <div className="study__tools">
-            {tools.map((tool) => {
-              return <BlankSquare key={tool} width="32px" height="32px" />;
+            {stacks.map((stack) => {
+              return <BlankSquare key={stack} width="32px" height="32px" />;
             })}
           </div>
         </StudyDetailInfoWrapper>
