@@ -12,8 +12,8 @@ export interface RecruitmentInfoType {
   positions: PositionType[];
   stacks: StackType[];
   contact: string;
-  platfromUrl: string;
-  detail: string;
+  platformUrl: string;
+  content: string;
   creator: string;
   createdAt: string;
   recruitmentEndDate: string;
@@ -29,13 +29,13 @@ export interface ProgressInfoType {
 }
 
 export interface StudyBasicInfoType {
-  studyId: number;
+  studyId?: number;
   studyTitle: string;
   category: StudyCategoryType;
   memberCnt: number;
 }
 
-export interface StudyInfoType extends RecruitmentInfoType, ProgressInfoType, StudyBasicInfoType {}
+export interface RecruitmentDetailType extends RecruitmentInfoType, ProgressInfoType, StudyBasicInfoType {}
 
 // StudyCard Prop로 사용하기 전, 서버로부터 받은 Raw Data
 export interface RecruitmentRawDataType {
@@ -59,11 +59,11 @@ export interface PopularRecruitmentsRawDataType {
   popularProjectRecruitments: RecruitmentRawDataType[];
 }
 
-export interface StudyInfoRawDataType extends RecruitmentRawDataType {
+export interface RecruitmentDetailRawDataType extends RecruitmentRawDataType {
   applicantCount: number;
   platformUrl: string;
   content: string;
   platform: string;
   memberCnt: number;
-  cotnact: string;
+  contact: string;
 }

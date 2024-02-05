@@ -7,25 +7,27 @@ import ApplyButton from '../../Components/Button/ApplyButton';
 import { useRecruitmentDetail } from '@/Apis/study';
 import { useParams } from 'react-router-dom';
 import { dateFormatter } from '@/Utils/date';
+import { convertRecruitmentDetailRawDataToRecruitmentDetail } from '@/Utils/propertyConverter';
 
 const RecruitmentDetail = () => {
   const studyId = Number(useParams().studyId);
   const { data, isLoading } = useRecruitmentDetail(studyId);
-  const recruitmentDetail = isLoading ? null : data.data;
+  const recruitmentDetail = isLoading ? null : convertRecruitmentDetailRawDataToRecruitmentDetail(data.data);
+  console.log(recruitmentDetail);
 
   return isLoading ? (
     <div>Loading...</div>
   ) : (
     <RecruitmentDetailWrapper>
       <StudyTitleWrapper>
-        <div className="title">{recruitmentDetail.title}</div>
+        <div className="title">{recruitmentDetail?.recruitmentTitle}</div>
       </StudyTitleWrapper>
       <StudyInfoWrapper>
         <div className="recruitment__status">
-          <div className="creator">{recruitmentDetail.ownerNickname}</div>
+          <div className="creator">{recruitmentDetail?.creator}</div>
           <ColumnDivider />
           <div className="edit__info">
-            <div className="createdAt">{recruitmentDetail.createdDateTime}</div>
+            <div className="createdAt">{recruitmentDetail?.createdAt}</div>
             <div className="edit__status">수정됨</div>
           </div>
         </div>
@@ -39,42 +41,42 @@ const RecruitmentDetail = () => {
             <div className="detail__info">
               <InfoField
                 title="모집 인원"
-                content={recruitmentDetail.applicantCount}
+                content={recruitmentDetail?.applicantCnt || '모집 인원'}
                 flexDirection="column"
                 gap="4px"
                 width="392px"
               />
               <InfoField
                 title="모집 마감일"
-                content={recruitmentDetail.recruitmentEndDateTime}
+                content={recruitmentDetail?.recruitmentEndDate || '모집 마감일'}
                 flexDirection="column"
                 gap="4px"
                 width="392px"
               />
               <InfoField
                 title="포지션"
-                content={recruitmentDetail.positions}
+                content={recruitmentDetail?.positions.join(', ') || '포지션'}
                 flexDirection="column"
                 gap="4px"
                 width="392px"
               />
               <InfoField
                 title="기술 스택"
-                content={recruitmentDetail.stacks}
+                content={recruitmentDetail?.stacks.join(', ') || '기술 스택'}
                 flexDirection="column"
                 gap="4px"
                 width="392px"
               />
               <InfoField
                 title="연락 방법"
-                content={recruitmentDetail.contact}
+                content={recruitmentDetail?.contact || '연락 방법'}
                 flexDirection="column"
                 gap="4px"
                 width="392px"
               />
               <InfoField
                 title="연결 url"
-                content={recruitmentDetail.platformUrl}
+                content={recruitmentDetail?.platformUrl || '연결 url'}
                 flexDirection="column"
                 gap="4px"
                 width="392px"
@@ -90,14 +92,14 @@ const RecruitmentDetail = () => {
             <div className="detail__info">
               <InfoField
                 title="진행 방식"
-                content={recruitmentDetail.way}
+                content={recruitmentDetail?.progressMethod || '진행 방식'}
                 flexDirection="column"
                 gap="4px"
                 width="392px"
               />
               <InfoField
                 title="진행 플랫폼"
-                content={recruitmentDetail.platform}
+                content={recruitmentDetail?.platform || '진행 플랫폼'}
                 flexDirection="column"
                 gap="4px"
                 width="392px"
@@ -105,7 +107,8 @@ const RecruitmentDetail = () => {
               <InfoField
                 title="진행 기간"
                 content={
-                  dateFormatter(recruitmentDetail.startDateTime) + ' ~ ' + dateFormatter(recruitmentDetail.endDateTime)
+                  dateFormatter(recruitmentDetail?.startDate) + ' ~ ' + dateFormatter(recruitmentDetail?.endDate) ||
+                  '진행 기간'
                 }
                 flexDirection="column"
                 gap="4px"
@@ -122,21 +125,21 @@ const RecruitmentDetail = () => {
             <div className="detail__info">
               <InfoField
                 title="스터디 제목"
-                content={recruitmentDetail.title}
+                content={recruitmentDetail?.studyTitle || '스터디 제목'}
                 flexDirection="column"
                 gap="4px"
                 width="100%"
               />
               <InfoField
                 title="카테고리"
-                content={recruitmentDetail.category}
+                content={recruitmentDetail?.category || '카테고리'}
                 flexDirection="column"
                 gap="4px"
                 width="600px"
               />
               <InfoField
                 title="스터디 최대 인원"
-                content={recruitmentDetail.maxMemberNum}
+                content={recruitmentDetail?.memberCnt || '스터디 최대 인원'}
                 flexDirection="column"
                 gap="4px"
                 width="600px"
@@ -148,7 +151,7 @@ const RecruitmentDetail = () => {
             <div className="detail__info">
               <InfoField
                 title="상세내용"
-                content={recruitmentDetail.content}
+                content={recruitmentDetail?.content || '상세내용'}
                 flexDirection="column"
                 gap="4px"
                 width="100%"

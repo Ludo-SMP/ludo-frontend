@@ -1,17 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
-import { StudyCategoryType } from '@/Types/study';
 import { useQuery } from '@tanstack/react-query';
 const apiRequester: AxiosInstance = axios.create({ baseURL: import.meta.env.VITE_API_URL });
-
-export interface RecruitmentDetailType extends PopularRecruitment {
-  category: StudyCategoryType;
-  applicantCount: number;
-  platformUrl: string;
-  content: string;
-  platform: string;
-  maxMemberNum: number;
-  cotnact: string;
-}
 
 export const getPopularRecruitments = () => apiRequester.get('/').then((res) => res.data);
 export const usePopularRecruitments = () => {

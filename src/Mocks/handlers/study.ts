@@ -1,5 +1,6 @@
 import { HttpResponse, http } from 'msw';
-import { popularRecruitmentsMockData, recruitmentsMockData } from '../data/mockData';
+import { popularRecruitmentsMockData, recruitmentsMockData, recruitmentDetailMockData } from '../data/mockData';
+import { RecruitmentDetailRawDataType } from '@/Types/study';
 // import { RecruitmentDetailType } from '@/Apis/study';
 
 const baseURL = import.meta.env.VITE_API_URL;
@@ -18,23 +19,23 @@ const getRecruitments = http.get(`${baseURL}/recruitments`, () => {
   });
 });
 
-// const getRecruitmentDetail = http.get(`${baseURL}/recruitments/:recruitmentId`, async ({ params }) => {
-//   const recruitmentId: number = Number(params?.recruitmentId);
+const getRecruitmentDetail = http.get(`${baseURL}/recruitments/:recruitmentId`, async ({ params }) => {
+  const recruitmentId: number = Number(params?.recruitmentId);
 
-//   return new HttpResponse(
-//     JSON.stringify({
-//       data: {
-//         ...recruitmentDetailMockData.filter(
-//           (recruitmentDetail: RecruitmentDetailType) => recruitmentDetail.id === recruitmentId,
-//         )[0],
-//       },
-//       message: 'Success',
-//     }),
-//     {
-//       status: 200,
-//       statusText: 'OK',
-//     },
-//   );
-// });
+  return new HttpResponse(
+    JSON.stringify({
+      data: {
+        ...recruitmentDetailMockData.filter(
+          (recruitmentDetail: RecruitmentDetailRawDataType) => recruitmentDetail.id === recruitmentId,
+        )[0],
+      },
+      message: 'Success',
+    }),
+    {
+      status: 200,
+      statusText: 'OK',
+    },
+  );
+});
 
-export default [getPopularRecruitments, getRecruitments];
+export default [getPopularRecruitments, getRecruitments, getRecruitmentDetail];

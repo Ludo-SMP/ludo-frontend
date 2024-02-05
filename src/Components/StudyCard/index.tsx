@@ -1,35 +1,13 @@
 import styled from 'styled-components';
 import Position from './Position';
-import {
-  PositionType,
-  ActivityType,
-  ToolType,
-  StudyCategoryType,
-  RecruitmentInfoType,
-  StudyBasicInfoType,
-  ProgressInfoType,
-} from '@/Types/study';
+import { PositionType, RecruitmentInfoType, StudyBasicInfoType, ProgressInfoType } from '@/Types/study';
 import { BlankSquare } from '../Common/BlankSquare';
 import { Link } from 'react-router-dom';
 import { dateFormatter } from '@/Utils/date';
 
 export type StudyCardProps = Pick<StudyBasicInfoType, 'category'> &
-  Omit<RecruitmentInfoType, 'applicantCnt' | 'contact' | 'platfromUrl' | 'detail' | 'isModified'> &
+  Omit<RecruitmentInfoType, 'applicantCnt' | 'contact' | 'platformUrl' | 'detail' | 'isModified'> &
   Omit<ProgressInfoType, 'platform'>;
-
-export interface StudyInfo {
-  studyId: number; // recruitmentId;
-  studyName: string; // recruitmentTitle
-  studyCategory: StudyCategoryType; // category
-  recruitDeadLine: string; // recruitmentEndDate
-  studyPeriod: string; // startDate, endDate
-  activityType: ActivityType; // progressMethod
-  positions: PositionType[]; // positions
-  tools: ToolType[]; // stacks
-  creator?: string; // creator
-  createdAt: string; // createdAt
-  views: number; // views
-}
 
 const StudyCard = ({
   recruitmentId,
