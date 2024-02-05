@@ -6,12 +6,11 @@ import Gnb from '../../Components/Gnb';
 import CreateButton from '../../Components/Button/CreateButton';
 import BlankCircle from '../../Components/Common/BlankCirecle';
 import { usePopularRecruitments } from '@/Apis/study';
-import { convertPopularRecruitmentsToStudyCardProps } from '@/Utils/property';
+import { convertPopularRecruitmentsToStudyCardProps } from '@/Utils/propertyConverter';
 
 const Main = () => {
   const { data, isLoading } = usePopularRecruitments();
   const popularRecruitments = isLoading ? null : convertPopularRecruitmentsToStudyCardProps(data.data);
-  console.log(popularRecruitments);
 
   return isLoading ? (
     <div>Loading...</div>

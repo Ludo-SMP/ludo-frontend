@@ -21,10 +21,13 @@ export const usePopularRecruitments = () => {
   });
 };
 
-export const fetchStudyListInfo = () =>
-  apiRequester.get('/recruitments').then((res) => {
-    return res.data;
+export const getRecruitments = () => apiRequester.get('/recruitments').then((res) => res.data);
+export const useRecruitments = () => {
+  return useQuery({
+    queryKey: ['Recruitments'],
+    queryFn: () => getRecruitments(),
   });
+};
 
 export const getRecruitmentDetail = (studyId: number) =>
   apiRequester.get(`/recruitments/${studyId}`).then((res) => res.data);

@@ -1,6 +1,6 @@
 import { PopularRecruitmentsRawDataType, RecruitmentRawDataType } from '@/Types/study';
 
-export const convertRecruitementRawDataToStudyCardProps = (recruitementRawData: RecruitmentRawDataType) => {
+export const convertRecruitmentRawDataToStudyCardProps = (recruitementRawData: RecruitmentRawDataType) => {
   const {
     id: recruitmentId,
     title: recruitmentTitle,
@@ -32,7 +32,7 @@ export const convertRecruitementRawDataToStudyCardProps = (recruitementRawData: 
 };
 
 export const convertRecruitmentsToStudyCardProps = (recruitments: RecruitmentRawDataType[]) => {
-  return recruitments.map((recruitment) => convertRecruitementRawDataToStudyCardProps(recruitment));
+  return recruitments.map((recruitment) => convertRecruitmentRawDataToStudyCardProps(recruitment));
 };
 
 export const convertPopularRecruitmentsToStudyCardProps = (popularRecruitments: PopularRecruitmentsRawDataType) => {

@@ -7,21 +7,13 @@ import CreateButton from '../../Components/Button/CreateButton';
 import BlankCircle from '../../Components/Common/BlankCirecle';
 import MoveToTopButton from '../../Components/Button/MoveToTopButton';
 import { UpBold } from '../../Assets/icons/UpBold';
-import { fetchStudyListInfo } from '../../Apis/study';
-import { useEffect, useState } from 'react';
+import { useRecruitments } from '@/Apis/study';
+import { convertRecruitmentsToStudyCardProps } from '@/Utils/propertyConverter';
 
-const StudyList = () => {
-  const [studyList, setStudyList] = useState([]);
-
-  const getStudyList = async () => {
-    const data = await fetchStudyListInfo();
-    setStudyList(data?.studyList);
-  };
-
-  useEffect(() => {
-    getStudyList();
-  }, []);
-
+const Recruitments = () => {
+  const { data, isLoading } = useRecruitments();
+  const recruitments = isLoading ? null : convertRecruitmentsToStudyCardProps(data.data);
+  console.log(recruitments);
   return (
     <ContentsWrapper>
       <Gnb />
@@ -34,7 +26,7 @@ const StudyList = () => {
         </CreateButton>
       </ButtonsWrapper>
       <Banner {...bannerDummy} />
-      <StudyCardList studyCategory="All" studyInfos={studyList} />
+      {isLoading ? <div>Loading...</div> : <StudyCardList studyCategory="All" studyCardsProps={recruitments} />}
     </ContentsWrapper>
   );
 };
@@ -57,4 +49,4 @@ const ButtonsWrapper = styled.span`
   gap: 20px;
 `;
 
-export default StudyList;
+export default Recruitments;

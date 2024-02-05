@@ -6,7 +6,7 @@ export const ROUTER_PATH = {
   recruitmentsCreate: '/studies/:studyId/recruitments/create', //모집공고 생성
   recruitmentDetail: '/studies/:studyId/recruitment', //모집공고 상세 페이지
   study: '/studies/:studyId', //스터디상세페이지
-  studyList: '/studies', //스터디 모아보기 페이지
+  recruitments: '/studies', //스터디 모아보기 페이지
   createStudy: '/studies/create', //스터디생성페이지
   modifyStudy: 'studies/modify',
   gatherStudy: 'studies/gather',

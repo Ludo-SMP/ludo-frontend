@@ -1,4 +1,4 @@
-import { PopularRecruitmentsRawDataType, StudyInfoRawDataType } from '@/Types/study';
+import { PopularRecruitmentsRawDataType, RecruitmentRawDataType, StudyInfoRawDataType } from '@/Types/study';
 // import { PopularRecruitments, RecruitmentDetailType } from '@/Apis/study';
 
 export const studyInfoMockData: StudyInfoRawDataType[] = [
@@ -836,6 +836,13 @@ export const popularRecruitmentsMockData: PopularRecruitmentsRawDataType = {
       .slice(0, 3),
   ],
 };
+
+export const recruitmentsMockData: RecruitmentRawDataType[] = [
+  ...studyInfoMockData.map((studyInfo: StudyInfoRawDataType) => {
+    const { applicantCount, platformUrl, content, platform, memberCnt, cotnact, ...studycardRawData } = studyInfo;
+    return studycardRawData;
+  }),
+];
 
 // export const recruitmentDetailMockData: RecruitmentDetailType[] = [
 //   {

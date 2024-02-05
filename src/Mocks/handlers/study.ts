@@ -1,17 +1,18 @@
 import { HttpResponse, http } from 'msw';
-import { popularRecruitmentsMockData } from '../data/mockData';
+import { popularRecruitmentsMockData, recruitmentsMockData } from '../data/mockData';
 // import { RecruitmentDetailType } from '@/Apis/study';
 
 const baseURL = import.meta.env.VITE_API_URL;
 
-// const getStudyListInfo = http.get(`${baseURL}/recruitments`, () => {
-//   return HttpResponse.json({
-//     studyList: [...StudyListMockData],
-//   });
-// });
-
 const getPopularRecruitments = http.get(`${baseURL}`, () => {
   return new HttpResponse(JSON.stringify({ data: popularRecruitmentsMockData, message: 'Success' }), {
+    status: 200,
+    statusText: 'OK',
+  });
+});
+
+const getRecruitments = http.get(`${baseURL}/recruitments`, () => {
+  return new HttpResponse(JSON.stringify({ data: recruitmentsMockData, message: 'Success' }), {
     status: 200,
     statusText: 'OK',
   });
@@ -36,4 +37,4 @@ const getPopularRecruitments = http.get(`${baseURL}`, () => {
 //   );
 // });
 
-export default [getPopularRecruitments];
+export default [getPopularRecruitments, getRecruitments];
