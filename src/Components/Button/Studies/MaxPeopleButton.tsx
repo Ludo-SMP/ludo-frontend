@@ -7,11 +7,12 @@ export type StudyProps = {
 
 export const MaxPeopleButton = () => {
   return (
-    <ButtonConTainer>
+    <ButtonConTainer name="max">
       <Textwrapper disabled selected>
         스터디 최대인원
       </Textwrapper>
-      <Textwrapper value="algorithm">6명</Textwrapper>
+      <Textwrapper value="4명">4명</Textwrapper>
+      <Textwrapper value="6명">6명</Textwrapper>
       <Textwrapper value="8명">8명</Textwrapper>
     </ButtonConTainer>
   );
@@ -33,3 +34,6 @@ const Textwrapper = styled.option`
   color: ${(props) => props.theme.color.gray3};
   padding-left: 330px;
 `;
+function useState(arg0: string): [any, any] {
+  throw new Error('Function not implemented.');
+}

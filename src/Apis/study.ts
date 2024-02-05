@@ -10,7 +10,7 @@ export const API = axios.create({
   responseType: 'json',
 });
 
-// export const fetchStudyListInfo = () =>
-//   API.get('/studies').then((res) => {
-//     return res.data;
-//   });
+export const fetchStudyListInfo = () =>
+  API.get('/studies').then((res) => {
+    return res.data;
+  });

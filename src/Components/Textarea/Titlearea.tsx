@@ -1,14 +1,65 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import styled from 'styled-components';
 
-export const Titlearea = () => {
+export type Props = {
+  onClick?: () => void;
+  children?: React.ReactNode;
+  onChange?: (event: any) => void;
+  value?: any;
+  type?: string;
+  name?: string;
+  maxlength?: any;
+  id?: string;
+  formData?: any;
+  ref?: any;
+};
+
+//작성
+const useInput = (defaultValue: string) => {
+  const [value, setValue] = useState(defaultValue);
+  const onChange = ({ target }: { target: HTMLInputElement | HTMLTextAreaElement }) => {
+    const { value } = target;
+    setValue(value);
+  };
+  return { value, onChange, setValue };
+};
+
+export const Titlearea = ({ value, name, maxlength, onChange }: Props) => {
+  // 글자수제한
   const [inputCount, setInputCount] = useState(0);
+
+  // title 임시 변수
+  const newTitle = useInput('');
+  // console.log(newTitle);
   const onInputHandler = (event: any) => {
     setInputCount(event.target.value.length);
   };
+
+  // input
+  const [titleValue, settitleValue] = useState('');
+  const titleHandler = (event: any) => {
+    settitleValue(event.target.value);
+  };
+
+  const refs = useRef<string>(newTitle.value);
+  // const changeValue = (event: React.ChangeEvent<HTMLInputElement>, type: React.MutableRefObject<string>) => {
+  //   let values = event.target.value;
+  //   type current = typeof values;
+  // };
+
   return (
-    <InputContainer>
-      <Input onChange={onInputHandler} maxLength={50} placeholder="제목을 기입해주세요" />
+    <InputContainer id="title" className="input">
+      <Input
+        // className="input"
+        // name="title"
+        // id="title"
+        // ref={refs}
+        onChange={(event) => [newTitle.setValue(event.target.value), onInputHandler(event)]}
+        value={newTitle.value}
+        name={name}
+        maxLength={50}
+        placeholder="제목을 기입해주세요"
+      />
       <InputText>{inputCount}/50</InputText>
     </InputContainer>
   );

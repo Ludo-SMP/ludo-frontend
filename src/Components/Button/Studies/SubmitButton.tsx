@@ -2,9 +2,10 @@ import styled from 'styled-components';
 
 export type SubmitProps = {
   children?: React.ReactNode;
+  type?: any;
 };
 
-export const SubmitButton = ({ children }: SubmitProps) => {
+export const SubmitButton = ({ children, type }: SubmitProps) => {
   return (
     <StudyContainer>
       <StudyText>{children}</StudyText>
@@ -22,6 +23,6 @@ const StudyContainer = styled.button`
 
 const StudyText = styled.text`
   text-align: center;
-  font-size: ${(props) => props.theme.font.small1};
+  font-size: ${(props) => props.theme.font.small};
   padding: 4px 12px;
 `;

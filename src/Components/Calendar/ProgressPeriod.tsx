@@ -9,6 +9,8 @@ export const ProgressPeriod = () => {
   const [startDate, endDate] = dateRange;
   return (
     <DateContainer
+      name="period"
+      className="select"
       selectsRange={true}
       startDate={startDate}
       endDate={endDate}

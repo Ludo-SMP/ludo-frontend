@@ -1,8 +1,13 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 
 export const PlatformButton = () => {
+  const [Value, setValue] = useState('');
+  const submitHandler = (event: any) => {
+    setValue(event.currentTarget.value);
+  };
   return (
-    <ButtonConTainer name="Progress" className="select">
+    <ButtonConTainer name="platform" className="select" value={Value} onChange={submitHandler}>
       <Textwrapper disabled selected>
         플랫폼
       </Textwrapper>
