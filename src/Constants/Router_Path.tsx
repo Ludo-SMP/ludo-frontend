@@ -11,4 +11,5 @@ export const ROUTER_PATH = {
   modifyStudy: 'studies/modify',
   gatherStudy: 'studies/gather',
   decativate: '/deactivate', //회원탈퇴 페이지
+  test: '/test',
 } as const;

@@ -9,15 +9,24 @@ import { MaxPeopleButton } from '../../Components/Button/Studies/MaxPeopleButton
 import { ProgressPeriod } from '../../Components/Calendar/ProgressPeriod';
 import { useState, useEffect, Key, useRef } from 'react';
 import { Validation } from '../../Constants/Validation';
+import { Titles } from '../../Components/Textarea/Titlearea';
 import axios from 'axios';
+import { useSetAtom, useAtomValue, useAtom } from 'jotai';
 
 export const CreateStudy = (Props: any) => {
   // 폼 데이터
 
+  // const [titleValue, settitleValue] = useAtom(Titles);
+  // const setValue = useAtomValue(Titles);
+  // const titleHandler = (event: any) => {
+  //   settitleValue(event.target.value);
+  //   console.log(setValue);
+  // };
   const [formData, setFormData] = useState({
     title: '',
     category: '',
   });
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formErrors, setFormErrors] = useState({});
 
@@ -73,10 +82,11 @@ export const CreateStudy = (Props: any) => {
     setIsSubmitting(true);
     postData();
   };
-
+  // action="http://localhost:3000/api/test" method="POST"
+  // onSubmit={createHandler}
   return (
     <>
-      <StudyContainer action="http://localhost:3000/api/test" method="POST">
+      <StudyContainer action="http://localhost:3000/api/test" method="POST" target="/">
         <StudyMain>스터디 생성하기</StudyMain>
         <TopBox>
           <StudyTitle>스터디 제목</StudyTitle>
@@ -86,9 +96,10 @@ export const CreateStudy = (Props: any) => {
               type="title"
               name="title"
               id="title "
+              onChange={(event) => handleInputChange(event)}
               // onChange={() => handleInputChange}
               // onChange={(event: any) => titleHandler(event)}
-              // value={formData.title}
+              value={formData.title}
             />
           </BottomWrapper>
         </TopBox>

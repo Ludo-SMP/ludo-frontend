@@ -1,5 +1,6 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import styled from 'styled-components';
+import { atom, useAtom, useAtomValue, useSetAtom } from 'jotai';
 
 export type Props = {
   onClick?: () => void;
@@ -23,6 +24,7 @@ const useInput = (defaultValue: string) => {
   };
   return { value, onChange, setValue };
 };
+export const Titles = atom('');
 
 export const Titlearea = ({ value, name, maxlength, onChange }: Props) => {
   // 글자수제한
@@ -36,16 +38,21 @@ export const Titlearea = ({ value, name, maxlength, onChange }: Props) => {
   };
 
   // input
-  const [titleValue, settitleValue] = useState('');
+  const [titleValue, settitleValue] = useAtom(Titles);
+  // const settitleValue = useSetAtom(Titles);
+  // export
+  const setValue = useAtomValue(Titles);
   const titleHandler = (event: any) => {
     settitleValue(event.target.value);
+    console.log(setValue);
   };
 
-  const refs = useRef<string>(newTitle.value);
-  // const changeValue = (event: React.ChangeEvent<HTMLInputElement>, type: React.MutableRefObject<string>) => {
-  //   let values = event.target.value;
-  //   type current = typeof values;
-  // };
+  // const onClick = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const {value} = e.target;
+  //   setValue((prev: string) => {
+  //     return value;
+  //   })
+  // }, [])
 
   return (
     <InputContainer id="title" className="input">
@@ -55,7 +62,10 @@ export const Titlearea = ({ value, name, maxlength, onChange }: Props) => {
         // id="title"
         // ref={refs}
         onChange={(event) => [newTitle.setValue(event.target.value), onInputHandler(event)]}
-        value={newTitle.value}
+        // value={newTitle.value}
+        // settitleValue(event.target.value)
+        // onChange={(event) => [titleHandler(event), onInputHandler(event)]}
+        value={titleValue}
         name={name}
         maxLength={50}
         placeholder="제목을 기입해주세요"

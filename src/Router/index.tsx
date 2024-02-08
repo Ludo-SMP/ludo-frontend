@@ -9,6 +9,7 @@ import { StudyDetail } from '../Pages/StudyDetail';
 import { Main } from '../Pages/Main';
 import { RecruitmentDetail } from '../Pages/RecruitmentDetail';
 import StudyList from '../Pages/StudyList';
+import { Test } from '../Pages/test';
 
 export const RouterPath = createBrowserRouter([
   {
@@ -47,5 +48,9 @@ export const RouterPath = createBrowserRouter([
   {
     path: ROUTER_PATH.studyList,
     element: <StudyList />,
+  },
+  {
+    path: ROUTER_PATH.test,
+    element: <Test />,
   },
 ]);
