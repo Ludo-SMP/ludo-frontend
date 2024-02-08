@@ -18,6 +18,7 @@ export const color = {
   purple2: '#EFECFF',
   purple3: '#807dcc',
   purple4: '#807dcc',
+  purple5: '#7170BF',
   orange1: '#E37756',
   orange2: '#F79D7E',
 };

@@ -25,6 +25,7 @@ export const GlobalStyle = createGlobalStyle`
       margin: 0;
       background: #fff;
       border: none;
+      box-shadow: none;
   }
 
   button,

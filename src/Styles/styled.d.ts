@@ -19,6 +19,7 @@ declare module 'styled-components' {
       purple2: string;
       purple3: string;
       purple4: string;
+      purple5: string;
       orange1: string;
       orange2: string;
     };

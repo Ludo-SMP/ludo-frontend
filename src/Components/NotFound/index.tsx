@@ -1,13 +1,26 @@
 import styled from 'styled-components';
 import CreateButton from '../Button/CreateButton';
+import { useRef, useState } from 'react';
+import LoginModal from '../Modal/LoginModal';
+import { useOutSideClick } from '@/Hooks/useOutsideClick';
+
 const notFoundText = `찾는 태그에 대한 검색 결과가 없습니다\n프로젝트를 직접 생성하시겠습니까?`;
 const NotFound = () => {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const handleModalOpen = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+  const modalWrapperRef = useRef(null);
+
+  useOutSideClick(modalWrapperRef, handleModalOpen);
+
   return (
     <NotFoundWrapper>
       <div className="notFound__text">{notFoundText}</div>
-      <CreateButton>
+      <CreateButton onClick={handleModalOpen}>
         <span>스터디 생성하기</span>
       </CreateButton>
+      {isModalOpen && <LoginModal closeModal={handleModalOpen} ref={modalWrapperRef} />}
     </NotFoundWrapper>
   );
 };
