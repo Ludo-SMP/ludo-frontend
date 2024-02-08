@@ -7,6 +7,7 @@ import CreateButton from '../../Components/Button/CreateButton';
 import BlankCircle from '../../Components/Common/BlankCirecle';
 import { usePopularRecruitments } from '@/Apis/study';
 import { convertPopularRecruitmentsToStudyCardProps } from '@/Utils/propertyConverter';
+import CardListInfo from '@/Components/CardListInfo';
 
 const Main = () => {
   const { data, isLoading } = usePopularRecruitments();
@@ -23,9 +24,18 @@ const Main = () => {
         </CreateButton>
       </ButtonsWrapper>
       <Banner {...bannerDummy} />
-      <StudyCardList studyCategory="코딩 테스트" studyCardsProps={popularRecruitments?.popularCodingRecruitments} />
-      <StudyCardList studyCategory="모의 면접" studyCardsProps={popularRecruitments?.popularInterviewRecruitments} />
-      <StudyCardList studyCategory="프로젝트" studyCardsProps={popularRecruitments?.popularProjectRecruitments} />
+      <StudyListWrapper>
+        <CardListInfo studyCategory="코딩 테스트" />
+        <StudyCardList studyCardsProps={popularRecruitments?.popularCodingRecruitments} />
+      </StudyListWrapper>
+      <StudyListWrapper>
+        <CardListInfo studyCategory="모의 면접" />
+        <StudyCardList studyCardsProps={popularRecruitments?.popularInterviewRecruitments} />
+      </StudyListWrapper>
+      <StudyListWrapper>
+        <CardListInfo studyCategory="프로젝트" />
+        <StudyCardList studyCardsProps={popularRecruitments?.popularProjectRecruitments} />
+      </StudyListWrapper>
     </MainWrapper>
   );
 };
@@ -43,6 +53,13 @@ const ButtonsWrapper = styled.span`
   bottom: 80px;
   background-color: none;
   padding: 40px;
+`;
+
+const StudyListWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
 `;
 
 export default Main;

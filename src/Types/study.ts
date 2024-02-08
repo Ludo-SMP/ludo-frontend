@@ -3,7 +3,9 @@ export type ActivityType = '온라인' | '오프라인' | '미정';
 export type ToolType = 'React' | 'Java' | 'Spring' | 'Figma' | 'Java' | 'Javascript';
 export type StackType = ToolType;
 export type ProgressMethodType = ActivityType;
-export type StudyCategoryType = '코딩 테스트' | '모의 면접' | '프로젝트' | 'All';
+export type StudyCategoryType = '코딩 테스트' | '모의 면접' | '프로젝트';
+export type SortType = '최신순' | '조회순';
+export type CategoryPropertyType = 'category' | 'stacks' | 'positions' | 'way' | 'sort';
 
 export interface RecruitmentInfoType {
   recruitmentId: number;
@@ -67,3 +69,27 @@ export interface RecruitmentDetailRawDataType extends RecruitmentRawDataType {
   memberCnt: number;
   contact: string;
 }
+
+export type MainCategoryNameType = '스터디 유형' | '기술 스택' | '포지션' | '진행 방식' | '목록 정렬 기준';
+export type AllType = '전체';
+export interface MainCategoryType<T, S> {
+  categoryName: MainCategoryNameType;
+  categoryProperty: string;
+  categoryItems?: (T | S)[];
+}
+
+export interface FilterOptionsType {
+  category: StudyCategoryType[];
+  stacks: StackType[];
+  positions: PositionType[];
+  way: ProgressMethodType[];
+  sort: SortType[];
+}
+
+export const defaultFilterOptions = {
+  category: ['코딩 테스트', '모의 면접', '프로젝트'],
+  stacks: ['React', 'Java', 'Spring', 'Figma', 'Java', 'Javascript'],
+  positions: ['백엔드', '프론트엔드', '기획', '디자이너'],
+  way: ['온라인', '오프라인', '미정'],
+  sort: ['최신순'],
+};

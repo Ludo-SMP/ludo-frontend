@@ -10,11 +10,20 @@ export const usePopularRecruitments = () => {
   });
 };
 
-export const getRecruitments = () => apiRequester.get('/recruitments').then((res) => res.data);
-export const useRecruitments = () => {
+export const getRecruitments = (filterOptionQueryString: string) =>
+  apiRequester.get(`/recruitments?${filterOptionQueryString}`).then((res) => res.data);
+
+export const useRecruitments = (filterOptions = []) => {
+  const fitlerOptionsQueryString = Object.entries(filterOptions)
+    .map((filterOption) => {
+      const [categoryProperty, categoryItems] = filterOption;
+      return `${categoryProperty}=${categoryItems.join(',')}`;
+    })
+    .join('&');
+
   return useQuery({
-    queryKey: ['Recruitments'],
-    queryFn: () => getRecruitments(),
+    queryKey: ['Recruitments', filterOptions],
+    queryFn: () => getRecruitments(fitlerOptionsQueryString),
   });
 };
 

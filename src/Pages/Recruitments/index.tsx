@@ -9,11 +9,20 @@ import MoveToTopButton from '../../Components/Button/MoveToTopButton';
 import { UpBold } from '../../Assets/icons/UpBold';
 import { useRecruitments } from '@/Apis/study';
 import { convertRecruitmentsToStudyCardProps } from '@/Utils/propertyConverter';
+import CardListInfo from '@/Components/CardListInfo';
+import DropdownFilters from '@/Components/DropdownFilters';
+import { useState } from 'react';
+import { defaultFilterOptions } from '@/Shared/category';
+import { mainCategories } from '@/Shared/category';
+import DropdownFilter from '@/Components/DropdownFilter';
+import { FilterOptionsType } from '@/Types/study';
 
 const Recruitments = () => {
-  const { data, isLoading } = useRecruitments();
+  const [filterOptions, setFilterOptions] = useState<FilterOptionsType>(defaultFilterOptions);
+
+  const { data, isLoading } = useRecruitments(filterOptions);
   const recruitments = isLoading ? null : convertRecruitmentsToStudyCardProps(data.data);
-  console.log(recruitments);
+
   return (
     <ContentsWrapper>
       <Gnb />
@@ -26,7 +35,25 @@ const Recruitments = () => {
         </CreateButton>
       </ButtonsWrapper>
       <Banner {...bannerDummy} />
-      {isLoading ? <div>Loading...</div> : <StudyCardList studyCategory="All" studyCardsProps={recruitments} />}
+      <StudyListWrapper>
+        <StudyListSearchSectionWrapper>
+          <CardListInfo />
+          <DropdownFilters>
+            {mainCategories.map((mainCategory) => {
+              return (
+                <DropdownFilter
+                  categoryName={mainCategory.categoryName}
+                  categoryProperty={mainCategory.categoryProperty}
+                  categoryItems={mainCategory.categoryItems}
+                  setFilterOptions={setFilterOptions}
+                  key={mainCategory.categoryName}
+                />
+              );
+            })}
+          </DropdownFilters>
+        </StudyListSearchSectionWrapper>
+        {isLoading ? <div>Loading...</div> : <StudyCardList studyCardsProps={recruitments} />}
+      </StudyListWrapper>
     </ContentsWrapper>
   );
 };
@@ -47,6 +74,17 @@ const ButtonsWrapper = styled.span`
   background-color: none;
   padding: 40px;
   gap: 20px;
+`;
+const StudyListWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+`;
+
+const StudyListSearchSectionWrapper = styled.div`
+  display: flex;
+  gap: 40px;
 `;
 
 export default Recruitments;

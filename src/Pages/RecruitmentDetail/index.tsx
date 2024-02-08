@@ -13,7 +13,6 @@ const RecruitmentDetail = () => {
   const studyId = Number(useParams().studyId);
   const { data, isLoading } = useRecruitmentDetail(studyId);
   const recruitmentDetail = isLoading ? null : convertRecruitmentDetailRawDataToRecruitmentDetail(data.data);
-  console.log(recruitmentDetail);
 
   return isLoading ? (
     <div>Loading...</div>

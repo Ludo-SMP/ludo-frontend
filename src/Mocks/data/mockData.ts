@@ -26,7 +26,7 @@ export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
     id: 2,
     title: '인기 코테 스터디 2',
     stacks: ['Javascript'],
-    positions: ['백엔드', '프론트엔드'],
+    positions: ['프론트엔드'],
     ownerNickname: 'Hyun',
     way: '온라인',
     startDateTime: '2024-02-03',
@@ -626,7 +626,7 @@ export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
     id: 32,
     title: '인기 코테 스터디 11',
     stacks: ['Javascript', 'Java'],
-    positions: ['백엔드', '프론트엔드', '디자이너'],
+    positions: ['프론트엔드', '디자이너'],
     ownerNickname: 'Hyun',
     way: '온라인',
     startDateTime: '2024-02-03',
@@ -646,9 +646,9 @@ export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
     id: 33,
     title: '인기 코테 스터디 12',
     stacks: ['Java', 'Javascript'],
-    positions: ['백엔드'],
+    positions: ['백엔드', '기획'],
     ownerNickname: '아카',
-    way: '온라인',
+    way: '미정',
     startDateTime: '2024-03-03',
     endDateTime: '2024-04-03',
     recruitmentEndDateTime: '2024-02-01',
@@ -666,9 +666,9 @@ export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
     id: 34,
     title: '인기 모의 면접 스터디 10',
     stacks: ['Java', 'Spring'],
-    positions: ['백엔드'],
+    positions: ['디자이너'],
     ownerNickname: '휴',
-    way: '오프라인',
+    way: '온라인',
     startDateTime: '2024-03-01',
     endDateTime: '2024-04-01',
     recruitmentEndDateTime: '2024-02-01',
@@ -847,3 +847,5 @@ export const recruitmentsMockData: RecruitmentRawDataType[] = [
     return studycardRawData;
   }),
 ];
+
+export const recruitmentsFilteredMockData: RecruitmentRawDataType[] = {};

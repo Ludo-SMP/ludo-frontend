@@ -39,5 +39,11 @@ export const GlobalStyle = createGlobalStyle`
   a {
     text-decoration: none;
   }
-  
+  button:hover {
+    cursor: pointer;
+  }
+
+  ul, li {
+    list-style: none;
+  }
 `;
