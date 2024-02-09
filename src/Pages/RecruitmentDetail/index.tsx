@@ -4,19 +4,29 @@ import { RowDivider } from '../../Components/Common/Divider/RowDivider';
 import { ColumnDivider } from '../../Components/Common/Divider/ColumnDivider';
 import { BlankSquare } from '../../Components/Common/BlankSquare';
 import ApplyButton from '../../Components/Button/ApplyButton';
+import { useRecruitmentDetail } from '@/Apis/study';
+import { useParams } from 'react-router-dom';
+import { dateFormatter } from '@/Utils/date';
+import { convertRecruitmentDetailRawDataToRecruitmentDetail } from '@/Utils/propertyConverter';
 
-export const RecruitmentDetail = () => {
-  return (
+const RecruitmentDetail = () => {
+  const studyId = Number(useParams().studyId);
+  const { data, isLoading } = useRecruitmentDetail(studyId);
+  const recruitmentDetail = isLoading ? null : convertRecruitmentDetailRawDataToRecruitmentDetail(data.data);
+
+  return isLoading ? (
+    <div>Loading...</div>
+  ) : (
     <RecruitmentDetailWrapper>
       <StudyTitleWrapper>
-        <div className="title">스터디 제목</div>
+        <div className="title">{recruitmentDetail?.recruitmentTitle}</div>
       </StudyTitleWrapper>
       <StudyInfoWrapper>
         <div className="recruitment__status">
-          <div className="creator">닉네임</div>
+          <div className="creator">{recruitmentDetail?.creator}</div>
           <ColumnDivider />
           <div className="edit__info">
-            <div className="createdAt">작성 날짜</div>
+            <div className="createdAt">{recruitmentDetail?.createdAt}</div>
             <div className="edit__status">수정됨</div>
           </div>
         </div>
@@ -28,12 +38,48 @@ export const RecruitmentDetail = () => {
               <div className="title">스터디 모집 안내</div>
             </div>
             <div className="detail__info">
-              <InfoField title="모집 인원" content="모집 인원" flexDirection="column" gap="4px" width="392px" />
-              <InfoField title="모집 마감일" content="모집 마감일" flexDirection="column" gap="4px" width="392px" />
-              <InfoField title="포지션" content="포지션" flexDirection="column" gap="4px" width="392px" />
-              <InfoField title="기술 스택" content="기술 스택" flexDirection="column" gap="4px" width="392px" />
-              <InfoField title="연락 방법" content="연락 방법" flexDirection="column" gap="4px" width="392px" />
-              <InfoField title="연결 url" content="연결 url" flexDirection="column" gap="4px" width="392px" />
+              <InfoField
+                title="모집 인원"
+                content={recruitmentDetail?.applicantCnt || '모집 인원'}
+                flexDirection="column"
+                gap="4px"
+                width="392px"
+              />
+              <InfoField
+                title="모집 마감일"
+                content={recruitmentDetail?.recruitmentEndDate || '모집 마감일'}
+                flexDirection="column"
+                gap="4px"
+                width="392px"
+              />
+              <InfoField
+                title="포지션"
+                content={recruitmentDetail?.positions.join(', ') || '포지션'}
+                flexDirection="column"
+                gap="4px"
+                width="392px"
+              />
+              <InfoField
+                title="기술 스택"
+                content={recruitmentDetail?.stacks.join(', ') || '기술 스택'}
+                flexDirection="column"
+                gap="4px"
+                width="392px"
+              />
+              <InfoField
+                title="연락 방법"
+                content={recruitmentDetail?.contact || '연락 방법'}
+                flexDirection="column"
+                gap="4px"
+                width="392px"
+              />
+              <InfoField
+                title="연결 url"
+                content={recruitmentDetail?.platformUrl || '연결 url'}
+                flexDirection="column"
+                gap="4px"
+                width="392px"
+              />
             </div>
           </div>
           <RowDivider />
@@ -43,9 +89,30 @@ export const RecruitmentDetail = () => {
               <div className="title">스터디 진행 안내</div>
             </div>
             <div className="detail__info">
-              <InfoField title="진행 방식" content="진행 방식" flexDirection="column" gap="4px" width="392px" />
-              <InfoField title="진행 플랫폼" content="진행 플랫폼" flexDirection="column" gap="4px" width="392px" />
-              <InfoField title="진행 기간" content="진행 기간" flexDirection="column" gap="4px" width="392px" />
+              <InfoField
+                title="진행 방식"
+                content={recruitmentDetail?.progressMethod || '진행 방식'}
+                flexDirection="column"
+                gap="4px"
+                width="392px"
+              />
+              <InfoField
+                title="진행 플랫폼"
+                content={recruitmentDetail?.platform || '진행 플랫폼'}
+                flexDirection="column"
+                gap="4px"
+                width="392px"
+              />
+              <InfoField
+                title="진행 기간"
+                content={
+                  dateFormatter(recruitmentDetail?.startDate) + ' ~ ' + dateFormatter(recruitmentDetail?.endDate) ||
+                  '진행 기간'
+                }
+                flexDirection="column"
+                gap="4px"
+                width="392px"
+              />
             </div>
           </div>
           <RowDivider />
@@ -55,11 +122,23 @@ export const RecruitmentDetail = () => {
               <div className="title">스터디 기본 구성 안내</div>
             </div>
             <div className="detail__info">
-              <InfoField title="스터디 제목" content="스터디 제목" flexDirection="column" gap="4px" width="100%" />
-              <InfoField title="카테고리" content="카테고리" flexDirection="column" gap="4px" width="600px" />
+              <InfoField
+                title="스터디 제목"
+                content={recruitmentDetail?.studyTitle || '스터디 제목'}
+                flexDirection="column"
+                gap="4px"
+                width="100%"
+              />
+              <InfoField
+                title="카테고리"
+                content={recruitmentDetail?.category || '카테고리'}
+                flexDirection="column"
+                gap="4px"
+                width="600px"
+              />
               <InfoField
                 title="스터디 최대 인원"
-                content="스터디 최대 인원"
+                content={recruitmentDetail?.memberCnt || '스터디 최대 인원'}
                 flexDirection="column"
                 gap="4px"
                 width="600px"
@@ -69,7 +148,13 @@ export const RecruitmentDetail = () => {
           <RowDivider />
           <div className="study__detail">
             <div className="detail__info">
-              <InfoField title="상세내용" content="상세내용" flexDirection="column" gap="4px" width="100%" />
+              <InfoField
+                title="상세내용"
+                content={recruitmentDetail?.content || '상세내용'}
+                flexDirection="column"
+                gap="4px"
+                width="100%"
+              />
             </div>
           </div>
         </div>
@@ -199,3 +284,5 @@ const StudyButtonsWrapper = styled.div`
     line-height: 44px;
   }
 `;
+
+export default RecruitmentDetail;

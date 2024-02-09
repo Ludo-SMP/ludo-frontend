@@ -25,6 +25,7 @@ export const GlobalStyle = createGlobalStyle`
       margin: 0;
       background: #fff;
       border: none;
+      box-shadow: none;
   }
 
   button,
@@ -39,5 +40,11 @@ export const GlobalStyle = createGlobalStyle`
   a {
     text-decoration: none;
   }
-  
+  button:hover {
+    cursor: pointer;
+  }
+
+  ul, li {
+    list-style: none;
+  }
 `;

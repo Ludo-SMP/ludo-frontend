@@ -6,9 +6,9 @@ import { CreateStudy } from '../Pages/Studies/CreateStudy';
 import { ModifyStudy } from '../Pages/Studies/ModifyStudy';
 import { GatherStudy } from '../Pages/Studies/GatherStudy';
 import { StudyDetail } from '../Pages/StudyDetail';
-import { Main } from '../Pages/Main';
-import { RecruitmentDetail } from '../Pages/RecruitmentDetail';
-import StudyList from '../Pages/StudyList';
+import Main from '../Pages/Main';
+import RecruitmentDetail from '../Pages/RecruitmentDetail';
+import Recruitments from '../Pages/Recruitments';
 
 export const RouterPath = createBrowserRouter([
   {
@@ -45,7 +45,7 @@ export const RouterPath = createBrowserRouter([
     element: <RecruitmentDetail />,
   },
   {
-    path: ROUTER_PATH.studyList,
-    element: <StudyList />,
+    path: ROUTER_PATH.recruitments,
+    element: <Recruitments />,
   },
 ]);

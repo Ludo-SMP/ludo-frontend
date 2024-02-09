@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-export type PositionType = '백엔드' | '프론트엔드' | '기획' | '디자이너';
+import { PositionType } from '@/Types/study';
 
 export type PositionProps = { position?: PositionType };
 
@@ -13,9 +13,8 @@ const PositionWrapper = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 24px;
-  border: 1px solid ${(props) => props.theme.color.gray5};
-  background: ${(props) => props.theme.color.gray5};
-  color: ${(props) => props.theme.color.white};
+  background: ${(props) => props.theme.color.purple2};
+  color: ${(props) => props.theme.color.purple1};
   text-align: center;
   font-size: ${(props) => props.theme.font.small};
   font-weight: 500;

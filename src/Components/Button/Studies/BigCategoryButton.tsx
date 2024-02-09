@@ -11,7 +11,7 @@ export const BigCategoryButton = () => {
       <Textwrapper disabled selected>
         카테고리
       </Textwrapper>
-      <Textwrapper value="algorithm">알고리즘</Textwrapper>
+      <Textwrapper value="algorithm">코딩 테스트</Textwrapper>
       <Textwrapper value="project">프로젝트</Textwrapper>
     </ButtonConTainer>
   );

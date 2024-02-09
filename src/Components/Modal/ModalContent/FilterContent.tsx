@@ -1,4 +1,4 @@
-import Filter from '../../Filter';
+import Filter from '../../DropdownFilter';
 import styled from 'styled-components';
 
 export const FilterContent = () => {

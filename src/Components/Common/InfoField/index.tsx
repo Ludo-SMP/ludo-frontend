@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export interface InfoFieldProps {
   title: string;
-  content: string;
+  content: string | number;
   width?: string;
   titleWidth?: string;
   contentWidth?: string;

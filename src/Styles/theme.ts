@@ -14,6 +14,13 @@ export const color = {
   gray3: '#262D31',
   gray4: '#858585',
   gray5: '#BCC0C4',
+  purple1: '#9F99E5',
+  purple2: '#EFECFF',
+  purple3: '#807dcc',
+  purple4: '#807dcc',
+  purple5: '#7170BF',
+  orange1: '#E37756',
+  orange2: '#F79D7E',
 };
 
 export const font = {

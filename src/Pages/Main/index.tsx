@@ -1,35 +1,46 @@
 import styled from 'styled-components';
 import StudyCardList from '../../Components/StudyCardList';
-import {
-  bannerDummy,
-  algorithmStudyCardListPropsDummy,
-  interviewStudyCardListPropsDummy,
-  projectStudyCardListPropsDummy,
-} from '../../Shared/dummy';
+import { bannerDummy } from '../../Shared/dummy';
 import Banner from '../../Components/Banner';
 import Gnb from '../../Components/Gnb';
 import CreateButton from '../../Components/Button/CreateButton';
 import BlankCircle from '../../Components/Common/BlankCirecle';
+import { usePopularRecruitments } from '@/Apis/study';
+import { convertPopularRecruitmentsToStudyCardProps } from '@/Utils/propertyConverter';
+import CardListInfo from '@/Components/CardListInfo';
 
-export const Main = () => {
-  return (
-    <ContentsWrapper>
+const Main = () => {
+  const { data, isLoading } = usePopularRecruitments();
+  const popularRecruitments = isLoading ? null : convertPopularRecruitmentsToStudyCardProps(data.data);
+
+  return isLoading ? (
+    <div>Loading...</div>
+  ) : (
+    <MainWrapper>
       <Gnb />
       <ButtonsWrapper>
         <CreateButton>
           <BlankCircle />
         </CreateButton>
       </ButtonsWrapper>
-
       <Banner {...bannerDummy} />
-      <StudyCardList {...algorithmStudyCardListPropsDummy} />
-      <StudyCardList {...interviewStudyCardListPropsDummy} />
-      <StudyCardList {...projectStudyCardListPropsDummy} />
-    </ContentsWrapper>
+      <StudyListWrapper>
+        <CardListInfo studyCategory="코딩 테스트" />
+        <StudyCardList studyCardsProps={popularRecruitments?.popularCodingRecruitments} />
+      </StudyListWrapper>
+      <StudyListWrapper>
+        <CardListInfo studyCategory="모의 면접" />
+        <StudyCardList studyCardsProps={popularRecruitments?.popularInterviewRecruitments} />
+      </StudyListWrapper>
+      <StudyListWrapper>
+        <CardListInfo studyCategory="프로젝트" />
+        <StudyCardList studyCardsProps={popularRecruitments?.popularProjectRecruitments} />
+      </StudyListWrapper>
+    </MainWrapper>
   );
 };
 
-const ContentsWrapper = styled.div`
+const MainWrapper = styled.section`
   display: flex;
   flex-direction: column;
   gap: 40px;
@@ -43,3 +54,12 @@ const ButtonsWrapper = styled.span`
   background-color: none;
   padding: 40px;
 `;
+
+const StudyListWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+`;
+
+export default Main;

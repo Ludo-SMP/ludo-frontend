@@ -1,3 +1,3 @@
-import StudyHandler from './study';
+import studyHandler from './study';
 
-export const handlers = [...StudyHandler];
+export const handlers = [...studyHandler];

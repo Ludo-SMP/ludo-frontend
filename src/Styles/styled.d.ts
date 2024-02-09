@@ -15,6 +15,13 @@ declare module 'styled-components' {
       gray3: string;
       gray4: string;
       gray5: string;
+      purple1: string;
+      purple2: string;
+      purple3: string;
+      purple4: string;
+      purple5: string;
+      orange1: string;
+      orange2: string;
     };
 
     font: {
