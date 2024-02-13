@@ -7,21 +7,17 @@ import CreateButton from '../../Components/Button/CreateButton';
 import BlankCircle from '../../Components/Common/BlankCirecle';
 import MoveToTopButton from '../../Components/Button/MoveToTopButton';
 import { UpBold } from '../../Assets/icons/UpBold';
-import { useRecruitments } from '@/Apis/study';
-import { convertRecruitmentsToStudyCardProps } from '@/Utils/propertyConverter';
 import CardListInfo from '@/Components/CardListInfo';
 import DropdownFilters from '@/Components/DropdownFilters';
-import { useState } from 'react';
 import { defaultFilterOptions } from '@/Shared/category';
 import { mainCategories } from '@/Shared/category';
 import DropdownFilter from '@/Components/DropdownFilter';
 import { FilterOptionsType } from '@/Types/study';
 
+import { useState } from 'react';
+
 const Recruitments = () => {
   const [filterOptions, setFilterOptions] = useState<FilterOptionsType>(defaultFilterOptions);
-
-  const { data, isLoading } = useRecruitments(filterOptions);
-  const recruitments = isLoading ? null : convertRecruitmentsToStudyCardProps(data.data);
 
   return (
     <ContentsWrapper>
@@ -52,7 +48,7 @@ const Recruitments = () => {
             })}
           </DropdownFilters>
         </StudyListSearchSectionWrapper>
-        {isLoading ? <div>Loading...</div> : <StudyCardList studyCardsProps={recruitments} />}
+        <StudyCardList filterOptions={filterOptions} />
       </StudyListWrapper>
     </ContentsWrapper>
   );

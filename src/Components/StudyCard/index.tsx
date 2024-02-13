@@ -72,7 +72,7 @@ const StudyCard = ({
   );
 };
 
-const StudyCardWrapper = styled.div`
+const StudyCardWrapper = styled.li`
   width: 394px;
   height: 368px;
   display: flex;

@@ -1,4 +1,5 @@
 import { PopularRecruitmentsRawDataType, RecruitmentRawDataType, RecruitmentDetailRawDataType } from '@/Types/study';
+
 // import { PopularRecruitments, RecruitmentDetailType } from '@/Apis/study';
 
 export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
@@ -64,7 +65,7 @@ export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
   },
   {
     id: 4,
-    title: '인기 모의 면접 스터디 1',
+    title: '인기 모의 면접 스터디 4',
     stacks: ['Java'],
     positions: ['백엔드'],
     ownerNickname: '휴',
@@ -84,7 +85,7 @@ export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
   },
   {
     id: 5,
-    title: '인기 모의 면접 스터디 2',
+    title: '인기 모의 면접 스터디 5',
     stacks: ['Javascript'],
     positions: ['백엔드', '프론트엔드'],
     ownerNickname: 'Hyun',
@@ -104,7 +105,7 @@ export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
   },
   {
     id: 6,
-    title: '인기 모의 면접 스터디 3',
+    title: '인기 모의 면접 스터디 6',
     stacks: ['Java'],
     positions: ['백엔드'],
     ownerNickname: '아카',
@@ -124,7 +125,7 @@ export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
   },
   {
     id: 7,
-    title: '인기 프로젝트 스터디 1',
+    title: '인기 프로젝트 스터디 7',
     stacks: ['Java'],
     positions: ['백엔드'],
     ownerNickname: '휴',
@@ -144,7 +145,7 @@ export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
   },
   {
     id: 8,
-    title: '인기 프로젝트 스터디 2',
+    title: '인기 프로젝트 스터디 8',
     stacks: ['Javascript'],
     positions: ['백엔드', '프론트엔드'],
     ownerNickname: 'Hyun',
@@ -164,7 +165,7 @@ export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
   },
   {
     id: 9,
-    title: '인기 프로젝트 스터디 3',
+    title: '인기 프로젝트 스터디 9',
     stacks: ['Java'],
     positions: ['백엔드'],
     ownerNickname: '아카',
@@ -184,7 +185,7 @@ export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
   },
   {
     id: 10,
-    title: '인기 프로젝트 스터디 4',
+    title: '인기 프로젝트 스터디 10',
     stacks: ['Java'],
     positions: ['백엔드'],
     ownerNickname: '아카',
@@ -204,7 +205,7 @@ export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
   },
   {
     id: 11,
-    title: '인기 코테 스터디 4',
+    title: '인기 코테 스터디 11',
     stacks: ['Java'],
     positions: ['백엔드'],
     ownerNickname: '휴',
@@ -224,7 +225,7 @@ export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
   },
   {
     id: 12,
-    title: '인기 코테 스터디 5',
+    title: '인기 코테 스터디 12',
     stacks: ['Javascript'],
     positions: ['백엔드', '프론트엔드'],
     ownerNickname: 'Hyun',
@@ -244,7 +245,7 @@ export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
   },
   {
     id: 13,
-    title: '인기 코테 스터디 6',
+    title: '인기 코테 스터디 13',
     stacks: ['Java'],
     positions: ['백엔드'],
     ownerNickname: '아카',
@@ -264,7 +265,7 @@ export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
   },
   {
     id: 14,
-    title: '인기 모의 면접 스터디 4',
+    title: '인기 모의 면접 스터디 14',
     stacks: ['Java'],
     positions: ['백엔드'],
     ownerNickname: '휴',
@@ -284,7 +285,7 @@ export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
   },
   {
     id: 15,
-    title: '인기 모의 면접 스터디 5',
+    title: '인기 모의 면접 스터디 15',
     stacks: ['Javascript'],
     positions: ['백엔드', '프론트엔드'],
     ownerNickname: 'Hyun',
@@ -304,7 +305,7 @@ export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
   },
   {
     id: 16,
-    title: '인기 모의 면접 스터디 6',
+    title: '인기 모의 면접 스터디 16',
     stacks: ['Java'],
     positions: ['백엔드'],
     ownerNickname: '아카',
@@ -324,7 +325,7 @@ export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
   },
   {
     id: 17,
-    title: '인기 프로젝트 스터디 5',
+    title: '인기 프로젝트 스터디 17',
     stacks: ['Java'],
     positions: ['백엔드'],
     ownerNickname: '휴',
@@ -344,7 +345,7 @@ export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
   },
   {
     id: 18,
-    title: '인기 프로젝트 스터디 6',
+    title: '인기 프로젝트 스터디 18',
     stacks: ['Javascript'],
     positions: ['백엔드', '프론트엔드'],
     ownerNickname: 'Hyun',
@@ -364,7 +365,7 @@ export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
   },
   {
     id: 19,
-    title: '인기 프로젝트 스터디 7',
+    title: '인기 프로젝트 스터디 19',
     stacks: ['Java'],
     positions: ['백엔드'],
     ownerNickname: '아카',
@@ -384,7 +385,7 @@ export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
   },
   {
     id: 20,
-    title: '인기 프로젝트 스터디 8',
+    title: '인기 프로젝트 스터디 20',
     stacks: ['Java'],
     positions: ['백엔드'],
     ownerNickname: '아카',
@@ -404,7 +405,7 @@ export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
   },
   {
     id: 21,
-    title: '인기 코테 스터디 7',
+    title: '인기 코테 스터디 21',
     stacks: ['Java'],
     positions: ['백엔드'],
     ownerNickname: '휴',
@@ -424,7 +425,7 @@ export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
   },
   {
     id: 22,
-    title: '인기 코테 스터디 8',
+    title: '인기 코테 스터디 22',
     stacks: ['Javascript'],
     positions: ['백엔드', '프론트엔드'],
     ownerNickname: 'Hyun',
@@ -444,7 +445,7 @@ export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
   },
   {
     id: 23,
-    title: '인기 코테 스터디 9',
+    title: '인기 코테 스터디 23',
     stacks: ['Java'],
     positions: ['백엔드'],
     ownerNickname: '아카',
@@ -464,7 +465,7 @@ export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
   },
   {
     id: 24,
-    title: '인기 모의 면접 스터디 7',
+    title: '인기 모의 면접 스터디 24',
     stacks: ['Java'],
     positions: ['백엔드'],
     ownerNickname: '휴',
@@ -484,7 +485,7 @@ export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
   },
   {
     id: 25,
-    title: '인기 모의 면접 스터디 8',
+    title: '인기 모의 면접 스터디 25',
     stacks: ['Javascript'],
     positions: ['백엔드', '프론트엔드'],
     ownerNickname: 'Hyun',
@@ -504,7 +505,7 @@ export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
   },
   {
     id: 26,
-    title: '인기 모의 면접 스터디 9',
+    title: '인기 모의 면접 스터디 26',
     stacks: ['Java'],
     positions: ['백엔드'],
     ownerNickname: '아카',
@@ -524,7 +525,7 @@ export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
   },
   {
     id: 27,
-    title: '인기 프로젝트 스터디 9',
+    title: '인기 프로젝트 스터디 27',
     stacks: ['Java'],
     positions: ['백엔드'],
     ownerNickname: '휴',
@@ -544,7 +545,7 @@ export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
   },
   {
     id: 28,
-    title: '인기 프로젝트 스터디 10',
+    title: '인기 프로젝트 스터디 28',
     stacks: ['Javascript'],
     positions: ['백엔드', '프론트엔드'],
     ownerNickname: 'Hyun',
@@ -564,7 +565,7 @@ export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
   },
   {
     id: 29,
-    title: '인기 프로젝트 스터디 11',
+    title: '인기 프로젝트 스터디 29',
     stacks: ['Java'],
     positions: ['백엔드', '디자이너'],
     ownerNickname: '아카',
@@ -584,7 +585,7 @@ export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
   },
   {
     id: 30,
-    title: '인기 프로젝트 스터디 12',
+    title: '인기 프로젝트 스터디 30',
     stacks: ['Java', 'React', 'Figma'],
     positions: ['백엔드', '기획'],
     ownerNickname: '아카',
@@ -604,7 +605,7 @@ export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
   },
   {
     id: 31,
-    title: '인기 코테 스터디 10',
+    title: '인기 코테 스터디 31',
     stacks: ['Java'],
     positions: ['백엔드'],
     ownerNickname: '휴',
@@ -624,7 +625,7 @@ export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
   },
   {
     id: 32,
-    title: '인기 코테 스터디 11',
+    title: '인기 코테 스터디 32',
     stacks: ['Javascript', 'Java'],
     positions: ['프론트엔드', '디자이너'],
     ownerNickname: 'Hyun',
@@ -644,7 +645,7 @@ export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
   },
   {
     id: 33,
-    title: '인기 코테 스터디 12',
+    title: '인기 코테 스터디 33',
     stacks: ['Java', 'Javascript'],
     positions: ['백엔드', '기획'],
     ownerNickname: '아카',
@@ -664,7 +665,7 @@ export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
   },
   {
     id: 34,
-    title: '인기 모의 면접 스터디 10',
+    title: '인기 모의 면접 스터디 34',
     stacks: ['Java', 'Spring'],
     positions: ['디자이너'],
     ownerNickname: '휴',
@@ -684,7 +685,7 @@ export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
   },
   {
     id: 35,
-    title: '인기 모의 면접 스터디 11',
+    title: '인기 모의 면접 스터디 35',
     stacks: ['Javascript', 'React', 'Java', 'Spring'],
     positions: ['백엔드', '프론트엔드'],
     ownerNickname: 'Hyun',
@@ -704,7 +705,7 @@ export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
   },
   {
     id: 36,
-    title: '인기 모의 면접 스터디 12',
+    title: '인기 모의 면접 스터디 36',
     stacks: ['Java'],
     positions: ['백엔드'],
     ownerNickname: '아카',
@@ -724,7 +725,7 @@ export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
   },
   {
     id: 37,
-    title: '인기 프로젝트 스터디 13',
+    title: '인기 프로젝트 스터디 37',
     stacks: ['Java'],
     positions: ['백엔드'],
     ownerNickname: '휴',
@@ -744,7 +745,7 @@ export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
   },
   {
     id: 38,
-    title: '인기 프로젝트 스터디 14',
+    title: '인기 프로젝트 스터디 38',
     stacks: ['Javascript'],
     positions: ['백엔드', '프론트엔드'],
     ownerNickname: 'Hyun',
@@ -764,7 +765,7 @@ export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
   },
   {
     id: 39,
-    title: '인기 프로젝트 스터디 15',
+    title: '인기 프로젝트 스터디 39',
     stacks: ['Java'],
     positions: ['백엔드'],
     ownerNickname: '아카',
@@ -784,7 +785,7 @@ export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
   },
   {
     id: 40,
-    title: '인기 프로젝트 스터디 16',
+    title: '인기 프로젝트 스터디 40',
     stacks: ['Java'],
     positions: ['백엔드'],
     ownerNickname: '아카',
@@ -847,5 +848,3 @@ export const recruitmentsMockData: RecruitmentRawDataType[] = [
     return studycardRawData;
   }),
 ];
-
-export const recruitmentsFilteredMockData: RecruitmentRawDataType[] = {};

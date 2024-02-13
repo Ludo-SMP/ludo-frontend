@@ -1,7 +1,7 @@
-import { FilterOptionsType, RecruitmentRawDataType, StudyCategoryType } from '@/Types/study';
+import { FilterOptionsType, StudyCategoryType } from '@/Types/study';
 import { recruitmentsMockData } from '../data/mockData';
 
-export const getFilteredRecruitmentsMockData: RecruitmentRawDataType[] = (filteredOptions: FilterOptionsType) => {
+export const getFilteredRecruitmentsMockData = (filteredOptions: FilterOptionsType) => {
   const { category, way, positions, stacks } = filteredOptions;
 
   const filteredRecruitmentsMockData = recruitmentsMockData.filter((data) => {

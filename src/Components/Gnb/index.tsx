@@ -1,16 +1,24 @@
 import styled from 'styled-components';
 import { Hamburger } from '../../Assets/Hamburger';
+import GnbMenu from './GnbMenu';
+
+const gnbMenuNames = ['메인 페이지', '스터디 모집 공고 모아보기', '마이페이지'];
 
 const Gnb = () => {
   return (
     <GnbWrapper>
-      <div className="hamburger__btn">
+      <GnbBtnWrapper>
         <button>
           <Hamburger />
         </button>
-      </div>
-      <div className="nav__section">메인페이지</div>
-      <div className="nav__section">스터디 모집 공고 모아보기</div>
+      </GnbBtnWrapper>
+      <GnbMenuListWrapper>
+        <ul>
+          {gnbMenuNames.map((gnbMenu) => (
+            <GnbMenu name={gnbMenu} key={gnbMenu} />
+          ))}
+        </ul>
+      </GnbMenuListWrapper>
     </GnbWrapper>
   );
 };
@@ -18,23 +26,19 @@ const Gnb = () => {
 const GnbWrapper = styled.div`
   display: flex;
   width: 100%;
-  height: 60px;
+  height: auto;
   padding: 8px 0;
   align-items: center;
   border: 1px solid ${(props) => props.theme.color.gray1};
   background: ${(props) => props.theme.color.white};
   gap: 12px;
-
-  .nav__section {
-    display: flex;
-    height: 44px;
-    width: 288px;
-    padding: 0 12px;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    flex-shrink: 0;
-  }
 `;
 
+const GnbBtnWrapper = styled.div``;
+
+const GnbMenuListWrapper = styled.div`
+  ul {
+    display: flex;
+  }
+`;
 export default Gnb;
