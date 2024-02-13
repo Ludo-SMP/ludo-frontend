@@ -21,6 +21,9 @@ export const color = {
   purple5: '#7170BF',
   orange1: '#E37756',
   orange2: '#F79D7E',
+  naver: '#03CF5D',
+  kakao: '#FEE500',
+  kakaoFontColor: '#521010',
 };
 
 export const font = {
@@ -43,7 +46,7 @@ export const Buttonsize = {
 
 const mediaQuery = (maxWidth: number): string => `@media (max-width: ${maxWidth}px)`;
 
-export const device = {
+export const media = {
   custom: mediaQuery,
   mobile: mediaQuery(768),
   tablet: mediaQuery(1024),

@@ -9,11 +9,16 @@ import { StudyDetail } from '../Pages/StudyDetail';
 import Main from '../Pages/Main';
 import RecruitmentDetail from '../Pages/RecruitmentDetail';
 import Recruitments from '../Pages/Recruitments';
+import SignUp from '@/Pages/SignUp';
 
 export const RouterPath = createBrowserRouter([
   {
     path: ROUTER_PATH.main,
     element: <Main />,
+  },
+  {
+    path: ROUTER_PATH.login,
+    element: <Login />,
   },
   {
     path: ROUTER_PATH.login,
@@ -47,5 +52,9 @@ export const RouterPath = createBrowserRouter([
   {
     path: ROUTER_PATH.recruitments,
     element: <Recruitments />,
+  },
+  {
+    path: ROUTER_PATH.signup,
+    element: <SignUp />,
   },
 ]);
