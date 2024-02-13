@@ -22,6 +22,9 @@ declare module 'styled-components' {
       purple5: string;
       orange1: string;
       orange2: string;
+      naver: string;
+      kakao: string;
+      kakaoFontColor: string;
     };
 
     font: {
