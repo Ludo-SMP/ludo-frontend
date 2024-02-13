@@ -22,7 +22,7 @@ const App = () => {
             <Header />
           </Router>
           <RouterProvider router={RouterPath} />
-          <Footer />
+          {/* <Footer /> */}
         </MainLayout>
       </ThemeProvider>
       <ReactQueryDevtools />

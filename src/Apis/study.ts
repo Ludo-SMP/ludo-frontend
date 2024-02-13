@@ -1,5 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
-import { useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
+
 const apiRequester: AxiosInstance = axios.create({ baseURL: import.meta.env.VITE_API_URL });
 
 export const getPopularRecruitments = () => apiRequester.get('/').then((res) => res.data);
@@ -10,23 +11,27 @@ export const usePopularRecruitments = () => {
   });
 };
 
-export const getRecruitments = (filterOptionQueryString: string) =>
-  apiRequester.get(`/recruitments?${filterOptionQueryString}`).then((res) => res.data);
-
-export const useRecruitments = (filterOptions = []) => {
+export const getRecruitments = ({ pageParam, filterOptions, recruitmentsPerPage }) => {
   const fitlerOptionsQueryString = Object.entries(filterOptions)
     .map((filterOption) => {
       const [categoryProperty, categoryItems] = filterOption;
       return `${categoryProperty}=${categoryItems.join(',')}`;
     })
     .join('&');
-
-  return useQuery({
-    queryKey: ['Recruitments', filterOptions],
-    queryFn: () => getRecruitments(fitlerOptionsQueryString),
-  });
+  return apiRequester
+    .get(`/recruitments?${fitlerOptionsQueryString}`, { params: { pageParam, recruitmentsPerPage } })
+    .then((res) => res.data);
 };
 
+export const useRecruitments = (filterOptions, recruitmentsPerPage) =>
+  useInfiniteQuery({
+    queryKey: ['Recruitments', filterOptions],
+    queryFn: ({ pageParam = 0 }) => getRecruitments({ pageParam, filterOptions, recruitmentsPerPage }),
+    getNextPageParam: (result, pages) => {
+      if (!result.isLastPage) return result.pageNum;
+      return null;
+    },
+  });
 export const getRecruitmentDetail = (studyId: number) =>
   apiRequester.get(`/recruitments/${studyId}`).then((res) => res.data);
 

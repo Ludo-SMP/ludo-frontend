@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import StudyCardList from '../../Components/StudyCardList';
+
 import { bannerDummy } from '../../Shared/dummy';
 import Banner from '../../Components/Banner';
 import Gnb from '../../Components/Gnb';
@@ -8,6 +8,7 @@ import BlankCircle from '../../Components/Common/BlankCirecle';
 import { usePopularRecruitments } from '@/Apis/study';
 import { convertPopularRecruitmentsToStudyCardProps } from '@/Utils/propertyConverter';
 import CardListInfo from '@/Components/CardListInfo';
+import PopularStudyCardList from '@/Components/PopularCardList';
 
 const Main = () => {
   const { data, isLoading } = usePopularRecruitments();
@@ -26,15 +27,15 @@ const Main = () => {
       <Banner {...bannerDummy} />
       <StudyListWrapper>
         <CardListInfo studyCategory="코딩 테스트" />
-        <StudyCardList studyCardsProps={popularRecruitments?.popularCodingRecruitments} />
+        <PopularStudyCardList studyCardsProps={popularRecruitments?.popularCodingRecruitments} />
       </StudyListWrapper>
       <StudyListWrapper>
         <CardListInfo studyCategory="모의 면접" />
-        <StudyCardList studyCardsProps={popularRecruitments?.popularInterviewRecruitments} />
+        <PopularStudyCardList studyCardsProps={popularRecruitments?.popularInterviewRecruitments} />
       </StudyListWrapper>
       <StudyListWrapper>
         <CardListInfo studyCategory="프로젝트" />
-        <StudyCardList studyCardsProps={popularRecruitments?.popularProjectRecruitments} />
+        <PopularStudyCardList studyCardsProps={popularRecruitments?.popularProjectRecruitments} />
       </StudyListWrapper>
     </MainWrapper>
   );
