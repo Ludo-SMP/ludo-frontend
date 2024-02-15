@@ -1,7 +1,5 @@
 import styled from 'styled-components';
-import Naver from '@/Assets/icons/naver';
-import Kakao from '@/Assets/icons/kakao';
-import Google from '@/Assets/icons/google';
+import { Kakao, Naver, Google } from '@/Assets';
 
 export type SocialLoginType = '네이버' | '카카오' | '구글';
 export interface LoginButtonType {
