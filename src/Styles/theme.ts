@@ -39,25 +39,31 @@ export const font = {
   xxxxlarge: '40px',
 };
 
-export const Buttonsize = {
-  small: '73px',
-  medium: '184px',
+export const buttonSize = {
+  small: '78px',
+  medium: '90px',
+  large: '100%',
 };
 
 const mediaQuery = (maxWidth: number): string => `@media (max-width: ${maxWidth}px)`;
 
 export const media = {
   custom: mediaQuery,
-  mobile: mediaQuery(768),
+  mobile: mediaQuery(500),
   tablet: mediaQuery(1024),
   desktop: mediaQuery(1440),
+};
+
+const borderRadius = {
+  small: '8px',
+  medium: '20px',
+  large: '24px',
 };
 
 export const theme: DefaultTheme = {
   color,
   font,
-  buttonsize: {
-    small: '73px',
-    medium: '184px',
-  },
+  media,
+  borderRadius,
+  buttonSize,
 };

@@ -40,9 +40,14 @@ declare module 'styled-components' {
       xxxlarge: string;
       xxxxlarge: string;
     };
-    buttonsize: {
+    buttonSize: {
       small: string;
       medium: string;
+    };
+    borderRadius: {
+      small: string;
+      medium: string;
+      large: string;
     };
   }
 
@@ -58,6 +63,8 @@ declare module 'styled-components' {
   export const theme: DefaultTheme = {
     color,
     font,
-    buttonsize,
+    media,
+    borderRadius,
+    buttonSize,
   };
 }
