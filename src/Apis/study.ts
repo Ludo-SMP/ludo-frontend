@@ -27,7 +27,7 @@ export const useRecruitments = (filterOptions, recruitmentsPerPage) =>
   useInfiniteQuery({
     queryKey: ['Recruitments', filterOptions],
     queryFn: ({ pageParam = 0 }) => getRecruitments({ pageParam, filterOptions, recruitmentsPerPage }),
-    getNextPageParam: (result, pages) => {
+    getNextPageParam: (result) => {
       if (!result.isLastPage) return result.pageNum;
       return null;
     },

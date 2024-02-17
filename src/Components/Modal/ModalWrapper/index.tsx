@@ -110,15 +110,4 @@ const ModalBtnsWrapper = styled.div<{ cancelBtn: BtnPropsType }>`
   }
 `;
 
-const Background = styled.div`
-  width: 100%;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: #000;
-  opacity: 0.5;
-  z-index: 100;
-`;
-
 export default ModalWrapper;
