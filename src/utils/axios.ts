@@ -8,8 +8,8 @@ const fetchWrapper = async ({
 }: {
   method: 'get' | 'post' | 'patch' | 'delete';
   url: string;
-  params?: {};
-  body?: {};
+  params?: object;
+  body?: object;
 }) => {
   try {
     const config = {
@@ -30,10 +30,11 @@ const fetchWrapper = async ({
   }
 };
 
-export const GET = (url: string, params?: {}) => fetchWrapper({ method: 'get', url, params });
+export const GET = (url: string, params?: object) => fetchWrapper({ method: 'get', url, params });
 
-export const POST = (url: string, body?: {}, params?: {}) => fetchWrapper({ method: 'post', url, body });
+export const POST = (url: string, body?: object, params?: object) =>
+  fetchWrapper({ method: 'post', url, body, params });
 
-export const PATCH = (url: string, body?: {}) => fetchWrapper({ method: 'patch', url, body });
+export const PATCH = (url: string, body?: object) => fetchWrapper({ method: 'patch', url, body });
 
 export const DELETE = (url: string) => fetchWrapper({ method: 'delete', url });

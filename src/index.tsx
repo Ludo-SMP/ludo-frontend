@@ -1,5 +1,4 @@
 import ReactDOM from 'react-dom/client';
-import { Provider } from 'jotai';
 import { StrictMode } from 'react';
 
 import App from './App.tsx';
@@ -13,9 +12,7 @@ const enableMocking = async () => {
 enableMocking().then(() =>
   ReactDOM.createRoot(document.getElementById('root')!).render(
     <StrictMode>
-      <Provider>
-        <App />
-      </Provider>
+      <App />
     </StrictMode>,
   ),
 );

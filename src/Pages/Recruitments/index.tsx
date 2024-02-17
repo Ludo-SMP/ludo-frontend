@@ -13,7 +13,6 @@ import { defaultFilterOptions } from '@/Shared/category';
 import { mainCategories } from '@/Shared/category';
 import DropdownFilter from '@/Components/DropdownFilter';
 import { FilterOptionsType } from '@/Types/study';
-
 import { useState } from 'react';
 
 const Recruitments = () => {

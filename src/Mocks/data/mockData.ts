@@ -810,8 +810,34 @@ export const popularRecruitmentsMockData: PopularRecruitmentsRawDataType = {
     ...recruitmentDetailMockData
       .filter((recruitmentDetail: RecruitmentDetailRawDataType) => recruitmentDetail.category === '코딩 테스트')
       .map((recruitmentDetail: RecruitmentDetailRawDataType) => {
-        const { applicantCount, platformUrl, content, platform, memberCnt, contact, ...studycardRawData } =
-          recruitmentDetail;
+        const {
+          id,
+          title,
+          stacks,
+          positions,
+          ownerNickname,
+          way,
+          startDateTime,
+          endDateTime,
+          recruitmentEndDateTime,
+          createdDateTime,
+          hits,
+          category,
+        } = recruitmentDetail;
+        const studycardRawData = {
+          id,
+          title,
+          stacks,
+          positions,
+          ownerNickname,
+          way,
+          startDateTime,
+          endDateTime,
+          recruitmentEndDateTime,
+          createdDateTime,
+          hits,
+          category,
+        };
         return studycardRawData;
       })
       .sort((a, b) => b.hits - a.hits)
@@ -821,8 +847,34 @@ export const popularRecruitmentsMockData: PopularRecruitmentsRawDataType = {
     ...recruitmentDetailMockData
       .filter((recruitmentDetail: RecruitmentDetailRawDataType) => recruitmentDetail.category === '모의 면접')
       .map((recruitmentDetail: RecruitmentDetailRawDataType) => {
-        const { applicantCount, platformUrl, content, platform, memberCnt, contact, ...studycardRawData } =
-          recruitmentDetail;
+        const {
+          id,
+          title,
+          stacks,
+          positions,
+          ownerNickname,
+          way,
+          startDateTime,
+          endDateTime,
+          recruitmentEndDateTime,
+          createdDateTime,
+          hits,
+          category,
+        } = recruitmentDetail;
+        const studycardRawData = {
+          id,
+          title,
+          stacks,
+          positions,
+          ownerNickname,
+          way,
+          startDateTime,
+          endDateTime,
+          recruitmentEndDateTime,
+          createdDateTime,
+          hits,
+          category,
+        };
         return studycardRawData;
       })
       .sort((a, b) => b.hits - a.hits)
@@ -832,8 +884,34 @@ export const popularRecruitmentsMockData: PopularRecruitmentsRawDataType = {
     ...recruitmentDetailMockData
       .filter((recruitmentDetail: RecruitmentDetailRawDataType) => recruitmentDetail.category === '프로젝트')
       .map((recruitmentDetail: RecruitmentDetailRawDataType) => {
-        const { applicantCount, platformUrl, content, platform, memberCnt, contact, ...studycardRawData } =
-          recruitmentDetail;
+        const {
+          id,
+          title,
+          stacks,
+          positions,
+          ownerNickname,
+          way,
+          startDateTime,
+          endDateTime,
+          recruitmentEndDateTime,
+          createdDateTime,
+          hits,
+          category,
+        } = recruitmentDetail;
+        const studycardRawData = {
+          id,
+          title,
+          stacks,
+          positions,
+          ownerNickname,
+          way,
+          startDateTime,
+          endDateTime,
+          recruitmentEndDateTime,
+          createdDateTime,
+          hits,
+          category,
+        };
         return studycardRawData;
       })
       .sort((a, b) => b.hits - a.hits)
@@ -843,8 +921,35 @@ export const popularRecruitmentsMockData: PopularRecruitmentsRawDataType = {
 
 export const recruitmentsMockData: RecruitmentRawDataType[] = [
   ...recruitmentDetailMockData.map((recruitmentDetail: RecruitmentDetailRawDataType) => {
-    const { applicantCount, platformUrl, content, platform, memberCnt, contact, ...studycardRawData } =
-      recruitmentDetail;
+    const {
+      id,
+      title,
+      stacks,
+      positions,
+      ownerNickname,
+      way,
+      startDateTime,
+      endDateTime,
+      recruitmentEndDateTime,
+      createdDateTime,
+      hits,
+      category,
+    } = recruitmentDetail;
+    const studycardRawData = {
+      id,
+      title,
+      stacks,
+      positions,
+      ownerNickname,
+      way,
+      startDateTime,
+      endDateTime,
+      recruitmentEndDateTime,
+      createdDateTime,
+      hits,
+      category,
+    };
+    return studycardRawData;
     return studycardRawData;
   }),
 ];
