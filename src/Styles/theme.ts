@@ -5,6 +5,7 @@ export const color = {
   white: '#ffffff',
   white1: '#D8D8D8',
   black: '#000000',
+  black0: 'rgba(0, 0, 0, 0.05)',
   black1: 'rgba(0, 0, 0, 0.10)',
   black2: 'rgba(0, 0, 0, 0.45)',
   black3: 'rgba(0, 0, 0, 0.65)',
@@ -19,6 +20,7 @@ export const color = {
   purple3: '#807dcc',
   purple4: '#807dcc',
   purple5: '#7170BF',
+  purple6: '#908bd9',
   orange1: '#E37756',
   orange2: '#F79D7E',
   naver: '#03CF5D',
@@ -58,6 +60,7 @@ const borderRadius = {
   small: '8px',
   medium: '20px',
   large: '24px',
+  xlarge: '999px',
 };
 
 export const theme: DefaultTheme = {
