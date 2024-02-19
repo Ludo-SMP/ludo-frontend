@@ -7,7 +7,7 @@ export const Login = () => {
       <LoginGuideWrapper></LoginGuideWrapper>
       <LoginBtnsWrapper>
         <LoginButton type="네이버" />
-        <LoginButton type="카카오" />
+        <LoginButton type="카카오" onClick={() => {}} />
         <LoginButton type="구글" />
       </LoginBtnsWrapper>
     </LoginWrapper>

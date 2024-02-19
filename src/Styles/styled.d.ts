@@ -6,6 +6,7 @@ declare module 'styled-components' {
       white: string;
       white1: string;
       black: string;
+      black0: string;
       black1: string;
       black2: string;
       black3: string;
@@ -20,6 +21,7 @@ declare module 'styled-components' {
       purple3: string;
       purple4: string;
       purple5: string;
+      purple6: string;
       orange1: string;
       orange2: string;
       naver: string;
@@ -48,13 +50,14 @@ declare module 'styled-components' {
       small: string;
       medium: string;
       large: string;
+      xlarge: string;
     };
   }
 
   const mediaQuery = (maxWidth: number): string => `@media (max-width: ${maxWidth}px)`;
 
   export const device = {
-    custom: mediaQuery,
+    custom: (maxwidth: number) => mediaQuery(maxwidth),
     mobile: mediaQuery(680),
     tablet: mediaQuery(1024),
     desktop: mediaQuery(1920),

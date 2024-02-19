@@ -4,12 +4,12 @@ import { Kakao, Naver, Google } from '@/Assets';
 export type SocialLoginType = '네이버' | '카카오' | '구글';
 export interface LoginButtonType {
   type: SocialLoginType;
-  onClck?: () => void;
+  onClick?: () => void;
 }
 
-const LoginButton = ({ type }: LoginButtonType) => {
+const LoginButton = ({ type, onClick }: LoginButtonType) => {
   return (
-    <LoginButtonWrapper type={type}>
+    <LoginButtonWrapper type={type} onClick={onClick}>
       {type === '네이버' ? <Naver /> : type === '카카오' ? <Kakao /> : <Google />}
       <img src="" alt="" />
       <span>{type} 로그인</span>
