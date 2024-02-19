@@ -1,4 +1,3 @@
-import { HttpResponse, http } from 'msw';
 import { popularRecruitmentsMockData, recruitmentDetailMockData } from '../data/mockData';
 import { RecruitmentDetailRawDataType } from '@/Types/study';
 import { getfilterOptions } from '../utils/getQueryParams';

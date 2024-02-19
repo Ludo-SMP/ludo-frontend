@@ -39,15 +39,8 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
     "husky": "^8.0.3",
-    "msw": "^2.1.5",
     "typescript": "^5.2.2",
     "vite": "^5.0.8",
     "vite-plugin-svgr": "^4.2.0"
-  },
-  "msw": {
-    "workerDirectory": [
-      "src/Mocks",
-      "public"
-    ]
   }
 }
