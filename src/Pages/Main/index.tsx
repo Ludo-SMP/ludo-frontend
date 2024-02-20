@@ -43,9 +43,10 @@ const Main = () => {
 
 const MainWrapper = styled.section`
   display: flex;
+  max-width: 1224px;
+  margin: 0 auto;
   flex-direction: column;
   gap: 40px;
-  margin: 40px 348px 80px 348px;
 `;
 
 const ButtonsWrapper = styled.span`

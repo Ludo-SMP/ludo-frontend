@@ -106,7 +106,7 @@ const HeaderWrapper = styled.section`
       background: var(--Button-sheet, linear-gradient(93deg, #6262b2 0%, #f7a477 100%));
     }
 
-    ${media.custom(600)} {
+    ${media.custom(800)} {
       display: none;
     }
   }
