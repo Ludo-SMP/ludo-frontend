@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
-const apiRequester: AxiosInstance = axios.create({ baseURL: import.meta.env.VITE_API_URL });
+export const apiRequester: AxiosInstance = axios.create({ baseURL: import.meta.env.VITE_MOCK_API_URL });
 
 export const getPopularRecruitments = () => apiRequester.get('/').then((res) => res.data);
 export const usePopularRecruitments = () => {
