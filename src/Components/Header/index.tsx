@@ -9,6 +9,7 @@ import Button from '../Common/Button';
 import StudyButtonSection from './StudyButtonSection';
 import SignButtonSection from './SignButtonSection';
 import HamburgerSection from './HamburgerSection';
+import Gnb from './Gnb';
 
 const Header = () => {
   const { isLoggedIn } = useLoginStore();
@@ -17,62 +18,72 @@ const Header = () => {
 
   return (
     <HeaderWrapper>
-      <Link to="/">
-        <img src={BlankLogo} />
-      </Link>
-      <ElementsWrapper>
-        {isLoggedIn ? (
-          <>
-            {currentLocation === ROUTER_PATH.main || currentLocation === ROUTER_PATH.recruitments ? (
-              <StudyButtonSection />
-            ) : (
-              <div className="login__elements">
-                <SignButtonSection isLoggedIn={true} />
-                <Button
-                  className="create__study"
-                  type="button"
-                  onClick={() => {
-                    navigate(ROUTER_PATH.createStudy);
-                  }}
-                >
-                  스터디 생성하기
-                </Button>
-              </div>
-            )}
-            <UserInfoWrapper>
-              <Alarm />
-              <Profile />
-            </UserInfoWrapper>
-          </>
-        ) : (
-          <div className="signout__elements">
-            <SignButtonSection isLoggedIn={false} />
-            <Button
-              className="create__study"
-              type="button"
-              onClick={() => {
-                navigate(ROUTER_PATH.createStudy);
-              }}
-            >
-              스터디 생성하기
-            </Button>
-          </div>
-        )}
-        <HamburgerSection />
-      </ElementsWrapper>
+      <TopBarWrapper>
+        <Link to="/">
+          <img src={BlankLogo} />
+        </Link>
+        <ElementsWrapper>
+          {isLoggedIn ? (
+            <>
+              {currentLocation === ROUTER_PATH.main || currentLocation === ROUTER_PATH.recruitments ? (
+                <StudyButtonSection />
+              ) : (
+                <div className="login__elements">
+                  <SignButtonSection isLoggedIn={true} />
+                  <Button
+                    className="create__study"
+                    type="button"
+                    onClick={() => {
+                      navigate(ROUTER_PATH.createStudy);
+                    }}
+                  >
+                    스터디 생성하기
+                  </Button>
+                </div>
+              )}
+              <UserInfoWrapper>
+                <Alarm />
+                <Profile />
+              </UserInfoWrapper>
+            </>
+          ) : (
+            <div className="signout__elements">
+              <SignButtonSection isLoggedIn={false} />
+              <Button
+                className="create__study"
+                type="button"
+                onClick={() => {
+                  navigate(ROUTER_PATH.createStudy);
+                }}
+              >
+                스터디 생성하기
+              </Button>
+            </div>
+          )}
+          <HamburgerSection />
+        </ElementsWrapper>
+      </TopBarWrapper>
+
+      {isLoggedIn && <Gnb />}
     </HeaderWrapper>
   );
 };
 
 const HeaderWrapper = styled.section`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 160px;
+  flex-direction: column;
+  height: 216px;
   max-width: 1224px;
+  margin: 0 auto;
+`;
+
+const TopBarWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  height: 160px;
+  align-items: center;
   padding: 60px 0 16px 0;
   background-color: ${(props) => props.theme.color.white};
-  margin: 0 auto;
 
   button {
     display: inline-flex;

@@ -37,7 +37,6 @@ const Gnb = () => {
 const GnbWrapper = styled.div`
   display: flex;
   align-items: center;
-  max-width: 1224px;
   padding: 8px 0;
   background: ${(props) => props.theme.color.white};
   gap: 12px;

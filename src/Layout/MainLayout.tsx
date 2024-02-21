@@ -17,7 +17,6 @@ export const MainLayout = ({ children }: Props) => {
 
 const Layout = styled.div`
   width: 100%;
-  height: 100vh;
   background-color: ${({ theme }) => theme.color.white};
 `;
 
