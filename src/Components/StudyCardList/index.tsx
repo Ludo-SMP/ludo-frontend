@@ -6,7 +6,8 @@ import { FilterOptionsType, StudyBasicInfoType } from '@/Types/study';
 import { useMemo } from 'react';
 import useIntersectionObservable from '@/Hooks/userIntersectionObservable';
 import { convertRecruitmentsToStudyCardProps } from '@/Utils/propertyConverter';
-import { useRecruitments } from '@/Apis/study';
+import { useRecruitments } from '@/Apis/recruitment';
+
 export interface StudyCardListProps {
   filterOptions?: FilterOptionsType;
   studyCategory?: StudyBasicInfoType;
@@ -26,7 +27,6 @@ const StudyCardList = ({ filterOptions }: StudyCardListProps) => {
     observer.unobserve(entry.target);
     if (hasNextPage && !isFetching) fetchNextPage();
   });
-  console.log(recruitments);
 
   return (
     <StudyCardsWrapper>

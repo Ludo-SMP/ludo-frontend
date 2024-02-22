@@ -4,7 +4,7 @@ import { RecruitmentDetailRawDataType } from '@/Types/study';
 import { getfilterOptions } from '../utils/getQueryParams';
 import { getFilteredRecruitmentsMockData } from '../utils/getData';
 
-const baseURL = import.meta.env.VITE_API_URL;
+const baseURL = import.meta.env.VITE_MOCK_API_URL;
 
 const getPopularRecruitments = http.get(`${baseURL}`, () => {
   return new HttpResponse(JSON.stringify({ data: popularRecruitmentsMockData, message: 'Success' }), {
@@ -19,7 +19,6 @@ const getRecruitments = http.get(`${baseURL}/recruitments`, ({ request }) => {
   const pageNum = Number(url.searchParams.get('pageParam'));
   const recruitmentsPerPage = Number(url.searchParams.get('recruitmentsPerPage'));
   const filteredRecruitmentsMockData = getFilteredRecruitmentsMockData(filterOptions);
-  console.log(filteredRecruitmentsMockData.length);
 
   return new HttpResponse(
     JSON.stringify({

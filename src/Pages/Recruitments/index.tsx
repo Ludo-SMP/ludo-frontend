@@ -2,11 +2,6 @@ import styled from 'styled-components';
 import StudyCardList from '../../Components/StudyCardList';
 import { bannerDummy } from '../../Shared/dummy';
 import Banner from '../../Components/Banner';
-import Gnb from '../../Components/Gnb';
-import CreateButton from '../../Components/Button/CreateButton';
-import BlankCircle from '../../Components/Common/BlankCirecle';
-import MoveToTopButton from '../../Components/Button/MoveToTopButton';
-import { UpBold } from '../../Assets/icons/UpBold';
 import CardListInfo from '@/Components/CardListInfo';
 import DropdownFilters from '@/Components/DropdownFilters';
 import { defaultFilterOptions } from '@/Shared/category';
@@ -14,26 +9,27 @@ import { mainCategories } from '@/Shared/category';
 import DropdownFilter from '@/Components/DropdownFilter';
 import { FilterOptionsType } from '@/Types/study';
 import { useState } from 'react';
+import { media } from '@/Styles/theme';
+import { CreateStudy, Filter, Up } from '@/Assets';
+import Button from '@/Components/Common/Button';
+import UtiltiyButtons from '@/Components/UtilityButtons';
+import { useNavigate } from 'react-router-dom';
 
 const Recruitments = () => {
   const [filterOptions, setFilterOptions] = useState<FilterOptionsType>(defaultFilterOptions);
+  const navigate = useNavigate();
+
+  const handleScroll = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <ContentsWrapper>
-      <Gnb />
-      <ButtonsWrapper>
-        <MoveToTopButton>
-          <UpBold />
-        </MoveToTopButton>
-        <CreateButton>
-          <BlankCircle />
-        </CreateButton>
-      </ButtonsWrapper>
       <Banner {...bannerDummy} />
       <StudyListWrapper>
         <StudyListSearchSectionWrapper>
           <CardListInfo />
-          <DropdownFilters>
+          <DropdownFilters className="filters">
             {mainCategories.map((mainCategory) => {
               return (
                 <DropdownFilter
@@ -46,9 +42,27 @@ const Recruitments = () => {
               );
             })}
           </DropdownFilters>
+          <Button className="filterIcon">
+            <Filter />
+          </Button>
         </StudyListSearchSectionWrapper>
         <StudyCardList filterOptions={filterOptions} />
       </StudyListWrapper>
+      <UtiltiyButtons>
+        <Button onClick={handleScroll} className="scroll__btn">
+          <Up />
+          <span>위로가기</span>
+        </Button>
+        <Button
+          onClick={() => {
+            navigate('/studies/create');
+          }}
+          className="create__btn"
+        >
+          <CreateStudy />
+          <span>스터디 생성</span>
+        </Button>
+      </UtiltiyButtons>
     </ContentsWrapper>
   );
 };
@@ -56,20 +70,12 @@ const Recruitments = () => {
 const ContentsWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  max-width: 1224px;
+  margin: 0 auto;
+  margin-top: 40px;
   gap: 40px;
-  margin: 40px 348px 80px 348px;
 `;
 
-const ButtonsWrapper = styled.span`
-  position: fixed;
-  right: 188px;
-  bottom: 80px;
-  display: flex;
-  flex-direction: column;
-  background-color: none;
-  padding: 40px;
-  gap: 20px;
-`;
 const StudyListWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -79,7 +85,21 @@ const StudyListWrapper = styled.div`
 
 const StudyListSearchSectionWrapper = styled.div`
   display: flex;
+  align-items: center;
   gap: 40px;
+
+  .filterIcon {
+    display: none;
+  }
+
+  ${media.custom(1224)} {
+    .filters {
+      display: none;
+    }
+    .filterIcon {
+      display: flex;
+    }
+  }
 `;
 
 export default Recruitments;

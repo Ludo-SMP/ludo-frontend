@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import { BlankSquare } from '../../Components/Common/BlankSquare';
-import { RightBold } from '../../Assets/icons/RightBold';
 import { InfoField } from '../../Components/Common/InfoField';
 import { RowDivider } from '../../Components/Common/Divider/RowDivider';
 import MemberProfile from '../../Components/MemberProfile';
-import ApplyButton from '../../Components/Button/ApplyButton';
+import { Right } from '@/Assets';
+import Button from '@/Components/Common/Button';
 
 export const StudyDetail = () => {
   return (
@@ -18,10 +18,10 @@ export const StudyDetail = () => {
       </StudyTitleWrapper>
       <StudyRecruitWrapper>
         <div className="recruit__text">스터디 지원자가 있어요!</div>
-        <ApplyButton>
+        <Button>
           <div className="button__text">지원자 확인하기</div>
-          <RightBold width={24} height={24} />
-        </ApplyButton>
+          <Right />
+        </Button>
       </StudyRecruitWrapper>
       <StudyInfoWrapper>
         <div className="study__detail__info">
@@ -63,8 +63,8 @@ export const StudyDetail = () => {
         </div>
       </StudyInfoWrapper>
       <StudyButtonsWrapper>
-        <ApplyButton>스터디 탈퇴하기</ApplyButton>
-        <ApplyButton>모집 마감하기</ApplyButton>
+        <Button>스터디 탈퇴하기</Button>
+        <Button>모집 마감하기</Button>
       </StudyButtonsWrapper>
     </StudyDetailWrapper>
   );

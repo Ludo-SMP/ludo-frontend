@@ -2,12 +2,16 @@ import styled from 'styled-components';
 import { InfoField } from '../../Components/Common/InfoField';
 import { RowDivider } from '../../Components/Common/Divider/RowDivider';
 import { ColumnDivider } from '../../Components/Common/Divider/ColumnDivider';
-import { BlankSquare } from '../../Components/Common/BlankSquare';
-import ApplyButton from '../../Components/Button/ApplyButton';
-import { useRecruitmentDetail } from '@/Apis/study';
+import { useRecruitmentDetail } from '@/Apis/recruitment';
 import { useParams } from 'react-router-dom';
 import { dateFormatter } from '@/Utils/date';
 import { convertRecruitmentDetailRawDataToRecruitmentDetail } from '@/Utils/propertyConverter';
+
+import RecruitmentInfoSection from './RecruitmentInfoSection';
+import StudyProgressInfoSection from './StudyProgessInfoSection';
+import StudyBasicInfoSection from './StudyBasicInfoSection';
+import Button from '@/Components/Common/Button';
+import { applyStudy } from '@/Apis/study';
 
 const RecruitmentDetail = () => {
   const studyId = Number(useParams().studyId);
@@ -18,10 +22,10 @@ const RecruitmentDetail = () => {
     <div>Loading...</div>
   ) : (
     <RecruitmentDetailWrapper>
-      <StudyTitleWrapper>
+      <RecruitmentTitleWrapper>
         <div className="title">{recruitmentDetail?.recruitmentTitle}</div>
-      </StudyTitleWrapper>
-      <StudyInfoWrapper>
+      </RecruitmentTitleWrapper>
+      <RecruitmentInfoWrapper>
         <div className="recruitment__status">
           <div className="creator">{recruitmentDetail?.creator}</div>
           <ColumnDivider />
@@ -30,138 +34,40 @@ const RecruitmentDetail = () => {
             <div className="edit__status">수정됨</div>
           </div>
         </div>
-        <RowDivider />
-        <div className="study__details">
-          <div className="study__detail">
-            <div className="title__section">
-              <BlankSquare width="50px" height="50px" />
-              <div className="title">스터디 모집 안내</div>
-            </div>
-            <div className="detail__info">
-              <InfoField
-                title="모집 인원"
-                content={recruitmentDetail?.applicantCnt || '모집 인원'}
-                flexDirection="column"
-                gap="4px"
-                width="392px"
-              />
-              <InfoField
-                title="모집 마감일"
-                content={recruitmentDetail?.recruitmentEndDate || '모집 마감일'}
-                flexDirection="column"
-                gap="4px"
-                width="392px"
-              />
-              <InfoField
-                title="포지션"
-                content={recruitmentDetail?.positions.join(', ') || '포지션'}
-                flexDirection="column"
-                gap="4px"
-                width="392px"
-              />
-              <InfoField
-                title="기술 스택"
-                content={recruitmentDetail?.stacks.join(', ') || '기술 스택'}
-                flexDirection="column"
-                gap="4px"
-                width="392px"
-              />
-              <InfoField
-                title="연락 방법"
-                content={recruitmentDetail?.contact || '연락 방법'}
-                flexDirection="column"
-                gap="4px"
-                width="392px"
-              />
-              <InfoField
-                title="연결 url"
-                content={recruitmentDetail?.platformUrl || '연결 url'}
-                flexDirection="column"
-                gap="4px"
-                width="392px"
-              />
-            </div>
-          </div>
+        <div className="recruitment__details">
+          <RecruitmentInfoSection
+            applicantCnt={recruitmentDetail?.applicantCnt}
+            endDate={recruitmentDetail?.recruitmentEndDate}
+            positions={recruitmentDetail?.positions.join(', ')}
+            stacks={recruitmentDetail?.stacks.join(', ')}
+            contact={recruitmentDetail?.contact}
+            platformUrl={recruitmentDetail?.platformUrl}
+          />
+          <RowDivider rowHeight={16} />
+          <StudyProgressInfoSection
+            method={recruitmentDetail?.progressMethod}
+            platform={recruitmentDetail?.platform}
+            period={dateFormatter(recruitmentDetail?.startDate) + ' ~ ' + dateFormatter(recruitmentDetail?.endDate)}
+          />
+          <RowDivider rowHeight={16} />
+          <StudyBasicInfoSection
+            studyTitle={recruitmentDetail?.studyTitle}
+            category={recruitmentDetail?.category}
+            memberCnt={recruitmentDetail?.memberCnt}
+          />
           <RowDivider />
           <div className="study__detail">
-            <div className="title__section">
-              <BlankSquare width="50px" height="50px" />
-              <div className="title">스터디 진행 안내</div>
-            </div>
-            <div className="detail__info">
-              <InfoField
-                title="진행 방식"
-                content={recruitmentDetail?.progressMethod || '진행 방식'}
-                flexDirection="column"
-                gap="4px"
-                width="392px"
-              />
-              <InfoField
-                title="진행 플랫폼"
-                content={recruitmentDetail?.platform || '진행 플랫폼'}
-                flexDirection="column"
-                gap="4px"
-                width="392px"
-              />
-              <InfoField
-                title="진행 기간"
-                content={
-                  dateFormatter(recruitmentDetail?.startDate) + ' ~ ' + dateFormatter(recruitmentDetail?.endDate) ||
-                  '진행 기간'
-                }
-                flexDirection="column"
-                gap="4px"
-                width="392px"
-              />
-            </div>
-          </div>
-          <RowDivider />
-          <div className="study__detail">
-            <div className="title__section">
-              <BlankSquare width="50px" height="50px" />
-              <div className="title">스터디 기본 구성 안내</div>
-            </div>
-            <div className="detail__info">
-              <InfoField
-                title="스터디 제목"
-                content={recruitmentDetail?.studyTitle || '스터디 제목'}
-                flexDirection="column"
-                gap="4px"
-                width="100%"
-              />
-              <InfoField
-                title="카테고리"
-                content={recruitmentDetail?.category || '카테고리'}
-                flexDirection="column"
-                gap="4px"
-                width="600px"
-              />
-              <InfoField
-                title="스터디 최대 인원"
-                content={recruitmentDetail?.memberCnt || '스터디 최대 인원'}
-                flexDirection="column"
-                gap="4px"
-                width="600px"
-              />
-            </div>
-          </div>
-          <RowDivider />
-          <div className="study__detail">
-            <div className="detail__info">
-              <InfoField
-                title="상세내용"
-                content={recruitmentDetail?.content || '상세내용'}
-                flexDirection="column"
-                gap="4px"
-                width="100%"
-              />
-            </div>
+            <InfoField
+              title="상세내용"
+              content={recruitmentDetail?.content || '상세내용'}
+              flexDirection="column"
+              width="100%"
+            />
           </div>
         </div>
-      </StudyInfoWrapper>
+      </RecruitmentInfoWrapper>
       <StudyButtonsWrapper>
-        <ApplyButton>스터디 탈퇴하기</ApplyButton>
-        <ApplyButton>모집 마감하기</ApplyButton>
+        <Button onClick={() => applyStudy(studyId, 1)}>스터디 지원하기</Button>
       </StudyButtonsWrapper>
     </RecruitmentDetailWrapper>
   );
@@ -170,32 +76,26 @@ const RecruitmentDetail = () => {
 const RecruitmentDetailWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 1920px;
-  padding: 40px 348px 80px 348px;
-  align-items: flex-start;
+  max-width: 1224px;
+  margin: 0 auto;
+  margin-top: 40px;
   gap: 40px;
 `;
 
-const StudyTitleWrapper = styled.div`
+const RecruitmentTitleWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 24px;
   align-self: stretch;
-
-  & > div:first-child {
-    display: flex;
-    width: 200px;
-    height: 60px;
-    justify-content: flex-start;
-    align-items: center;
-    color: ${(props) => props.theme.color.black4};
-    font-size: ${(props) => props.theme.font.xxxxlarge};
-    font-weight: 800;
-    line-height: 60px;
-  }
+  color: ${(props) => props.theme.color.black5};
+  font-family: Pretendard;
+  font-size: ${(props) => props.theme.font.xxxxlarge};
+  font-style: normal;
+  font-weight: 800;
+  line-height: 48px;
 `;
 
-const StudyInfoWrapper = styled.div`
+const RecruitmentInfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -225,21 +125,7 @@ const StudyInfoWrapper = styled.div`
     }
   }
 
-  .title__section {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    align-self: stretch;
-
-    .title {
-      color: ${(props) => props.theme.color.black4};
-      font-size: ${(props) => props.theme.font.xlarge};
-      font-weight: 800;
-      line-height: 50px;
-    }
-  }
-
-  .study__details {
+  .recruitment__details {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -252,15 +138,6 @@ const StudyInfoWrapper = styled.div`
     align-items: flex-start;
     gap: 16px;
   }
-
-  .detail__info {
-    display: flex;
-    align-items: flex-start;
-    align-content: flex-start;
-    gap: 24px;
-    align-self: stretch;
-    flex-wrap: wrap;
-  }
 `;
 const StudyButtonsWrapper = styled.div`
   display: flex;
@@ -270,7 +147,6 @@ const StudyButtonsWrapper = styled.div`
 
   & > button {
     display: flex;
-    padding: 0 12px;
     justify-content: center;
     align-items: center;
     gap: 8px;

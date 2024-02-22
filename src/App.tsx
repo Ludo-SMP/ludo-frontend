@@ -18,7 +18,7 @@ const App = () => {
           <RouterProvider router={RouterPath} />
         </MainLayout>
       </ThemeProvider>
-      <ReactQueryDevtools />
+      <ReactQueryDevtools buttonPosition="bottom-left" />
     </QueryClientProvider>
   );
 };

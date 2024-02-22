@@ -10,7 +10,15 @@ export interface InfoFieldProps {
   gap?: string;
 }
 
-export const InfoField = ({ width, titleWidth, contentWidth, title, content, flexDirection, gap }: InfoFieldProps) => {
+export const InfoField = ({
+  width = 'auto',
+  titleWidth,
+  contentWidth,
+  title,
+  content,
+  flexDirection,
+  gap,
+}: InfoFieldProps) => {
   return (
     <InfoFieldWrapper
       width={width}
@@ -36,7 +44,7 @@ const InfoFieldWrapper = styled.div<{
   flex-direction: ${(props) => props.flexDirection || 'row'};
   width: ${(props) => props.width};
   text-align: start;
-  gap: ${(props) => props.gap || '24px'};
+  gap: ${(props) => (props.flexDirection ? '4px' : '24px')};
   font-size: ${(props) => props.theme.font.medium};
   font-weight: 500;
   line-height: 40px;
@@ -44,12 +52,10 @@ const InfoFieldWrapper = styled.div<{
   .field {
     &__title {
       text-align: start;
-      width: ${(props) => (props.flexDirection ? 'column' : props.width || '184px')};
       color: ${(props) => props.theme.color.black4};
     }
 
     &__content {
-      width: ${(props) => (props.flexDirection ? 'column' : props.width || '392px')};
       color: ${(props) => props.theme.color.black2};
     }
   }
