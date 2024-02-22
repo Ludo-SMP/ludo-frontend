@@ -66,9 +66,9 @@ const RecruitmentDetail = () => {
           </div>
         </div>
       </RecruitmentInfoWrapper>
-      <ButtonsWrapper>
+      <StudyButtonsWrapper>
         <Button onClick={() => applyStudy(studyId, 1)}>스터디 지원하기</Button>
-      </ButtonsWrapper>
+      </StudyButtonsWrapper>
     </RecruitmentDetailWrapper>
   );
 };
