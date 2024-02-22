@@ -9,6 +9,7 @@ import { Titlearea } from '../../Components/Textarea/Titlearea';
 import { GatherButton } from '../../Components/Button/Studies/GatherButton';
 import { StackModal } from '../../Components/Modal/StackModal';
 import { EndDate } from '../../Components/Calendar/EndDate';
+import { media } from '../../Styles/theme';
 
 export const GatherStudy = () => {
   return (
@@ -107,6 +108,9 @@ const StudyMain = styled.p`
   font-weight: 800;
   line-height: 60px;
   padding-bottom: 60px;
+  ${media.custom(800)} {
+    display: none;
+  }
 `;
 
 const StudyTitle = styled.p`

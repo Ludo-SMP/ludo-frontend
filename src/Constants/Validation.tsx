@@ -1,10 +1,14 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 
-export const Validation = () => {
+type errorProps = {
+  children?: React.ReactNode;
+};
+
+export const Validation = ({ children }: errorProps) => {
   return (
     <>
-      <NoticeContainer />
+      <NoticeContainer>{children}</NoticeContainer>
     </>
   );
 };

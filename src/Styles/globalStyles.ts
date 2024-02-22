@@ -6,8 +6,6 @@ export const GlobalStyle = createGlobalStyle`
 
   * {
     font-family: AppleSDGothicNeo, Noto Sans KR, sans-serif;
-    max-width: 100vw;
-    max-height: 100vh;
     box-sizing: border-box;
     -ms-overflow-style: none; 
     scrollbar-width: none; 
@@ -25,6 +23,7 @@ export const GlobalStyle = createGlobalStyle`
       margin: 0;
       background: #fff;
       border: none;
+      box-shadow: none;
   }
 
   button,
@@ -39,5 +38,11 @@ export const GlobalStyle = createGlobalStyle`
   a {
     text-decoration: none;
   }
-  
+  button:hover {
+    cursor: pointer;
+  }
+
+  ul, li {
+    list-style: none;
+  }
 `;

@@ -39,8 +39,8 @@ declare module 'styled-components' {
   const mediaQuery = (maxWidth: number): string => `@media (max-width: ${maxWidth}px)`;
 
   export const device = {
-    custom: mediaQuery,
-    mobile: mediaQuery(680),
+    custom: (maxwidth: number) => mediaQuery(maxwidth),
+    mobile: mediaQuery(500),
     tablet: mediaQuery(1024),
     desktop: mediaQuery(1920),
   };

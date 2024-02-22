@@ -5,26 +5,48 @@ import 'react-datepicker/dist/react-datepicker.css';
 import styled from 'styled-components';
 
 export const ProgressPeriod = () => {
-  const [dateRange, setDateRange] = useState([null, null]);
-  const [startDate, endDate] = dateRange;
+  // const [dateRange, setDateRange] = useState([null, null]);
+  // const [startDate, endDate] = dateRange;
+  // <DateContainer
+  //   name="period"
+  //   className="select"
+  //   selectsRange={true}
+  //   startDate={startDate}
+  //   endDate={endDate}
+  //   dateFormat="yy.MM.dd"
+  //   onChange={(update: any) => {
+  //     setDateRange(update);
+  //   }}
+  //   isClearable={true}
+  // />
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(null);
   return (
-    <DateContainer
-      name="period"
-      className="select"
-      selectsRange={true}
-      startDate={startDate}
-      endDate={endDate}
-      dateFormat="yy.MM.dd"
-      onChange={(update: any) => {
-        setDateRange(update);
-      }}
-      isClearable={true}
-    />
+    <>
+      <DateContainer
+        selected={startDate}
+        onChange={(date: any) => setStartDate(date)}
+        selectsStart
+        startDate={startDate}
+        endDate={endDate}
+        dateFormat="yy.MM.dd"
+      />
+      <Slash>-</Slash>
+      <DateContainer
+        selected={endDate}
+        onChange={(date: any) => setEndDate(date)}
+        selectsEnd
+        startDate={startDate}
+        endDate={endDate}
+        minDate={startDate}
+        dateFormat="yy.MM.dd"
+      />
+    </>
   );
 };
 
 const DateContainer = styled(DatePicker)`
-  width: 328px;
+  width: 145px;
   height: 24px;
   background-color: ${(props) => props.theme.color.gray3};
   align-items: center;
@@ -38,4 +60,8 @@ const DateContainer = styled(DatePicker)`
   padding-bottom: 10px;
   padding-right: 16px;
   padding-left: 16px;
+`;
+
+const Slash = styled.p`
+  padding-right: 20px;
 `;

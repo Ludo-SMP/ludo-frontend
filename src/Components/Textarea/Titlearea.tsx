@@ -1,6 +1,11 @@
 import { useState, useRef, useCallback } from 'react';
+import { useForm, SubmitHandler, RegisterOptions } from 'react-hook-form';
+import { ErrorMessage } from '@hookform/error-message';
 import styled from 'styled-components';
-import { atom, useAtom, useAtomValue, useSetAtom } from 'jotai';
+// import { atom, useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { FieldErrors, FieldValues, UseFormRegister, FormState } from 'react-hook-form';
+import { Validation } from '../../Constants/Validation';
+import type { UseFormRegisterReturn } from 'react-hook-form';
 
 export type Props = {
   onClick?: () => void;
@@ -15,61 +20,71 @@ export type Props = {
   ref?: any;
 };
 
-//작성
-const useInput = (defaultValue: string) => {
-  const [value, setValue] = useState(defaultValue);
-  const onChange = ({ target }: { target: HTMLInputElement | HTMLTextAreaElement }) => {
-    const { value } = target;
-    setValue(value);
-  };
-  return { value, onChange, setValue };
-};
-export const Titles = atom('');
+type InputProps = {
+  id?: any;
+  label?: string;
+  type?: string;
+  disabled?: boolean;
+  required?: boolean;
+  placeholder?: string;
+  errors?: FieldErrors;
+  defaultValue?: string;
+  onErrorMsg?: boolean;
+  smallLabel?: boolean;
+  validation?: RegisterOptions;
+  register?: any;
+  formState?: any;
 
-export const Titlearea = ({ value, name, maxlength, onChange }: Props) => {
+  // register: UseFormRegisterReturn;
+  [key: string]: any;
+};
+
+//작성
+
+// export const Titles = atom('');
+
+// {
+//   id,
+//   type,
+//   required,
+//   errors,
+//   placeholder,
+//   defaultValue,
+//   register,
+//   formstate,
+// }: InputProps
+export const Titlearea = (Props: any) => {
+  const useInput = (defaultValue: string) => {
+    const [value, setValue] = useState(defaultValue);
+    const onChange = ({ target }: { target: HTMLInputElement | HTMLTextAreaElement }) => {
+      const { value } = target;
+      setValue(value);
+    };
+    return { value, onChange, setValue };
+  };
+
+  const newTitle = useInput('');
   // 글자수제한
   const [inputCount, setInputCount] = useState(0);
-
-  // title 임시 변수
-  const newTitle = useInput('');
-  // console.log(newTitle);
   const onInputHandler = (event: any) => {
     setInputCount(event.target.value.length);
   };
-
-  // input
-  const [titleValue, settitleValue] = useAtom(Titles);
-  // const settitleValue = useSetAtom(Titles);
-  // export
-  const setValue = useAtomValue(Titles);
-  const titleHandler = (event: any) => {
-    settitleValue(event.target.value);
-    console.log(setValue);
-  };
-
-  // const onClick = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const {value} = e.target;
-  //   setValue((prev: string) => {
-  //     return value;
-  //   })
-  // }, [])
-
   return (
     <InputContainer id="title" className="input">
       <Input
-        // className="input"
-        // name="title"
-        // id="title"
-        // ref={refs}
         onChange={(event) => [newTitle.setValue(event.target.value), onInputHandler(event)]}
-        // value={newTitle.value}
-        // settitleValue(event.target.value)
-        // onChange={(event) => [titleHandler(event), onInputHandler(event)]}
-        value={titleValue}
-        name={name}
-        maxLength={50}
-        placeholder="제목을 기입해주세요"
+        // id={id} placeholder={placeholder} defaultValue={defaultValue} maxLength={50}
+        placeholder="제목을 입력하시오"
+        // type="text"
+        // id={id}
+        // {...register('title', {
+        //   required: '제목을 입력하세요',
+        //   errors: '제목을 입력해주세요',
+        // })}
+        // required={true}
+        // placeholder="제목을 입력하세요"
       />
+      {/* {id.value < 0 && <span>"제목을 입력하세요"</span>} */}
       <InputText>{inputCount}/50</InputText>
     </InputContainer>
   );

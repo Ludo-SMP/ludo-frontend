@@ -7,6 +7,7 @@ import { SubmitButton } from '../../Components/Button/Studies/SubmitButton';
 import { CalendarButton } from '../../Components/Button/Studies/CalendarButton';
 import { BigCategoryButton } from '../../Components/Button/Studies/BigCategoryButton';
 import { ProgressPeriod } from '../../Components/Calendar/ProgressPeriod';
+import { media } from '../../Styles/theme';
 
 export const ModifyStudy = () => {
   return (
@@ -71,6 +72,9 @@ const StudyMain = styled.p`
   padding-bottom: 60px;
   padding-top: 40px;
   /* padding-bottom: 60px; */
+  ${media.custom(800)} {
+    display: none;
+  }
 `;
 
 const StudyContainer = styled.div`

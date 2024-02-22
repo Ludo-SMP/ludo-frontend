@@ -9,14 +9,26 @@ import { MaxPeopleButton } from '../../Components/Button/Studies/MaxPeopleButton
 import { ProgressPeriod } from '../../Components/Calendar/ProgressPeriod';
 import { useState, useEffect, Key, useRef } from 'react';
 import { Validation } from '../../Constants/Validation';
-import { Titles } from '../../Components/Textarea/Titlearea';
+import { media } from '../../Styles/theme';
+// import { Titles } from '../../Components/Textarea/Titlearea';
 import axios from 'axios';
 import { useSetAtom, useAtomValue, useAtom } from 'jotai';
+import { useForm } from 'react-hook-form';
 
+interface IFormInput {
+  title: string;
+  pattern: string;
+}
 export const CreateStudy = (Props: any) => {
+  // {register} = useForm
   // 폼 데이터
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  // const [titleValue, settitleValue] = useAtom(Titles);
+  const [titleValue, settitleValue] = useState('');
   // const setValue = useAtomValue(Titles);
   // const titleHandler = (event: any) => {
   //   settitleValue(event.target.value);
@@ -27,80 +39,73 @@ export const CreateStudy = (Props: any) => {
     category: '',
   });
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [formErrors, setFormErrors] = useState({});
+  // const [isSubmitting, setIsSubmitting] = useState(false);
+  // const [formErrors, setFormErrors] = useState({});
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const { name, value } = event.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-    console.log(formData);
-  };
+  // const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+  //   const { name, value } = event.target;
+  //   setFormData((prevFormData) => ({
+  //     ...prevFormData,
+  //     [name]: value,
+  //   }));
+  //   console.log(formData);
+  // };
 
-  async function post() {
-    console.log('post');
-    const { data } = await axios.post('http://localhost:3000/api/test', {
-      name: 'a',
-      email: '이메일',
-      title: formData.title,
-      category: formData.category,
-    });
+  // async function post() {
+  //   console.log('post');
+  //   const { data } = await axios.post('http://localhost:3000/api/test', {
+  //     name: 'a',
+  //     email: '이메일',
+  //     title: formData.title,
+  //     category: formData.category,
+  //   });
 
-    console.log(data);
-  }
+  //   console.log(data);
+  // }
 
-  const postData = () => {
-    // async function post() {
-    //   console.log('post');
-    //   const { data } = await axios.post('http://localhost:3000/api/test', {
-    //     name: 'a',
-    //     email: '이메일',
-    //     title: formData.title,
-    //     category: formData.category,
-    //   });
+  // const postData = () => {
+  //   // async function post() {
+  //   //   console.log('post');
+  //   //   const { data } = await axios.post('http://localhost:3000/api/test', {
+  //   //     name: 'a',
+  //   //     email: '이메일',
+  //   //     title: formData.title,
+  //   //     category: formData.category,
+  //   //   });
 
-    //   console.log(data);
-    // }
-    // return post();
-    return post();
-  };
+  //   //   console.log(data);
+  //   // }
+  //   // return post();
+  //   return post();
+  // };
 
-  const validateForm = (values: { title: string; category: string | any[] }) => {
-    if (!values.title) {
-      setFormErrors({ email: '제목을 입력해주세요' });
-    }
-    if (!values.category) {
-      setFormErrors({ password: '분야를 골라주세요' });
-    }
-  };
+  // const validateForm = (values: { title: string; category: string | any[] }) => {
+  //   if (!values.title) {
+  //     setFormErrors({ email: '제목을 입력해주세요' });
+  //   }
+  //   if (!values.category) {
+  //     setFormErrors({ password: '분야를 골라주세요' });
+  //   }
+  // };
 
   // event: React.FormEvent<HTMLFormElement>
-  const createHandler = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setIsSubmitting(true);
-    postData();
-  };
+  // const createHandler = (event: React.FormEvent<HTMLFormElement>) => {
+  //   event.preventDefault();
+  //   setIsSubmitting(true);
+  //   postData();
+  // };
   // action="http://localhost:3000/api/test" method="POST"
   // onSubmit={createHandler}
+  // type="text" id="title" register={register}
   return (
     <>
-      <StudyContainer action="http://localhost:3000/api/test" method="POST" target="/">
+      <StudyContainer>
         <StudyMain>스터디 생성하기</StudyMain>
         <TopBox>
           <StudyTitle>스터디 제목</StudyTitle>
           <BottomWrapper>
             <ContentText>제목</ContentText>
-            <Titlearea
-              type="title"
-              name="title"
-              id="title "
-              onChange={(event) => handleInputChange(event)}
-              // onChange={() => handleInputChange}
-              // onChange={(event: any) => titleHandler(event)}
-              value={formData.title}
-            />
+            <Titlearea />
           </BottomWrapper>
         </TopBox>
         <MiddleBox>
@@ -110,6 +115,7 @@ export const CreateStudy = (Props: any) => {
               <MiddleBottomWrapper>
                 <ContentText>카테고리</ContentText>
                 <BigCategoryButton
+
                 // value={formData.category}
                 // type="submit"
                 // name="category"
@@ -159,6 +165,9 @@ const StudyMain = styled.p`
   line-height: 60px;
   padding-bottom: 60px;
   padding-top: 40px;
+  ${media.custom(800)} {
+    display: none;
+  }
 `;
 
 const StudyContainer = styled.form`
