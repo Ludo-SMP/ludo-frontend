@@ -1,6 +1,5 @@
 import ReactDOM from 'react-dom/client';
 import { StrictMode } from 'react';
-
 import App from './App.tsx';
 
 const enableMocking = async () => {
@@ -16,6 +15,7 @@ enableMocking().then(() =>
     </StrictMode>,
   ),
 );
+
 // ReactDOM.createRoot(document.getElementById('root')!).render(
 //   <StrictMode>
 //     <App />

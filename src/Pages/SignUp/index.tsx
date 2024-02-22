@@ -1,50 +1,53 @@
-import LoginButton from '@/Components/Button/LoginButton';
-import { Link } from 'react-router-dom';
+import SocialLogin from '@/Components/SocialLogin';
+import { ROUTER_PATH } from '@/Constants/Router_Path';
+import { media } from '@/Styles/theme';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const SignUp = () => {
+  const navigate = useNavigate();
   return (
     <SignUpWrapper>
       <SignUpGuideWrapper />
-      <LoginBtnsWrapper>
-        <LoginButton type="네이버" />
-        <LoginButton type="카카오" />
-        <LoginButton type="구글" />
-      </LoginBtnsWrapper>
+      <SignUpBtnsWrapper>
+        <SocialLogin socialType="네이버" signType="회원가입" />
+        <SocialLogin socialType="카카오" signType="회원가입" />
+        <SocialLogin socialType="구글" signType="회원가입" />
+      </SignUpBtnsWrapper>
       <LoginWrapper>
         <span>이미 ㅇㅇ 계정이 있으신가요?</span>
-        <Link to={`/login`}>
-          <button>로그인하기</button>
-        </Link>
+        <button onClick={() => navigate(ROUTER_PATH.login)}>로그인하기</button>
       </LoginWrapper>
     </SignUpWrapper>
   );
 };
-
-const SignUpGuideWrapper = styled.div`
-  width: 100%;
-  height: 320px;
-  background-color: ${(props) => props.theme.color.gray5};
-`;
-
 const SignUpWrapper = styled.div`
   display: flex;
-  margin: 40px 348px 80px;
-  padding: 312px;
+  max-width: 1224px;
+  margin: 40px auto 0 auto;
   flex-direction: column;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
   gap: 72px;
-  align-self: stretch;
-  display: flex;
 `;
 
-const LoginBtnsWrapper = styled.div`
+const SignUpGuideWrapper = styled.div`
+  height: 320px;
+  width: 600px;
+  margin: 0 auto;
+  align-self: stretch;
+  background-color: ${(props) => props.theme.color.gray5};
+
+  ${media.custom(600)} {
+    width: 400px;
+  }
+`;
+
+const SignUpBtnsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   gap: 16px;
-  align-self: stretch;
-  display: flex;
 `;
 
 const LoginWrapper = styled.div`
@@ -56,7 +59,7 @@ const LoginWrapper = styled.div`
   color: ${(props) => props.theme.color.black3};
   text-align: center;
   font-family: Pretendard;
-  font-size: 20px;
+  font-size: ${(props) => props.theme.font.medium};
   font-style: normal;
   font-weight: 600;
   line-height: 40px;

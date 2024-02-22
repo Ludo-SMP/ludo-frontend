@@ -1,3 +1,4 @@
+import { apiRequester } from '@/Apis/auth';
 import Button from '@/Components/Common/Button';
 import { ROUTER_PATH } from '@/Constants/Router_Path';
 import { media } from '@/Styles/theme';
@@ -13,7 +14,13 @@ const SignButtonSection = ({ isLoggedIn }: SignButtonSectionProps) => {
   return (
     <SignButtonSectionWrapper {...{ isLoggedIn }}>
       {isLoggedIn ? (
-        <Button className="logout" type="button" onClick={() => {}}>
+        <Button
+          className="logout"
+          type="button"
+          onClick={() => {
+            apiRequester.post(`/auth/logout`);
+          }}
+        >
           로그아웃
         </Button>
       ) : (

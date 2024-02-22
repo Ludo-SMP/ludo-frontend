@@ -2,14 +2,15 @@ import { defineConfig } from 'vite';
 import svgr from 'vite-plugin-svgr';
 import react from '@vitejs/plugin-react';
 import * as path from 'path';
-import dns from 'dns';
-
-dns.setDefaultResultOrder('verbatim');
+import mkcert from 'vite-plugin-mkcert';
 
 export default defineConfig({
-  plugins: [react(), svgr()],
+  plugins: [react(), svgr(), mkcert()],
   resolve: {
     alias: [{ find: '@', replacement: path.resolve(__dirname, 'src') }],
   },
-  server: { port: 3000 },
+  server: {
+    host: 'local.ludoapi.store',
+    port: 3000,
+  },
 });
