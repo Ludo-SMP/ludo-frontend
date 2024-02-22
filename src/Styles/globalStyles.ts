@@ -6,8 +6,6 @@ export const GlobalStyle = createGlobalStyle`
 
   * {
     font-family: AppleSDGothicNeo, Noto Sans KR, sans-serif;
-    max-width: 100vw;
-    max-height: 100vh;
     box-sizing: border-box;
     -ms-overflow-style: none; 
     scrollbar-width: none; 

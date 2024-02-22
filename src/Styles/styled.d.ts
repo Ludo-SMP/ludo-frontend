@@ -11,6 +11,7 @@ declare module 'styled-components' {
       black2: string;
       black3: string;
       black4: string;
+      black5: string;
       gray1: string;
       gray2: string;
       gray3: string;
@@ -24,6 +25,7 @@ declare module 'styled-components' {
       purple6: string;
       orange1: string;
       orange2: string;
+      orange3: string;
       naver: string;
       kakao: string;
       kakaoFontColor: string;
