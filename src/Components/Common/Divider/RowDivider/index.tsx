@@ -1,10 +1,15 @@
 import styled from 'styled-components';
 
-export const RowDivider = () => {
-  return <RowDividerWrapper></RowDividerWrapper>;
+interface RowDividerProps {
+  rowHeight?: number;
+}
+
+export const RowDivider = ({ rowHeight }: RowDividerProps) => {
+  return <RowDividerWrapper rowHeight={rowHeight}></RowDividerWrapper>;
 };
 
-const RowDividerWrapper = styled.div`
+const RowDividerWrapper = styled.div<{ rowHeight: number }>`
   width: 100%;
-  border: 1px solid rgba(38, 45, 49, 0.2);
+  height: ${(props) => `${props.rowHeight}px` || '1px'};
+  background-color: ${(props) => props.theme.color.black1};
 `;

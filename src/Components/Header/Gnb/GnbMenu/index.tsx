@@ -34,6 +34,7 @@ const GnbMenuWrapper = styled.button`
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    box-shadow: 0px -5px linear-gradient(93deg, #6262b2 0%, #f7a477 100%); inset;
   }
 
   ${media.custom(900)} {

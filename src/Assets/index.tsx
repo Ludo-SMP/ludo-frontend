@@ -21,6 +21,8 @@ export { default as Three } from './icons/three.svg?react';
 export { default as Two } from './icons/two.svg?react';
 export { default as Up } from './icons/up.svg?react';
 export { default as Views } from './icons/views.svg?react';
+export { default as Filter } from './icons/filter.svg?react';
+export { default as CreateStudy } from './icons/createstudy.svg?react';
 
 // logo
 export { default as BlankLogo } from './images/blank-logo.png';

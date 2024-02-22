@@ -114,7 +114,7 @@ const TopBarWrapper = styled.div`
     background: ${(props) => props.theme.color.purple3};
 
     &:hover {
-      background: var(--Button-sheet, linear-gradient(93deg, #6262b2 0%, #f7a477 100%));
+      background: linear-gradient(93deg, #6262b2 0%, #f7a477 100%);
     }
 
     ${media.custom(800)} {

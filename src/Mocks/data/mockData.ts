@@ -1,7 +1,5 @@
 import { PopularRecruitmentsRawDataType, RecruitmentRawDataType, RecruitmentDetailRawDataType } from '@/Types/study';
 
-// import { PopularRecruitments, RecruitmentDetailType } from '@/Apis/study';
-
 export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
   {
     id: 1,

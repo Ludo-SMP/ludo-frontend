@@ -10,7 +10,6 @@ const useIntersectionObservable = (
     (entries: IntersectionObserverEntry[], _observer: IntersectionObserver) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          console.log(entry);
           onIntersection(entry, _observer);
         }
       });

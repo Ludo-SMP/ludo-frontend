@@ -19,7 +19,6 @@ const getRecruitments = http.get(`${baseURL}/recruitments`, ({ request }) => {
   const pageNum = Number(url.searchParams.get('pageParam'));
   const recruitmentsPerPage = Number(url.searchParams.get('recruitmentsPerPage'));
   const filteredRecruitmentsMockData = getFilteredRecruitmentsMockData(filterOptions);
-  console.log(filteredRecruitmentsMockData.length);
 
   return new HttpResponse(
     JSON.stringify({
