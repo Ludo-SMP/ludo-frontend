@@ -3,9 +3,9 @@ import { Three } from '@/Assets';
 import { InfoField } from '@/Components/Common/InfoField';
 
 export interface StudyBasicInfoSectionProps {
-  studyTitle: string;
-  category: string;
-  memberCnt: number;
+  studyTitle?: string;
+  category?: string;
+  memberCnt?: number;
 }
 
 const StudyBasicInfoSection = ({ studyTitle, category, memberCnt }: StudyBasicInfoSectionProps) => {

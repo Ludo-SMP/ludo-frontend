@@ -1,3 +1,4 @@
+import { media } from '@/Styles/theme';
 import styled from 'styled-components';
 
 export interface InfoFieldProps {
@@ -52,7 +53,11 @@ const InfoFieldWrapper = styled.div<{
   .field {
     &__title {
       text-align: start;
+      width: ${(props) => props.flexDirection || '184px'};
       color: ${(props) => props.theme.color.black4};
+      ${media.tablet} {
+        width: auto;
+      }
     }
 
     &__content {

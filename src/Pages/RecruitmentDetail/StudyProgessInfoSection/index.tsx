@@ -3,9 +3,9 @@ import { Two } from '@/Assets';
 import { InfoField } from '@/Components/Common/InfoField';
 
 export interface StudyProgressInfoSectionProps {
-  method: string;
-  platform: string;
-  period: string;
+  method?: string;
+  platform?: string;
+  period?: string;
 }
 
 const StudyProgressInfoSection = ({ method, platform, period }: StudyProgressInfoSectionProps) => {
