@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import StudyCard, { StudyCardProps } from '../StudyCard';
-
 import NotFound from '../NotFound';
 import { FilterOptionsType, StudyBasicInfoType } from '@/Types/study';
-import { useMemo } from 'react';
-import useIntersectionObservable from '@/Hooks/userIntersectionObservable';
+// import { useMemo } from 'react';
+// import useIntersectionObservable from '@/Hooks/userIntersectionObservable';
 import { convertRecruitmentsToStudyCardProps } from '@/Utils/propertyConverter';
-import { useRecruitments } from '@/Apis/recruitment';
+// import { useRecruitments } from '@/Apis/recruitment';
+import { recruitmentsMockData } from '@/Shared/dummy';
 
 export interface StudyCardListProps {
   filterOptions?: FilterOptionsType;
@@ -15,18 +15,21 @@ export interface StudyCardListProps {
 export const recruitmentsPerPage = 9;
 
 const StudyCardList = ({ filterOptions }: StudyCardListProps) => {
-  const { data, hasNextPage, isFetching, fetchNextPage, isFetchingNextPage } = useRecruitments(
-    filterOptions,
-    recruitmentsPerPage,
-  );
+  // const { data, hasNextPage, isFetching, fetchNextPage, isFetchingNextPage } = useRecruitments(
+  //   filterOptions,
+  //   recruitmentsPerPage,
+  // );
 
-  const recruitments = convertRecruitmentsToStudyCardProps(
-    useMemo(() => (data ? data.pages.flatMap(({ data }) => data) : []), [data]),
-  );
-  const ref = useIntersectionObservable((entry, observer) => {
-    observer.unobserve(entry.target);
-    if (hasNextPage && !isFetching) fetchNextPage();
-  });
+  // const recruitments = convertRecruitmentsToStudyCardProps(
+  //   useMemo(() => (data ? data.pages.flatMap(({ data }) => data) : []), [data]),
+  // );
+
+  // const ref = useIntersectionObservable((entry, observer) => {
+  //   observer.unobserve(entry.target);
+  //   if (hasNextPage && !isFetching) fetchNextPage();
+  // });
+
+  const recruitments = convertRecruitmentsToStudyCardProps(recruitmentsMockData);
 
   return (
     <StudyCardsWrapper>
@@ -37,7 +40,7 @@ const StudyCardList = ({ filterOptions }: StudyCardListProps) => {
       ) : (
         <NotFound />
       )}
-      {filterOptions && <Target ref={ref}>{isFetchingNextPage && hasNextPage ? 'Loading...' : 'No Result'}</Target>}
+      {/* {filterOptions && <Target ref={ref}>{isFetchingNextPage && hasNextPage ? 'Loading...' : 'No Result'}</Target>} */}
     </StudyCardsWrapper>
   );
 };

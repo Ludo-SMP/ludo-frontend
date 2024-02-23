@@ -1,17 +1,20 @@
 import styled from 'styled-components';
 import { bannerDummy } from '../../Shared/dummy';
 import Banner from '../../Components/Banner';
-import { usePopularRecruitments } from '@/Apis/recruitment';
+// import { usePopularRecruitments } from '@/Apis/recruitment';
 import { convertPopularRecruitmentsToStudyCardProps } from '@/Utils/propertyConverter';
 import CardListInfo from '@/Components/CardListInfo';
 import PopularStudyCardList from '@/Components/PopularCardList';
 import Button from '@/Components/Common/Button';
 import { Up } from '@/Assets';
 import UtiltiyButtons from '@/Components/UtilityButtons';
+import { popularRecruitmentsMockData } from '../../Shared/dummy';
 
 const Main = () => {
-  const { data, isLoading } = usePopularRecruitments();
-  const popularRecruitments = isLoading ? null : convertPopularRecruitmentsToStudyCardProps(data.data);
+  // const { data, isLoading } = usePopularRecruitments();
+  // const popularRecruitments = isLoading ? null : convertPopularRecruitmentsToStudyCardProps(data.data);
+  const isLoading = false;
+  const popularRecruitments = convertPopularRecruitmentsToStudyCardProps(popularRecruitmentsMockData);
 
   const handleScroll = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });

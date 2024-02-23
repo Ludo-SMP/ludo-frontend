@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-export const apiRequester: AxiosInstance = axios.create({ baseURL: import.meta.env.VITE_MOCK_API_URL });
+export const apiRequester: AxiosInstance = axios.create({ baseURL: import.meta.env.VITE_BASE_URL });
 
 const fetchWrapper = async ({
   method,

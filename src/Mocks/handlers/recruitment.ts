@@ -4,7 +4,7 @@ import { RecruitmentDetailRawDataType } from '@/Types/study';
 import { getfilterOptions } from '../utils/getQueryParams';
 import { getFilteredRecruitmentsMockData } from '../utils/getData';
 
-const baseURL = import.meta.env.VITE_MOCK_API_URL;
+const baseURL = import.meta.env.VITE_BASE_URL;
 
 const getPopularRecruitments = http.get(`${baseURL}`, () => {
   return new HttpResponse(JSON.stringify({ data: popularRecruitmentsMockData, message: 'Success' }), {
