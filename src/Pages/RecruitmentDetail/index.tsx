@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { InfoField } from '../../Components/Common/InfoField';
 import { RowDivider } from '../../Components/Common/Divider/RowDivider';
 import { ColumnDivider } from '../../Components/Common/Divider/ColumnDivider';
-import { useRecruitmentDetail } from '@/Apis/recruitment';
+// import { useRecruitmentDetail } from '@/Apis/recruitment';
 import { useParams } from 'react-router-dom';
 import { dateFormatter } from '@/Utils/date';
 import { convertRecruitmentDetailRawDataToRecruitmentDetail } from '@/Utils/propertyConverter';
@@ -12,11 +12,14 @@ import StudyProgressInfoSection from './StudyProgessInfoSection';
 import StudyBasicInfoSection from './StudyBasicInfoSection';
 import Button from '@/Components/Common/Button';
 import { applyStudy } from '@/Apis/study';
+import { recruitmentDetailMockDataById } from '@/Shared/dummy';
 
 const RecruitmentDetail = () => {
   const studyId = Number(useParams().studyId);
-  const { data, isLoading } = useRecruitmentDetail(studyId);
-  const recruitmentDetail = isLoading ? null : convertRecruitmentDetailRawDataToRecruitmentDetail(data.data);
+  const isLoading = false;
+  // const { data, isLoading } = useRecruitmentDetail(studyId);
+  // const recruitmentDetail = isLoading ? null : convertRecruitmentDetailRawDataToRecruitmentDetail(data.data);
+  const recruitmentDetail = convertRecruitmentDetailRawDataToRecruitmentDetail(recruitmentDetailMockDataById(studyId));
 
   return isLoading ? (
     <div>Loading...</div>

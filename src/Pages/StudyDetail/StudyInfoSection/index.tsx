@@ -39,27 +39,9 @@ const StudyInfoSectionWrapper = styled.div`
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     align-items: flex-start;
-    align-content: flex-start;
     grid-gap: 24px;
     align-self: stretch;
     flex-wrap: wrap;
-  }
-
-  & > div:first-child {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 32px;
-    align-self: stretch;
-
-    .detail__info {
-      display: flex;
-      align-items: flex-start;
-      align-content: flex-start;
-      gap: 20px;
-      align-self: stretch;
-      flex-wrap: wrap;
-    }
   }
 `;
 

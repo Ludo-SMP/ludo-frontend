@@ -1,17 +1,23 @@
 import styled from 'styled-components';
-import { BlankSquare } from '../../Components/Common/BlankSquare';
-import { InfoField } from '../../Components/Common/InfoField';
 import { RowDivider } from '../../Components/Common/Divider/RowDivider';
-import MemberProfile from '../../Components/MemberProfile';
+import { MemberProfileProps } from '../../Components/MemberProfile';
 import { Right, StudyInfo } from '@/Assets';
 import Button from '@/Components/Common/Button';
 import Chip from '@/Components/Common/Chip';
 import { useNavigate, useParams } from 'react-router-dom';
 import StudyInfoSection from './StudyInfoSection';
+import MemberSection from './MemberSection';
 
 export const StudyDetail = () => {
   const studyId = Number(useParams().studyId);
   const navigate = useNavigate();
+  const memberProfileMocks: MemberProfileProps[] = [
+    { nickName: 'Hyun', email: 'ksci195@hanmail.net', teamPosition: '팀장', skillPosition: '디자이너' },
+    { nickName: 'Hyun', email: 'ksci195@hanmail.net', teamPosition: '팀원', skillPosition: 'FE' },
+    { nickName: 'Hyun', email: 'ksci195@hanmail.net', teamPosition: '팀원', skillPosition: 'BE' },
+    { nickName: 'Hyun', email: 'ksci195@hanmail.net', teamPosition: '팀원', skillPosition: 'FE' },
+    { nickName: 'Hyun', email: 'ksci195@hanmail.net', teamPosition: '팀원', skillPosition: 'FE' },
+  ];
 
   return (
     <StudyDetailWrapper>
@@ -36,28 +42,8 @@ export const StudyDetail = () => {
         period={'03.03~04.04'}
         remainingPeriod={30}
       />
-      <RowDivider />
-      <div className="study__member__info">
-        <div className="title__section">
-          <BlankSquare width="50px" height="50px" />
-          <div className="title">구성원</div>
-        </div>
-        <div className="member__info">
-          <div className="member__headcount">
-            <InfoField title="현재 인원수" content="5명" />
-            <InfoField title="목표 인원수" content="7명" />
-          </div>
-          <div className="member__profiles">
-            <MemberProfile nickName="Hyun" email="ksci195@hanmail.net" teamPosition="팀원" skillPosition="FE" />
-            <MemberProfile nickName="Hyun" email="ksci195@hanmail.net" teamPosition="팀장" skillPosition="BE" />
-            <MemberProfile nickName="Hyun" email="ksci195@hanmail.net" teamPosition="팀원" skillPosition="디자이너" />
-            <MemberProfile nickName="Hyun" email="ksci195@hanmail.net" teamPosition="팀원" skillPosition="디자이너" />
-            <MemberProfile nickName="Hyun" email="ksci195@hanmail.net" teamPosition="팀원" skillPosition="디자이너" />
-            <MemberProfile nickName="Hyun" email="ksci195@hanmail.net" teamPosition="팀원" skillPosition="디자이너" />
-          </div>
-        </div>
-      </div>
-
+      <RowDivider rowHeight={16} />
+      <MemberSection goalMemberCnt={7} memberProfiles={[...memberProfileMocks]} />
       <StudyButtonsWrapper>
         <Button>스터디 탈퇴하기</Button>
         <Button>모집 마감하기</Button>
@@ -80,7 +66,7 @@ const StudyDetailTitleWrapper = styled.div`
   align-items: center;
   gap: 24px;
   justify-content: space-between;
-
+  color: ${({ theme }) => theme.color.black3};
   button {
     display: flex;
     align-items: center;
@@ -100,77 +86,6 @@ const StudyTitleWrapper = styled.div`
   .chips {
     display: flex;
     gap: 24px;
-  }
-`;
-
-const StudyInfoWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 32px;
-  align-self: stretch;
-  margin-bottom: 20px;
-
-  .title__section {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    align-self: stretch;
-
-    .title {
-      color: ${(props) => props.theme.color.black4};
-      font-size: ${(props) => props.theme.font.xlarge};
-      font-weight: 800;
-      line-height: 50px;
-    }
-  }
-
-  & > div:first-child {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 32px;
-    align-self: stretch;
-
-    .detail__info {
-      display: flex;
-      align-items: flex-start;
-      align-content: flex-start;
-      gap: 20px;
-      align-self: stretch;
-      flex-wrap: wrap;
-    }
-  }
-
-  & > div:last-child {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 32px;
-    align-self: stretch;
-
-    .member__info {
-      display: flex;
-      align-items: flex-start;
-      align-content: flex-start;
-      gap: 20px;
-      align-self: stretch;
-      flex-wrap: wrap;
-    }
-
-    .member__headcount {
-      display: flex;
-      align-items: flex-start;
-      align-content: flex-start;
-      align-self: stretch;
-      flex-wrap: wrap;
-    }
-
-    .member__profiles {
-      display: flex;
-      align-items: flex-start;
-      gap: 24px;
-    }
   }
 `;
 
