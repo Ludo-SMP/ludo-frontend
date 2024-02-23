@@ -5,12 +5,12 @@ export interface LoginState {
 }
 
 export interface LoginAction {
-  login: () => void;
-  logout: () => void;
+  setIsLoggedIn: () => void;
+  setIsLoggedOut: () => void;
 }
 
 export const useLoginStore = create<LoginState & LoginAction>((set) => ({
   isLoggedIn: true,
-  login: () => set(() => ({ isLoggedIn: true })),
-  logout: () => set(() => ({ isLoggedIn: false })),
+  setIsLoggedIn: () => set(() => ({ isLoggedIn: true })),
+  setIsLoggedOut: () => set(() => ({ isLoggedIn: false })),
 }));
