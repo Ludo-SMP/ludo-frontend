@@ -13,18 +13,15 @@ export interface UserInfo {
 
 export type SocialLoginType = 'google' | 'kakao' | 'naver';
 
-// 회원가입
 export const signUp = async (signUpType: SocialLoginType) => {
-  await apiRequester.get(`/auth/signup/${signUpType}`).then((res) => res);
+  await apiRequester.get(`/auth/login/${signUpType}`).then((res) => res);
 };
-
-// 로그인
-export const logIn = async (loginInfo: UserInfo, loginType: SocialLoginType) => {
-  await GET(`/auth/login/${loginType}`, loginInfo);
+export const login = async (signUpType: SocialLoginType) => {
+  await apiRequester.get(`/auth/signup/${signUpType}`).then((res) => res);
 };
 
 // 로그이웃
 export const logOut = async () => await POST('/auth/logout');
 
-// 토큰 검증??
-export const verifyToken = async () => await GET('/auth');
+// 토큰 검증
+export const verifyToken = async () => await GET('/api/usrs/me');

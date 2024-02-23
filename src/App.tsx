@@ -6,6 +6,7 @@ import { RouterProvider } from 'react-router-dom';
 import { RouterPath } from './Router/index.tsx';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import LoginProvider from './Components/LoginProvider/index.tsx';
 
 const queryClient = new QueryClient();
 
@@ -14,9 +15,11 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <MainLayout>
-          <RouterProvider router={RouterPath} />
-        </MainLayout>
+        <LoginProvider>
+          <MainLayout>
+            <RouterProvider router={RouterPath} />
+          </MainLayout>
+        </LoginProvider>
       </ThemeProvider>
       <ReactQueryDevtools buttonPosition="bottom-left" />
     </QueryClientProvider>
