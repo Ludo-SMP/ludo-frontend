@@ -4,12 +4,12 @@ interface RowDividerProps {
   rowHeight?: number;
 }
 
-export const RowDivider = ({ rowHeight }: RowDividerProps) => {
+export const RowDivider = ({ rowHeight = 1 }: RowDividerProps) => {
   return <RowDividerWrapper rowHeight={rowHeight}></RowDividerWrapper>;
 };
 
 const RowDividerWrapper = styled.div<{ rowHeight: number }>`
   width: 100%;
-  height: ${(props) => `${props.rowHeight}px` || '1px'};
+  height: ${(props) => `${props.rowHeight}px`};
   background-color: ${(props) => props.theme.color.black1};
 `;
