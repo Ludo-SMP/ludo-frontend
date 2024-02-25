@@ -54,20 +54,16 @@ type InputProps = {
 //   formstate,
 // }: InputProps
 export const Titlearea = (Props: any) => {
-  // const useInput = (defaultValue: string) => {
-  //   const [value, setValue] = useState(defaultValue);
-  //   const onChange = ({ target }: { target: HTMLInputElement | HTMLTextAreaElement }) => {
-  //     const { value } = target;
-  //     setValue(value);
-  //   };
-  //   return { value, onChange, setValue };
-  // };
-
-  // const newTitle = useInput('');
-  const [title, setTitle] = useState('');
-  const ontitleHandler = (event: any) => {
-    setTitle(event.target.value);
+  const useInput = (defaultValue: string) => {
+    const [value, setValue] = useState(defaultValue);
+    const onChange = ({ target }: { target: HTMLInputElement | HTMLTextAreaElement }) => {
+      const { value } = target;
+      setValue(value);
+    };
+    return { value, onChange, setValue };
   };
+
+  const newTitle = useInput('');
   // 글자수제한
   const [inputCount, setInputCount] = useState(0);
   const onInputHandler = (event: any) => {
@@ -76,10 +72,9 @@ export const Titlearea = (Props: any) => {
   return (
     <InputContainer id="title" className="input">
       <Input
-        onChange={(event) => [onInputHandler(event), onInputHandler(event)]}
+        onChange={(event) => [newTitle.setValue(event.target.value), onInputHandler(event)]}
         // id={id} placeholder={placeholder} defaultValue={defaultValue} maxLength={50}
         placeholder="제목을 입력하시오"
-
         // type="text"
         // id={id}
         // {...register('title', {

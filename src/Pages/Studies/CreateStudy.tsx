@@ -1,15 +1,16 @@
 import styled from 'styled-components';
-import { ProgressButton } from '../../Components/SelectBox/ProgressButton';
-import { PlatformButton } from '../../Components/SelectBox/PlatformButton';
+import { ProgressButton } from '../../Components/Button/Studies/ProgressButton';
+import { PlatformButton } from '../../Components/Button/Studies/PlatformButton';
 import { Titlearea } from '../../Components/Textarea/Titlearea';
 import { SubmitButton } from '../../Components/Button/Studies/SubmitButton';
-import { CalendarButton } from '../../Components/SelectBox/CalendarButton';
-import { BigCategoryButton } from '../../Components/SelectBox/BigCategoryButton';
-import { MaxPeopleButton } from '../../Components/SelectBox/MaxPeopleButton';
+import { CalendarButton } from '../../Components/Button/Studies/CalendarButton';
+import { BigCategoryButton } from '../../Components/Button/Studies/BigCategoryButton';
+import { MaxPeopleButton } from '../../Components/Button/Studies/MaxPeopleButton';
 import { ProgressPeriod } from '../../Components/Calendar/ProgressPeriod';
 import { useState, useEffect, Key, useRef } from 'react';
 import { Validation } from '../../Constants/Validation';
 import { media } from '../../Styles/theme';
+// import { Titles } from '../../Components/Textarea/Titlearea';
 import axios from 'axios';
 import { useSetAtom, useAtomValue, useAtom } from 'jotai';
 import { useForm } from 'react-hook-form';
@@ -21,22 +22,22 @@ interface IFormInput {
 export const CreateStudy = (Props: any) => {
   // {register} = useForm
   // 폼 데이터
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   formState: { errors },
-  // } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  // const [titleValue, settitleValue] = useState('');
+  const [titleValue, settitleValue] = useState('');
   // const setValue = useAtomValue(Titles);
   // const titleHandler = (event: any) => {
   //   settitleValue(event.target.value);
   //   console.log(setValue);
   // };
-  // const [formData, setFormData] = useState({
-  //   title: '',
-  //   category: '',
-  // });
+  const [formData, setFormData] = useState({
+    title: '',
+    category: '',
+  });
 
   // const [isSubmitting, setIsSubmitting] = useState(false);
   // const [formErrors, setFormErrors] = useState({});
