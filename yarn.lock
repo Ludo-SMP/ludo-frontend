@@ -507,6 +507,7 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+<<<<<<< HEAD
 "@octokit/auth-token@^4.0.0":
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/@octokit/auth-token/-/auth-token-4.0.0.tgz#40d203ea827b9f17f42a29c6afb93b7745ef80c7"
@@ -602,6 +603,8 @@
   dependencies:
     "@octokit/openapi-types" "^19.1.0"
 
+=======
+>>>>>>> 9f5b07096ef8318060163aa9f5ec728abe7557f0
 "@pkgr/core@^0.1.0":
   version "0.1.0"
   resolved "https://registry.npmjs.org/@pkgr/core/-/core-0.1.0.tgz"
@@ -613,16 +616,22 @@
   integrity sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 9f5b07096ef8318060163aa9f5ec728abe7557f0
 "@remix-run/router@1.15.0":
   version "1.15.0"
   resolved "https://registry.yarnpkg.com/@remix-run/router/-/router-1.15.0.tgz#461a952c2872dd82c8b2e9b74c4dfaff569123e2"
   integrity sha512-HOil5aFtme37dVQTB6M34G95kPM3MMuqSmIRVCC52eKV+Y/tGSqw9P3rWhlAx6A+mz+MoX+XxsGsNJbaI5qCgQ==
+<<<<<<< HEAD
 =======
 "@remix-run/router@1.14.1":
   version "1.14.1"
   resolved "https://registry.npmjs.org/@remix-run/router/-/router-1.14.1.tgz"
   integrity sha512-Qg4DMQsfPNAs88rb2xkdk03N3bjK4jgX5fR24eHCTR9q6PrhZQZ4UJBPzCHJkIpTRN1UKxx2DzjZmnC+7Lj0Ow==
 >>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
+=======
+>>>>>>> 9f5b07096ef8318060163aa9f5ec728abe7557f0
 
 "@rollup/pluginutils@^5.0.5":
   version "5.1.0"
@@ -1150,6 +1159,7 @@ available-typed-arrays@^1.0.5:
   integrity sha512-DMD0KiN46eipeziST1LPP/STfDU0sufISXmjSgvVsoU2tqxctQeASejWcfNtxYKqETM1UxQ8sp2OrSBWpHY6sw==
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 axios@^1.6.5, axios@^1.6.7:
   version "1.6.7"
   resolved "https://registry.yarnpkg.com/axios/-/axios-1.6.7.tgz#7b48c2e27c96f9c68a2f8f31e2ab19f59b06b0a7"
@@ -1160,6 +1170,12 @@ axios@^1.6.5:
   resolved "https://registry.npmjs.org/axios/-/axios-1.6.5.tgz"
   integrity sha512-Ii012v05KEVuUoFWmMW/UQv9aRIc3ZwkWDcM+h5Il8izZCtRVpDUfwpoFf7eOtajT3QiGR4yDUx7lPqHJULgbg==
 >>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
+=======
+axios@^1.6.7:
+  version "1.6.7"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-1.6.7.tgz#7b48c2e27c96f9c68a2f8f31e2ab19f59b06b0a7"
+  integrity sha512-/hDJGff6/c7u0hDkvkGxR/oy6CbCs8ziCsC7SqmhjfozqiJGc8Z11wrv9z9lYfY4K8l+H9TpjcMDX0xOZmx+RA==
+>>>>>>> 9f5b07096ef8318060163aa9f5ec728abe7557f0
   dependencies:
     follow-redirects "^1.15.4"
     form-data "^4.0.0"
@@ -1170,11 +1186,14 @@ balanced-match@^1.0.0:
   resolved "https://registry.npmjs.org/balanced-match/-/balanced-match-1.0.2.tgz"
   integrity sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==
 
+<<<<<<< HEAD
 before-after-hook@^2.2.0:
   version "2.2.3"
   resolved "https://registry.yarnpkg.com/before-after-hook/-/before-after-hook-2.2.3.tgz#c51e809c81a4e354084422b9b26bad88249c517c"
   integrity sha512-NzUnlZexiaH/46WDhANlyR2bXRopNg4F/zuSA3OpZnllCUgRaOF2znDioDWrmbNVsuZk6l9pMquQB38cfBZwkQ==
 
+=======
+>>>>>>> 9f5b07096ef8318060163aa9f5ec728abe7557f0
 brace-expansion@^1.1.7:
   version "1.1.11"
   resolved "https://registry.npmjs.org/brace-expansion/-/brace-expansion-1.1.11.tgz"
@@ -2266,8 +2285,11 @@ jotai@^2.6.4:
   version "2.6.4"
   resolved "https://registry.yarnpkg.com/jotai/-/jotai-2.6.4.tgz#a68a76f0e5cd2b614afae7112cfc52a77dbfe038"
   integrity sha512-RniwQPX4893YlNR1muOtyUGHYaTD1fhEN4qnOuZJSrDHj6xdEMrqlRSN/hCm2fshwk78ruecB/P2l+NCVWe6TQ==
+<<<<<<< HEAD
 =======
 >>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
+=======
+>>>>>>> 9f5b07096ef8318060163aa9f5ec728abe7557f0
 
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"
@@ -2720,10 +2742,14 @@ react-refresh@^0.14.0:
   integrity sha512-wViHqhAd8OHeLS/IRMJjTSDHF3U9eWi62F/MledQGPdJGDhodXJ9PBLNGr6WWL7qlH12Mt3TyTpbS+hGXMjCzQ==
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 9f5b07096ef8318060163aa9f5ec728abe7557f0
 react-router-dom@^6.22.0:
   version "6.22.0"
   resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-6.22.0.tgz#177c8bd27146decbb991eafb5df159f7a9f70035"
   integrity sha512-z2w+M4tH5wlcLmH3BMMOMdrtrJ9T3oJJNsAlBJbwk+8Syxd5WFJ7J5dxMEW0/GEXD1BBis4uXRrNIz3mORr0ag==
+<<<<<<< HEAD
   dependencies:
     "@remix-run/router" "1.15.0"
     react-router "6.22.0"
@@ -2739,17 +2765,23 @@ react-router-dom@^6.21.1:
   version "6.21.1"
   resolved "https://registry.npmjs.org/react-router-dom/-/react-router-dom-6.21.1.tgz"
   integrity sha512-QCNrtjtDPwHDO+AO21MJd7yIcr41UetYt5jzaB9Y1UYaPTCnVuJq6S748g1dE11OQlCFIQg+RtAA1SEZIyiBeA==
+=======
+>>>>>>> 9f5b07096ef8318060163aa9f5ec728abe7557f0
   dependencies:
-    "@remix-run/router" "1.14.1"
-    react-router "6.21.1"
+    "@remix-run/router" "1.15.0"
+    react-router "6.22.0"
 
-react-router@6.21.1:
-  version "6.21.1"
-  resolved "https://registry.npmjs.org/react-router/-/react-router-6.21.1.tgz"
-  integrity sha512-W0l13YlMTm1YrpVIOpjCADJqEUpz1vm+CMo47RuFX4Ftegwm6KOYsL5G3eiE52jnJpKvzm6uB/vTKTPKM8dmkA==
+react-router@6.22.0:
+  version "6.22.0"
+  resolved "https://registry.yarnpkg.com/react-router/-/react-router-6.22.0.tgz#a22b44851a79dafc6b944cb418db3e80622b9be1"
+  integrity sha512-q2yemJeg6gw/YixRlRnVx6IRJWZD6fonnfZhN1JIOhV2iJCPeRNSH3V1ISwHf+JWcESzLC3BOLD1T07tmO5dmg==
   dependencies:
+<<<<<<< HEAD
     "@remix-run/router" "1.14.1"
 >>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
+=======
+    "@remix-run/router" "1.15.0"
+>>>>>>> 9f5b07096ef8318060163aa9f5ec728abe7557f0
 
 react@^18.2.0:
   version "18.2.0"
@@ -3193,6 +3225,7 @@ uri-js@^4.2.2:
     punycode "^2.1.0"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 use-sync-external-store@1.2.0:
   version "1.2.0"
@@ -3210,6 +3243,8 @@ vite-plugin-mkcert@^1.17.3:
     debug "^4.3.4"
     picocolors "^1.0.0"
 
+=======
+>>>>>>> 9f5b07096ef8318060163aa9f5ec728abe7557f0
 vite-plugin-svgr@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/vite-plugin-svgr/-/vite-plugin-svgr-4.2.0.tgz#9f3bf5206b0ec510287e56d16f1915e729bb4e6b"
