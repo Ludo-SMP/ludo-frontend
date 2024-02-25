@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { ContactButton } from '../../Components/Button/Studies/ContactButton';
 import { ContactUrlInput } from '../../Components/Textarea/ContactUrlInput';
 import { SubmitButton } from '../../Components/Button/Studies/SubmitButton';
-import { CalendarButton } from '../../Components/Button/Studies/CalendarButton';
+import { CalendarButton } from '../../Components/Selectbox/CalendarButton';
 import { PositionButton } from '../../Components/Button/Studies/PositionButton';
 import { Mainarea } from '../../Components/Textarea/Mainarea';
 import { Titlearea } from '../../Components/Textarea/Titlearea';
