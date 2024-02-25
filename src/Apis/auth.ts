@@ -1,4 +1,4 @@
-import { GET, POST } from '@/utils/axios';
+import { GET, POST } from '@/Utils/axios';
 import axios, { AxiosInstance } from 'axios';
 
 export const apiRequester: AxiosInstance = axios.create({

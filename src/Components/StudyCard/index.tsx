@@ -1,85 +1,4 @@
 import styled from 'styled-components';
-<<<<<<< HEAD
-import Position, { PositionType } from './Position';
-import Tool from './Tool';
-import { BlankSquare } from '../Common/BlankSquare';
-
-type ActivityType = '온라인' | '오프라인' | '미정';
-export type StudyCategory = '알고리즘' | '모의 면접' | '프로젝트' | 'All';
-export interface StudyInfo {
-  studyCategory: StudyCategory;
-  recruitDeadLine: string;
-  studyName: string;
-  studyPeriod: string;
-  activityType: ActivityType;
-  positions: PositionType[];
-  tools: Tool[];
-  creator?: string;
-  createdAt: string;
-  views: number;
-}
-
-const StudyCard: React.FC<StudyInfo> = ({
-  studyCategory,
-  recruitDeadLine,
-  studyName,
-  studyPeriod,
-  activityType,
-  positions,
-  tools,
-  creator,
-  createdAt,
-  views,
-}) => {
-  return (
-    <StudyCardWrapper>
-      <StudyRecruitInfoWrapper>
-        <div className="study__category">[{studyCategory}]</div>
-        <div className="recruit__deadline">
-          <div>모집 마감일</div>
-          <span>{recruitDeadLine}</span>
-        </div>
-      </StudyRecruitInfoWrapper>
-      <StudyNameWrapper>
-        <div className="study__name">{studyName}</div>
-      </StudyNameWrapper>
-      <StudyDetailInfoWrapper>
-        <div>
-          <span className="title">진행기간</span>
-          <span className="study__period">{studyPeriod}</span>
-        </div>
-        <div>
-          <span className="title">진행방식</span>
-          <span className="study__type">{activityType}</span>
-        </div>
-        <div className="study__positions">
-          {positions?.map((position: PositionType) => {
-            return <Position position={position} />;
-          })}
-        </div>
-        <div className="study__tools">
-          {tools.map(() => {
-            return <BlankSquare width="32px" height="32px" />;
-          })}
-        </div>
-      </StudyDetailInfoWrapper>
-      <StudyAdditionalInfoWrapper>
-        <div className="creation__info">
-          <div className="study__creator">{creator}</div>
-          <div className="division-line"></div>
-          <div className="study__createdAt">{createdAt}</div>
-        </div>
-        <div className="views__info">
-          <BlankSquare width="18px" height="18px" />
-          <span className="views">{views}</span>
-        </div>
-      </StudyAdditionalInfoWrapper>
-    </StudyCardWrapper>
-  );
-};
-
-const StudyCardWrapper = styled.div`
-=======
 import Position from './Position';
 import { PositionType, RecruitmentInfoType, StudyBasicInfoType, ProgressInfoType } from '@/Types/study';
 import { BlankSquare } from '../Common/BlankSquare';
@@ -154,7 +73,6 @@ const StudyCard = ({
 };
 
 const StudyCardWrapper = styled.li`
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
   width: 394px;
   height: 368px;
   display: flex;
@@ -238,13 +156,8 @@ const StudyDetailInfoWrapper = styled.div`
 const StudyAdditionalInfoWrapper = styled.div`
   display: flex;
   align-items: center;
-<<<<<<< HEAD
-  justify-content: center;
-  gap: 132px;
-=======
   justify-content: space-between;
   gap: 120px;
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
   align-self: stretch;
   font-size: ${(props) => props.theme.font.xsmall};
   font-weight: 500;
@@ -254,11 +167,7 @@ const StudyAdditionalInfoWrapper = styled.div`
     display: flex;
     padding: 2px 0px;
     align-items: center;
-<<<<<<< HEAD
-    width: 113px;
-=======
     width: 1000px;
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
     gap: 12px;
   }
 

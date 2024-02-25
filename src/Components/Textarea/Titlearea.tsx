@@ -70,26 +70,8 @@ export const Titlearea = (Props: any) => {
     setInputCount(event.target.value.length);
   };
   return (
-<<<<<<< HEAD
-    <InputContainer id="title" className="input">
-      <Input
-        onChange={(event) => [newTitle.setValue(event.target.value), onInputHandler(event)]}
-        // id={id} placeholder={placeholder} defaultValue={defaultValue} maxLength={50}
-        placeholder="제목을 입력하시오"
-        // type="text"
-        // id={id}
-        // {...register('title', {
-        //   required: '제목을 입력하세요',
-        //   errors: '제목을 입력해주세요',
-        // })}
-        // required={true}
-        // placeholder="제목을 입력하세요"
-      />
-      {/* {id.value < 0 && <span>"제목을 입력하세요"</span>} */}
-=======
     <InputContainer>
       <Input onChange={onInputHandler} maxLength={50} placeholder="제목을 기입해주세요" />
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
       <InputText>{inputCount}/50</InputText>
     </InputContainer>
   );

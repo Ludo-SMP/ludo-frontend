@@ -1,10 +1,8 @@
 import { BannerProps } from '../Components/Banner';
 import { StudyInfo } from '../Components/StudyCard';
 import { StudyCardListProps } from '../Components/StudyCardList';
-<<<<<<< HEAD
-=======
 import { RecruitmentDetailRawDataType, PopularRecruitmentsRawDataType, RecruitmentRawDataType } from '@/Types/study';
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
+
 
 export const bannerDummy: BannerProps = {
   brief: '함께 발견하는 가능성, 기회의 연결',
@@ -12,10 +10,7 @@ export const bannerDummy: BannerProps = {
 };
 
 export const studyInfoDummy: StudyInfo = {
-<<<<<<< HEAD
-=======
   studyId: 1,
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
   studyCategory: '프로젝트',
   recruitDeadLine: '24. 03. 01',
   studyName: 'Ludo Study',
@@ -30,12 +25,8 @@ export const studyInfoDummy: StudyInfo = {
 
 export const algorithmStudyInfosDummy: StudyInfo[] = [
   {
-<<<<<<< HEAD
-    studyCategory: '알고리즘',
-=======
     studyId: 1,
     studyCategory: '코딩 테스트',
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
     recruitDeadLine: '24.03.01',
     studyName: 'Ludo Algorithm 1',
     studyPeriod: '3개월',
@@ -47,12 +38,8 @@ export const algorithmStudyInfosDummy: StudyInfo[] = [
     views: 1234,
   },
   {
-<<<<<<< HEAD
-    studyCategory: '알고리즘',
-=======
     studyId: 2,
     studyCategory: '코딩 테스트',
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
     recruitDeadLine: '24.02.22',
     studyName: 'Ludo Algorithm 2',
     studyPeriod: '0.5개월',
@@ -64,12 +51,8 @@ export const algorithmStudyInfosDummy: StudyInfo[] = [
     views: 230,
   },
   {
-<<<<<<< HEAD
-    studyCategory: '알고리즘',
-=======
     studyId: 3,
     studyCategory: '코딩 테스트',
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
     recruitDeadLine: '24.04.23',
     studyName: 'Ludo Algorithm 3',
     studyPeriod: '4개월',
@@ -84,10 +67,7 @@ export const algorithmStudyInfosDummy: StudyInfo[] = [
 
 export const interviewStudyInfosDummy: StudyInfo[] = [
   {
-<<<<<<< HEAD
-=======
     studyId: 4,
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
     studyCategory: '모의 면접',
     recruitDeadLine: '24.02.01',
     studyName: 'Ludo Interview 1',
@@ -100,10 +80,7 @@ export const interviewStudyInfosDummy: StudyInfo[] = [
     views: 24,
   },
   {
-<<<<<<< HEAD
-=======
     studyId: 5,
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
     studyCategory: '모의 면접',
     recruitDeadLine: '24.02.22',
     studyName: 'Ludo Interview 2',
@@ -116,10 +93,7 @@ export const interviewStudyInfosDummy: StudyInfo[] = [
     views: 1111,
   },
   {
-<<<<<<< HEAD
-=======
     studyId: 6,
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
     studyCategory: '모의 면접',
     recruitDeadLine: '24.03.13',
     studyName: 'Ludo Interview 3',
@@ -135,10 +109,7 @@ export const interviewStudyInfosDummy: StudyInfo[] = [
 
 export const projectStudyInfosDummy: StudyInfo[] = [
   {
-<<<<<<< HEAD
-=======
     studyId: 7,
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
     studyCategory: '프로젝트',
     recruitDeadLine: '24.03.12',
     studyName: 'Ludo Study Project 1',
@@ -151,10 +122,7 @@ export const projectStudyInfosDummy: StudyInfo[] = [
     views: 3333,
   },
   {
-<<<<<<< HEAD
-=======
     studyId: 8,
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
     studyCategory: '프로젝트',
     recruitDeadLine: '24.02.22',
     studyName: 'Ludo Study Project 2',
@@ -167,10 +135,7 @@ export const projectStudyInfosDummy: StudyInfo[] = [
     views: 5555,
   },
   {
-<<<<<<< HEAD
-=======
     studyId: 9,
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
     studyCategory: '프로젝트',
     recruitDeadLine: '24.03.01',
     studyName: 'Ludo Study Project 3',
@@ -186,10 +151,7 @@ export const projectStudyInfosDummy: StudyInfo[] = [
 
 const StudyInfosDummy: StudyInfo[] = [
   {
-<<<<<<< HEAD
-=======
     studyId: 10,
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
     studyCategory: '프로젝트',
     recruitDeadLine: '24.03.12',
     studyName: 'Ludo Study Project 1',
@@ -202,10 +164,7 @@ const StudyInfosDummy: StudyInfo[] = [
     views: 3333,
   },
   {
-<<<<<<< HEAD
-=======
     studyId: 11,
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
     studyCategory: '프로젝트',
     recruitDeadLine: '24.02.22',
     studyName: 'Ludo Study Project 2',
@@ -218,10 +177,7 @@ const StudyInfosDummy: StudyInfo[] = [
     views: 5555,
   },
   {
-<<<<<<< HEAD
-=======
     studyId: 12,
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
     studyCategory: '프로젝트',
     recruitDeadLine: '24.03.01',
     studyName: 'Ludo Study Project 3',
@@ -234,12 +190,8 @@ const StudyInfosDummy: StudyInfo[] = [
     views: 12346789,
   },
   {
-<<<<<<< HEAD
-    studyCategory: '알고리즘',
-=======
     studyId: 13,
     studyCategory: '코딩 테스트',
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
     recruitDeadLine: '24.03.01',
     studyName: 'Ludo Algorithm 1',
     studyPeriod: '3개월',
@@ -251,12 +203,8 @@ const StudyInfosDummy: StudyInfo[] = [
     views: 1234,
   },
   {
-<<<<<<< HEAD
-    studyCategory: '알고리즘',
-=======
     studyId: 14,
     studyCategory: '코딩 테스트',
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
     recruitDeadLine: '24.02.22',
     studyName: 'Ludo Algorithm 2',
     studyPeriod: '0.5개월',
@@ -268,12 +216,8 @@ const StudyInfosDummy: StudyInfo[] = [
     views: 230,
   },
   {
-<<<<<<< HEAD
-    studyCategory: '알고리즘',
-=======
     studyId: 15,
     studyCategory: '코딩 테스트',
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
     recruitDeadLine: '24.04.23',
     studyName: 'Ludo Algorithm 3',
     studyPeriod: '4개월',
@@ -285,10 +229,7 @@ const StudyInfosDummy: StudyInfo[] = [
     views: 999999,
   },
   {
-<<<<<<< HEAD
-=======
     studyId: 16,
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
     studyCategory: '모의 면접',
     recruitDeadLine: '24.02.01',
     studyName: 'Ludo Interview 1',
@@ -301,10 +242,7 @@ const StudyInfosDummy: StudyInfo[] = [
     views: 24,
   },
   {
-<<<<<<< HEAD
-=======
     studyId: 17,
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
     studyCategory: '모의 면접',
     recruitDeadLine: '24.02.22',
     studyName: 'Ludo Interview 2',
@@ -317,10 +255,7 @@ const StudyInfosDummy: StudyInfo[] = [
     views: 1111,
   },
   {
-<<<<<<< HEAD
-=======
     studyId: 18,
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
     studyCategory: '모의 면접',
     recruitDeadLine: '24.03.13',
     studyName: 'Ludo Interview 3',
@@ -333,12 +268,8 @@ const StudyInfosDummy: StudyInfo[] = [
     views: 1234,
   },
   {
-<<<<<<< HEAD
-    studyCategory: '알고리즘',
-=======
     studyId: 19,
     studyCategory: '코딩 테스트',
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
     recruitDeadLine: '24.04.23',
     studyName: 'Ludo Algorithm 3',
     studyPeriod: '4개월',
@@ -350,10 +281,7 @@ const StudyInfosDummy: StudyInfo[] = [
     views: 999999,
   },
   {
-<<<<<<< HEAD
-=======
     studyId: 20,
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
     studyCategory: '모의 면접',
     recruitDeadLine: '24.02.01',
     studyName: 'Ludo Interview 1',
@@ -366,10 +294,7 @@ const StudyInfosDummy: StudyInfo[] = [
     views: 24,
   },
   {
-<<<<<<< HEAD
-=======
     studyId: 21,
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
     studyCategory: '모의 면접',
     recruitDeadLine: '24.02.22',
     studyName: 'Ludo Interview 2',
@@ -382,10 +307,7 @@ const StudyInfosDummy: StudyInfo[] = [
     views: 1111,
   },
   {
-<<<<<<< HEAD
-=======
     studyId: 22,
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
     studyCategory: '모의 면접',
     recruitDeadLine: '24.03.13',
     studyName: 'Ludo Interview 3',
@@ -398,12 +320,8 @@ const StudyInfosDummy: StudyInfo[] = [
     views: 1234,
   },
   {
-<<<<<<< HEAD
-    studyCategory: '알고리즘',
-=======
     studyId: 23,
     studyCategory: '코딩 테스트',
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
     recruitDeadLine: '24.04.23',
     studyName: 'Ludo Algorithm 3',
     studyPeriod: '4개월',
@@ -415,10 +333,7 @@ const StudyInfosDummy: StudyInfo[] = [
     views: 999999,
   },
   {
-<<<<<<< HEAD
-=======
     studyId: 24,
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
     studyCategory: '모의 면접',
     recruitDeadLine: '24.02.01',
     studyName: 'Ludo Interview 1',
@@ -431,10 +346,7 @@ const StudyInfosDummy: StudyInfo[] = [
     views: 24,
   },
   {
-<<<<<<< HEAD
-=======
     studyId: 25,
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
     studyCategory: '모의 면접',
     recruitDeadLine: '24.02.22',
     studyName: 'Ludo Interview 2',
@@ -447,10 +359,7 @@ const StudyInfosDummy: StudyInfo[] = [
     views: 1111,
   },
   {
-<<<<<<< HEAD
-=======
     studyId: 26,
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
     studyCategory: '모의 면접',
     recruitDeadLine: '24.03.13',
     studyName: 'Ludo Interview 3',
@@ -465,11 +374,7 @@ const StudyInfosDummy: StudyInfo[] = [
 ];
 
 export const algorithmStudyCardListPropsDummy: StudyCardListProps = {
-<<<<<<< HEAD
-  studyCategory: '알고리즘',
-=======
   studyCategory: '코딩 테스트',
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
   studyInfos: algorithmStudyInfosDummy,
 };
 
@@ -487,8 +392,6 @@ export const StudyCardListPropsDummy: StudyCardListProps = {
   studyCategory: 'All',
   studyInfos: StudyInfosDummy,
 };
-<<<<<<< HEAD
-=======
 
 export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
   {
@@ -1446,4 +1349,3 @@ export const recruitmentDetailMockDataById = (recruitmentId: number) =>
   recruitmentDetailMockData.filter(
     (recruitmentDetail: RecruitmentDetailRawDataType) => recruitmentDetail.id === recruitmentId,
   )[0];
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b

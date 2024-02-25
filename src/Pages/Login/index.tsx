@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-export const Login = () => {
-  return <div>로그인페이지</div>;
-};
-=======
 import SocialLogin from '@/Components/SocialLogin';
 import { media } from '@/Styles/theme';
 import styled from 'styled-components';
@@ -49,4 +44,3 @@ const LoginBtnsWrapper = styled.div`
 `;
 
 export default Login;
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b

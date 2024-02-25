@@ -55,14 +55,6 @@ export const StudyDetail = () => {
 const StudyDetailWrapper = styled.div`
   display: flex;
   flex-direction: column;
-<<<<<<< HEAD
-  width: 1920px;
-  padding: 40px 348px 80px 348px;
-  align-items: flex-start;
-  gap: 40px;
-`;
-
-=======
   max-width: 1224px;
   margin: 0 auto;
   margin-top: 40px;
@@ -83,153 +75,10 @@ const StudyDetailTitleWrapper = styled.div`
   }
 `;
 
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
 const StudyTitleWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 24px;
-<<<<<<< HEAD
-  align-self: stretch;
-
-  & > div:first-child {
-    display: flex;
-    width: 200px;
-    height: 60px;
-    justify-content: flex-start;
-    align-items: center;
-    color: ${(props) => props.theme.color.black4};
-    font-size: ${(props) => props.theme.font.xxxxlarge};
-    font-weight: 800;
-    line-height: 60px;
-  }
-
-  & > div:last-child {
-    display: flex;
-    gap: 24px;
-  }
-
-  .chip {
-    display: flex;
-    padding: 4px 12px;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    border-radius: 24px;
-    background: ${(props) => props.theme.color.gray1};
-    background-blend-mode: multiply;
-    font-size: ${(props) => props.theme.font.small};
-    font-weight: 500;
-    line-height: 30px;
-    color: ${(props) => props.theme.color.black2};
-  }
-`;
-
-const StudyRecruitWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  align-self: stretch;
-  margin-bottom: 20px;
-
-  & > div:first-child {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: ${(props) => props.theme.color.black4};
-    font-size: ${(props) => props.theme.font.xlarge};
-    font-weight: 800;
-    line-height: 50px;
-  }
-
-  & > :last-child {
-    display: flex;
-    width: 288px;
-    padding: 0 12px;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    background-color: ${(props) => props.theme.color.gray1};
-    border-radius: 8px;
-
-    .button__text {
-      color: ${(props) => props.theme.color.black3};
-      text-align: center;
-      font-size: ${(props) => props.theme.font.xsmall};
-      font-weight: 600;
-      line-height: 44px;
-    }
-  }
-`;
-
-const StudyInfoWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 32px;
-  align-self: stretch;
-  margin-bottom: 20px;
-
-  .title__section {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    align-self: stretch;
-
-    .title {
-      color: ${(props) => props.theme.color.black4};
-      font-size: ${(props) => props.theme.font.xlarge};
-      font-weight: 800;
-      line-height: 50px;
-    }
-  }
-
-  & > div:first-child {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 32px;
-    align-self: stretch;
-
-    .detail__info {
-      display: flex;
-      align-items: flex-start;
-      align-content: flex-start;
-      gap: 20px;
-      align-self: stretch;
-      flex-wrap: wrap;
-    }
-  }
-
-  & > div:last-child {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 32px;
-    align-self: stretch;
-
-    .member__info {
-      display: flex;
-      align-items: flex-start;
-      align-content: flex-start;
-      gap: 20px;
-      align-self: stretch;
-      flex-wrap: wrap;
-    }
-
-    .member__headcount {
-      display: flex;
-      align-items: flex-start;
-      align-content: flex-start;
-      align-self: stretch;
-      flex-wrap: wrap;
-    }
-
-    .member__profiles {
-      display: flex;
-      align-items: flex-start;
-      gap: 24px;
-    }
-  }
-=======
   color: ${(props) => props.theme.color.black4};
   font-size: ${(props) => props.theme.font.xxxxlarge};
   font-weight: 800;
@@ -238,7 +87,7 @@ const StudyInfoWrapper = styled.div`
     display: flex;
     gap: 24px;
   }
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
+
 `;
 
 const StudyButtonsWrapper = styled.div`

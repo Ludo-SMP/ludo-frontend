@@ -114,18 +114,7 @@ export const CreateStudy = (Props: any) => {
             <MiddleBottomInfo>
               <MiddleBottomWrapper>
                 <ContentText>카테고리</ContentText>
-<<<<<<< HEAD
-                <BigCategoryButton
-
-                // value={formData.category}
-                // type="submit"
-                // name="category"
-                // id="category"
-                // onChange={() => handleInputChange}
-                />
-=======
                 <BigCategoryButton />
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
               </MiddleBottomWrapper>
               <MiddleBottomWrapper>
                 <ContentText>스터디 최대 인원</ContentText>
@@ -154,13 +143,8 @@ export const CreateStudy = (Props: any) => {
           </StudyMiddleInfo>
         </MiddleCenterBox>
         <ButtonBox>
-<<<<<<< HEAD
           <SubmitButton type="submit">임시저장</SubmitButton>
           <SubmitButton type="submit">등록하기</SubmitButton>
-=======
-          <SubmitButton>임시저장</SubmitButton>
-          <SubmitButton>등록하기</SubmitButton>
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
         </ButtonBox>
       </StudyContainer>
     </>
@@ -174,18 +158,13 @@ const StudyMain = styled.p`
   line-height: 60px;
   padding-bottom: 60px;
   padding-top: 40px;
-<<<<<<< HEAD
   ${media.custom(800)} {
     display: none;
   }
 `;
 
 const StudyContainer = styled.form`
-=======
-`;
 
-const StudyContainer = styled.div`
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
   height: 1300px;
   padding-left: 348px;
   padding-right: 348px;

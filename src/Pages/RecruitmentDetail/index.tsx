@@ -79,15 +79,6 @@ const RecruitmentDetail = () => {
 const RecruitmentDetailWrapper = styled.div`
   display: flex;
   flex-direction: column;
-<<<<<<< HEAD
-  width: 1920px;
-  padding: 40px 348px 80px 348px;
-  align-items: flex-start;
-  gap: 40px;
-`;
-
-const StudyTitleWrapper = styled.div`
-=======
   max-width: 1224px;
   margin: 0 auto;
   margin-top: 40px;
@@ -95,28 +86,10 @@ const StudyTitleWrapper = styled.div`
 `;
 
 const RecruitmentTitleWrapper = styled.div`
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
   display: flex;
   align-items: center;
   gap: 24px;
   align-self: stretch;
-<<<<<<< HEAD
-
-  & > div:first-child {
-    display: flex;
-    width: 200px;
-    height: 60px;
-    justify-content: flex-start;
-    align-items: center;
-    color: ${(props) => props.theme.color.black4};
-    font-size: ${(props) => props.theme.font.xxxxlarge};
-    font-weight: 800;
-    line-height: 60px;
-  }
-`;
-
-const StudyInfoWrapper = styled.div`
-=======
   color: ${(props) => props.theme.color.black5};
   font-family: Pretendard;
   font-size: ${(props) => props.theme.font.xxxxlarge};
@@ -126,7 +99,6 @@ const StudyInfoWrapper = styled.div`
 `;
 
 const RecruitmentInfoWrapper = styled.div`
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -156,25 +128,7 @@ const RecruitmentInfoWrapper = styled.div`
     }
   }
 
-<<<<<<< HEAD
-  .title__section {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    align-self: stretch;
-
-    .title {
-      color: ${(props) => props.theme.color.black4};
-      font-size: ${(props) => props.theme.font.xlarge};
-      font-weight: 800;
-      line-height: 50px;
-    }
-  }
-
-  .study__details {
-=======
   .recruitment__details {
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -187,18 +141,6 @@ const RecruitmentInfoWrapper = styled.div`
     align-items: flex-start;
     gap: 16px;
   }
-<<<<<<< HEAD
-
-  .detail__info {
-    display: flex;
-    align-items: flex-start;
-    align-content: flex-start;
-    gap: 24px;
-    align-self: stretch;
-    flex-wrap: wrap;
-  }
-=======
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
 `;
 const StudyButtonsWrapper = styled.div`
   display: flex;
@@ -208,10 +150,6 @@ const StudyButtonsWrapper = styled.div`
 
   & > button {
     display: flex;
-<<<<<<< HEAD
-    padding: 0 12px;
-=======
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
     justify-content: center;
     align-items: center;
     gap: 8px;
@@ -225,8 +163,5 @@ const StudyButtonsWrapper = styled.div`
     line-height: 44px;
   }
 `;
-<<<<<<< HEAD
-=======
 
 export default RecruitmentDetail;
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
