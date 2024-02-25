@@ -1,15 +1,102 @@
 import styled from 'styled-components';
-// import { BackHeader } from '../../Components/Header/BackHeader';
-import { ProgressButton } from '../../Components/Button/Studies/ProgressButton';
-import { PlatformButton } from '../../Components/Button/Studies/PlatformButton';
+import { ProgressButton } from '../../Components/Selectbox/ProgressButton';
+import { PlatformButton } from '../../Components/Selectbox/PlatformButton';
 import { Titlearea } from '../../Components/Textarea/Titlearea';
 import { SubmitButton } from '../../Components/Button/Studies/SubmitButton';
-import { CalendarButton } from '../../Components/Button/Studies/CalendarButton';
-import { BigCategoryButton } from '../../Components/Button/Studies/BigCategoryButton';
-import { MaxPeopleButton } from '../../Components/Button/Studies/MaxPeopleButton';
+import { CalendarButton } from '../../Components/Selectbox/CalendarButton';
+import { BigCategoryButton } from '../../Components/Selectbox/BigCategoryButton';
+import { MaxPeopleButton } from '../../Components/Selectbox/MaxPeopleButton';
 import { ProgressPeriod } from '../../Components/Calendar/ProgressPeriod';
+import { useState, useEffect, Key, useRef } from 'react';
+import { Validation } from '../../Constants/Validation';
+import { media } from '../../Styles/theme';
+// import { Titles } from '../../Components/Textarea/Titlearea';
+import axios from 'axios';
+import { useSetAtom, useAtomValue, useAtom } from 'jotai';
+import { useForm } from 'react-hook-form';
 
-export const CreateStudy = () => {
+interface IFormInput {
+  title: string;
+  pattern: string;
+}
+export const CreateStudy = (Props: any) => {
+  // {register} = useForm
+  // 폼 데이터
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const [titleValue, settitleValue] = useState('');
+  // const setValue = useAtomValue(Titles);
+  // const titleHandler = (event: any) => {
+  //   settitleValue(event.target.value);
+  //   console.log(setValue);
+  // };
+  const [formData, setFormData] = useState({
+    title: '',
+    category: '',
+  });
+
+  // const [isSubmitting, setIsSubmitting] = useState(false);
+  // const [formErrors, setFormErrors] = useState({});
+
+  // const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+  //   const { name, value } = event.target;
+  //   setFormData((prevFormData) => ({
+  //     ...prevFormData,
+  //     [name]: value,
+  //   }));
+  //   console.log(formData);
+  // };
+
+  // async function post() {
+  //   console.log('post');
+  //   const { data } = await axios.post('http://localhost:3000/api/test', {
+  //     name: 'a',
+  //     email: '이메일',
+  //     title: formData.title,
+  //     category: formData.category,
+  //   });
+
+  //   console.log(data);
+  // }
+
+  // const postData = () => {
+  //   // async function post() {
+  //   //   console.log('post');
+  //   //   const { data } = await axios.post('http://localhost:3000/api/test', {
+  //   //     name: 'a',
+  //   //     email: '이메일',
+  //   //     title: formData.title,
+  //   //     category: formData.category,
+  //   //   });
+
+  //   //   console.log(data);
+  //   // }
+  //   // return post();
+  //   return post();
+  // };
+
+  // const validateForm = (values: { title: string; category: string | any[] }) => {
+  //   if (!values.title) {
+  //     setFormErrors({ email: '제목을 입력해주세요' });
+  //   }
+  //   if (!values.category) {
+  //     setFormErrors({ password: '분야를 골라주세요' });
+  //   }
+  // };
+
+  // event: React.FormEvent<HTMLFormElement>
+  // const createHandler = (event: React.FormEvent<HTMLFormElement>) => {
+  //   event.preventDefault();
+  //   setIsSubmitting(true);
+  //   postData();
+  // };
+  // action="http://localhost:3000/api/test" method="POST"
+  // onSubmit={createHandler}
+  // type="text" id="title" register={register}
   return (
     <>
       <StudyContainer>
@@ -27,7 +114,18 @@ export const CreateStudy = () => {
             <MiddleBottomInfo>
               <MiddleBottomWrapper>
                 <ContentText>카테고리</ContentText>
+<<<<<<< HEAD
+                <BigCategoryButton
+
+                // value={formData.category}
+                // type="submit"
+                // name="category"
+                // id="category"
+                // onChange={() => handleInputChange}
+                />
+=======
                 <BigCategoryButton />
+>>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
               </MiddleBottomWrapper>
               <MiddleBottomWrapper>
                 <ContentText>스터디 최대 인원</ContentText>
@@ -56,8 +154,13 @@ export const CreateStudy = () => {
           </StudyMiddleInfo>
         </MiddleCenterBox>
         <ButtonBox>
+<<<<<<< HEAD
+          <SubmitButton type="submit">임시저장</SubmitButton>
+          <SubmitButton type="submit">등록하기</SubmitButton>
+=======
           <SubmitButton>임시저장</SubmitButton>
           <SubmitButton>등록하기</SubmitButton>
+>>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
         </ButtonBox>
       </StudyContainer>
     </>
@@ -71,9 +174,18 @@ const StudyMain = styled.p`
   line-height: 60px;
   padding-bottom: 60px;
   padding-top: 40px;
+<<<<<<< HEAD
+  ${media.custom(800)} {
+    display: none;
+  }
+`;
+
+const StudyContainer = styled.form`
+=======
 `;
 
 const StudyContainer = styled.div`
+>>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
   height: 1300px;
   padding-left: 348px;
   padding-right: 348px;

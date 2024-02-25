@@ -1,14 +1,95 @@
-import { useState } from 'react';
+import { useState, useRef, useCallback } from 'react';
+import { useForm, SubmitHandler, RegisterOptions } from 'react-hook-form';
+import { ErrorMessage } from '@hookform/error-message';
 import styled from 'styled-components';
+// import { atom, useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { FieldErrors, FieldValues, UseFormRegister, FormState } from 'react-hook-form';
+import { Validation } from '../../Constants/Validation';
+import type { UseFormRegisterReturn } from 'react-hook-form';
 
-export const Titlearea = () => {
+export type Props = {
+  onClick?: () => void;
+  children?: React.ReactNode;
+  onChange?: (event: any) => void;
+  value?: any;
+  type?: string;
+  name?: string;
+  maxlength?: any;
+  id?: string;
+  formData?: any;
+  ref?: any;
+};
+
+type InputProps = {
+  id?: any;
+  label?: string;
+  type?: string;
+  disabled?: boolean;
+  required?: boolean;
+  placeholder?: string;
+  errors?: FieldErrors;
+  defaultValue?: string;
+  onErrorMsg?: boolean;
+  smallLabel?: boolean;
+  validation?: RegisterOptions;
+  register?: any;
+  formState?: any;
+
+  // register: UseFormRegisterReturn;
+  [key: string]: any;
+};
+
+//작성
+
+// export const Titles = atom('');
+
+// {
+//   id,
+//   type,
+//   required,
+//   errors,
+//   placeholder,
+//   defaultValue,
+//   register,
+//   formstate,
+// }: InputProps
+export const Titlearea = (Props: any) => {
+  const useInput = (defaultValue: string) => {
+    const [value, setValue] = useState(defaultValue);
+    const onChange = ({ target }: { target: HTMLInputElement | HTMLTextAreaElement }) => {
+      const { value } = target;
+      setValue(value);
+    };
+    return { value, onChange, setValue };
+  };
+
+  const newTitle = useInput('');
+  // 글자수제한
   const [inputCount, setInputCount] = useState(0);
   const onInputHandler = (event: any) => {
     setInputCount(event.target.value.length);
   };
   return (
+<<<<<<< HEAD
+    <InputContainer id="title" className="input">
+      <Input
+        onChange={(event) => [newTitle.setValue(event.target.value), onInputHandler(event)]}
+        // id={id} placeholder={placeholder} defaultValue={defaultValue} maxLength={50}
+        placeholder="제목을 입력하시오"
+        // type="text"
+        // id={id}
+        // {...register('title', {
+        //   required: '제목을 입력하세요',
+        //   errors: '제목을 입력해주세요',
+        // })}
+        // required={true}
+        // placeholder="제목을 입력하세요"
+      />
+      {/* {id.value < 0 && <span>"제목을 입력하세요"</span>} */}
+=======
     <InputContainer>
       <Input onChange={onInputHandler} maxLength={50} placeholder="제목을 기입해주세요" />
+>>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
       <InputText>{inputCount}/50</InputText>
     </InputContainer>
   );

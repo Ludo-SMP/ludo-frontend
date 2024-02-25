@@ -1,14 +1,15 @@
 import styled from 'styled-components';
-import { ContactButton } from '../../Components/Button/Studies/ContactButton';
+import { ContactButton } from '../../Components/Selectbox/ContactButton';
 import { ContactUrlInput } from '../../Components/Textarea/ContactUrlInput';
 import { SubmitButton } from '../../Components/Button/Studies/SubmitButton';
-import { CalendarButton } from '../../Components/Button/Studies/CalendarButton';
-import { PositionButton } from '../../Components/Button/Studies/PositionButton';
+import { CalendarButton } from '../../Components/Selectbox/CalendarButton';
+import { PositionButton } from '../../Components/Selectbox/PositionButton';
 import { Mainarea } from '../../Components/Textarea/Mainarea';
 import { Titlearea } from '../../Components/Textarea/Titlearea';
-import { GatherButton } from '../../Components/Button/Studies/GatherButton';
+import { GatherButton } from '../../Components/Selectbox/GatherButton';
 import { StackModal } from '../../Components/Modal/StackModal';
 import { EndDate } from '../../Components/Calendar/EndDate';
+import { media } from '../../Styles/theme';
 
 export const GatherStudy = () => {
   return (
@@ -107,6 +108,12 @@ const StudyMain = styled.p`
   font-weight: 800;
   line-height: 60px;
   padding-bottom: 60px;
+<<<<<<< HEAD
+  ${media.custom(800)} {
+    display: none;
+  }
+=======
+>>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
 `;
 
 const StudyTitle = styled.p`

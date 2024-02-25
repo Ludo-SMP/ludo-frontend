@@ -71,4 +71,11 @@ export const theme: DefaultTheme = {
   media,
   borderRadius,
   buttonSize,
+<<<<<<< HEAD
+  buttonsize: {
+    small: '',
+    medium: '',
+  },
+=======
+>>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
 };
