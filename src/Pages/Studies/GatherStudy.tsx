@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import { ContactButton } from '../../Components/Button/Studies/ContactButton';
+import { ContactButton } from '../../Components/Selectbox/ContactButton';
 import { ContactUrlInput } from '../../Components/Textarea/ContactUrlInput';
 import { SubmitButton } from '../../Components/Button/Studies/SubmitButton';
 import { CalendarButton } from '../../Components/Selectbox/CalendarButton';
-import { PositionButton } from '../../Components/Button/Studies/PositionButton';
+import { PositionButton } from '../../Components/Selectbox/PositionButton';
 import { Mainarea } from '../../Components/Textarea/Mainarea';
 import { Titlearea } from '../../Components/Textarea/Titlearea';
-import { GatherButton } from '../../Components/Button/Studies/GatherButton';
+import { GatherButton } from '../../Components/Selectbox/GatherButton';
 import { StackModal } from '../../Components/Modal/StackModal';
 import { EndDate } from '../../Components/Calendar/EndDate';
 import { media } from '../../Styles/theme';
