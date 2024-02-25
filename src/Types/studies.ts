@@ -24,7 +24,7 @@ export type Gather = {
   gather: string;
   end: string;
   position: Position;
-  stack: [];
+  stack: [StackItem];
   contact: string;
   contactUrl: string;
   title: string;
