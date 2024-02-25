@@ -2,6 +2,7 @@ import { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from './Styles/globalStyles';
 import { theme } from './Styles/theme';
 import { MainLayout } from './Layout/MainLayout';
+<<<<<<< HEAD
 import { Header } from './Components/Header/Header';
 import { Footer } from './Components/Footer/Footer';
 import { RouterProvider } from 'react-router-dom';
@@ -43,6 +44,29 @@ const App = () => {
         <Footer />
       </MainLayout>
     </ThemeProvider>
+=======
+import { RouterProvider } from 'react-router-dom';
+import { RouterPath } from './Router/index.tsx';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import LoginProvider from './Components/LoginProvider/index.tsx';
+
+const queryClient = new QueryClient();
+
+const App = () => {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <LoginProvider>
+          <MainLayout>
+            <RouterProvider router={RouterPath} />
+          </MainLayout>
+        </LoginProvider>
+      </ThemeProvider>
+      <ReactQueryDevtools buttonPosition="bottom-left" />
+    </QueryClientProvider>
+>>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
   );
 };
 

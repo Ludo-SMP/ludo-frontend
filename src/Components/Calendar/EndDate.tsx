@@ -8,8 +8,11 @@ export const EndDate = () => {
   const [startDate, setStartDate] = useState(new Date());
   return (
     <DateContainer
+<<<<<<< HEAD
       name="endDate"
       className="select"
+=======
+>>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
       selected={startDate}
       dateFormat="yy.MM.dd"
       onChange={(date: any) => setStartDate(date)}

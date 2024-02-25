@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+<<<<<<< HEAD
 import Position, { PositionType } from './Position';
 import Tool from './Tool';
 import { BlankSquare } from '../Common/BlankSquare';
@@ -78,6 +79,82 @@ const StudyCard: React.FC<StudyInfo> = ({
 };
 
 const StudyCardWrapper = styled.div`
+=======
+import Position from './Position';
+import { PositionType, RecruitmentInfoType, StudyBasicInfoType, ProgressInfoType } from '@/Types/study';
+import { BlankSquare } from '../Common/BlankSquare';
+import { Link } from 'react-router-dom';
+import { dateFormatter } from '@/Utils/date';
+
+export type StudyCardProps = Pick<StudyBasicInfoType, 'category'> &
+  Omit<RecruitmentInfoType, 'applicantCnt' | 'contact' | 'platformUrl' | 'detail' | 'isModified'> &
+  Omit<ProgressInfoType, 'platform'>;
+
+const StudyCard = ({
+  recruitmentId,
+  recruitmentTitle,
+  positions,
+  stacks,
+  creator,
+  createdAt,
+  recruitmentEndDate,
+  views,
+  category,
+  startDate,
+  endDate,
+  progressMethod,
+}: StudyCardProps) => {
+  return (
+    <Link to={`/studies/${recruitmentId}/recruitment`}>
+      <StudyCardWrapper>
+        <StudyRecruitInfoWrapper>
+          <div className="s tudy__category">[{category}]</div>
+          <div className="recruit__deadline">
+            <div>모집 마감일</div>
+            <span>{recruitmentEndDate}</span>
+          </div>
+        </StudyRecruitInfoWrapper>
+        <StudyNameWrapper>
+          <div className="study__name">{recruitmentTitle}</div>
+        </StudyNameWrapper>
+        <StudyDetailInfoWrapper>
+          <div>
+            <span className="title">진행기간</span>
+            <span className="study__period">{`${dateFormatter(startDate)} ~ ${dateFormatter(endDate)}`}</span>
+          </div>
+          <div>
+            <span className="title">진행방식</span>
+            <span className="study__type">{progressMethod}</span>
+          </div>
+          <div className="study__positions">
+            {positions?.map((position: PositionType) => {
+              return <Position key={position} position={position} />;
+            })}
+          </div>
+          <div className="study__tools">
+            {stacks.map((stack) => {
+              return <BlankSquare key={stack} width="32px" height="32px" />;
+            })}
+          </div>
+        </StudyDetailInfoWrapper>
+        <StudyAdditionalInfoWrapper>
+          <div className="creation__info">
+            <div className="study__creator">{creator}</div>
+            <div className="division-line"></div>
+            <div className="study__createdAt">{createdAt.slice(2)}</div>
+          </div>
+          <div className="views__info">
+            <BlankSquare width="18px" height="18px" />
+            <span className="views">{views}</span>
+          </div>
+        </StudyAdditionalInfoWrapper>
+      </StudyCardWrapper>
+    </Link>
+  );
+};
+
+const StudyCardWrapper = styled.li`
+>>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
   width: 394px;
   height: 368px;
   display: flex;
@@ -161,8 +238,13 @@ const StudyDetailInfoWrapper = styled.div`
 const StudyAdditionalInfoWrapper = styled.div`
   display: flex;
   align-items: center;
+<<<<<<< HEAD
   justify-content: center;
   gap: 132px;
+=======
+  justify-content: space-between;
+  gap: 120px;
+>>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
   align-self: stretch;
   font-size: ${(props) => props.theme.font.xsmall};
   font-weight: 500;
@@ -172,7 +254,11 @@ const StudyAdditionalInfoWrapper = styled.div`
     display: flex;
     padding: 2px 0px;
     align-items: center;
+<<<<<<< HEAD
     width: 113px;
+=======
+    width: 1000px;
+>>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
     gap: 12px;
   }
 

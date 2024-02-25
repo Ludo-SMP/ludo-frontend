@@ -22,10 +22,20 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+<<<<<<< HEAD
 /cert
+=======
+
+>>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
 # dotenv environment variable files
 .env
 .env.development.local
 .env.test.local
 .env.production.local
+<<<<<<< HEAD
 .env.local
+=======
+.env.local
+
+/cert
+>>>>>>> 622a1649988450510ff9876a2c8500717f7d097b

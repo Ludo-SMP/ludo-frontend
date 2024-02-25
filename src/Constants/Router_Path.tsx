@@ -7,9 +7,11 @@ export const ROUTER_PATH = {
   recruitmentDetail: '/studies/:studyId/recruitment', //모집공고 상세 페이지
   study: '/studies/:studyId', //스터디상세페이지
   studyList: '/studies', //스터디 모아보기 페이지
+  recruitments: '/studies', //스터디 모아보기 페이지
   createStudy: '/studies/create', //스터디생성페이지
   modifyStudy: 'studies/modify',
   gatherStudy: 'studies/gather',
   decativate: '/deactivate', //회원탈퇴 페이지
   test: '/test',
+  applicants: '/studies/:studyId/applicants', //지원자 확인 페이지
 } as const;

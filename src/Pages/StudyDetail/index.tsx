@@ -1,70 +1,52 @@
 import styled from 'styled-components';
-import { BlankSquare } from '../../Components/Common/BlankSquare';
-import { RightBold } from '../../Assets/icons/RightBold';
-import { InfoField } from '../../Components/Common/InfoField';
 import { RowDivider } from '../../Components/Common/Divider/RowDivider';
-import MemberProfile from '../../Components/MemberProfile';
-import ApplyButton from '../../Components/Button/ApplyButton';
+import { MemberProfileProps } from '../../Components/MemberProfile';
+import { Right, StudyInfo } from '@/Assets';
+import Button from '@/Components/Common/Button';
+import Chip from '@/Components/Common/Chip';
+import { useNavigate, useParams } from 'react-router-dom';
+import StudyInfoSection from './StudyInfoSection';
+import MemberSection from './MemberSection';
 
 export const StudyDetail = () => {
+  const studyId = Number(useParams().studyId);
+  const navigate = useNavigate();
+  const memberProfileMocks: MemberProfileProps[] = [
+    { nickName: 'Hyun', email: 'ksci195@hanmail.net', teamPosition: '팀장', skillPosition: '디자이너' },
+    { nickName: 'Hyun', email: 'ksci195@hanmail.net', teamPosition: '팀원', skillPosition: 'FE' },
+    { nickName: 'Hyun', email: 'ksci195@hanmail.net', teamPosition: '팀원', skillPosition: 'BE' },
+    { nickName: 'Hyun', email: 'ksci195@hanmail.net', teamPosition: '팀원', skillPosition: 'FE' },
+    { nickName: 'Hyun', email: 'ksci195@hanmail.net', teamPosition: '팀원', skillPosition: 'FE' },
+  ];
+
   return (
     <StudyDetailWrapper>
-      <StudyTitleWrapper>
-        <div className="title">스터디 제목</div>
-        <div className="chips">
-          <div className="chip">소속된 스터디</div>
-          <div className="chip">모집중</div>
-        </div>
-      </StudyTitleWrapper>
-      <StudyRecruitWrapper>
-        <div className="recruit__text">스터디 지원자가 있어요!</div>
-        <ApplyButton>
-          <div className="button__text">지원자 확인하기</div>
-          <RightBold width={24} height={24} />
-        </ApplyButton>
-      </StudyRecruitWrapper>
-      <StudyInfoWrapper>
-        <div className="study__detail__info">
-          <div className="title__section">
-            <BlankSquare width="50px" height="50px" />
-            <div className="title">스터디 정보</div>
+      <StudyDetailTitleWrapper>
+        <StudyTitleWrapper>
+          <StudyInfo width="48" height="48" />
+          <span className="title">스터디 제목</span>
+          <div className="chips">
+            <Chip chipState="InProgress">참여 중인 스터디</Chip>
+            <Chip chipState="InProgress">모집중</Chip>
           </div>
-          <div className="study__category">
-            <InfoField title="카테고리" content="FE" />
-          </div>
-          <RowDivider />
-          <div className="detail__info">
-            <InfoField title="진행방식" content="오프라인" />
-            <InfoField title="진행플랫폼" content="디스코드" />
-            <InfoField title="진행기간" content="24.2.1 ~ 24.3.1" />
-            <InfoField title="남은 진행기간" content="D-22" />
-          </div>
-          <RowDivider />
-        </div>
-        <div className="study__member__info">
-          <div className="title__section">
-            <BlankSquare width="50px" height="50px" />
-            <div className="title">구성원</div>
-          </div>
-          <div className="member__info">
-            <div className="member__headcount">
-              <InfoField title="현재 인원수" content="5명" />
-              <InfoField title="목표 인원수" content="7명" />
-            </div>
-            <div className="member__profiles">
-              <MemberProfile nickName="Hyun" email="ksci195@hanmail.net" teamPosition="팀원" skillPosition="FE" />
-              <MemberProfile nickName="Hyun" email="ksci195@hanmail.net" teamPosition="팀장" skillPosition="BE" />
-              <MemberProfile nickName="Hyun" email="ksci195@hanmail.net" teamPosition="팀원" skillPosition="디자이너" />
-              <MemberProfile nickName="Hyun" email="ksci195@hanmail.net" teamPosition="팀원" skillPosition="디자이너" />
-              <MemberProfile nickName="Hyun" email="ksci195@hanmail.net" teamPosition="팀원" skillPosition="디자이너" />
-              <MemberProfile nickName="Hyun" email="ksci195@hanmail.net" teamPosition="팀원" skillPosition="디자이너" />
-            </div>
-          </div>
-        </div>
-      </StudyInfoWrapper>
+        </StudyTitleWrapper>
+        <Button primary="default" onClick={() => navigate(`/studies/${studyId}/applicants`)}>
+          <span>스터디 지원자가 있어요!</span>
+          <Right />
+        </Button>
+      </StudyDetailTitleWrapper>
+      <StudyInfoSection
+        category={'코딩 테스트'}
+        activity={'오프라인'}
+        platform={'게더'}
+        period={'03.03~04.04'}
+        remainingPeriod={30}
+      />
+      <RowDivider rowHeight={16} />
+      <MemberSection goalMemberCnt={7} memberProfiles={[...memberProfileMocks]} />
       <StudyButtonsWrapper>
-        <ApplyButton>스터디 탈퇴하기</ApplyButton>
-        <ApplyButton>모집 마감하기</ApplyButton>
+        <Button>스터디 탈퇴하기</Button>
+        <Button>모집 마감하기</Button>
       </StudyButtonsWrapper>
     </StudyDetailWrapper>
   );
@@ -73,16 +55,40 @@ export const StudyDetail = () => {
 const StudyDetailWrapper = styled.div`
   display: flex;
   flex-direction: column;
+<<<<<<< HEAD
   width: 1920px;
   padding: 40px 348px 80px 348px;
   align-items: flex-start;
   gap: 40px;
 `;
 
+=======
+  max-width: 1224px;
+  margin: 0 auto;
+  margin-top: 40px;
+  gap: 40px;
+`;
+
+const StudyDetailTitleWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  justify-content: space-between;
+  color: ${({ theme }) => theme.color.black3};
+  button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: calc((${({ theme }) => theme.font.small} + ${({ theme }) => theme.font.medium}) / 2);
+  }
+`;
+
+>>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
 const StudyTitleWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 24px;
+<<<<<<< HEAD
   align-self: stretch;
 
   & > div:first-child {
@@ -223,6 +229,16 @@ const StudyInfoWrapper = styled.div`
       gap: 24px;
     }
   }
+=======
+  color: ${(props) => props.theme.color.black4};
+  font-size: ${(props) => props.theme.font.xxxxlarge};
+  font-weight: 800;
+
+  .chips {
+    display: flex;
+    gap: 24px;
+  }
+>>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
 `;
 
 const StudyButtonsWrapper = styled.div`

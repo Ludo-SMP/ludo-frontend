@@ -1,16 +1,4 @@
-import axios from 'axios';
-export const API = axios.create({
-  baseURL: 'http://localhost:5173',
-  timeout: 3000,
-  headers: {
-    'Cache-Control': 'no-cache',
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*',
-  },
-  responseType: 'json',
-});
+import { apiRequester } from '@/utils/axios';
 
-export const fetchStudyListInfo = () =>
-  API.get('/studies').then((res) => {
-    return res.data;
-  });
+export const applyStudy = (studyId: number, recruitmentId: number) =>
+  apiRequester.post(`/studies/${studyId}/${recruitmentId}/apply`);

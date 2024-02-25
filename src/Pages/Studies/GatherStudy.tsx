@@ -108,9 +108,12 @@ const StudyMain = styled.p`
   font-weight: 800;
   line-height: 60px;
   padding-bottom: 60px;
+<<<<<<< HEAD
   ${media.custom(800)} {
     display: none;
   }
+=======
+>>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
 `;
 
 const StudyTitle = styled.p`

@@ -72,9 +72,12 @@ const StudyMain = styled.p`
   padding-bottom: 60px;
   padding-top: 40px;
   /* padding-bottom: 60px; */
+<<<<<<< HEAD
   ${media.custom(800)} {
     display: none;
   }
+=======
+>>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
 `;
 
 const StudyContainer = styled.div`
