@@ -14,7 +14,6 @@
   "dependencies": {
     "@hookform/error-message": "^2.0.1",
     "@tanstack/react-query": "^5.17.9",
-<<<<<<< HEAD
     "@types/react-datepicker": "^4.19.5",
     "@types/styled-components": "^5.1.34",
     "axios": "^1.6.7",

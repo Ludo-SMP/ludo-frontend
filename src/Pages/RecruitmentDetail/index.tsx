@@ -2,83 +2,6 @@ import styled from 'styled-components';
 import { InfoField } from '../../Components/Common/InfoField';
 import { RowDivider } from '../../Components/Common/Divider/RowDivider';
 import { ColumnDivider } from '../../Components/Common/Divider/ColumnDivider';
-<<<<<<< HEAD
-import { BlankSquare } from '../../Components/Common/BlankSquare';
-import ApplyButton from '../../Components/Button/ApplyButton';
-
-export const RecruitmentDetail = () => {
-  return (
-    <RecruitmentDetailWrapper>
-      <StudyTitleWrapper>
-        <div className="title">스터디 제목</div>
-      </StudyTitleWrapper>
-      <StudyInfoWrapper>
-        <div className="recruitment__status">
-          <div className="creator">닉네임</div>
-          <ColumnDivider />
-          <div className="edit__info">
-            <div className="createdAt">작성 날짜</div>
-            <div className="edit__status">수정됨</div>
-          </div>
-        </div>
-        <RowDivider />
-        <div className="study__details">
-          <div className="study__detail">
-            <div className="title__section">
-              <BlankSquare width="50px" height="50px" />
-              <div className="title">스터디 모집 안내</div>
-            </div>
-            <div className="detail__info">
-              <InfoField title="모집 인원" content="모집 인원" flexDirection="column" gap="4px" width="392px" />
-              <InfoField title="모집 마감일" content="모집 마감일" flexDirection="column" gap="4px" width="392px" />
-              <InfoField title="포지션" content="포지션" flexDirection="column" gap="4px" width="392px" />
-              <InfoField title="기술 스택" content="기술 스택" flexDirection="column" gap="4px" width="392px" />
-              <InfoField title="연락 방법" content="연락 방법" flexDirection="column" gap="4px" width="392px" />
-              <InfoField title="연결 url" content="연결 url" flexDirection="column" gap="4px" width="392px" />
-            </div>
-          </div>
-          <RowDivider />
-          <div className="study__detail">
-            <div className="title__section">
-              <BlankSquare width="50px" height="50px" />
-              <div className="title">스터디 진행 안내</div>
-            </div>
-            <div className="detail__info">
-              <InfoField title="진행 방식" content="진행 방식" flexDirection="column" gap="4px" width="392px" />
-              <InfoField title="진행 플랫폼" content="진행 플랫폼" flexDirection="column" gap="4px" width="392px" />
-              <InfoField title="진행 기간" content="진행 기간" flexDirection="column" gap="4px" width="392px" />
-            </div>
-          </div>
-          <RowDivider />
-          <div className="study__detail">
-            <div className="title__section">
-              <BlankSquare width="50px" height="50px" />
-              <div className="title">스터디 기본 구성 안내</div>
-            </div>
-            <div className="detail__info">
-              <InfoField title="스터디 제목" content="스터디 제목" flexDirection="column" gap="4px" width="100%" />
-              <InfoField title="카테고리" content="카테고리" flexDirection="column" gap="4px" width="600px" />
-              <InfoField
-                title="스터디 최대 인원"
-                content="스터디 최대 인원"
-                flexDirection="column"
-                gap="4px"
-                width="600px"
-              />
-            </div>
-          </div>
-          <RowDivider />
-          <div className="study__detail">
-            <div className="detail__info">
-              <InfoField title="상세내용" content="상세내용" flexDirection="column" gap="4px" width="100%" />
-            </div>
-          </div>
-        </div>
-      </StudyInfoWrapper>
-      <StudyButtonsWrapper>
-        <ApplyButton>스터디 탈퇴하기</ApplyButton>
-        <ApplyButton>모집 마감하기</ApplyButton>
-=======
 // import { useRecruitmentDetail } from '@/Apis/recruitment';
 import { useParams } from 'react-router-dom';
 import { dateFormatter } from '@/Utils/date';
@@ -148,7 +71,6 @@ const RecruitmentDetail = () => {
       </RecruitmentInfoWrapper>
       <StudyButtonsWrapper>
         <Button onClick={() => applyStudy(studyId, 1)}>스터디 지원하기</Button>
->>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
       </StudyButtonsWrapper>
     </RecruitmentDetailWrapper>
   );
