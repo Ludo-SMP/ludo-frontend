@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 // import { BackHeader } from '../../Components/Header/BackHeader';
-import { ProgressButton } from '../../Components/Button/Studies/ProgressButton';
-import { PlatformButton } from '../../Components/Button/Studies/PlatformButton';
+import { ProgressButton } from '../../Components/Selectbox/ProgressButton';
+import { PlatformButton } from '../../Components/Selectbox/PlatformButton';
 import { Titlearea } from '../../Components/Textarea/Titlearea';
 import { SubmitButton } from '../../Components/Button/Studies/SubmitButton';
-import { CalendarButton } from '../../Components/Button/Studies/CalendarButton';
-import { BigCategoryButton } from '../../Components/Button/Studies/BigCategoryButton';
+import { CalendarButton } from '../../Components/Selectbox/CalendarButton';
+import { BigCategoryButton } from '../../Components/Selectbox/BigCategoryButton';
 import { ProgressPeriod } from '../../Components/Calendar/ProgressPeriod';
+import { media } from '../../Styles/theme';
 
 export const ModifyStudy = () => {
   return (
@@ -71,6 +72,12 @@ const StudyMain = styled.p`
   padding-bottom: 60px;
   padding-top: 40px;
   /* padding-bottom: 60px; */
+<<<<<<< HEAD
+  ${media.custom(800)} {
+    display: none;
+  }
+=======
+>>>>>>> 622a1649988450510ff9876a2c8500717f7d097b
 `;
 
 const StudyContainer = styled.div`
