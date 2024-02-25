@@ -1,3 +1,4 @@
+import { all } from 'axios';
 import { useState } from 'react';
 import styled from 'styled-components';
 
@@ -12,6 +13,7 @@ export type Props = {
   maxlength?: any;
   id?: string;
   formData?: any;
+  deflautValue?: string;
 };
 
 export const BigCategoryButton = (props: any) => {
@@ -20,13 +22,17 @@ export const BigCategoryButton = (props: any) => {
     setSelectedVal(event.currentTarget.value);
   };
   return (
-    <ButtonConTainer name="category" className="select" key={selectValue} value={selectValue} onChange={submitHandler}>
-      <Textwrapper disabled selected>
-        카테고리
-      </Textwrapper>
-      <Textwrapper value="all">전체</Textwrapper>
-      <Textwrapper value="algorithm">알고리즘</Textwrapper>
-      <Textwrapper value="project">프로젝트</Textwrapper>
+    // <ButtonConTainer name="category" className="select" key={selectValue} value={selectValue} onChange={submitHandler}>
+    //   <Textwrapper>카테고리</Textwrapper>
+    //   <Textwrapper value="all">전체</Textwrapper>
+    //   <Textwrapper value="algorithm">알고리즘</Textwrapper>
+    //   <Textwrapper value="project">프로젝트</Textwrapper>
+    // </ButtonConTainer>
+    <ButtonConTainer name="category" className="select" value={selectValue} onChange={submitHandler}>
+      <Textwrapper>카테고리</Textwrapper>
+      <Textwrapper value="1">알고리즘</Textwrapper>
+      <Textwrapper value="2">프로젝트</Textwrapper>
+      <Textwrapper value="3">면접 스터디</Textwrapper>
     </ButtonConTainer>
   );
 };

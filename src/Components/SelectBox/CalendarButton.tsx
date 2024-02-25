@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Calendar } from '../../../Assets/Calendar';
+import { Calendar } from '../../Assets/Calendar';
 
 type FilterProps = {
   onClick?: () => void;

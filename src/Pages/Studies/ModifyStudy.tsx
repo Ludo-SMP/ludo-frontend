@@ -1,13 +1,12 @@
 import styled from 'styled-components';
 // import { BackHeader } from '../../Components/Header/BackHeader';
-import { ProgressButton } from '../../Components/Button/Studies/ProgressButton';
-import { PlatformButton } from '../../Components/Button/Studies/PlatformButton';
+import { ProgressButton } from '../../Components/SelectBox/ProgressButton';
+import { PlatformButton } from '../../Components/SelectBox/PlatformButton';
 import { Titlearea } from '../../Components/Textarea/Titlearea';
 import { SubmitButton } from '../../Components/Button/Studies/SubmitButton';
-import { CalendarButton } from '../../Components/Button/Studies/CalendarButton';
-import { BigCategoryButton } from '../../Components/Button/Studies/BigCategoryButton';
+import { CalendarButton } from '../../Components/SelectBox/CalendarButton';
+import { BigCategoryButton } from '../../Components/SelectBox/BigCategoryButton';
 import { ProgressPeriod } from '../../Components/Calendar/ProgressPeriod';
-import { media } from '../../Styles/theme';
 
 export const ModifyStudy = () => {
   return (
@@ -72,9 +71,6 @@ const StudyMain = styled.p`
   padding-bottom: 60px;
   padding-top: 40px;
   /* padding-bottom: 60px; */
-  ${media.custom(800)} {
-    display: none;
-  }
 `;
 
 const StudyContainer = styled.div`
