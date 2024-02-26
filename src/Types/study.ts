@@ -7,9 +7,13 @@ export type StudyCategoryType = '코딩 테스트' | '모의 면접' | '프로�
 export type SortType = '최신순' | '조회순';
 export type CategoryPropertyType = 'category' | 'stacks' | 'positions' | 'way' | 'sort';
 export type TeamPositionType = '팀장' | '팀원';
+export type StudyApplyState = '합류 확정' | '지원 완료' | '합류 거절';
+export type StudyRecruitState = '모집 중' | '모집 마감';
+export type StudyProgressState = '진행 중' | '진행 완료';
+export type myStudyState = '참여' | '지원' | '완료';
 
-export interface Member {
-  nickName: string;
+export interface MemberType {
+  nickname: string;
   email: string;
   teamPosition: string;
   skillPosition: string;

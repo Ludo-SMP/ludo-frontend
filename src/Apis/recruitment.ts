@@ -40,5 +40,3 @@ export const useRecruitmentDetail = (studyId: number) => {
     queryFn: () => getRecruitmentDetail(studyId),
   });
 };
-
-export const getRecr;
