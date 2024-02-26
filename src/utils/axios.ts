@@ -1,5 +1,8 @@
 import axios, { AxiosInstance } from 'axios';
-export const apiRequester: AxiosInstance = axios.create({ baseURL: import.meta.env.VITE_BASE_URL });
+export const apiRequester: AxiosInstance = axios.create({
+  baseURL: import.meta.env.VITE_BASE_URL,
+  withCredentials: true,
+});
 
 const fetchWrapper = async ({
   method,

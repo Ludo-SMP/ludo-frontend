@@ -1,5 +1,5 @@
 import { verifyToken } from '@/Apis/auth';
-import { useLoginStore } from '@/store/auth';
+import { useLoginStore } from '@/Store/auth';
 import { useEffect } from 'react';
 
 interface LoginProviderProps {

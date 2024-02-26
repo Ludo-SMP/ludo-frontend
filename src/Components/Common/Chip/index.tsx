@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
-export type ChipState = 'InProgress' | 'Completed' | 'Apply';
+export type ChipState = 'default' | 'InProgress' | 'Completed' | 'Apply';
 
 export interface ChipProps {
   chipState: ChipState;
   children: React.ReactNode;
 }
 
-const Chip = ({ chipState, children }: ChipProps) => {
+const Chip = ({ chipState = 'default', children }: ChipProps) => {
   return <ChipWrapper {...{ chipState }}>{children}</ChipWrapper>;
 };
 
