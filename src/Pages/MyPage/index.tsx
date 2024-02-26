@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import Chip from '@/Components/Common/Chip';
 import { BlankSquare } from '@/Components/Common/BlankSquare';
 import TemporarySavedStudyCard from '@/Components/TemporarySavedStudyCard';
+import Button from '@/Components/Common/Button';
 
 const MyPage = () => {
   const memberData: MemberType = {
@@ -53,6 +54,11 @@ const MyPage = () => {
         <TemporarySavedStudyCard studyId={1} title={'모집공고 1'} />
         <TemporarySavedStudyCard title={'스터디 이름'} />
       </TemporarySavedStudyWrapper>
+
+      <MypageButtonsWrapper>
+        <Button>회원 정보 수정</Button>
+        <Button>로그아웃</Button>
+      </MypageButtonsWrapper>
     </MyPageWrapper>
   );
 };
@@ -125,6 +131,14 @@ const TemporarySavedStudyWrapper = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 24px;
+  align-self: stretch;
+`;
+
+const MypageButtonsWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
   align-self: stretch;
 `;
 
