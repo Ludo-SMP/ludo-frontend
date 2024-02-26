@@ -6,6 +6,14 @@ export type ProgressMethodType = ActivityType;
 export type StudyCategoryType = '코딩 테스트' | '모의 면접' | '프로젝트';
 export type SortType = '최신순' | '조회순';
 export type CategoryPropertyType = 'category' | 'stacks' | 'positions' | 'way' | 'sort';
+export type TeamPositionType = '팀장' | '팀원';
+
+export interface Member {
+  nickName: string;
+  email: string;
+  teamPosition: string;
+  skillPosition: string;
+}
 
 export interface RecruitmentInfoType {
   recruitmentId: number;

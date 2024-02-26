@@ -1,16 +1,11 @@
 import styled from 'styled-components';
 import { ColumnDivider } from '../Common/Divider/ColumnDivider';
 import { Profile } from '@/Assets';
+import { Member } from '@/Types/study';
 
-export interface MemberProfileProps {
-
+interface MemberProfileProps extends Member {
   imgUrl?: string;
-  nickName: string;
-  email: string;
-  teamPosition: string;
-  skillPosition: string;
-
-};
+}
 
 const MemberProfile = ({ imgUrl, nickName, email, teamPosition, skillPosition }: MemberProfileProps) => {
   return (

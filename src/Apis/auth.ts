@@ -1,10 +1,5 @@
-import { GET, POST } from '@/Utils/axios';
+import { GET, POST, apiRequester } from '@/Utils/axios';
 import axios, { AxiosInstance } from 'axios';
-
-export const apiRequester: AxiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_BASE_URL,
-  withCredentials: true,
-});
 
 export interface UserInfo {
   email: string;
