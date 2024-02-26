@@ -1,6 +1,6 @@
 import { Outlet, createBrowserRouter } from 'react-router-dom';
 import { ROUTER_PATH } from '../Constants/Router_Path';
-import { MyPage } from '../Pages/MyPage';
+import MyPage from '../Pages/MyPage';
 import { Login } from '../Pages/Login';
 import { CreateStudy } from '../Pages/Studies/CreateStudy';
 import { ModifyStudy } from '../Pages/Studies/ModifyStudy';
