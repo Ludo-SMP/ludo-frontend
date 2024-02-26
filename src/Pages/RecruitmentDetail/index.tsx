@@ -4,8 +4,8 @@ import { RowDivider } from '../../Components/Common/Divider/RowDivider';
 import { ColumnDivider } from '../../Components/Common/Divider/ColumnDivider';
 // import { useRecruitmentDetail } from '@/Apis/recruitment';
 import { useParams } from 'react-router-dom';
-import { dateFormatter } from '@/Utils/date';
-import { convertRecruitmentDetailRawDataToRecruitmentDetail } from '@/Utils/propertyConverter';
+import { dateFormatter } from '@/utils/date';
+import { convertRecruitmentDetailRawDataToRecruitmentDetail } from '@/utils/propertyConverter';
 
 import RecruitmentInfoSection from './RecruitmentInfoSection';
 import StudyProgressInfoSection from './StudyProgessInfoSection';

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { bannerDummy } from '../../Shared/dummy';
 import Banner from '../../Components/Banner';
 // import { usePopularRecruitments } from '@/Apis/recruitment';
-import { convertPopularRecruitmentsToStudyCardProps } from '@/Utils/propertyConverter';
+import { convertPopularRecruitmentsToStudyCardProps } from '@/utils/propertyConverter';
 import CardListInfo from '@/Components/CardListInfo';
 import PopularStudyCardList from '@/Components/PopularCardList';
 import Button from '@/Components/Common/Button';
@@ -64,4 +64,3 @@ const StudyListWrapper = styled.div`
 `;
 
 export default Main;
-

@@ -4,7 +4,7 @@ import NotFound from '../NotFound';
 import { FilterOptionsType, StudyBasicInfoType } from '@/Types/study';
 // import { useMemo } from 'react';
 // import useIntersectionObservable from '@/Hooks/userIntersectionObservable';
-import { convertRecruitmentsToStudyCardProps } from '@/Utils/propertyConverter';
+import { convertRecruitmentsToStudyCardProps } from '@/utils/propertyConverter';
 // import { useRecruitments } from '@/Apis/recruitment';
 import { recruitmentsMockData } from '@/Shared/dummy';
 
