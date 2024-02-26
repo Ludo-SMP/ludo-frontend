@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { RowDivider } from '../../Components/Common/Divider/RowDivider';
-import { Member } from '@/Types/study';
+import { MemberType } from '@/Types/study';
 import { Right, StudyInfo } from '@/Assets';
 import Button from '@/Components/Common/Button';
 import Chip from '@/Components/Common/Chip';
@@ -12,13 +12,13 @@ export const StudyDetail = () => {
   const studyId = Number(useParams().studyId);
   const navigate = useNavigate();
 
-  const memberProfileMocks: Member[] = [
-    { nickName: '포키', email: 'aaa@bb.net', teamPosition: '팀장', skillPosition: '디자이너' },
-    { nickName: '휴', email: 'aaa@bb.net', teamPosition: '팀원', skillPosition: 'BE' },
-    { nickName: '아카', email: 'aaa@bb.net', teamPosition: '팀원', skillPosition: 'BE' },
-    { nickName: '빽', email: 'aaa@bb.net', teamPosition: '팀원', skillPosition: 'BE' },
-    { nickName: '타로', email: 'aaa@bb.net', teamPosition: '팀원', skillPosition: 'FE' },
-    { nickName: 'Hyun', email: 'aaa@bb.net', teamPosition: '팀원', skillPosition: 'FE' },
+  const memberProfileMocks: MemberType[] = [
+    { nickname: '포키', email: 'aaa@bb.net', teamPosition: '팀장', skillPosition: '디자이너' },
+    { nickname: '휴', email: 'aaa@bb.net', teamPosition: '팀원', skillPosition: 'BE' },
+    { nickname: '아카', email: 'aaa@bb.net', teamPosition: '팀원', skillPosition: 'BE' },
+    { nickname: '빽', email: 'aaa@bb.net', teamPosition: '팀원', skillPosition: 'BE' },
+    { nickname: '타로', email: 'aaa@bb.net', teamPosition: '팀원', skillPosition: 'FE' },
+    { nickname: 'Hyun', email: 'aaa@bb.net', teamPosition: '팀원', skillPosition: 'FE' },
   ];
 
   return (

@@ -1,28 +1,26 @@
 import { Profile } from '@/Assets';
-import { Member } from '@/Types/study';
+import { MemberType } from '@/Types/study';
 import styled from 'styled-components';
 import { ColumnDivider } from '../Common/Divider/ColumnDivider';
 import { InfoField } from '../Common/InfoField';
 import Button from '../Common/Button';
 
-interface ApplicantCardProps extends Member {
+interface ApplicantCardProps extends MemberType {
   title: string;
 }
 
-const ApplicantCard = ({ title, nickName, email, skillPosition }: ApplicantCardProps) => {
+const ApplicantCard = ({ title, nickname, email, skillPosition }: ApplicantCardProps) => {
   return (
     <ApplicantCardWrapper>
       <Profile width={180} height={180} />
       <ApplicantInfoWrapper>
-        <ApplicantInfoWrapper>
-          <div className="title">{title}</div>
-          <div className="detail__info">
-            <span className="nickname">{nickName}</span>
-            <ColumnDivider />
-            <span className="email">{email}</span>
-          </div>
-          <InfoField title="포지션" content={skillPosition || '포지션'} />
-        </ApplicantInfoWrapper>
+        <div className="title">{title}</div>
+        <div className="detail__info">
+          <span className="nickname">{nickname}</span>
+          <ColumnDivider />
+          <span className="email">{email}</span>
+        </div>
+        <InfoField title="포지션" content={skillPosition || '포지션'} />
       </ApplicantInfoWrapper>
       <ApplicantButtonsWrapper>
         <Button>거절하기</Button>
@@ -44,10 +42,6 @@ const ApplicantCardWrapper = styled.div`
   border: 1px solid ${({ theme }) => theme.color.black1};
   background: ${({ theme }) => theme.color.white};
   box-shadow: 0px 0px 20px 0px ${({ theme }) => theme.color.black0};
-
-  button {
-    display: hidden;
-  }
 `;
 
 const ApplicantInfoWrapper = styled.div`

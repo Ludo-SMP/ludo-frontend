@@ -3,19 +3,19 @@ import { StudyInfo } from '@/Assets';
 import Chip from '@/Components/Common/Chip';
 import { InfoField } from '@/Components/Common/InfoField';
 import ApplicantCard from '@/Components/ApplicantCard';
-import { Member } from '@/Types/study';
+import { MemberType } from '@/Types/study';
 import Button from '@/Components/Common/Button';
 
 const Applicants = () => {
   const studyTitle = '스터디 제목';
 
-  const recruitmentUsersData: Member[] = [
-    { nickName: '포키', email: 'aaa1@bb.net', teamPosition: '팀장', skillPosition: '디자이너' },
-    { nickName: '휴', email: 'aaa2@bb.net', teamPosition: '팀원', skillPosition: '백엔드' },
-    { nickName: '아카', email: 'aaa3@bb.net', teamPosition: '팀원', skillPosition: '백엔드' },
-    { nickName: '빽', email: 'aaa4@bb.net', teamPosition: '팀원', skillPosition: '백엔드' },
-    { nickName: '타로', email: 'aaa5@bb.net', teamPosition: '팀원', skillPosition: '프론트엔드' },
-    { nickName: 'Hyun', email: 'aaa6@bb.net', teamPosition: '팀원', skillPosition: '프론트엔드' },
+  const recruitmentUsersData: MemberType[] = [
+    { nickname: '포키', email: 'aaa1@bb.net', teamPosition: '팀장', skillPosition: '디자이너' },
+    { nickname: '휴', email: 'aaa2@bb.net', teamPosition: '팀원', skillPosition: '백엔드' },
+    { nickname: '아카', email: 'aaa3@bb.net', teamPosition: '팀원', skillPosition: '백엔드' },
+    { nickname: '빽', email: 'aaa4@bb.net', teamPosition: '팀원', skillPosition: '백엔드' },
+    { nickname: '타로', email: 'aaa5@bb.net', teamPosition: '팀원', skillPosition: '프론트엔드' },
+    { nickname: 'Hyun', email: 'aaa6@bb.net', teamPosition: '팀원', skillPosition: '프론트엔드' },
   ];
 
   return (
