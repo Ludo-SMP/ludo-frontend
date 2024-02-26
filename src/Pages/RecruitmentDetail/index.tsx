@@ -3,23 +3,33 @@ import { InfoField } from '../../Components/Common/InfoField';
 import { RowDivider } from '../../Components/Common/Divider/RowDivider';
 import { ColumnDivider } from '../../Components/Common/Divider/ColumnDivider';
 // import { useRecruitmentDetail } from '@/Apis/recruitment';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { dateFormatter } from '@/Utils/date';
 import { convertRecruitmentDetailRawDataToRecruitmentDetail } from '@/Utils/propertyConverter';
-
 import RecruitmentInfoSection from './RecruitmentInfoSection';
 import StudyProgressInfoSection from './StudyProgessInfoSection';
 import StudyBasicInfoSection from './StudyBasicInfoSection';
 import Button from '@/Components/Common/Button';
 import { applyStudy } from '@/Apis/study';
 import { recruitmentDetailMockDataById } from '@/Shared/dummy';
+import { useState } from 'react';
+import Modal from '@/Components/Common/Modal';
+import { APPLY } from '@/Constants/Messages';
+import { useLoginStore } from '@/Store/auth';
+import { ROUTER_PATH } from '@/Constants/Router_Path';
 
 const RecruitmentDetail = () => {
-  const studyId = Number(useParams().studyId);
+  const recruitmentId = Number(useParams().studyId);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { isLoggedIn, setIsLoggedIn, setIsLoggedOut } = useLoginStore();
+  const navigate = useNavigate();
+
   const isLoading = false;
   // const { data, isLoading } = useRecruitmentDetail(studyId);
   // const recruitmentDetail = isLoading ? null : convertRecruitmentDetailRawDataToRecruitmentDetail(data.data);
-  const recruitmentDetail = convertRecruitmentDetailRawDataToRecruitmentDetail(recruitmentDetailMockDataById(studyId));
+  const recruitmentDetail = convertRecruitmentDetailRawDataToRecruitmentDetail(
+    recruitmentDetailMockDataById(recruitmentId),
+  );
 
   return isLoading ? (
     <div>Loading...</div>
@@ -70,8 +80,21 @@ const RecruitmentDetail = () => {
         </div>
       </RecruitmentInfoWrapper>
       <StudyButtonsWrapper>
-        <Button onClick={() => applyStudy(studyId, 1)}>스터디 지원하기</Button>
+        <Button onClick={() => setIsOpen(!isOpen)}>스터디 지원하기</Button>
       </StudyButtonsWrapper>
+      {isOpen && !isLoggedIn && (
+        <Modal
+          closeModal={() => setIsOpen(!isOpen)}
+          title={APPLY.LOGIN.title}
+          handleApprove={() => navigate(ROUTER_PATH.login)}
+          handleCancel={() => setIsOpen(!isOpen)}
+          approveBtnText="로그인하기"
+          cancelBtnText="나중에 하기"
+          isBtnWidthEqual={false}
+        >
+          {APPLY.LOGIN.content}
+        </Modal>
+      )}
     </RecruitmentDetailWrapper>
   );
 };
@@ -156,7 +179,7 @@ const StudyButtonsWrapper = styled.div`
     flex: 1 0 0;
     border-radius: 8px;
     background: ${(props) => props.theme.color.gray1};
-    color: var(--Palette-base-black-alpha-65, rgba(0, 0, 0, 0.65));
+    color: ${(props) => props.theme.color.black3};
     text-align: center;
     font-size: ${(props) => props.theme.font.xsmall};
     font-weight: 600;
