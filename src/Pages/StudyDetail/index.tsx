@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { RowDivider } from '../../Components/Common/Divider/RowDivider';
-import { MemberProfileProps } from '../../Components/MemberProfile';
+import { Member } from '@/Types/study';
 import { Right, StudyInfo } from '@/Assets';
 import Button from '@/Components/Common/Button';
 import Chip from '@/Components/Common/Chip';
@@ -12,7 +12,7 @@ export const StudyDetail = () => {
   const studyId = Number(useParams().studyId);
   const navigate = useNavigate();
 
-  const memberProfileMocks: MemberProfileProps[] = [
+  const memberProfileMocks: Member[] = [
     { nickName: '포키', email: 'aaa@bb.net', teamPosition: '팀장', skillPosition: '디자이너' },
     { nickName: '휴', email: 'aaa@bb.net', teamPosition: '팀원', skillPosition: 'BE' },
     { nickName: '아카', email: 'aaa@bb.net', teamPosition: '팀원', skillPosition: 'BE' },

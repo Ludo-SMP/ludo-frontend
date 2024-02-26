@@ -4,6 +4,7 @@ import Chip from '@/Components/Common/Chip';
 import { InfoField } from '@/Components/Common/InfoField';
 import ApplicantCard from '@/Components/ApplicantCard';
 import { Member } from '@/Types/study';
+import Button from '@/Components/Common/Button';
 
 const Applicants = () => {
   const studyTitle = '스터디 제목';
@@ -39,6 +40,9 @@ const Applicants = () => {
           ))}
         </ApplicantsInfoWrapper>
       </StudyDetailWrapper>
+      <ApplicantButtonsWrapper>
+        <Button>모집 마감하기</Button>
+      </ApplicantButtonsWrapper>
     </ApplicantsWrapper>
   );
 };
@@ -47,8 +51,7 @@ const ApplicantsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 1224px;
-  margin: 0 auto;
-  margin-top: 40px;
+  margin: 40px auto 80px auto;
   gap: 40px;
 `;
 
@@ -102,6 +105,23 @@ const ApplicantsInfoWrapper = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 24px;
+`;
+
+const ApplicantButtonsWrapper = styled.div`
+  button {
+    display: flex;
+    width: 100%;
+    height: 48px;
+    padding: var(--Padding-btn-lg-vertical, 0px) var(--Spacing-16, 16px);
+    justify-content: center;
+    align-items: center;
+    gap: var(--Spacing-8, 8px);
+    align-self: stretch;
+    border-radius: ${({ theme }) => theme.borderRadius.small};
+    border: 1px solid ${({ theme }) => theme.color.purple2};
+    background: ${({ theme }) => theme.color.white};
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.03);
+  }
 `;
 
 export default Applicants;
