@@ -4,7 +4,7 @@ import { media } from '@/Styles/theme';
 import { ROUTER_PATH } from '@/Constants/Router_Path';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
 import { BlankLogo, Alarm, Profile } from '@/Assets';
-import { useLoginStore } from '@/store/auth';
+import { useLoginStore } from '@/Store/auth';
 import Button from '../Common/Button';
 import StudyButtonSection from './StudyButtonSection';
 import SignButtonSection from './SignButtonSection';

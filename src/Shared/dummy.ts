@@ -3,7 +3,6 @@ import { StudyInfo } from '../Components/StudyCard';
 import { StudyCardListProps } from '../Components/StudyCardList';
 import { RecruitmentDetailRawDataType, PopularRecruitmentsRawDataType, RecruitmentRawDataType } from '@/Types/study';
 
-
 export const bannerDummy: BannerProps = {
   brief: '함께 발견하는 가능성, 기회의 연결',
   title: 'Ludo Study',

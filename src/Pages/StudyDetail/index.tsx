@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { RowDivider } from '../../Components/Common/Divider/RowDivider';
-import { MemberProfileProps } from '../../Components/MemberProfile';
+import { MemberType } from '@/Types/study';
 import { Right, StudyInfo } from '@/Assets';
 import Button from '@/Components/Common/Button';
 import Chip from '@/Components/Common/Chip';
@@ -11,12 +11,14 @@ import MemberSection from './MemberSection';
 export const StudyDetail = () => {
   const studyId = Number(useParams().studyId);
   const navigate = useNavigate();
-  const memberProfileMocks: MemberProfileProps[] = [
-    { nickName: 'Hyun', email: 'ksci195@hanmail.net', teamPosition: '팀장', skillPosition: '디자이너' },
-    { nickName: 'Hyun', email: 'ksci195@hanmail.net', teamPosition: '팀원', skillPosition: 'FE' },
-    { nickName: 'Hyun', email: 'ksci195@hanmail.net', teamPosition: '팀원', skillPosition: 'BE' },
-    { nickName: 'Hyun', email: 'ksci195@hanmail.net', teamPosition: '팀원', skillPosition: 'FE' },
-    { nickName: 'Hyun', email: 'ksci195@hanmail.net', teamPosition: '팀원', skillPosition: 'FE' },
+
+  const memberProfileMocks: MemberType[] = [
+    { nickname: '포키', email: 'aaa@bb.net', teamPosition: '팀장', skillPosition: '디자이너' },
+    { nickname: '휴', email: 'aaa@bb.net', teamPosition: '팀원', skillPosition: 'BE' },
+    { nickname: '아카', email: 'aaa@bb.net', teamPosition: '팀원', skillPosition: 'BE' },
+    { nickname: '빽', email: 'aaa@bb.net', teamPosition: '팀원', skillPosition: 'BE' },
+    { nickname: '타로', email: 'aaa@bb.net', teamPosition: '팀원', skillPosition: 'FE' },
+    { nickname: 'Hyun', email: 'aaa@bb.net', teamPosition: '팀원', skillPosition: 'FE' },
   ];
 
   return (
@@ -87,7 +89,6 @@ const StudyTitleWrapper = styled.div`
     display: flex;
     gap: 24px;
   }
-
 `;
 
 const StudyButtonsWrapper = styled.div`

@@ -64,4 +64,3 @@ const StudyListWrapper = styled.div`
 `;
 
 export default Main;
-

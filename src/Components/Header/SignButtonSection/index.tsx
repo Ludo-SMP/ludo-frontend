@@ -1,4 +1,4 @@
-import { apiRequester } from '@/Apis/auth';
+import { apiRequester } from '@/Utils/axios';
 import Button from '@/Components/Common/Button';
 import { ROUTER_PATH } from '@/Constants/Router_Path';
 import { media } from '@/Styles/theme';
