@@ -3,7 +3,7 @@ import { RowDivider } from '../../Components/Common/Divider/RowDivider';
 import { MemberType } from '@/Types/study';
 import { Right, StudyInfo } from '@/Assets';
 import Button from '@/Components/Common/Button';
-import Chip from '@/Components/Common/Chip';
+import StudyToken from '@/Components/Common/StudyToken';
 import { useNavigate, useParams } from 'react-router-dom';
 import StudyInfoSection from './StudyInfoSection';
 import MemberSection from './MemberSection';
@@ -27,9 +27,9 @@ export const StudyDetail = () => {
         <StudyTitleWrapper>
           <StudyInfo width="48" height="48" />
           <span className="title">스터디 제목</span>
-          <div className="chips">
-            <Chip chipState="InProgress">참여 중인 스터디</Chip>
-            <Chip chipState="InProgress">모집중</Chip>
+          <div className="study__tokens">
+            <StudyToken tokenState="InProgress">참여 중인 스터디</StudyToken>
+            <StudyToken tokenState="InProgress">모집중</StudyToken>
           </div>
         </StudyTitleWrapper>
         <Button primary="default" onClick={() => navigate(`/studies/${studyId}/applicants`)}>
@@ -85,7 +85,7 @@ const StudyTitleWrapper = styled.div`
   font-size: ${(props) => props.theme.font.xxxxlarge};
   font-weight: 800;
 
-  .chips {
+  .study__tokens {
     display: flex;
     gap: 24px;
   }
