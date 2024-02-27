@@ -12,16 +12,17 @@ import StudyBasicInfoSection from './StudyBasicInfoSection';
 import Button from '@/Components/Common/Button';
 import { applyStudy } from '@/Apis/study';
 import { recruitmentDetailMockDataById } from '@/Shared/dummy';
-import { useState } from 'react';
 import Modal from '@/Components/Common/Modal';
 import { APPLY } from '@/Constants/Messages';
 import { useLoginStore } from '@/Store/auth';
 import { ROUTER_PATH } from '@/Constants/Router_Path';
+import ApplyModal from '@/Components/Modal/ApplyModal';
+import { useModalStore } from '@/Store/modal';
 
 const RecruitmentDetail = () => {
   const recruitmentId = Number(useParams().studyId);
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const { isLoggedIn, setIsLoggedIn, setIsLoggedOut } = useLoginStore();
+  const { isModalOpen, openModal } = useModalStore();
+  const { isLoggedIn } = useLoginStore();
   const navigate = useNavigate();
 
   const isLoading = false;
@@ -30,6 +31,7 @@ const RecruitmentDetail = () => {
   const recruitmentDetail = convertRecruitmentDetailRawDataToRecruitmentDetail(
     recruitmentDetailMockDataById(recruitmentId),
   );
+  const studyId = 1;
 
   return isLoading ? (
     <div>Loading...</div>
@@ -80,20 +82,21 @@ const RecruitmentDetail = () => {
         </div>
       </RecruitmentInfoWrapper>
       <StudyButtonsWrapper>
-        <Button onClick={() => setIsOpen(!isOpen)}>스터디 지원하기</Button>
+        <Button onClick={openModal}>스터디 지원하기</Button>
       </StudyButtonsWrapper>
-      {isOpen && !isLoggedIn && (
+      {!isLoggedIn && isModalOpen && (
         <Modal
-          closeModal={() => setIsOpen(!isOpen)}
           title={APPLY.LOGIN.title}
           handleApprove={() => navigate(ROUTER_PATH.login)}
-          handleCancel={() => setIsOpen(!isOpen)}
           approveBtnText="로그인하기"
           cancelBtnText="나중에 하기"
           isBtnWidthEqual={false}
         >
           {APPLY.LOGIN.content}
         </Modal>
+      )}
+      {isLoggedIn && isModalOpen && (
+        <ApplyModal positions={recruitmentDetail?.positions} recruitmentId={recruitmentId} studyId={studyId} />
       )}
     </RecruitmentDetailWrapper>
   );
