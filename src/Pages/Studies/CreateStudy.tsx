@@ -164,7 +164,6 @@ const StudyMain = styled.p`
 `;
 
 const StudyContainer = styled.form`
-
   height: 1300px;
   padding-left: 348px;
   padding-right: 348px;

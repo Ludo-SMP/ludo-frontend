@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import { StudyInfo } from '@/Assets';
-import Chip from '@/Components/Common/Chip';
 import { InfoField } from '@/Components/Common/InfoField';
 import ApplicantCard from '@/Components/ApplicantCard';
 import { MemberType } from '@/Types/study';
 import Button from '@/Components/Common/Button';
+import StudyToken from '@/Components/Common/StudyToken';
 
 const Applicants = () => {
   const studyTitle = '스터디 제목';
@@ -25,9 +25,9 @@ const Applicants = () => {
         <StudyTitleWrapper>
           <StudyInfo width="48" height="48" />
           <span className="title">{studyTitle}</span>
-          <div className="chips">
-            <Chip chipState="InProgress">참여 중인 스터디</Chip>
-            <Chip chipState="InProgress">모집중</Chip>
+          <div className="study__tokens">
+            <StudyToken tokenState="InProgress">참여 중인 스터디</StudyToken>
+            <StudyToken tokenState="InProgress">모집중</StudyToken>
           </div>
         </StudyTitleWrapper>
         <StudyInfoWrapper>
@@ -84,7 +84,7 @@ const StudyTitleWrapper = styled.div`
   font-size: ${(props) => props.theme.font.xxxxlarge};
   font-weight: 800;
 
-  .chips {
+  .study__tokens {
     display: flex;
     gap: 24px;
   }

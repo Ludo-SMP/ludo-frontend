@@ -15,6 +15,7 @@ const LoginProvider = ({ children }: LoginProviderProps) => {
         await verifyToken();
         setIsLoggedIn();
       } catch (e) {
+        console.log(e);
         setIsLoggedOut();
       }
     };

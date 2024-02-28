@@ -3,7 +3,7 @@ import MemberCard from '@/Components/MemberCard';
 import MyStudyCard from '@/Components/MyStudyCard';
 import { MemberType } from '@/Types/study';
 import styled from 'styled-components';
-import Chip from '@/Components/Common/Chip';
+import StudyToken from '@/Components/Common/StudyToken';
 import { BlankSquare } from '@/Components/Common/BlankSquare';
 import TemporarySavedStudyCard from '@/Components/TemporarySavedStudyCard';
 import Button from '@/Components/Common/Button';
@@ -30,11 +30,11 @@ const MyPage = () => {
           <StudyInfo width={40} height={40} />
           <span className="title">스따-디</span>
         </MyStudyTitleWrapper>
-        <StudyChipsWrapper>
-          <Chip chipState="Apply">참여 중인 스터디</Chip>
-          <Chip chipState="Completed">내가 지원한 스터디</Chip>
-          <Chip chipState="Completed">진행 완료된 스터디</Chip>
-        </StudyChipsWrapper>
+        <StudyTokensWrapper>
+          <StudyToken tokenState="Apply">참여 중인 스터디</StudyToken>
+          <StudyToken tokenState="Completed">내가 지원한 스터디</StudyToken>
+          <StudyToken tokenState="Completed">진행 완료된 스터디</StudyToken>
+        </StudyTokensWrapper>
 
         <MyStudyCard title={'스터디 이름'} skillPosition="백엔드" period="03.03~04.04" memberCnt={6} isCreator />
         <MyStudyCard title={'스터디 이름'} />
@@ -47,10 +47,10 @@ const MyPage = () => {
           <BlankSquare width="40px" height="40px" />
           <span>임시 저장된 글</span>
         </div>
-        <StudyChipsWrapper>
-          <Chip chipState="Apply">스터디 생성</Chip>
-          <Chip chipState="Completed">스터디 모집공고</Chip>
-        </StudyChipsWrapper>
+        <StudyTokensWrapper>
+          <StudyToken tokenState="Apply">스터디 생성</StudyToken>
+          <StudyToken tokenState="Completed">스터디 모집공고</StudyToken>
+        </StudyTokensWrapper>
         <TemporarySavedStudyCard studyId={1} title={'모집공고 1'} />
         <TemporarySavedStudyCard title={'스터디 이름'} />
       </TemporarySavedStudyWrapper>
@@ -107,7 +107,7 @@ const MyStudyTitleWrapper = styled.div`
   align-self: stretch;
 `;
 
-const StudyChipsWrapper = styled.div`
+const StudyTokensWrapper = styled.div`
   display: flex;
   align-items: flex-start;
   gap: 12px;
