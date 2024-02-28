@@ -7,13 +7,12 @@ interface LoginProviderProps {
 }
 
 const LoginProvider = ({ children }: LoginProviderProps) => {
-  const { isLoggedIn, setIsLoggedIn, setIsLoggedOut } = useLoginStore();
+  const { setIsLoggedIn, setIsLoggedOut } = useLoginStore();
 
   useEffect(() => {
     const checkLoggedIn = async () => {
       try {
         await verifyToken();
-        console.log(isLoggedIn);
         setIsLoggedIn();
       } catch (e) {
         console.log(e);

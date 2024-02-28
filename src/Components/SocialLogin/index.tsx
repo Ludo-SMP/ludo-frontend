@@ -19,7 +19,6 @@ const SocialLogin = ({ socialType, signType }: SocialLoginType) => {
         socialType === '네이버' ? 'naver' : socialType === '카카오' ? 'kakao' : 'google'
       }`}
       onClick={() => {
-        console.log(3);
         !isLoggedIn && setIsLoggedIn();
       }}
     >

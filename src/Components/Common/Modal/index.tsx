@@ -1,29 +1,28 @@
 import styled from 'styled-components';
 import Button from '../Button';
+import { useModalStore } from '@/Store/modal';
 
 export interface ModalProps {
-  closeModal?: () => void;
   children: React.ReactNode;
   alignTitle?: 'flex-start' | 'center';
   title?: string;
   handleApprove: () => void;
-  handleCancel?: () => void;
+  data?: object;
   approveBtnText: string;
   cancelBtnText?: string;
   isBtnWidthEqual?: boolean;
 }
 
 const Modal = ({
-  closeModal,
   children,
   alignTitle = 'flex-start',
   title,
   handleApprove,
-  handleCancel,
   approveBtnText,
   cancelBtnText,
   isBtnWidthEqual = true,
 }: ModalProps) => {
+  const { closeModal } = useModalStore();
   return (
     <ModalBackDropWrapper>
       <ModalWrapper>
@@ -32,12 +31,12 @@ const Modal = ({
           <ModalContentWrapper>{children}</ModalContentWrapper>
         </ModalInfoWrapper>
         <ModalBtnsWrapper onClick={closeModal} isBtnWidthEqual={isBtnWidthEqual}>
-          {handleCancel && (
-            <Button className="cancel__btn" onClick={handleCancel}>
+          {cancelBtnText && (
+            <Button className="cancel__btn" onClick={() => closeModal()}>
               {cancelBtnText}
             </Button>
           )}
-          <Button className="approve__btn" onClick={handleApprove}>
+          <Button className="approve__btn" onClick={() => handleApprove()}>
             {approveBtnText}
           </Button>
         </ModalBtnsWrapper>
@@ -67,6 +66,8 @@ const ModalWrapper = styled.div`
   align-items: flex-start;
   gap: 32px;
   background-color: ${({ theme }) => theme.color.white};
+  border-radius: ${({ theme }) => theme.borderRadius.medium};
+  border: 1px solid ${({ theme }) => theme.color.black1};
 `;
 
 const ModalInfoWrapper = styled.div<{ alignTitle: 'flex-start' | 'center' }>`
@@ -77,10 +78,10 @@ const ModalInfoWrapper = styled.div<{ alignTitle: 'flex-start' | 'center' }>`
 
   .title {
     display: flex;
-    justify-content: ${(props) => props.alignTitle || 'flex-start'};
+    justify-content: center;
     height: 40px;
     padding: 5px 0px;
-    justify-content: center;
+    justify-content: ${(props) => props.alignTitle};
     align-items: center;
     align-self: stretch;
     color: ${({ theme }) => theme.color.black5};
@@ -96,7 +97,7 @@ const ModalInfoWrapper = styled.div<{ alignTitle: 'flex-start' | 'center' }>`
 const ModalContentWrapper = styled.div`
   display: flex;
   width: 520px;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-shrink: 0;
   color: ${({ theme }) => theme.color.black4};
@@ -141,83 +142,5 @@ const ModalBtnsWrapper = styled.div<{ isBtnWidthEqual: boolean }>`
     background: ${({ theme }) => theme.color.purple1};
   }
 `;
-
-// export default Modal;
-// import { useState } from 'react';
-// import styled from 'styled-components';
-
-// function Modal() {
-//   const [isOpen, setIsOpen] = useState(false);
-
-//   return (
-//     <div>
-//       <ModalContainer onClick={() => setIsOpen(!isOpen)}>
-//         <ModalButton onClick={() => setIsOpen(!isOpen)}>open modal</ModalButton>
-//         {isOpen ? (
-//           <ModalBackDrop>
-//             <ModalView onClick={(e) => e.stopPropagation()}>
-//               HIII
-//               <span onClick={() => setIsOpen(!isOpen)}>x</span>
-//             </ModalView>
-//           </ModalBackDrop>
-//         ) : null}
-//       </ModalContainer>
-//     </div>
-//   );
-// }
-
-// const ModalContainer = styled.div`
-//   height: 150px;
-//   text-align: center;
-//   margin: 120px auto;
-//   display: flex;
-// `;
-
-// const ModalButton = styled.button`
-//   background-color: black;
-//   width: 100px;
-//   height: 50px;
-//   color: white;
-//   border-radius: 20px;
-//   margin: 0 auto;
-//   display: flex;
-//   align-items: center;
-// `;
-
-// const ModalBackDrop = styled.div`
-//   position: fixed;
-//   z-index: 999;
-//   top: 0;
-//   left: 0;
-//   bottom: 0;
-//   right: 0;
-//   background-color: rgba(0, 0, 0, 0.4);
-
-//   /* 중앙 정렬 option 1 - display: grid */
-//   /* display: grid;
-//   place-items: center; */
-
-//   /* 중앙 정렬 option 2 - display: flex */
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-// `;
-
-// const ModalView = styled.div`
-//   position: relative;
-//   width: 300px;
-//   border-radius: 20px;
-//   height: 200px;
-//   background-color: white;
-//   display: flex;
-// align-items: center;
-// justify-content: center;
-
-//   span {
-//     position: absolute;
-//     top: 5px;
-//     right: 15px;
-//   }
-// `;
 
 export default Modal;

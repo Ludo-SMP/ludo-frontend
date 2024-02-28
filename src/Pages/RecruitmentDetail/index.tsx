@@ -10,7 +10,6 @@ import RecruitmentInfoSection from './RecruitmentInfoSection';
 import StudyProgressInfoSection from './StudyProgessInfoSection';
 import StudyBasicInfoSection from './StudyBasicInfoSection';
 import Button from '@/Components/Common/Button';
-import { applyStudy } from '@/Apis/study';
 import { recruitmentDetailMockDataById } from '@/Shared/dummy';
 import Modal from '@/Components/Common/Modal';
 import { APPLY } from '@/Constants/Messages';

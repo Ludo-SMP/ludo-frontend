@@ -16,14 +16,12 @@ interface HttpError extends Error {
 }
 
 export const handleHttpError = (error: HttpError) => {
-  console.log(error.response.data);
+  console.log(error.response);
 
   switch (error.response.status) {
     case HttpStatus.UNAUTHORIZED:
-      // moveTo('/login');
       break;
     case HttpStatus.PRECONDITION_FAILED:
-      // handleExpiredToken();
       break;
     case HttpStatus.NOT_FOUND:
       // moveTo('/404');
@@ -51,7 +49,6 @@ const fetchWrapper = async ({
       (method === 'patch' && (await apiRequester.patch(url, body))) ||
       (method === 'delete' && (await apiRequester.delete(url))) ||
       {};
-
     return data;
   } catch (error) {
     handleHttpError(error);
