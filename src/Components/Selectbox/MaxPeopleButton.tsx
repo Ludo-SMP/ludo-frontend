@@ -7,13 +7,20 @@ export type StudyProps = {
 
 export const MaxPeopleButton = () => {
   return (
-    <ButtonConTainer name="max">
+    <ButtonConTainer name="participantLimit">
       <Textwrapper disabled selected>
         스터디 최대인원
       </Textwrapper>
-      <Textwrapper value="4명">4명</Textwrapper>
-      <Textwrapper value="6명">6명</Textwrapper>
-      <Textwrapper value="8명">8명</Textwrapper>
+      <Textwrapper value={1}>1명</Textwrapper>
+      <Textwrapper value={2}>2명</Textwrapper>
+      <Textwrapper value={3}>3명</Textwrapper>
+      <Textwrapper value={4}>4명</Textwrapper>
+      <Textwrapper value={5}>5명</Textwrapper>
+      <Textwrapper value={6}>6명</Textwrapper>
+      <Textwrapper value={7}>7명</Textwrapper>
+      <Textwrapper value={8}>8명</Textwrapper>
+      <Textwrapper value={9}>9명</Textwrapper>
+      <Textwrapper value={10}>10명</Textwrapper>
     </ButtonConTainer>
   );
 };

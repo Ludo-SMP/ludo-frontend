@@ -28,11 +28,11 @@ export const BigCategoryButton = (props: any) => {
     //   <Textwrapper value="algorithm">알고리즘</Textwrapper>
     //   <Textwrapper value="project">프로젝트</Textwrapper>
     // </ButtonConTainer>
-    <ButtonConTainer name="category" className="select" value={selectValue} onChange={submitHandler}>
+    <ButtonConTainer name="categoryId" className="select" value={selectValue} onChange={submitHandler}>
       <Textwrapper>카테고리</Textwrapper>
-      <Textwrapper value="1">알고리즘</Textwrapper>
-      <Textwrapper value="2">프로젝트</Textwrapper>
-      <Textwrapper value="3">면접 스터디</Textwrapper>
+      <Textwrapper value={1}>코딩테스트</Textwrapper>
+      <Textwrapper value={2}>프로젝트</Textwrapper>
+      <Textwrapper value={3}>모의면접</Textwrapper>
     </ButtonConTainer>
   );
 };

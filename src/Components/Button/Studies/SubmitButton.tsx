@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 export type SubmitProps = {
   children?: React.ReactNode;
+  type?: any;
+  onClick?: any;
 };
 
 export const SubmitButton = ({ children }: SubmitProps) => {

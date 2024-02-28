@@ -7,12 +7,12 @@ export const ProgressButton = () => {
     setValue(event.currentTarget.value);
   };
   return (
-    <ButtonConTainer name="progress" className="select" value={Value} onChange={submitHandler}>
+    <ButtonConTainer name="way" className="select" value={Value} onChange={submitHandler}>
       <Textwrapper disabled selected>
         진행방식
       </Textwrapper>
-      <Textwrapper value="온라인">온라인</Textwrapper>
-      <Textwrapper value="온프라인">오프라인</Textwrapper>
+      <Textwrapper value="ONLINE">온라인</Textwrapper>
+      <Textwrapper value="OFFLINE">오프라인</Textwrapper>
     </ButtonConTainer>
   );
 };

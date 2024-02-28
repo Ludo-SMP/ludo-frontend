@@ -7,79 +7,65 @@ import { CalendarButton } from '../../Components/Selectbox/CalendarButton';
 import { BigCategoryButton } from '../../Components/Selectbox/BigCategoryButton';
 import { MaxPeopleButton } from '../../Components/Selectbox/MaxPeopleButton';
 import { ProgressPeriod } from '../../Components/Calendar/ProgressPeriod';
-import { useState, useEffect, Key, useRef } from 'react';
-import { Validation } from '../../Constants/Validation';
 import { media } from '../../Styles/theme';
-// import { Titles } from '../../Components/Textarea/Titlearea';
+import { Creates } from '@/Types/studies';
+import { createStudy } from '@/Apis/study';
+import { FormEvent, useEffect, useState } from 'react';
 import axios from 'axios';
-import { useSetAtom, useAtomValue, useAtom } from 'jotai';
-import { useForm } from 'react-hook-form';
-
-interface IFormInput {
-  title: string;
-  pattern: string;
-}
-export const CreateStudy = (Props: any) => {
+axios.defaults.withCredentials = true;
+export type OptionalCreates = Partial<Creates>;
+export const CreateStudy = () => {
   // {register} = useForm
   // 폼 데이터
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
 
-  const [titleValue, settitleValue] = useState('');
-  // const setValue = useAtomValue(Titles);
-  // const titleHandler = (event: any) => {
-  //   settitleValue(event.target.value);
-  //   console.log(setValue);
-  // };
-  const [formData, setFormData] = useState({
+  const [useForm, setuseForm] = useState<Creates>({
     title: '',
-    category: '',
+    categoryId: null,
+    way: '',
+    participantLimit: null,
+    startDateTime: '',
+    endDateTime: '',
   });
 
-  // const [isSubmitting, setIsSubmitting] = useState(false);
-  // const [formErrors, setFormErrors] = useState({});
+  function forms(fields: OptionalCreates) {
+    setuseForm({
+      ...useForm,
+      ...fields,
+    });
+  }
 
-  // const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-  //   const { name, value } = event.target;
-  //   setFormData((prevFormData) => ({
-  //     ...prevFormData,
-  //     [name]: value,
-  //   }));
-  //   console.log(formData);
-  // };
+  async function post() {
+    const { data } = await axios.post('https://ludoapi.store/studies', {
+      title: useForm.title,
+      categoryId: useForm.categoryId,
+      way: useForm.way,
+      participantLimit: useForm.participantLimit,
+      startDateTime: useForm.startDateTime,
+      endDateTime: useForm.endDateTime,
+    });
+    console.log(data);
+  }
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
+    post();
 
-  // async function post() {
-  //   console.log('post');
-  //   const { data } = await axios.post('http://localhost:3000/api/test', {
-  //     name: 'a',
-  //     email: '이메일',
-  //     title: formData.title,
-  //     category: formData.category,
-  //   });
+    // const postData = () => {
+    // async function post() {
+    //   const { data } = await axios.post('https://ludoapi.store/studies', {
+    //     SubmitData,
+    //   });
 
-  //   console.log(data);
-  // }
+    //   console.log(data);
+    // }
+    // return post();
+    // };
+  };
 
-  // const postData = () => {
-  //   // async function post() {
-  //   //   console.log('post');
-  //   //   const { data } = await axios.post('http://localhost:3000/api/test', {
-  //   //     name: 'a',
-  //   //     email: '이메일',
-  //   //     title: formData.title,
-  //   //     category: formData.category,
-  //   //   });
+  // useEffect(() => {
+  //   postData();
+  // }, []);
 
-  //   //   console.log(data);
-  //   // }
-  //   // return post();
-  //   return post();
-  // };
-
-  // const validateForm = (values: { title: string; category: string | any[] }) => {
+  // st validateForm = (values: { title: string; category: string | any[] }) => {
   //   if (!values.title) {
   //     setFormErrors({ email: '제목을 입력해주세요' });
   //   }
@@ -99,13 +85,20 @@ export const CreateStudy = (Props: any) => {
   // type="text" id="title" register={register}
   return (
     <>
-      <StudyContainer>
+      <StudyContainer
+        onSubmit={handleSubmit}
+        // encType="text/plain"
+        // encType="application/json"
+        // action="https://ludoapi.store/studies"
+        // method="POST"
+        // location-href="/"
+      >
         <StudyMain>스터디 생성하기</StudyMain>
         <TopBox>
           <StudyTitle>스터디 제목</StudyTitle>
           <BottomWrapper>
             <ContentText>제목</ContentText>
-            <Titlearea />
+            <Titlearea setForm={forms} useForm={useForm} />
           </BottomWrapper>
         </TopBox>
         <MiddleBox>
@@ -130,10 +123,10 @@ export const CreateStudy = (Props: any) => {
               <ContentText>진행방식</ContentText>
               <ProgressButton />
             </StudyWrapper>
-            <StudyWrapper>
+            {/* <StudyWrapper>
               <ContentText>진행 플랫폼</ContentText>
               <PlatformButton />
-            </StudyWrapper>
+            </StudyWrapper> */}
             <StudyWrapper>
               <ContentText> 진행기간</ContentText>
               <CalendarButton>
@@ -164,7 +157,6 @@ const StudyMain = styled.p`
 `;
 
 const StudyContainer = styled.form`
-
   height: 1300px;
   padding-left: 348px;
   padding-right: 348px;
