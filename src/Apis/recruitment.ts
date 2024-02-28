@@ -4,8 +4,10 @@ import { convertPopularRecruitmentsToStudyCardProps } from '@/Utils/propertyConv
 import { RECRUITMENT } from '@/Constants/queryString';
 import { FilterOptionsType } from '@/Types/study';
 
-export const getPopularRecruitments = () =>
-  httpClient.get('/').then((res) => convertPopularRecruitmentsToStudyCardProps(res.data.data));
+export const getPopularRecruitments = async () => {
+  const response = await httpClient.get('/');
+  return convertPopularRecruitmentsToStudyCardProps(response.data.data);
+};
 
 export const usePopularRecruitments = () => {
   return useQuery({
@@ -20,16 +22,18 @@ interface GetRecruitmentsParams {
   recruitmentsPerPage: number;
 }
 
-export const getRecruitments = ({ pageParam, filterOptions, recruitmentsPerPage }: GetRecruitmentsParams) => {
+export const getRecruitments = async ({ pageParam, filterOptions, recruitmentsPerPage }: GetRecruitmentsParams) => {
   const fitlerOptionsQueryString = Object.entries(filterOptions)
     .map((filterOption) => {
       const [categoryProperty, categoryItems] = filterOption;
       return `${categoryProperty}=${categoryItems.join(',')}`;
     })
     .join('&');
-  return httpClient
-    .get(`/recruitments?${fitlerOptionsQueryString}`, { params: { pageParam, recruitmentsPerPage } })
-    .then((res) => res.data);
+
+  const response = await httpClient.get(`/recruitments?${fitlerOptionsQueryString}`, {
+    params: { pageParam, recruitmentsPerPage },
+  });
+  return response.data;
 };
 
 export const useRecruitments = ({ filterOptions, recruitmentsPerPage }) =>
@@ -41,8 +45,11 @@ export const useRecruitments = ({ filterOptions, recruitmentsPerPage }) =>
       return null;
     },
   });
-export const getRecruitmentDetail = (studyId: number) =>
-  httpClient.get(`/recruitments/${studyId}`).then((res) => res.data);
+
+export const getRecruitmentDetail = async (studyId: number) => {
+  const response = await httpClient.get(`/recruitments/${studyId}`);
+  return response.data;
+};
 
 export const useRecruitmentDetail = (studyId: number) => {
   return useQuery({
