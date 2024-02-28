@@ -1,7 +1,7 @@
-import { apiRequester } from '@/utils/axios';
+import { httpClient } from '@/Utils/axios';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
-export const getPopularRecruitments = () => apiRequester.get('/').then((res) => res.data);
+export const getPopularRecruitments = () => httpClient.get('/').then((res) => res.data);
 
 export const usePopularRecruitments = () => {
   return useQuery({
@@ -17,7 +17,7 @@ export const getRecruitments = ({ pageParam, filterOptions, recruitmentsPerPage 
       return `${categoryProperty}=${categoryItems.join(',')}`;
     })
     .join('&');
-  return apiRequester
+  return httpClient
     .get(`/recruitments?${fitlerOptionsQueryString}`, { params: { pageParam, recruitmentsPerPage } })
     .then((res) => res.data);
 };
@@ -32,7 +32,7 @@ export const useRecruitments = (filterOptions, recruitmentsPerPage) =>
     },
   });
 export const getRecruitmentDetail = (studyId: number) =>
-  apiRequester.get(`/recruitments/${studyId}`).then((res) => res.data);
+  httpClient.get(`/recruitments/${studyId}`).then((res) => res.data);
 
 export const useRecruitmentDetail = (studyId: number) => {
   return useQuery({
