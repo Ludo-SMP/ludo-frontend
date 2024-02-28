@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { BlankSquare } from '../Common/BlankSquare';
-import Chip from '../Common/Chip';
+import StudyToken from '../Common/StudyToken';
 import { InfoField } from '../Common/InfoField';
 import Button from '../Common/Button';
 import { PositionType, StudyApplyState, StudyProgressState, StudyRecruitState, myStudyState } from '@/Types/study';
@@ -34,11 +34,11 @@ const MyStudyCard = ({
       <StudyInfoWrapper>
         <div className="study__status">
           <span className="title">{title}</span>
-          <div className="chips">
-            <Chip chipState="InProgress">참여 중인 스터디</Chip>
-            <Chip chipState="InProgress">진행중</Chip>
-            <Chip chipState="Completed">모집중</Chip>
-            <Chip chipState="Apply">모집중</Chip>
+          <div className="studyTokens">
+            <StudyToken tokenState="InProgress">참여 중인 스터디</StudyToken>
+            <StudyToken tokenState="InProgress">진행중</StudyToken>
+            <StudyToken tokenState="Completed">모집중</StudyToken>
+            <StudyToken tokenState="Apply">모집중</StudyToken>
           </div>
         </div>
         <div className="detail__info">
@@ -94,7 +94,7 @@ const StudyInfoWrapper = styled.div`
       line-height: 40px;
     }
 
-    .chips {
+    .studyTokens {
       display: flex;
       align-items: center;
       gap: 8px;
