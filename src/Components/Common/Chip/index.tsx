@@ -1,37 +1,56 @@
+import { useSelectedPositionStore } from '@/Store/position';
+import { PositionType } from '@/Types/study';
 import styled from 'styled-components';
 
-export type ChipState = 'default' | 'InProgress' | 'Completed' | 'Apply';
+type ChipType = 'Primary' | 'Secondary';
 
-export interface ChipProps {
-  chipState: ChipState;
-  children: React.ReactNode;
+export interface ChipProps<T> {
+  chipType: ChipType;
+  children?: React.ReactNode;
+  value: T;
 }
 
-const Chip = ({ chipState = 'default', children }: ChipProps) => {
-  return <ChipWrapper {...{ chipState }}>{children}</ChipWrapper>;
+const Chip = ({ chipType, children, value }: ChipProps<PositionType>) => {
+  const { selectedPosition, setSelectedPosition, resetSelectedPosition } = useSelectedPositionStore();
+
+  const isSelected: boolean = selectedPosition === value;
+
+  return (
+    <ChipWrapper
+      chipType={chipType}
+      isSelected={isSelected}
+      onClick={() => {
+        if (!isSelected) setSelectedPosition(value);
+        else resetSelectedPosition();
+      }}
+    >
+      {children}
+    </ChipWrapper>
+  );
 };
 
-const ChipWrapper = styled.span<{ chipState: ChipState }>`
-  display: flex;
-  padding: 4px 12px;
+const ChipWrapper = styled.span<{ chipType: ChipType; isSelected: boolean }>`
+  display: inline-flex;
+  padding: 0px 16px;
   justify-content: center;
   align-items: center;
-
-  color: ${({ chipState, theme }) =>
-    chipState === 'InProgress'
-      ? theme.color.purple1
-      : chipState === 'Completed'
-      ? `rgba(0, 0, 0, 0.25)`
-      : theme.color.orange3};
-
-  background: #f2f2f2;
-  border-radius: ${({ theme }) => theme.borderRadius.large};
+  gap: 8px;
+  color: ${({ isSelected, chipType, theme }) =>
+    isSelected ? (chipType === 'Primary' ? theme.color.white : theme.color.orange3) : theme.color.black3};
   text-align: center;
-  font-size: ${({ theme }) => theme.font.small};
   font-family: Pretendard;
+  font-size: 18px;
   font-style: normal;
-  font-weight: 500;
-  line-height: 30px;
+  font-weight: 600;
+  line-height: 48px;
+  border-radius: ${({ theme }) => theme.borderRadius.xlarge};
+  border: 1px solid ${({ isSelected, theme }) => (isSelected ? theme.color.orange4 : theme.color.black3)};
+  background: ${({ isSelected, chipType, theme }) =>
+    isSelected && chipType === 'Primary' ? theme.color.orange3 : theme.color.white};
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export default Chip;

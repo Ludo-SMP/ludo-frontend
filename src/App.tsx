@@ -15,15 +15,15 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <LoginProvider>
-          <MainLayout>
-            <RouterProvider router={RouterPath} />
-          </MainLayout>
-        </LoginProvider>
+        {/* <LoginProvider> */}
+        <MainLayout>
+          <RouterProvider router={RouterPath} />
+        </MainLayout>
+        {/* </LoginProvider> */}
       </ThemeProvider>
       <ReactQueryDevtools buttonPosition="bottom-left" />
     </QueryClientProvider>
-  )
-}
-  
+  );
+};
+
 export default App;

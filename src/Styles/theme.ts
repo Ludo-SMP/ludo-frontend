@@ -25,6 +25,7 @@ export const color = {
   orange1: '#E37756',
   orange2: '#F79D7E',
   orange3: '#F7A477',
+  orange4: '#DE723A',
   naver: '#03CF5D',
   kakao: '#FEE500',
   kakaoFontColor: '#521010',
