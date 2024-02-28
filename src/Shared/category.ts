@@ -26,7 +26,7 @@ export const stackCategory: MainCategoryType<StackType, AllType> = {
 export const positionCategory: MainCategoryType<PositionType, AllType> = {
   categoryName: '포지션',
   categoryProperty: 'positions',
-  categoryItems: ['전체', '백엔드', '프론트엔드', '기획', '디자이너'],
+  categoryItems: ['전체', '백엔드', '프론트엔드', '데브옵스', '디자이너'],
 };
 export const progessMethodCategory: MainCategoryType<ProgressMethodType, AllType> = {
   categoryName: '진행 방식',
@@ -43,7 +43,7 @@ export const sortCategory: MainCategoryType<SortType, AllType> = {
 export const defaultFilterOptions: FilterOptionsType = {
   category: ['코딩 테스트', '모의 면접', '프로젝트'],
   stacks: ['React', 'Java', 'Spring', 'Figma', 'Java', 'Javascript'],
-  positions: ['백엔드', '프론트엔드', '기획', '디자이너'],
+  positions: ['백엔드', '프론트엔드', '데브옵스', '디자이너'],
   way: ['온라인', '오프라인', '미정'],
   sort: ['최신순'],
 };
