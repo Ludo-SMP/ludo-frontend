@@ -1,16 +1,26 @@
 import { httpClient } from '@/Utils/axios';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
+import { convertPopularRecruitmentsToStudyCardProps } from '@/Utils/propertyConverter';
+import { RECRUITMENT } from '@/Constants/queryString';
+import { FilterOptionsType } from '@/Types/study';
 
-export const getPopularRecruitments = () => httpClient.get('/').then((res) => res.data);
+export const getPopularRecruitments = () =>
+  httpClient.get('/').then((res) => convertPopularRecruitmentsToStudyCardProps(res.data.data));
 
 export const usePopularRecruitments = () => {
   return useQuery({
-    queryKey: ['popularRecruitments'],
+    queryKey: [...RECRUITMENT.popular],
     queryFn: () => getPopularRecruitments(),
   });
 };
 
-export const getRecruitments = ({ pageParam, filterOptions, recruitmentsPerPage }) => {
+interface GetRecruitmentsParams {
+  pageParam: number;
+  filterOptions: FilterOptionsType;
+  recruitmentsPerPage: number;
+}
+
+export const getRecruitments = ({ pageParam, filterOptions, recruitmentsPerPage }: GetRecruitmentsParams) => {
   const fitlerOptionsQueryString = Object.entries(filterOptions)
     .map((filterOption) => {
       const [categoryProperty, categoryItems] = filterOption;
@@ -22,9 +32,9 @@ export const getRecruitments = ({ pageParam, filterOptions, recruitmentsPerPage 
     .then((res) => res.data);
 };
 
-export const useRecruitments = (filterOptions, recruitmentsPerPage) =>
+export const useRecruitments = ({ filterOptions, recruitmentsPerPage }) =>
   useInfiniteQuery({
-    queryKey: ['Recruitments', filterOptions],
+    queryKey: [...RECRUITMENT.recruitments(filterOptions)],
     queryFn: ({ pageParam = 0 }) => getRecruitments({ pageParam, filterOptions, recruitmentsPerPage }),
     getNextPageParam: (result) => {
       if (!result.isLastPage) return result.pageNum;
