@@ -12,7 +12,7 @@ import StudyBasicInfoSection from './StudyBasicInfoSection';
 import Button from '@/Components/Common/Button';
 import { recruitmentDetailMockDataById } from '@/Shared/dummy';
 import Modal from '@/Components/Common/Modal';
-import { APPLY } from '@/Constants/Messages';
+import { APPLY } from '@/Constants/messages';
 import { useLoginStore } from '@/Store/auth';
 import { ROUTER_PATH } from '@/Constants/Router_Path';
 import ApplyModal from '@/Components/Modal/ApplyModal';
