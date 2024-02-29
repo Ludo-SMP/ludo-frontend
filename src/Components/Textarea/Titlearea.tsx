@@ -22,38 +22,9 @@ export type Props = {
   ref?: string;
 };
 
-// type InputProps = {
-//   id?: any;
-//   label?: string;
-//   type?: string;
-//   disabled?: boolean;
-//   required?: boolean;
-//   placeholder?: string;
-//   errors?: FieldErrors;
-//   defaultValue?: string;
-//   onErrorMsg?: boolean;
-//   smallLabel?: boolean;
-//   validation?: RegisterOptions;
-//   register?: any;
-//   formState?: any;
-
-//   // register: UseFormRegisterReturn;
-//   [key: string]: any;
-// };
-
 //작성
 
 export const Titlearea = ({ setForm, useForm }: Props) => {
-  // const useInput = (defaultValue: string) => {
-  //   const [value, setValue] = useState(defaultValue);
-  //   const onChange = ({ target }: { target: HTMLInputElement | HTMLTextAreaElement }) => {
-  //     const { value } = target;
-  //     setValue(value);
-  //   };
-  //   return { value, onChange, setValue };
-  // };
-
-  // const newTitle = useInput('');
   const [inputValue, setForms] = useState('');
   const onValueHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setForm({ title: event.target.value });
@@ -63,7 +34,6 @@ export const Titlearea = ({ setForm, useForm }: Props) => {
 
   const onInputHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setInputCount(event.target.value.length);
-    console.log(inputCount);
   };
   return (
     <InputContainer>

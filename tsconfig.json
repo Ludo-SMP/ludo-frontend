@@ -7,14 +7,15 @@
     "skipLibCheck": true,
     "types": ["node"],
     "paths": {
-      "@/*": ["./src/*"],
+      "@/*": ["./src/*"]
     },
-    "forceConsistentCasingInFileNames" : false,
+    "forceConsistentCasingInFileNames": false,
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "strictNullChecks": false,
     "noEmit": true,
     "jsx": "react-jsx",
 

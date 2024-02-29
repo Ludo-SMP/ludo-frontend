@@ -1,16 +1,36 @@
 import styled from 'styled-components';
+import { OptionalCreates } from '@/Pages/Studies/CreateStudy';
+import { Creates } from '@/Types/studies';
+import { ChangeEvent } from 'react';
 
-export type StudyProps = {
-  onClick: () => void;
+export type Props = {
+  onClick?: () => void;
   children?: React.ReactNode;
+  // onChange?: (event: string) => void;
+  setForm: (any: OptionalCreates) => void;
+  useForm: Creates;
+  value?: number;
+  type?: string;
+  name?: string;
+  maxlength?: number;
+  id?: string;
+  formData?: number | string;
+  ref?: string;
 };
 
-export const MaxPeopleButton = () => {
+export const MaxPeopleButton = ({ setForm, useForm }: Props) => {
+  // const [selectValue, setForms] = useState<string>();
+  const LimitHandler = (event: ChangeEvent<HTMLSelectElement>) => {
+    setForm({ participantLimit: event.target.selectedIndex });
+  };
   return (
-    <ButtonConTainer name="participantLimit">
-      <Textwrapper disabled selected>
-        스터디 최대인원
-      </Textwrapper>
+    <ButtonConTainer
+      name="participantLimit"
+      className="select"
+      value={useForm.participantLimit}
+      onChange={LimitHandler}
+    >
+      <Textwrapper>스터디 최대인원</Textwrapper>
       <Textwrapper value={1}>1명</Textwrapper>
       <Textwrapper value={2}>2명</Textwrapper>
       <Textwrapper value={3}>3명</Textwrapper>

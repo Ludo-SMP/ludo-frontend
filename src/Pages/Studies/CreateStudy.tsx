@@ -20,9 +20,9 @@ export const CreateStudy = () => {
 
   const [useForm, setuseForm] = useState<Creates>({
     title: '',
-    categoryId: null,
+    categoryId: 0,
     way: '',
-    participantLimit: null,
+    participantLimit: 0,
     startDateTime: '',
     endDateTime: '',
   });
@@ -48,41 +48,8 @@ export const CreateStudy = () => {
   const handleSubmit = (event: any) => {
     event.preventDefault();
     post();
-
-    // const postData = () => {
-    // async function post() {
-    //   const { data } = await axios.post('https://ludoapi.store/studies', {
-    //     SubmitData,
-    //   });
-
-    //   console.log(data);
-    // }
-    // return post();
-    // };
   };
 
-  // useEffect(() => {
-  //   postData();
-  // }, []);
-
-  // st validateForm = (values: { title: string; category: string | any[] }) => {
-  //   if (!values.title) {
-  //     setFormErrors({ email: '제목을 입력해주세요' });
-  //   }
-  //   if (!values.category) {
-  //     setFormErrors({ password: '분야를 골라주세요' });
-  //   }
-  // };
-
-  // event: React.FormEvent<HTMLFormElement>
-  // const createHandler = (event: React.FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault();
-  //   setIsSubmitting(true);
-  //   postData();
-  // };
-  // action="http://localhost:3000/api/test" method="POST"
-  // onSubmit={createHandler}
-  // type="text" id="title" register={register}
   return (
     <>
       <StudyContainer
@@ -107,11 +74,11 @@ export const CreateStudy = () => {
             <MiddleBottomInfo>
               <MiddleBottomWrapper>
                 <ContentText>카테고리</ContentText>
-                <BigCategoryButton />
+                <BigCategoryButton setForm={forms} useForm={useForm} />
               </MiddleBottomWrapper>
               <MiddleBottomWrapper>
                 <ContentText>스터디 최대 인원</ContentText>
-                <MaxPeopleButton />
+                <MaxPeopleButton setForm={forms} useForm={useForm} />
               </MiddleBottomWrapper>
             </MiddleBottomInfo>
           </MiddleWrapper>
@@ -121,7 +88,7 @@ export const CreateStudy = () => {
           <StudyMiddleInfo>
             <StudyWrapper>
               <ContentText>진행방식</ContentText>
-              <ProgressButton />
+              <ProgressButton setForm={forms} useForm={useForm} />
             </StudyWrapper>
             {/* <StudyWrapper>
               <ContentText>진행 플랫폼</ContentText>

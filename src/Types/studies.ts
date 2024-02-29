@@ -9,8 +9,8 @@
 // };
 export type Creates = {
   title: string;
-  categoryId: number | null;
-  participantLimit: number | null;
+  categoryId: number;
+  participantLimit: number;
   way: string;
   platform?: string;
   startDateTime: string;
