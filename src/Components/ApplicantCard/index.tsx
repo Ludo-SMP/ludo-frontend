@@ -6,9 +6,10 @@ import Button from '../Common/Button';
 
 interface ApplicantCardProps extends Omit<MemberType, 'role'> {
   title: string;
+  isOwner: boolean;
 }
 
-const ApplicantCard = ({ title, nickname, email, position }: ApplicantCardProps) => {
+const ApplicantCard = ({ title, nickname, email, position, isOwner }: ApplicantCardProps) => {
   return (
     <ApplicantCardWrapper>
       <Profile width={180} height={180} />
@@ -20,10 +21,12 @@ const ApplicantCard = ({ title, nickname, email, position }: ApplicantCardProps)
           <InfoField title="포지션" content={position} />
         </div>
       </ApplicantInfoWrapper>
-      <ApplicantButtonsWrapper>
-        <Button>거절하기</Button>
-        <Button>수락하기</Button>
-      </ApplicantButtonsWrapper>
+      {isOwner && (
+        <ApplicantButtonsWrapper>
+          <Button>거절하기</Button>
+          <Button>수락하기</Button>
+        </ApplicantButtonsWrapper>
+      )}
     </ApplicantCardWrapper>
   );
 };

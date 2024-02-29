@@ -16,6 +16,7 @@ export const StudyDetail = () => {
   const navigate = useNavigate();
   const { data: studyDetail, isLoading } = useStudyDetail(studyId);
   const ownerId = studyDetail?.members.filter((member) => member.role === '팀장')[0].id;
+  console.log(ownerId, user);
 
   return isLoading ? (
     <div>Loading...</div>
@@ -39,6 +40,7 @@ export const StudyDetail = () => {
                 title: studyDetail?.studyInfo.title,
                 memberCnt: studyDetail?.memberCnt,
                 memberLimit: studyDetail?.memberLimit,
+                ownerId,
               },
             })
           }
@@ -49,7 +51,7 @@ export const StudyDetail = () => {
       </StudyDetailTitleWrapper>
       <StudyInfoSection
         category={studyDetail?.studyInfo.category || '코딩 테스트'}
-        progressMethod={studyDetail?.studyInfo.progressMethod || '진행방식'}
+        progressMethod={studyDetail?.studyInfo.progressMethod || '미정'}
         platform={'진행 플랫폼'}
         period={
           studyDetail?.studyInfo

@@ -7,10 +7,12 @@ import Button from '@/Components/Common/Button';
 import StudyToken from '@/Components/Common/StudyToken';
 import { useLocation, useParams } from 'react-router-dom';
 import { useApplicants } from '@/Apis/study';
+import { useUserStore } from '@/Store/user';
 
 const Applicants = () => {
   const studyId = Number(useParams().studyId);
-  const { title, memberCnt, memberLimit } = useLocation().state;
+  const { title, memberCnt, memberLimit, ownerId } = useLocation().state;
+  const { user } = useUserStore();
   const { isLoading, data: applicants } = useApplicants(studyId);
 
   return isLoading ? (
@@ -33,13 +35,15 @@ const Applicants = () => {
         </StudyInfoWrapper>
         <ApplicantsInfoWrapper>
           {applicants?.map((applicant: ApplicantType) => (
-            <ApplicantCard {...applicant} title={title} key={applicant?.email} />
+            <ApplicantCard {...applicant} title={title} key={applicant?.email} isOwner={ownerId === user?.id} />
           ))}
         </ApplicantsInfoWrapper>
       </StudyDetailWrapper>
-      <ApplicantButtonsWrapper>
-        <Button>스터디원 모집 마감하기</Button>
-      </ApplicantButtonsWrapper>
+      {ownerId === user?.id && (
+        <ApplicantButtonsWrapper>
+          <Button>스터디원 모집 마감하기</Button>
+        </ApplicantButtonsWrapper>
+      )}
     </ApplicantsWrapper>
   );
 };
