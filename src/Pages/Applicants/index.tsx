@@ -10,12 +10,12 @@ const Applicants = () => {
   const studyTitle = '스터디 제목';
 
   const recruitmentUsersData: MemberType[] = [
-    { nickname: '포키', email: 'aaa1@bb.net', teamPosition: '팀장', skillPosition: '디자이너' },
-    { nickname: '휴', email: 'aaa2@bb.net', teamPosition: '팀원', skillPosition: '백엔드' },
-    { nickname: '아카', email: 'aaa3@bb.net', teamPosition: '팀원', skillPosition: '백엔드' },
-    { nickname: '빽', email: 'aaa4@bb.net', teamPosition: '팀원', skillPosition: '백엔드' },
-    { nickname: '타로', email: 'aaa5@bb.net', teamPosition: '팀원', skillPosition: '프론트엔드' },
-    { nickname: 'Hyun', email: 'aaa6@bb.net', teamPosition: '팀원', skillPosition: '프론트엔드' },
+    { id: 1, nickname: '포키', email: 'aaa1@bb.net', role: '팀장', position: '디자이너' },
+    { id: 2, nickname: '휴', email: 'aaa2@bb.net', role: '팀원', position: '백엔드' },
+    { id: 3, nickname: '아카', email: 'aaa3@bb.net', role: '팀원', position: '백엔드' },
+    { id: 4, nickname: '빽', email: 'aaa4@bb.net', role: '팀원', position: '백엔드' },
+    { id: 5, nickname: '타로', email: 'aaa5@bb.net', role: '팀원', position: '프론트엔드' },
+    { id: 6, nickname: 'Hyun', email: 'aaa6@bb.net', role: '팀원', position: '프론트엔드' },
   ];
 
   return (

@@ -9,7 +9,7 @@ interface ApplicantCardProps extends MemberType {
   title: string;
 }
 
-const ApplicantCard = ({ title, nickname, email, skillPosition }: ApplicantCardProps) => {
+const ApplicantCard = ({ title, nickname, email, position }: ApplicantCardProps) => {
   return (
     <ApplicantCardWrapper>
       <Profile width={180} height={180} />
@@ -20,7 +20,7 @@ const ApplicantCard = ({ title, nickname, email, skillPosition }: ApplicantCardP
           <ColumnDivider />
           <span className="email">{email}</span>
         </div>
-        <InfoField title="포지션" content={skillPosition || '포지션'} />
+        <InfoField title="포지션" content={position || '포지션'} />
       </ApplicantInfoWrapper>
       <ApplicantButtonsWrapper>
         <Button>거절하기</Button>

@@ -11,7 +11,7 @@ interface MyStudyCardProps {
   applyState?: StudyApplyState;
   recruitState?: StudyRecruitState;
   progressState?: StudyProgressState;
-  skillPosition?: PositionType;
+  position?: PositionType;
   period?: string;
   memberCnt?: number;
   isCreator?: boolean;
@@ -23,7 +23,7 @@ const MyStudyCard = ({
   applyState,
   recruitState,
   progressState,
-  skillPosition,
+  position,
   period,
   memberCnt,
   isCreator,
@@ -42,8 +42,8 @@ const MyStudyCard = ({
           </div>
         </div>
         <div className="detail__info">
-          <InfoField title="나의 포지션" content={skillPosition || '나의 포지션'} />
-          <InfoField title="진행 기간" content={skillPosition || '포지션'} />
+          <InfoField title="나의 포지션" content={position || '나의 포지션'} />
+          <InfoField title="진행 기간" content={position || '포지션'} />
           <InfoField title="팀원 수" content={memberCnt || 0} />
         </div>
       </StudyInfoWrapper>

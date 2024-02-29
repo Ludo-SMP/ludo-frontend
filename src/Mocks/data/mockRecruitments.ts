@@ -948,6 +948,5 @@ export const recruitmentsMockData: RecruitmentRawDataType[] = [
       category,
     };
     return studycardRawData;
-    return studycardRawData;
   }),
 ];

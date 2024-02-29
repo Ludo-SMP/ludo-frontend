@@ -1,17 +1,24 @@
 import { httpClient } from '@/Utils/axios';
-import { Participant, StudyDetail } from '@/Types/study';
+import { useQuery } from '@tanstack/react-query';
+import { STUDY } from '@/Constants/queryString';
+import { convertStudyDetailRawDataToStydtDetail } from '@/Utils/propertyConverter';
 
-export const applyStudy = (studyId: number, recruitmentId: number, data: object) =>
-  httpClient.post(`/studies/${studyId}/${recruitmentId}/apply`, data);
-
-interface StudyDeatilResposne {
-  study: StudyDetail;
-  participants: Participant[];
-  participantsCount: number;
-  participantsLimit: number;
-}
+// usemutation 처리
+export const applyStudy = async (studyId: number, recruitmentId: number, data: object) => {
+  const response = await httpClient.post(`/studies/${studyId}/${recruitmentId}/apply`, data);
+  return response;
+};
 
 export const getStudyDetail = async (studyId: number) => {
-  const response = await httpClient.get<StudyDeatilResposne>(`studies/${studyId}/`);
-  return response.data;
+  console.log(studyId);
+  const response = await httpClient.get(`/studies/${studyId}`);
+  console.log(response);
+  return convertStudyDetailRawDataToStydtDetail(response.data.data);
+};
+
+export const useStudyDetail = (studyId: number) => {
+  return useQuery({
+    queryKey: [...STUDY.study(studyId)],
+    queryFn: () => getStudyDetail(studyId),
+  });
 };

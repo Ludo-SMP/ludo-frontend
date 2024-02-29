@@ -3,6 +3,8 @@ import {
   RecruitmentRawDataType,
   RecruitmentDetailRawDataType,
   RecruitmentDetailType,
+  StudyDetailRawType,
+  Participant,
 } from '@/Types/study';
 
 export const convertRecruitmentRawDataToStudyCardProps = (recruitementRawData: RecruitmentRawDataType) => {
@@ -97,5 +99,29 @@ export const convertRecruitmentDetailRawDataToRecruitmentDetail = (
     memberCnt,
     contact,
     studyTitle,
+  };
+};
+
+export const convertStudyDetailRawDataToStydtDetail = (studyDetailRawData: StudyDetailRawType) => {
+  const { study, participants, participantsCount: memberCnt, participantsLimit: memberLimit } = studyDetailRawData;
+  const {
+    id: studyId,
+    title,
+    way: progressMethod,
+    category,
+    startDateTime: startDate,
+    endDateTime: endDate,
+    dDay,
+  } = study;
+  const members = participants.map((participant: Participant) => {
+    const { id, name: nickname, email, position, role: _role } = participant;
+    const role = _role === 'Owner' ? '팀장' : '팀원';
+    return { id, nickname, email, position, role };
+  });
+  return {
+    studyInfo: { studyId, title, progressMethod, category, startDate, endDate, dDay },
+    members,
+    memberCnt,
+    memberLimit,
   };
 };

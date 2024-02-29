@@ -1,6 +1,9 @@
 import { httpClient } from '@/Utils/axios';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
-import { convertPopularRecruitmentsToStudyCardProps } from '@/Utils/propertyConverter';
+import {
+  convertPopularRecruitmentsToStudyCardProps,
+  convertRecruitmentDetailRawDataToRecruitmentDetail,
+} from '@/Utils/propertyConverter';
 import { RECRUITMENT } from '@/Constants/queryString';
 import { FilterOptionsType } from '@/Types/study';
 
@@ -46,14 +49,14 @@ export const useRecruitments = ({ filterOptions, recruitmentsPerPage }) =>
     },
   });
 
-export const getRecruitmentDetail = async (studyId: number) => {
-  const response = await httpClient.get(`/recruitments/${studyId}`);
-  return response.data;
+export const getRecruitmentDetail = async (recruitmentId: number) => {
+  const response = await httpClient.get(`/recruitments/${recruitmentId}`);
+  return convertRecruitmentDetailRawDataToRecruitmentDetail(response.data.data);
 };
 
-export const useRecruitmentDetail = (studyId: number) => {
+export const useRecruitmentDetail = (recruitmentId: number) => {
   return useQuery({
-    queryKey: ['recruitmentDetail', studyId],
-    queryFn: () => getRecruitmentDetail(studyId),
+    queryKey: [...RECRUITMENT.recruitment(recruitmentId)],
+    queryFn: () => getRecruitmentDetail(recruitmentId),
   });
 };

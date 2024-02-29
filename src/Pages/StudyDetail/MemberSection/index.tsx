@@ -1,14 +1,15 @@
-import MemberProfile, { MemberProfileProps } from '@/Components/MemberProfile';
+import MemberProfile from '@/Components/MemberProfile';
 import { Member } from '@/Assets';
 import styled from 'styled-components';
 import { InfoField } from '@/Components/Common/InfoField';
+import { MemberType } from '@/Types/study';
 
 export interface MemberSectionProps {
-  goalMemberCnt: number;
-  memberProfiles: MemberProfileProps[];
+  memberLimit: number;
+  members: MemberType[];
 }
 
-const MemberSection = ({ goalMemberCnt, memberProfiles }: MemberSectionProps) => {
+const MemberSection = ({ memberLimit, members }: MemberSectionProps) => {
   return (
     <MemberSectionWrapper>
       <div className="title">
@@ -17,15 +18,15 @@ const MemberSection = ({ goalMemberCnt, memberProfiles }: MemberSectionProps) =>
       </div>
       <div className="member__info">
         <div className="member__cnt">
-          <InfoField title="현재 인원수" content={memberProfiles.length} />
-          <InfoField title="목표 인원수" content={goalMemberCnt || '??명'} />
+          <InfoField title="현재 인원수" content={members.length} />
+          <InfoField title="목표 인원수" content={memberLimit || '??명'} />
         </div>
 
         <div className="member__profiles">
           <ul>
-            {memberProfiles.map((memberProfile) => (
+            {members.map((member) => (
               <li>
-                <MemberProfile {...memberProfile} />
+                <MemberProfile {...member} />
               </li>
             ))}
           </ul>
