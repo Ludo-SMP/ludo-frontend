@@ -3,31 +3,19 @@ import { BlankSquare } from '../Common/BlankSquare';
 import StudyToken from '../Common/StudyToken';
 import { InfoField } from '../Common/InfoField';
 import Button from '../Common/Button';
-import { PositionType, StudyApplyState, StudyProgressState, StudyRecruitState, myStudyState } from '@/Types/study';
+import { PositionType, StudyStatus } from '@/Types/study';
 
 interface MyStudyCardProps {
+  id: number;
   title: string;
-  myStudyState?: myStudyState;
-  applyState?: StudyApplyState;
-  recruitState?: StudyRecruitState;
-  progressState?: StudyProgressState;
+  status: StudyStatus[];
   position?: PositionType;
   period?: string;
   memberCnt?: number;
   isCreator?: boolean;
 }
 
-const MyStudyCard = ({
-  title,
-  myStudyState,
-  applyState,
-  recruitState,
-  progressState,
-  position,
-  period,
-  memberCnt,
-  isCreator,
-}: MyStudyCardProps) => {
+const MyStudyCard = ({ title, status, position, period, memberCnt, isCreator }: MyStudyCardProps) => {
   return (
     <MyStudyCardWrapper>
       <BlankSquare width="180px" height="180px" />
@@ -35,10 +23,9 @@ const MyStudyCard = ({
         <div className="study__status">
           <span className="title">{title}</span>
           <div className="studyTokens">
-            <StudyToken tokenState="InProgress">참여 중인 스터디</StudyToken>
-            <StudyToken tokenState="InProgress">진행중</StudyToken>
-            <StudyToken tokenState="Completed">모집중</StudyToken>
-            <StudyToken tokenState="Apply">모집중</StudyToken>
+            {status.map((_status: StudyStatus) => (
+              <StudyToken tokenState="InProgress">{_status}</StudyToken>
+            ))}
           </div>
         </div>
         <div className="detail__info">

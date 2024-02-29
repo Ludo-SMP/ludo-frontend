@@ -1,5 +1,5 @@
 import { HttpResponse, http } from 'msw';
-import { applicantsMockData, studyDetailMockData } from '../data/mockStudies';
+import { applicantsMockData, studyDetailMockData, myStudiesMockData } from '../data/mockStudies';
 import { StudyDetailRawType } from '@/Types/study';
 const baseURL = import.meta.env.VITE_MOCK_API_URL;
 
@@ -30,4 +30,17 @@ const getApplicants = http.get(`${baseURL}/studies/:studyId/recruitments/users`,
   );
 });
 
-export default [getStudyDetail, getApplicants];
+const getMyStudies = http.get(`${baseURL}/users/mypage`, async () => {
+  return new HttpResponse(
+    JSON.stringify({
+      data: { ...myStudiesMockData },
+      message: 'Success',
+    }),
+    {
+      status: 200,
+      statusText: 'OK',
+    },
+  );
+});
+
+export default [getStudyDetail, getApplicants, getMyStudies];
