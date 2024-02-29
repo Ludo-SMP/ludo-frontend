@@ -97,7 +97,7 @@ export const CreateStudy = () => {
             <StudyWrapper>
               <ContentText> 진행기간</ContentText>
               <CalendarButton>
-                <ProgressPeriod />
+                <ProgressPeriod setForm={forms} useForm={useForm} />
               </CalendarButton>
             </StudyWrapper>
           </StudyMiddleInfo>

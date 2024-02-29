@@ -1,21 +1,42 @@
 // react-datepicker를 사용해서 진행기간 구현 328px, 24px, ex) 24.01.23 - 24.03.23
 import DatePicker from 'react-datepicker';
-import { useState } from 'react';
+import { useState, ChangeEvent } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
 import styled from 'styled-components';
+import { OptionalCreates } from '@/Pages/Studies/CreateStudy';
+import { Creates } from '@/Types/studies';
 
-export const ProgressPeriod = () => {
-  const [startDateTime, setstartDateTime] = useState(new Date());
-  // new Date(updateEvent.open).getTime() - 9 * 60 * 60 * 1000
-  const [endDateTime, setendDateTime] = useState(new Date());
-  console.log(startDateTime);
-  console.log(endDateTime);
+export type Props = {
+  onClick?: () => void;
+  children?: React.ReactNode;
+  // onChange?: (event: string) => void;
+  setForm: (any: OptionalCreates) => void;
+  useForm: Creates;
+  value?: string;
+  type?: string;
+  name?: string;
+  maxlength?: number;
+  id?: string;
+  formData?: number | string;
+  ref?: string;
+};
+
+export const ProgressPeriod = ({ setForm, useForm }: Props) => {
+  const [startDateTime, setForms] = useState(new Date());
+  const [endDateTime, setFormss] = useState(new Date());
+
+  // const StartHandler = (event: ChangeEvent<HTMLSelectElement>) => {
+  //   setForm({ startDateTime: event.target.value });
+  // };
+
   return (
     <>
       <DateContainer
         selected={startDateTime}
+        value={(useForm.startDateTime = startDateTime.toISOString().slice(0, -5))}
         name="startDateTime"
-        onChange={(date: any) => setstartDateTime(date)}
+        onChange={(date: Date) => setForms(date)}
+        // onChange={StartHandler}
         selectsStart
         startDate={startDateTime}
         endDate={endDateTime}
@@ -24,8 +45,9 @@ export const ProgressPeriod = () => {
       <Slash>-</Slash>
       <DateContainer
         selected={endDateTime}
+        value={(useForm.endDateTime = endDateTime.toISOString().slice(0, -5))}
         name="endDateTime"
-        onChange={(date: any) => setendDateTime(date)}
+        onChange={(date: any) => setForms(date)}
         selectsEnd
         endDate={endDateTime}
         minDate={startDateTime}
