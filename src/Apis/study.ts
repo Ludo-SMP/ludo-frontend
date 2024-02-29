@@ -10,9 +10,7 @@ export const applyStudy = async (studyId: number, recruitmentId: number, data: o
 };
 
 export const getStudyDetail = async (studyId: number) => {
-  console.log(studyId);
   const response = await httpClient.get(`/studies/${studyId}`);
-  console.log(response);
   return convertStudyDetailRawDataToStydtDetail(response.data.data);
 };
 

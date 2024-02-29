@@ -9,13 +9,15 @@ import StudyInfoSection from './StudyInfoSection';
 import MemberSection from './MemberSection';
 import { useStudyDetail } from '@/Apis/study';
 import { dateFormatter } from '@/Utils/date';
+import { useUserStore } from '@/Store/user';
 
 export const StudyDetail = () => {
+  const { user } = useUserStore();
   const studyId = Number(useParams().studyId);
   const navigate = useNavigate();
   const { data, isLoading } = useStudyDetail(studyId);
   const studyDetail: StudyDetailType = isLoading ? null : data;
-  console.log(studyDetail);
+  const ownerId = studyDetail?.members.filter((member) => member.role === '팀장')[0].id;
 
   return isLoading ? (
     <div>Loading...</div>
@@ -30,10 +32,12 @@ export const StudyDetail = () => {
             <StudyToken tokenState="InProgress">모집중</StudyToken>
           </div>
         </StudyTitleWrapper>
-        <Button primary="default" onClick={() => navigate(`/studies/${studyId}/applicants`)}>
-          <span>스터디 지원자가 있어요!</span>
-          <Right />
-        </Button>
+        {user?.id === ownerId && (
+          <Button primary="default" onClick={() => navigate(`/studies/${studyId}/applicants`)}>
+            <span>스터디 지원자가 있어요!</span>
+            <Right />
+          </Button>
+        )}
       </StudyDetailTitleWrapper>
       <StudyInfoSection
         category={studyDetail?.studyInfo.category || '코딩 테스트'}
@@ -49,8 +53,8 @@ export const StudyDetail = () => {
       <RowDivider rowHeight={16} />
       <MemberSection memberLimit={studyDetail?.memberLimit} members={studyDetail?.members} />
       <StudyButtonsWrapper>
+        {user?.id === ownerId && <Button>모집 마감하기</Button>}
         <Button>스터디 탈퇴하기</Button>
-        <Button>모집 마감하기</Button>
       </StudyButtonsWrapper>
     </StudyDetailWrapper>
   );

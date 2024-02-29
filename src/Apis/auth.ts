@@ -21,7 +21,7 @@ export const logOut = async () => {
   return response;
 };
 
-export const verifyToken = async () => {
+export const getUser = async () => {
   const response = await httpClient.get(`/api/users/me`);
-  return response;
+  return response.data;
 };
