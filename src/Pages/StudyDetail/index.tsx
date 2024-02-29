@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { RowDivider } from '../../Components/Common/Divider/RowDivider';
-import { StudyDetailType } from '@/Types/study';
 import { Right, StudyInfo } from '@/Assets';
 import Button from '@/Components/Common/Button';
 import StudyToken from '@/Components/Common/StudyToken';
@@ -15,8 +14,7 @@ export const StudyDetail = () => {
   const { user } = useUserStore();
   const studyId = Number(useParams().studyId);
   const navigate = useNavigate();
-  const { data, isLoading } = useStudyDetail(studyId);
-  const studyDetail: StudyDetailType = isLoading ? null : data;
+  const { data: studyDetail, isLoading } = useStudyDetail(studyId);
   const ownerId = studyDetail?.members.filter((member) => member.role === '팀장')[0].id;
 
   return isLoading ? (
@@ -32,12 +30,22 @@ export const StudyDetail = () => {
             <StudyToken tokenState="InProgress">모집중</StudyToken>
           </div>
         </StudyTitleWrapper>
-        {user?.id === ownerId && (
-          <Button primary="default" onClick={() => navigate(`/studies/${studyId}/applicants`)}>
-            <span>스터디 지원자가 있어요!</span>
-            <Right />
-          </Button>
-        )}
+
+        <Button
+          primary="default"
+          onClick={() =>
+            navigate(`/studies/${studyId}/applicants`, {
+              state: {
+                title: studyDetail?.studyInfo.title,
+                memberCnt: studyDetail?.memberCnt,
+                memberLimit: studyDetail?.memberLimit,
+              },
+            })
+          }
+        >
+          <span>스터디 지원자가 있어요!</span>
+          <Right />
+        </Button>
       </StudyDetailTitleWrapper>
       <StudyInfoSection
         category={studyDetail?.studyInfo.category || '코딩 테스트'}

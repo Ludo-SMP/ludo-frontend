@@ -10,9 +10,10 @@ import Button from '@/Components/Common/Button';
 
 const MyPage = () => {
   const memberData: MemberType = {
+    id: 1,
     nickname: '포키',
     email: 'aaa1@bb.net',
-    role: 'Owner',
+    role: '팀장',
     position: '디자이너',
   };
 

@@ -21,6 +21,8 @@ export interface MemberType {
   position: string;
 }
 
+export interface ApplicantType extends Omit<MemberType, 'role'> {}
+
 export interface RecruitmentInfoType {
   recruitmentId: number;
   recruitmentTitle: string;

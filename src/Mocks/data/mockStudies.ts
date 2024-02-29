@@ -1,4 +1,4 @@
-import { StudyDetailRawType } from '@/Types/study';
+import { ApplicantType, StudyDetailRawType } from '@/Types/study';
 export const studyDetailMockData: StudyDetailRawType[] = [
   {
     study: {
@@ -2279,5 +2279,44 @@ export const studyDetailMockData: StudyDetailRawType[] = [
     ],
     participantsCount: 6,
     participantsLimit: 7,
+  },
+];
+
+export const applicantsMockData: ApplicantType[] = [
+  {
+    id: 11,
+    nickname: '지원자 포키',
+    email: 'aaa@bb1.cc',
+    position: '디자이너',
+  },
+  {
+    id: 12,
+    nickname: '지원자 빽',
+    email: 'aaa@2bb.cc',
+    position: '백엔드',
+  },
+  {
+    id: 13,
+    nickname: '지원자 아카',
+    email: 'aaa@3bb.cc',
+    position: '백엔드',
+  },
+  {
+    id: 14,
+    nickname: '지원자 휴',
+    email: 'aaa4@bb.cc',
+    position: '백엔드',
+  },
+  {
+    id: 15,
+    nickname: '지원자 타로',
+    email: 'aaa5@bb.cc',
+    position: '프론트엔드',
+  },
+  {
+    id: 16,
+    nickname: '지원자 Hyun',
+    email: 'aaa6@bb.cc',
+    position: '프론트엔드',
   },
 ];

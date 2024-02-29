@@ -5,6 +5,7 @@ import {
   RecruitmentDetailType,
   StudyDetailRawType,
   Participant,
+  ApplicantType,
 } from '@/Types/study';
 
 export const convertRecruitmentRawDataToStudyCardProps = (recruitementRawData: RecruitmentRawDataType) => {
@@ -102,7 +103,7 @@ export const convertRecruitmentDetailRawDataToRecruitmentDetail = (
   };
 };
 
-export const convertStudyDetailRawDataToStydtDetail = (studyDetailRawData: StudyDetailRawType) => {
+export const convertStudyDetailRawDataToStudyDetail = (studyDetailRawData: StudyDetailRawType) => {
   const { study, participants, participantsCount: memberCnt, participantsLimit: memberLimit } = studyDetailRawData;
   const {
     id: studyId,
@@ -124,4 +125,9 @@ export const convertStudyDetailRawDataToStydtDetail = (studyDetailRawData: Study
     memberCnt,
     memberLimit,
   };
+};
+
+export const convertApplicantsRawDataToApplicants = (applicantsRawData: { recruitmentUsers: ApplicantType[] }) => {
+  const { recruitmentUsers } = applicantsRawData;
+  return [...recruitmentUsers];
 };

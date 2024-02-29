@@ -2,46 +2,43 @@ import styled from 'styled-components';
 import { StudyInfo } from '@/Assets';
 import { InfoField } from '@/Components/Common/InfoField';
 import ApplicantCard from '@/Components/ApplicantCard';
-import { MemberType } from '@/Types/study';
+import { ApplicantType } from '@/Types/study';
 import Button from '@/Components/Common/Button';
 import StudyToken from '@/Components/Common/StudyToken';
+import { useLocation, useParams } from 'react-router-dom';
+import { useApplicants } from '@/Apis/study';
 
 const Applicants = () => {
-  const studyTitle = '스터디 제목';
+  const studyId = Number(useParams().studyId);
+  const { title, memberCnt, memberLimit } = useLocation().state;
+  const { isLoading, data: applicants } = useApplicants(studyId);
 
-  const recruitmentUsersData: MemberType[] = [
-    { id: 1, nickname: '포키', email: 'aaa1@bb.net', role: '팀장', position: '디자이너' },
-    { id: 2, nickname: '휴', email: 'aaa2@bb.net', role: '팀원', position: '백엔드' },
-    { id: 3, nickname: '아카', email: 'aaa3@bb.net', role: '팀원', position: '백엔드' },
-    { id: 4, nickname: '빽', email: 'aaa4@bb.net', role: '팀원', position: '백엔드' },
-    { id: 5, nickname: '타로', email: 'aaa5@bb.net', role: '팀원', position: '프론트엔드' },
-    { id: 6, nickname: 'Hyun', email: 'aaa6@bb.net', role: '팀원', position: '프론트엔드' },
-  ];
-
-  return (
+  return isLoading ? (
+    <div>Loading...</div>
+  ) : (
     <ApplicantsWrapper>
       <ApplicantsTitleWrapper>스터디 지원자를 확인해주세요!</ApplicantsTitleWrapper>
       <StudyDetailWrapper>
         <StudyTitleWrapper>
           <StudyInfo width="48" height="48" />
-          <span className="title">{studyTitle}</span>
+          <span className="title">{title}</span>
           <div className="study__tokens">
             <StudyToken tokenState="InProgress">참여 중인 스터디</StudyToken>
             <StudyToken tokenState="InProgress">모집중</StudyToken>
           </div>
         </StudyTitleWrapper>
         <StudyInfoWrapper>
-          <InfoField title="현재 인원수" content={6} />
-          <InfoField title="목표 인원수" content={7} />
+          <InfoField title="현재 인원수" content={memberCnt} />
+          <InfoField title="목표 인원수" content={memberLimit} />
         </StudyInfoWrapper>
         <ApplicantsInfoWrapper>
-          {recruitmentUsersData.map((recruitmentUser) => (
-            <ApplicantCard {...recruitmentUser} title={studyTitle} key={recruitmentUser?.email} />
+          {applicants?.map((applicant: ApplicantType) => (
+            <ApplicantCard {...applicant} title={title} key={applicant?.email} />
           ))}
         </ApplicantsInfoWrapper>
       </StudyDetailWrapper>
       <ApplicantButtonsWrapper>
-        <Button>모집 마감하기</Button>
+        <Button>스터디원 모집 마감하기</Button>
       </ApplicantButtonsWrapper>
     </ApplicantsWrapper>
   );
