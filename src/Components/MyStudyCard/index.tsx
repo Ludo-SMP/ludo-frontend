@@ -15,7 +15,7 @@ interface MyStudyCardProps {
   isCreator?: boolean;
 }
 
-const MyStudyCard = ({ title, status, position, period, memberCnt, isCreator }: MyStudyCardProps) => {
+const MyStudyCard = ({ title, status, position, memberCnt, isCreator }: MyStudyCardProps) => {
   return (
     <MyStudyCardWrapper>
       <BlankSquare width="180px" height="180px" />

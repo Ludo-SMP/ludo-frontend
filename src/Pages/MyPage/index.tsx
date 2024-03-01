@@ -8,7 +8,7 @@ import TemporarySavedStudyCard from '@/Components/TemporarySavedStudyCard';
 import Button from '@/Components/Common/Button';
 import { useMyStudies } from '@/Apis/study';
 import { useSelectedMyStudyStore } from '@/Store/study';
-import { StudyProgressStatus, StudyApplyStatus, ApplicantStudyType, ParticiPantStudyType } from '@/Types/study';
+import { ApplicantStudyType, ParticiPantStudyType } from '@/Types/study';
 import { dateFormatter } from '@/Utils/date';
 import ChipButton from '@/Components/Button/ChipButton';
 
@@ -144,7 +144,7 @@ const MyStudyTitleWrapper = styled.div`
   align-self: stretch;
 `;
 
-const StudyStateButtonsWrapper = styled.div<{ selectedMyStudyState: StudyProgressStatus | StudyApplyStatus }>`
+const StudyStateButtonsWrapper = styled.div`
   display: flex;
   align-items: flex-start;
   gap: 12px;
