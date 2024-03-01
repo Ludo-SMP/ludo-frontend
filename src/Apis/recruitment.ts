@@ -7,15 +7,13 @@ import {
 import { RECRUITMENT } from '@/Constants/queryString';
 import { FilterOptionsType } from '@/Types/study';
 
-export const getPopularRecruitments = async () => {
-  const response = await httpClient.get('/');
-  return convertPopularRecruitmentsToStudyCardProps(response.data.data);
-};
+export const getPopularRecruitments = async () => httpClient.get('/');
 
 export const usePopularRecruitments = () => {
   return useQuery({
     queryKey: [...RECRUITMENT.popular],
     queryFn: () => getPopularRecruitments(),
+    select: (data) => convertPopularRecruitmentsToStudyCardProps(data?.data.data),
   });
 };
 
@@ -49,14 +47,12 @@ export const useRecruitments = ({ filterOptions, recruitmentsPerPage }) =>
     },
   });
 
-export const getRecruitmentDetail = async (recruitmentId: number) => {
-  const response = await httpClient.get(`/recruitments/${recruitmentId}`);
-  return convertRecruitmentDetailRawDataToRecruitmentDetail(response.data.data);
-};
+export const getRecruitmentDetail = (recruitmentId: number) => httpClient.get(`/recruitments/${recruitmentId}`);
 
 export const useRecruitmentDetail = (recruitmentId: number) => {
   return useQuery({
     queryKey: [...RECRUITMENT.recruitment(recruitmentId)],
     queryFn: () => getRecruitmentDetail(recruitmentId),
+    select: (data) => convertRecruitmentDetailRawDataToRecruitmentDetail(data?.data.data),
   });
 };

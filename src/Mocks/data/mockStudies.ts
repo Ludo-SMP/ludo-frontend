@@ -1,4 +1,4 @@
-import { ApplicantType, StudyDetailRawType } from '@/Types/study';
+import { ApplicantType, MyStudiesType, StudyDetailRawType } from '@/Types/study';
 export const studyDetailMockData: StudyDetailRawType[] = [
   {
     study: {
@@ -2320,3 +2320,75 @@ export const applicantsMockData: ApplicantType[] = [
     position: '프론트엔드',
   },
 ];
+
+export const myStudiesMockData: MyStudiesType = {
+  user: {
+    id: 1,
+    nickname: '포키',
+    email: 'aaa@bb1.cc',
+  },
+  participantStudies: [
+    {
+      id: 1,
+      title: '인기있는 스터디 1',
+      status: ['진행 중', '모집 완료'],
+      startDateTime: '2024-03-01',
+      endDateTime: '2024-04-01',
+    },
+    {
+      id: 2,
+      title: '인기있는 스터디 2',
+      status: ['완료됨'],
+      startDateTime: '2024-03-02',
+      endDateTime: '2024-04-02',
+    },
+    {
+      id: 3,
+      title: '인기있는 스터디 3',
+      status: ['진행 중', '모집 중'],
+      startDateTime: '2024-03-03',
+      endDateTime: '2024-04-03',
+    },
+    {
+      id: 4,
+      title: '인기있는 스터디 4',
+      status: ['완료됨'],
+      startDateTime: '2024-03-04',
+      endDateTime: '2024-04-04',
+    },
+    {
+      id: 5,
+      title: '인기있는 스터디 5',
+      status: ['진행 중', '모집 중'],
+      startDateTime: '2024-03-05',
+      endDateTime: '2024-04-05',
+    },
+  ],
+  applicantStudies: [
+    {
+      id: 6,
+      title: '인기있는 스터디 6',
+      status: ['진행 중', '지원 완료'],
+    },
+    {
+      id: 7,
+      title: '인기있는 스터디 7',
+      status: ['진행 중', '합류 거절'],
+    },
+    {
+      id: 8,
+      title: '인기있는 스터디 8',
+      status: ['진행 중', '합류 확정'],
+    },
+    {
+      id: 9,
+      title: '인기있는 스터디 9',
+      status: ['진행 중', '지원 완료'],
+    },
+    {
+      id: 10,
+      title: '인기있는 스터디 10',
+      status: ['진행 중', '합류 거절'],
+    },
+  ],
+};
