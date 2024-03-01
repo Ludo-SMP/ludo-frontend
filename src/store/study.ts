@@ -1,16 +1,30 @@
-import { StudyApplyStatus, StudyProgressStatus } from '@/Types/study';
 import { create } from 'zustand';
 
-export interface SelectedMyStudyStatus {
-  selectedMyStudyStatus: StudyProgressStatus | StudyApplyStatus;
+export interface Study {
+  id: number;
+  title: string;
+  status: string;
 }
 
-export interface SelectedMyStudyStatusAction {
-  setSelectedMyStudyStatus: (newStatus: StudyProgressStatus | StudyApplyStatus) => void;
+export interface StudyParticipated extends Study {
+  startDateTime: string;
+  endDateTime: string;
 }
 
-export const useSelectedMyStudyStore = create<SelectedMyStudyStatus & SelectedMyStudyStatusAction>((set) => ({
-  selectedMyStudyStatus: '진행 중',
-  setSelectedMyStudyStatus: (newStatus: StudyProgressStatus | StudyApplyStatus) =>
-    set({ selectedMyStudyStatus: newStatus }),
+export interface myStudyListState {
+  studiesParticipated: StudyParticipated[];
+  studiesApplied: Study[];
+  studiesCreated: Study[];
+}
+
+export interface myStudyState {
+  myStudyList: myStudyListState;
+  updateMyStudyState: () => void;
+  initializeState: () => void;
+}
+
+export const useStudyStore = create<myStudyState>((set) => ({
+  myStudyList: { studiesParticipated: [], studiesApplied: [], studiesCreated: [] },
+  updateMyStudyState: () => set(() => ({})),
+  initializeState: () => set(() => ({})),
 }));

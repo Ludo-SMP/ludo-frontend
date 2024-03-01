@@ -31,13 +31,3 @@ export const useApplicants = (studyId: number) => {
     select: (data) => convertApplicantsRawDataToApplicants(data?.data.data),
   });
 };
-
-export const getMyStudies = () => httpClient.get(`/users/mypage`);
-
-export const useMyStudies = () => {
-  return useQuery({
-    queryKey: [...STUDY.myStudies()],
-    queryFn: () => getMyStudies(),
-    select: (data) => data?.data.data,
-  });
-};

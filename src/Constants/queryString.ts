@@ -12,5 +12,4 @@ export const RECRUITMENT = {
 export const STUDY = {
   study: (studyId: number) => [BASE_KEY.study, studyId],
   applicants: (studyId: number) => [BASE_KEY.study, 'applicants', studyId],
-  myStudies: () => [BASE_KEY.study, 'myStudy'],
 };
