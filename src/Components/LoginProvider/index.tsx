@@ -1,5 +1,6 @@
-import { verifyToken } from '@/Apis/auth';
+import { getUser } from '@/Apis/auth';
 import { useLoginStore } from '@/Store/auth';
+import { useUserStore } from '@/Store/user';
 import { useEffect } from 'react';
 
 interface LoginProviderProps {
@@ -8,19 +9,22 @@ interface LoginProviderProps {
 
 const LoginProvider = ({ children }: LoginProviderProps) => {
   const { setIsLoggedIn, setIsLoggedOut } = useLoginStore();
+  const { setUser, resetUser } = useUserStore();
 
   useEffect(() => {
     const checkLoggedIn = async () => {
       try {
-        await verifyToken();
+        const { data } = await getUser();
         setIsLoggedIn();
+        setUser(data);
       } catch (e) {
         console.log(e);
         setIsLoggedOut();
+        resetUser();
       }
     };
     checkLoggedIn();
-  }, [setIsLoggedIn, setIsLoggedOut]);
+  }, [setIsLoggedIn, setIsLoggedOut, resetUser, setUser]);
 
   return <>{children}</>;
 };

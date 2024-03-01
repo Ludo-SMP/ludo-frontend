@@ -2,34 +2,34 @@ import styled from 'styled-components';
 import StudyCard, { StudyCardProps } from '../StudyCard';
 import NotFound from '../NotFound';
 import { FilterOptionsType, StudyBasicInfoType } from '@/Types/study';
-// import { useMemo } from 'react';
-// import useIntersectionObservable from '@/Hooks/userIntersectionObservable';
-import { convertRecruitmentsToStudyCardProps } from '@/utils/propertyConverter';
-// import { useRecruitments } from '@/Apis/recruitment';
-import { recruitmentsMockData } from '@/Shared/dummy';
+import { useMemo } from 'react';
+import useIntersectionObservable from '@/Hooks/userIntersectionObservable';
+import { convertRecruitmentsToStudyCardProps } from '@/Utils/propertyConverter';
+import { useRecruitments } from '@/Apis/recruitment';
+import { INFINITE_RECRUITMENTS_COUMT_PER_PAGE } from '@/Constants/common';
+// import { recruitmentsMockData } from '@/Shared/dummy';
 
 export interface StudyCardListProps {
   filterOptions?: FilterOptionsType;
   studyCategory?: StudyBasicInfoType;
 }
-export const recruitmentsPerPage = 9;
 
 const StudyCardList = ({ filterOptions }: StudyCardListProps) => {
-  // const { data, hasNextPage, isFetching, fetchNextPage, isFetchingNextPage } = useRecruitments(
-  //   filterOptions,
-  //   recruitmentsPerPage,
-  // );
+  const { data, hasNextPage, isFetching, fetchNextPage, isFetchingNextPage } = useRecruitments({
+    filterOptions,
+    recruitmentsPerPage: INFINITE_RECRUITMENTS_COUMT_PER_PAGE,
+  });
 
-  // const recruitments = convertRecruitmentsToStudyCardProps(
-  //   useMemo(() => (data ? data.pages.flatMap(({ data }) => data) : []), [data]),
-  // );
+  const recruitments = convertRecruitmentsToStudyCardProps(
+    useMemo(() => (data ? data.pages.flatMap(({ data }) => data) : []), [data]),
+  );
 
-  // const ref = useIntersectionObservable((entry, observer) => {
-  //   observer.unobserve(entry.target);
-  //   if (hasNextPage && !isFetching) fetchNextPage();
-  // });
+  const ref = useIntersectionObservable((entry, observer) => {
+    observer.unobserve(entry.target);
+    if (hasNextPage && !isFetching) fetchNextPage();
+  });
 
-  const recruitments = convertRecruitmentsToStudyCardProps(recruitmentsMockData);
+  // const recruitments = convertRecruitmentsToStudyCardProps(recruitmentsMockData);
 
   return (
     <StudyCardsWrapper>
@@ -40,7 +40,7 @@ const StudyCardList = ({ filterOptions }: StudyCardListProps) => {
       ) : (
         <NotFound />
       )}
-      {/* {filterOptions && <Target ref={ref}>{isFetchingNextPage && hasNextPage ? 'Loading...' : 'No Result'}</Target>} */}
+      {filterOptions && <Target ref={ref}>{isFetchingNextPage && hasNextPage ? 'Loading...' : null}</Target>}
     </StudyCardsWrapper>
   );
 };

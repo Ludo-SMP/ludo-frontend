@@ -1,13 +1,43 @@
-import { apiRequester } from '@/utils/axios';
-// import { Creates } from '@/Types/studies';
+import { httpClient } from '@/Utils/axios';
+import { useQuery } from '@tanstack/react-query';
+import { STUDY } from '@/Constants/queryString';
+import {
+  convertApplicantsRawDataToApplicants,
+  convertStudyDetailRawDataToStudyDetail,
+} from '@/Utils/propertyConverter';
 
-export const createStudy = () => apiRequester.post(`/studies`);
+// usemutation 처리
+export const applyStudy = async (studyId: number, recruitmentId: number, data: object) => {
+  const response = await httpClient.post(`/studies/${studyId}/${recruitmentId}/apply`, data);
+  return response;
+};
 
-export const ModifyStudy = (studyId: number) => apiRequester.put(`/studies/${studyId}/recruitments`);
+export const getStudyDetail = (studyId: number) => httpClient.get(`/studies/${studyId}`);
 
-export const stack = () => apiRequester.get(`/api/stacks`).then((res) => res);
-import { POST } from '@/Utils/axios';
-import { PositionType } from '@/Types/study';
-export const applyStudy = (studyId: number, recruitmentId: number, position: PositionType | null) => {
-  POST(`/studies/${studyId}/recruitments/${recruitmentId}/apply`, { position });
+export const useStudyDetail = (studyId: number) => {
+  return useQuery({
+    queryKey: [...STUDY.study(studyId)],
+    queryFn: () => getStudyDetail(studyId),
+    select: (data) => convertStudyDetailRawDataToStudyDetail(data?.data.data),
+  });
+};
+
+export const getApplicants = (studyId: number) => httpClient.get(`/studies/${studyId}/recruitments/users`);
+
+export const useApplicants = (studyId: number) => {
+  return useQuery({
+    queryKey: [...STUDY.applicants(studyId)],
+    queryFn: () => getApplicants(studyId),
+    select: (data) => convertApplicantsRawDataToApplicants(data?.data.data),
+  });
+};
+
+export const getMyStudies = () => httpClient.get(`/users/mypage`);
+
+export const useMyStudies = () => {
+  return useQuery({
+    queryKey: [...STUDY.myStudies()],
+    queryFn: () => getMyStudies(),
+    select: (data) => data?.data.data,
+  });
 };

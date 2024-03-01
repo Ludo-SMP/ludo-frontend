@@ -1,54 +1,70 @@
 import styled from 'styled-components';
 import { RowDivider } from '../../Components/Common/Divider/RowDivider';
-import { MemberType } from '@/Types/study';
 import { Right, StudyInfo } from '@/Assets';
 import Button from '@/Components/Common/Button';
 import StudyToken from '@/Components/Common/StudyToken';
 import { useNavigate, useParams } from 'react-router-dom';
 import StudyInfoSection from './StudyInfoSection';
 import MemberSection from './MemberSection';
+import { useStudyDetail } from '@/Apis/study';
+import { dateFormatter } from '@/Utils/date';
+import { useUserStore } from '@/Store/user';
 
 export const StudyDetail = () => {
+  const { user } = useUserStore();
   const studyId = Number(useParams().studyId);
   const navigate = useNavigate();
+  const { data: studyDetail, isLoading } = useStudyDetail(studyId);
+  const ownerId = studyDetail?.members.filter((member) => member.role === '팀장')[0].id;
+  console.log(ownerId, user);
 
-  const memberProfileMocks: MemberType[] = [
-    { nickname: '포키', email: 'aaa@bb.net', teamPosition: '팀장', skillPosition: '디자이너' },
-    { nickname: '휴', email: 'aaa@bb.net', teamPosition: '팀원', skillPosition: 'BE' },
-    { nickname: '아카', email: 'aaa@bb.net', teamPosition: '팀원', skillPosition: 'BE' },
-    { nickname: '빽', email: 'aaa@bb.net', teamPosition: '팀원', skillPosition: 'BE' },
-    { nickname: '타로', email: 'aaa@bb.net', teamPosition: '팀원', skillPosition: 'FE' },
-    { nickname: 'Hyun', email: 'aaa@bb.net', teamPosition: '팀원', skillPosition: 'FE' },
-  ];
-
-  return (
+  return isLoading ? (
+    <div>Loading...</div>
+  ) : (
     <StudyDetailWrapper>
       <StudyDetailTitleWrapper>
         <StudyTitleWrapper>
           <StudyInfo width="48" height="48" />
-          <span className="title">스터디 제목</span>
+          <span className="title">{studyDetail?.studyInfo.title}</span>
           <div className="study__tokens">
             <StudyToken tokenState="InProgress">참여 중인 스터디</StudyToken>
             <StudyToken tokenState="InProgress">모집중</StudyToken>
           </div>
         </StudyTitleWrapper>
-        <Button primary="default" onClick={() => navigate(`/studies/${studyId}/applicants`)}>
+
+        <Button
+          primary="default"
+          onClick={() =>
+            navigate(`/studies/${studyId}/applicants`, {
+              state: {
+                title: studyDetail?.studyInfo.title,
+                memberCnt: studyDetail?.memberCnt,
+                memberLimit: studyDetail?.memberLimit,
+                ownerId,
+              },
+            })
+          }
+        >
           <span>스터디 지원자가 있어요!</span>
           <Right />
         </Button>
       </StudyDetailTitleWrapper>
       <StudyInfoSection
-        category={'코딩 테스트'}
-        activity={'오프라인'}
-        platform={'게더'}
-        period={'03.03~04.04'}
-        remainingPeriod={30}
+        category={studyDetail?.studyInfo.category || '코딩 테스트'}
+        progressMethod={studyDetail?.studyInfo.progressMethod || '미정'}
+        platform={'진행 플랫폼'}
+        period={
+          studyDetail?.studyInfo
+            ? `${dateFormatter(studyDetail?.studyInfo.startDate)} ~ ${dateFormatter(studyDetail?.studyInfo.endDate)}`
+            : '진행기간'
+        }
+        dDay={studyDetail?.studyInfo.dDay || 9999}
       />
       <RowDivider rowHeight={16} />
-      <MemberSection goalMemberCnt={7} memberProfiles={[...memberProfileMocks]} />
+      <MemberSection memberLimit={studyDetail?.memberLimit} members={studyDetail?.members} />
       <StudyButtonsWrapper>
+        {user?.id === ownerId && <Button>모집 마감하기</Button>}
         <Button>스터디 탈퇴하기</Button>
-        <Button>모집 마감하기</Button>
       </StudyButtonsWrapper>
     </StudyDetailWrapper>
   );

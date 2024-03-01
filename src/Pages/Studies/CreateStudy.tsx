@@ -12,7 +12,7 @@ import { Creates } from '@/Types/studies';
 import { createStudy } from '@/Apis/study';
 import { useNavigate } from 'react-router-dom';
 
-import { FormEvent, useEffect, useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 axios.defaults.withCredentials = true;
 export type OptionalCreates = Partial<Creates>;

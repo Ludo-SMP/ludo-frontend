@@ -3,31 +3,19 @@ import { BlankSquare } from '../Common/BlankSquare';
 import StudyToken from '../Common/StudyToken';
 import { InfoField } from '../Common/InfoField';
 import Button from '../Common/Button';
-import { PositionType, StudyApplyState, StudyProgressState, StudyRecruitState, myStudyState } from '@/Types/study';
+import { PositionType, StudyStatus } from '@/Types/study';
 
 interface MyStudyCardProps {
+  id: number;
   title: string;
-  myStudyState?: myStudyState;
-  applyState?: StudyApplyState;
-  recruitState?: StudyRecruitState;
-  progressState?: StudyProgressState;
-  skillPosition?: PositionType;
+  status: StudyStatus[];
+  position?: PositionType;
   period?: string;
   memberCnt?: number;
   isCreator?: boolean;
 }
 
-const MyStudyCard = ({
-  title,
-  myStudyState,
-  applyState,
-  recruitState,
-  progressState,
-  skillPosition,
-  period,
-  memberCnt,
-  isCreator,
-}: MyStudyCardProps) => {
+const MyStudyCard = ({ title, status, position, memberCnt, isCreator }: MyStudyCardProps) => {
   return (
     <MyStudyCardWrapper>
       <BlankSquare width="180px" height="180px" />
@@ -35,15 +23,14 @@ const MyStudyCard = ({
         <div className="study__status">
           <span className="title">{title}</span>
           <div className="studyTokens">
-            <StudyToken tokenState="InProgress">참여 중인 스터디</StudyToken>
-            <StudyToken tokenState="InProgress">진행중</StudyToken>
-            <StudyToken tokenState="Completed">모집중</StudyToken>
-            <StudyToken tokenState="Apply">모집중</StudyToken>
+            {status.map((_status: StudyStatus) => (
+              <StudyToken tokenState="InProgress">{_status}</StudyToken>
+            ))}
           </div>
         </div>
         <div className="detail__info">
-          <InfoField title="나의 포지션" content={skillPosition || '나의 포지션'} />
-          <InfoField title="진행 기간" content={skillPosition || '포지션'} />
+          <InfoField title="나의 포지션" content={position || '나의 포지션'} />
+          <InfoField title="진행 기간" content={position || '포지션'} />
           <InfoField title="팀원 수" content={memberCnt || 0} />
         </div>
       </StudyInfoWrapper>

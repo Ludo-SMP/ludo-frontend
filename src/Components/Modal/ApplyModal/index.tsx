@@ -1,5 +1,5 @@
 import Modal from '@/Components/Common/Modal';
-import { APPLY } from '@/Constants/Messages';
+import { APPLY } from '@/Constants/messages';
 import Chip from '@/Components/Common/Chip';
 import { applyStudy } from '@/Apis/study';
 import { PositionType } from '@/Types/study';

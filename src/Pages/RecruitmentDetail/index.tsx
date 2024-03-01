@@ -2,17 +2,17 @@ import styled from 'styled-components';
 import { InfoField } from '../../Components/Common/InfoField';
 import { RowDivider } from '../../Components/Common/Divider/RowDivider';
 import { ColumnDivider } from '../../Components/Common/Divider/ColumnDivider';
-// import { useRecruitmentDetail } from '@/Apis/recruitment';
+import { useRecruitmentDetail } from '@/Apis/recruitment';
 import { useNavigate, useParams } from 'react-router-dom';
 import { dateFormatter } from '@/Utils/date';
-import { convertRecruitmentDetailRawDataToRecruitmentDetail } from '@/Utils/propertyConverter';
+// import { convertRecruitmentDetailRawDataToRecruitmentDetail } from '@/Utils/propertyConverter';
 import RecruitmentInfoSection from './RecruitmentInfoSection';
 import StudyProgressInfoSection from './StudyProgessInfoSection';
 import StudyBasicInfoSection from './StudyBasicInfoSection';
 import Button from '@/Components/Common/Button';
-import { recruitmentDetailMockDataById } from '@/Shared/dummy';
+// import { recruitmentDetailMockDataById } from '@/Shared/dummy';
 import Modal from '@/Components/Common/Modal';
-import { APPLY } from '@/Constants/Messages';
+import { APPLY } from '@/Constants/messages';
 import { useLoginStore } from '@/Store/auth';
 import { ROUTER_PATH } from '@/Constants/Router_Path';
 import ApplyModal from '@/Components/Modal/ApplyModal';
@@ -23,14 +23,12 @@ const RecruitmentDetail = () => {
   const { isModalOpen, openModal } = useModalStore();
   const { isLoggedIn } = useLoginStore();
   const navigate = useNavigate();
-
-  const isLoading = false;
-  // const { data, isLoading } = useRecruitmentDetail(studyId);
-  // const recruitmentDetail = isLoading ? null : convertRecruitmentDetailRawDataToRecruitmentDetail(data.data);
-  const recruitmentDetail = convertRecruitmentDetailRawDataToRecruitmentDetail(
-    recruitmentDetailMockDataById(recruitmentId),
-  );
   const studyId = 1;
+  const { data, isLoading } = useRecruitmentDetail(recruitmentId);
+  const recruitmentDetail = isLoading ? null : data;
+  // const recruitmentDetail = convertRecruitmentDetailRawDataToRecruitmentDetail(
+  //   recruitmentDetailMockDataById(recruitmentId),
+  // );
 
   return isLoading ? (
     <div>Loading...</div>

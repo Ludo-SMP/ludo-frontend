@@ -6,19 +6,23 @@ export type ProgressMethodType = ActivityType;
 export type StudyCategoryType = '코딩 테스트' | '모의 면접' | '프로젝트';
 export type SortType = '최신순' | '조회순';
 export type CategoryPropertyType = 'category' | 'stacks' | 'positions' | 'way' | 'sort';
-export type TeamPositionType = '팀장' | '팀원';
-export type StudyApplyState = '합류 확정' | '지원 완료' | '합류 거절';
-export type StudyRecruitState = '모집 중' | '모집 마감';
-export type StudyProgressState = '진행 중' | '진행 완료';
-export type myStudyState = '참여' | '지원' | '완료';
+export type StudyRecruitStatus = '모집 중' | '모집 완료';
+export type StudyProgressStatus = '진행 중' | '완료됨';
+export type StudyApplyStatus = '합류 확정' | '지원 완료' | '합류 거절';
+export type StudyStatus = StudyProgressStatus | StudyApplyStatus | StudyRecruitStatus;
+export type myStudyStatus = '참여' | '지원' | '완료';
 export type AllType = '전체';
+export type RoleType = '팀장' | '팀원';
 
 export interface MemberType {
+  id: number;
   nickname: string;
   email: string;
-  teamPosition: string;
-  skillPosition: string;
+  role: RoleType;
+  position: string;
 }
+
+export interface ApplicantType extends Omit<MemberType, 'role'> {}
 
 export interface RecruitmentInfoType {
   recruitmentId: number;
@@ -106,3 +110,65 @@ export const defaultFilterOptions = {
   way: ['온라인', '오프라인', '미정'],
   sort: ['최신순'],
 };
+
+export interface Participant {
+  id: number;
+  name: string;
+  email: string;
+  position: PositionType;
+  role: 'Owner' | 'Member';
+}
+
+export interface StudyRawType {
+  id: number;
+  title: string;
+  way: string;
+  category: StudyCategoryType;
+  startDateTime: string;
+  endDateTime: string;
+  dDay: number;
+}
+
+export interface StudyInfoType {
+  studyId: number;
+  title: string;
+  progressMethod: ProgressMethodType;
+  category: StudyCategoryType;
+  startDate: string;
+  endDate: string;
+  dDay: number;
+}
+
+export interface StudyDetailRawType {
+  study: StudyRawType;
+  participants: Participant[];
+  participantsCount: number;
+  participantsLimit: number;
+}
+
+export interface StudyDetailType {
+  studyInfo: StudyInfoType;
+  members: MemberType[];
+  memberCnt: number;
+  memberLimit: number;
+}
+
+export interface ParticiPantStudyType {
+  id: number;
+  title: string;
+  status: StudyStatus[];
+  startDateTime: string;
+  endDateTime: string;
+}
+
+export interface ApplicantStudyType {
+  id: number;
+  title: string;
+  status: StudyStatus[];
+}
+
+export interface MyStudiesType {
+  user: Pick<MemberType, 'id' | 'nickname' | 'email'>;
+  participantStudies: ParticiPantStudyType[];
+  applicantStudies: ApplicantStudyType[];
+}
