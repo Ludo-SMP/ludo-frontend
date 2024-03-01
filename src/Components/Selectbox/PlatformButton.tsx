@@ -11,8 +11,8 @@ export const PlatformButton = () => {
       <Textwrapper disabled selected>
         플랫폼
       </Textwrapper>
-      <Textwrapper value="gathertown">게더타운</Textwrapper>
-      <Textwrapper value="googlemeet">구글미트</Textwrapper>
+      <Textwrapper value="GATHER">게더타운</Textwrapper>
+      <Textwrapper value="GOOGLE_MEAT">구글미트</Textwrapper>
     </ButtonConTainer>
   );
 };

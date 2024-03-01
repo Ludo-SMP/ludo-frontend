@@ -1,18 +1,35 @@
-import { useState } from 'react';
+import { useState, ChangeEvent } from 'react';
 import styled from 'styled-components';
+import { OptionalCreates } from '@/Pages/Studies/CreateStudy';
+import { Creates } from '@/Types/studies';
 
-export const ProgressButton = () => {
-  const [Value, setValue] = useState('');
-  const submitHandler = (event: any) => {
-    setValue(event.currentTarget.value);
+export type Props = {
+  onClick?: () => void;
+  children?: React.ReactNode;
+  // onChange?: (event: string) => void;
+  setForm: (any: OptionalCreates) => void;
+  useForm: Creates;
+  value?: string;
+  type?: string;
+  name?: string;
+  maxlength?: number;
+  id?: string;
+  formData?: number | string;
+  ref?: string;
+};
+
+export const ProgressButton = ({ setForm, useForm }: Props) => {
+  const [wayValue, setForms] = useState<string>('');
+  const submitHandler = (event: ChangeEvent<HTMLSelectElement>) => {
+    setForm({ way: event.target.value });
   };
   return (
-    <ButtonConTainer name="progress" className="select" value={Value} onChange={submitHandler}>
+    <ButtonConTainer name="way" className="select" value={useForm.way} onChange={submitHandler}>
       <Textwrapper disabled selected>
         진행방식
       </Textwrapper>
-      <Textwrapper value="온라인">온라인</Textwrapper>
-      <Textwrapper value="온프라인">오프라인</Textwrapper>
+      <Textwrapper value="ONLINE">온라인</Textwrapper>
+      <Textwrapper value="OFFLINE">오프라인</Textwrapper>
     </ButtonConTainer>
   );
 };

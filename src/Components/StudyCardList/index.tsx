@@ -9,6 +9,7 @@ import { useRecruitments } from '@/Apis/recruitment';
 import { INFINITE_RECRUITMENTS_COUMT_PER_PAGE } from '@/Constants/common';
 // import { recruitmentsMockData } from '@/Shared/dummy';
 
+
 export interface StudyCardListProps {
   filterOptions?: FilterOptionsType;
   studyCategory?: StudyBasicInfoType;
