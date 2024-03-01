@@ -3,7 +3,6 @@ import { StudyInfo } from '../Components/StudyCard';
 import { StudyCardListProps } from '../Components/StudyCardList';
 import { RecruitmentDetailRawDataType, PopularRecruitmentsRawDataType, RecruitmentRawDataType } from '@/Types/study';
 
-
 export const bannerDummy: BannerProps = {
   brief: '함께 발견하는 가능성, 기회의 연결',
   title: 'Ludo Study',
@@ -86,7 +85,7 @@ export const interviewStudyInfosDummy: StudyInfo[] = [
     studyName: 'Ludo Interview 2',
     studyPeriod: '3개월',
     activityType: '오프라인',
-    positions: ['디자이너', '기획'],
+    positions: ['디자이너', '데브옵스'],
     tools: ['Figma'],
     creator: 'BBak',
     createdAt: '2024.01.25',
@@ -1038,7 +1037,7 @@ export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
     id: 33,
     title: '인기 코테 스터디 33',
     stacks: ['Java', 'Javascript'],
-    positions: ['백엔드', '기획'],
+    positions: ['프론트엔드', '디자이너', '백엔드'],
     ownerNickname: '아카',
     way: '미정',
     startDateTime: '2024-03-03',

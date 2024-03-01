@@ -1,9 +1,10 @@
-import { apiRequester } from '@/Apis/auth';
+import { apiRequester } from '@/Utils/axios';
 import Button from '@/Components/Common/Button';
 import { ROUTER_PATH } from '@/Constants/Router_Path';
 import { media } from '@/Styles/theme';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { logOut } from '@/Apis/auth';
 
 export interface SignButtonSectionProps {
   isLoggedIn: boolean;
@@ -14,13 +15,7 @@ const SignButtonSection = ({ isLoggedIn }: SignButtonSectionProps) => {
   return (
     <SignButtonSectionWrapper {...{ isLoggedIn }}>
       {isLoggedIn ? (
-        <Button
-          className="logout"
-          type="button"
-          onClick={() => {
-            apiRequester.post(`/auth/logout`);
-          }}
-        >
+        <Button className="logout" type="button" onClick={logOut}>
           로그아웃
         </Button>
       ) : (

@@ -23,7 +23,7 @@ export interface myStudyState {
   initializeState: () => void;
 }
 
-export const useLoginStore = create<myStudyState>((set) => ({
+export const useStudyStore = create<myStudyState>((set) => ({
   myStudyList: { studiesParticipated: [], studiesApplied: [], studiesCreated: [] },
   updateMyStudySTate: () => set(() => ({})),
   initializeState: () => set(() => ({})),

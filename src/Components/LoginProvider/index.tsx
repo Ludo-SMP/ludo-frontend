@@ -1,5 +1,5 @@
 import { verifyToken } from '@/Apis/auth';
-import { useLoginStore } from '@/store/auth';
+import { useLoginStore } from '@/Store/auth';
 import { useEffect } from 'react';
 
 interface LoginProviderProps {
@@ -15,6 +15,7 @@ const LoginProvider = ({ children }: LoginProviderProps) => {
         await verifyToken();
         setIsLoggedIn();
       } catch (e) {
+        console.log(e);
         setIsLoggedOut();
       }
     };

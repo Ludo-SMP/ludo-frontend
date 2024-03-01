@@ -3,23 +3,34 @@ import { InfoField } from '../../Components/Common/InfoField';
 import { RowDivider } from '../../Components/Common/Divider/RowDivider';
 import { ColumnDivider } from '../../Components/Common/Divider/ColumnDivider';
 // import { useRecruitmentDetail } from '@/Apis/recruitment';
-import { useParams } from 'react-router-dom';
-import { dateFormatter } from '@/utils/date';
-import { convertRecruitmentDetailRawDataToRecruitmentDetail } from '@/utils/propertyConverter';
-
+import { useNavigate, useParams } from 'react-router-dom';
+import { dateFormatter } from '@/Utils/date';
+import { convertRecruitmentDetailRawDataToRecruitmentDetail } from '@/Utils/propertyConverter';
 import RecruitmentInfoSection from './RecruitmentInfoSection';
 import StudyProgressInfoSection from './StudyProgessInfoSection';
 import StudyBasicInfoSection from './StudyBasicInfoSection';
 import Button from '@/Components/Common/Button';
-import { applyStudy } from '@/Apis/study';
 import { recruitmentDetailMockDataById } from '@/Shared/dummy';
+import Modal from '@/Components/Common/Modal';
+import { APPLY } from '@/Constants/Messages';
+import { useLoginStore } from '@/Store/auth';
+import { ROUTER_PATH } from '@/Constants/Router_Path';
+import ApplyModal from '@/Components/Modal/ApplyModal';
+import { useModalStore } from '@/Store/modal';
 
 const RecruitmentDetail = () => {
-  const studyId = Number(useParams().studyId);
+  const recruitmentId = Number(useParams().studyId);
+  const { isModalOpen, openModal } = useModalStore();
+  const { isLoggedIn } = useLoginStore();
+  const navigate = useNavigate();
+
   const isLoading = false;
   // const { data, isLoading } = useRecruitmentDetail(studyId);
   // const recruitmentDetail = isLoading ? null : convertRecruitmentDetailRawDataToRecruitmentDetail(data.data);
-  const recruitmentDetail = convertRecruitmentDetailRawDataToRecruitmentDetail(recruitmentDetailMockDataById(studyId));
+  const recruitmentDetail = convertRecruitmentDetailRawDataToRecruitmentDetail(
+    recruitmentDetailMockDataById(recruitmentId),
+  );
+  const studyId = 1;
 
   return isLoading ? (
     <div>Loading...</div>
@@ -70,8 +81,22 @@ const RecruitmentDetail = () => {
         </div>
       </RecruitmentInfoWrapper>
       <StudyButtonsWrapper>
-        <Button onClick={() => applyStudy(studyId, 1)}>스터디 지원하기</Button>
+        <Button onClick={openModal}>스터디 지원하기</Button>
       </StudyButtonsWrapper>
+      {!isLoggedIn && isModalOpen && (
+        <Modal
+          title={APPLY.LOGIN.title}
+          handleApprove={() => navigate(ROUTER_PATH.login)}
+          approveBtnText="로그인하기"
+          cancelBtnText="나중에 하기"
+          isBtnWidthEqual={false}
+        >
+          {APPLY.LOGIN.content}
+        </Modal>
+      )}
+      {isLoggedIn && isModalOpen && (
+        <ApplyModal positions={recruitmentDetail?.positions} recruitmentId={recruitmentId} studyId={studyId} />
+      )}
     </RecruitmentDetailWrapper>
   );
 };
@@ -156,7 +181,7 @@ const StudyButtonsWrapper = styled.div`
     flex: 1 0 0;
     border-radius: 8px;
     background: ${(props) => props.theme.color.gray1};
-    color: var(--Palette-base-black-alpha-65, rgba(0, 0, 0, 0.65));
+    color: ${(props) => props.theme.color.black3};
     text-align: center;
     font-size: ${(props) => props.theme.font.xsmall};
     font-weight: 600;

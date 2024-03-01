@@ -1,5 +1,35 @@
 import axios, { AxiosInstance } from 'axios';
-export const apiRequester: AxiosInstance = axios.create({ baseURL: import.meta.env.VITE_BASE_URL });
+import { HttpStatus } from '@/Constants/StatusCodes';
+
+export const apiRequester: AxiosInstance = axios.create({
+  baseURL: import.meta.env.VITE_BASE_URL,
+  withCredentials: true,
+});
+
+interface ErrorResponse extends Response {
+  data?: string;
+}
+
+interface HttpError extends Error {
+  status: number;
+  response: ErrorResponse;
+}
+
+export const handleHttpError = (error: HttpError) => {
+  console.log(error.response);
+
+  switch (error.response.status) {
+    case HttpStatus.UNAUTHORIZED:
+      break;
+    case HttpStatus.PRECONDITION_FAILED:
+      break;
+    case HttpStatus.NOT_FOUND:
+      // moveTo('/404');
+      break;
+    default:
+      break;
+  }
+};
 
 const fetchWrapper = async ({
   method,
@@ -13,21 +43,15 @@ const fetchWrapper = async ({
   body?: object;
 }) => {
   try {
-    const config = {
-      baseURL: import.meta.env.API_URL,
-      params,
-    };
-
     const { data } =
-      (method === 'get' && (await axios.get(url, config))) ||
-      (method === 'post' && (await axios.post(url, body, config))) ||
-      (method === 'patch' && (await axios.patch(url, body, config))) ||
-      (method === 'delete' && (await axios.delete(url, config))) ||
+      (method === 'get' && (await apiRequester.get(url))) ||
+      (method === 'post' && (await apiRequester.post(url, body))) ||
+      (method === 'patch' && (await apiRequester.patch(url, body))) ||
+      (method === 'delete' && (await apiRequester.delete(url))) ||
       {};
-
     return data;
   } catch (error) {
-    console.log(error);
+    handleHttpError(error);
   }
 };
 
