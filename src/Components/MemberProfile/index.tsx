@@ -7,7 +7,7 @@ export interface MemberProfileProps extends MemberType {
   imgUrl?: string;
 }
 
-const MemberProfile = ({ imgUrl, nickname, email, teamPosition, skillPosition }: MemberProfileProps) => {
+const MemberProfile = ({ imgUrl, nickname, email, role, position }: MemberProfileProps) => {
   return (
     <MemberProfileWrapper>
       <Profile width={160} height={160} />
@@ -16,9 +16,9 @@ const MemberProfile = ({ imgUrl, nickname, email, teamPosition, skillPosition }:
         <div className="email">{email}</div>
       </div>
       <div className="positions">
-        <div className="position">{teamPosition}</div>
+        <div className="position">{role}</div>
         <ColumnDivider />
-        <div className="position">{skillPosition}</div>
+        <div className="position">{position}</div>
       </div>
     </MemberProfileWrapper>
   );

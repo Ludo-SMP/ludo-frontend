@@ -1,10 +1,4 @@
-import { GET, POST } from '@/utils/axios';
-import axios, { AxiosInstance } from 'axios';
-
-export const apiRequester: AxiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_BASE_URL,
-  withCredentials: true,
-});
+import { httpClient } from '@/Utils/axios';
 
 export interface UserInfo {
   email: string;
@@ -13,17 +7,21 @@ export interface UserInfo {
 
 export type SocialLoginType = 'google' | 'kakao' | 'naver';
 
-// export const signUp = async (signUpType: SocialLoginType) => {
-//   await apiRequester.get(`/auth/login/${signUpType}`).then((res) => res);
-// };
-// export const login = async (signUpType: SocialLoginType) => {
-//   await apiRequester.get(`/auth/signup/${signUpType}`).then((res) => res);
-// };
+export const login = async (loginType: SocialLoginType) => {
+  const response = await httpClient.get(`/auth/login/${loginType}`);
+  return response;
+};
+export const signUp = async (signUpType: SocialLoginType) => {
+  const response = await httpClient.get(`/auth/singUp/${signUpType}`);
+  return response;
+};
 
-// 로그이웃
-export const logOut = async () => await POST('/auth/logout');
+export const logOut = async () => {
+  const response = await httpClient.post(`/auth/logout`);
+  return response;
+};
 
-// 토큰 검증
-export const verifyToken = async () => {
-  await GET('/api/users/me');
+export const getUser = async () => {
+  const response = await httpClient.get(`/api/users/me`);
+  return response.data;
 };

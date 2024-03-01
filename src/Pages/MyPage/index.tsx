@@ -10,10 +10,11 @@ import Button from '@/Components/Common/Button';
 
 const MyPage = () => {
   const memberData: MemberType = {
+    id: 1,
     nickname: '포키',
     email: 'aaa1@bb.net',
-    teamPosition: '팀장',
-    skillPosition: '디자이너',
+    role: '팀장',
+    position: '디자이너',
   };
 
   return (
@@ -36,7 +37,7 @@ const MyPage = () => {
           <StudyToken tokenState="Completed">진행 완료된 스터디</StudyToken>
         </StudyTokensWrapper>
 
-        <MyStudyCard title={'스터디 이름'} skillPosition="백엔드" period="03.03~04.04" memberCnt={6} isCreator />
+        <MyStudyCard title={'스터디 이름'} position="백엔드" period="03.03~04.04" memberCnt={6} isCreator />
         <MyStudyCard title={'스터디 이름'} />
         <MyStudyCard title={'스터디 이름'} />
         <MyStudyCard title={'스터디 이름'} />
