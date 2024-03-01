@@ -19,12 +19,12 @@ export interface myStudyListState {
 
 export interface myStudyState {
   myStudyList: myStudyListState;
-  updateMyStudySTate: () => void;
+  updateMyStudyState: () => void;
   initializeState: () => void;
 }
 
 export const useStudyStore = create<myStudyState>((set) => ({
   myStudyList: { studiesParticipated: [], studiesApplied: [], studiesCreated: [] },
-  updateMyStudySTate: () => set(() => ({})),
+  updateMyStudyState: () => set(() => ({})),
   initializeState: () => set(() => ({})),
 }));

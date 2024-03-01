@@ -1,15 +1,15 @@
 import { Profile } from '@/Assets';
 import { MemberType } from '@/Types/study';
 import styled from 'styled-components';
-import { ColumnDivider } from '../Common/Divider/ColumnDivider';
 import { InfoField } from '../Common/InfoField';
 import Button from '../Common/Button';
 
-interface ApplicantCardProps extends MemberType {
+interface ApplicantCardProps extends Omit<MemberType, 'role'> {
   title: string;
+  isOwner: boolean;
 }
 
-const ApplicantCard = ({ title, nickname, email, skillPosition }: ApplicantCardProps) => {
+const ApplicantCard = ({ title, nickname, email, position, isOwner }: ApplicantCardProps) => {
   return (
     <ApplicantCardWrapper>
       <Profile width={180} height={180} />
@@ -17,15 +17,16 @@ const ApplicantCard = ({ title, nickname, email, skillPosition }: ApplicantCardP
         <div className="title">{title}</div>
         <div className="detail__info">
           <span className="nickname">{nickname}</span>
-          <ColumnDivider />
-          <span className="email">{email}</span>
+          <InfoField title="이메일" content={email} />
+          <InfoField title="포지션" content={position} />
         </div>
-        <InfoField title="포지션" content={skillPosition || '포지션'} />
       </ApplicantInfoWrapper>
-      <ApplicantButtonsWrapper>
-        <Button>거절하기</Button>
-        <Button>수락하기</Button>
-      </ApplicantButtonsWrapper>
+      {isOwner && (
+        <ApplicantButtonsWrapper>
+          <Button>거절하기</Button>
+          <Button>수락하기</Button>
+        </ApplicantButtonsWrapper>
+      )}
     </ApplicantCardWrapper>
   );
 };
@@ -63,17 +64,18 @@ const ApplicantInfoWrapper = styled.div`
 
   .detail__info {
     display: flex;
-    align-items: center;
-    gap: 24px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
     align-self: stretch;
-    font-family: Pretendard;
-    font-size: ${({ theme }) => theme.font.xxlarge};
-    font-style: normal;
-    font-weight: 700;
-    line-height: 40px;
 
     .nickname {
       color: ${({ theme }) => theme.color.black5};
+      font-family: Pretendard;
+      font-size: ${({ theme }) => theme.font.xxlarge};
+      font-style: normal;
+      font-weight: 700;
+      line-height: 40px;
     }
     .email {
       color: ${({ theme }) => theme.color.black2};
@@ -90,8 +92,8 @@ const ApplicantButtonsWrapper = styled.div`
 
   button {
     border-radius: ${({ theme }) => theme.borderRadius.small};
-    background: var(--Background-Button, #fff);
-    color: var(--Font-text-muted, rgba(0, 0, 0, 0.45));
+    background: ${({ theme }) => theme.color.white};
+    color: ${({ theme }) => theme.color.black2};
     text-align: center;
     font-family: Pretendard;
     font-size: 18px;
