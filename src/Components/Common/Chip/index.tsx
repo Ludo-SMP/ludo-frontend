@@ -1,5 +1,6 @@
 import { useSelectedPositionStore } from '@/Store/position';
 import { PositionType } from '@/Types/study';
+import { POSITION } from '@/Store/position';
 import styled from 'styled-components';
 
 type ChipType = 'Primary' | 'Secondary';
@@ -13,7 +14,7 @@ export interface ChipProps<T> {
 const Chip = ({ chipType, children, value }: ChipProps<PositionType>) => {
   const { selectedPosition, setSelectedPosition, resetSelectedPosition } = useSelectedPositionStore();
 
-  const isSelected: boolean = selectedPosition === value;
+  const isSelected: boolean = selectedPosition === POSITION[value];
 
   return (
     <ChipWrapper

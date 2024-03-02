@@ -8,7 +8,7 @@ import {
   ApplicantType,
 } from '@/Types/study';
 
-export const convertRecruitmentRawDataToRecruitmentCardProps = (recruitementRawData: RecruitmentRawDataType) => {
+export const convertRecruitmentRawDataToRecruitmentCardProps = (recruitmentRawData: RecruitmentRawDataType) => {
   const {
     id: recruitmentId,
     title: recruitmentTitle,
@@ -22,7 +22,7 @@ export const convertRecruitmentRawDataToRecruitmentCardProps = (recruitementRawD
     startDateTime: startDate,
     endDateTime: endDate,
     way: progressMethod,
-  } = recruitementRawData;
+  } = recruitmentRawData;
   return {
     recruitmentId,
     recruitmentTitle,

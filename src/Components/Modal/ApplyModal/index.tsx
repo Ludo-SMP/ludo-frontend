@@ -14,6 +14,7 @@ interface ApplyModalProps {
 
 const ApplyModal = ({ recruitmentId, studyId, positions }: ApplyModalProps) => {
   const { selectedPosition, resetSelectedPosition } = useSelectedPositionStore();
+
   return (
     <Modal
       title={APPLY.CHOSSE_POSITION.title}
@@ -21,9 +22,10 @@ const ApplyModal = ({ recruitmentId, studyId, positions }: ApplyModalProps) => {
       approveBtnText="선택 완료"
       cancelBtnText="나중에 하기"
       handleApprove={() => {
-        applyStudy(recruitmentId, studyId, selectedPosition);
+        applyStudy(recruitmentId, studyId, { selectedPosition });
         resetSelectedPosition();
       }}
+      handleCancel={() => resetSelectedPosition()}
     >
       <ChipsWrapper>
         {positions.map((position) => (

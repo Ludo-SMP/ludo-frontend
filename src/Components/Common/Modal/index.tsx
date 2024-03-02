@@ -7,6 +7,7 @@ export interface ModalProps {
   alignTitle?: 'flex-start' | 'center';
   title?: string;
   handleApprove: () => void;
+  handleCancel?: () => void;
   data?: object;
   approveBtnText: string;
   cancelBtnText?: string;
@@ -18,6 +19,7 @@ const Modal = ({
   alignTitle = 'flex-start',
   title,
   handleApprove,
+  handleCancel,
   approveBtnText,
   cancelBtnText,
   isBtnWidthEqual = true,
@@ -32,7 +34,7 @@ const Modal = ({
         </ModalInfoWrapper>
         <ModalBtnsWrapper onClick={closeModal} isBtnWidthEqual={isBtnWidthEqual}>
           {cancelBtnText && (
-            <Button className="cancel__btn" onClick={() => closeModal()}>
+            <Button className="cancel__btn" onClick={handleCancel ? handleCancel : closeModal}>
               {cancelBtnText}
             </Button>
           )}

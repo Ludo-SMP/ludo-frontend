@@ -22,7 +22,7 @@ const NotFound = () => {
     <NotFoundWrapper>
       <div className="notFound__image"></div>
       <div className="notFound__text">{SEARCH.NOT_FONND.content}</div>
-      <Button onClick={() => handleNotFound()}>
+      <Button scheme="primary" onClick={() => handleNotFound()}>
         <span>스터디 직접 생성하기</span>
       </Button>
       {!isLoggedIn && isModalOpen && (
@@ -66,22 +66,8 @@ const NotFoundWrapper = styled.div`
   }
 
   button {
-    display: flex;
-    padding: 4px 24px;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    text-align: center;
-    color: ${({ theme }) => theme.color.white};
-    text-align: center;
-    justify-content: center;
-    align-items: center;
     font-size: 18px;
-    font-weight: 600;
-    line-height: 48px;
-    border-radius: ${({ theme }) => theme.borderRadius.small};
-    border: 1px solid ${({ theme }) => theme.color.black1};
-    background: ${(props) => props.theme.color.purple1};
+    padding: 4px 24px;
   }
 `;
 
