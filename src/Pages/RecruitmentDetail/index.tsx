@@ -13,18 +13,29 @@ import Modal from '@/Components/Common/Modal';
 import { APPLY } from '@/Constants/messages';
 import { useLoginStore } from '@/Store/auth';
 import { ROUTER_PATH } from '@/Constants/Router_Path';
-import ApplyModal from '@/Components/Modal/ApplyModal';
+import { useSelectedPositionStore } from '@/Store/position';
 import { useModalStore } from '@/Store/modal';
+import { useUserStore } from '@/Store/user';
+import { applyStudy } from '@/Apis/study';
+import Chip from '@/Components/Common/Chip';
+import { useEffect } from 'react';
 
 const RecruitmentDetail = () => {
   const recruitmentId = Number(useParams().studyId);
-  const { isModalOpen, openModal } = useModalStore();
+  const { isModalOpen, openModal, closeModal } = useModalStore();
   const { isLoggedIn } = useLoginStore();
+  const { user } = useUserStore();
   const navigate = useNavigate();
+  const { selectedPosition, resetSelectedPosition } = useSelectedPositionStore();
   const studyId = 1;
   const { data, isLoading } = useRecruitmentDetail(recruitmentId);
   const recruitmentDetail = isLoading ? null : data;
-  console.log(recruitmentDetail);
+  console.log(recruitmentDetail, user);
+
+  useEffect(() => {
+    closeModal();
+  }, []);
+
   return isLoading ? (
     <div>Loading...</div>
   ) : (
@@ -74,7 +85,18 @@ const RecruitmentDetail = () => {
         </div>
       </RecruitmentInfoWrapper>
       <StudyButtonsWrapper>
-        <Button onClick={openModal}>스터디 지원하기</Button>
+        {user?.nickname === recruitmentDetail?.creator ? (
+          <>
+            <Button onClick={() => {}}>모집 마감하기</Button>
+            <Button scheme="secondary" onClick={() => {}}>
+              스터디 모집 공고 수정하기
+            </Button>
+          </>
+        ) : (
+          <Button scheme="secondary" onClick={openModal}>
+            스터디 지원하기
+          </Button>
+        )}
       </StudyButtonsWrapper>
       {!isLoggedIn && isModalOpen && (
         <Modal
@@ -88,7 +110,25 @@ const RecruitmentDetail = () => {
         </Modal>
       )}
       {isLoggedIn && isModalOpen && (
-        <ApplyModal positions={recruitmentDetail?.positions} recruitmentId={recruitmentId} studyId={studyId} />
+        <Modal
+          title={APPLY.CHOSSE_POSITION.title}
+          isBtnWidthEqual={false}
+          approveBtnText="선택 완료"
+          cancelBtnText="나중에 하기"
+          handleApprove={() => {
+            applyStudy(recruitmentId, studyId, { positionId: selectedPosition });
+            resetSelectedPosition();
+          }}
+          handleCancel={() => resetSelectedPosition()}
+        >
+          <ChipsWrapper>
+            {recruitmentDetail?.positions.map((position) => (
+              <Chip chipType="Primary" value={position}>
+                {position}
+              </Chip>
+            ))}
+          </ChipsWrapper>
+        </Modal>
       )}
     </RecruitmentDetailWrapper>
   );
@@ -100,6 +140,7 @@ const RecruitmentDetailWrapper = styled.div`
   max-width: 1224px;
   margin: 0 auto;
   margin-top: 40px;
+  padding-bottom: 80px;
   gap: 40px;
 `;
 
@@ -172,14 +213,13 @@ const StudyButtonsWrapper = styled.div`
     align-items: center;
     gap: 8px;
     flex: 1 0 0;
-    border-radius: 8px;
-    background: ${(props) => props.theme.color.gray1};
-    color: ${(props) => props.theme.color.black3};
-    text-align: center;
-    font-size: ${(props) => props.theme.font.xsmall};
-    font-weight: 600;
-    line-height: 44px;
   }
+`;
+const ChipsWrapper = styled.ul`
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 8px;
 `;
 
 export default RecruitmentDetail;

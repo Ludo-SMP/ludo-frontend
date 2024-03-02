@@ -45,8 +45,8 @@ export const font = {
 };
 
 export const buttonSize = {
-  small: '78px',
-  medium: '90px',
+  small: '84px',
+  medium: '88px',
   large: '100%',
 };
 
