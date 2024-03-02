@@ -29,7 +29,7 @@ const ButtonContainer = styled.button<{ scheme: 'primary' | 'secondary' | 'third
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  gap: var(--Spacing-8, 8px);
+  gap: 8px;
   padding: 0 16px;
   cursor: pointer;
   box-sizing: border-box;

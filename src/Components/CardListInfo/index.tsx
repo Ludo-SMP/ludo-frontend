@@ -40,16 +40,7 @@ const CardListInfoWrapper = styled.div<{ studyCategory?: StudyCategoryType }>`
   }
 
   button {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: ${(props) => props.theme.color.black3};
-    font-size: calc((${(props) => props.theme.font.small} + ${(props) => props.theme.font.medium}) / 2);
-    text-align: center;
-    font-family: Pretendard;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 48px;
+    border: none;
   }
 `;
 
