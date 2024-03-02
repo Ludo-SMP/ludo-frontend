@@ -26,7 +26,11 @@ const SocialLogin = ({ socialType, signType }: SocialLoginType) => {
   return (
     <SocialLoginWrapper
       {...{ socialType, signType }}
-      href={signType === 'login' ? API_END_POINT.LOGIN(socialType) : API_END_POINT.SIGNUP(socialType)}
+      href={
+        signType === 'login'
+          ? `${import.meta.env.VITE_BASE_API_URL}/${API_END_POINT.LOGIN(socialType)}`
+          : `${import.meta.env.VITE_BASE_API_URL}/${API_END_POINT.SIGNUP(socialType)}`
+      }
       onClick={() => {
         !isLoggedIn && setIsLoggedIn();
       }}
