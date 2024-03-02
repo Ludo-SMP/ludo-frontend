@@ -3,7 +3,7 @@ import Position from './Position';
 import { PositionType, RecruitmentInfoType, StudyBasicInfoType, ProgressInfoType } from '@/Types/study';
 import { BlankSquare } from '../Common/BlankSquare';
 import { Link } from 'react-router-dom';
-import { dateFormatter } from '@/utils/date';
+import { dateFormatter } from '@/Utils/date';
 
 export type StudyCardProps = Pick<StudyBasicInfoType, 'category'> &
   Omit<RecruitmentInfoType, 'applicantCnt' | 'contact' | 'platformUrl' | 'detail' | 'isModified'> &

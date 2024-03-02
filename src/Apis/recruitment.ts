@@ -6,8 +6,9 @@ import {
 } from '@/Utils/propertyConverter';
 import { RECRUITMENT } from '@/Constants/queryString';
 import { FilterOptionsType } from '@/Types/study';
+import { API_END_POINT } from '@/Constants/api';
 
-export const getPopularRecruitments = async () => httpClient.get('/');
+export const getPopularRecruitments = async () => httpClient.get(API_END_POINT.POPULAR_RECRUITMENTS);
 
 export const usePopularRecruitments = () => {
   return useQuery({
@@ -31,7 +32,7 @@ export const getRecruitments = async ({ pageParam, filterOptions, recruitmentsPe
     })
     .join('&');
 
-  const response = await httpClient.get(`/recruitments?${fitlerOptionsQueryString}`, {
+  const response = await httpClient.get(`${API_END_POINT.RECRUITMENTS}?${fitlerOptionsQueryString}`, {
     params: { pageParam, recruitmentsPerPage },
   });
   return response.data;
@@ -47,7 +48,7 @@ export const useRecruitments = ({ filterOptions, recruitmentsPerPage }) =>
     },
   });
 
-export const getRecruitmentDetail = (recruitmentId: number) => httpClient.get(`/recruitments/${recruitmentId}`);
+export const getRecruitmentDetail = (recruitmentId: number) => httpClient.get(API_END_POINT.RECRUITMENT(recruitmentId));
 
 export const useRecruitmentDetail = (recruitmentId: number) => {
   return useQuery({

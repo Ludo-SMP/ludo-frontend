@@ -26,9 +26,6 @@ const RecruitmentDetail = () => {
   const studyId = 1;
   const { data, isLoading } = useRecruitmentDetail(recruitmentId);
   const recruitmentDetail = isLoading ? null : data;
-  // const recruitmentDetail = convertRecruitmentDetailRawDataToRecruitmentDetail(
-  //   recruitmentDetailMockDataById(recruitmentId),
-  // );
 
   return isLoading ? (
     <div>Loading...</div>

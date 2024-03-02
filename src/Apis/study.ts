@@ -5,14 +5,15 @@ import {
   convertApplicantsRawDataToApplicants,
   convertStudyDetailRawDataToStudyDetail,
 } from '@/Utils/propertyConverter';
+import { API_END_POINT } from '@/Constants/api';
 
 // usemutation 처리
 export const applyStudy = async (studyId: number, recruitmentId: number, data: object) => {
-  const response = await httpClient.post(`/studies/${studyId}/${recruitmentId}/apply`, data);
+  const response = await httpClient.post(API_END_POINT.APPLY(studyId, recruitmentId), data);
   return response;
 };
 
-export const getStudyDetail = (studyId: number) => httpClient.get(`/studies/${studyId}`);
+export const getStudyDetail = (studyId: number) => httpClient.get(API_END_POINT.STUDY(studyId));
 
 export const useStudyDetail = (studyId: number) => {
   return useQuery({
@@ -22,7 +23,7 @@ export const useStudyDetail = (studyId: number) => {
   });
 };
 
-export const getApplicants = (studyId: number) => httpClient.get(`/studies/${studyId}/recruitments/users`);
+export const getApplicants = (studyId: number) => httpClient.get(API_END_POINT.APPLICANTS(studyId));
 
 export const useApplicants = (studyId: number) => {
   return useQuery({
@@ -32,7 +33,7 @@ export const useApplicants = (studyId: number) => {
   });
 };
 
-export const getMyStudies = () => httpClient.get(`/users/mypage`);
+export const getMyStudies = () => httpClient.get(API_END_POINT.MYPAGE);
 
 export const useMyStudies = () => {
   return useQuery({

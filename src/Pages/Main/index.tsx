@@ -11,7 +11,7 @@ import UtiltiyButtons from '@/Components/UtilityButtons';
 
 const Main = () => {
   const { data, isLoading, status } = usePopularRecruitments();
-  console.log(status);
+  console.log(status, data);
   const popularRecruitments = isLoading ? null : data;
   // const popularRecruitments = convertPopularRecruitmentsToStudyCardProps(popularRecruitmentsMockData);
 
