@@ -1,5 +1,5 @@
 import { httpClient } from '@/Utils/axios';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { STUDY } from '@/Constants/queryString';
 import {
   convertApplicantsRawDataToApplicants,
@@ -7,10 +7,18 @@ import {
 } from '@/Utils/propertyConverter';
 import { API_END_POINT } from '@/Constants/api';
 
-// usemutation 처리
-export const applyStudy = async (studyId: number, recruitmentId: number, data: object) => {
-  const response = await httpClient.post(API_END_POINT.APPLY(studyId, recruitmentId), data);
-  return response;
+export const applyStudy = async (studyId: number, recruitmentId: number, data: object) =>
+  httpClient.post(API_END_POINT.APPLY(studyId, recruitmentId), data);
+
+export const useApplyStudyMutation = (studyId: number, recruitmentId: number, data: object) => {
+  const { mutate } = useMutation({
+    mutationKey: ['apply'],
+    mutationFn: () => applyStudy(studyId, recruitmentId, data),
+    onSuccess: () => {},
+    onError: () => {
+      console.log('error');
+    },
+  });
 };
 
 export const getStudyDetail = (studyId: number) => httpClient.get(API_END_POINT.STUDY(studyId));

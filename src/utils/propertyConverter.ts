@@ -8,7 +8,7 @@ import {
   ApplicantType,
 } from '@/Types/study';
 
-export const convertRecruitmentRawDataToStudyCardProps = (recruitementRawData: RecruitmentRawDataType) => {
+export const convertRecruitmentRawDataToRecruitmentCardProps = (recruitementRawData: RecruitmentRawDataType) => {
   const {
     id: recruitmentId,
     title: recruitmentTitle,
@@ -39,20 +39,22 @@ export const convertRecruitmentRawDataToStudyCardProps = (recruitementRawData: R
   };
 };
 
-export const convertRecruitmentsToStudyCardProps = (recruitments: RecruitmentRawDataType[]) => {
-  return recruitments.map((recruitment) => convertRecruitmentRawDataToStudyCardProps(recruitment));
+export const convertRecruitmentsToRecruitmentCardProps = (recruitments: RecruitmentRawDataType[]) => {
+  return recruitments.map((recruitment) => convertRecruitmentRawDataToRecruitmentCardProps(recruitment));
 };
 
-export const convertPopularRecruitmentsToStudyCardProps = (popularRecruitments: PopularRecruitmentsRawDataType) => {
+export const convertPopularRecruitmentsToRecruitmentCardProps = (
+  popularRecruitments: PopularRecruitmentsRawDataType,
+) => {
   const {
     popularCodingRecruitments: codingRecruitments,
     popularInterviewRecruitments: interviewRecruitments,
     popularProjectRecruitments: projectRecruitments,
   } = popularRecruitments;
   return {
-    popularCodingRecruitments: convertRecruitmentsToStudyCardProps(codingRecruitments),
-    popularInterviewRecruitments: convertRecruitmentsToStudyCardProps(interviewRecruitments),
-    popularProjectRecruitments: convertRecruitmentsToStudyCardProps(projectRecruitments),
+    popularCodingRecruitments: convertRecruitmentsToRecruitmentCardProps(codingRecruitments),
+    popularInterviewRecruitments: convertRecruitmentsToRecruitmentCardProps(interviewRecruitments),
+    popularProjectRecruitments: convertRecruitmentsToRecruitmentCardProps(projectRecruitments),
   };
 };
 

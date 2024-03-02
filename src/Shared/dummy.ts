@@ -968,7 +968,7 @@ export const popularRecruitmentsMockData: PopularRecruitmentsRawDataType = {
           hits,
           category,
         } = recruitmentDetail;
-        const studycardRawData = {
+        const recruitmentCardRawData = {
           id,
           title,
           stacks,
@@ -982,7 +982,7 @@ export const popularRecruitmentsMockData: PopularRecruitmentsRawDataType = {
           hits,
           category,
         };
-        return studycardRawData;
+        return recruitmentCardRawData;
       })
       .sort((a, b) => b.hits - a.hits)
       .slice(0, 3),
@@ -1005,7 +1005,7 @@ export const popularRecruitmentsMockData: PopularRecruitmentsRawDataType = {
           hits,
           category,
         } = recruitmentDetail;
-        const studycardRawData = {
+        const recruitmentCardRawData = {
           id,
           title,
           stacks,
@@ -1019,7 +1019,7 @@ export const popularRecruitmentsMockData: PopularRecruitmentsRawDataType = {
           hits,
           category,
         };
-        return studycardRawData;
+        return recruitmentCardRawData;
       })
       .sort((a, b) => b.hits - a.hits)
       .slice(0, 3),
@@ -1042,7 +1042,7 @@ export const popularRecruitmentsMockData: PopularRecruitmentsRawDataType = {
           hits,
           category,
         } = recruitmentDetail;
-        const studycardRawData = {
+        const recruitmentCardRawData = {
           id,
           title,
           stacks,
@@ -1056,7 +1056,7 @@ export const popularRecruitmentsMockData: PopularRecruitmentsRawDataType = {
           hits,
           category,
         };
-        return studycardRawData;
+        return recruitmentCardRawData;
       })
       .sort((a, b) => b.hits - a.hits)
       .slice(0, 3),
@@ -1079,7 +1079,7 @@ export const recruitmentsMockData: RecruitmentRawDataType[] = [
       hits,
       category,
     } = recruitmentDetail;
-    const studycardRawData = {
+    const recruitmentCardRawData = {
       id,
       title,
       stacks,
@@ -1093,8 +1093,8 @@ export const recruitmentsMockData: RecruitmentRawDataType[] = [
       hits,
       category,
     };
-    return studycardRawData;
-    return studycardRawData;
+    return recruitmentCardRawData;
+    return recruitmentCardRawData;
   }),
 ];
 

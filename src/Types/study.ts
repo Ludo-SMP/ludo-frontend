@@ -56,7 +56,6 @@ export interface StudyBasicInfoType {
 
 export interface RecruitmentDetailType extends RecruitmentInfoType, ProgressInfoType, StudyBasicInfoType {}
 
-// StudyCard Prop로 사용하기 전, 서버로부터 받은 Raw Data
 export interface RecruitmentRawDataType {
   id: number;
   title: string;
