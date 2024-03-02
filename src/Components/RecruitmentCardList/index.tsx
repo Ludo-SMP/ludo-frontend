@@ -30,7 +30,7 @@ const RecruitmentCardList = ({ filterOptions }: RecruitmentCardListProps) => {
 
   return (
     <RecruitmentCardsWrapper>
-      {recruitments ? (
+      {recruitments.length ? (
         recruitments?.map((recruitment: RecruitmentCardProps) => (
           <RecruitmentCard key={recruitment.recruitmentId} {...recruitment} />
         ))

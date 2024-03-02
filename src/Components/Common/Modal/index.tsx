@@ -106,6 +106,7 @@ const ModalContentWrapper = styled.div`
   font-style: normal;
   font-weight: 500;
   line-height: 32px;
+  white-space: pre-line;
 `;
 
 const ModalBtnsWrapper = styled.div<{ isBtnWidthEqual: boolean }>`

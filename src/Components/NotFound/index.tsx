@@ -1,60 +1,87 @@
+import { CREATE_STUDY, SEARCH } from '@/Constants/messages';
+import { useLoginStore } from '@/Store/auth';
+import { useNavigate } from 'react-router-dom';
+import Button from '../Common/Button';
 import styled from 'styled-components';
-import CreateButton from '../Button/CreateButton';
-import { useRef, useState } from 'react';
-import { useOutSideClick } from '@/Hooks/useOutsideClick';
+import { ROUTER_PATH } from '@/Constants/Router_Path';
+import { useModalStore } from '@/Store/modal';
+import Modal from '../Common/Modal';
 
-const notFoundText = `찾는 태그에 대한 검색 결과가 없습니다\n프로젝트를 직접 생성하시겠습니까?`;
 const NotFound = () => {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const handleModalOpen = () => {
-    setIsModalOpen(!isModalOpen);
+  const { isLoggedIn } = useLoginStore();
+  const { isModalOpen, openModal } = useModalStore();
+  const navigate = useNavigate();
+  const handleNotFound = () => {
+    if (isLoggedIn) {
+      navigate(ROUTER_PATH.createStudy);
+      return;
+    }
+    openModal();
   };
-  const modalWrapperRef = useRef(null);
-  useOutSideClick(modalWrapperRef, handleModalOpen);
   return (
     <NotFoundWrapper>
-      <div className="notFound__text">{notFoundText}</div>
-      <CreateButton onClick={handleModalOpen}>
-        <span>스터디 생성하기</span>
-      </CreateButton>
-      {isModalOpen && <LoginModal closeModal={handleModalOpen} ref={modalWrapperRef} />}
+      <div className="notFound__image"></div>
+      <div className="notFound__text">{SEARCH.NOT_FONND.content}</div>
+      <Button onClick={() => handleNotFound()}>
+        <span>스터디 직접 생성하기</span>
+      </Button>
+      {!isLoggedIn && isModalOpen && (
+        <Modal
+          title={CREATE_STUDY.LOGIN.title}
+          handleApprove={() => navigate(ROUTER_PATH.login)}
+          approveBtnText="로그인하기"
+          cancelBtnText="나중에 할래요"
+          isBtnWidthEqual={false}
+        >
+          {CREATE_STUDY.LOGIN.content}
+        </Modal>
+      )}
     </NotFoundWrapper>
   );
 };
 
 const NotFoundWrapper = styled.div`
   display: flex;
+  padding: 40px 0px;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  margin: 116px auto;
+  margin: 0 auto;
   gap: 40px;
-  text-align: center;
-  line-height: 40px;
-  white-space: pre-wrap;
+
+  .notFound__image {
+    margin: 0 auto;
+    width: 316px;
+    height: 160px;
+    background-color: ${({ theme }) => theme.color.gray1};
+  }
 
   .notFound__text {
-    color: ${(props) => props.theme.color.black4};
-    text-align: ${(props) => props.theme.font.medium};
-    font-size: 20px;
+    color: ${({ theme }) => theme.color.black4};
+    text-align: center;
+    font-size: ${({ theme }) => theme.font.medium};
     font-style: normal;
     font-weight: 500;
+    white-space: pre-line;
+    line-height: 40px;
   }
 
   button {
     display: flex;
-    height: 48px;
-    padding: 0 24px;
-    color: ${(props) => props.theme.color.white};
+    padding: 4px 24px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+    color: ${({ theme }) => theme.color.white};
     text-align: center;
     justify-content: center;
     align-items: center;
     font-size: 18px;
     font-weight: 600;
     line-height: 48px;
-    border-radius: 8px;
-    background: ${(props) => props.theme.color.purple3};
-    box-shadow: 0px 0px 10px 0px ${(props) => props.theme.color.black1};
+    border-radius: ${({ theme }) => theme.borderRadius.small};
+    border: 1px solid ${({ theme }) => theme.color.black1};
+    background: ${(props) => props.theme.color.purple1};
   }
 `;
 
