@@ -6,19 +6,32 @@ import {
   convertStudyDetailRawDataToStudyDetail,
 } from '@/Utils/propertyConverter';
 import { API_END_POINT } from '@/Constants/api';
+import { SetStateAction } from 'react';
+import { useModalStore } from '@/Store/modal';
 
 export const applyStudy = async (studyId: number, recruitmentId: number, data: object) =>
-  httpClient.post(API_END_POINT.APPLY(studyId, recruitmentId), data);
+  httpClient.post(API_END_POINT.APPLY(studyId, recruitmentId), { ...data });
 
-export const useApplyStudyMutation = (studyId: number, recruitmentId: number, data: object) => {
+export const useApplyStudyMutation = (
+  studyId: number,
+  recruitmentId: number,
+  data: object,
+  handleApplyApprove: React.Dispatch<SetStateAction<boolean>>,
+) => {
+  const { openModal } = useModalStore();
   const { mutate } = useMutation({
     mutationKey: ['apply'],
     mutationFn: () => applyStudy(studyId, recruitmentId, data),
-    onSuccess: () => {},
+    onSuccess: () => {
+      console.log('success');
+      handleApplyApprove((prev) => !prev);
+      openModal();
+    },
     onError: () => {
       console.log('error');
     },
   });
+  return { mutate };
 };
 
 export const getStudyDetail = (studyId: number) => httpClient.get(API_END_POINT.STUDY(studyId));

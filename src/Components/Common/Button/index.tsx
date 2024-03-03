@@ -18,14 +18,17 @@ const Button = ({
   disabled = false,
   children,
   className,
-  size = 'medium',
+  size = 'large',
 }: ButtonProps) => (
   <ButtonContainer {...{ onClick, type, scheme, disabled, className, size }}>
     <>{children}</>
   </ButtonContainer>
 );
 
-const ButtonContainer = styled.button<{ scheme: 'primary' | 'secondary' | 'third' | 'normal'; size: string }>`
+const ButtonContainer = styled.button<{
+  scheme: 'primary' | 'secondary' | 'third' | 'normal';
+  size: 'small' | 'medium' | 'large';
+}>`
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -34,21 +37,22 @@ const ButtonContainer = styled.button<{ scheme: 'primary' | 'secondary' | 'third
   cursor: pointer;
   box-sizing: border-box;
   opacity: 1;
-  width: ${({ size }) => size === 'large' && '100%'};
+  width: ${({ size, theme }) =>
+    size === 'medium' ? theme.buttonSize.medium : size === 'small' ? theme.buttonSize.small : theme.buttonSize.large};
   font-size: ${({ theme }) => theme.font.small};
   font-family: Pretendard;
   font-style: normal;
   font-weight: 600;
   line-height: 40px;
   white-space: nowrap;
-  color: ${({ scheme, theme }) => (scheme === 'primary' ? theme.color.white : theme.color.black)};
+  color: ${({ scheme, theme }) => (scheme === 'primary' ? theme.color.white : theme.color.black3)};
   background: ${({ scheme, theme }) =>
     scheme === 'primary' ? theme.color.purple1 : scheme === 'secondary' ? theme.color.purple2 : theme.color.white};
   border: 1px solid ${({ theme }) => theme.color.black1};
   border-radius: ${({ scheme, theme }) => (scheme === 'third' ? theme.borderRadius.xlarge : theme.borderRadius.small)};
 
   &:hover {
-    color: ${({ scheme, theme }) => (scheme === 'normal' ? theme.color.black : theme.color.white)};
+    color: ${({ scheme, theme }) => (scheme === 'normal' ? theme.color.black4 : theme.color.white)};
     background: ${({ scheme, theme }) =>
       scheme === 'third' ? theme.color.orange4 : scheme === 'normal' ? theme.color.white : theme.color.purple5};
   }

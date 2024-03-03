@@ -8,6 +8,9 @@ export const APPLY = Object.freeze({
   CHOSSE_POSITION: {
     title: '지원하려는 스터디의 포지션을 골라주세요',
   },
+  APPROVE: {
+    title: '스터디 지원을 완료했습니다!',
+  },
 });
 
 export const SEARCH = Object.freeze({

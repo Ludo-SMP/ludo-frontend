@@ -32,13 +32,13 @@ const Modal = ({
           <div className="title">{title}</div>
           <ModalContentWrapper>{children}</ModalContentWrapper>
         </ModalInfoWrapper>
-        <ModalBtnsWrapper onClick={closeModal} isBtnWidthEqual={isBtnWidthEqual}>
+        <ModalBtnsWrapper onClick={closeModal} isBtnWidthEqual={isBtnWidthEqual} cancelBtnText={cancelBtnText}>
           {cancelBtnText && (
             <Button className="cancel__btn" onClick={handleCancel ? handleCancel : closeModal}>
               {cancelBtnText}
             </Button>
           )}
-          <Button className="approve__btn" onClick={() => handleApprove()}>
+          <Button className="approve__btn" scheme="primary" onClick={() => handleApprove()}>
             {approveBtnText}
           </Button>
         </ModalBtnsWrapper>
@@ -109,11 +109,19 @@ const ModalContentWrapper = styled.div`
   font-weight: 500;
   line-height: 32px;
   white-space: pre-line;
+
+  .approve__image {
+    width: 100%;
+    height: 160px;
+    align-self: stretch;
+    background: ${({ theme }) => theme.color.gray1};
+  }
 `;
 
-const ModalBtnsWrapper = styled.div<{ isBtnWidthEqual: boolean }>`
+const ModalBtnsWrapper = styled.div<{ isBtnWidthEqual: boolean; cancelBtnText: string }>`
   display: grid;
-  grid-template-columns: ${(props) => (props.isBtnWidthEqual ? `1fr 1fr` : `158fr 338fr`)};
+  grid-template-columns: ${(props) =>
+    props.cancelBtnText ? (props.isBtnWidthEqual ? `1fr 1fr` : `158fr 338fr`) : '1fr'};
   align-items: flex-start;
   grid-gap: 24px;
   align-self: stretch;
@@ -137,12 +145,6 @@ const ModalBtnsWrapper = styled.div<{ isBtnWidthEqual: boolean }>`
   .cancel__btn {
     color: ${({ theme }) => theme.color.black3};
     background: ${({ theme }) => theme.color.white};
-  }
-
-  .approve__btn {
-    color: ${({ theme }) => theme.color.white};
-    border: 1px solid ${({ theme }) => theme.color.purple5};
-    background: ${({ theme }) => theme.color.purple1};
   }
 `;
 

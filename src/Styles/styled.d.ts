@@ -48,6 +48,7 @@ declare module 'styled-components' {
     buttonSize: {
       small: string;
       medium: string;
+      large: string;
     };
     borderRadius: {
       small: string;

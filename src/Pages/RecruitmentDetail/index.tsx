@@ -13,28 +13,26 @@ import Modal from '@/Components/Common/Modal';
 import { APPLY } from '@/Constants/messages';
 import { useLoginStore } from '@/Store/auth';
 import { ROUTER_PATH } from '@/Constants/Router_Path';
-import { useSelectedPositionStore } from '@/Store/position';
 import { useModalStore } from '@/Store/modal';
 import { useUserStore } from '@/Store/user';
-import { applyStudy } from '@/Apis/study';
-import Chip from '@/Components/Common/Chip';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import ApplyModal from '@/Components/Modal/ApplyModal';
 
 const RecruitmentDetail = () => {
   const recruitmentId = Number(useParams().studyId);
   const { isModalOpen, openModal, closeModal } = useModalStore();
   const { isLoggedIn } = useLoginStore();
   const { user } = useUserStore();
+  const [isApplyAccepted, setIsApplyAccepted] = useState<boolean>(false);
   const navigate = useNavigate();
-  const { selectedPosition, resetSelectedPosition } = useSelectedPositionStore();
   const studyId = 1;
   const { data, isLoading } = useRecruitmentDetail(recruitmentId);
   const recruitmentDetail = isLoading ? null : data;
-  console.log(recruitmentDetail, user);
+  console.log(recruitmentDetail, user, isApplyAccepted);
 
   useEffect(() => {
     closeModal();
-  }, []);
+  }, [closeModal]);
 
   return isLoading ? (
     <div>Loading...</div>
@@ -109,25 +107,25 @@ const RecruitmentDetail = () => {
           {APPLY.LOGIN.content}
         </Modal>
       )}
-      {isLoggedIn && isModalOpen && (
+      {isLoggedIn && isModalOpen && !isApplyAccepted && (
+        <ApplyModal
+          handleApplyApprove={setIsApplyAccepted}
+          studyId={studyId}
+          recruitmentId={recruitmentId}
+          positions={recruitmentDetail?.positions}
+        />
+      )}
+      {isLoggedIn && isModalOpen && isApplyAccepted && (
         <Modal
-          title={APPLY.CHOSSE_POSITION.title}
-          isBtnWidthEqual={false}
-          approveBtnText="선택 완료"
-          cancelBtnText="나중에 하기"
+          title={APPLY.APPROVE.title}
           handleApprove={() => {
-            applyStudy(recruitmentId, studyId, { positionId: selectedPosition });
-            resetSelectedPosition();
+            setIsApplyAccepted((prev) => !prev);
+            closeModal();
           }}
-          handleCancel={() => resetSelectedPosition()}
+          approveBtnText="확인"
+          alignTitle="center"
         >
-          <ChipsWrapper>
-            {recruitmentDetail?.positions.map((position) => (
-              <Chip chipType="Primary" value={position}>
-                {position}
-              </Chip>
-            ))}
-          </ChipsWrapper>
+          <div className="approve__image"></div>
         </Modal>
       )}
     </RecruitmentDetailWrapper>
@@ -214,12 +212,6 @@ const StudyButtonsWrapper = styled.div`
     gap: 8px;
     flex: 1 0 0;
   }
-`;
-const ChipsWrapper = styled.ul`
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: 8px;
 `;
 
 export default RecruitmentDetail;
