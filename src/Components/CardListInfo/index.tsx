@@ -16,7 +16,7 @@ const CardListInfo = ({ studyCategory }: CardListInfoProps) => {
         {studyCategory ? `인기있는 ${studyCategory} 스터디` : `내가 필요한 스터디를 찾아보아요`}
       </div>
       {studyCategory ? (
-        <Button onClick={() => navigate('/studies')}>
+        <Button size="normal" onClick={() => navigate('/studies')}>
           <div>더보기</div>
           <Right />
         </Button>

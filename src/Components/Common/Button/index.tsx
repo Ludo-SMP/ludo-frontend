@@ -8,7 +8,7 @@ export type ButtonProps = {
   disabled?: boolean;
   children: React.ReactNode;
   className?: string;
-  size?: 'small' | 'medium' | 'large';
+  size?: 'normal' | 'fullWidth';
 };
 
 const Button = ({
@@ -18,7 +18,7 @@ const Button = ({
   disabled = false,
   children,
   className,
-  size = 'large',
+  size = 'normal',
 }: ButtonProps) => (
   <ButtonContainer {...{ onClick, type, scheme, disabled, className, size }}>
     <>{children}</>
@@ -27,7 +27,7 @@ const Button = ({
 
 const ButtonContainer = styled.button<{
   scheme: 'primary' | 'secondary' | 'third' | 'normal';
-  size: 'small' | 'medium' | 'large';
+  size: 'normal' | 'fullWidth';
 }>`
   display: inline-flex;
   justify-content: center;
@@ -37,8 +37,7 @@ const ButtonContainer = styled.button<{
   cursor: pointer;
   box-sizing: border-box;
   opacity: 1;
-  width: ${({ size, theme }) =>
-    size === 'medium' ? theme.buttonSize.medium : size === 'small' ? theme.buttonSize.small : theme.buttonSize.large};
+  width: ${({ size, theme }) => (size === 'fullWidth' ? theme.buttonSize.fullWidth : theme.buttonSize.normal)};
   font-size: ${({ theme }) => theme.font.small};
   font-family: Pretendard;
   font-style: normal;
