@@ -6,9 +6,10 @@ import { PositionType } from '@/Types/study';
 import styled from 'styled-components';
 import { useSelectedPositionStore } from '@/Store/position';
 import { SetStateAction } from 'react';
+import { ApplyState } from '@/Types/study';
 
 interface ApplyModalProps {
-  handleApplyApprove: React.Dispatch<SetStateAction<boolean>>;
+  handleApplyApprove: React.Dispatch<SetStateAction<ApplyState>>;
   recruitmentId: number;
   studyId: number;
   positions: PositionType[];

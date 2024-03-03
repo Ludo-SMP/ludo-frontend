@@ -17,18 +17,20 @@ import { useModalStore } from '@/Store/modal';
 import { useUserStore } from '@/Store/user';
 import { useEffect, useState } from 'react';
 import ApplyModal from '@/Components/Modal/ApplyModal';
+import { ApplyState } from '@/Types/study';
 
 const RecruitmentDetail = () => {
   const recruitmentId = Number(useParams().studyId);
+  const navigate = useNavigate();
   const { isModalOpen, openModal, closeModal } = useModalStore();
   const { isLoggedIn } = useLoginStore();
   const { user } = useUserStore();
-  const [isApplyAccepted, setIsApplyAccepted] = useState<boolean>(false);
-  const navigate = useNavigate();
+
+  const [applyState, setApplyState] = useState<ApplyState>('NOT APPLY');
   const studyId = 1;
   const { data, isLoading } = useRecruitmentDetail(recruitmentId);
   const recruitmentDetail = isLoading ? null : data;
-  console.log(recruitmentDetail, user, isApplyAccepted);
+  console.log(recruitmentDetail, user, applyState);
 
   useEffect(() => {
     closeModal();
@@ -107,25 +109,37 @@ const RecruitmentDetail = () => {
           {APPLY.LOGIN.content}
         </Modal>
       )}
-      {isLoggedIn && isModalOpen && !isApplyAccepted && (
+      {isLoggedIn && isModalOpen && applyState === 'NOT APPLY' && (
         <ApplyModal
-          handleApplyApprove={setIsApplyAccepted}
+          handleApplyApprove={setApplyState}
           studyId={studyId}
           recruitmentId={recruitmentId}
           positions={recruitmentDetail?.positions}
         />
       )}
-      {isLoggedIn && isModalOpen && isApplyAccepted && (
+      {isLoggedIn && isModalOpen && applyState === 'APPROVE' && (
         <Modal
           title={APPLY.APPROVE.title}
           handleApprove={() => {
-            setIsApplyAccepted((prev) => !prev);
+            setApplyState(() => 'NOT APPLY');
             closeModal();
           }}
           approveBtnText="확인"
           alignTitle="center"
         >
           <div className="approve__image"></div>
+        </Modal>
+      )}
+      {isLoggedIn && isModalOpen && applyState === 'FAIL' && (
+        <Modal
+          title={APPLY.FAIL.title}
+          handleApprove={() => {
+            setApplyState(() => 'NOT APPLY');
+            closeModal();
+          }}
+          approveBtnText="확인"
+        >
+          {APPLY.FAIL.content}
         </Modal>
       )}
     </RecruitmentDetailWrapper>

@@ -11,6 +11,10 @@ export const APPLY = Object.freeze({
   APPROVE: {
     title: '스터디 지원을 완료했습니다!',
   },
+  FAIL: {
+    title: '앗, 지원이 마감된 스터디입니다ㅠㅠ',
+    content: `방금 전 스터디 모집이 마감되었습니다.\n 해당 스터디에 관심 가져주셔서 감사합니다.`,
+  },
 });
 
 export const SEARCH = Object.freeze({
