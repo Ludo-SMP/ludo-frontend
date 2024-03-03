@@ -3,7 +3,7 @@ import { ROUTER_PATH } from '@/Constants/Router_Path';
 import { media } from '@/Styles/theme';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { logOut, useLogOutMutation } from '@/Apis/auth';
+import { useLogOutMutation } from '@/Apis/auth';
 
 export interface SignButtonSectionProps {
   isLoggedIn: boolean;
@@ -11,12 +11,12 @@ export interface SignButtonSectionProps {
 
 const SignButtonSection = ({ isLoggedIn }: SignButtonSectionProps) => {
   const navigate = useNavigate();
-  const { mutate: logoutMutate } = useLogOutMutation();
+  const { logoutMutate } = useLogOutMutation();
 
   return (
     <SignButtonSectionWrapper {...{ isLoggedIn }}>
       {isLoggedIn ? (
-        <Button className="logout" type="button" onClick={() => logOut()}>
+        <Button className="logout" type="button" onClick={() => logoutMutate()}>
           로그아웃
         </Button>
       ) : (

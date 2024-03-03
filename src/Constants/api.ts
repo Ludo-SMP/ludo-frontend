@@ -5,7 +5,7 @@ const API_PREFIX = `api`;
 export const API_END_POINT = {
   // AUTH
   LOGIN: (socialType: SocialType) => `${API_PREFIX}/auth/login/${socialType}`,
-  LOGOUT: `${API_PREFIX}/auth//logout`,
+  LOGOUT: `${API_PREFIX}/auth/logout`,
   SIGNUP: (socialType: SocialType) => `${API_PREFIX}/auth/signup/${socialType}`,
 
   // USER
