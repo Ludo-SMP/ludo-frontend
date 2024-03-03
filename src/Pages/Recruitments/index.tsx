@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import StudyCardList from '../../Components/StudyCardList';
+import RecruitmentCardList from '../../Components/RecruitmentCardList';
 import { bannerDummy } from '../../Shared/dummy';
 import Banner from '../../Components/Banner';
 import CardListInfo from '@/Components/CardListInfo';
@@ -26,8 +26,8 @@ const Recruitments = () => {
   return (
     <ContentsWrapper>
       <Banner {...bannerDummy} />
-      <StudyListWrapper>
-        <StudyListSearchSectionWrapper>
+      <RecruitmentListWrapper>
+        <RecruitmentListSearchSectionWrapper>
           <CardListInfo />
           <DropdownFilters className="filters">
             {mainCategories.map((mainCategory) => {
@@ -45,9 +45,9 @@ const Recruitments = () => {
           <Button className="filterIcon">
             <Filter />
           </Button>
-        </StudyListSearchSectionWrapper>
-        <StudyCardList filterOptions={filterOptions} />
-      </StudyListWrapper>
+        </RecruitmentListSearchSectionWrapper>
+        <RecruitmentCardList filterOptions={filterOptions} />
+      </RecruitmentListWrapper>
       <UtiltiyButtons>
         <Button onClick={handleScroll} className="scroll__btn">
           <Up />
@@ -76,14 +76,14 @@ const ContentsWrapper = styled.div`
   gap: 40px;
 `;
 
-const StudyListWrapper = styled.div`
+const RecruitmentListWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;
 `;
 
-const StudyListSearchSectionWrapper = styled.div`
+const RecruitmentListSearchSectionWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 40px;

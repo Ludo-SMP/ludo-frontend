@@ -5,30 +5,36 @@ import { ColumnDivider } from '../../Components/Common/Divider/ColumnDivider';
 import { useRecruitmentDetail } from '@/Apis/recruitment';
 import { useNavigate, useParams } from 'react-router-dom';
 import { dateFormatter } from '@/Utils/date';
-// import { convertRecruitmentDetailRawDataToRecruitmentDetail } from '@/Utils/propertyConverter';
 import RecruitmentInfoSection from './RecruitmentInfoSection';
 import StudyProgressInfoSection from './StudyProgessInfoSection';
 import StudyBasicInfoSection from './StudyBasicInfoSection';
 import Button from '@/Components/Common/Button';
-// import { recruitmentDetailMockDataById } from '@/Shared/dummy';
 import Modal from '@/Components/Common/Modal';
 import { APPLY } from '@/Constants/messages';
 import { useLoginStore } from '@/Store/auth';
 import { ROUTER_PATH } from '@/Constants/Router_Path';
-import ApplyModal from '@/Components/Modal/ApplyModal';
 import { useModalStore } from '@/Store/modal';
+import { useUserStore } from '@/Store/user';
+import { useEffect, useState } from 'react';
+import ApplyModal from '@/Components/Modal/ApplyModal';
+import { ApplyState } from '@/Types/study';
 
 const RecruitmentDetail = () => {
   const recruitmentId = Number(useParams().studyId);
-  const { isModalOpen, openModal } = useModalStore();
-  const { isLoggedIn } = useLoginStore();
   const navigate = useNavigate();
+  const { isModalOpen, openModal, closeModal } = useModalStore();
+  const { isLoggedIn } = useLoginStore();
+  const { user } = useUserStore();
+
+  const [applyState, setApplyState] = useState<ApplyState>('NOT APPLY');
   const studyId = 1;
   const { data, isLoading } = useRecruitmentDetail(recruitmentId);
   const recruitmentDetail = isLoading ? null : data;
-  // const recruitmentDetail = convertRecruitmentDetailRawDataToRecruitmentDetail(
-  //   recruitmentDetailMockDataById(recruitmentId),
-  // );
+  console.log(recruitmentDetail, user, applyState);
+
+  useEffect(() => {
+    closeModal();
+  }, [closeModal]);
 
   return isLoading ? (
     <div>Loading...</div>
@@ -79,7 +85,18 @@ const RecruitmentDetail = () => {
         </div>
       </RecruitmentInfoWrapper>
       <StudyButtonsWrapper>
-        <Button onClick={openModal}>스터디 지원하기</Button>
+        {user?.nickname === recruitmentDetail?.creator ? (
+          <>
+            <Button onClick={() => {}}>모집 마감하기</Button>
+            <Button scheme="secondary" onClick={() => {}}>
+              스터디 모집 공고 수정하기
+            </Button>
+          </>
+        ) : (
+          <Button scheme="secondary" onClick={openModal}>
+            스터디 지원하기
+          </Button>
+        )}
       </StudyButtonsWrapper>
       {!isLoggedIn && isModalOpen && (
         <Modal
@@ -92,8 +109,38 @@ const RecruitmentDetail = () => {
           {APPLY.LOGIN.content}
         </Modal>
       )}
-      {isLoggedIn && isModalOpen && (
-        <ApplyModal positions={recruitmentDetail?.positions} recruitmentId={recruitmentId} studyId={studyId} />
+      {isLoggedIn && isModalOpen && applyState === 'NOT APPLY' && (
+        <ApplyModal
+          handleApplyApprove={setApplyState}
+          studyId={studyId}
+          recruitmentId={recruitmentId}
+          positions={recruitmentDetail?.positions}
+        />
+      )}
+      {isLoggedIn && isModalOpen && applyState === 'APPROVE' && (
+        <Modal
+          title={APPLY.APPROVE.title}
+          handleApprove={() => {
+            setApplyState(() => 'NOT APPLY');
+            closeModal();
+          }}
+          approveBtnText="확인"
+          alignTitle="center"
+        >
+          <div className="approve__image"></div>
+        </Modal>
+      )}
+      {isLoggedIn && isModalOpen && applyState === 'FAIL' && (
+        <Modal
+          title={APPLY.FAIL.title}
+          handleApprove={() => {
+            setApplyState(() => 'NOT APPLY');
+            closeModal();
+          }}
+          approveBtnText="확인"
+        >
+          {APPLY.FAIL.content}
+        </Modal>
       )}
     </RecruitmentDetailWrapper>
   );
@@ -105,6 +152,7 @@ const RecruitmentDetailWrapper = styled.div`
   max-width: 1224px;
   margin: 0 auto;
   margin-top: 40px;
+  padding-bottom: 80px;
   gap: 40px;
 `;
 
@@ -177,13 +225,6 @@ const StudyButtonsWrapper = styled.div`
     align-items: center;
     gap: 8px;
     flex: 1 0 0;
-    border-radius: 8px;
-    background: ${(props) => props.theme.color.gray1};
-    color: ${(props) => props.theme.color.black3};
-    text-align: center;
-    font-size: ${(props) => props.theme.font.xsmall};
-    font-weight: 600;
-    line-height: 44px;
   }
 `;
 

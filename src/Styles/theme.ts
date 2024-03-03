@@ -45,9 +45,8 @@ export const font = {
 };
 
 export const buttonSize = {
-  small: '78px',
-  medium: '90px',
-  large: '100%',
+  normal: 'auto',
+  fullWidth: '100%',
 };
 
 const mediaQuery = (maxWidth: number): string => `@media (max-width: ${maxWidth}px)`;

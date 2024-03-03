@@ -6,14 +6,14 @@ import { getFilteredRecruitmentsMockData } from '../utils/getData';
 
 const baseURL = import.meta.env.VITE_MOCK_API_URL;
 
-const getPopularRecruitments = http.get(`${baseURL}`, () => {
+const getPopularRecruitments = http.get(`${baseURL}/api/recruitments/popular`, () => {
   return new HttpResponse(JSON.stringify({ data: popularRecruitmentsMockData, message: 'Success' }), {
     status: 200,
     statusText: 'OK',
   });
 });
 
-const getRecruitments = http.get(`${baseURL}/recruitments`, ({ request }) => {
+const getRecruitments = http.get(`${baseURL}/api/recruitments`, ({ request }) => {
   const url = new URL(request.url);
   const filterOptions = getfilterOptions(url.searchParams);
   const pageNum = Number(url.searchParams.get('pageParam'));
@@ -34,7 +34,7 @@ const getRecruitments = http.get(`${baseURL}/recruitments`, ({ request }) => {
   );
 });
 
-const getRecruitmentDetail = http.get(`${baseURL}/recruitments/:recruitmentId`, async ({ params }) => {
+const getRecruitmentDetail = http.get(`${baseURL}/api/recruitments/:recruitmentId`, async ({ params }) => {
   const recruitmentId: number = Number(params?.recruitmentId);
 
   return new HttpResponse(

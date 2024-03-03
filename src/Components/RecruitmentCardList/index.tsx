@@ -1,27 +1,25 @@
 import styled from 'styled-components';
-import StudyCard, { StudyCardProps } from '../StudyCard';
+import RecruitmentCard, { RecruitmentCardProps } from '../RecruitmentCard';
 import NotFound from '../NotFound';
 import { FilterOptionsType, StudyBasicInfoType } from '@/Types/study';
 import { useMemo } from 'react';
 import useIntersectionObservable from '@/Hooks/userIntersectionObservable';
-import { convertRecruitmentsToStudyCardProps } from '@/Utils/propertyConverter';
+import { convertRecruitmentsToRecruitmentCardProps } from '@/Utils/propertyConverter';
 import { useRecruitments } from '@/Apis/recruitment';
 import { INFINITE_RECRUITMENTS_COUMT_PER_PAGE } from '@/Constants/common';
-// import { recruitmentsMockData } from '@/Shared/dummy';
 
-
-export interface StudyCardListProps {
+export interface RecruitmentCardListProps {
   filterOptions?: FilterOptionsType;
   studyCategory?: StudyBasicInfoType;
 }
 
-const StudyCardList = ({ filterOptions }: StudyCardListProps) => {
+const RecruitmentCardList = ({ filterOptions }: RecruitmentCardListProps) => {
   const { data, hasNextPage, isFetching, fetchNextPage, isFetchingNextPage } = useRecruitments({
     filterOptions,
     recruitmentsPerPage: INFINITE_RECRUITMENTS_COUMT_PER_PAGE,
   });
 
-  const recruitments = convertRecruitmentsToStudyCardProps(
+  const recruitments = convertRecruitmentsToRecruitmentCardProps(
     useMemo(() => (data ? data.pages.flatMap(({ data }) => data) : []), [data]),
   );
 
@@ -30,23 +28,21 @@ const StudyCardList = ({ filterOptions }: StudyCardListProps) => {
     if (hasNextPage && !isFetching) fetchNextPage();
   });
 
-  // const recruitments = convertRecruitmentsToStudyCardProps(recruitmentsMockData);
-
   return (
-    <StudyCardsWrapper>
-      {recruitments ? (
-        recruitments?.map((recruitment: StudyCardProps) => (
-          <StudyCard key={recruitment.recruitmentId} {...recruitment} />
+    <RecruitmentCardsWrapper>
+      {recruitments.length ? (
+        recruitments?.map((recruitment: RecruitmentCardProps) => (
+          <RecruitmentCard key={recruitment.recruitmentId} {...recruitment} />
         ))
       ) : (
         <NotFound />
       )}
       {filterOptions && <Target ref={ref}>{isFetchingNextPage && hasNextPage ? 'Loading...' : null}</Target>}
-    </StudyCardsWrapper>
+    </RecruitmentCardsWrapper>
   );
 };
 
-const StudyCardsWrapper = styled.li`
+const RecruitmentCardsWrapper = styled.li`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
@@ -58,4 +54,4 @@ const StudyCardsWrapper = styled.li`
 const Target = styled.div`
   height: 1px;
 `;
-export default StudyCardList;
+export default RecruitmentCardList;

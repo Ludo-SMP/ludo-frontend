@@ -10,9 +10,9 @@ export const SignUp = () => {
     <SignUpWrapper>
       <SignUpGuideWrapper />
       <SignUpBtnsWrapper>
-        <SocialLogin socialType="네이버" signType="회원가입" />
-        <SocialLogin socialType="카카오" signType="회원가입" />
-        <SocialLogin socialType="구글" signType="회원가입" />
+        <SocialLogin socialType="naver" signType="signup" />
+        <SocialLogin socialType="kakao" signType="signup" />
+        <SocialLogin socialType="google" signType="signup" />
       </SignUpBtnsWrapper>
       <LoginWrapper>
         <span>이미 ㅇㅇ 계정이 있으신가요?</span>

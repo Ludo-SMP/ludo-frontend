@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-const initialLoginState: boolean = true;
+const initialLoginState: boolean = false;
 
 export interface LoginState {
   isLoggedIn: boolean;

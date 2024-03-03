@@ -3,13 +3,13 @@ import Position from './Position';
 import { PositionType, RecruitmentInfoType, StudyBasicInfoType, ProgressInfoType } from '@/Types/study';
 import { BlankSquare } from '../Common/BlankSquare';
 import { Link } from 'react-router-dom';
-import { dateFormatter } from '@/utils/date';
+import { dateFormatter } from '@/Utils/date';
 
-export type StudyCardProps = Pick<StudyBasicInfoType, 'category'> &
+export type RecruitmentCardProps = Pick<StudyBasicInfoType, 'category'> &
   Omit<RecruitmentInfoType, 'applicantCnt' | 'contact' | 'platformUrl' | 'detail' | 'isModified'> &
   Omit<ProgressInfoType, 'platform'>;
 
-const StudyCard = ({
+const RecruitmentCard = ({
   recruitmentId,
   recruitmentTitle,
   positions,
@@ -22,12 +22,12 @@ const StudyCard = ({
   startDate,
   endDate,
   progressMethod,
-}: StudyCardProps) => {
+}: RecruitmentCardProps) => {
   return (
     <Link to={`/studies/${recruitmentId}/recruitment`}>
-      <StudyCardWrapper>
+      <RecruitmentCardWrapper>
         <StudyRecruitInfoWrapper>
-          <div className="s tudy__category">[{category}]</div>
+          <div className="study__category">[{category}]</div>
           <div className="recruit__deadline">
             <div>모집 마감일</div>
             <span>{recruitmentEndDate}</span>
@@ -67,12 +67,12 @@ const StudyCard = ({
             <span className="views">{views}</span>
           </div>
         </StudyAdditionalInfoWrapper>
-      </StudyCardWrapper>
+      </RecruitmentCardWrapper>
     </Link>
   );
 };
 
-const StudyCardWrapper = styled.li`
+const RecruitmentCardWrapper = styled.li`
   width: 394px;
   height: 368px;
   display: flex;
@@ -199,4 +199,4 @@ const StudyAdditionalInfoWrapper = styled.div`
   }
 `;
 
-export default StudyCard;
+export default RecruitmentCard;
