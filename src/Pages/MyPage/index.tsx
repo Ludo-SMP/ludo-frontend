@@ -34,7 +34,7 @@ const MyPage = () => {
         </MyStudyTitleWrapper>
         <StudyStateButtonsWrapper>
           <ChipButton checked={selectedMyStudyStatus === '진행 중'} onClick={() => setSelectedMyStudyStatus('진행 중')}>
-            참여 중인 스터디
+            참여중인 스터디
           </ChipButton>
           <ChipButton
             checked={selectedMyStudyStatus === '지원 완료'}
