@@ -15,8 +15,7 @@ export const StudyDetail = () => {
   const studyId = Number(useParams().studyId);
   const navigate = useNavigate();
   const { data: studyDetail, isLoading } = useStudyDetail(studyId);
-  console.log(studyDetail);
-  const ownerId = studyDetail?.members.filter((member) => member.role === '팀장')[0].id;
+  console.log(studyDetail?.members);
 
   return isLoading ? (
     <div>Loading...</div>
@@ -25,7 +24,7 @@ export const StudyDetail = () => {
       <StudyDetailTitleWrapper>
         <StudyTitleWrapper>
           <StudyInfo width="48" height="48" />
-          <span className="title">{studyDetail?.studyInfo.title}</span>
+          <span className="title">{studyDetail?.title}</span>
           <div className="study__tokens">
             <StudyToken tokenState="InProgress">참여 중인 스터디</StudyToken>
             <StudyToken tokenState="InProgress">모집중</StudyToken>
@@ -33,14 +32,13 @@ export const StudyDetail = () => {
         </StudyTitleWrapper>
 
         <Button
-          primary="default"
           onClick={() =>
             navigate(`/studies/${studyId}/applicants`, {
               state: {
-                title: studyDetail?.studyInfo.title,
+                title: studyDetail?.title,
                 memberCnt: studyDetail?.memberCnt,
                 memberLimit: studyDetail?.memberLimit,
-                ownerId,
+                ownerId: studyDetail?.owner.id,
               },
             })
           }
@@ -50,20 +48,18 @@ export const StudyDetail = () => {
         </Button>
       </StudyDetailTitleWrapper>
       <StudyInfoSection
-        category={studyDetail?.studyInfo.category || '코딩 테스트'}
-        progressMethod={studyDetail?.studyInfo.progressMethod || '미정'}
-        platform={'진행 플랫폼'}
+        category={studyDetail?.category.name || '카테고리'}
+        progressMethod={studyDetail?.progressMethod || '미정'}
+        platform={studyDetail?.progressMethod || '진행 플랫폼'}
         period={
-          studyDetail?.studyInfo
-            ? `${dateFormatter(studyDetail?.studyInfo.startDate)} ~ ${dateFormatter(studyDetail?.studyInfo.endDate)}`
-            : '진행기간'
+          studyDetail ? `${dateFormatter(studyDetail?.startDate)} ~ ${dateFormatter(studyDetail?.endDate)}` : '진행기간'
         }
-        dDay={studyDetail?.studyInfo.dDay || 9999}
+        dDay={studyDetail?.dDay || 9999}
       />
       <RowDivider rowHeight={16} />
       <MemberSection memberLimit={studyDetail?.memberLimit} members={studyDetail?.members} />
       <StudyButtonsWrapper>
-        {user?.id === ownerId && <Button>모집 마감하기</Button>}
+        {user?.id === studyDetail?.owner.id && <Button>모집 마감하기</Button>}
         <Button>스터디 탈퇴하기</Button>
       </StudyButtonsWrapper>
     </StudyDetailWrapper>

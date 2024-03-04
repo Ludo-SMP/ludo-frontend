@@ -1,10 +1,10 @@
 import { Profile } from '@/Assets';
-import { MemberType } from '@/Types/study';
+import { Member } from '@/Types/study';
 import styled from 'styled-components';
 import { InfoField } from '../Common/InfoField';
 import Button from '../Common/Button';
 
-interface ApplicantCardProps extends Omit<MemberType, 'role'> {
+interface ApplicantCardProps extends Omit<Member, 'role'> {
   title: string;
   isOwner: boolean;
 }

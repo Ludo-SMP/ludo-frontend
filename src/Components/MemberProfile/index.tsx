@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { ColumnDivider } from '../Common/Divider/ColumnDivider';
 import { Profile } from '@/Assets';
-import { MemberType } from '@/Types/study';
+import { Member } from '@/Types/study';
 
-export interface MemberProfileProps extends MemberType {
+export interface MemberProfileProps extends Member {
   imgUrl?: string;
 }
 
@@ -18,7 +18,7 @@ const MemberProfile = ({ imgUrl, nickname, email, role, position }: MemberProfil
       <div className="positions">
         <div className="position">{role}</div>
         <ColumnDivider />
-        <div className="position">{position}</div>
+        <div className="position">{position?.name}</div>
       </div>
     </MemberProfileWrapper>
   );

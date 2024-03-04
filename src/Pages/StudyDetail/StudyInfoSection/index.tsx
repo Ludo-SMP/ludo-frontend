@@ -4,7 +4,7 @@ import { RowDivider } from '@/Components/Common/Divider/RowDivider';
 import { ProgressMethod, StudyCategory } from '@/Types/study';
 
 export interface StudyInfoSectionProps {
-  category?: StudyCategory;
+  category?: StudyCategory | string;
   progressMethod?: ProgressMethod;
   platform?: string;
   period?: string;

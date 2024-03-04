@@ -9,7 +9,7 @@ export { default as Google } from './icons/google.svg?react';
 export { default as Hamburger } from './icons/hamburger.svg?react';
 export { default as Kakao } from './icons/kakao.svg?react';
 export { default as Left } from './icons/left.svg?react';
-export { default as Member } from './icons/member.svg?react';
+export { default as MemberImage } from './icons/member.svg?react';
 export { default as More } from './icons/more.svg?react';
 export { default as Naver } from './icons/naver.svg?react';
 export { default as One } from './icons/one.svg?react';

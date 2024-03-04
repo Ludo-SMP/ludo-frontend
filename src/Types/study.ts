@@ -12,17 +12,20 @@ export type StudyApplyStatus = '합류 확정' | '지원 완료' | '합류 거�
 export type StudyStatus = StudyProgressStatus | StudyApplyStatus | StudyRecruitStatus;
 export type myStudyStatus = '참여' | '지원' | '완료';
 export type AllType = '전체';
-export type RoleType = '팀장' | '팀원';
+export type Role = '팀장' | '팀원';
 export type Platform = 'GATHER' | 'GOOGLE MEET';
-export interface MemberType {
+export interface Member {
   id: number;
   nickname: string;
   email: string;
-  role: RoleType;
-  position: string;
+  position: {
+    id: number;
+    name: StudyCategory | string;
+  };
+  role: Role | string;
 }
 
-export interface ApplicantType extends Omit<MemberType, 'role'> {}
+export interface ApplicantType extends Omit<Member, 'role'> {}
 
 export interface RecruitmentInfoType {
   recruitmentId: number;
@@ -158,7 +161,7 @@ export interface StudyDetail {
   studyId: number;
   title: string;
   progressMethod: ProgressMethod;
-  members: MemberType[];
+  members: Member[];
   memberCnt: number;
   memberLimit: number;
 }
@@ -178,7 +181,7 @@ export interface ApplicantStudyType {
 }
 
 export interface MyStudiesType {
-  user: Pick<MemberType, 'id' | 'nickname' | 'email'>;
+  user: Pick<Member, 'id' | 'nickname' | 'email'>;
   participantStudies: ParticiPantStudyType[];
   applicantStudies: ApplicantStudyType[];
 }

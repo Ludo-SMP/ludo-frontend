@@ -1,10 +1,10 @@
 import { Profile, More } from '@/Assets';
-import { MemberType } from '@/Types/study';
+import { Member } from '@/Types/study';
 import styled from 'styled-components';
 
 import Button from '../Common/Button';
 
-type MemberCardProps = Pick<MemberType, 'nickname' | 'email'>;
+type MemberCardProps = Pick<Member, 'nickname' | 'email'>;
 
 const MemberCard = ({ nickname, email }: MemberCardProps) => {
   return (
