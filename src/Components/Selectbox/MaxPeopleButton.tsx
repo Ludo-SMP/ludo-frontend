@@ -46,7 +46,7 @@ export const MaxPeopleButton = ({ setForm, useForm }: Props) => {
 };
 
 const ButtonConTainer = styled.select`
-  width: 600px;
+  width: 392px;
   height: 44px;
   background-color: ${(props) => props.theme.color.gray1};
   border-radius: 8px;
@@ -61,6 +61,3 @@ const Textwrapper = styled.option`
   color: ${(props) => props.theme.color.gray3};
   padding-left: 330px;
 `;
-function useState(arg0: string): [any, any] {
-  throw new Error('Function not implemented.');
-}

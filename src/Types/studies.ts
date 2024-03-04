@@ -7,26 +7,29 @@
 //   startDateTime: string;
 //   endDateTime: string;
 // };
+
 export type Creates = {
   title: string;
   categoryId: number;
   participantLimit: number;
   way: string;
   platform?: string;
+  positionId: number;
   startDateTime: string;
   endDateTime: string;
 };
 
-type Position = '프론트엔드' | '백엔드' | '디자이너' | '기획자';
-type ItemCategory = {
+export type Position = '프론트엔드' | '백엔드' | '디자이너' | '기획자';
+export type stackId = 4 | 5 | 6 | 8 | 9 | 10;
+export type ItemCategory = {
   name: string;
   id: number;
 };
 
-type StackItem = {
+export type StackItem = {
   id: number;
   name: string;
-  ImageUrl: string;
+  imageUrl: string;
   category: ItemCategory;
 };
 

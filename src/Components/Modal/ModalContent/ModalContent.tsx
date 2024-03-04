@@ -75,7 +75,7 @@ const ModalContainers = styled.section`
   flex-direction: column;
   align-items: flex-start;
   width: 1200px;
-  height: 882px;
+  height: 932px;
 `;
 
 const ButtonWrapper = styled.section`

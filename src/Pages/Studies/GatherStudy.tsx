@@ -10,8 +10,27 @@ import { GatherButton } from '../../Components/Selectbox/GatherButton';
 import { StackModal } from '../../Components/Modal/StackModal';
 import { EndDate } from '../../Components/Calendar/EndDate';
 import { media } from '../../Styles/theme';
+import { Creates } from '@/Types/studies';
+import { useState } from 'react';
+export type OptionalCreates = Partial<Creates>;
 
 export const GatherStudy = () => {
+  const [useForm, setuseForm] = useState<Creates>({
+    title: '',
+    categoryId: 0,
+    way: '',
+    participantLimit: 0,
+    startDateTime: '',
+    endDateTime: '',
+    positionId: 0,
+  });
+
+  function forms(fields: OptionalCreates) {
+    setuseForm({
+      ...useForm,
+      ...fields,
+    });
+  }
   return (
     <>
       <StudyContainer>
@@ -31,7 +50,7 @@ export const GatherStudy = () => {
             </StudyWrapper>
             <StudyWrapper>
               <ContentText>포지션</ContentText>
-              <PositionButton />
+              <PositionButton setForm={forms} useForm={useForm} />
             </StudyWrapper>
             <StudyWrapper>
               <ContentText>기술스택</ContentText>
@@ -86,7 +105,7 @@ export const GatherStudy = () => {
           <StudyTitle>스터디 팀원 모집 공고 제목</StudyTitle>
           <BottomWrapper>
             <ContentText>제목</ContentText>
-            <Titlearea />
+            <Titlearea setForm={forms} useForm={useForm} />
           </BottomWrapper>
           <BottomWrapper>
             <ContentText>내용</ContentText>

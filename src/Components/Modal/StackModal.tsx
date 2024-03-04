@@ -3,11 +3,6 @@ import { useState } from 'react';
 import { ModalContent } from './ModalContent/ModalContent';
 import { StackButton } from '../Button/Studies/StackButton';
 
-// type ModalProps = {
-//   closeModal?: () => void;
-//   open: () => void;
-// };
-
 //
 export const StackModal = () => {
   const [showModal, setShowModal] = useState(false);
