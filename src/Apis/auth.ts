@@ -11,20 +11,6 @@ export interface UserInfo {
 
 export const logOut = async () => httpClient.post(API_END_POINT.LOGOUT);
 
-<<<<<<< HEAD
-export const login = async (loginType: SocialLoginType) => {
-  const response = await httpClient.get(`api/auth/login/${loginType}`);
-  return response;
-};
-export const signUp = async (signUpType: SocialLoginType) => {
-  const response = await httpClient.get(`/auth/singUp/${signUpType}`);
-  return response;
-};
-
-export const logOut = async () => {
-  const response = await httpClient.post(`/auth/logout`);
-  return response;
-=======
 export const useLogOutMutation = () => {
   const { setIsLoggedOut } = useLoginStore();
   const navigate = useNavigate();
@@ -41,7 +27,6 @@ export const useLogOutMutation = () => {
     },
   });
   return { logoutMutate: mutate };
->>>>>>> 13bfd44f73995db4ace6c0219c5424b370daf9d2
 };
 
 export const getUser = async () => {
