@@ -18,13 +18,13 @@ const MemberSection = ({ memberLimit, members }: MemberSectionProps) => {
       </div>
       <div className="member__info">
         <div className="member__cnt">
-          <InfoField title="현재 인원수" content={members.length} />
+          <InfoField title="현재 인원수" content={members?.length || '??명'} />
           <InfoField title="목표 인원수" content={memberLimit || '??명'} />
         </div>
 
         <div className="member__profiles">
           <ul>
-            {members.map((member) => (
+            {members?.map((member) => (
               <li>
                 <MemberProfile {...member} />
               </li>

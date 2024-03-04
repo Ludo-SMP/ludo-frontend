@@ -3,13 +3,13 @@ import { BlankSquare } from '../Common/BlankSquare';
 import StudyToken from '../Common/StudyToken';
 import { InfoField } from '../Common/InfoField';
 import Button from '../Common/Button';
-import { PositionType, StudyStatus } from '@/Types/study';
+import { Position, StudyStatus } from '@/Types/study';
 
 interface MyStudyCardProps {
   id: number;
   title: string;
   status: StudyStatus[];
-  position?: PositionType;
+  position?: Position;
   period?: string;
   memberCnt?: number;
   isCreator?: boolean;

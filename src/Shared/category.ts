@@ -1,17 +1,17 @@
 import {
-  StudyCategoryType,
+  StudyCategory,
   MainCategoryType,
   AllType,
   StackType,
-  PositionType,
-  ProgressMethodType,
+  Position,
+  ProgressMethod,
   SortType,
   FilterOptionsType,
   CategoryPropertyType,
 } from '@/Types/study';
 
 export const cateegoryProperties: CategoryPropertyType[] = ['category', 'stacks', 'positions', 'way', 'sort'];
-export const studyCategory: MainCategoryType<StudyCategoryType, AllType> = {
+export const studyCategory: MainCategoryType<StudyCategory, AllType> = {
   categoryName: '스터디 유형',
   categoryProperty: 'category',
   categoryItems: ['전체', '코딩 테스트', '모의 면접', '프로젝트'],
@@ -23,12 +23,12 @@ export const stackCategory: MainCategoryType<StackType, AllType> = {
   categoryItems: ['전체', 'React', 'Java', 'Spring', 'Figma', 'Java', 'Javascript'],
 };
 
-export const positionCategory: MainCategoryType<PositionType, AllType> = {
+export const positionCategory: MainCategoryType<Position, AllType> = {
   categoryName: '포지션',
   categoryProperty: 'positions',
   categoryItems: ['전체', '백엔드', '프론트엔드', '데브옵스', '디자이너'],
 };
-export const progessMethodCategory: MainCategoryType<ProgressMethodType, AllType> = {
+export const progessMethodCategory: MainCategoryType<ProgressMethod, AllType> = {
   categoryName: '진행 방식',
   categoryProperty: 'way',
   categoryItems: ['전체', '온라인', '오프라인', '미정'],

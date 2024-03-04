@@ -1,5 +1,6 @@
 export const dateFormatter = (date: string) => {
-  const dateElements = date.split('-');
-  const [month, day] = dateElements.slice(1);
-  return month + '.' + day;
+  const [year, month, day] = date.split('-');
+  return year.slice(2) + '.' + month + '.' + day.slice(2);
 };
+
+export const getdDay = (startDate: string, endDate: string) => {};

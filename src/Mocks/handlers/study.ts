@@ -3,8 +3,9 @@ import { applicantsMockData, studyDetailMockData, myStudiesMockData } from '../d
 import { StudyDetailRawType } from '@/Types/study';
 const baseURL = import.meta.env.VITE_MOCK_API_URL;
 
-const getStudyDetail = http.get(`${baseURL}/studies/:studyId`, async ({ params }) => {
+const getStudyDetail = http.get(`${baseURL}/api/studies/:studyId`, async ({ params }) => {
   const studyId: number = Number(params?.studyId);
+  console.log(studyId);
   return new HttpResponse(
     JSON.stringify({
       data: studyDetailMockData.filter((studyDetail: StudyDetailRawType) => studyDetail?.study.id === studyId)[0],
@@ -17,7 +18,7 @@ const getStudyDetail = http.get(`${baseURL}/studies/:studyId`, async ({ params }
   );
 });
 
-const getApplicants = http.get(`${baseURL}/studies/:studyId/recruitments/users`, async () => {
+const getApplicants = http.get(`${baseURL}/api/studies/:studyId/recruitments/users`, async () => {
   return new HttpResponse(
     JSON.stringify({
       data: { recruitmentUsers: applicantsMockData },

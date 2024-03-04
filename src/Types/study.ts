@@ -1,9 +1,9 @@
-export type PositionType = '백엔드' | '프론트엔드' | '디자이너' | '데브옵스';
+export type Position = '백엔드' | '프론트엔드' | '디자이너' | '데브옵스';
 export type ActivityType = '온라인' | '오프라인' | '미정';
 export type ToolType = 'React' | 'Java' | 'Spring' | 'Figma' | 'Java' | 'Javascript';
 export type StackType = ToolType;
-export type ProgressMethodType = ActivityType;
-export type StudyCategoryType = '코딩 테스트' | '모의 면접' | '프로젝트';
+export type ProgressMethod = ActivityType;
+export type StudyCategory = '코딩 테스트' | '모의 면접' | '프로젝트';
 export type SortType = '최신순' | '조회순';
 export type CategoryPropertyType = 'category' | 'stacks' | 'positions' | 'way' | 'sort';
 export type StudyRecruitStatus = '모집 중' | '모집 완료';
@@ -13,7 +13,7 @@ export type StudyStatus = StudyProgressStatus | StudyApplyStatus | StudyRecruitS
 export type myStudyStatus = '참여' | '지원' | '완료';
 export type AllType = '전체';
 export type RoleType = '팀장' | '팀원';
-
+export type Platform = 'GATHER' | 'GOOGLE MEET';
 export interface MemberType {
   id: number;
   nickname: string;
@@ -28,7 +28,7 @@ export interface RecruitmentInfoType {
   recruitmentId: number;
   recruitmentTitle: string;
   applicantCnt: number;
-  positions: PositionType[];
+  positions: Position[];
   stacks: StackType[];
   contact: string;
   platformUrl: string;
@@ -41,7 +41,7 @@ export interface RecruitmentInfoType {
 }
 
 export interface ProgressInfoType {
-  progressMethod: ProgressMethodType;
+  progressMethod: ProgressMethod;
   platform: string;
   startDate: string;
   endDate: string;
@@ -50,7 +50,7 @@ export interface ProgressInfoType {
 export interface StudyBasicInfoType {
   studyId?: number;
   studyTitle: string;
-  category: StudyCategoryType;
+  category: StudyCategory;
   memberCnt: number;
 }
 
@@ -60,8 +60,8 @@ export interface RecruitmentRawDataType {
   id: number;
   title: string;
   stacks: ToolType[];
-  category: StudyCategoryType;
-  positions: PositionType[];
+  category: StudyCategory;
+  positions: Position[];
   ownerNickname: string;
   way: ActivityType;
   startDateTime: string;
@@ -96,10 +96,10 @@ export interface MainCategoryType<T, S> {
 }
 
 export interface FilterOptionsType {
-  category: StudyCategoryType[];
+  category: StudyCategory[];
   stacks: StackType[];
-  positions: PositionType[];
-  way: ProgressMethodType[];
+  positions: Position[];
+  way: ProgressMethod;
   sort: SortType[];
 }
 
@@ -113,41 +113,51 @@ export const defaultFilterOptions = {
 
 export interface Participant {
   id: number;
-  name: string;
+  nickname: string;
+  role: 'OWNER' | 'MEMBER';
   email: string;
-  position: PositionType;
-  role: 'Owner' | 'Member';
+  position: { id: number; name: string };
 }
 
-export interface StudyRawType {
-  id: number;
-  title: string;
-  way: string;
-  category: StudyCategoryType;
-  startDateTime: string;
-  endDateTime: string;
-  dDay: number;
+export type Status = 'PROGRESS' | 'RECRUITING' | 'RECRUITED' | 'COMPLETED';
+
+export interface StudyDetailResponseData {
+  study: {
+    id: number;
+    status: Status;
+    title: string;
+    platform: Platform;
+    way: 'ONLINE' | 'OFFLINE';
+    participantsCount: number;
+    participantsLimit: number;
+    startDateTime: string;
+    endDateTime: string;
+    category: {
+      id: number;
+      name: StudyCategory | string;
+    };
+    owner: {
+      id: number;
+      nickname: string;
+      email: string;
+    };
+    participants: Participant[];
+  };
 }
 
 export interface StudyInfoType {
   studyId: number;
   title: string;
-  progressMethod: ProgressMethodType;
-  category: StudyCategoryType;
+  progressMethod: ProgressMethod;
+  category: StudyCategory;
   startDate: string;
   endDate: string;
-  dDay: number;
 }
 
-export interface StudyDetailRawType {
-  study: StudyRawType;
-  participants: Participant[];
-  participantsCount: number;
-  participantsLimit: number;
-}
-
-export interface StudyDetailType {
-  studyInfo: StudyInfoType;
+export interface StudyDetail {
+  studyId: number;
+  title: string;
+  progressMethod: ProgressMethod;
   members: MemberType[];
   memberCnt: number;
   memberLimit: number;

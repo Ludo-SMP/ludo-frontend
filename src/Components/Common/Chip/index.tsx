@@ -1,5 +1,5 @@
 import { useSelectedPositionStore } from '@/Store/position';
-import { PositionType } from '@/Types/study';
+import { Position } from '@/Types/study';
 import { POSITION } from '@/Store/position';
 import styled from 'styled-components';
 
@@ -11,7 +11,7 @@ export interface ChipProps<T> {
   value: T;
 }
 
-const Chip = ({ chipType, children, value }: ChipProps<PositionType>) => {
+const Chip = ({ chipType, children, value }: ChipProps<Position>) => {
   const { selectedPosition, setSelectedPosition, resetSelectedPosition } = useSelectedPositionStore();
 
   const isSelected: boolean = selectedPosition === POSITION[value];

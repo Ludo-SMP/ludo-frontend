@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import { InfoField } from '@/Components/Common/InfoField';
 import { RowDivider } from '@/Components/Common/Divider/RowDivider';
-import { ProgressMethodType, StudyCategoryType } from '@/Types/study';
+import { ProgressMethod, StudyCategory } from '@/Types/study';
 
 export interface StudyInfoSectionProps {
-  category?: StudyCategoryType;
-  progressMethod?: ProgressMethodType;
+  category?: StudyCategory;
+  progressMethod?: ProgressMethod;
   platform?: string;
   period?: string;
   dDay?: number;

@@ -15,6 +15,7 @@ export const StudyDetail = () => {
   const studyId = Number(useParams().studyId);
   const navigate = useNavigate();
   const { data: studyDetail, isLoading } = useStudyDetail(studyId);
+  console.log(studyDetail);
   const ownerId = studyDetail?.members.filter((member) => member.role === '팀장')[0].id;
 
   return isLoading ? (
@@ -85,10 +86,10 @@ const StudyDetailTitleWrapper = styled.div`
   justify-content: space-between;
   color: ${({ theme }) => theme.color.black3};
   button {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: calc((${({ theme }) => theme.font.small} + ${({ theme }) => theme.font.medium}) / 2);
+    border: none;
+    &:hover {
+      border: none;
+    }
   }
 `;
 
