@@ -1,4 +1,4 @@
 export interface MessageType {
-  title: string;
+  title?: string;
   content?: string;
 }

@@ -56,7 +56,6 @@ export interface StudyBasicInfoType {
 
 export interface RecruitmentDetailType extends RecruitmentInfoType, ProgressInfoType, StudyBasicInfoType {}
 
-// StudyCard Prop로 사용하기 전, 서버로부터 받은 Raw Data
 export interface RecruitmentRawDataType {
   id: number;
   title: string;
@@ -88,6 +87,7 @@ export interface RecruitmentDetailRawDataType extends RecruitmentRawDataType {
 }
 
 export type MainCategoryNameType = '스터디 유형' | '기술 스택' | '포지션' | '진행 방식' | '목록 정렬 기준';
+export type ApplyState = 'NOT APPLY' | 'APPROVE' | 'FAIL';
 
 export interface MainCategoryType<T, S> {
   categoryName: MainCategoryNameType;

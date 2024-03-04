@@ -2,29 +2,42 @@ import styled from 'styled-components';
 import { Kakao, Naver, Google } from '@/Assets';
 import { media } from '@/Styles/theme';
 import { useLoginStore } from '@/Store/auth';
+import { API_END_POINT } from '@/Constants/api';
+import { SocialType, SignType } from '@/Types/auth';
 
-export type SocialType = '네이버' | '카카오' | '구글';
-export type SignType = '로그인' | '회원가입';
 export interface SocialLoginType extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   socialType: SocialType;
   signType: SignType;
 }
+
+const social = Object.freeze({
+  naver: '네이버',
+  kakao: '카카오',
+  google: '구글',
+});
+
+const sign = Object.freeze({
+  login: '로그인',
+  signup: '회원가입',
+});
 
 const SocialLogin = ({ socialType, signType }: SocialLoginType) => {
   const { isLoggedIn, setIsLoggedIn } = useLoginStore();
   return (
     <SocialLoginWrapper
       {...{ socialType, signType }}
-      href={`${import.meta.env.VITE_BASE_URL}/auth/${signType === '로그인' ? 'login' : 'signup'}/${
-        socialType === '네이버' ? 'naver' : socialType === '카카오' ? 'kakao' : 'google'
-      }`}
+      href={
+        signType === 'login'
+          ? `${import.meta.env.VITE_BASE_API_URL}/${API_END_POINT.LOGIN(socialType)}`
+          : `${import.meta.env.VITE_BASE_API_URL}/${API_END_POINT.SIGNUP(socialType)}`
+      }
       onClick={() => {
         !isLoggedIn && setIsLoggedIn();
       }}
     >
-      {socialType === '네이버' ? <Naver /> : socialType === '카카오' ? <Kakao /> : <Google />}
+      {socialType === 'naver' ? <Naver /> : socialType === 'kakao' ? <Kakao /> : <Google />}
       <span>
-        {socialType} {signType}
+        {social[socialType]} {sign[signType]}
       </span>
     </SocialLoginWrapper>
   );
@@ -42,17 +55,17 @@ const SocialLoginWrapper = styled.a<{ socialType: SocialType; signType: SignType
   border: 1px solid rgba(0, 0, 0, 0.1);
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.05);
   background-color: ${(props) =>
-    props.socialType === '네이버'
+    props.socialType === 'naver'
       ? props.theme.color.naver
-      : props.socialType === '카카오'
+      : props.socialType === 'kakao'
       ? props.theme.color.kakao
       : props.theme.color.white};
 
   span {
     color: ${(props) =>
-      props.socialType === '네이버'
+      props.socialType === 'naver'
         ? props.theme.color.white
-        : props.socialType === '카카오'
+        : props.socialType === 'kakao'
         ? props.theme.color.kakaoFontColor
         : props.theme.color.black};
     text-align: center;

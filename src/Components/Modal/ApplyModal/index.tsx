@@ -1,19 +1,29 @@
 import Modal from '@/Components/Common/Modal';
 import { APPLY } from '@/Constants/messages';
 import Chip from '@/Components/Common/Chip';
-import { applyStudy } from '@/Apis/study';
+import { useApplyStudyMutation } from '@/Apis/study';
 import { PositionType } from '@/Types/study';
 import styled from 'styled-components';
 import { useSelectedPositionStore } from '@/Store/position';
+import { SetStateAction } from 'react';
+import { ApplyState } from '@/Types/study';
 
 interface ApplyModalProps {
+  handleApplyApprove: React.Dispatch<SetStateAction<ApplyState>>;
   recruitmentId: number;
   studyId: number;
   positions: PositionType[];
 }
 
-const ApplyModal = ({ recruitmentId, studyId, positions }: ApplyModalProps) => {
+const ApplyModal = ({ handleApplyApprove, recruitmentId, studyId, positions }: ApplyModalProps) => {
   const { selectedPosition, resetSelectedPosition } = useSelectedPositionStore();
+  const { mutate } = useApplyStudyMutation(
+    studyId,
+    recruitmentId,
+    { positionId: selectedPosition },
+    handleApplyApprove,
+  );
+
   return (
     <Modal
       title={APPLY.CHOSSE_POSITION.title}
@@ -21,9 +31,11 @@ const ApplyModal = ({ recruitmentId, studyId, positions }: ApplyModalProps) => {
       approveBtnText="선택 완료"
       cancelBtnText="나중에 하기"
       handleApprove={() => {
-        applyStudy(recruitmentId, studyId, selectedPosition);
+        if (!selectedPosition) return;
+        mutate();
         resetSelectedPosition();
       }}
+      handleCancel={() => resetSelectedPosition()}
     >
       <ChipsWrapper>
         {positions.map((position) => (

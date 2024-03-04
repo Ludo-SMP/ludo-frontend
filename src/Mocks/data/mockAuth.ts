@@ -1,32 +1,32 @@
 export const mockUsers = [
   {
     id: 1,
-    name: '포키',
+    nickname: '포키',
     email: 'aaa@bb1.cc',
   },
   {
     id: 2,
-    name: '빽',
+    nickname: '빽',
     email: 'aaa@2bb.cc',
   },
   {
     id: 3,
-    name: '아카',
+    nickname: '아카',
     email: 'aaa@3bb.cc',
   },
   {
     id: 4,
-    name: '휴',
+    nickname: '휴',
     email: 'aaa4@bb.cc',
   },
   {
     id: 5,
-    name: '타로',
+    nickname: '타로',
     email: 'aaa5@bb.cc',
   },
   {
     id: 6,
-    name: 'Hyun',
+    nickname: 'Hyun',
     email: 'aaa6@bb.cc',
   },
 ];

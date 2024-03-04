@@ -16,7 +16,6 @@ export const StudyDetail = () => {
   const navigate = useNavigate();
   const { data: studyDetail, isLoading } = useStudyDetail(studyId);
   const ownerId = studyDetail?.members.filter((member) => member.role === '팀장')[0].id;
-  console.log(ownerId, user);
 
   return isLoading ? (
     <div>Loading...</div>

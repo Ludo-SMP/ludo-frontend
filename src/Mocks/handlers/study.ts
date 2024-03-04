@@ -30,7 +30,7 @@ const getApplicants = http.get(`${baseURL}/studies/:studyId/recruitments/users`,
   );
 });
 
-const getMyStudies = http.get(`${baseURL}/users/mypage`, async () => {
+const getMyStudies = http.get(`${baseURL}/api/users/mypage`, async () => {
   return new HttpResponse(
     JSON.stringify({
       data: { ...myStudiesMockData },
@@ -43,4 +43,29 @@ const getMyStudies = http.get(`${baseURL}/users/mypage`, async () => {
   );
 });
 
-export default [getStudyDetail, getApplicants, getMyStudies];
+const applyStudy = http.post(`${baseURL}/api/studies/:studyId/recruitments/:recruitmentId/apply`, async () => {
+  return new HttpResponse(
+    JSON.stringify({
+      data: { applicantId: 6 },
+      message: 'Success',
+    }),
+    {
+      status: 201,
+      statusText: 'OK',
+    },
+  );
+});
+
+const failApplyStudy = http.post(`${baseURL}/api/studies/:studyId/recruitments/:recruitmentId/apply`, async () => {
+  return new HttpResponse(
+    JSON.stringify({
+      message: '',
+    }),
+    {
+      status: 500,
+      statusText: 'OK',
+    },
+  );
+});
+
+export default [getStudyDetail, getApplicants, getMyStudies, failApplyStudy];
