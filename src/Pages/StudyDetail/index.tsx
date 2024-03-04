@@ -7,7 +7,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import StudyInfoSection from './StudyInfoSection';
 import MemberSection from './MemberSection';
 import { useStudyDetail } from '@/Apis/study';
-import { dateFormatter } from '@/Utils/date';
+import { dateFormatter, getDday } from '@/Utils/date';
 import { useUserStore } from '@/Store/user';
 
 export const StudyDetail = () => {
@@ -16,6 +16,7 @@ export const StudyDetail = () => {
   const navigate = useNavigate();
   const { data: studyDetail, isLoading } = useStudyDetail(studyId);
   console.log(studyDetail?.members);
+  console.log(getDday(studyDetail?.startDate, studyDetail?.endDate));
 
   return isLoading ? (
     <div>Loading...</div>
@@ -54,7 +55,7 @@ export const StudyDetail = () => {
         period={
           studyDetail ? `${dateFormatter(studyDetail?.startDate)} ~ ${dateFormatter(studyDetail?.endDate)}` : '진행기간'
         }
-        dDay={studyDetail?.dDay || 9999}
+        dDay={getDday(studyDetail?.startDate, studyDetail.endDate) || 9999}
       />
       <RowDivider rowHeight={16} />
       <MemberSection memberLimit={studyDetail?.memberLimit} members={studyDetail?.members} />
