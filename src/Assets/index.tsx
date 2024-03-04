@@ -26,3 +26,4 @@ export { default as CreateStudy } from './icons/createstudy.svg?react';
 
 // logo
 export { default as BlankLogo } from './images/blank-logo.png';
+export { default as Logo } from './images/logo.png';
