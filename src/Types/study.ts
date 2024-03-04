@@ -6,10 +6,8 @@ export type ProgressMethod = ActivityType;
 export type StudyCategory = '코딩 테스트' | '모의 면접' | '프로젝트';
 export type SortType = '최신순' | '조회순';
 export type CategoryPropertyType = 'category' | 'stacks' | 'positions' | 'way' | 'sort';
-export type StudyRecruitStatus = '모집 중' | '모집 완료';
-export type StudyProgressStatus = '진행 중' | '완료됨';
 export type StudyApplyStatus = '합류 확정' | '지원 완료' | '합류 거절';
-export type StudyStatus = StudyProgressStatus | StudyApplyStatus | StudyRecruitStatus;
+export type StudyStatus = '진행 중' | '모집 중' | '모집 완료' | '완료됨';
 export type myStudyStatus = '참여' | '지원' | '완료';
 export type AllType = '전체';
 export type Role = '팀장' | '팀원';
@@ -25,7 +23,7 @@ export interface Member {
   role: Role | string;
 }
 
-export interface ApplicantType extends Omit<Member, 'role'> {}
+export interface Applicant extends Omit<Member, 'role'> {}
 
 export interface RecruitmentInfoType {
   recruitmentId: number;
@@ -145,6 +143,7 @@ export interface StudyDetailResponseData {
       email: string;
     };
     participants: Participant[];
+    applicants: Applicant[];
   };
 }
 
