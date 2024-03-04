@@ -38,8 +38,6 @@ export const API_END_POINT = {
   APPLY_REFUSE: (studyId: number, recruitmentId: number, applicantId: number) =>
     `${API_PREFIX}/studies/${studyId}/recruitments/${recruitmentId}/apply-refuse/${applicantId}`,
 
-  APPLICANTS: (studyId: number) => `${API_PREFIX}/studies/${studyId}/recruitments/users`,
-
   // MyPage
   MYPAGE: `${API_PREFIX}/users/mypage`,
 

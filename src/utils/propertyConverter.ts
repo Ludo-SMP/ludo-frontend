@@ -5,13 +5,12 @@ import {
   RecruitmentDetailType,
   StudyDetailResponseData,
   Participant,
-  ApplicantType,
   ProgressMethod,
 } from '@/Types/study';
 
-export const status = {
-  PROGRESS: '진행중',
-  RECRUITING: '모집중',
+export const STATUS = {
+  PROGRESS: '진행 중',
+  RECRUITING: '모집 중',
   RECRUITED: '모집 완료',
   COMPLETED: '완료됨',
 };
@@ -134,7 +133,7 @@ export const convertRecruitmentDetailRawDataToRecruitmentDetail = (
 export const convertStudyDetailRawDataToStudyDetail = (studyDetailRawData: StudyDetailResponseData) => {
   const {
     id,
-    status,
+    status: _status,
     title,
     platform,
     way,
@@ -145,6 +144,7 @@ export const convertStudyDetailRawDataToStudyDetail = (studyDetailRawData: Study
     category,
     owner,
     participants,
+    applicants,
   } = studyDetailRawData.study;
 
   const members = participants.map((participant: Participant) => {
@@ -152,12 +152,12 @@ export const convertStudyDetailRawDataToStudyDetail = (studyDetailRawData: Study
     const role = _role === 'OWNER' ? '팀장' : '팀원';
     return { id, nickname, role, email, position };
   });
-
+  const status = STATUS[_status];
   const progressMethod: ProgressMethod = way === 'OFFLINE' ? '오프라인' : way === 'ONLINE' ? '온라인' : '미정';
   return {
     id,
-    status,
     title,
+    status,
     owner,
     platform,
     progressMethod,
@@ -167,10 +167,6 @@ export const convertStudyDetailRawDataToStudyDetail = (studyDetailRawData: Study
     members,
     memberCnt,
     memberLimit,
+    applicants,
   };
-};
-
-export const convertApplicantsRawDataToApplicants = (applicantsRawData: { recruitmentUsers: ApplicantType[] }) => {
-  const { recruitmentUsers } = applicantsRawData;
-  return [...recruitmentUsers];
 };

@@ -1,10 +1,7 @@
 import { httpClient } from '@/Utils/axios';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { STUDY } from '@/Constants/queryString';
-import {
-  convertApplicantsRawDataToApplicants,
-  convertStudyDetailRawDataToStudyDetail,
-} from '@/Utils/propertyConverter';
+import { convertStudyDetailRawDataToStudyDetail } from '@/Utils/propertyConverter';
 import { API_END_POINT } from '@/Constants/api';
 import { SetStateAction } from 'react';
 import { useModalStore } from '@/Store/modal';
@@ -43,16 +40,6 @@ export const useStudyDetail = (studyId: number) => {
     queryKey: [...STUDY.study(studyId)],
     queryFn: () => getStudyDetail(studyId),
     select: (data) => convertStudyDetailRawDataToStudyDetail(data?.data.data),
-  });
-};
-
-export const getApplicants = (studyId: number) => httpClient.get(API_END_POINT.APPLICANTS(studyId));
-
-export const useApplicants = (studyId: number) => {
-  return useQuery({
-    queryKey: [...STUDY.applicants(studyId)],
-    queryFn: () => getApplicants(studyId),
-    select: (data) => convertApplicantsRawDataToApplicants(data?.data.data),
   });
 };
 
