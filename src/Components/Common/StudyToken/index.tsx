@@ -30,7 +30,7 @@ const StudyTokenWrapper = styled.span<{ tokenType: TokenType; status: StudyStatu
       ? theme.color.purple1
       : status === '완료됨'
       ? `rgba(0, 0, 0, 0.25)`
-      : theme.color.orange3};
+      : theme.color.black3};
 
   background: #f2f2f2;
   border-radius: ${({ theme }) => theme.borderRadius.large};

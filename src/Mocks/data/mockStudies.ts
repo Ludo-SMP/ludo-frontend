@@ -5,7 +5,7 @@ export const studyDetailMockData: StudyDetailResponseData[] = [
   {
     study: {
       id: 1,
-      status: 'PROGRESS',
+      status: 'RECRUITING',
       title: '인기 코테 스터디 1',
       platform: 'GATHER',
       way: 'OFFLINE',
@@ -106,7 +106,7 @@ export const studyDetailMockData: StudyDetailResponseData[] = [
   {
     study: {
       id: 2,
-      status: 'PROGRESS',
+      status: 'RECRUITING',
       title: '인기 코테 스터디 2',
       platform: 'GATHER',
       way: 'ONLINE',
@@ -207,7 +207,7 @@ export const studyDetailMockData: StudyDetailResponseData[] = [
   {
     study: {
       id: 3,
-      status: 'PROGRESS',
+      status: 'RECRUITING',
       title: '인기 코테 스터디 3',
       platform: 'GATHER',
       way: 'ONLINE',
@@ -308,7 +308,7 @@ export const studyDetailMockData: StudyDetailResponseData[] = [
   {
     study: {
       id: 4,
-      status: 'PROGRESS',
+      status: 'RECRUITING',
       title: '인기 모의 면접 스터디 4',
       platform: 'GATHER',
       way: 'OFFLINE',
@@ -409,7 +409,7 @@ export const studyDetailMockData: StudyDetailResponseData[] = [
   {
     study: {
       id: 5,
-      status: 'PROGRESS',
+      status: 'RECRUITING',
       title: '인기 모의 면접 스터디 5',
       platform: 'GATHER',
       way: 'ONLINE',
@@ -510,7 +510,7 @@ export const studyDetailMockData: StudyDetailResponseData[] = [
   {
     study: {
       id: 6,
-      status: 'PROGRESS',
+      status: 'RECRUITING',
       title: '인기 모의 면접 스터디 6',
       platform: 'GATHER',
       way: 'ONLINE',
@@ -611,7 +611,7 @@ export const studyDetailMockData: StudyDetailResponseData[] = [
   {
     study: {
       id: 7,
-      status: 'PROGRESS',
+      status: 'RECRUITING',
       title: '인기 프로젝트 스터디 7',
       platform: 'GATHER',
       way: 'OFFLINE',
@@ -712,7 +712,7 @@ export const studyDetailMockData: StudyDetailResponseData[] = [
   {
     study: {
       id: 8,
-      status: 'PROGRESS',
+      status: 'RECRUITING',
       title: '인기 프로젝트 스터디 8',
       platform: 'GATHER',
       way: 'ONLINE',
@@ -813,7 +813,7 @@ export const studyDetailMockData: StudyDetailResponseData[] = [
   {
     study: {
       id: 9,
-      status: 'PROGRESS',
+      status: 'RECRUITING',
       title: '인기 프로젝트 스터디 9',
       platform: 'GATHER',
       way: 'ONLINE',
@@ -914,7 +914,7 @@ export const studyDetailMockData: StudyDetailResponseData[] = [
   {
     study: {
       id: 10,
-      status: 'PROGRESS',
+      status: 'RECRUITING',
       title: '인기 프로젝트 스터디 10',
       platform: 'GATHER',
       way: 'ONLINE',

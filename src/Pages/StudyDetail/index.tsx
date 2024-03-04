@@ -67,8 +67,26 @@ export const StudyDetail = () => {
       <RowDivider rowHeight={16} />
       <MemberSection memberLimit={studyDetail?.memberLimit} members={studyDetail?.members} />
       <StudyButtonsWrapper>
-        {user?.id === studyDetail?.owner.id && <Button>모집 마감하기</Button>}
-        <Button>스터디 탈퇴하기</Button>
+        {user?.id === studyDetail?.owner.id && studyDetail.members.length === 0 && (
+          <Button size="fullWidth" onClick={() => {}}>
+            스터디 삭제하기
+          </Button>
+        )}
+        {studyDetail.members.length && (
+          <Button size="fullWidth" onClick={() => {}}>
+            스터디 탈퇴하기
+          </Button>
+        )}
+        {user?.id === studyDetail?.owner.id && studyDetail.members.length && studyDetail.status === '모집 중' && (
+          <Button scheme="secondary" size="fullWidth" onClick={() => {}}>
+            스터디원 모집 마감하기
+          </Button>
+        )}
+        {user?.id === studyDetail?.owner.id && studyDetail.members.length && studyDetail.status === '진행 중' && (
+          <Button scheme="secondary" size="fullWidth" onClick={() => {}}>
+            스터디 수정하기
+          </Button>
+        )}
       </StudyButtonsWrapper>
     </StudyDetailWrapper>
   );
@@ -80,6 +98,7 @@ const StudyDetailWrapper = styled.div`
   max-width: 1224px;
   margin: 0 auto;
   margin-top: 40px;
+  margin-bottom: 80px;
   gap: 40px;
 `;
 
@@ -116,20 +135,4 @@ const StudyButtonsWrapper = styled.div`
   align-items: flex-start;
   gap: 24px;
   align-self: stretch;
-
-  & > button {
-    display: flex;
-    padding: 0 12px;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    flex: 1 0 0;
-    border-radius: 8px;
-    background: ${(props) => props.theme.color.gray1};
-    color: var(--Palette-base-black-alpha-65, rgba(0, 0, 0, 0.65));
-    text-align: center;
-    font-size: ${(props) => props.theme.font.xsmall};
-    font-weight: 600;
-    line-height: 44px;
-  }
 `;
