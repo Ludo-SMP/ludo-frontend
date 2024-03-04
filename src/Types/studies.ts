@@ -7,6 +7,7 @@
 //   startDateTime: string;
 //   endDateTime: string;
 // };
+
 export type Creates = {
   title: string;
   categoryId: number;
@@ -18,7 +19,8 @@ export type Creates = {
   endDateTime: string;
 };
 
-type Position = '프론트엔드' | '백엔드' | '디자이너' | '기획자';
+export type Position = '프론트엔드' | '백엔드' | '디자이너' | '기획자';
+export type stackId = 4 | 5 | 6 | 8 | 9 | 10;
 export type ItemCategory = {
   name: string;
   id: number;
