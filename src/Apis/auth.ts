@@ -8,7 +8,7 @@ export interface UserInfo {
 export type SocialLoginType = 'google' | 'kakao' | 'naver';
 
 export const login = async (loginType: SocialLoginType) => {
-  const response = await httpClient.get(`/auth/login/${loginType}`);
+  const response = await httpClient.get(`api/auth/login/${loginType}`);
   return response;
 };
 export const signUp = async (signUpType: SocialLoginType) => {

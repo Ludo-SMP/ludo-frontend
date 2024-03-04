@@ -7,11 +7,10 @@ import { CalendarButton } from '../../Components/Selectbox/CalendarButton';
 import { BigCategoryButton } from '../../Components/Selectbox/BigCategoryButton';
 import { MaxPeopleButton } from '../../Components/Selectbox/MaxPeopleButton';
 import { ProgressPeriod } from '../../Components/Calendar/ProgressPeriod';
+import { PositionButton } from '@/Components/Selectbox/PositionButton';
 import { media } from '../../Styles/theme';
 import { Creates } from '@/Types/studies';
-import { createStudy } from '@/Apis/study';
 import { useNavigate } from 'react-router-dom';
-
 import { useState } from 'react';
 import axios from 'axios';
 axios.defaults.withCredentials = true;
@@ -27,6 +26,8 @@ export const CreateStudy = () => {
     participantLimit: 0,
     startDateTime: '',
     endDateTime: '',
+    positionId: 0,
+    platform: '',
   });
 
   function forms(fields: OptionalCreates) {
@@ -37,13 +38,15 @@ export const CreateStudy = () => {
   }
 
   async function post() {
-    const { data } = await axios.post('https://ludoapi.store/studies', {
+    const { data } = await axios.post('https://ludoapi.store/api/studies', {
       title: useForm.title,
       categoryId: useForm.categoryId,
       way: useForm.way,
       participantLimit: useForm.participantLimit,
       startDateTime: useForm.startDateTime,
       endDateTime: useForm.endDateTime,
+      positionId: useForm.positionId,
+      platform: useForm.platform,
     });
     console.log(data);
   }
@@ -55,14 +58,7 @@ export const CreateStudy = () => {
 
   return (
     <>
-      <StudyContainer
-        onSubmit={handleSubmit}
-        // encType="text/plain"
-        // encType="application/json"
-        // action="https://ludoapi.store/studies"
-        // method="POST"
-        // location-href="/"
-      >
+      <StudyContainer onSubmit={handleSubmit}>
         <StudyMain>스터디 생성하기</StudyMain>
         <TopBox>
           <StudyTitle>스터디 제목</StudyTitle>
@@ -83,6 +79,10 @@ export const CreateStudy = () => {
                 <ContentText>스터디 최대 인원</ContentText>
                 <MaxPeopleButton setForm={forms} useForm={useForm} />
               </MiddleBottomWrapper>
+              <MiddleBottomWrapper>
+                <ContentText>포지션</ContentText>
+                <PositionButton setForm={forms} useForm={useForm} />
+              </MiddleBottomWrapper>
             </MiddleBottomInfo>
           </MiddleWrapper>
         </MiddleBox>
@@ -93,10 +93,10 @@ export const CreateStudy = () => {
               <ContentText>진행방식</ContentText>
               <ProgressButton setForm={forms} useForm={useForm} />
             </StudyWrapper>
-            {/* <StudyWrapper>
+            <StudyWrapper>
               <ContentText>진행 플랫폼</ContentText>
-              <PlatformButton />
-            </StudyWrapper> */}
+              <PlatformButton setForm={forms} useForm={useForm} />
+            </StudyWrapper>
             <StudyWrapper>
               <ContentText> 진행기간</ContentText>
               <CalendarButton>
@@ -164,12 +164,17 @@ const StudyMiddleInfo = styled.div`
 
 const MiddleBottomInfo = styled.div`
   display: grid;
-  grid-template-columns: 630px 630px;
+  grid-template-columns: 430px 430px 430px;
   grid-template-rows: 80px;
-  font-size: ${(props) => props.theme.font.medium};
   row-gap: 24px 24px;
   column-gap: 24px 24px;
   padding-bottom: 40px;
+  font-size: ${(props) => props.theme.font.medium};
+  /* grid-template-columns: 630px 630px;
+  grid-template-rows: 80px;
+  row-gap: 24px 24px;
+  column-gap: 24px 24px;
+  padding-bottom: 40px; */
 `;
 const MiddleBottomWrapper = styled.section`
   font-size: ${(props) => props.theme.font.medium};

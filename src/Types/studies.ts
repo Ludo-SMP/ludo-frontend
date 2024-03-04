@@ -13,20 +13,21 @@ export type Creates = {
   participantLimit: number;
   way: string;
   platform?: string;
+  positionId: number;
   startDateTime: string;
   endDateTime: string;
 };
 
 type Position = '프론트엔드' | '백엔드' | '디자이너' | '기획자';
-type ItemCategory = {
+export type ItemCategory = {
   name: string;
   id: number;
 };
 
-type StackItem = {
+export type StackItem = {
   id: number;
   name: string;
-  ImageUrl: string;
+  imageUrl: string;
   category: ItemCategory;
 };
 

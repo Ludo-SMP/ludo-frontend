@@ -1,15 +1,34 @@
 import styled from 'styled-components';
+import { OptionalCreates } from '@/Pages/Studies/CreateStudy';
+import { Creates } from '@/Types/studies';
+import { ChangeEvent } from 'react';
 
-export const PositionButton = () => {
+export type Props = {
+  onClick?: () => void;
+  children?: React.ReactNode;
+  // onChange?: (event: string) => void;
+  setForm: (any: OptionalCreates) => void;
+  useForm: Creates;
+  value?: string;
+  type?: string;
+  name?: string;
+  maxlength?: number;
+  id?: string;
+  formData?: number | string;
+  ref?: string;
+};
+
+export const PositionButton = ({ setForm, useForm }: Props) => {
+  const PositionHandler = (event: ChangeEvent<HTMLSelectElement>) => {
+    setForm({ positionId: event.target.selectedIndex });
+  };
   return (
-    <ButtonConTainer name="contact" className="select">
-      <Textwrapper disabled selected>
-        포지션
-      </Textwrapper>
-      <Textwrapper value="frontend">프론트엔드</Textwrapper>
-      <Textwrapper value="backend">백엔드</Textwrapper>
-      <Textwrapper value="pm">기획자</Textwrapper>
-      <Textwrapper value="designer">디자이너</Textwrapper>
+    <ButtonConTainer name="positionId" className="select" value={useForm.positionId} onChange={PositionHandler}>
+      <Textwrapper>포지션</Textwrapper>
+      <Textwrapper value={1}>백엔드</Textwrapper>
+      <Textwrapper value={2}>프론트엔드</Textwrapper>
+      <Textwrapper value={3}>디자이너</Textwrapper>
+      <Textwrapper value={4}>데브옵스</Textwrapper>
     </ButtonConTainer>
   );
 };

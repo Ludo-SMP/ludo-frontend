@@ -39,7 +39,7 @@ export const ProgressPeriod = ({ setForm, useForm }: Props) => {
         // onChange={StartHandler}
         selectsStart
         startDate={startDateTime}
-        endDate={endDateTime}
+        // endDate={endDateTime}
         dateFormat="yyyy-MM-dd'T'HH:mm:ss"
       />
       <Slash>-</Slash>

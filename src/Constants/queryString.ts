@@ -1,6 +1,7 @@
 export const BASE_KEY = {
   recruitment: 'recruitment',
   study: 'study',
+  stack: 'stack',
 };
 
 export const RECRUITMENT = {
