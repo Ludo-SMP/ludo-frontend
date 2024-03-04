@@ -2,22 +2,17 @@ import styled from 'styled-components';
 import { StudyInfo } from '@/Assets';
 import { InfoField } from '@/Components/Common/InfoField';
 import ApplicantCard from '@/Components/ApplicantCard';
-import { ApplicantType } from '@/Types/study';
+import { Applicant } from '@/Types/study';
 import Button from '@/Components/Common/Button';
 import StudyToken from '@/Components/Common/StudyToken';
-import { useLocation, useParams } from 'react-router-dom';
-import { useApplicants } from '@/Apis/study';
+import { useLocation } from 'react-router-dom';
 import { useUserStore } from '@/Store/user';
 
 const Applicants = () => {
-  const studyId = Number(useParams().studyId);
-  const { title, memberCnt, memberLimit, ownerId } = useLocation().state;
+  const { title, memberCnt, memberLimit, ownerId, applicants, status } = useLocation().state;
   const { user } = useUserStore();
-  const { isLoading, data: applicants } = useApplicants(studyId);
-
-  return isLoading ? (
-    <div>Loading...</div>
-  ) : (
+  console.log(applicants);
+  return (
     <ApplicantsWrapper>
       <ApplicantsTitleWrapper>스터디 지원자를 확인해주세요!</ApplicantsTitleWrapper>
       <StudyDetailWrapper>
@@ -25,8 +20,14 @@ const Applicants = () => {
           <StudyInfo width="48" height="48" />
           <span className="title">{title}</span>
           <div className="study__tokens">
-            <StudyToken tokenState="InProgress">참여 중인 스터디</StudyToken>
-            <StudyToken tokenState="InProgress">모집중</StudyToken>
+            {status !== '완료됨' && (
+              <StudyToken status={status} tokenType={'MEMBER'}>
+                참여중인 스터디
+              </StudyToken>
+            )}
+            <StudyToken status={status} tokenType={'STUDY'}>
+              {status}
+            </StudyToken>
           </div>
         </StudyTitleWrapper>
         <StudyInfoWrapper>
@@ -34,7 +35,7 @@ const Applicants = () => {
           <InfoField title="목표 인원수" content={memberLimit} />
         </StudyInfoWrapper>
         <ApplicantsInfoWrapper>
-          {applicants?.map((applicant: ApplicantType) => (
+          {applicants?.map((applicant: Applicant) => (
             <ApplicantCard {...applicant} title={title} key={applicant?.email} isOwner={ownerId === user?.id} />
           ))}
         </ApplicantsInfoWrapper>

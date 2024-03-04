@@ -15,8 +15,7 @@ export const StudyDetail = () => {
   const studyId = Number(useParams().studyId);
   const navigate = useNavigate();
   const { data: studyDetail, isLoading } = useStudyDetail(studyId);
-  console.log(studyDetail?.members);
-  console.log(getDday(studyDetail?.startDate, studyDetail?.endDate));
+  console.log(studyDetail?.applicants);
 
   return isLoading ? (
     <div>Loading...</div>
@@ -27,8 +26,14 @@ export const StudyDetail = () => {
           <StudyInfo width="48" height="48" />
           <span className="title">{studyDetail?.title}</span>
           <div className="study__tokens">
-            <StudyToken tokenState="InProgress">참여 중인 스터디</StudyToken>
-            <StudyToken tokenState="InProgress">모집중</StudyToken>
+            {studyDetail?.status !== '완료됨' && (
+              <StudyToken status={studyDetail?.status} tokenType={'MEMBER'}>
+                참여중인 스터디
+              </StudyToken>
+            )}
+            <StudyToken status={studyDetail?.status} tokenType={'STUDY'}>
+              {studyDetail?.status}
+            </StudyToken>
           </div>
         </StudyTitleWrapper>
 
@@ -37,9 +42,11 @@ export const StudyDetail = () => {
             navigate(`/studies/${studyId}/applicants`, {
               state: {
                 title: studyDetail?.title,
+                status: studyDetail?.status,
                 memberCnt: studyDetail?.memberCnt,
                 memberLimit: studyDetail?.memberLimit,
                 ownerId: studyDetail?.owner.id,
+                applicants: studyDetail?.applicants,
               },
             })
           }
@@ -100,7 +107,7 @@ const StudyTitleWrapper = styled.div`
 
   .study__tokens {
     display: flex;
-    gap: 24px;
+    gap: 8px;
   }
 `;
 

@@ -7,7 +7,7 @@ export interface MemberProfileProps extends Member {
   imgUrl?: string;
 }
 
-const MemberProfile = ({ imgUrl, nickname, email, role, position }: MemberProfileProps) => {
+const MemberProfile = ({ nickname, email, role, position }: MemberProfileProps) => {
   return (
     <MemberProfileWrapper>
       <Profile width={160} height={160} />

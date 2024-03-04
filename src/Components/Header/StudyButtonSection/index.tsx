@@ -17,7 +17,7 @@ const StudyButtonSection = () => {
           navigate(ROUTER_PATH.mypage);
         }}
       >
-        내가 지원한 스터디
+        참여중인 스터디
       </Button>
       <Button
         type="button"
@@ -26,7 +26,7 @@ const StudyButtonSection = () => {
           navigate(ROUTER_PATH.mypage);
         }}
       >
-        진행 중인 스터디
+        내가 지원한 스터디
       </Button>
       <Button
         type="button"

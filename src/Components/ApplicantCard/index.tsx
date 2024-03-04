@@ -18,7 +18,7 @@ const ApplicantCard = ({ title, nickname, email, position, isOwner }: ApplicantC
         <div className="detail__info">
           <span className="nickname">{nickname}</span>
           <InfoField title="이메일" content={email} />
-          <InfoField title="포지션" content={position} />
+          <InfoField title="포지션" content={position?.name} />
         </div>
       </ApplicantInfoWrapper>
       {isOwner && (
