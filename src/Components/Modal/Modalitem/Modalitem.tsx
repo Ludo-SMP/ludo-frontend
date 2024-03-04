@@ -6,24 +6,15 @@ import { useStack } from '@/Apis/stack';
 type Props = { item: StackItem[] };
 
 export const ModalItem = ({ item }: Props) => {
-  // async function post() {
-  //   const { data } = await axios.get('https://ludoapi.store/api/stacks');
-  //   console.log(data);
-  //   // console.log(data && data.data.stackCategory);  영역별 분리
-  //   // console.log(data && data.data.stackCategory[0]); 프론트엔드 id=4
-  //   // console.log(data && data.data.stackCategory[0].stacks); 안에 있는 항목들
-  // }
-  // post();
   const { data } = useStack();
   console.log({ data });
 
   <div>
-    {/* {data?.map((data: any) => ( */}
-    <div>
-      {/* <li>{message?.pages}</li> */}
-      <li>data</li>
-    </div>
-    {/* ))} */}
+    {data?.data.map((data: any) => (
+      <div>
+        <li>{data.stacks}</li>
+      </div>
+    ))}
   </div>;
 
   // return (

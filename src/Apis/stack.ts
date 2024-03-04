@@ -16,8 +16,8 @@ export const useStack = () => {
       //   data: data?.data.data.stackCategory.flatMap((data: { id: any }) => data.id), // id
 
       data: data?.data.data.stackCategory.flatMap((data: any) => data), // stackcategory 데이터
-      stacks: data?.data.map((stacks: any) => stacks.data), //기술 스택
-      id: data?.data.map((id: any) => id.data), //id
+      //   stacks: data?.data.flatMap((stacks: any) => stacks), //기술 스택
+      //   id: data?.data.map((id: any) => id.data), //id
     }),
   });
 };
