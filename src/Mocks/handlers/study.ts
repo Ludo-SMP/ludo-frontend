@@ -90,7 +90,7 @@ const failRefuseApply = http.post(
   async () => {
     return new HttpResponse(
       JSON.stringify({
-        message: '지원자의 스터디 지원을 거절하였습니다.',
+        message: '스터디 지원 거절 실패',
         data: null,
       }),
       {
@@ -101,4 +101,46 @@ const failRefuseApply = http.post(
   },
 );
 
-export default [getStudyDetail, getApplicants, getMyStudies, applyStudy, failRefuseApply];
+const acceptApply = http.post(
+  `${baseURL}/api/studies/:studyId/recruitments/:recruitmentId/apply-accept/:applicantId`,
+  async ({ params }) => {
+    const applicantId: number = Number(params?.applicantId);
+    return new HttpResponse(
+      JSON.stringify({
+        message: '지원자의 스터디 지원을 수락하였습니다.',
+        data: {
+          participant: applicantId,
+          nickname: 'hyun',
+          email: 'aa@bb.cc',
+          role: 'MEMBER',
+          position: {
+            id: 1,
+            name: '백엔드',
+          },
+        },
+      }),
+      {
+        status: HttpStatus.OK,
+        statusText: 'OK',
+      },
+    );
+  },
+);
+
+const failAcceptApply = http.post(
+  `${baseURL}/api/studies/:studyId/recruitments/:recruitmentId/apply-accept/:applicantId`,
+  async () => {
+    return new HttpResponse(
+      JSON.stringify({
+        message: '스터디 지원 수락 실패',
+        data: null,
+      }),
+      {
+        status: HttpStatus.INTERNAL_SERVER_ERROR,
+        statusText: 'INTERNAL_SERVER_ERROR',
+      },
+    );
+  },
+);
+
+export default [getStudyDetail, getApplicants, getMyStudies, applyStudy, failRefuseApply, failAcceptApply];

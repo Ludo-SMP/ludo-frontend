@@ -4,18 +4,19 @@ import styled from 'styled-components';
 import { InfoField } from '../Common/InfoField';
 import Button from '../Common/Button';
 import { useState } from 'react';
-import { useRefuseApplyMutation } from '@/Apis/study';
+import { useAcceptApplyMutation, useRefuseApplyMutation } from '@/Apis/study';
 interface ApplicantCardProps extends Omit<Member, 'role'> {
   studyId: number;
   title: string;
   isOwner: boolean;
 }
 
-const ApplicantCard = ({ studyId, id, title, nickname, email, position, isOwner }: ApplicantCardProps) => {
+const ApplicantCard = ({ studyId, id: applicantId, title, nickname, email, position, isOwner }: ApplicantCardProps) => {
   const [isDisabled, setIsDisabled] = useState<boolean>(false);
   // 임시 RecruitmentId
   const recruitmentId = 1;
-  const { mutate: refuseMutate } = useRefuseApplyMutation(studyId, recruitmentId, id);
+  const { mutate: refuseMutate } = useRefuseApplyMutation(studyId, recruitmentId, applicantId);
+  const { mutate: acceptMutate } = useAcceptApplyMutation(studyId, recruitmentId, applicantId);
 
   return (
     <ApplicantCardWrapper>
@@ -43,6 +44,7 @@ const ApplicantCard = ({ studyId, id, title, nickname, email, position, isOwner 
             disabled={isDisabled}
             scheme="secondary"
             onClick={() => {
+              acceptMutate();
               setIsDisabled(!isDisabled);
             }}
           >

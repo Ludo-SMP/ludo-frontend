@@ -17,5 +17,11 @@ export const STUDY = {
     recruitmentId,
     applicantId,
   ],
+  ACCEPT: (studyId: number, recruitmentId: number, applicantId: number) => [
+    BASE_KEY.study,
+    studyId,
+    recruitmentId,
+    applicantId,
+  ],
   myStudies: () => [BASE_KEY.study, 'myStudy'],
 };
