@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import Position from './Position';
-import { PositionType, RecruitmentInfoType, StudyBasicInfoType, ProgressInfoType } from '@/Types/study';
+import PositionSection from './PositionSection';
+import { Position, RecruitmentInfoType, StudyBasicInfoType, ProgressInfoType } from '@/Types/study';
 import { BlankSquare } from '../Common/BlankSquare';
 import { Link } from 'react-router-dom';
 import { dateFormatter } from '@/Utils/date';
@@ -46,8 +46,8 @@ const RecruitmentCard = ({
             <span className="study__type">{progressMethod}</span>
           </div>
           <div className="study__positions">
-            {positions?.map((position: PositionType) => {
-              return <Position key={position} position={position} />;
+            {positions?.map((position: Position) => {
+              return <PositionSection key={position} position={position} />;
             })}
           </div>
           <div className="study__tools">

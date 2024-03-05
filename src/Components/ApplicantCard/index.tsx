@@ -1,15 +1,33 @@
 import { Profile } from '@/Assets';
-import { MemberType } from '@/Types/study';
+import { ApplyAcceptState, Member } from '@/Types/study';
 import styled from 'styled-components';
 import { InfoField } from '../Common/InfoField';
 import Button from '../Common/Button';
-
-interface ApplicantCardProps extends Omit<MemberType, 'role'> {
+import { useState } from 'react';
+import { useAcceptApplyMutation, useRefuseApplyMutation } from '@/Apis/study';
+import Modal from '../Common/Modal';
+import { APPLY } from '@/Constants/messages';
+import { useModalStore } from '@/Store/modal';
+interface ApplicantCardProps extends Omit<Member, 'role'> {
+  studyId: number;
   title: string;
   isOwner: boolean;
 }
 
-const ApplicantCard = ({ title, nickname, email, position, isOwner }: ApplicantCardProps) => {
+const ApplicantCard = ({ studyId, id: applicantId, title, nickname, email, position, isOwner }: ApplicantCardProps) => {
+  const [isDisabled, setIsDisabled] = useState<boolean>(false);
+  const [applyAcceptState, setApplyAcceptState] = useState<ApplyAcceptState>('NOT ACCEPTED');
+  const { isModalOpen, closeModal } = useModalStore();
+  // 임시 RecruitmentId
+  const recruitmentId = 1;
+  const { mutate: acceptMutate } = useAcceptApplyMutation(studyId, recruitmentId, applicantId, () => {
+    setApplyAcceptState('ACCEPTED');
+    setIsDisabled(true);
+  });
+  const { mutate: refuseMutate } = useRefuseApplyMutation(studyId, recruitmentId, applicantId, () =>
+    setIsDisabled(true),
+  );
+
   return (
     <ApplicantCardWrapper>
       <Profile width={180} height={180} />
@@ -18,14 +36,34 @@ const ApplicantCard = ({ title, nickname, email, position, isOwner }: ApplicantC
         <div className="detail__info">
           <span className="nickname">{nickname}</span>
           <InfoField title="이메일" content={email} />
-          <InfoField title="포지션" content={position} />
+          <InfoField title="포지션" content={position?.name} />
         </div>
       </ApplicantInfoWrapper>
       {isOwner && (
         <ApplicantButtonsWrapper>
-          <Button>거절하기</Button>
-          <Button>수락하기</Button>
+          <Button
+            disabled={isDisabled}
+            onClick={() => {
+              refuseMutate();
+            }}
+          >
+            거절하기
+          </Button>
+          <Button
+            disabled={isDisabled}
+            scheme="secondary"
+            onClick={() => {
+              acceptMutate();
+            }}
+          >
+            수락하기
+          </Button>
         </ApplicantButtonsWrapper>
+      )}
+      {applyAcceptState === 'ACCEPTED' && isModalOpen && (
+        <Modal handleApprove={closeModal} title={APPLY.ACCEPT.title} approveBtnText="확인하기">
+          {APPLY.ACCEPT.content}
+        </Modal>
       )}
     </ApplicantCardWrapper>
   );
@@ -89,18 +127,6 @@ const ApplicantButtonsWrapper = styled.div`
   display: flex;
   gap: 24px;
   align-items: flex-end;
-
-  button {
-    border-radius: ${({ theme }) => theme.borderRadius.small};
-    background: ${({ theme }) => theme.color.white};
-    color: ${({ theme }) => theme.color.black2};
-    text-align: center;
-    font-family: Pretendard;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 48px;
-  }
 `;
 
 export default ApplicantCard;

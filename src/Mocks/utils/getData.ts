@@ -1,4 +1,4 @@
-import { FilterOptionsType, StudyCategoryType } from '@/Types/study';
+import { FilterOptionsType, StudyCategory } from '@/Types/study';
 import { recruitmentsMockData } from '../data/mockRecruitments';
 
 export const getFilteredRecruitmentsMockData = (filteredOptions: FilterOptionsType) => {
@@ -12,7 +12,7 @@ export const getFilteredRecruitmentsMockData = (filteredOptions: FilterOptionsTy
       stacks: recruitmentStacks,
     } = data;
     return (
-      category.some((studyCategory: StudyCategoryType) => recruitmentCategory.includes(studyCategory)) &&
+      category.some((studyCategory: StudyCategory) => recruitmentCategory.includes(studyCategory)) &&
       way.some((progressMethod) => recruitmentWay.includes(progressMethod)) &&
       positions.some((position) => recruitmentPositions.includes(position)) &&
       stacks.some((stack) => recruitmentStacks.includes(stack))

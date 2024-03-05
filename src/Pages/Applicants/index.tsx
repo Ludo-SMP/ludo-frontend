@@ -2,22 +2,16 @@ import styled from 'styled-components';
 import { StudyInfo } from '@/Assets';
 import { InfoField } from '@/Components/Common/InfoField';
 import ApplicantCard from '@/Components/ApplicantCard';
-import { ApplicantType } from '@/Types/study';
+import { Applicant } from '@/Types/study';
 import Button from '@/Components/Common/Button';
 import StudyToken from '@/Components/Common/StudyToken';
-import { useLocation, useParams } from 'react-router-dom';
-import { useApplicants } from '@/Apis/study';
+import { useLocation } from 'react-router-dom';
 import { useUserStore } from '@/Store/user';
 
 const Applicants = () => {
-  const studyId = Number(useParams().studyId);
-  const { title, memberCnt, memberLimit, ownerId } = useLocation().state;
+  const { studyId, title, memberCnt, memberLimit, ownerId, applicants, status } = useLocation().state;
   const { user } = useUserStore();
-  const { isLoading, data: applicants } = useApplicants(studyId);
-
-  return isLoading ? (
-    <div>Loading...</div>
-  ) : (
+  return (
     <ApplicantsWrapper>
       <ApplicantsTitleWrapper>스터디 지원자를 확인해주세요!</ApplicantsTitleWrapper>
       <StudyDetailWrapper>
@@ -25,8 +19,14 @@ const Applicants = () => {
           <StudyInfo width="48" height="48" />
           <span className="title">{title}</span>
           <div className="study__tokens">
-            <StudyToken tokenState="InProgress">참여 중인 스터디</StudyToken>
-            <StudyToken tokenState="InProgress">모집중</StudyToken>
+            {status !== '완료됨' && (
+              <StudyToken status={status} tokenType={'MEMBER'}>
+                참여중인 스터디
+              </StudyToken>
+            )}
+            <StudyToken status={status} tokenType={'STUDY'}>
+              {status}
+            </StudyToken>
           </div>
         </StudyTitleWrapper>
         <StudyInfoWrapper>
@@ -34,14 +34,22 @@ const Applicants = () => {
           <InfoField title="목표 인원수" content={memberLimit} />
         </StudyInfoWrapper>
         <ApplicantsInfoWrapper>
-          {applicants?.map((applicant: ApplicantType) => (
-            <ApplicantCard {...applicant} title={title} key={applicant?.email} isOwner={ownerId === user?.id} />
+          {applicants?.map((applicant: Applicant) => (
+            <ApplicantCard
+              {...applicant}
+              title={title}
+              studyId={studyId}
+              key={applicant?.email}
+              isOwner={ownerId === user?.id}
+            />
           ))}
         </ApplicantsInfoWrapper>
       </StudyDetailWrapper>
       {ownerId === user?.id && (
         <ApplicantButtonsWrapper>
-          <Button>스터디원 모집 마감하기</Button>
+          <Button onClick={() => {}} scheme="secondary" size="fullWidth">
+            스터디원 모집 마감하기
+          </Button>
         </ApplicantButtonsWrapper>
       )}
     </ApplicantsWrapper>
@@ -108,21 +116,6 @@ const ApplicantsInfoWrapper = styled.div`
   gap: 24px;
 `;
 
-const ApplicantButtonsWrapper = styled.div`
-  button {
-    display: flex;
-    width: 100%;
-    height: 48px;
-    padding: var(--Padding-btn-lg-vertical, 0px) var(--Spacing-16, 16px);
-    justify-content: center;
-    align-items: center;
-    gap: var(--Spacing-8, 8px);
-    align-self: stretch;
-    border-radius: ${({ theme }) => theme.borderRadius.small};
-    border: 1px solid ${({ theme }) => theme.color.purple2};
-    background: ${({ theme }) => theme.color.white};
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.03);
-  }
-`;
+const ApplicantButtonsWrapper = styled.div``;
 
 export default Applicants;

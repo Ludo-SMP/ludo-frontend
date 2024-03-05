@@ -1,4 +1,4 @@
-import { Member, StudyInfo } from '@/Assets';
+import { MemberImage, StudyInfo } from '@/Assets';
 import MemberCard from '@/Components/MemberCard';
 import MyStudyCard from '@/Components/MyStudyCard';
 import styled from 'styled-components';
@@ -22,7 +22,7 @@ const MyPage = () => {
     <MyPageWrapper>
       <UserInfoWrapper>
         <div className="title">
-          <Member />
+          <MemberImage />
           <span>회원정보</span>
         </div>
         <MemberCard nickname={myStudies?.user.nickname || '닉네임'} email={myStudies?.user.email || '이메일'} />
@@ -34,7 +34,7 @@ const MyPage = () => {
         </MyStudyTitleWrapper>
         <StudyStateButtonsWrapper>
           <ChipButton checked={selectedMyStudyStatus === '진행 중'} onClick={() => setSelectedMyStudyStatus('진행 중')}>
-            참여 중인 스터디
+            참여중인 스터디
           </ChipButton>
           <ChipButton
             checked={selectedMyStudyStatus === '지원 완료'}

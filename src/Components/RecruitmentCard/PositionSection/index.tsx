@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { PositionType } from '@/Types/study';
+import { Position } from '@/Types/study';
 
-export type PositionProps = { position?: PositionType };
+export type PositionProps = { position?: Position };
 
-const Position = ({ position }: PositionProps) => {
+const PositionSection = ({ position }: PositionProps) => {
   return <PositionWrapper>{position}</PositionWrapper>;
 };
 
@@ -21,4 +21,4 @@ const PositionWrapper = styled.div`
   line-height: 30px;
 `;
 
-export default Position;
+export default PositionSection;

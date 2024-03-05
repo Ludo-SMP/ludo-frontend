@@ -1,30 +1,30 @@
 import MemberProfile from '@/Components/MemberProfile';
-import { Member } from '@/Assets';
+import { MemberImage } from '@/Assets';
 import styled from 'styled-components';
 import { InfoField } from '@/Components/Common/InfoField';
-import { MemberType } from '@/Types/study';
+import { Member } from '@/Types/study';
 
 export interface MemberSectionProps {
   memberLimit: number;
-  members: MemberType[];
+  members: Member[];
 }
 
 const MemberSection = ({ memberLimit, members }: MemberSectionProps) => {
   return (
     <MemberSectionWrapper>
       <div className="title">
-        <Member width={40} height={40} />
+        <MemberImage width={40} height={40} />
         <span>구성원</span>
       </div>
       <div className="member__info">
         <div className="member__cnt">
-          <InfoField title="현재 인원수" content={members.length} />
+          <InfoField title="현재 인원수" content={members?.length || '??명'} />
           <InfoField title="목표 인원수" content={memberLimit || '??명'} />
         </div>
 
         <div className="member__profiles">
           <ul>
-            {members.map((member) => (
+            {members?.map((member) => (
               <li>
                 <MemberProfile {...member} />
               </li>

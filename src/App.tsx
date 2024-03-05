@@ -4,15 +4,12 @@ import { theme } from './Styles/theme';
 import { MainLayout } from './Layout/MainLayout';
 import { RouterProvider } from 'react-router-dom';
 import { RouterPath } from './Router/index.tsx';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import LoginProvider from './Components/LoginProvider/index.tsx';
-
-const queryClient = new QueryClient();
+import LoginProvider from './Providers/LoginProvider/index.tsx';
+import ReactQueryProvider from './Providers/QueryProvider/index.tsx';
 
 const App = () => {
   return (
-    <QueryClientProvider client={queryClient}>
+    <ReactQueryProvider>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <LoginProvider>
@@ -21,8 +18,7 @@ const App = () => {
           </MainLayout>
         </LoginProvider>
       </ThemeProvider>
-      <ReactQueryDevtools buttonPosition="bottom-left" />
-    </QueryClientProvider>
+    </ReactQueryProvider>
   );
 };
 

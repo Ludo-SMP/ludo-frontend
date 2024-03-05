@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { media } from '@/Styles/theme';
 import { ROUTER_PATH } from '@/Constants/Router_Path';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
-import { BlankLogo, Alarm, Profile } from '@/Assets';
+import { Logo, Alarm, Profile } from '@/Assets';
 import { useLoginStore } from '@/Store/auth';
 import Button from '../Common/Button';
 import StudyButtonSection from './StudyButtonSection';
@@ -20,7 +20,7 @@ const Header = () => {
     <HeaderWrapper>
       <TopBarWrapper>
         <Link to="/">
-          <img src={BlankLogo} />
+          <img width="140" src={Logo} />
         </Link>
         <ElementsWrapper>
           {isLoggedIn ? (

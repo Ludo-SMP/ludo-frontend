@@ -1,28 +1,36 @@
+import { StudyStatus } from '@/Types/study';
 import styled from 'styled-components';
 
-export type TokenState = 'default' | 'InProgress' | 'Completed' | 'Apply';
+export type TokenType = 'STUDY' | 'APPLICANT' | 'MEMBER';
 
-export interface TokenStateProps {
-  tokenState: TokenState;
-  children: React.ReactNode;
+export interface StudyTokenProps {
+  tokenType: TokenType;
+  status?: StudyStatus | string;
+  children?: React.ReactNode;
 }
 
-const StudyToken = ({ tokenState = 'default', children }: TokenStateProps) => {
-  return <StudyTokenWrapper {...{ tokenState }}>{children}</StudyTokenWrapper>;
+const StudyToken = ({ tokenType, status, children }: StudyTokenProps) => {
+  return (
+    <StudyTokenWrapper tokenType={tokenType} status={status}>
+      {children}
+    </StudyTokenWrapper>
+  );
 };
 
-const StudyTokenWrapper = styled.span<{ tokenState: TokenState }>`
+const StudyTokenWrapper = styled.span<{ tokenType: TokenType; status: StudyStatus | string }>`
   display: flex;
   padding: 4px 12px;
   justify-content: center;
   align-items: center;
 
-  color: ${({ tokenState, theme }) =>
-    tokenState === 'InProgress'
+  color: ${({ tokenType, status, theme }) =>
+    tokenType === 'MEMBER'
+      ? theme.color.purple5
+      : status === '진행 중'
       ? theme.color.purple1
-      : tokenState === 'Completed'
+      : status === '완료됨'
       ? `rgba(0, 0, 0, 0.25)`
-      : theme.color.orange3};
+      : theme.color.black3};
 
   background: #f2f2f2;
   border-radius: ${({ theme }) => theme.borderRadius.large};

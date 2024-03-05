@@ -13,20 +13,20 @@ const StudyButtonSection = () => {
       <Button
         type="button"
         onClick={() => {
+          setSelectedMyStudyStatus('진행 중');
+          navigate(ROUTER_PATH.mypage);
+        }}
+      >
+        참여중인 스터디
+      </Button>
+      <Button
+        type="button"
+        onClick={() => {
           setSelectedMyStudyStatus('지원 완료');
           navigate(ROUTER_PATH.mypage);
         }}
       >
         내가 지원한 스터디
-      </Button>
-      <Button
-        type="button"
-        onClick={() => {
-          setSelectedMyStudyStatus('진행 중');
-          navigate(ROUTER_PATH.mypage);
-        }}
-      >
-        진행 중인 스터디
       </Button>
       <Button
         type="button"
