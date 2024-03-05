@@ -11,6 +11,11 @@ export const RECRUITMENT = {
 
 export const STUDY = {
   study: (studyId: number) => [BASE_KEY.study, studyId],
-  applicants: (studyId: number) => [BASE_KEY.study, 'applicants', studyId],
+  REFUSE: (studyId: number, recruitmentId: number, applicantId: number) => [
+    BASE_KEY.study,
+    studyId,
+    recruitmentId,
+    applicantId,
+  ],
   myStudies: () => [BASE_KEY.study, 'myStudy'],
 };

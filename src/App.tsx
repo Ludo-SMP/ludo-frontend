@@ -4,7 +4,6 @@ import { theme } from './Styles/theme';
 import { MainLayout } from './Layout/MainLayout';
 import { RouterProvider } from 'react-router-dom';
 import { RouterPath } from './Router/index.tsx';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import LoginProvider from './Providers/LoginProvider/index.tsx';
 import ReactQueryProvider from './Providers/QueryProvider/index.tsx';
 

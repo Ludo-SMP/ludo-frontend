@@ -15,7 +15,6 @@ export const StudyDetail = () => {
   const studyId = Number(useParams().studyId);
   const navigate = useNavigate();
   const { data: studyDetail, isLoading } = useStudyDetail(studyId);
-  console.log(studyDetail?.applicants);
 
   return isLoading ? (
     <div>Loading...</div>
@@ -41,6 +40,7 @@ export const StudyDetail = () => {
           onClick={() =>
             navigate(`/studies/${studyId}/applicants`, {
               state: {
+                studyId: studyDetail?.id,
                 title: studyDetail?.title,
                 status: studyDetail?.status,
                 memberCnt: studyDetail?.memberCnt,

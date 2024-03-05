@@ -3,13 +3,20 @@ import { Member } from '@/Types/study';
 import styled from 'styled-components';
 import { InfoField } from '../Common/InfoField';
 import Button from '../Common/Button';
-
+import { useState } from 'react';
+import { useRefuseApplyMutation } from '@/Apis/study';
 interface ApplicantCardProps extends Omit<Member, 'role'> {
+  studyId: number;
   title: string;
   isOwner: boolean;
 }
 
-const ApplicantCard = ({ title, nickname, email, position, isOwner }: ApplicantCardProps) => {
+const ApplicantCard = ({ studyId, id, title, nickname, email, position, isOwner }: ApplicantCardProps) => {
+  const [isDisabled, setIsDisabled] = useState<boolean>(false);
+  // 임시 RecruitmentId
+  const recruitmentId = 1;
+  const { mutate: refuseMutate } = useRefuseApplyMutation(studyId, recruitmentId, id);
+
   return (
     <ApplicantCardWrapper>
       <Profile width={180} height={180} />
@@ -23,8 +30,24 @@ const ApplicantCard = ({ title, nickname, email, position, isOwner }: ApplicantC
       </ApplicantInfoWrapper>
       {isOwner && (
         <ApplicantButtonsWrapper>
-          <Button>거절하기</Button>
-          <Button>수락하기</Button>
+          <Button
+            disabled={isDisabled}
+            onClick={() => {
+              refuseMutate();
+              setIsDisabled(!isDisabled);
+            }}
+          >
+            거절하기
+          </Button>
+          <Button
+            disabled={isDisabled}
+            scheme="secondary"
+            onClick={() => {
+              setIsDisabled(!isDisabled);
+            }}
+          >
+            수락하기
+          </Button>
         </ApplicantButtonsWrapper>
       )}
     </ApplicantCardWrapper>
@@ -89,18 +112,6 @@ const ApplicantButtonsWrapper = styled.div`
   display: flex;
   gap: 24px;
   align-items: flex-end;
-
-  button {
-    border-radius: ${({ theme }) => theme.borderRadius.small};
-    background: ${({ theme }) => theme.color.white};
-    color: ${({ theme }) => theme.color.black2};
-    text-align: center;
-    font-family: Pretendard;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 48px;
-  }
 `;
 
 export default ApplicantCard;

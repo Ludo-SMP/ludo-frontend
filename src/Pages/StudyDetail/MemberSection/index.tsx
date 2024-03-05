@@ -10,7 +10,6 @@ export interface MemberSectionProps {
 }
 
 const MemberSection = ({ memberLimit, members }: MemberSectionProps) => {
-  console.log(memberLimit, members);
   return (
     <MemberSectionWrapper>
       <div className="title">

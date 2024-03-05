@@ -52,3 +52,20 @@ export const useMyStudies = () => {
     select: (data) => data?.data.data,
   });
 };
+
+export const refuseApply = (studyId: number, recruitmentId: number, applicantId: number) =>
+  httpClient.post(API_END_POINT.APPLY_REFUSE(studyId, recruitmentId, applicantId));
+
+export const useRefuseApplyMutation = (studyId: number, recruitmentId: number, applicantId: number) => {
+  const { mutate } = useMutation({
+    mutationKey: [...STUDY.REFUSE(studyId, recruitmentId, applicantId)],
+    mutationFn: () => refuseApply(studyId, recruitmentId, applicantId),
+    onSuccess: () => {
+      console.log('지원 거절 성공');
+    },
+    onError: () => {
+      console.log('지원 거절 실패');
+    },
+  });
+  return { mutate };
+};

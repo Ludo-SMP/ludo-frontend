@@ -9,9 +9,8 @@ import { useLocation } from 'react-router-dom';
 import { useUserStore } from '@/Store/user';
 
 const Applicants = () => {
-  const { title, memberCnt, memberLimit, ownerId, applicants, status } = useLocation().state;
+  const { studyId, title, memberCnt, memberLimit, ownerId, applicants, status } = useLocation().state;
   const { user } = useUserStore();
-  console.log(applicants);
   return (
     <ApplicantsWrapper>
       <ApplicantsTitleWrapper>스터디 지원자를 확인해주세요!</ApplicantsTitleWrapper>
@@ -36,13 +35,21 @@ const Applicants = () => {
         </StudyInfoWrapper>
         <ApplicantsInfoWrapper>
           {applicants?.map((applicant: Applicant) => (
-            <ApplicantCard {...applicant} title={title} key={applicant?.email} isOwner={ownerId === user?.id} />
+            <ApplicantCard
+              {...applicant}
+              title={title}
+              studyId={studyId}
+              key={applicant?.email}
+              isOwner={ownerId === user?.id}
+            />
           ))}
         </ApplicantsInfoWrapper>
       </StudyDetailWrapper>
       {ownerId === user?.id && (
         <ApplicantButtonsWrapper>
-          <Button>스터디원 모집 마감하기</Button>
+          <Button onClick={() => {}} scheme="secondary" size="fullWidth">
+            스터디원 모집 마감하기
+          </Button>
         </ApplicantButtonsWrapper>
       )}
     </ApplicantsWrapper>
@@ -109,21 +116,6 @@ const ApplicantsInfoWrapper = styled.div`
   gap: 24px;
 `;
 
-const ApplicantButtonsWrapper = styled.div`
-  button {
-    display: flex;
-    width: 100%;
-    height: 48px;
-    padding: var(--Padding-btn-lg-vertical, 0px) var(--Spacing-16, 16px);
-    justify-content: center;
-    align-items: center;
-    gap: var(--Spacing-8, 8px);
-    align-self: stretch;
-    border-radius: ${({ theme }) => theme.borderRadius.small};
-    border: 1px solid ${({ theme }) => theme.color.purple2};
-    background: ${({ theme }) => theme.color.white};
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.03);
-  }
-`;
+const ApplicantButtonsWrapper = styled.div``;
 
 export default Applicants;
