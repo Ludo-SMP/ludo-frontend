@@ -1,10 +1,13 @@
 import { Profile } from '@/Assets';
-import { Member } from '@/Types/study';
+import { ApplyAcceptState, Member } from '@/Types/study';
 import styled from 'styled-components';
 import { InfoField } from '../Common/InfoField';
 import Button from '../Common/Button';
 import { useState } from 'react';
 import { useAcceptApplyMutation, useRefuseApplyMutation } from '@/Apis/study';
+import Modal from '../Common/Modal';
+import { APPLY } from '@/Constants/messages';
+import { useModalStore } from '@/Store/modal';
 interface ApplicantCardProps extends Omit<Member, 'role'> {
   studyId: number;
   title: string;
@@ -13,10 +16,17 @@ interface ApplicantCardProps extends Omit<Member, 'role'> {
 
 const ApplicantCard = ({ studyId, id: applicantId, title, nickname, email, position, isOwner }: ApplicantCardProps) => {
   const [isDisabled, setIsDisabled] = useState<boolean>(false);
+  const [applyAcceptState, setApplyAcceptState] = useState<ApplyAcceptState>('NOT ACCEPTED');
+  const { isModalOpen, closeModal } = useModalStore();
   // 임시 RecruitmentId
   const recruitmentId = 1;
-  const { mutate: refuseMutate } = useRefuseApplyMutation(studyId, recruitmentId, applicantId);
-  const { mutate: acceptMutate } = useAcceptApplyMutation(studyId, recruitmentId, applicantId);
+  const { mutate: acceptMutate } = useAcceptApplyMutation(studyId, recruitmentId, applicantId, () => {
+    setApplyAcceptState('ACCEPTED');
+    setIsDisabled(true);
+  });
+  const { mutate: refuseMutate } = useRefuseApplyMutation(studyId, recruitmentId, applicantId, () =>
+    setIsDisabled(true),
+  );
 
   return (
     <ApplicantCardWrapper>
@@ -35,7 +45,6 @@ const ApplicantCard = ({ studyId, id: applicantId, title, nickname, email, posit
             disabled={isDisabled}
             onClick={() => {
               refuseMutate();
-              setIsDisabled(!isDisabled);
             }}
           >
             거절하기
@@ -45,12 +54,16 @@ const ApplicantCard = ({ studyId, id: applicantId, title, nickname, email, posit
             scheme="secondary"
             onClick={() => {
               acceptMutate();
-              setIsDisabled(!isDisabled);
             }}
           >
             수락하기
           </Button>
         </ApplicantButtonsWrapper>
+      )}
+      {applyAcceptState === 'ACCEPTED' && isModalOpen && (
+        <Modal handleApprove={closeModal} title={APPLY.ACCEPT.title} approveBtnText="확인하기">
+          {APPLY.ACCEPT.content}
+        </Modal>
       )}
     </ApplicantCardWrapper>
   );

@@ -56,11 +56,17 @@ export const useMyStudies = () => {
 export const refuseApply = (studyId: number, recruitmentId: number, applicantId: number) =>
   httpClient.post(API_END_POINT.APPLY_REFUSE(studyId, recruitmentId, applicantId));
 
-export const useRefuseApplyMutation = (studyId: number, recruitmentId: number, applicantId: number) => {
+export const useRefuseApplyMutation = (
+  studyId: number,
+  recruitmentId: number,
+  applicantId: number,
+  successHandler: () => void,
+) => {
   const { mutate } = useMutation({
     mutationKey: [...STUDY.REFUSE(studyId, recruitmentId, applicantId)],
     mutationFn: () => refuseApply(studyId, recruitmentId, applicantId),
     onSuccess: () => {
+      successHandler();
       console.log('지원 거절 성공');
     },
     onError: () => {
@@ -73,11 +79,19 @@ export const useRefuseApplyMutation = (studyId: number, recruitmentId: number, a
 export const acceptApply = (studyId: number, recruitmentId: number, applicantId: number) =>
   httpClient.post(API_END_POINT.APPLY_ACCEPT(studyId, recruitmentId, applicantId));
 
-export const useAcceptApplyMutation = (studyId: number, recruitmentId: number, applicantId: number) => {
+export const useAcceptApplyMutation = (
+  studyId: number,
+  recruitmentId: number,
+  applicantId: number,
+  successHandler: () => void,
+) => {
+  const { openModal } = useModalStore();
   const { mutate } = useMutation({
     mutationKey: [...STUDY.ACCEPT(studyId, recruitmentId, applicantId)],
     mutationFn: () => acceptApply(studyId, recruitmentId, applicantId),
     onSuccess: () => {
+      successHandler();
+      openModal();
       console.log('지원 수락 성공');
     },
     onError: () => {

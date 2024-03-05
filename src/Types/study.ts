@@ -89,6 +89,7 @@ export interface RecruitmentDetailRawDataType extends RecruitmentRawDataType {
 
 export type MainCategoryNameType = '스터디 유형' | '기술 스택' | '포지션' | '진행 방식' | '목록 정렬 기준';
 export type ApplyState = 'NOT APPLY' | 'APPROVE' | 'FAIL';
+export type ApplyAcceptState = 'NOT ACCEPTED' | 'ACCEPTED';
 
 export interface MainCategoryType<T, S> {
   categoryName: MainCategoryNameType;

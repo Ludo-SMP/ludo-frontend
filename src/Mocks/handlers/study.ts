@@ -143,4 +143,4 @@ const failAcceptApply = http.post(
   },
 );
 
-export default [getStudyDetail, getApplicants, getMyStudies, applyStudy, failRefuseApply, failAcceptApply];
+export default [getStudyDetail, getApplicants, getMyStudies, applyStudy, refuseApply, acceptApply];
