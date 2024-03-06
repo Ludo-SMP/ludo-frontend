@@ -22,8 +22,13 @@ export type Creates = {
 export type Position = '프론트엔드' | '백엔드' | '디자이너' | '기획자';
 export type stackId = 4 | 5 | 6 | 8 | 9 | 10;
 export type ItemCategory = {
-  name: string;
-  id: number;
+  categoryName?: string;
+  categoryId?: number;
+  stacks?: string;
+  stackId?: number;
+  stackImg?: string;
+  name?: string;
+  id?: number;
 };
 
 export type StackItem = {
