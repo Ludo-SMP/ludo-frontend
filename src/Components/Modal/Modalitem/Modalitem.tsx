@@ -11,9 +11,11 @@ export const ModalItem = ({ item }: Props) => {
 
   <div>
     {data?.data.map((data: any) => (
-      <div>
-        <li>{data.stacks}</li>
-      </div>
+      <ItemContainer key={data.id}>
+        {/* {data.map((stacks: any) => (
+          <li>{stacks.name}</li>
+        ))} */}
+      </ItemContainer>
     ))}
   </div>;
 

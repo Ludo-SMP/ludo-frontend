@@ -14,10 +14,13 @@ export const useStack = () => {
     select: (data) => ({
       // data: data?.data.data.stackCategory, // 영역별 배열 분리
       //   data: data?.data.data.stackCategory.flatMap((data: { id: any }) => data.id), // id
-
-      data: data?.data.data.stackCategory.flatMap((data: any) => data), // stackcategory 데이터
-      //   stacks: data?.data.flatMap((stacks: any) => stacks), //기술 스택
-      //   id: data?.data.map((id: any) => id.data), //id
+      data: data?.data.data.stackCategory.flatMap((data: any) => data.id), // stackcategory 데이터
+      categoryId: data?.data.data.stackCategory.flatMap((data: any) => data), // stackcategory 데이터
+      stacks: data?.data.data.stackCategory.flatMap((data: any) => data.stacks.flatMap((stacks: any) => stacks.name)), //기술스택 이름
+      stackId: data?.data.data.stackCategory.flatMap((data: any) => data.stacks.flatMap((stacks: any) => stacks.id)), //기술 스택 id
+      stackImg: data?.data.data.stackCategory.flatMap((data: any) =>
+        data.stacks.flatMap((stacks: any) => stacks.imageUrl),
+      ), //기술스택 이미지
     }),
   });
 };
