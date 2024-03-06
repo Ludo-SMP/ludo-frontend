@@ -27,7 +27,7 @@ export const useLogOutMutation = () => {
       console.log(res);
     },
   });
-  return { logoutMutate: mutate };
+  return { mutate };
 };
 
 export const getUser = async () => {

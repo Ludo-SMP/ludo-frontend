@@ -2,15 +2,15 @@ import { MemberImage, StudyInfo } from '@/Assets';
 import UserCard from '@/Components/UserCard';
 import MyStudyCard from '@/Components/MyStudyCard';
 import styled from 'styled-components';
-import StudyToken from '@/Components/Common/StudyToken';
 import { BlankSquare } from '@/Components/Common/BlankSquare';
-import TemporarySavedStudyCard from '@/Components/TemporarySavedStudyCard';
+import TemporarySavedCard, { TemporarySavedCardProps } from '@/Components/TemporarySavedCard';
 import Button from '@/Components/Common/Button';
 import { useMyPageInfo } from '@/Apis/study';
 import { getPeriod } from '@/Utils/date';
-import ChipButton from '@/Components/Button/ChipButton';
+import ChipMenu from '@/Components/Common/ChipMenu';
 import { User, ParticipateStudy, ApplicantRecruitment, CompletedStudy } from '@/Types/study';
-import { useSelectedMyStudyStore } from '@/Store/study';
+import { useSelectedCardStore, useSelectedMyStudyStore } from '@/Store/study';
+import { useLogOutMutation } from '@/Apis/auth';
 
 const MyPage = () => {
   const { data: myPageInfo, isLoading } = useMyPageInfo();
@@ -18,8 +18,22 @@ const MyPage = () => {
   const participateStudies: ParticipateStudy[] = myPageInfo?.participateStudies;
   const applicantRecruitments: ApplicantRecruitment[] = myPageInfo?.applicantRecruitments;
   const completedStudies: CompletedStudy[] = myPageInfo?.completedStudies;
+
   const { selectedMyStudyStatus, setSelectedMyStudyStatus } = useSelectedMyStudyStore();
-  console.log(user, participateStudies, applicantRecruitments, completedStudies);
+  const { selectedCard, setSelectedCard } = useSelectedCardStore();
+
+  const { mutate: logoutMutate } = useLogOutMutation();
+
+  const temporarySavedCardMockData: TemporarySavedCardProps[] = [
+    { title: '모집공고 1', id: 1, card: 'RECRUITMENT' },
+    { title: '모집공고 2', id: 2, card: 'RECRUITMENT' },
+    { title: '모집공고 3', id: 3, card: 'RECRUITMENT' },
+    { title: '모집공고 4', id: 4, card: 'RECRUITMENT' },
+    { title: '스터디 1', card: 'STUDY' },
+    { title: '스터디 2', card: 'STUDY' },
+    { title: '스터디 3', card: 'STUDY' },
+    { title: '스터디 4', card: 'STUDY' },
+  ];
 
   return isLoading ? (
     <div>Loading ...</div>
@@ -32,31 +46,28 @@ const MyPage = () => {
         </div>
         <UserCard nickname={user?.nickname || '닉네임'} email={user?.email || '이메일'} />
       </UserInfoWrapper>
-      <MyStudyWrapper>
+      <CardsWrapper>
         <MyStudyTitleWrapper>
           <StudyInfo width={40} height={40} />
           <span className="title">스따-디</span>
         </MyStudyTitleWrapper>
-        <StudyStateButtonsWrapper>
-          <ChipButton
-            checked={selectedMyStudyStatus === 'PROGRESS'}
-            onClick={() => setSelectedMyStudyStatus('PROGRESS')}
-          >
+        <ChipMenusWrapper>
+          <ChipMenu checked={selectedMyStudyStatus === 'PROGRESS'} onClick={() => setSelectedMyStudyStatus('PROGRESS')}>
             참여중인 스터디
-          </ChipButton>
-          <ChipButton
+          </ChipMenu>
+          <ChipMenu
             checked={selectedMyStudyStatus === 'UNCHECKED'}
             onClick={() => setSelectedMyStudyStatus('UNCHECKED')}
           >
             내가 지원한 스터디
-          </ChipButton>
-          <ChipButton
+          </ChipMenu>
+          <ChipMenu
             checked={selectedMyStudyStatus === 'COMPLETED'}
             onClick={() => setSelectedMyStudyStatus('COMPLETED')}
           >
             진행 완료된 스터디
-          </ChipButton>
-        </StudyStateButtonsWrapper>
+          </ChipMenu>
+        </ChipMenusWrapper>
         {selectedMyStudyStatus === 'PROGRESS'
           ? participateStudies.map((participateStudy: ParticipateStudy) => (
               <MyStudyCard
@@ -90,23 +101,32 @@ const MyPage = () => {
                 key={completedStudy.studyId}
               />
             ))}
-      </MyStudyWrapper>
+      </CardsWrapper>
 
-      <TemporarySavedStudyWrapper>
+      <CardsWrapper>
         <div className="title">
           <BlankSquare width="40px" height="40px" />
           <span>임시 저장된 글</span>
         </div>
-        <StudyTokensWrapper>
-          <StudyToken tokenState="Apply">스터디 생성</StudyToken>
-          <StudyToken tokenState="Completed">스터디 모집공고</StudyToken>
-        </StudyTokensWrapper>
-        <TemporarySavedStudyCard studyId={1} title={'모집공고 1'} />
-        <TemporarySavedStudyCard title={'스터디 이름'} />
-      </TemporarySavedStudyWrapper>
+        <ChipMenusWrapper>
+          <ChipMenu checked={selectedCard === 'STUDY'} onClick={() => setSelectedCard('STUDY')}>
+            스터디 생성
+          </ChipMenu>
+          <ChipMenu checked={selectedCard === 'RECRUITMENT'} onClick={() => setSelectedCard('RECRUITMENT')}>
+            스터디 모집공고
+          </ChipMenu>
+        </ChipMenusWrapper>
+        {selectedCard === 'STUDY'
+          ? temporarySavedCardMockData
+              .filter((temporarySavedCard: TemporarySavedCardProps) => temporarySavedCard.card === 'STUDY')
+              .map((studySavedCard: TemporarySavedCardProps) => <TemporarySavedCard {...studySavedCard} />)
+          : temporarySavedCardMockData
+              .filter((temporarySavedCard: TemporarySavedCardProps) => temporarySavedCard.card === 'RECRUITMENT')
+              .map((recruitmentSavedCard: TemporarySavedCardProps) => <TemporarySavedCard {...recruitmentSavedCard} />)}
+      </CardsWrapper>
 
       <MypageButtonsWrapper>
-        <Button onClick={() => {}} size="fullWidth">
+        <Button onClick={() => logoutMutate()} size="fullWidth">
           로그아웃
         </Button>
       </MypageButtonsWrapper>
@@ -143,7 +163,7 @@ const UserInfoWrapper = styled.div`
   align-self: stretch;
 `;
 
-const MyStudyWrapper = styled.div`
+const CardsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -158,37 +178,10 @@ const MyStudyTitleWrapper = styled.div`
   align-self: stretch;
 `;
 
-const StudyStateButtonsWrapper = styled.div`
+const ChipMenusWrapper = styled.div`
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  align-self: stretch;
-`;
-
-const StudyTokensWrapper = styled.div`
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  align-self: stretch;
-
-  span {
-    border-radius: ${({ theme }) => theme.borderRadius.xlarge};
-    border: 1px solid ${({ theme }) => theme.color.black1};
-    background: ${({ theme }) => theme.color.white};
-    text-align: center;
-    font-family: Pretendard;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 48px;
-  }
-`;
-
-const TemporarySavedStudyWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 24px;
   align-self: stretch;
 `;
 

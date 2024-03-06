@@ -14,6 +14,7 @@ export type MemberStatus = keyof typeof MEMBER_STATUS;
 export type AllType = '전체';
 export type Role = '팀장' | '팀원';
 export type Platform = 'GATHER' | 'GOOGLE MEET';
+export type Card = 'STUDY' | 'RECRUITMENT';
 
 export interface Member {
   id: number;

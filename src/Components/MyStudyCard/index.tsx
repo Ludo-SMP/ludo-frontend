@@ -25,6 +25,7 @@ const MyStudyCard = ({ id, title, status, position, period, participantCount }: 
     queryClient.invalidateQueries({ queryKey: [...STUDY.MYPAGE_INFO()] });
   };
   const { mutate: cancelMutate } = useCancelAppyMutation(1, id, cancelApplySuccessHandler);
+
   return (
     <MyStudyCardWrapper
       onClick={() => {
