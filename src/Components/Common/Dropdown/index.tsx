@@ -2,22 +2,21 @@ import styled from 'styled-components';
 
 interface DropdownProps {
   onClick: () => void;
-  checked: boolean;
   children: React.ReactNode;
 }
 
 const Dropdown = ({ onClick, children }: DropdownProps) => {
-  return <DropDownWrapper>{children}</DropDownWrapper>;
+  return <DropDownWrapper onClick={onClick}>{children}</DropDownWrapper>;
 };
 
 const DropDownWrapper = styled.div`
+  display: flex;
+  gap: 10px;
   width: 184px;
   height: 40px;
-  display: inline-flex;
   padding: 8px 8px 8px 16px;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  gap: 10px;
   background: ${({ theme }) => theme.color.white};
   color: ${({ theme }) => theme.color.black3};
   font-family: Pretendard;

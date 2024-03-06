@@ -1,5 +1,5 @@
 import { MemberImage, StudyInfo } from '@/Assets';
-import MemberCard from '@/Components/MemberCard';
+import UserCard from '@/Components/UserCard';
 import MyStudyCard from '@/Components/MyStudyCard';
 import styled from 'styled-components';
 import StudyToken from '@/Components/Common/StudyToken';
@@ -14,6 +14,7 @@ import ChipButton from '@/Components/Button/ChipButton';
 
 const MyPage = () => {
   const { data: myStudies, isLoading } = useMyStudies();
+
   const { selectedMyStudyStatus, setSelectedMyStudyStatus } = useSelectedMyStudyStore();
 
   return isLoading ? (
@@ -25,7 +26,7 @@ const MyPage = () => {
           <MemberImage />
           <span>회원정보</span>
         </div>
-        <MemberCard nickname={myStudies?.user.nickname || '닉네임'} email={myStudies?.user.email || '이메일'} />
+        <UserCard nickname={myStudies?.user.nickname || '닉네임'} email={myStudies?.user.email || '이메일'} />
       </UserInfoWrapper>
       <MyStudyWrapper>
         <MyStudyTitleWrapper>
@@ -94,7 +95,9 @@ const MyPage = () => {
       </TemporarySavedStudyWrapper>
 
       <MypageButtonsWrapper>
-        <Button>로그아웃</Button>
+        <Button onClick={() => {}} size="fullWidth">
+          로그아웃
+        </Button>
       </MypageButtonsWrapper>
     </MyPageWrapper>
   );
