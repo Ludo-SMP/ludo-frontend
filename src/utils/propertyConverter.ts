@@ -7,31 +7,7 @@ import {
   Participant,
   ProgressMethod,
 } from '@/Types/study';
-
-export const STATUS = {
-  PROGRESS: '진행 중',
-  RECRUITING: '모집 중',
-  RECRUITED: '모집 완료',
-  COMPLETED: '완료됨',
-};
-
-export const position = {
-  1: '벡엔드',
-  2: '프론트엔드',
-  3: '디자이너',
-  4: '데브옵스',
-};
-
-export const process = {
-  ONLINE: '온라인',
-  OFFLINE: '오프라인',
-};
-
-export const category = {
-  1: '프로젝트',
-  2: '코딩테스트',
-  3: '모의면접',
-};
+import { STUDY_STATUS } from '../Shared/study';
 
 export const convertRecruitmentRawDataToRecruitmentCardProps = (recruitmentRawData: RecruitmentRawDataType) => {
   const {
@@ -152,7 +128,7 @@ export const convertStudyDetailRawDataToStudyDetail = (studyDetailRawData: Study
     const role = _role === 'OWNER' ? '팀장' : '팀원';
     return { id, nickname, role, email, position };
   });
-  const status = STATUS[_status];
+  const status = STUDY_STATUS[_status];
   const progressMethod: ProgressMethod = way === 'OFFLINE' ? '오프라인' : way === 'ONLINE' ? '온라인' : '미정';
   return {
     id,

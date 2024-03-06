@@ -4,6 +4,10 @@ import StudyToken from '../Common/StudyToken';
 import { InfoField } from '../Common/InfoField';
 import Button from '../Common/Button';
 import { ApplyStatus, StudyStatus, PositionType } from '@/Types/study';
+import { useNavigate } from 'react-router-dom';
+import { useCancelAppyMutation } from '@/Apis/study';
+import { useQueryClient } from '@tanstack/react-query';
+import { STUDY } from '@/Constants/queryString';
 
 interface MyStudyCardProps {
   id: number;
@@ -12,12 +16,17 @@ interface MyStudyCardProps {
   position: PositionType;
   period?: string;
   participantCount?: number;
-  isCreator?: boolean;
 }
 
-const MyStudyCard = ({ title, status, position, period, participantCount, isCreator }: MyStudyCardProps) => {
+const MyStudyCard = ({ id, title, status, position, period, participantCount }: MyStudyCardProps) => {
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const cancelApplySuccessHandler = () => {
+    queryClient.invalidateQueries({ queryKey: [...STUDY.MYPAGE_INFO()] });
+  };
+  const { mutate: cancelMutate } = useCancelAppyMutation(1, id, cancelApplySuccessHandler);
   return (
-    <MyStudyCardWrapper>
+    <MyStudyCardWrapper onClick={() => navigate(`/studies/${id}${status === 'UNCHECKED' ? '/recruitment' : ''}`)}>
       <BlankSquare width="180px" height="180px" />
       <StudyInfoWrapper>
         <div className="study__status">
@@ -32,10 +41,21 @@ const MyStudyCard = ({ title, status, position, period, participantCount, isCrea
         <div className="detail__info">
           <InfoField title="나의 포지션" content={position?.name || '나의 포지션'} />
           {period && <InfoField title="진행 기간" content={period || '진행 기간'} />}
-          <InfoField title="팀원 수" content={participantCount || 0} />
+          {participantCount && <InfoField title="팀원 수" content={participantCount || '팀원 수'} />}
         </div>
       </StudyInfoWrapper>
-      <MyStudyCardButtonsWrapper>{isCreator && <Button>스터디원 모집 공고 작성하기</Button>}</MyStudyCardButtonsWrapper>
+      <MyStudyCardButtonsWrapper>
+        {status === 'UNCHECKED' && (
+          <Button
+            onClick={(e) => {
+              e.stopPropagation();
+              cancelMutate();
+            }}
+          >
+            지원 취소하기
+          </Button>
+        )}
+      </MyStudyCardButtonsWrapper>
     </MyStudyCardWrapper>
   );
 };
@@ -50,13 +70,15 @@ const MyStudyCardWrapper = styled.div`
   border-radius: ${({ theme }) => theme.borderRadius.small};
   border: 1px solid ${({ theme }) => theme.color.black1};
   background: ${({ theme }) => theme.color.white};
-
-  /* Card */
-  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 0px 20px 0px ${({ theme }) => theme.color.black0};
 
   & > div:first-child {
     border-radius: ${({ theme }) => theme.borderRadius.small};
     background: ${({ theme }) => theme.color.gray5};
+  }
+
+  &:hover {
+    cursor: pointer;
   }
 `;
 
@@ -94,24 +116,6 @@ const MyStudyCardButtonsWrapper = styled.div`
   position: absolute;
   bottom: 32px;
   right: 40px;
-
-  button {
-    display: inline-flex;
-    padding: 4px 24px;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    border-radius: ${({ theme }) => theme.borderRadius.small};
-    border: 1px solid ${({ theme }) => theme.color.black1};
-    background: ${({ theme }) => theme.color.purple3};
-    color: var(--Font-text-on-primary, #fff);
-    text-align: center;
-    font-family: Pretendard;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 48px;
-  }
 `;
 
 export default MyStudyCard;

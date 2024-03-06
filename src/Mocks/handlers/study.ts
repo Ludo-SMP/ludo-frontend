@@ -143,4 +143,17 @@ const failAcceptApply = http.post(
   },
 );
 
-export default [getStudyDetail, getApplicants, getMyPageInfo, applyStudy, refuseApply, acceptApply];
+const cancelApply = http.post(`${baseURL}/api/studies/:studyId/recruitments/:recruitmentId/cancel`, async () => {
+  return new HttpResponse(
+    JSON.stringify({
+      message: '스터디 지원 취소 성공',
+      data: null,
+    }),
+    {
+      status: HttpStatus.OK,
+      statusText: 'OK',
+    },
+  );
+});
+
+export default [getStudyDetail, getApplicants, getMyPageInfo, applyStudy, refuseApply, acceptApply, cancelApply];

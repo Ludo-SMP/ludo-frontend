@@ -12,9 +12,6 @@ import ChipButton from '@/Components/Button/ChipButton';
 import { User, ParticipateStudy, ApplicantRecruitment, CompletedStudy } from '@/Types/study';
 import { useSelectedMyStudyStore } from '@/Store/study';
 
-import axios from 'axios';
-axios.defaults.withCredentials = true;
-
 const MyPage = () => {
   const { data: myPageInfo, isLoading } = useMyPageInfo();
   const user: User = myPageInfo?.user;

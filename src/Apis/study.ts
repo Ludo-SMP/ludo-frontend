@@ -90,3 +90,21 @@ export const useAcceptApplyMutation = (studyId: number, applicantId: number, suc
   });
   return { mutate };
 };
+
+export const cancelApply = (studyId: number, recruitmentId: number) =>
+  httpClient.post(API_END_POINT.APPLY_CANCEL(studyId, recruitmentId));
+
+export const useCancelAppyMutation = (studyId: number, recruitmentId: number, successHandler: () => void) => {
+  const { mutate } = useMutation({
+    mutationKey: [...STUDY.CANCEL(studyId, recruitmentId)],
+    mutationFn: () => cancelApply(studyId, recruitmentId),
+    onSuccess: () => {
+      successHandler();
+      console.log('지원 취소 성공');
+    },
+    onError: () => {
+      console.log('지원 취소 실패');
+    },
+  });
+  return { mutate };
+};
