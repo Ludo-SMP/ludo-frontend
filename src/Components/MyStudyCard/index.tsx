@@ -26,9 +26,14 @@ const MyStudyCard = ({ id, title, status, position, period, participantCount }: 
   };
   const { mutate: cancelMutate } = useCancelAppyMutation(1, id, cancelApplySuccessHandler);
   return (
-    <MyStudyCardWrapper onClick={() => navigate(`/studies/${id}${status === 'UNCHECKED' ? '/recruitment' : ''}`)}>
+    <MyStudyCardWrapper
+      onClick={() => {
+        if (status === 'COMPLETED') return;
+        navigate(`/studies/${id}${status === 'UNCHECKED' ? '/recruitment' : ''}`);
+      }}
+    >
       <BlankSquare width="180px" height="180px" />
-      <StudyInfoWrapper>
+      <StudyInfoWrapper status={status}>
         <div className="study__status">
           <span className="title">{title}</span>
           <div className="studyTokens">
@@ -39,9 +44,11 @@ const MyStudyCard = ({ id, title, status, position, period, participantCount }: 
           </div>
         </div>
         <div className="detail__info">
-          <InfoField title="나의 포지션" content={position?.name || '나의 포지션'} />
-          {period && <InfoField title="진행 기간" content={period || '진행 기간'} />}
-          {participantCount && <InfoField title="팀원 수" content={participantCount || '팀원 수'} />}
+          <InfoField title="나의 포지션" content={position?.name || '나의 포지션'} disabled={status === 'COMPLETED'} />
+          {period && <InfoField title="진행 기간" content={period || '진행 기간'} disabled={status === 'COMPLETED'} />}
+          {participantCount && (
+            <InfoField title="팀원 수" content={participantCount || '팀원 수'} disabled={status === 'COMPLETED'} />
+          )}
         </div>
       </StudyInfoWrapper>
       <MyStudyCardButtonsWrapper>
@@ -82,7 +89,7 @@ const MyStudyCardWrapper = styled.div`
   }
 `;
 
-const StudyInfoWrapper = styled.div`
+const StudyInfoWrapper = styled.div<{ status: StudyStatus | ApplyStatus }>`
   display: flex;
   width: (100%-180px);
   flex-direction: column;
