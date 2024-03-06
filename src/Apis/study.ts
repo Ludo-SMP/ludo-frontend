@@ -5,7 +5,7 @@ import { convertStudyDetailRawDataToStudyDetail } from '@/Utils/propertyConverte
 import { API_END_POINT } from '@/Constants/api';
 import { SetStateAction } from 'react';
 import { useModalStore } from '@/Store/modal';
-import { ApplyState } from '@/Types/study';
+import { ApplyState, MyPageInfo } from '@/Types/study';
 
 export const applyStudy = async (studyId: number, recruitmentId: number, data: object) =>
   httpClient.post(API_END_POINT.APPLY(studyId, recruitmentId), { ...data });
@@ -43,13 +43,13 @@ export const useStudyDetail = (studyId: number) => {
   });
 };
 
-export const getMyStudies = () => httpClient.get(API_END_POINT.MYPAGE);
+export const getMyPageInfo = (): Promise<{ data: { data: MyPageInfo } }> => httpClient.get(API_END_POINT.MYPAGE);
 
-export const useMyStudies = () => {
+export const useMyPageInfo = () => {
   return useQuery({
-    queryKey: [...STUDY.myStudies()],
-    queryFn: () => getMyStudies(),
-    select: (data) => data?.data.data,
+    queryKey: [...STUDY.MYPAGE_INFO()],
+    queryFn: () => getMyPageInfo(),
+    select: (data: { data: { data: MyPageInfo } }) => data?.data?.data,
   });
 };
 

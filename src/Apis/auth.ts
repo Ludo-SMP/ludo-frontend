@@ -2,6 +2,7 @@ import { API_END_POINT } from '@/Constants/api';
 import { useLoginStore } from '@/Store/auth';
 import { httpClient } from '@/Utils/axios';
 import { useMutation } from '@tanstack/react-query';
+
 import { useNavigate } from 'react-router-dom';
 
 export interface UserInfo {
@@ -16,14 +17,14 @@ export const useLogOutMutation = () => {
   const navigate = useNavigate();
   const { mutate } = useMutation({
     mutationKey: ['logout'],
-    mutationFn: logOut,
+    mutationFn: () => logOut(),
     onSuccess: () => {
       console.log('성공');
       setIsLoggedOut();
       navigate('/');
     },
-    onError: () => {
-      console.log('error');
+    onError: (res) => {
+      console.log(res);
     },
   });
   return { logoutMutate: mutate };
