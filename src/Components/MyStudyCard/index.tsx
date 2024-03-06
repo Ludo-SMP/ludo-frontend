@@ -3,19 +3,19 @@ import { BlankSquare } from '../Common/BlankSquare';
 import StudyToken from '../Common/StudyToken';
 import { InfoField } from '../Common/InfoField';
 import Button from '../Common/Button';
-import { Position, StudyStatus } from '@/Types/study';
+import { ApplyStatus, StudyStatus, PositionType } from '@/Types/study';
 
 interface MyStudyCardProps {
   id: number;
   title: string;
-  status: StudyStatus[];
-  position?: Position;
+  status: StudyStatus | ApplyStatus;
+  position: PositionType;
   period?: string;
-  memberCnt?: number;
+  participantCount?: number;
   isCreator?: boolean;
 }
 
-const MyStudyCard = ({ title, status, position, memberCnt, isCreator }: MyStudyCardProps) => {
+const MyStudyCard = ({ title, status, position, period, participantCount, isCreator }: MyStudyCardProps) => {
   return (
     <MyStudyCardWrapper>
       <BlankSquare width="180px" height="180px" />
@@ -23,15 +23,16 @@ const MyStudyCard = ({ title, status, position, memberCnt, isCreator }: MyStudyC
         <div className="study__status">
           <span className="title">{title}</span>
           <div className="studyTokens">
-            {status.map((_status: StudyStatus) => (
-              <StudyToken tokenState="InProgress">{_status}</StudyToken>
-            ))}
+            {(status === 'PROGRESS' || status === 'RECRUITING' || status === 'RECRUITED') && (
+              <StudyToken status="PARTICIPATED" />
+            )}
+            <StudyToken status={status} />
           </div>
         </div>
         <div className="detail__info">
-          <InfoField title="나의 포지션" content={position || '나의 포지션'} />
-          <InfoField title="진행 기간" content={position || '포지션'} />
-          <InfoField title="팀원 수" content={memberCnt || 0} />
+          <InfoField title="나의 포지션" content={position?.name || '나의 포지션'} />
+          {period && <InfoField title="진행 기간" content={period || '진행 기간'} />}
+          <InfoField title="팀원 수" content={participantCount || 0} />
         </div>
       </StudyInfoWrapper>
       <MyStudyCardButtonsWrapper>{isCreator && <Button>스터디원 모집 공고 작성하기</Button>}</MyStudyCardButtonsWrapper>

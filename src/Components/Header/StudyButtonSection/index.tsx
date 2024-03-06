@@ -13,7 +13,7 @@ const StudyButtonSection = () => {
       <Button
         type="button"
         onClick={() => {
-          setSelectedMyStudyStatus('진행 중');
+          setSelectedMyStudyStatus('PROGRESS');
           navigate(ROUTER_PATH.mypage);
         }}
       >
@@ -22,7 +22,7 @@ const StudyButtonSection = () => {
       <Button
         type="button"
         onClick={() => {
-          setSelectedMyStudyStatus('지원 완료');
+          setSelectedMyStudyStatus('UNCHECKED');
           navigate(ROUTER_PATH.mypage);
         }}
       >
@@ -31,7 +31,7 @@ const StudyButtonSection = () => {
       <Button
         type="button"
         onClick={() => {
-          setSelectedMyStudyStatus('완료됨');
+          setSelectedMyStudyStatus('COMPLETED');
           navigate(ROUTER_PATH.mypage);
         }}
       >

@@ -1,16 +1,15 @@
-import { StudyApplyStatus, StudyProgressStatus } from '@/Types/study';
+import { ApplyStatus, StudyStatus } from '@/Types/study';
 import { create } from 'zustand';
 
 export interface SelectedMyStudyStatus {
-  selectedMyStudyStatus: StudyProgressStatus | StudyApplyStatus;
+  selectedMyStudyStatus: StudyStatus | ApplyStatus;
 }
 
 export interface SelectedMyStudyStatusAction {
-  setSelectedMyStudyStatus: (newStatus: StudyProgressStatus | StudyApplyStatus) => void;
+  setSelectedMyStudyStatus: (newStatus: StudyStatus | ApplyStatus) => void;
 }
 
 export const useSelectedMyStudyStore = create<SelectedMyStudyStatus & SelectedMyStudyStatusAction>((set) => ({
-  selectedMyStudyStatus: '진행 중',
-  setSelectedMyStudyStatus: (newStatus: StudyProgressStatus | StudyApplyStatus) =>
-    set({ selectedMyStudyStatus: newStatus }),
+  selectedMyStudyStatus: 'PROGRESS',
+  setSelectedMyStudyStatus: (newStatus: StudyStatus | ApplyStatus) => set({ selectedMyStudyStatus: newStatus }),
 }));

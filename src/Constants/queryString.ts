@@ -24,5 +24,5 @@ export const STUDY = {
     recruitmentId,
     applicantId,
   ],
-  myStudies: () => [BASE_KEY.study, 'myStudy'],
+  MYPAGE_INFO: () => [BASE_KEY.study, 'myPage'],
 };

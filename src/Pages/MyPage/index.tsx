@@ -6,16 +6,23 @@ import StudyToken from '@/Components/Common/StudyToken';
 import { BlankSquare } from '@/Components/Common/BlankSquare';
 import TemporarySavedStudyCard from '@/Components/TemporarySavedStudyCard';
 import Button from '@/Components/Common/Button';
-import { useMyStudies } from '@/Apis/study';
-import { useSelectedMyStudyStore } from '@/Store/study';
-import { ApplicantStudyType, ParticiPantStudyType } from '@/Types/study';
-import { dateFormatter } from '@/Utils/date';
+import { useMyPageInfo } from '@/Apis/study';
+import { getPeriod } from '@/Utils/date';
 import ChipButton from '@/Components/Button/ChipButton';
+import { User, ParticipateStudy, ApplicantRecruitment, CompletedStudy } from '@/Types/study';
+import { useSelectedMyStudyStore } from '@/Store/study';
+
+import axios from 'axios';
+axios.defaults.withCredentials = true;
 
 const MyPage = () => {
-  const { data: myStudies, isLoading } = useMyStudies();
-
+  const { data: myPageInfo, isLoading } = useMyPageInfo();
+  const user: User = myPageInfo?.user;
+  const participateStudies: ParticipateStudy[] = myPageInfo?.participateStudies;
+  const applicantRecruitments: ApplicantRecruitment[] = myPageInfo?.applicantRecruitments;
+  const completedStudies: CompletedStudy[] = myPageInfo?.completedStudies;
   const { selectedMyStudyStatus, setSelectedMyStudyStatus } = useSelectedMyStudyStore();
+  console.log(user, participateStudies, applicantRecruitments, completedStudies);
 
   return isLoading ? (
     <div>Loading ...</div>
@@ -26,7 +33,7 @@ const MyPage = () => {
           <MemberImage />
           <span>회원정보</span>
         </div>
-        <UserCard nickname={myStudies?.user.nickname || '닉네임'} email={myStudies?.user.email || '이메일'} />
+        <UserCard nickname={user?.nickname || '닉네임'} email={user?.email || '이메일'} />
       </UserInfoWrapper>
       <MyStudyWrapper>
         <MyStudyTitleWrapper>
@@ -34,51 +41,58 @@ const MyPage = () => {
           <span className="title">스따-디</span>
         </MyStudyTitleWrapper>
         <StudyStateButtonsWrapper>
-          <ChipButton checked={selectedMyStudyStatus === '진행 중'} onClick={() => setSelectedMyStudyStatus('진행 중')}>
+          <ChipButton
+            checked={selectedMyStudyStatus === 'PROGRESS'}
+            onClick={() => setSelectedMyStudyStatus('PROGRESS')}
+          >
             참여중인 스터디
           </ChipButton>
           <ChipButton
-            checked={selectedMyStudyStatus === '지원 완료'}
-            onClick={() => setSelectedMyStudyStatus('지원 완료')}
+            checked={selectedMyStudyStatus === 'UNCHECKED'}
+            onClick={() => setSelectedMyStudyStatus('UNCHECKED')}
           >
             내가 지원한 스터디
           </ChipButton>
-          <ChipButton checked={selectedMyStudyStatus === '완료됨'} onClick={() => setSelectedMyStudyStatus('완료됨')}>
+          <ChipButton
+            checked={selectedMyStudyStatus === 'COMPLETED'}
+            onClick={() => setSelectedMyStudyStatus('COMPLETED')}
+          >
             진행 완료된 스터디
           </ChipButton>
         </StudyStateButtonsWrapper>
-        {selectedMyStudyStatus === '지원 완료'
-          ? myStudies?.applicantStudies.map((applicantStudy: ApplicantStudyType) => (
+        {selectedMyStudyStatus === 'PROGRESS'
+          ? participateStudies.map((participateStudy: ParticipateStudy) => (
               <MyStudyCard
-                id={applicantStudy.id}
-                title={applicantStudy.title}
-                status={[...applicantStudy.status]}
-                key={applicantStudy.id}
+                id={participateStudy.studyId}
+                title={participateStudy.title}
+                status={'PROGRESS'}
+                position={participateStudy.position}
+                period={getPeriod(participateStudy.startDateTime, participateStudy.endDateTime)}
+                participantCount={participateStudy.participantCount}
+                key={participateStudy.studyId}
               />
             ))
-          : selectedMyStudyStatus === '진행 중'
-          ? myStudies?.participantStudies
-              .filter((participantStudy: ParticiPantStudyType) => participantStudy.status.includes('진행 중'))
-              .map((filteredStudy: ParticiPantStudyType) => (
-                <MyStudyCard
-                  id={filteredStudy.id}
-                  title={filteredStudy.title}
-                  status={[...filteredStudy.status]}
-                  key={filteredStudy.id}
-                  period={`${dateFormatter(filteredStudy.startDateTime)}~${dateFormatter(filteredStudy.endDateTime)}`}
-                />
-              ))
-          : myStudies?.participantStudies
-              .filter((participantStudy: ParticiPantStudyType) => participantStudy.status.includes('완료됨'))
-              .map((filteredStudy: ParticiPantStudyType) => (
-                <MyStudyCard
-                  id={filteredStudy.id}
-                  title={filteredStudy.title}
-                  status={[...filteredStudy.status]}
-                  key={filteredStudy.id}
-                  period={`${dateFormatter(filteredStudy.startDateTime)}~${dateFormatter(filteredStudy.endDateTime)}`}
-                />
-              ))}
+          : selectedMyStudyStatus === 'UNCHECKED'
+          ? applicantRecruitments.map((applicantRecruitment: ApplicantRecruitment) => (
+              <MyStudyCard
+                id={applicantRecruitment.recruitmentId}
+                title={applicantRecruitment.title}
+                status={'UNCHECKED'}
+                position={applicantRecruitment.position}
+                key={applicantRecruitment.recruitmentId}
+              />
+            ))
+          : completedStudies.map((completedStudy: CompletedStudy) => (
+              <MyStudyCard
+                id={completedStudy.studyId}
+                title={completedStudy.title}
+                status={'COMPLETED'}
+                position={completedStudy.position}
+                period={getPeriod(completedStudy.startDateTime, completedStudy.endDateTime)}
+                participantCount={completedStudy.participantCount}
+                key={completedStudy.studyId}
+              />
+            ))}
       </MyStudyWrapper>
 
       <TemporarySavedStudyWrapper>

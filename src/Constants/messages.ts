@@ -33,3 +33,9 @@ export const CREATE_STUDY = Object.freeze({
     content: `스터디를 생성하기 위해서 로그인이 필요합니다.\n가입을 통해 루도의 더 많은 서비스를 즐길 수 있습니다.\n  로그인을 진행하시겠습니까?`,
   } as MessageType,
 });
+
+export const PROFILE = Object.freeze({
+  EDIT: {
+    title: '닉네임 변경하기',
+  },
+});
