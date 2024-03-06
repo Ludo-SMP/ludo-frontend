@@ -18,15 +18,12 @@ const ApplicantCard = ({ studyId, id: applicantId, title, nickname, email, posit
   const [isDisabled, setIsDisabled] = useState<boolean>(false);
   const [applyAcceptState, setApplyAcceptState] = useState<ApplyAcceptState>('NOT ACCEPTED');
   const { isModalOpen, closeModal } = useModalStore();
-  // 임시 RecruitmentId
-  const recruitmentId = 1;
-  const { mutate: acceptMutate } = useAcceptApplyMutation(studyId, recruitmentId, applicantId, () => {
+
+  const { mutate: acceptMutate } = useAcceptApplyMutation(studyId, applicantId, () => {
     setApplyAcceptState('ACCEPTED');
     setIsDisabled(true);
   });
-  const { mutate: refuseMutate } = useRefuseApplyMutation(studyId, recruitmentId, applicantId, () =>
-    setIsDisabled(true),
-  );
+  const { mutate: refuseMutate } = useRefuseApplyMutation(studyId, applicantId, () => setIsDisabled(true));
 
   return (
     <ApplicantCardWrapper>

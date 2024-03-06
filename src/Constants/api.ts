@@ -33,10 +33,10 @@ export const API_END_POINT = {
     `${API_PREFIX}/studies/${studyId}/recruitments/${recruitmentId}/apply`,
   APPLY_CANCEL: (studyId: number, recruitmentId: number) =>
     `${API_PREFIX}/studies/${studyId}/recruitments/${recruitmentId}/cancel`,
-  APPLY_ACCEPT: (studyId: number, recruitmentId: number, applicantId: number) =>
-    `${API_PREFIX}/studies/${studyId}/recruitments/${recruitmentId}/apply-accept/${applicantId}`,
-  APPLY_REFUSE: (studyId: number, recruitmentId: number, applicantId: number) =>
-    `${API_PREFIX}/studies/${studyId}/recruitments/${recruitmentId}/apply-refuse/${applicantId}`,
+  APPLY_ACCEPT: (studyId: number, applicantId: number) =>
+    `${API_PREFIX}/studies/${studyId}/apply-accept/${applicantId}`,
+  APPLY_REFUSE: (studyId: number, applicantId: number) =>
+    `${API_PREFIX}/studies/${studyId}/apply-refuse/${applicantId}`,
 
   // MyPage
   MYPAGE: `${API_PREFIX}/users/mypage`,

@@ -53,18 +53,13 @@ export const useMyPageInfo = () => {
   });
 };
 
-export const refuseApply = (studyId: number, recruitmentId: number, applicantId: number) =>
-  httpClient.post(API_END_POINT.APPLY_REFUSE(studyId, recruitmentId, applicantId));
+export const refuseApply = (studyId: number, applicantId: number) =>
+  httpClient.post(API_END_POINT.APPLY_REFUSE(studyId, applicantId));
 
-export const useRefuseApplyMutation = (
-  studyId: number,
-  recruitmentId: number,
-  applicantId: number,
-  successHandler: () => void,
-) => {
+export const useRefuseApplyMutation = (studyId: number, applicantId: number, successHandler: () => void) => {
   const { mutate } = useMutation({
-    mutationKey: [...STUDY.REFUSE(studyId, recruitmentId, applicantId)],
-    mutationFn: () => refuseApply(studyId, recruitmentId, applicantId),
+    mutationKey: [...STUDY.REFUSE(studyId, applicantId)],
+    mutationFn: () => refuseApply(studyId, applicantId),
     onSuccess: () => {
       successHandler();
       console.log('지원 거절 성공');
@@ -76,19 +71,14 @@ export const useRefuseApplyMutation = (
   return { mutate };
 };
 
-export const acceptApply = (studyId: number, recruitmentId: number, applicantId: number) =>
-  httpClient.post(API_END_POINT.APPLY_ACCEPT(studyId, recruitmentId, applicantId));
+export const acceptApply = (studyId: number, applicantId: number) =>
+  httpClient.post(API_END_POINT.APPLY_ACCEPT(studyId, applicantId));
 
-export const useAcceptApplyMutation = (
-  studyId: number,
-  recruitmentId: number,
-  applicantId: number,
-  successHandler: () => void,
-) => {
+export const useAcceptApplyMutation = (studyId: number, applicantId: number, successHandler: () => void) => {
   const { openModal } = useModalStore();
   const { mutate } = useMutation({
-    mutationKey: [...STUDY.ACCEPT(studyId, recruitmentId, applicantId)],
-    mutationFn: () => acceptApply(studyId, recruitmentId, applicantId),
+    mutationKey: [...STUDY.ACCEPT(studyId, applicantId)],
+    mutationFn: () => acceptApply(studyId, applicantId),
     onSuccess: () => {
       successHandler();
       openModal();
