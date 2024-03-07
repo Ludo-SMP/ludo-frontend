@@ -1,3 +1,5 @@
+import { MEMBER_STATUS, STUDY_STATUS } from '@/Shared/study';
+
 export type Position = '백엔드' | '프론트엔드' | '디자이너' | '데브옵스';
 export type ActivityType = '온라인' | '오프라인' | '미정';
 export type ToolType = 'React' | 'Java' | 'Spring' | 'Figma' | 'Java' | 'Javascript';
@@ -6,12 +8,14 @@ export type ProgressMethod = ActivityType;
 export type StudyCategory = '코딩 테스트' | '모의 면접' | '프로젝트';
 export type SortType = '최신순' | '조회순';
 export type CategoryPropertyType = 'category' | 'stacks' | 'positions' | 'way' | 'sort';
-export type StudyApplyStatus = '합류 확정' | '지원 완료' | '합류 거절';
-export type StudyStatus = '진행 중' | '모집 중' | '모집 완료' | '완료됨';
-export type myStudyStatus = '참여' | '지원' | '완료';
+export type ApplyStatus = 'UNCHECKED';
+export type StudyStatus = keyof typeof STUDY_STATUS;
+export type MemberStatus = keyof typeof MEMBER_STATUS;
 export type AllType = '전체';
 export type Role = '팀장' | '팀원';
 export type Platform = 'GATHER' | 'GOOGLE MEET';
+export type Card = 'STUDY' | 'RECRUITMENT';
+
 export interface Member {
   id: number;
   nickname: string;
@@ -21,6 +25,18 @@ export interface Member {
     name: StudyCategory | string;
   };
   role: Role | string;
+}
+
+export interface User {
+  id: number;
+  nickname: string;
+  email: string;
+}
+
+// 추후에 Position 타입과 통합하는 과정 필요
+export interface PositionType {
+  id: number;
+  name: Position;
 }
 
 export interface Applicant extends Omit<Member, 'role'> {}
@@ -166,22 +182,37 @@ export interface StudyDetail {
   memberLimit: number;
 }
 
-export interface ParticiPantStudyType {
-  id: number;
+export interface ParticipateStudy {
+  studyId: number;
   title: string;
-  status: StudyStatus[];
+  position: PositionType;
   startDateTime: string;
   endDateTime: string;
+  participantCount: number;
 }
 
-export interface ApplicantStudyType {
-  id: number;
+export interface ApplicantRecruitment {
+  recruitmentId: number;
   title: string;
-  status: StudyStatus[];
+  position: { id: number; name: Position };
+  applicantStatus: 'UNCHECKED';
 }
 
-export interface MyStudiesType {
-  user: Pick<Member, 'id' | 'nickname' | 'email'>;
-  participantStudies: ParticiPantStudyType[];
-  applicantStudies: ApplicantStudyType[];
+export interface CompletedStudy {
+  studyId: number;
+  title: string;
+  position: PositionType;
+  startDateTime: string;
+  endDateTime: string;
+  participantCount: number;
+}
+
+export interface MyStudies {
+  participateStudies: ParticipateStudy[];
+  applicantRecruitments: ApplicantRecruitment[];
+  completedStudies: CompletedStudy[];
+}
+
+export interface MyPageInfo extends MyStudies {
+  user: User;
 }

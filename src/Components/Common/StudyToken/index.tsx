@@ -1,36 +1,37 @@
-import { StudyStatus } from '@/Types/study';
+import { APPLY_STATUS, MEMBER_STATUS, STUDY_STATUS } from '@/Shared/study';
+import { ApplyStatus, MemberStatus, StudyStatus } from '@/Types/study';
 import styled from 'styled-components';
 
-export type TokenType = 'STUDY' | 'APPLICANT' | 'MEMBER';
-
 export interface StudyTokenProps {
-  tokenType: TokenType;
-  status?: StudyStatus | string;
-  children?: React.ReactNode;
+  status?: StudyStatus | ApplyStatus | MemberStatus;
 }
 
-const StudyToken = ({ tokenType, status, children }: StudyTokenProps) => {
+const StudyToken = ({ status }: StudyTokenProps) => {
   return (
-    <StudyTokenWrapper tokenType={tokenType} status={status}>
-      {children}
+    <StudyTokenWrapper status={status}>
+      {status === 'PARTICIPATED'
+        ? `${MEMBER_STATUS[status]}인 스터디`
+        : status === 'UNCHECKED'
+        ? `${APPLY_STATUS[status]}`
+        : `${STUDY_STATUS[status]}`}
     </StudyTokenWrapper>
   );
 };
 
-const StudyTokenWrapper = styled.span<{ tokenType: TokenType; status: StudyStatus | string }>`
+const StudyTokenWrapper = styled.span<{ status: StudyStatus | ApplyStatus | MemberStatus }>`
   display: flex;
   padding: 4px 12px;
   justify-content: center;
   align-items: center;
 
-  color: ${({ tokenType, status, theme }) =>
-    tokenType === 'MEMBER'
-      ? theme.color.purple5
-      : status === '진행 중'
+  color: ${({ status, theme }) =>
+    status === 'PARTICIPATED'
       ? theme.color.purple1
-      : status === '완료됨'
+      : status === 'PROGRESS'
+      ? theme.color.purple5
+      : status === 'COMPLETED'
       ? `rgba(0, 0, 0, 0.25)`
-      : theme.color.black3};
+      : theme.color.orange3};
 
   background: #f2f2f2;
   border-radius: ${({ theme }) => theme.borderRadius.large};

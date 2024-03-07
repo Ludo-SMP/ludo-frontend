@@ -1,5 +1,5 @@
 import { HttpResponse, http } from 'msw';
-import { applicantsMockData, studyDetailMockData, myStudiesMockData } from '../data/mockStudies';
+import { applicantsMockData, studyDetailMockData, myPageInfoData } from '../data/mockStudies';
 import { StudyDetailResponseData } from '@/Types/study';
 import { HttpStatus } from '@/Constants/StatusCodes';
 const baseURL = import.meta.env.VITE_MOCK_API_URL;
@@ -31,10 +31,10 @@ const getApplicants = http.get(`${baseURL}/api/studies/:studyId/recruitments/use
   );
 });
 
-const getMyStudies = http.get(`${baseURL}/api/users/mypage`, async () => {
+const getMyPageInfo = http.get(`${baseURL}/api/users/mypage`, async () => {
   return new HttpResponse(
     JSON.stringify({
-      data: { ...myStudiesMockData },
+      data: { ...myPageInfoData },
       message: 'Success',
     }),
     {
@@ -143,4 +143,17 @@ const failAcceptApply = http.post(
   },
 );
 
-export default [getStudyDetail, getApplicants, getMyStudies, applyStudy, refuseApply, acceptApply];
+const cancelApply = http.post(`${baseURL}/api/studies/:studyId/recruitments/:recruitmentId/cancel`, async () => {
+  return new HttpResponse(
+    JSON.stringify({
+      message: '스터디 지원 취소 성공',
+      data: null,
+    }),
+    {
+      status: HttpStatus.OK,
+      statusText: 'OK',
+    },
+  );
+});
+
+export default [getStudyDetail, getApplicants, getMyPageInfo, applyStudy, refuseApply, acceptApply, cancelApply];

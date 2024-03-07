@@ -11,7 +11,7 @@ export interface SignButtonSectionProps {
 
 const SignButtonSection = ({ isLoggedIn }: SignButtonSectionProps) => {
   const navigate = useNavigate();
-  const { logoutMutate } = useLogOutMutation();
+  const { mutate: logoutMutate } = useLogOutMutation();
 
   return (
     <SignButtonSectionWrapper {...{ isLoggedIn }}>

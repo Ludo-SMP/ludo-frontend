@@ -1,21 +1,20 @@
-import { MouseEventHandler } from 'react';
 import styled from 'styled-components';
 
-export type ChipButtonProps = {
-  onClick: MouseEventHandler<HTMLButtonElement>;
+export type ChipMenuProps = {
+  onClick: () => void;
   checked: boolean;
   children: React.ReactNode;
   disabled?: boolean;
   className?: string;
 };
 
-const ChipButton = ({ onClick, checked, children, disabled, className }: ChipButtonProps) => (
-  <ChipButtonContainer {...{ checked, onClick, disabled, className }}>
+const ChipMenu = ({ onClick, checked, children, disabled, className }: ChipMenuProps) => (
+  <ChipMenuContainer {...{ checked, onClick, disabled, className }}>
     <>{children}</>
-  </ChipButtonContainer>
+  </ChipMenuContainer>
 );
 
-const ChipButtonContainer = styled.button<{ checked: boolean }>`
+const ChipMenuContainer = styled.button<{ checked: boolean }>`
   display: flex;
   padding: 0px 16px;
   justify-content: center;
@@ -32,4 +31,4 @@ const ChipButtonContainer = styled.button<{ checked: boolean }>`
   line-height: 40px;
 `;
 
-export default ChipButton;
+export default ChipMenu;
