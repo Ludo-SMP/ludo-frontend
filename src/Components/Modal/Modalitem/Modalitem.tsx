@@ -29,6 +29,7 @@ export const ModalItem = ({ item }: Props) => {
     <ListContainer>
       {data?.stacks.map((item: any) => (
         <div key={item.id}>
+          {/* 기술 스택 id */}
           {/* {item?.stacks.map((item: StackItem) => ( */}
           <ItemContainer>
             <ImageUrl src={VITE_BASE_URL + item.imageUrl} ref={imgRef} />
@@ -56,34 +57,27 @@ const ListContainer = styled.section`
     overflow-y: auto;
   } */
   & button:focus {
-    background: lightblue;
+    background: #efecff;
+    color: #9f99e5;
   }
 `;
 
 const ItemContainer = styled.button`
   width: 172px;
   height: 48px;
-  justify-content: space-evenly;
+  /* justify-content: space-evenly; */
+  justify-content: space-between;
   align-items: stretch;
-  gap: 12px;
-
-  &:active {
-    background-color: purple;
-    color: gray;
-  }
-  &.select {
-    background: #9f99e5;
-    color: gray;
-  }
 `;
 
 const StackName = styled.span`
   width: 75px;
   height: 32px;
-  font-size: 14px;
+  font-size: 10px;
+  line-height: 32px;
   margin: auto;
   margin-left: 12px;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 `;
 
 const ImageUrl = styled.img`
