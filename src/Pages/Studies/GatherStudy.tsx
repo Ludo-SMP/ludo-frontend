@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ContactButton } from '../../Components/Selectbox/ContactButton';
+// import { ContactButton } from '../../Components/Selectbox/ContactButton';
 import { ContactUrlInput } from '../../Components/Textarea/ContactUrlInput';
 import { SubmitButton } from '../../Components/Button/Studies/SubmitButton';
 import { CalendarButton } from '../../Components/Selectbox/CalendarButton';
@@ -8,24 +8,28 @@ import { StackSelectButton } from '@/Components/Selectbox/StackSelectButton';
 import { Mainarea } from '../../Components/Textarea/Mainarea';
 import { Titlearea } from '../../Components/Textarea/Titlearea';
 import { GatherButton } from '../../Components/Selectbox/GatherButton';
-import { StackModal } from '../../Components/Modal/StackModal';
+// import { StackModal } from '../../Components/Modal/StackModal';
 import { EndDate } from '../../Components/Calendar/EndDate';
 import { media } from '../../Styles/theme';
 import { Creates } from '@/Types/studies';
 import { useState } from 'react';
+// import { stackCategory } from '@/Shared/category';
+import { useStack } from '@/Apis/stack';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export type OptionalCreates = Partial<Creates>;
 
 export const GatherStudy = () => {
+  const Navigation = useNavigate();
   const [useForm, setuseForm] = useState<Creates>({
     title: '',
-    categoryId: 0,
-    way: '',
-    participantLimit: 0,
-    startDateTime: '',
-    endDateTime: '',
+    recruitmentLimit: 0,
+    recruitmentEndDateTime: '',
     positionId: 0,
     stackId: 0,
+    contactUrl: '',
+    content: '',
   });
 
   function forms(fields: OptionalCreates) {
@@ -34,21 +38,41 @@ export const GatherStudy = () => {
       ...fields,
     });
   }
+
+  async function posts() {
+    const { data } = await axios.post(`https://ludoapi.store/api/studies/${20}/recruitments`, {
+      title: useForm.title,
+      recruitmentLimit: useForm.recruitmentLimit,
+      recruitmentEndDateTime: useForm.recruitmentLimit,
+      positionId: useForm.positionId,
+      stackId: useForm.stackId,
+      contactUrl: useForm.contactUrl,
+      content: useForm.content,
+    });
+    console.log(data);
+  }
+
+  const constSubmit = (event: any) => {
+    event.preventDefault();
+    posts();
+    Navigation('/');
+  };
+
   return (
     <>
-      <StudyContainer>
+      <StudyContainer onSubmit={constSubmit}>
         <StudyMain>스터디 팀원 모집하기</StudyMain>
         <TopBox>
           <StudyTitle>스터디 기본 안내</StudyTitle>
           <StudyTopInfo>
             <StudyWrapper>
               <ContentText>모집인원</ContentText>
-              <GatherButton />
+              <GatherButton setForm={forms} useForm={useForm} />
             </StudyWrapper>
             <StudyWrapper>
               <ContentText>모집마감일</ContentText>
               <CalendarButton>
-                <EndDate />
+                <EndDate setForm={forms} useForm={useForm} />
               </CalendarButton>
             </StudyWrapper>
             <StudyWrapper>
@@ -57,15 +81,15 @@ export const GatherStudy = () => {
             </StudyWrapper>
             <StudyWrapper>
               <ContentText>기술스택</ContentText>
-              <StackSelectButton setForm={forms} useForm={useForm} item={[]} />
+              <StackSelectButton setForm={forms} useForm={useForm} item={useStack as any} />
             </StudyWrapper>
-            <StudyWrapper>
+            {/* <StudyWrapper>
               <ContentText>연락방법</ContentText>
               <ContactButton />
-            </StudyWrapper>
+            </StudyWrapper> */}
             <StudyWrapper>
               <ContentText>연결url</ContentText>
-              <ContactUrlInput />
+              <ContactUrlInput setForm={forms} useForm={useForm} />
             </StudyWrapper>
           </StudyTopInfo>
         </TopBox>
@@ -112,12 +136,12 @@ export const GatherStudy = () => {
           </BottomWrapper>
           <BottomWrapper>
             <ContentText>내용</ContentText>
-            <Mainarea />
+            <Mainarea setForm={forms} useForm={useForm} />
           </BottomWrapper>
         </BottomBox>
         <ButtonBox>
-          <SubmitButton>수정취소</SubmitButton>
-          <SubmitButton>수정완료</SubmitButton>
+          <SubmitButton type="submit">수정취소</SubmitButton>
+          <SubmitButton type="submit">등록하기</SubmitButton>
         </ButtonBox>
       </StudyContainer>
     </>

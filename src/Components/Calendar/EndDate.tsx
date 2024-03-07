@@ -1,16 +1,34 @@
 // react-datepicker를 사용해서 마감날짜 구현 328px, 44px, ex) 24.01.23
 import DatePicker from 'react-datepicker';
-import { useState } from 'react';
+import { useState, ChangeEvent } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
 import styled from 'styled-components';
+import { OptionalCreates } from '@/Pages/Studies/GatherStudy';
+import { Creates } from '@/Types/studies';
 
-export const EndDate = () => {
-  const [startDate, setStartDate] = useState(new Date());
+export type Props = {
+  onClick?: () => void;
+  children?: React.ReactNode;
+  // onChange?: (event: string) => void;
+  setForm: (any: OptionalCreates) => void;
+  useForm: Creates;
+  value?: string;
+  type?: string;
+  name?: string;
+  maxlength?: number;
+  id?: string;
+  formData?: number | string;
+  ref?: string;
+};
+
+export const EndDate = ({ setForm, useForm }: Props) => {
+  const [recruitmentEndDateTime, setForms] = useState(new Date());
   return (
     <DateContainer
-      selected={startDate}
+      value={(useForm.recruitmentEndDateTime = recruitmentEndDateTime.toISOString().slice(0, -5))}
+      selected={recruitmentEndDateTime}
       dateFormat="yy.MM.dd"
-      onChange={(date: any) => setStartDate(date)}
+      onChange={(date: Date) => setForms(date)}
       placeholderText="ex)24.01.07"
       isClearable={true}
     />

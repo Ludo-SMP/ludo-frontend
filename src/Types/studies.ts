@@ -39,10 +39,10 @@ export type ItemCategory = {
 };
 
 export type StackItem = {
-  id: number;
-  name: string;
-  imageUrl: string;
-  category: ItemCategory;
+  id?: number;
+  name?: string;
+  imageUrl?: string;
+  category?: ItemCategory;
 };
 
 // export type Gather = {

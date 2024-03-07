@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { OptionalCreates } from '@/Pages/Studies/CreateStudy';
-import { Creates } from '@/Types/studies';
+import { OptionalCreates } from '@/Pages/Studies/GatherStudy';
+import { Creates, ItemCategory } from '@/Types/studies';
 import { ChangeEvent, useState, useRef } from 'react';
 import { StackItem } from '@/Types/studies';
 import { useStack } from '@/Apis/stack';
@@ -18,20 +18,20 @@ export type Props = {
   id?: string;
   formData?: number | string;
   ref?: string;
-  item: StackItem[];
+  item?: StackItem;
 };
 
 export const StackSelectButton = ({ setForm, useForm, item }: Props) => {
   const { data } = useStack();
-  console.log({ data });
-  const imgRef = useRef<HTMLImageElement>(null);
-  const PositionHandler = (event: ChangeEvent<HTMLSelectElement>) => {
-    setForm({ positionId: event.target.selectedIndex });
+  const StackHandler = (event: ChangeEvent<HTMLSelectElement>) => {
+    setForm({ stackId: event.target.selectedIndex });
   };
   return (
-    <ButtonConTainer>
-      {data?.stacks.map((item: any) => (
-        <Textwrapper value={item.name}>{item.name}</Textwrapper>
+    <ButtonConTainer name="stackId" className="select" onChange={StackHandler} value={(useForm.stackId = item.id)}>
+      {data?.stacks.map((item: ItemCategory) => (
+        <Textwrapper value={item.id} key={item.name}>
+          {item.name}
+        </Textwrapper>
       ))}
     </ButtonConTainer>
   );
@@ -52,4 +52,8 @@ const Textwrapper = styled.option`
   background: ${(props) => props.theme.color.gray1};
   color: ${(props) => props.theme.color.gray3};
   padding-left: 16px;
+  & option:focus {
+    background: #efecff;
+    color: #9f99e5;
+  }
 `;
