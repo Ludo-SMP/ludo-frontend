@@ -206,20 +206,6 @@ export interface CompletedStudy {
   endDateTime: string;
   participantCount: number;
 }
-// export interface participateStudy {
-//   id: number;
-//   title: string;
-//   position: { id: number; name: string };
-//   status: StudyStatus[];
-//   startDateTime: string;
-//   endDateTime: string;
-// }
-
-// export interface ApplicantStudyType {
-//   id: number;
-//   title: string;
-//   status: StudyStatus[];
-// }
 
 export interface MyStudies {
   participateStudies: ParticipateStudy[];

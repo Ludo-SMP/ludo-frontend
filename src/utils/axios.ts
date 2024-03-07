@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 
 export const createClient = (config?: AxiosRequestConfig) => {
   const axiosInstance = axios.create({
-    baseURL: import.meta.env.VITE_MOCk_API_URL,
+    baseURL: import.meta.env.VITE_BASE_API_URL,
     headers: {
       'Content-Type': 'application/json',
     },
