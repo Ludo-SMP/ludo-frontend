@@ -1,11 +1,11 @@
-import { StudyCategoryType } from '@/Types/study';
+import { StudyCategory } from '@/Types/study';
 import { useNavigate } from 'react-router-dom';
 import Button from '../Common/Button';
 import styled from 'styled-components';
 import { Right } from '@/Assets';
 
 export interface CardListInfoProps {
-  studyCategory?: StudyCategoryType;
+  studyCategory?: StudyCategory;
 }
 
 const CardListInfo = ({ studyCategory }: CardListInfoProps) => {
@@ -25,7 +25,7 @@ const CardListInfo = ({ studyCategory }: CardListInfoProps) => {
   );
 };
 
-const CardListInfoWrapper = styled.div<{ studyCategory?: StudyCategoryType }>`
+const CardListInfoWrapper = styled.div<{ studyCategory?: StudyCategory }>`
   display: flex;
   justify-content: ${(props) => (props.studyCategory ? 'space-between' : 'flex-start')};
   gap: ${(props) => props.studyCategory && '40px'};

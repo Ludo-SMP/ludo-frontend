@@ -1,4 +1,4 @@
-import { PositionType } from '@/Types/study';
+import { Position } from '@/Types/study';
 import { create } from 'zustand';
 
 export const POSITION = Object.freeze({
@@ -13,12 +13,12 @@ export interface SelectedPositionState {
 }
 
 export interface SetSelectedPositionsAction {
-  setSelectedPosition: (selectedPosition: PositionType) => void;
+  setSelectedPosition: (selectedPosition: Position) => void;
   resetSelectedPosition: () => void;
 }
 
 export const useSelectedPositionStore = create<SelectedPositionState & SetSelectedPositionsAction>((set) => ({
   selectedPosition: null,
-  setSelectedPosition: (selectedTarget: PositionType) => set({ selectedPosition: POSITION[selectedTarget] }),
+  setSelectedPosition: (selectedTarget: Position) => set({ selectedPosition: POSITION[selectedTarget] }),
   resetSelectedPosition: () => set({ selectedPosition: null }),
 }));

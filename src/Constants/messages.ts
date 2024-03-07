@@ -15,6 +15,10 @@ export const APPLY = Object.freeze({
     title: '앗, 지원이 마감된 스터디입니다ㅠㅠ',
     content: `방금 전 스터디 모집이 마감되었습니다.\n 해당 스터디에 관심 가져주셔서 감사합니다.`,
   },
+  ACCEPT: {
+    title: '스터디 지원자를 수락했습니다!',
+    content: `수락된 지원자는 \`구성원\`항목에 업로드 되었습니다.\n 확인 부탁드립니다.`,
+  },
 });
 
 export const SEARCH = Object.freeze({
@@ -28,4 +32,10 @@ export const CREATE_STUDY = Object.freeze({
     title: '로그인이 필요한 서비스입니다.',
     content: `스터디를 생성하기 위해서 로그인이 필요합니다.\n가입을 통해 루도의 더 많은 서비스를 즐길 수 있습니다.\n  로그인을 진행하시겠습니까?`,
   } as MessageType,
+});
+
+export const PROFILE = Object.freeze({
+  EDIT: {
+    title: '닉네임 변경하기',
+  },
 });

@@ -2,7 +2,7 @@ import Modal from '@/Components/Common/Modal';
 import { APPLY } from '@/Constants/messages';
 import Chip from '@/Components/Common/Chip';
 import { useApplyStudyMutation } from '@/Apis/study';
-import { PositionType } from '@/Types/study';
+import { Position } from '@/Types/study';
 import styled from 'styled-components';
 import { useSelectedPositionStore } from '@/Store/position';
 import { SetStateAction } from 'react';
@@ -12,7 +12,7 @@ interface ApplyModalProps {
   handleApplyApprove: React.Dispatch<SetStateAction<ApplyState>>;
   recruitmentId: number;
   studyId: number;
-  positions: PositionType[];
+  positions: Position[];
 }
 
 const ApplyModal = ({ handleApplyApprove, recruitmentId, studyId, positions }: ApplyModalProps) => {

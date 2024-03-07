@@ -1,26 +1,35 @@
+import { APPLY_STATUS, MEMBER_STATUS, STUDY_STATUS } from '@/Shared/study';
+import { ApplyStatus, MemberStatus, StudyStatus } from '@/Types/study';
 import styled from 'styled-components';
 
-export type TokenState = 'default' | 'InProgress' | 'Completed' | 'Apply';
-
-export interface TokenStateProps {
-  tokenState: TokenState;
-  children: React.ReactNode;
+export interface StudyTokenProps {
+  status?: StudyStatus | ApplyStatus | MemberStatus;
 }
 
-const StudyToken = ({ tokenState = 'default', children }: TokenStateProps) => {
-  return <StudyTokenWrapper {...{ tokenState }}>{children}</StudyTokenWrapper>;
+const StudyToken = ({ status }: StudyTokenProps) => {
+  return (
+    <StudyTokenWrapper status={status}>
+      {status === 'PARTICIPATED'
+        ? `${MEMBER_STATUS[status]}인 스터디`
+        : status === 'UNCHECKED'
+        ? `${APPLY_STATUS[status]}`
+        : `${STUDY_STATUS[status]}`}
+    </StudyTokenWrapper>
+  );
 };
 
-const StudyTokenWrapper = styled.span<{ tokenState: TokenState }>`
+const StudyTokenWrapper = styled.span<{ status: StudyStatus | ApplyStatus | MemberStatus }>`
   display: flex;
   padding: 4px 12px;
   justify-content: center;
   align-items: center;
 
-  color: ${({ tokenState, theme }) =>
-    tokenState === 'InProgress'
+  color: ${({ status, theme }) =>
+    status === 'PARTICIPATED'
       ? theme.color.purple1
-      : tokenState === 'Completed'
+      : status === 'PROGRESS'
+      ? theme.color.purple5
+      : status === 'COMPLETED'
       ? `rgba(0, 0, 0, 0.25)`
       : theme.color.orange3};
 

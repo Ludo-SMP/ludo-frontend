@@ -30,7 +30,6 @@ const RecruitmentDetail = () => {
   const studyId = 1;
   const { data, isLoading } = useRecruitmentDetail(recruitmentId);
   const recruitmentDetail = isLoading ? null : data;
-  console.log(recruitmentDetail, user, applyState);
 
   useEffect(() => {
     closeModal();
