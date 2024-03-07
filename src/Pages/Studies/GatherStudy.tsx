@@ -4,6 +4,7 @@ import { ContactUrlInput } from '../../Components/Textarea/ContactUrlInput';
 import { SubmitButton } from '../../Components/Button/Studies/SubmitButton';
 import { CalendarButton } from '../../Components/Selectbox/CalendarButton';
 import { PositionButton } from '../../Components/Selectbox/PositionButton';
+import { StackSelectButton } from '@/Components/Selectbox/StackSelectButton';
 import { Mainarea } from '../../Components/Textarea/Mainarea';
 import { Titlearea } from '../../Components/Textarea/Titlearea';
 import { GatherButton } from '../../Components/Selectbox/GatherButton';
@@ -12,6 +13,7 @@ import { EndDate } from '../../Components/Calendar/EndDate';
 import { media } from '../../Styles/theme';
 import { Creates } from '@/Types/studies';
 import { useState } from 'react';
+
 export type OptionalCreates = Partial<Creates>;
 
 export const GatherStudy = () => {
@@ -23,6 +25,7 @@ export const GatherStudy = () => {
     startDateTime: '',
     endDateTime: '',
     positionId: 0,
+    stackId: 0,
   });
 
   function forms(fields: OptionalCreates) {
@@ -54,7 +57,7 @@ export const GatherStudy = () => {
             </StudyWrapper>
             <StudyWrapper>
               <ContentText>기술스택</ContentText>
-              <StackModal />
+              <StackSelectButton setForm={forms} useForm={useForm} item={[]} />
             </StudyWrapper>
             <StudyWrapper>
               <ContentText>연락방법</ContentText>

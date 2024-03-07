@@ -9,18 +9,25 @@
 // };
 
 export type Creates = {
-  title: string;
-  categoryId: number;
-  participantLimit: number;
-  way: string;
+  title?: string;
+  categoryId?: number;
+  participantLimit?: number;
+  way?: string;
   platform?: string;
-  positionId: number;
-  startDateTime: string;
-  endDateTime: string;
+  positionId?: number;
+  stackId?: number;
+  // stackIds?: stackId;
+  startDateTime?: string;
+  endDateTime?: string;
+  recruitmentEndDateTime?: string;
+  recruitmentLimit?: number;
+  contact?: string;
+  contactUrl?: string;
+  content?: string;
 };
 
-export type Position = '프론트엔드' | '백엔드' | '디자이너' | '기획자';
-export type stackId = 4 | 5 | 6 | 8 | 9 | 10;
+// export type Position = '프론트엔드' | '백엔드' | '디자이너' | '기획자';
+// export type stackId = 4 | 5 | 6 | 8 | 9 | 10;
 export type ItemCategory = {
   categoryName?: string;
   categoryId?: number;
@@ -38,16 +45,16 @@ export type StackItem = {
   category: ItemCategory;
 };
 
-export type Gather = {
-  gather: string;
-  end: string;
-  position: Position;
-  stack: [StackItem];
-  contact: string;
-  contactUrl: string;
-  title: string;
-  detail: string;
-};
+// export type Gather = {
+//   gather: string;
+//   end: string;
+//   position: Position;
+//   stack: [StackItem];
+//   contact: string;
+//   contactUrl: string;
+//   title: string;
+//   detail: string;
+// };
 
 export type Modify = {
   title: string;
