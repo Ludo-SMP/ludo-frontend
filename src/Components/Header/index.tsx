@@ -29,7 +29,7 @@ const Header = () => {
                 <StudyButtonSection />
               ) : (
                 <div className="login__elements">
-                  <SignButtonSection isLoggedIn={true} />
+                  <SignButtonSection />
                   <Button
                     className="create__study"
                     type="button"
@@ -48,7 +48,7 @@ const Header = () => {
             </>
           ) : (
             <div className="signout__elements">
-              <SignButtonSection isLoggedIn={false} />
+              <SignButtonSection />
               <Button
                 className="create__study"
                 type="button"
