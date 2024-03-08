@@ -38,9 +38,6 @@ const MyStudyCard = ({ id, title, status, position, period, participantCount }: 
         <div className="study__status">
           <span className="title">{title}</span>
           <div className="studyTokens">
-            {(status === 'PROGRESS' || status === 'RECRUITING' || status === 'RECRUITED') && (
-              <StudyToken status="PARTICIPATED" />
-            )}
             <StudyToken status={status} />
           </div>
         </div>
