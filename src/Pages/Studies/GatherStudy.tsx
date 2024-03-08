@@ -54,7 +54,7 @@ export const GatherStudy = () => {
       callUrl: useForm.callUrl,
       content: useForm.content,
       // studyId: useForm.studyId,
-      studyId: 35,
+      studyId: 37,
     });
     console.log(data);
   }

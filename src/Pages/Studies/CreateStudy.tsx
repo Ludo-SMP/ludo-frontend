@@ -49,7 +49,10 @@ export const CreateStudy = () => {
       platform: useForm.platform,
     });
     console.log(data);
+    localStorage.setItem('create', JSON.stringify(data.data));
   }
+
+  const onSave = async () => {};
   const handleSubmit = (event: any) => {
     event.preventDefault();
     post();
@@ -106,7 +109,7 @@ export const CreateStudy = () => {
           </StudyMiddleInfo>
         </MiddleCenterBox>
         <ButtonBox>
-          <SubmitButton type="submit">임시저장</SubmitButton>
+          <SubmitButton onClick={onSave}>임시저장</SubmitButton>
           <SubmitButton type="submit">등록하기</SubmitButton>
         </ButtonBox>
       </StudyContainer>
