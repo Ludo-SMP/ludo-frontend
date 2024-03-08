@@ -21,12 +21,12 @@ export type Props = {
 export const ContactUrlInput = ({ setForm, useForm }: Props) => {
   const [UrlValue, setForms] = useState('');
   const onUrlHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setForm({ contactUrl: event.target.value });
+    setForm({ callUrl: event.target.value });
   };
   return (
     <InputContainer
-      id="contactUrl"
-      name="contactUrl"
+      id="callUrl"
+      name="callUrl"
       value={useForm.contactUrl}
       onChange={(event) => onUrlHandler(event)}
       placeholder="ex)오픈 카카오톡 링크"

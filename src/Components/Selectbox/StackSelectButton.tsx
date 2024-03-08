@@ -8,7 +8,6 @@ import { useStack } from '@/Apis/stack';
 export type Props = {
   onClick?: () => void;
   children?: React.ReactNode;
-  // onChange?: (event: string) => void;
   setForm: (any: OptionalCreates) => void;
   useForm: Creates;
   value?: string;
@@ -25,14 +24,11 @@ export const StackSelectButton = ({ setForm, useForm, item }: Props) => {
   const { data } = useStack();
   const StackHandler = (event: ChangeEvent<HTMLSelectElement>) => {
     setForm({ stackId: event.target.selectedIndex });
-    console.log(setForm({ stackId: event.target.selectedIndex }));
   };
   return (
-    <ButtonConTainer name="stackId" className="select" onChange={StackHandler} value={(useForm.stackId = item.id)}>
+    <ButtonConTainer name="stackId" className="select" onChange={StackHandler} value={useForm.stackId}>
       {data?.stacks.map((item: ItemCategory) => (
-        <Textwrapper value={item.id} key={item.name}>
-          {item.name}
-        </Textwrapper>
+        <Textwrapper value={(item.id = useForm.stackId)}>{item.name}</Textwrapper>
       ))}
     </ButtonConTainer>
   );

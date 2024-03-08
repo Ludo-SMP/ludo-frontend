@@ -28,12 +28,15 @@ export type Creates = {
 
 export type Gather = {
   title?: string;
+  studyId?: number;
   recruitmentEndDateTime?: string;
   recruitmentLimit?: number;
   contact?: string;
-  contactUrl?: string;
+  callUrl?: string;
   content?: string;
   stackId?: number;
+  stackIds?: Array<number>;
+  positionIds?: Array<number>;
   positionId?: number;
 };
 

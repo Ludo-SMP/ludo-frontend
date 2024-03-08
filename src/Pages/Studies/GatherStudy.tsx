@@ -24,15 +24,17 @@ export type OptionalCreates = Partial<Gather>;
 
 export const GatherStudy = () => {
   const Navigation = useNavigate();
-  // const navigate = useNavigate();
   const [useForm, setuseForm] = useState<Gather>({
     title: '',
     recruitmentLimit: 0,
     recruitmentEndDateTime: '',
     positionId: 0,
     stackId: 0,
-    contactUrl: '',
+    // positionId: 0,
+    // stackId: 0,
+    callUrl: '',
     content: '',
+    // studyId: 0,
   });
 
   function forms(fields: OptionalCreates) {
@@ -43,14 +45,16 @@ export const GatherStudy = () => {
   }
 
   async function posts() {
-    const { data } = await axios.post(`https://ludoapi.store/api/studies/${0}/recruitments`, {
+    const { data } = await axios.post(`https://ludoapi.store/api/studies/${1}/recruitments`, {
       title: useForm.title,
       recruitmentLimit: useForm.recruitmentLimit,
       recruitmentEndDateTime: useForm.recruitmentEndDateTime,
-      positionId: useForm.positionId,
-      stackId: useForm.stackId,
-      contactUrl: useForm.contactUrl,
+      positionIds: [useForm.positionId],
+      stackIds: [useForm.stackId],
+      callUrl: useForm.callUrl,
       content: useForm.content,
+      // studyId: useForm.studyId,
+      studyId: 35,
     });
     console.log(data);
   }
