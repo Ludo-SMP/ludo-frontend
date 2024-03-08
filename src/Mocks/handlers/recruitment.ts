@@ -54,4 +54,17 @@ const getRecruitmentDetail = http.get(`${baseURL}/api/recruitments/:recruitmentI
   );
 });
 
-export default [getPopularRecruitments, getRecruitments, getRecruitmentDetail];
+const closeRecruitment = http.patch(`${baseURL}/api/studies/:studyId`, async () => {
+  return new HttpResponse(
+    JSON.stringify({
+      data: null,
+      message: '스터디 모집마감 성공',
+    }),
+    {
+      status: 200,
+      statusText: 'OK',
+    },
+  );
+});
+
+export default [getPopularRecruitments, getRecruitments, getRecruitmentDetail, closeRecruitment];

@@ -9,12 +9,21 @@ import MemberSection from './MemberSection';
 import { useStudyDetail } from '@/Apis/study';
 import { getDday, getPeriod } from '@/Utils/date';
 import { useUserStore } from '@/Store/user';
+import { useCloseRecruitmentMutation } from '@/Apis/recruitment';
+import { useQueryClient } from '@tanstack/react-query';
+import { STUDY } from '@/Constants/queryString';
 
 export const StudyDetailPage = () => {
   const { user } = useUserStore();
   const studyId = Number(useParams().studyId);
   const { data: studyDetail, isLoading } = useStudyDetail(studyId);
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
+  const { mutate: closeRecruitmentMutate } = useCloseRecruitmentMutation(studyId, () => {
+    queryClient.invalidateQueries({ queryKey: [...STUDY.STUDY(studyId)] });
+  });
+
   const study = studyDetail?.study;
 
   return isLoading ? (
@@ -56,12 +65,12 @@ export const StudyDetailPage = () => {
             스터디 탈퇴하기
           </Button>
         )}
-        {user?.id === study.owner.id && study.participants.length && status === 'RECRUITED' && (
-          <Button scheme="secondary" size="fullWidth" onClick={() => {}}>
+        {user?.id === study.owner.id && study.participants.length && study.status === 'RECRUITING' && (
+          <Button scheme="secondary" size="fullWidth" onClick={() => closeRecruitmentMutate()}>
             스터디원 모집 마감하기
           </Button>
         )}
-        {user?.id === study.owner.id && study.participants.length && status === 'PROGRESS' && (
+        {user?.id === study.owner.id && study.participants.length && study.status === 'PROGRESS' && (
           <Button scheme="secondary" size="fullWidth" onClick={() => {}}>
             스터디 수정하기
           </Button>

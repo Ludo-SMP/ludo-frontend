@@ -11,7 +11,7 @@ const getUser = http.get(`${baseURL}/api/users/me`, () => {
   });
 });
 
-const logout = http.get(`${baseURL}/api/auth/logout`, () => {
+const logout = http.post(`${baseURL}/api/auth/logout`, () => {
   return new HttpResponse(JSON.stringify({ data: null, message: '로그아웃 성공' }), {
     status: HttpStatus.TEMPORARY_REDIRECT,
     statusText: 'Temporary Redirect',

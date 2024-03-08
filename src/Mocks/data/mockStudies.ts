@@ -2562,20 +2562,22 @@ export const applicantsMockData: Applicant[] = [
   },
 ];
 
-export const applicantsDetailMockData: ApplicantsDetail = {
-  study: {
-    id: 3,
-    owner: {
-      id: 1,
-      nickname: '포키',
-      email: 'aa@bb1.cc',
+export const applicantsDetailMockData = (studyId: number): ApplicantsDetail => {
+  return {
+    study: {
+      id: studyId,
+      owner: {
+        id: 1,
+        nickname: '포키',
+        email: 'aa@bb1.cc',
+      },
+      status: 'PROGRESS',
+      title: `지원자 페이지 Mock Title ${studyId}`,
+      participantLimit: 3,
+      participantCount: 4,
     },
-    status: 'PROGRESS',
-    title: '지원자 페이지 Mock Title',
-    participantLimit: 3,
-    participantCount: 4,
-  },
-  applicants: applicantsMockData,
+    applicants: applicantsMockData,
+  };
 };
 
 export const myPageInfoData: MyPageInfo = {

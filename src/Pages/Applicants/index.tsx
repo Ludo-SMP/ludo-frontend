@@ -8,13 +8,16 @@ import StudyToken from '@/Components/Common/StudyToken';
 import { useUserStore } from '@/Store/user';
 import { useParams } from 'react-router-dom';
 import { useApplicantsDetail } from '@/Apis/study';
+import { useCloseRecruitmentMutation } from '@/Apis/recruitment';
 
 const ApplicantsPage = () => {
   const studyId = Number(useParams().studyId);
-  const { data: ApplicantsDetail, isLoading } = useApplicantsDetail(studyId);
   const { user } = useUserStore();
+  const { data: ApplicantsDetail, isLoading } = useApplicantsDetail(studyId);
   const study = ApplicantsDetail?.study;
   const applicants: Applicant[] = ApplicantsDetail?.applicants;
+
+  const { mutate: closeRecruitmentMutate } = useCloseRecruitmentMutation(studyId);
 
   return isLoading ? (
     <div>Loading...</div>
@@ -48,7 +51,7 @@ const ApplicantsPage = () => {
       </StudyDetailWrapper>
       {study.owner.id === user?.id && (
         <ApplicantButtonsWrapper>
-          <Button onClick={() => {}} scheme="secondary" size="fullWidth">
+          <Button onClick={() => closeRecruitmentMutate()} scheme="secondary" size="fullWidth">
             스터디원 모집 마감하기
           </Button>
         </ApplicantButtonsWrapper>

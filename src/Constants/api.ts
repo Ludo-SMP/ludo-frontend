@@ -20,6 +20,7 @@ export const API_END_POINT = {
   CREATE_RECRUITMENT: (studyId: number) => `${API_PREFIX}/studies/${studyId}/recruitments`,
   EDIT_RECRUITMENT: (studyId: number) => `${API_PREFIX}/studies/${studyId}/recruitments`,
   DELETE_RECRUITMENT: (studyId: number) => `${API_PREFIX}/studies/${studyId}/recruitments`,
+  CLOSE_RECRUITMENT: (studyId: number) => `${API_PREFIX}/studies/${studyId}`,
 
   //STUDIES
   CREATE_STUDY: `${API_PREFIX}/studies`,

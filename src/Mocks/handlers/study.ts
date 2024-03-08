@@ -6,7 +6,6 @@ const baseURL = import.meta.env.VITE_MOCK_API_URL;
 
 const getStudyDetail = http.get(`${baseURL}/api/studies/:studyId`, async ({ params }) => {
   const studyId: number = Number(params?.studyId);
-  console.log(studyDetailMockData.filter((studyDetail: StudyDetail) => studyDetail?.study.id === studyId)[0]);
   return new HttpResponse(
     JSON.stringify({
       data: studyDetailMockData.filter((studyDetail: StudyDetail) => studyDetail?.study.id === studyId)[0],
@@ -132,10 +131,11 @@ const cancelApply = http.post(`${baseURL}/api/recruitments/:recruitmentId/cancel
     },
   );
 });
-const getApplicantsDetail = http.get(`${baseURL}/api/studies/:studyId/applicants`, async () => {
+const getApplicantsDetail = http.get(`${baseURL}/api/studies/:studyId/applicants`, async ({ params }) => {
+  const studyId: number = Number(params?.studyId);
   return new HttpResponse(
     JSON.stringify({
-      data: applicantsDetailMockData,
+      data: applicantsDetailMockData(studyId),
       message: 'Success',
     }),
     {

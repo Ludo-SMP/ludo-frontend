@@ -16,7 +16,7 @@ export const createClient = (config?: AxiosRequestConfig) => {
 
   axiosInstance.interceptors.response.use(
     (response) => {
-      console.log(response);
+      // console.log(response);
       return response;
     },
     (error) => {

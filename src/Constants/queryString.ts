@@ -1,21 +1,22 @@
 export const BASE_KEY = {
-  recruitment: 'recruitment',
-  study: 'study',
-  stack: 'stack',
+  RECRUITMENT: 'RECRUITMENT',
+  STUDY: 'STUDY',
+  STACK: 'STACK',
 };
 
 export const RECRUITMENT = {
-  popular: [BASE_KEY.recruitment, 'popular'],
-  recruitments: (filterOptions: object) => [BASE_KEY.recruitment, filterOptions],
-  recruitment: (recruitmentId: number) => [BASE_KEY.recruitment, recruitmentId],
+  POPULAR: [BASE_KEY.RECRUITMENT, 'POPULAR'],
+  RECRUITMENTS: (filterOptions: object) => [BASE_KEY.RECRUITMENT, filterOptions],
+  RECRUITMENT: (recruitmentId: number) => [BASE_KEY.RECRUITMENT, recruitmentId],
+  CLOSE_RECRUITMENT: (studyId: number) => [BASE_KEY.RECRUITMENT, studyId, 'CLOSE'],
 };
 
 export const STUDY = {
-  STUDY: (studyId: number) => [BASE_KEY.study, studyId],
-  APPLY: (recruitmentId: number) => [BASE_KEY.study, recruitmentId, 'APPLY'],
-  APPLY_REFUSE: (studyId: number, applicantId: number) => [BASE_KEY.study, studyId, applicantId, 'REFUSE'],
-  APPLY_ACCEPT: (studyId: number, applicantId: number) => [BASE_KEY.study, studyId, applicantId, 'ACCEPT'],
-  APPLY_CANCEL: (recruitmentId: number) => [BASE_KEY.study, recruitmentId, 'CANCEL'],
-  APPLICNATS: (studyId: number) => [BASE_KEY.study, studyId, 'APPLICANTS'],
-  MYPAGE_INFO: () => [BASE_KEY.study, 'MYPAGE'],
+  STUDY: (studyId: number) => [BASE_KEY.STUDY, studyId],
+  APPLY: (recruitmentId: number) => [BASE_KEY.STUDY, recruitmentId, 'APPLY'],
+  APPLY_REFUSE: (studyId: number, applicantId: number) => [BASE_KEY.STUDY, studyId, applicantId, 'REFUSE'],
+  APPLY_ACCEPT: (studyId: number, applicantId: number) => [BASE_KEY.STUDY, studyId, applicantId, 'ACCEPT'],
+  APPLY_CANCEL: (recruitmentId: number) => [BASE_KEY.STUDY, recruitmentId, 'CANCEL'],
+  APPLICNATS: (studyId: number) => [BASE_KEY.STUDY, studyId, 'APPLICANTS'],
+  MYPAGE_INFO: () => [BASE_KEY.STUDY, 'MYPAGE'],
 };
