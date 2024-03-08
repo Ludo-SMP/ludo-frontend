@@ -11,7 +11,7 @@ export const RECRUITMENT = {
 };
 
 export const STUDY = {
-  study: (studyId: number) => [BASE_KEY.study, studyId],
+  STUDY: (studyId: number) => [BASE_KEY.study, studyId],
   REFUSE: (studyId: number, applicantId: number) => [BASE_KEY.study, studyId, applicantId],
   ACCEPT: (studyId: number, applicantId: number) => [BASE_KEY.study, studyId, applicantId],
   MYPAGE_INFO: () => [BASE_KEY.study, 'MYPAGE'],

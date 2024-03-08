@@ -1,11 +1,10 @@
 import { httpClient } from '@/Utils/axios';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { STUDY } from '@/Constants/queryString';
-import { convertStudyDetailRawDataToStudyDetail } from '@/Utils/propertyConverter';
 import { API_END_POINT } from '@/Constants/api';
 import { SetStateAction } from 'react';
 import { useModalStore } from '@/Store/modal';
-import { ApplyState, MyPageInfo } from '@/Types/study';
+import { ApplyState, MyPageInfo, StudyDetail } from '@/Types/study';
 
 export const applyStudy = async (studyId: number, recruitmentId: number, data: object) =>
   httpClient.post(API_END_POINT.APPLY(studyId, recruitmentId), { ...data });
@@ -33,13 +32,14 @@ export const useApplyStudyMutation = (
   return { mutate };
 };
 
-export const getStudyDetail = (studyId: number) => httpClient.get(API_END_POINT.STUDY(studyId));
+export const getStudyDetail = (studyId: number): Promise<{ data: { data: StudyDetail } }> =>
+  httpClient.get(API_END_POINT.STUDY(studyId));
 
 export const useStudyDetail = (studyId: number) => {
   return useQuery({
-    queryKey: [...STUDY.study(studyId)],
+    queryKey: [...STUDY.STUDY(studyId)],
     queryFn: () => getStudyDetail(studyId),
-    select: (data) => convertStudyDetailRawDataToStudyDetail(data?.data.data),
+    select: (data: { data: { data: StudyDetail } }) => data?.data?.data,
   });
 };
 

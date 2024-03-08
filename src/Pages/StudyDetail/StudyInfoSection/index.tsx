@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 import { InfoField } from '@/Components/Common/InfoField';
 import { RowDivider } from '@/Components/Common/Divider/RowDivider';
-import { ProgressMethod, StudyCategory } from '@/Types/study';
+import { StudyCategory } from '@/Types/study';
+import { PROCESS_METHOD } from '@/Shared/study';
 
 export interface StudyInfoSectionProps {
   category?: StudyCategory | string;
-  progressMethod?: ProgressMethod;
+  progressMethod?: 'ONLINE' | 'OFFLINE';
   platform?: string;
   period?: string;
   dDay?: number;
@@ -19,7 +20,7 @@ const StudyInfoSection = ({ category, progressMethod, platform, period, dDay }: 
       </div>
       <RowDivider />
       <div className="study__info">
-        <InfoField title="진행방식" content={progressMethod || '진행 방식'} />
+        <InfoField title="진행방식" content={PROCESS_METHOD[progressMethod] || '진행 방식'} />
         <InfoField title="진행플랫폼" content={platform || '진행 플랫폼'} />
         <InfoField title="진행기간" content={period || '진행 기간'} />
         <InfoField title="남은 진행기간" content={`D-${dDay}` || '남은 진행기간'} />

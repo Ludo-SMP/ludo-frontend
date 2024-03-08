@@ -3,8 +3,6 @@ import {
   RecruitmentRawDataType,
   RecruitmentDetailRawDataType,
   RecruitmentDetailType,
-  Participant,
-  ProgressMethod,
 } from '@/Types/study';
 import { STUDY_STATUS } from '../Shared/study';
 

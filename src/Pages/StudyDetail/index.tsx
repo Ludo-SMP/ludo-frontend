@@ -7,14 +7,15 @@ import { useNavigate, useParams } from 'react-router-dom';
 import StudyInfoSection from './StudyInfoSection';
 import MemberSection from './MemberSection';
 import { useStudyDetail } from '@/Apis/study';
-import { dateFormatter, getDday } from '@/Utils/date';
+import { getDday, getPeriod } from '@/Utils/date';
 import { useUserStore } from '@/Store/user';
 
-export const StudyDetail = () => {
+export const StudyDetailPage = () => {
   const { user } = useUserStore();
   const studyId = Number(useParams().studyId);
-  const navigate = useNavigate();
   const { data: studyDetail, isLoading } = useStudyDetail(studyId);
+  const navigate = useNavigate();
+  const study = studyDetail?.study;
 
   return isLoading ? (
     <div>Loading...</div>
@@ -23,66 +24,44 @@ export const StudyDetail = () => {
       <StudyDetailTitleWrapper>
         <StudyTitleWrapper>
           <StudyInfo width="48" height="48" />
-          <span className="title">{studyDetail?.title}</span>
+          <span className="title">{study?.title}</span>
           <div className="study__tokens">
-            {studyDetail?.status !== '완료됨' && (
-              <StudyToken status={studyDetail?.status} tokenType={'MEMBER'}>
-                참여중인 스터디
-              </StudyToken>
-            )}
-            <StudyToken status={studyDetail?.status} tokenType={'STUDY'}>
-              {studyDetail?.status}
-            </StudyToken>
+            {study?.status !== 'COMPLETED' && <StudyToken status={'PARTICIPATED'} />}
+            <StudyToken status={study?.status} />
           </div>
         </StudyTitleWrapper>
 
-        <Button
-          onClick={() =>
-            navigate(`/studies/${studyId}/applicants`, {
-              state: {
-                studyId: studyDetail?.id,
-                title: studyDetail?.title,
-                status: studyDetail?.status,
-                memberCnt: studyDetail?.memberCnt,
-                memberLimit: studyDetail?.memberLimit,
-                ownerId: studyDetail?.owner.id,
-                applicants: studyDetail?.applicants,
-              },
-            })
-          }
-        >
+        <Button onClick={() => navigate(`/studies/${studyId}/applicants`)}>
           <span>스터디 지원자가 있어요!</span>
           <Right />
         </Button>
       </StudyDetailTitleWrapper>
       <StudyInfoSection
-        category={studyDetail?.category.name || '카테고리'}
-        progressMethod={studyDetail?.progressMethod || '미정'}
-        platform={studyDetail?.progressMethod || '진행 플랫폼'}
-        period={
-          studyDetail ? `${dateFormatter(studyDetail?.startDate)} ~ ${dateFormatter(studyDetail?.endDate)}` : '진행기간'
-        }
-        dDay={getDday(studyDetail?.startDate, studyDetail.endDate) || 9999}
+        category={study?.category.name}
+        progressMethod={study?.way}
+        platform={study?.platform}
+        period={getPeriod(study?.startDateTime, study?.endDateTime)}
+        dDay={getDday(study?.startDateTime, study?.endDateTime)}
       />
       <RowDivider rowHeight={16} />
-      <MemberSection memberLimit={studyDetail?.memberLimit} members={studyDetail?.members} />
+      <MemberSection memberLimit={study?.participantsLimit} members={study?.participants} />
       <StudyButtonsWrapper>
-        {user?.id === studyDetail?.owner.id && studyDetail.members.length === 0 && (
+        {user?.id === study?.owner.id && study?.participants.length === 0 && (
           <Button size="fullWidth" onClick={() => {}}>
             스터디 삭제하기
           </Button>
         )}
-        {studyDetail.members.length && (
+        {study.participants.length && (
           <Button size="fullWidth" onClick={() => {}}>
             스터디 탈퇴하기
           </Button>
         )}
-        {user?.id === studyDetail?.owner.id && studyDetail.members.length && studyDetail.status === '모집 중' && (
+        {user?.id === study.owner.id && study.participants.length && status === 'RECRUITED' && (
           <Button scheme="secondary" size="fullWidth" onClick={() => {}}>
             스터디원 모집 마감하기
           </Button>
         )}
-        {user?.id === studyDetail?.owner.id && studyDetail.members.length && studyDetail.status === '진행 중' && (
+        {user?.id === study.owner.id && study.participants.length && status === 'PROGRESS' && (
           <Button scheme="secondary" size="fullWidth" onClick={() => {}}>
             스터디 수정하기
           </Button>
@@ -136,3 +115,5 @@ const StudyButtonsWrapper = styled.div`
   gap: 24px;
   align-self: stretch;
 `;
+
+export default StudyDetailPage;

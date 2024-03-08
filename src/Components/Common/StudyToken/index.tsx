@@ -31,6 +31,8 @@ const StudyTokenWrapper = styled.span<{ status: StudyStatus | ApplyStatus | Memb
       ? theme.color.purple5
       : status === 'COMPLETED'
       ? `rgba(0, 0, 0, 0.25)`
+      : status === 'RECRUITING'
+      ? theme.color.black3
       : theme.color.orange3};
 
   background: #f2f2f2;
