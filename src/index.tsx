@@ -2,8 +2,21 @@ import ReactDOM from 'react-dom/client';
 import { StrictMode } from 'react';
 import App from './App.tsx';
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
+const enableMocking = async () => {
+  if (import.meta.env.DEV === false) return;
+  const { worker } = await import('./Mocks/browser');
+  return worker.start();
+};
+
+enableMocking().then(() =>
+  ReactDOM.createRoot(document.getElementById('root')!).render(
+    <StrictMode>
+      <App />
+    </StrictMode>,
+  ),
 );
+// ReactDOM.createRoot(document.getElementById('root')!).render(
+//   <StrictMode>
+//     <App />
+//   </StrictMode>,
+// );
