@@ -5,47 +5,48 @@ import ApplicantCard from '@/Components/ApplicantCard';
 import { Applicant } from '@/Types/study';
 import Button from '@/Components/Common/Button';
 import StudyToken from '@/Components/Common/StudyToken';
-import { useLocation } from 'react-router-dom';
 import { useUserStore } from '@/Store/user';
+import { useParams } from 'react-router-dom';
+import { useApplicantsDetail } from '@/Apis/study';
 
-const Applicants = () => {
-  const { studyId, title, memberCnt, memberLimit, ownerId, applicants, status } = useLocation().state;
+const ApplicantsPage = () => {
+  const studyId = Number(useParams().studyId);
+  const { data: ApplicantsDetail, isLoading } = useApplicantsDetail(studyId);
   const { user } = useUserStore();
-  return (
+  const study = ApplicantsDetail?.study;
+  const applicants: Applicant[] = ApplicantsDetail?.applicants;
+
+  return isLoading ? (
+    <div>Loading...</div>
+  ) : (
     <ApplicantsWrapper>
       <ApplicantsTitleWrapper>스터디 지원자를 확인해주세요!</ApplicantsTitleWrapper>
       <StudyDetailWrapper>
         <StudyTitleWrapper>
           <StudyInfo width="48" height="48" />
-          <span className="title">{title}</span>
+          <span className="title">{study.title}</span>
           <div className="study__tokens">
-            {status !== '완료됨' && (
-              <StudyToken status={status} tokenType={'MEMBER'}>
-                참여중인 스터디
-              </StudyToken>
-            )}
-            <StudyToken status={status} tokenType={'STUDY'}>
-              {status}
-            </StudyToken>
+            {study?.status !== 'COMPLETED' && <StudyToken status={'PARTICIPATED'} />}
+            <StudyToken status={study?.status} />
           </div>
         </StudyTitleWrapper>
         <StudyInfoWrapper>
-          <InfoField title="현재 인원수" content={memberCnt} />
-          <InfoField title="목표 인원수" content={memberLimit} />
+          <InfoField title="현재 인원수" content={study.participantCount} />
+          <InfoField title="목표 인원수" content={study.participantLimit} />
         </StudyInfoWrapper>
         <ApplicantsInfoWrapper>
           {applicants?.map((applicant: Applicant) => (
             <ApplicantCard
               {...applicant}
-              title={title}
+              title={study.title}
               studyId={studyId}
               key={applicant?.email}
-              isOwner={ownerId === user?.id}
+              isOwner={study.owner.id === user?.id}
             />
           ))}
         </ApplicantsInfoWrapper>
       </StudyDetailWrapper>
-      {ownerId === user?.id && (
+      {study.owner.id === user?.id && (
         <ApplicantButtonsWrapper>
           <Button onClick={() => {}} scheme="secondary" size="fullWidth">
             스터디원 모집 마감하기
@@ -118,4 +119,4 @@ const ApplicantsInfoWrapper = styled.div`
 
 const ApplicantButtonsWrapper = styled.div``;
 
-export default Applicants;
+export default ApplicantsPage;

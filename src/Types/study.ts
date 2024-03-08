@@ -100,7 +100,7 @@ export interface RecruitmentDetailRawDataType extends RecruitmentRawDataType {
 
 export type MainCategoryNameType = '스터디 유형' | '기술 스택' | '포지션' | '진행 방식' | '목록 정렬 기준';
 export type ApplyState = 'NOT APPLY' | 'APPROVE' | 'FAIL';
-export type ApplyAcceptState = 'NOT ACCEPTED' | 'ACCEPTED';
+export type ApplyAcceptState = 'REFUSED' | 'ACCEPTED' | 'NOT DETERMINED';
 
 export interface MainCategoryType<T, S> {
   categoryName: MainCategoryNameType;
@@ -148,6 +148,7 @@ export interface StudyDetail {
 export interface ApplicantsDetail {
   study: {
     id: number;
+    owner: User;
     status: StudyStatus | ApplyStatus;
     title: string;
     participantLimit: number;
@@ -155,15 +156,6 @@ export interface ApplicantsDetail {
   };
   applicants: Applicant[];
 }
-
-// export interface StudyDetail {
-//   studyId: number;
-//   title: string;
-//   progressMethod: ProgressMethod;
-//   members: Member[];
-//   memberCnt: number;
-//   memberLimit: number;
-// }
 
 export interface ParticipateStudy {
   studyId: number;

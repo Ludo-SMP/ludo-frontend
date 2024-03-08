@@ -34,27 +34,24 @@ const getRecruitments = http.get(`${baseURL}/api/recruitments`, ({ request }) =>
   );
 });
 
-const getRecruitmentDetail = http.get(
-  `${baseURL}/studies/:recruitmentId/api/recruitments/:recruitmentId`,
-  async ({ params }) => {
-    const recruitmentId: number = Number(params?.recruitmentId);
+const getRecruitmentDetail = http.get(`${baseURL}/api/recruitments/:recruitmentId`, async ({ params }) => {
+  const recruitmentId: number = Number(params?.recruitmentId);
 
-    return new HttpResponse(
-      JSON.stringify({
-        data: {
-          ...recruitmentDetailMockData.filter(
-            (recruitmentDetail: RecruitmentDetailRawDataType) => recruitmentDetail.id === recruitmentId,
-          )[0],
-        },
-
-        message: 'Success',
-      }),
-      {
-        status: 200,
-        statusText: 'OK',
+  return new HttpResponse(
+    JSON.stringify({
+      data: {
+        ...recruitmentDetailMockData.filter(
+          (recruitmentDetail: RecruitmentDetailRawDataType) => recruitmentDetail.id === recruitmentId,
+        )[0],
       },
-    );
-  },
-);
+
+      message: 'Success',
+    }),
+    {
+      status: 200,
+      statusText: 'OK',
+    },
+  );
+});
 
 export default [getPopularRecruitments, getRecruitments, getRecruitmentDetail];

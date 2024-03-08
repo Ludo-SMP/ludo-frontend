@@ -1,10 +1,10 @@
 import { httpClient } from '@/Utils/axios';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { STUDY } from '@/Constants/queryString';
 import { API_END_POINT } from '@/Constants/api';
 import { SetStateAction } from 'react';
 import { useModalStore } from '@/Store/modal';
-import { ApplyState, MyPageInfo, StudyDetail } from '@/Types/study';
+import { ApplicantsDetail, ApplyState, MyPageInfo, StudyDetail } from '@/Types/study';
 
 export const getStudyDetail = (studyId: number): Promise<{ data: { data: StudyDetail } }> =>
   httpClient.get(API_END_POINT.STUDY(studyId));
@@ -24,6 +24,17 @@ export const useMyPageInfo = () => {
     queryKey: [...STUDY.MYPAGE_INFO()],
     queryFn: () => getMyPageInfo(),
     select: (data: { data: { data: MyPageInfo } }) => data?.data?.data,
+  });
+};
+
+export const getApplicantsDetail = (studyId: number): Promise<{ data: { data: ApplicantsDetail } }> =>
+  httpClient.get(API_END_POINT.APPLICANTS(studyId));
+
+export const useApplicantsDetail = (studyId: number) => {
+  return useQuery({
+    queryKey: [...STUDY.APPLICNATS(studyId)],
+    queryFn: () => getApplicantsDetail(studyId),
+    select: (data: { data: { data: ApplicantsDetail } }) => data?.data?.data,
   });
 };
 
@@ -56,11 +67,15 @@ export const refuseApply = (studyId: number, applicantId: number) =>
   httpClient.post(API_END_POINT.APPLY_REFUSE(studyId, applicantId));
 
 export const useRefuseApplyMutation = (studyId: number, applicantId: number, successHandler: () => void) => {
+  const { openModal } = useModalStore();
+  const queryClient = useQueryClient();
   const { mutate } = useMutation({
     mutationKey: [...STUDY.APPLY_REFUSE(studyId, applicantId)],
     mutationFn: () => refuseApply(studyId, applicantId),
     onSuccess: () => {
       successHandler();
+      openModal();
+      queryClient.invalidateQueries({ queryKey: [...STUDY.APPLICNATS(studyId)] });
       console.log('지원 거절 성공');
     },
     onError: () => {
@@ -75,12 +90,16 @@ export const acceptApply = (studyId: number, applicantId: number) =>
 
 export const useAcceptApplyMutation = (studyId: number, applicantId: number, successHandler: () => void) => {
   const { openModal } = useModalStore();
+  const queryClient = useQueryClient();
+
   const { mutate } = useMutation({
     mutationKey: [...STUDY.APPLY_ACCEPT(studyId, applicantId)],
     mutationFn: () => acceptApply(studyId, applicantId),
     onSuccess: () => {
       successHandler();
       openModal();
+      queryClient.invalidateQueries({ queryKey: [...STUDY.APPLICNATS(studyId)] });
+
       console.log('지원 수락 성공');
     },
     onError: () => {

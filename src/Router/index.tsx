@@ -10,7 +10,7 @@ import RecruitmentDetail from '../Pages/RecruitmentDetail';
 import Recruitments from '../Pages/Recruitments';
 import SignUp from '@/Pages/SignUp';
 import Header from '@/Components/Header';
-import Applicants from '@/Pages/Applicants';
+import ApplicantsPage from '@/Pages/Applicants';
 import StudyDetailPage from '@/Pages/StudyDetail';
 
 export const RouterPath = createBrowserRouter([
@@ -65,7 +65,7 @@ export const RouterPath = createBrowserRouter([
       },
       {
         path: ROUTER_PATH.applicants,
-        element: <Applicants />,
+        element: <ApplicantsPage />,
       },
     ],
   },

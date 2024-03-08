@@ -1,4 +1,4 @@
-import { Applicant, MyPageInfo, StudyDetail } from '@/Types/study';
+import { Applicant, ApplicantsDetail, MyPageInfo, StudyDetail } from '@/Types/study';
 
 export const studyDetailMockData: StudyDetail[] = [
   {
@@ -2561,6 +2561,22 @@ export const applicantsMockData: Applicant[] = [
     position: { id: 2, name: '프론트엔드' },
   },
 ];
+
+export const applicantsDetailMockData: ApplicantsDetail = {
+  study: {
+    id: 3,
+    owner: {
+      id: 1,
+      nickname: '포키',
+      email: 'aa@bb1.cc',
+    },
+    status: 'PROGRESS',
+    title: '지원자 페이지 Mock Title',
+    participantLimit: 3,
+    participantCount: 4,
+  },
+  applicants: applicantsMockData,
+};
 
 export const myPageInfoData: MyPageInfo = {
   user: {
