@@ -6,7 +6,9 @@ export const STUDY_STATUS = {
 };
 
 export const APPLY_STATUS = {
-  UNCHECKED: '지원 완료',
+  UNCHECKED: '지원 중',
+  ACCEPTED: '지원 수락',
+  REJECTED: '지원 거절',
 };
 
 export const MEMBER_STATUS = {

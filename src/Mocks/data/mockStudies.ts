@@ -634,7 +634,7 @@ export const studyDetailMockData: StudyDetail[] = [
   {
     study: {
       id: 11,
-      status: 'PROGRESS',
+      status: 'RECRUITED',
       title: '인기 코테 스터디 11',
       platform: 'GATHER',
       way: 'OFFLINE',
@@ -697,7 +697,7 @@ export const studyDetailMockData: StudyDetail[] = [
   {
     study: {
       id: 12,
-      status: 'PROGRESS',
+      status: 'RECRUITED',
       title: '인기 코테 스터디 12',
       platform: 'GATHER',
       way: 'ONLINE',
@@ -760,7 +760,7 @@ export const studyDetailMockData: StudyDetail[] = [
   {
     study: {
       id: 13,
-      status: 'PROGRESS',
+      status: 'RECRUITED',
       title: '인기 코테 스터디 13',
       platform: 'GATHER',
       way: 'ONLINE',
@@ -823,7 +823,7 @@ export const studyDetailMockData: StudyDetail[] = [
   {
     study: {
       id: 14,
-      status: 'PROGRESS',
+      status: 'RECRUITED',
       title: '인기 모의 면접 스터디 14',
       platform: 'GATHER',
       way: 'OFFLINE',
@@ -886,7 +886,7 @@ export const studyDetailMockData: StudyDetail[] = [
   {
     study: {
       id: 15,
-      status: 'PROGRESS',
+      status: 'RECRUITED',
       title: '인기 모의 면접 스터디 15',
       platform: 'GATHER',
       way: 'ONLINE',
@@ -949,7 +949,7 @@ export const studyDetailMockData: StudyDetail[] = [
   {
     study: {
       id: 16,
-      status: 'PROGRESS',
+      status: 'RECRUITED',
       title: '인기 모의 면접 스터디 16',
       platform: 'GATHER',
       way: 'ONLINE',
@@ -1012,7 +1012,7 @@ export const studyDetailMockData: StudyDetail[] = [
   {
     study: {
       id: 17,
-      status: 'PROGRESS',
+      status: 'RECRUITED',
       title: '인기 프로젝트 스터디 17',
       platform: 'GATHER',
       way: 'OFFLINE',
@@ -1075,7 +1075,7 @@ export const studyDetailMockData: StudyDetail[] = [
   {
     study: {
       id: 18,
-      status: 'PROGRESS',
+      status: 'RECRUITED',
       title: '인기 프로젝트 스터디 18',
       platform: 'GATHER',
       way: 'ONLINE',
@@ -1138,7 +1138,7 @@ export const studyDetailMockData: StudyDetail[] = [
   {
     study: {
       id: 19,
-      status: 'PROGRESS',
+      status: 'RECRUITED',
       title: '인기 프로젝트 스터디 19',
       platform: 'GATHER',
       way: 'ONLINE',
@@ -1201,7 +1201,7 @@ export const studyDetailMockData: StudyDetail[] = [
   {
     study: {
       id: 20,
-      status: 'PROGRESS',
+      status: 'RECRUITED',
       title: '인기 프로젝트 스터디 20',
       platform: 'GATHER',
       way: 'ONLINE',
@@ -1264,7 +1264,7 @@ export const studyDetailMockData: StudyDetail[] = [
   {
     study: {
       id: 21,
-      status: 'PROGRESS',
+      status: 'RECRUITED',
       title: '인기 코테 스터디 21',
       platform: 'GATHER',
       way: 'OFFLINE',
@@ -1327,7 +1327,7 @@ export const studyDetailMockData: StudyDetail[] = [
   {
     study: {
       id: 22,
-      status: 'PROGRESS',
+      status: 'RECRUITED',
       title: '인기 코테 스터디 22',
       platform: 'GATHER',
       way: 'ONLINE',
@@ -1390,7 +1390,7 @@ export const studyDetailMockData: StudyDetail[] = [
   {
     study: {
       id: 23,
-      status: 'PROGRESS',
+      status: 'RECRUITED',
       title: '인기 코테 스터디 23',
       platform: 'GATHER',
       way: 'ONLINE',
@@ -1453,7 +1453,7 @@ export const studyDetailMockData: StudyDetail[] = [
   {
     study: {
       id: 24,
-      status: 'PROGRESS',
+      status: 'RECRUITED',
       title: '인기 모의 면접 스터디 24',
       platform: 'GATHER',
       way: 'OFFLINE',
@@ -1516,7 +1516,7 @@ export const studyDetailMockData: StudyDetail[] = [
   {
     study: {
       id: 25,
-      status: 'PROGRESS',
+      status: 'RECRUITED',
       title: '인기 모의 면접 스터디 25',
       platform: 'GATHER',
       way: 'ONLINE',
@@ -1579,7 +1579,7 @@ export const studyDetailMockData: StudyDetail[] = [
   {
     study: {
       id: 26,
-      status: 'PROGRESS',
+      status: 'RECRUITED',
       title: '인기 모의 면접 스터디 26',
       platform: 'GATHER',
       way: 'ONLINE',
@@ -1642,7 +1642,7 @@ export const studyDetailMockData: StudyDetail[] = [
   {
     study: {
       id: 27,
-      status: 'PROGRESS',
+      status: 'RECRUITED',
       title: '인기 프로젝트 스터디 27',
       platform: 'GATHER',
       way: 'OFFLINE',
@@ -1705,7 +1705,7 @@ export const studyDetailMockData: StudyDetail[] = [
   {
     study: {
       id: 28,
-      status: 'PROGRESS',
+      status: 'RECRUITED',
       title: '인기 프로젝트 스터디 28',
       platform: 'GATHER',
       way: 'ONLINE',
@@ -1768,7 +1768,7 @@ export const studyDetailMockData: StudyDetail[] = [
   {
     study: {
       id: 29,
-      status: 'PROGRESS',
+      status: 'RECRUITED',
       title: '인기 프로젝트 스터디 29',
       platform: 'GATHER',
       way: 'ONLINE',
@@ -1831,7 +1831,7 @@ export const studyDetailMockData: StudyDetail[] = [
   {
     study: {
       id: 30,
-      status: 'PROGRESS',
+      status: 'RECRUITED',
       title: '인기 프로젝트 스터디 30',
       platform: 'GATHER',
       way: 'ONLINE',
@@ -1894,7 +1894,7 @@ export const studyDetailMockData: StudyDetail[] = [
   {
     study: {
       id: 31,
-      status: 'PROGRESS',
+      status: 'RECRUITED',
       title: '인기 코테 스터디 31',
       platform: 'GATHER',
       way: 'OFFLINE',
@@ -1957,7 +1957,7 @@ export const studyDetailMockData: StudyDetail[] = [
   {
     study: {
       id: 32,
-      status: 'PROGRESS',
+      status: 'RECRUITED',
       title: '인기 코테 스터디 32',
       platform: 'GATHER',
       way: 'ONLINE',
@@ -2020,7 +2020,7 @@ export const studyDetailMockData: StudyDetail[] = [
   {
     study: {
       id: 33,
-      status: 'PROGRESS',
+      status: 'RECRUITED',
       title: '인기 코테 스터디 33',
       platform: 'GATHER',
       way: 'OFFLINE',
@@ -2083,7 +2083,7 @@ export const studyDetailMockData: StudyDetail[] = [
   {
     study: {
       id: 34,
-      status: 'PROGRESS',
+      status: 'RECRUITED',
       title: '인기 모의 면접 스터디 34',
       platform: 'GATHER',
       way: 'ONLINE',
@@ -2146,7 +2146,7 @@ export const studyDetailMockData: StudyDetail[] = [
   {
     study: {
       id: 35,
-      status: 'PROGRESS',
+      status: 'RECRUITED',
       title: '인기 모의 면접 스터디 35',
       platform: 'GATHER',
       way: 'ONLINE',
@@ -2209,7 +2209,7 @@ export const studyDetailMockData: StudyDetail[] = [
   {
     study: {
       id: 36,
-      status: 'PROGRESS',
+      status: 'RECRUITED',
       title: '인기 모의 면접 스터디 36',
       platform: 'GATHER',
       way: 'ONLINE',
@@ -2272,7 +2272,7 @@ export const studyDetailMockData: StudyDetail[] = [
   {
     study: {
       id: 37,
-      status: 'PROGRESS',
+      status: 'RECRUITED',
       title: '인기 프로젝트 스터디 37',
       platform: 'GATHER',
       way: 'OFFLINE',
@@ -2335,7 +2335,7 @@ export const studyDetailMockData: StudyDetail[] = [
   {
     study: {
       id: 38,
-      status: 'PROGRESS',
+      status: 'RECRUITED',
       title: '인기 프로젝트 스터디 38',
       platform: 'GATHER',
       way: 'ONLINE',
@@ -2398,7 +2398,7 @@ export const studyDetailMockData: StudyDetail[] = [
   {
     study: {
       id: 39,
-      status: 'PROGRESS',
+      status: 'RECRUITED',
       title: '인기 프로젝트 스터디 39',
       platform: 'GATHER',
       way: 'ONLINE',
@@ -2461,7 +2461,7 @@ export const studyDetailMockData: StudyDetail[] = [
   {
     study: {
       id: 40,
-      status: 'PROGRESS',
+      status: 'RECRUITED',
       title: '인기 프로젝트 스터디 40',
       platform: 'GATHER',
       way: 'ONLINE',
@@ -2571,7 +2571,7 @@ export const applicantsDetailMockData = (studyId: number): ApplicantsDetail => {
         nickname: '포키',
         email: 'aa@bb1.cc',
       },
-      status: 'PROGRESS',
+      status: 'RECRUITED',
       title: `지원자 페이지 Mock Title ${studyId}`,
       participantLimit: 3,
       participantCount: 4,

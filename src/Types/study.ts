@@ -1,4 +1,4 @@
-import { MEMBER_STATUS, ROLE, STUDY_STATUS } from '@/Shared/study';
+import { APPLY_STATUS, MEMBER_STATUS, ROLE, STUDY_STATUS } from '@/Shared/study';
 
 export type Position = '백엔드' | '프론트엔드' | '디자이너' | '데브옵스';
 export type ActivityType = '온라인' | '오프라인' | '미정';
@@ -8,9 +8,10 @@ export type ProgressMethod = ActivityType;
 export type StudyCategory = '코딩 테스트' | '모의 면접' | '프로젝트';
 export type SortType = '최신순' | '조회순';
 export type CategoryPropertyType = 'category' | 'stacks' | 'positions' | 'way' | 'sort';
-export type ApplyStatus = 'UNCHECKED';
+export type RecruitStatus = 'RECRUITED' | 'RECRUITING';
 export type StudyStatus = keyof typeof STUDY_STATUS;
 export type MemberStatus = keyof typeof MEMBER_STATUS;
+export type ApplyStatus = keyof typeof APPLY_STATUS;
 export type AllType = '전체';
 export type Role = keyof typeof ROLE;
 export type Platform = 'GATHER' | 'GOOGLE MEET';
@@ -128,7 +129,7 @@ export interface Applicant extends Omit<Member, 'role'> {}
 export interface StudyDetail {
   study: {
     id: number;
-    status: StudyStatus | ApplyStatus;
+    status: RecruitStatus | ApplyStatus;
     title: string;
     platform: Platform;
     way: 'ONLINE' | 'OFFLINE';
@@ -149,7 +150,7 @@ export interface ApplicantsDetail {
   study: {
     id: number;
     owner: User;
-    status: StudyStatus | ApplyStatus;
+    status: RecruitStatus | ApplyStatus;
     title: string;
     participantLimit: number;
     participantCount: number;

@@ -1,41 +1,48 @@
 import { APPLY_STATUS, MEMBER_STATUS, STUDY_STATUS } from '@/Shared/study';
-import { ApplyStatus, MemberStatus, StudyStatus } from '@/Types/study';
+import { ApplyStatus, MemberStatus, RecruitStatus, StudyStatus } from '@/Types/study';
+import { getStudyState } from '@/Utils/status';
 import styled from 'styled-components';
 
 export interface StudyTokenProps {
-  status?: StudyStatus | ApplyStatus | MemberStatus;
+  status: RecruitStatus | ApplyStatus | MemberStatus;
+  startDate?: string;
+  endDate?: string;
 }
 
-const StudyToken = ({ status }: StudyTokenProps) => {
+const StudyToken = ({ status, startDate, endDate }: StudyTokenProps) => {
+  const correctedStatus =
+    status === 'RECRUITED' || status === 'RECRUITING' ? getStudyState(startDate, endDate, status) : status;
   return (
-    <StudyTokenWrapper status={status}>
+    <StudyTokenWrapper correctedStatus={correctedStatus}>
       {status === 'PARTICIPATED'
         ? `${MEMBER_STATUS[status]}인 스터디`
-        : status === 'UNCHECKED'
+        : status === 'UNCHECKED' || status === 'ACCEPTED' || status === 'REJECTED'
         ? `${APPLY_STATUS[status]}`
-        : `${STUDY_STATUS[status]}`}
+        : `${STUDY_STATUS[getStudyState(startDate, endDate, status)]}`}
     </StudyTokenWrapper>
   );
 };
 
-const StudyTokenWrapper = styled.span<{ status: StudyStatus | ApplyStatus | MemberStatus }>`
+const StudyTokenWrapper = styled.span<{ correctedStatus: ApplyStatus | MemberStatus | StudyStatus }>`
   display: flex;
   padding: 4px 12px;
   justify-content: center;
   align-items: center;
 
-  color: ${({ status, theme }) =>
-    status === 'PARTICIPATED'
+  color: ${({ correctedStatus, theme }) =>
+    correctedStatus === 'PARTICIPATED'
       ? theme.color.purple1
-      : status === 'PROGRESS'
-      ? theme.color.purple5
-      : status === 'COMPLETED'
+      : correctedStatus === ('COMPLETED' || 'REJECTED' || 'RECRUITED')
       ? `rgba(0, 0, 0, 0.25)`
-      : status === 'RECRUITING'
+      : correctedStatus === 'PROGRESS'
+      ? theme.color.purple5
+      : correctedStatus === 'RECRUITING'
       ? theme.color.black3
+      : correctedStatus === 'ACCEPTED'
+      ? '#AD8395'
       : theme.color.orange3};
 
-  background: #f2f2f2;
+  background: #5b4d4d;
   border-radius: ${({ theme }) => theme.borderRadius.large};
   text-align: center;
   font-size: ${({ theme }) => theme.font.small};
