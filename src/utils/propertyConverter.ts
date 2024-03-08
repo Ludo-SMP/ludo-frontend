@@ -4,7 +4,6 @@ import {
   RecruitmentDetailRawDataType,
   RecruitmentDetailType,
 } from '@/Types/study';
-import { STUDY_STATUS } from '../Shared/study';
 
 export const convertRecruitmentRawDataToRecruitmentCardProps = (recruitmentRawData: RecruitmentRawDataType) => {
   const {

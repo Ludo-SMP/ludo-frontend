@@ -12,8 +12,9 @@ export const RECRUITMENT = {
 
 export const STUDY = {
   STUDY: (studyId: number) => [BASE_KEY.study, studyId],
-  REFUSE: (studyId: number, applicantId: number) => [BASE_KEY.study, studyId, applicantId],
-  ACCEPT: (studyId: number, applicantId: number) => [BASE_KEY.study, studyId, applicantId],
+  APPLY: (recruitmentId: number) => [BASE_KEY.study, recruitmentId, 'APPLY'],
+  APPLY_REFUSE: (studyId: number, applicantId: number) => [BASE_KEY.study, studyId, applicantId, 'REFUSE'],
+  APPLY_ACCEPT: (studyId: number, applicantId: number) => [BASE_KEY.study, studyId, applicantId, 'ACCEPT'],
+  APPLY_CANCEL: (recruitmentId: number) => [BASE_KEY.study, recruitmentId, 'CANCEL'],
   MYPAGE_INFO: () => [BASE_KEY.study, 'MYPAGE'],
-  CANCEL: (studyId: number, recruitmentId: number) => [BASE_KEY.study, studyId, recruitmentId],
 };

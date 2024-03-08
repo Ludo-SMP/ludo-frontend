@@ -6,32 +6,6 @@ import { SetStateAction } from 'react';
 import { useModalStore } from '@/Store/modal';
 import { ApplyState, MyPageInfo, StudyDetail } from '@/Types/study';
 
-export const applyStudy = async (studyId: number, recruitmentId: number, data: object) =>
-  httpClient.post(API_END_POINT.APPLY(studyId, recruitmentId), { ...data });
-
-export const useApplyStudyMutation = (
-  studyId: number,
-  recruitmentId: number,
-  data: object,
-  handleApplyApprove: React.Dispatch<SetStateAction<ApplyState>>,
-) => {
-  const { openModal } = useModalStore();
-  const { mutate } = useMutation({
-    mutationKey: ['apply'],
-    mutationFn: () => applyStudy(studyId, recruitmentId, data),
-    onSuccess: () => {
-      console.log('success');
-      handleApplyApprove(() => 'APPROVE');
-      openModal();
-    },
-    onError: () => {
-      handleApplyApprove(() => 'FAIL');
-      openModal();
-    },
-  });
-  return { mutate };
-};
-
 export const getStudyDetail = (studyId: number): Promise<{ data: { data: StudyDetail } }> =>
   httpClient.get(API_END_POINT.STUDY(studyId));
 
@@ -53,12 +27,37 @@ export const useMyPageInfo = () => {
   });
 };
 
+export const applyStudy = async (recruitmentId: number, data: object) =>
+  httpClient.post(API_END_POINT.APPLY(recruitmentId), { ...data });
+
+export const useApplyStudyMutation = (
+  recruitmentId: number,
+  data: object,
+  handleApplyApprove: React.Dispatch<SetStateAction<ApplyState>>,
+) => {
+  const { openModal } = useModalStore();
+  const { mutate } = useMutation({
+    mutationKey: [STUDY.APPLY(recruitmentId)],
+    mutationFn: () => applyStudy(recruitmentId, data),
+    onSuccess: () => {
+      console.log('success');
+      handleApplyApprove(() => 'APPROVE');
+      openModal();
+    },
+    onError: () => {
+      handleApplyApprove(() => 'FAIL');
+      openModal();
+    },
+  });
+  return { mutate };
+};
+
 export const refuseApply = (studyId: number, applicantId: number) =>
   httpClient.post(API_END_POINT.APPLY_REFUSE(studyId, applicantId));
 
 export const useRefuseApplyMutation = (studyId: number, applicantId: number, successHandler: () => void) => {
   const { mutate } = useMutation({
-    mutationKey: [...STUDY.REFUSE(studyId, applicantId)],
+    mutationKey: [...STUDY.APPLY_REFUSE(studyId, applicantId)],
     mutationFn: () => refuseApply(studyId, applicantId),
     onSuccess: () => {
       successHandler();
@@ -77,7 +76,7 @@ export const acceptApply = (studyId: number, applicantId: number) =>
 export const useAcceptApplyMutation = (studyId: number, applicantId: number, successHandler: () => void) => {
   const { openModal } = useModalStore();
   const { mutate } = useMutation({
-    mutationKey: [...STUDY.ACCEPT(studyId, applicantId)],
+    mutationKey: [...STUDY.APPLY_ACCEPT(studyId, applicantId)],
     mutationFn: () => acceptApply(studyId, applicantId),
     onSuccess: () => {
       successHandler();
@@ -91,13 +90,12 @@ export const useAcceptApplyMutation = (studyId: number, applicantId: number, suc
   return { mutate };
 };
 
-export const cancelApply = (studyId: number, recruitmentId: number) =>
-  httpClient.post(API_END_POINT.APPLY_CANCEL(studyId, recruitmentId));
+export const cancelApply = (recruitmentId: number) => httpClient.post(API_END_POINT.APPLY_CANCEL(recruitmentId));
 
-export const useCancelAppyMutation = (studyId: number, recruitmentId: number, successHandler: () => void) => {
+export const useCancelAppyMutation = (recruitmentId: number, successHandler: () => void) => {
   const { mutate } = useMutation({
-    mutationKey: [...STUDY.CANCEL(studyId, recruitmentId)],
-    mutationFn: () => cancelApply(studyId, recruitmentId),
+    mutationKey: [...STUDY.APPLY_CANCEL(recruitmentId)],
+    mutationFn: () => cancelApply(recruitmentId),
     onSuccess: () => {
       successHandler();
       console.log('지원 취소 성공');

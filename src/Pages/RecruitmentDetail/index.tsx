@@ -27,7 +27,6 @@ const RecruitmentDetail = () => {
   const { user } = useUserStore();
 
   const [applyState, setApplyState] = useState<ApplyState>('NOT APPLY');
-  const studyId = 1;
   const { data, isLoading } = useRecruitmentDetail(recruitmentId);
   const recruitmentDetail = isLoading ? null : data;
 
@@ -111,7 +110,6 @@ const RecruitmentDetail = () => {
       {isLoggedIn && isModalOpen && applyState === 'NOT APPLY' && (
         <ApplyModal
           handleApplyApprove={setApplyState}
-          studyId={studyId}
           recruitmentId={recruitmentId}
           positions={recruitmentDetail?.positions}
         />

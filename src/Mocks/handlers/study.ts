@@ -45,7 +45,7 @@ const getMyPageInfo = http.get(`${baseURL}/api/users/mypage`, async () => {
   );
 });
 
-const applyStudy = http.post(`${baseURL}/api/studies/:studyId/recruitments/:recruitmentId/apply`, async () => {
+const applyStudy = http.post(`${baseURL}/api/recruitments/:recruitmentId/apply`, async () => {
   return new HttpResponse(
     JSON.stringify({
       data: { applicantId: 6 },
@@ -58,7 +58,7 @@ const applyStudy = http.post(`${baseURL}/api/studies/:studyId/recruitments/:recr
   );
 });
 
-const failApplyStudy = http.post(`${baseURL}/api/studies/:studyId/recruitments/:recruitmentId/apply`, async () => {
+const failApplyStudy = http.post(`${baseURL}/api/recruitments/:recruitmentId/apply`, async () => {
   return new HttpResponse(
     JSON.stringify({
       message: '지원이 마감된 스터디입니다.',
@@ -144,7 +144,7 @@ const failAcceptApply = http.post(
   },
 );
 
-const cancelApply = http.post(`${baseURL}/api/studies/:studyId/recruitments/:recruitmentId/cancel`, async () => {
+const cancelApply = http.post(`${baseURL}/api/recruitments/:recruitmentId/cancel`, async () => {
   return new HttpResponse(
     JSON.stringify({
       message: '스터디 지원 취소 성공',
