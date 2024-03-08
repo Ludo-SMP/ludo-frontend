@@ -26,6 +26,17 @@ export type Creates = {
   content?: string;
 };
 
+export type Gather = {
+  title?: string;
+  recruitmentEndDateTime?: string;
+  recruitmentLimit?: number;
+  contact?: string;
+  contactUrl?: string;
+  content?: string;
+  stackId?: number;
+  positionId?: number;
+};
+
 // export type Position = '프론트엔드' | '백엔드' | '디자이너' | '기획자';
 // export type stackId = 4 | 5 | 6 | 8 | 9 | 10;
 export type ItemCategory = {

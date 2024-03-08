@@ -11,18 +11,21 @@ import { GatherButton } from '../../Components/Selectbox/GatherButton';
 // import { StackModal } from '../../Components/Modal/StackModal';
 import { EndDate } from '../../Components/Calendar/EndDate';
 import { media } from '../../Styles/theme';
-import { Creates } from '@/Types/studies';
+import { Creates, Gather } from '@/Types/studies';
 import { useState } from 'react';
 // import { stackCategory } from '@/Shared/category';
 import { useStack } from '@/Apis/stack';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { httpClient } from '@/Utils/axios';
 
-export type OptionalCreates = Partial<Creates>;
+axios.defaults.withCredentials = true;
+export type OptionalCreates = Partial<Gather>;
 
 export const GatherStudy = () => {
   const Navigation = useNavigate();
-  const [useForm, setuseForm] = useState<Creates>({
+  // const navigate = useNavigate();
+  const [useForm, setuseForm] = useState<Gather>({
     title: '',
     recruitmentLimit: 0,
     recruitmentEndDateTime: '',
@@ -40,10 +43,10 @@ export const GatherStudy = () => {
   }
 
   async function posts() {
-    const { data } = await axios.post(`https://ludoapi.store/api/studies/${20}/recruitments`, {
+    const { data } = await axios.post(`https://ludoapi.store/api/studies/${0}/recruitments`, {
       title: useForm.title,
       recruitmentLimit: useForm.recruitmentLimit,
-      recruitmentEndDateTime: useForm.recruitmentLimit,
+      recruitmentEndDateTime: useForm.recruitmentEndDateTime,
       positionId: useForm.positionId,
       stackId: useForm.stackId,
       contactUrl: useForm.contactUrl,
@@ -52,7 +55,7 @@ export const GatherStudy = () => {
     console.log(data);
   }
 
-  const constSubmit = (event: any) => {
+  const handleSubmit = (event: any) => {
     event.preventDefault();
     posts();
     Navigation('/');
@@ -60,7 +63,7 @@ export const GatherStudy = () => {
 
   return (
     <>
-      <StudyContainer onSubmit={constSubmit}>
+      <StudyContainer onSubmit={handleSubmit}>
         <StudyMain>스터디 팀원 모집하기</StudyMain>
         <TopBox>
           <StudyTitle>스터디 기본 안내</StudyTitle>
@@ -140,7 +143,7 @@ export const GatherStudy = () => {
           </BottomWrapper>
         </BottomBox>
         <ButtonBox>
-          <SubmitButton type="submit">수정취소</SubmitButton>
+          <SubmitButton type="submit">임시저장</SubmitButton>
           <SubmitButton type="submit">등록하기</SubmitButton>
         </ButtonBox>
       </StudyContainer>
@@ -178,7 +181,7 @@ const SubContentTitle = styled.p`
   font-weight: 500;
 `;
 
-const StudyContainer = styled.div`
+const StudyContainer = styled.form`
   height: 2000px;
   padding-left: 348px;
   padding-right: 348px;

@@ -25,6 +25,7 @@ export const StackSelectButton = ({ setForm, useForm, item }: Props) => {
   const { data } = useStack();
   const StackHandler = (event: ChangeEvent<HTMLSelectElement>) => {
     setForm({ stackId: event.target.selectedIndex });
+    console.log(setForm({ stackId: event.target.selectedIndex }));
   };
   return (
     <ButtonConTainer name="stackId" className="select" onChange={StackHandler} value={(useForm.stackId = item.id)}>

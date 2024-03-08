@@ -10,6 +10,7 @@ import StudyButtonSection from './StudyButtonSection';
 import SignButtonSection from './SignButtonSection';
 import HamburgerSection from './HamburgerSection';
 import Gnb from './Gnb';
+import { SignButtonSectionProps } from './SignButtonSection';
 
 const Header = () => {
   const { isLoggedIn } = useLoginStore();
@@ -23,43 +24,45 @@ const Header = () => {
           <img width="140" src={Logo} />
         </Link>
         <ElementsWrapper>
-          {isLoggedIn ? (
-            <>
-              {currentLocation === ROUTER_PATH.main || currentLocation === ROUTER_PATH.recruitments ? (
-                <StudyButtonSection />
-              ) : (
-                <div className="login__elements">
-                  <SignButtonSection isLoggedIn={true} />
-                  <Button
-                    className="create__study"
-                    type="button"
-                    onClick={() => {
-                      navigate(ROUTER_PATH.createStudy);
-                    }}
-                  >
-                    스터디 생성하기
-                  </Button>
-                </div>
-              )}
-              <UserInfoWrapper>
-                <Alarm />
-                <Profile />
-              </UserInfoWrapper>
-            </>
-          ) : (
-            <div className="signout__elements">
-              <SignButtonSection isLoggedIn={false} />
-              <Button
-                className="create__study"
-                type="button"
-                onClick={() => {
-                  navigate(ROUTER_PATH.createStudy);
-                }}
-              >
-                스터디 생성하기
-              </Button>
-            </div>
-          )}
+          <>
+            {isLoggedIn ? (
+              <>
+                {currentLocation === ROUTER_PATH.main || currentLocation === ROUTER_PATH.recruitments ? (
+                  <StudyButtonSection />
+                ) : (
+                  <div className="login__elements">
+                    <SignButtonSection isLoggedIn={true} />
+                    <Button
+                      className="create__study"
+                      type="button"
+                      onClick={() => {
+                        navigate(ROUTER_PATH.createStudy);
+                      }}
+                    >
+                      스터디 생성하기
+                    </Button>
+                  </div>
+                )}
+                <UserInfoWrapper>
+                  <Alarm />
+                  <Profile />
+                </UserInfoWrapper>
+              </>
+            ) : (
+              <div className="signout__elements">
+                <SignButtonSection isLoggedIn={false} />
+                <Button
+                  className="create__study"
+                  type="button"
+                  onClick={() => {
+                    navigate(ROUTER_PATH.createStudy);
+                  }}
+                >
+                  스터디 생성하기
+                </Button>
+              </div>
+            )}
+          </>
           <HamburgerSection />
         </ElementsWrapper>
       </TopBarWrapper>

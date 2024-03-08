@@ -22,11 +22,11 @@ export type Props = {
 };
 
 export const EndDate = ({ setForm, useForm }: Props) => {
-  const [recruitmentEndDateTime, setForms] = useState(new Date());
+  const [startDateTime, setForms] = useState(new Date());
   return (
     <DateContainer
-      value={(useForm.recruitmentEndDateTime = recruitmentEndDateTime.toISOString().slice(0, -5))}
-      selected={recruitmentEndDateTime}
+      value={(useForm.recruitmentEndDateTime = startDateTime.toISOString().slice(0, -5))}
+      selected={startDateTime}
       dateFormat="yy.MM.dd"
       onChange={(date: Date) => setForms(date)}
       placeholderText="ex)24.01.07"

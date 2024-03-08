@@ -18,7 +18,7 @@ export type OptionalCreates = Partial<Creates>;
 export const CreateStudy = () => {
   // {register} = useForm
   // 폼 데이터
-  const navigate = useNavigate();
+  const Navigate = useNavigate();
   const [useForm, setuseForm] = useState<Creates>({
     title: '',
     categoryId: 0,
@@ -53,7 +53,7 @@ export const CreateStudy = () => {
   const handleSubmit = (event: any) => {
     event.preventDefault();
     post();
-    navigate('/');
+    Navigate('/');
   };
 
   return (
