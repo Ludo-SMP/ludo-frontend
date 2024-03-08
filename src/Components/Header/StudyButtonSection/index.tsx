@@ -13,7 +13,7 @@ const StudyButtonSection = () => {
       <Button
         type="button"
         onClick={() => {
-          setSelectedMyStudyStatus('PROGRESS');
+          setSelectedMyStudyStatus('PARTICIPATED');
           navigate(ROUTER_PATH.mypage);
         }}
       >
@@ -22,7 +22,7 @@ const StudyButtonSection = () => {
       <Button
         type="button"
         onClick={() => {
-          setSelectedMyStudyStatus('UNCHECKED');
+          setSelectedMyStudyStatus('APPLIED');
           navigate(ROUTER_PATH.mypage);
         }}
       >

@@ -2575,6 +2575,8 @@ export const applicantsDetailMockData = (studyId: number): ApplicantsDetail => {
       title: `지원자 페이지 Mock Title ${studyId}`,
       participantLimit: 3,
       participantCount: 4,
+      startDateTime: '2024-03-03T03:16:03.598Z',
+      endDateTime: '2024-04-03T03:16:03.598Z',
     },
     applicants: applicantsMockData,
   };
@@ -2591,8 +2593,9 @@ export const myPageInfoData: MyPageInfo = {
       studyId: 1,
       title: '인기있는 스터디 1',
       position: { id: 1, name: '백엔드' },
-      startDateTime: '2024-03-01T03:16:03.598Z',
-      endDateTime: '2024-04-01T03:16:03.598Z',
+      startDateTime: '2024-04-01T03:16:03.598Z',
+      endDateTime: '2024-04-24T03:16:03.598Z',
+      status: 'RECRUITING',
       participantCount: 1,
     },
     {
@@ -2601,6 +2604,7 @@ export const myPageInfoData: MyPageInfo = {
       position: { id: 2, name: '프론트엔드' },
       startDateTime: '2024-03-02T03:16:03.598Z',
       endDateTime: '2024-04-02T03:16:03.598Z',
+      status: 'RECRUITED',
       participantCount: 2,
     },
     {
@@ -2609,6 +2613,7 @@ export const myPageInfoData: MyPageInfo = {
       position: { id: 3, name: '디자이너' },
       startDateTime: '2024-03-03T03:16:03.598Z',
       endDateTime: '2024-04-03T03:16:03.598Z',
+      status: 'PROGRESS',
       participantCount: 3,
     },
     {
@@ -2617,6 +2622,7 @@ export const myPageInfoData: MyPageInfo = {
       position: { id: 4, name: '데브옵스' },
       startDateTime: '2024-03-04T03:16:03.598Z',
       endDateTime: '2024-04-04T03:16:03.598Z',
+      status: 'PROGRESS',
       participantCount: 4,
     },
     {
@@ -2625,6 +2631,7 @@ export const myPageInfoData: MyPageInfo = {
       position: { id: 2, name: '프론트엔드' },
       startDateTime: '2024-03-05T03:16:03.598Z',
       endDateTime: '2024-04-05T03:16:03.598Z',
+      status: 'RECRUITING',
       participantCount: 5,
     },
   ],
@@ -2645,7 +2652,7 @@ export const myPageInfoData: MyPageInfo = {
       recruitmentId: 8,
       title: '인기있는 스터디 8',
       position: { id: 3, name: '디자이너' },
-      applicantStatus: 'UNCHECKED',
+      applicantStatus: 'REFUSED',
     },
     {
       recruitmentId: 9,
@@ -2657,7 +2664,7 @@ export const myPageInfoData: MyPageInfo = {
       recruitmentId: 10,
       title: '인기있는 스터디 10',
       position: { id: 2, name: '프론트엔드' },
-      applicantStatus: 'UNCHECKED',
+      applicantStatus: 'ACCEPTED',
     },
   ],
   completedStudies: [
@@ -2667,6 +2674,7 @@ export const myPageInfoData: MyPageInfo = {
       position: { id: 1, name: '백엔드' },
       startDateTime: '2024-03-01T03:16:03.598Z',
       endDateTime: '2024-04-01T03:16:03.598Z',
+      status: 'COMPLETED',
       participantCount: 1,
     },
     {
@@ -2675,6 +2683,7 @@ export const myPageInfoData: MyPageInfo = {
       position: { id: 2, name: '프론트엔드' },
       startDateTime: '2024-03-02T03:16:03.598Z',
       endDateTime: '2024-04-02T03:16:03.598Z',
+      status: 'COMPLETED',
       participantCount: 2,
     },
     {
@@ -2683,6 +2692,7 @@ export const myPageInfoData: MyPageInfo = {
       position: { id: 3, name: '디자이너' },
       startDateTime: '2024-03-03T03:16:03.598Z',
       endDateTime: '2024-04-03T03:16:03.598Z',
+      status: 'COMPLETED',
       participantCount: 3,
     },
     {
@@ -2691,6 +2701,7 @@ export const myPageInfoData: MyPageInfo = {
       position: { id: 4, name: '데브옵스' },
       startDateTime: '2024-03-04T03:16:03.598Z',
       endDateTime: '2024-04-04T03:16:03.598Z',
+      status: 'COMPLETED',
       participantCount: 4,
     },
     {
@@ -2699,6 +2710,7 @@ export const myPageInfoData: MyPageInfo = {
       position: { id: 2, name: '프론트엔드' },
       startDateTime: '2024-03-05T03:16:03.598Z',
       endDateTime: '2024-04-05T03:16:03.598Z',
+      status: 'COMPLETED',
       participantCount: 5,
     },
   ],

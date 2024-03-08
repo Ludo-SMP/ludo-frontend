@@ -29,8 +29,11 @@ const MyStudyCard = ({ id, title, status, position, period, participantCount }: 
   return (
     <MyStudyCardWrapper
       onClick={() => {
-        if (status === 'COMPLETED') return;
-        navigate(`/studies/${id}${status === 'UNCHECKED' ? '/recruitment' : ''}`);
+        navigate(
+          `/studies/${id}${
+            status === 'UNCHECKED' || status === 'REFUSED' || status === 'ACCEPTED' ? '/recruitment' : ''
+          }`,
+        );
       }}
     >
       <BlankSquare width="180px" height="180px" />
@@ -60,6 +63,7 @@ const MyStudyCard = ({ id, title, status, position, period, participantCount }: 
             지원 취소하기
           </Button>
         )}
+        {(status === 'REFUSED' || status === 'ACCEPTED') && <Button onClick={() => {}}>지원 기록 삭제하기</Button>}
       </MyStudyCardButtonsWrapper>
     </MyStudyCardWrapper>
   );

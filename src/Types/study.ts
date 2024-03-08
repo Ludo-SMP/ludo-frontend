@@ -8,7 +8,6 @@ export type ProgressMethod = ActivityType;
 export type StudyCategory = '코딩 테스트' | '모의 면접' | '프로젝트';
 export type SortType = '최신순' | '조회순';
 export type CategoryPropertyType = 'category' | 'stacks' | 'positions' | 'way' | 'sort';
-export type RecruitStatus = 'RECRUITED' | 'RECRUITING';
 export type StudyStatus = keyof typeof STUDY_STATUS;
 export type MemberStatus = keyof typeof MEMBER_STATUS;
 export type ApplyStatus = keyof typeof APPLY_STATUS;
@@ -129,7 +128,7 @@ export interface Applicant extends Omit<Member, 'role'> {}
 export interface StudyDetail {
   study: {
     id: number;
-    status: RecruitStatus | ApplyStatus;
+    status: StudyStatus;
     title: string;
     platform: Platform;
     way: 'ONLINE' | 'OFFLINE';
@@ -150,10 +149,12 @@ export interface ApplicantsDetail {
   study: {
     id: number;
     owner: User;
-    status: RecruitStatus | ApplyStatus;
+    status: StudyStatus;
     title: string;
     participantLimit: number;
     participantCount: number;
+    startDateTime: string;
+    endDateTime: string;
   };
   applicants: Applicant[];
 }
@@ -164,6 +165,7 @@ export interface ParticipateStudy {
   position: PositionType;
   startDateTime: string;
   endDateTime: string;
+  status: StudyStatus;
   participantCount: number;
 }
 
@@ -171,7 +173,7 @@ export interface ApplicantRecruitment {
   recruitmentId: number;
   title: string;
   position: { id: number; name: Position };
-  applicantStatus: 'UNCHECKED';
+  applicantStatus: ApplyStatus;
 }
 
 export interface CompletedStudy {
@@ -180,6 +182,7 @@ export interface CompletedStudy {
   position: PositionType;
   startDateTime: string;
   endDateTime: string;
+  status: StudyStatus;
   participantCount: number;
 }
 

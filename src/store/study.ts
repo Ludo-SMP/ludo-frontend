@@ -1,17 +1,18 @@
-import { ApplyStatus, Card, StudyStatus } from '@/Types/study';
+import { Card } from '@/Types/study';
 import { create } from 'zustand';
 
 export interface SelectedMyStudyStatus {
-  selectedMyStudyStatus: StudyStatus | ApplyStatus;
+  selectedMyStudyStatus: 'PARTICIPATED' | 'APPLIED' | 'COMPLETED';
 }
 
 export interface SelectedMyStudyStatusAction {
-  setSelectedMyStudyStatus: (newStatus: StudyStatus | ApplyStatus) => void;
+  setSelectedMyStudyStatus: (newStatus: 'PARTICIPATED' | 'APPLIED' | 'COMPLETED') => void;
 }
 
 export const useSelectedMyStudyStore = create<SelectedMyStudyStatus & SelectedMyStudyStatusAction>((set) => ({
-  selectedMyStudyStatus: 'PROGRESS',
-  setSelectedMyStudyStatus: (newStatus: StudyStatus | ApplyStatus) => set({ selectedMyStudyStatus: newStatus }),
+  selectedMyStudyStatus: 'PARTICIPATED',
+  setSelectedMyStudyStatus: (newStatus: 'PARTICIPATED' | 'APPLIED' | 'COMPLETED') =>
+    set({ selectedMyStudyStatus: newStatus }),
 }));
 
 export interface SelectedCard {

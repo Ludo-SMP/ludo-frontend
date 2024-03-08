@@ -1,6 +1,6 @@
 import { BannerProps } from '../Components/Banner';
 import { RecruitmentDetailRawDataType, PopularRecruitmentsRawDataType, RecruitmentRawDataType } from '@/Types/study';
-
+import { TemporarySavedCardProps } from '@/Components/TemporarySavedCard';
 export const bannerDummy: BannerProps = {
   brief: '함께 발견하는 가능성, 기회의 연결',
   title: 'Ludo Study',
@@ -1102,3 +1102,13 @@ export const recruitmentDetailMockDataById = (recruitmentId: number) =>
   recruitmentDetailMockData.filter(
     (recruitmentDetail: RecruitmentDetailRawDataType) => recruitmentDetail.id === recruitmentId,
   )[0];
+export const temporarySavedCardMockData: TemporarySavedCardProps[] = [
+  { title: '모집공고 1', id: 1, card: 'RECRUITMENT' },
+  { title: '모집공고 2', id: 2, card: 'RECRUITMENT' },
+  { title: '모집공고 3', id: 3, card: 'RECRUITMENT' },
+  { title: '모집공고 4', id: 4, card: 'RECRUITMENT' },
+  { title: '스터디 1', card: 'STUDY' },
+  { title: '스터디 2', card: 'STUDY' },
+  { title: '스터디 3', card: 'STUDY' },
+  { title: '스터디 4', card: 'STUDY' },
+];

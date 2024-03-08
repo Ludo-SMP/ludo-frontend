@@ -50,7 +50,7 @@ export const StudyDetailPage = () => {
         progressMethod={study?.way}
         platform={study?.platform}
         period={getPeriod(study?.startDateTime, study?.endDateTime)}
-        dDay={getDday(study?.startDateTime, study?.endDateTime)}
+        dDay={getDday(study?.endDateTime)}
       />
       <RowDivider rowHeight={16} />
       <MemberSection memberLimit={study?.participantsLimit} members={study?.participants} />
@@ -70,7 +70,7 @@ export const StudyDetailPage = () => {
             스터디원 모집 마감하기
           </Button>
         )}
-        {user?.id === study.owner.id && study.participants.length && study.status === 'PROGRESS' && (
+        {user?.id === study.owner.id && study.participants.length && study.status === 'RECRUITED' && (
           <Button scheme="secondary" size="fullWidth" onClick={() => {}}>
             스터디 수정하기
           </Button>

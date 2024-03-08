@@ -125,3 +125,19 @@ export const useCancelAppyMutation = (recruitmentId: number, successHandler: () 
   });
   return { mutate };
 };
+
+export const deleteStudy = (studyId: number) => httpClient.delete(API_END_POINT.DELETE_STUDY(studyId));
+
+export const useDeleteStudy = (studyId: number) => {
+  const { mutate } = useMutation({
+    mutationKey: [...STUDY.DELETE(studyId)],
+    mutationFn: () => deleteStudy(studyId),
+    onSuccess: () => {
+      console.log('스터디 삭제 성공');
+    },
+    onError: () => {
+      console.log('스터디 삭제 실패');
+    },
+  });
+  return { mutate };
+};

@@ -19,4 +19,5 @@ export const STUDY = {
   APPLY_CANCEL: (recruitmentId: number) => [BASE_KEY.STUDY, recruitmentId, 'CANCEL'],
   APPLICNATS: (studyId: number) => [BASE_KEY.STUDY, studyId, 'APPLICANTS'],
   MYPAGE_INFO: () => [BASE_KEY.STUDY, 'MYPAGE'],
+  DELETE: (studyId: number) => [BASE_KEY.STUDY, studyId, 'DELETE'],
 };
