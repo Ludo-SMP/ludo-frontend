@@ -1,4 +1,4 @@
-import { MEMBER_STATUS, STUDY_STATUS } from '@/Shared/study';
+import { MEMBER_STATUS, ROLE, STUDY_STATUS } from '@/Shared/study';
 
 export type Position = '백엔드' | '프론트엔드' | '디자이너' | '데브옵스';
 export type ActivityType = '온라인' | '오프라인' | '미정';
@@ -12,7 +12,7 @@ export type ApplyStatus = 'UNCHECKED';
 export type StudyStatus = keyof typeof STUDY_STATUS;
 export type MemberStatus = keyof typeof MEMBER_STATUS;
 export type AllType = '전체';
-export type Role = '팀장' | '팀원';
+export type Role = keyof typeof ROLE;
 export type Platform = 'GATHER' | 'GOOGLE MEET';
 export type Card = 'STUDY' | 'RECRUITMENT';
 
@@ -20,11 +20,8 @@ export interface Member {
   id: number;
   nickname: string;
   email: string;
-  position: {
-    id: number;
-    name: StudyCategory | string;
-  };
-  role: Role | string;
+  position: PositionType;
+  role: Role;
 }
 
 export interface User {
@@ -38,8 +35,6 @@ export interface PositionType {
   id: number;
   name: Position;
 }
-
-export interface Applicant extends Omit<Member, 'role'> {}
 
 export interface RecruitmentInfoType {
   recruitmentId: number;
@@ -121,28 +116,19 @@ export interface FilterOptionsType {
   sort: SortType[];
 }
 
-export const defaultFilterOptions = {
-  category: ['코딩 테스트', '모의 면접', '프로젝트'],
-  stacks: ['React', 'Java', 'Spring', 'Figma', 'Java', 'Javascript'],
-  positions: ['백엔드', '프론트엔드', '기획', '디자이너'],
-  way: ['온라인', '오프라인', '미정'],
-  sort: ['최신순'],
-};
-
 export interface Participant {
   id: number;
   nickname: string;
-  role: 'OWNER' | 'MEMBER';
+  role: Role;
   email: string;
-  position: { id: number; name: string };
+  position: PositionType;
 }
+export interface Applicant extends Omit<Member, 'role'> {}
 
-export type Status = 'PROGRESS' | 'RECRUITING' | 'RECRUITED' | 'COMPLETED';
-
-export interface StudyDetailResponseData {
+export interface StudyDetail {
   study: {
     id: number;
-    status: Status;
+    status: StudyStatus | ApplyStatus;
     title: string;
     platform: Platform;
     way: 'ONLINE' | 'OFFLINE';
@@ -152,35 +138,32 @@ export interface StudyDetailResponseData {
     endDateTime: string;
     category: {
       id: number;
-      name: StudyCategory | string;
+      name: StudyCategory;
     };
-    owner: {
-      id: number;
-      nickname: string;
-      email: string;
-    };
+    owner: User;
     participants: Participant[];
-    applicants: Applicant[];
   };
 }
 
-export interface StudyInfoType {
-  studyId: number;
-  title: string;
-  progressMethod: ProgressMethod;
-  category: StudyCategory;
-  startDate: string;
-  endDate: string;
+export interface ApplicantsDetail {
+  study: {
+    id: number;
+    status: StudyStatus | ApplyStatus;
+    title: string;
+    participantLimit: number;
+    participantCount: number;
+  };
+  applicants: Applicant[];
 }
 
-export interface StudyDetail {
-  studyId: number;
-  title: string;
-  progressMethod: ProgressMethod;
-  members: Member[];
-  memberCnt: number;
-  memberLimit: number;
-}
+// export interface StudyDetail {
+//   studyId: number;
+//   title: string;
+//   progressMethod: ProgressMethod;
+//   members: Member[];
+//   memberCnt: number;
+//   memberLimit: number;
+// }
 
 export interface ParticipateStudy {
   studyId: number;

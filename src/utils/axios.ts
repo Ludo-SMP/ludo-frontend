@@ -9,6 +9,10 @@ export const createClient = (config?: AxiosRequestConfig) => {
     withCredentials: true,
     ...config,
   });
+  axiosInstance.interceptors.request.use((request) => {
+    // console.log(request);
+    return request;
+  });
 
   axiosInstance.interceptors.response.use(
     (response) => {

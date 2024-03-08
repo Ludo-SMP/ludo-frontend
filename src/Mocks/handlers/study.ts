@@ -1,14 +1,15 @@
 import { HttpResponse, http } from 'msw';
 import { applicantsMockData, studyDetailMockData, myPageInfoData } from '../data/mockStudies';
-import { StudyDetailResponseData } from '@/Types/study';
+import { StudyDetail } from '@/Types/study';
 import { HttpStatus } from '@/Constants/StatusCodes';
 const baseURL = import.meta.env.VITE_MOCK_API_URL;
 
-const getStudyDetail = http.get(`${baseURL}/api/studies/:studyId`, async ({ params }) => {
+const getStudyDetail = http.get(`${baseURL}/studies/api/studies/:studyId`, async ({ params }) => {
   const studyId: number = Number(params?.studyId);
+  console.log(studyDetailMockData.filter((studyDetail: StudyDetail) => studyDetail?.study.id === studyId)[0]);
   return new HttpResponse(
     JSON.stringify({
-      data: studyDetailMockData.filter((studyDetail: StudyDetailResponseData) => studyDetail?.study.id === studyId)[0],
+      data: studyDetailMockData.filter((studyDetail: StudyDetail) => studyDetail?.study.id === studyId)[0],
       message: 'Success',
     }),
     {
