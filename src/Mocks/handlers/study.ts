@@ -1,7 +1,7 @@
 import { HttpResponse, http } from 'msw';
 import { applicantsDetailMockData, studyDetailMockData, myPageInfoData } from '../data/mockStudies';
 import { StudyDetail } from '@/Types/study';
-import { HttpStatus } from '@/Constants/StatusCodes';
+import { HttpStatus } from '@/Constants/statusCodes';
 const baseURL = import.meta.env.VITE_MOCK_API_URL;
 
 const getStudyDetail = http.get(`${baseURL}/api/studies/:studyId`, async ({ params }) => {
