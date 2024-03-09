@@ -1,5 +1,5 @@
 import { Profile } from '@/Assets';
-import { ApplyAcceptState, Member } from '@/Types/study';
+import { Member, ApplyStatus } from '@/Types/study';
 import styled from 'styled-components';
 import { InfoField } from '../Common/InfoField';
 import Button from '../Common/Button';
@@ -15,15 +15,15 @@ interface ApplicantCardProps extends Omit<Member, 'role'> {
 }
 
 const ApplicantCard = ({ studyId, id: applicantId, title, nickname, email, position, isOwner }: ApplicantCardProps) => {
-  const [isDisabled, setIsDisabled] = useState<boolean>(false);
-  const [applyAcceptState, setApplyAcceptState] = useState<ApplyAcceptState>('NOT ACCEPTED');
+  const [applyStatus, setApplyStatus] = useState<ApplyStatus>('UNCHECKED');
   const { isModalOpen, closeModal } = useModalStore();
 
   const { mutate: acceptMutate } = useAcceptApplyMutation(studyId, applicantId, () => {
-    setApplyAcceptState('ACCEPTED');
-    setIsDisabled(true);
+    setApplyStatus('ACCEPTED');
   });
-  const { mutate: refuseMutate } = useRefuseApplyMutation(studyId, applicantId, () => setIsDisabled(true));
+  const { mutate: refuseMutate } = useRefuseApplyMutation(studyId, applicantId, () => {
+    setApplyStatus('REFUSED');
+  });
 
   return (
     <ApplicantCardWrapper>
@@ -39,7 +39,6 @@ const ApplicantCard = ({ studyId, id: applicantId, title, nickname, email, posit
       {isOwner && (
         <ApplicantButtonsWrapper>
           <Button
-            disabled={isDisabled}
             onClick={() => {
               refuseMutate();
             }}
@@ -47,7 +46,6 @@ const ApplicantCard = ({ studyId, id: applicantId, title, nickname, email, posit
             거절하기
           </Button>
           <Button
-            disabled={isDisabled}
             scheme="secondary"
             onClick={() => {
               acceptMutate();
@@ -57,9 +55,14 @@ const ApplicantCard = ({ studyId, id: applicantId, title, nickname, email, posit
           </Button>
         </ApplicantButtonsWrapper>
       )}
-      {applyAcceptState === 'ACCEPTED' && isModalOpen && (
+      {isModalOpen && applyStatus === 'ACCEPTED' && (
         <Modal handleApprove={closeModal} title={APPLY.ACCEPT.title} approveBtnText="확인하기">
           {APPLY.ACCEPT.content}
+        </Modal>
+      )}
+      {isModalOpen && applyStatus === 'REFUSED' && (
+        <Modal handleApprove={closeModal} title={APPLY.REFUSE.title} approveBtnText="확인하기">
+          {APPLY.REFUSE.content}
         </Modal>
       )}
     </ApplicantCardWrapper>

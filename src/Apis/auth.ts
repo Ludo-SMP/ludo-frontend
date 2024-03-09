@@ -19,12 +19,12 @@ export const useLogOutMutation = () => {
     mutationKey: ['logout'],
     mutationFn: () => logOut(),
     onSuccess: () => {
-      console.log('성공');
+      console.log('로그아웃 성공');
       setIsLoggedOut();
       navigate('/');
     },
-    onError: (res) => {
-      console.log(res);
+    onError: () => {
+      console.log('로그아웃 실패');
     },
   });
   return { mutate };

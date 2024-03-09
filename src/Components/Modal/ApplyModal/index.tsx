@@ -11,18 +11,12 @@ import { ApplyState } from '@/Types/study';
 interface ApplyModalProps {
   handleApplyApprove: React.Dispatch<SetStateAction<ApplyState>>;
   recruitmentId: number;
-  studyId: number;
   positions: Position[];
 }
 
-const ApplyModal = ({ handleApplyApprove, recruitmentId, studyId, positions }: ApplyModalProps) => {
+const ApplyModal = ({ handleApplyApprove, recruitmentId, positions }: ApplyModalProps) => {
   const { selectedPosition, resetSelectedPosition } = useSelectedPositionStore();
-  const { mutate } = useApplyStudyMutation(
-    studyId,
-    recruitmentId,
-    { positionId: selectedPosition },
-    handleApplyApprove,
-  );
+  const { mutate } = useApplyStudyMutation(recruitmentId, { positionId: selectedPosition }, handleApplyApprove);
 
   return (
     <Modal

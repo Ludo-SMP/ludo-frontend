@@ -3,11 +3,7 @@ import {
   RecruitmentRawDataType,
   RecruitmentDetailRawDataType,
   RecruitmentDetailType,
-  StudyDetailResponseData,
-  Participant,
-  ProgressMethod,
 } from '@/Types/study';
-import { STUDY_STATUS } from '../Shared/study';
 
 export const convertRecruitmentRawDataToRecruitmentCardProps = (recruitmentRawData: RecruitmentRawDataType) => {
   const {
@@ -103,46 +99,5 @@ export const convertRecruitmentDetailRawDataToRecruitmentDetail = (
     memberCnt,
     contact,
     studyTitle,
-  };
-};
-
-export const convertStudyDetailRawDataToStudyDetail = (studyDetailRawData: StudyDetailResponseData) => {
-  const {
-    id,
-    status: _status,
-    title,
-    platform,
-    way,
-    participantsCount: memberCnt,
-    participantsLimit: memberLimit,
-    startDateTime: startDate,
-    endDateTime: endDate,
-    category,
-    owner,
-    participants,
-    applicants,
-  } = studyDetailRawData.study;
-
-  const members = participants.map((participant: Participant) => {
-    const { id, nickname, email, role: _role, position } = participant;
-    const role = _role === 'OWNER' ? '팀장' : '팀원';
-    return { id, nickname, role, email, position };
-  });
-  const status = STUDY_STATUS[_status];
-  const progressMethod: ProgressMethod = way === 'OFFLINE' ? '오프라인' : way === 'ONLINE' ? '온라인' : '미정';
-  return {
-    id,
-    title,
-    status,
-    owner,
-    platform,
-    progressMethod,
-    category,
-    startDate,
-    endDate,
-    members,
-    memberCnt,
-    memberLimit,
-    applicants,
   };
 };

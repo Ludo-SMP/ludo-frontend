@@ -3,7 +3,7 @@ import { ApplyStatus, MemberStatus, StudyStatus } from '@/Types/study';
 import styled from 'styled-components';
 
 export interface StudyTokenProps {
-  status?: StudyStatus | ApplyStatus | MemberStatus;
+  status: StudyStatus | ApplyStatus | MemberStatus;
 }
 
 const StudyToken = ({ status }: StudyTokenProps) => {
@@ -11,14 +11,14 @@ const StudyToken = ({ status }: StudyTokenProps) => {
     <StudyTokenWrapper status={status}>
       {status === 'PARTICIPATED'
         ? `${MEMBER_STATUS[status]}인 스터디`
-        : status === 'UNCHECKED'
+        : status === 'UNCHECKED' || status === 'ACCEPTED' || status === 'REFUSED'
         ? `${APPLY_STATUS[status]}`
         : `${STUDY_STATUS[status]}`}
     </StudyTokenWrapper>
   );
 };
 
-const StudyTokenWrapper = styled.span<{ status: StudyStatus | ApplyStatus | MemberStatus }>`
+const StudyTokenWrapper = styled.span<{ status: ApplyStatus | MemberStatus | StudyStatus }>`
   display: flex;
   padding: 4px 12px;
   justify-content: center;
@@ -27,10 +27,14 @@ const StudyTokenWrapper = styled.span<{ status: StudyStatus | ApplyStatus | Memb
   color: ${({ status, theme }) =>
     status === 'PARTICIPATED'
       ? theme.color.purple1
+      : status === 'COMPLETED' || status === 'REFUSED' || status === 'RECRUITED'
+      ? `rgba(0, 0, 0, 0.25)`
       : status === 'PROGRESS'
       ? theme.color.purple5
-      : status === 'COMPLETED'
-      ? `rgba(0, 0, 0, 0.25)`
+      : status === 'RECRUITING'
+      ? theme.color.black3
+      : status === 'ACCEPTED'
+      ? '#AD8395'
       : theme.color.orange3};
 
   background: #f2f2f2;

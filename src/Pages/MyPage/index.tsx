@@ -11,6 +11,7 @@ import ChipMenu from '@/Components/Common/ChipMenu';
 import { User, ParticipateStudy, ApplicantRecruitment, CompletedStudy } from '@/Types/study';
 import { useSelectedCardStore, useSelectedMyStudyStore } from '@/Store/study';
 import { useLogOutMutation } from '@/Apis/auth';
+import { temporarySavedCardMockData } from '@/Shared/dummy';
 
 const MyPage = () => {
   const { data: myPageInfo, isLoading } = useMyPageInfo();
@@ -23,17 +24,6 @@ const MyPage = () => {
   const { selectedCard, setSelectedCard } = useSelectedCardStore();
 
   const { mutate: logoutMutate } = useLogOutMutation();
-
-  const temporarySavedCardMockData: TemporarySavedCardProps[] = [
-    { title: '모집공고 1', id: 1, card: 'RECRUITMENT' },
-    { title: '모집공고 2', id: 2, card: 'RECRUITMENT' },
-    { title: '모집공고 3', id: 3, card: 'RECRUITMENT' },
-    { title: '모집공고 4', id: 4, card: 'RECRUITMENT' },
-    { title: '스터디 1', card: 'STUDY' },
-    { title: '스터디 2', card: 'STUDY' },
-    { title: '스터디 3', card: 'STUDY' },
-    { title: '스터디 4', card: 'STUDY' },
-  ];
 
   return isLoading ? (
     <div>Loading ...</div>
@@ -52,13 +42,13 @@ const MyPage = () => {
           <span className="title">스따-디</span>
         </MyStudyTitleWrapper>
         <ChipMenusWrapper>
-          <ChipMenu checked={selectedMyStudyStatus === 'PROGRESS'} onClick={() => setSelectedMyStudyStatus('PROGRESS')}>
+          <ChipMenu
+            checked={selectedMyStudyStatus === 'PARTICIPATED'}
+            onClick={() => setSelectedMyStudyStatus('PARTICIPATED')}
+          >
             참여중인 스터디
           </ChipMenu>
-          <ChipMenu
-            checked={selectedMyStudyStatus === 'UNCHECKED'}
-            onClick={() => setSelectedMyStudyStatus('UNCHECKED')}
-          >
+          <ChipMenu checked={selectedMyStudyStatus === 'APPLIED'} onClick={() => setSelectedMyStudyStatus('APPLIED')}>
             내가 지원한 스터디
           </ChipMenu>
           <ChipMenu
@@ -68,37 +58,37 @@ const MyPage = () => {
             진행 완료된 스터디
           </ChipMenu>
         </ChipMenusWrapper>
-        {selectedMyStudyStatus === 'PROGRESS'
+        {selectedMyStudyStatus === 'PARTICIPATED'
           ? participateStudies.map((participateStudy: ParticipateStudy) => (
               <MyStudyCard
-                id={participateStudy.studyId}
-                title={participateStudy.title}
-                status={'PROGRESS'}
-                position={participateStudy.position}
-                period={getPeriod(participateStudy.startDateTime, participateStudy.endDateTime)}
-                participantCount={participateStudy.participantCount}
-                key={participateStudy.studyId}
+                id={participateStudy?.studyId}
+                title={participateStudy?.title}
+                status={participateStudy.status}
+                position={participateStudy?.position}
+                period={getPeriod(participateStudy?.startDateTime, participateStudy?.endDateTime)}
+                participantCount={participateStudy?.participantCount}
+                key={participateStudy?.studyId}
               />
             ))
-          : selectedMyStudyStatus === 'UNCHECKED'
+          : selectedMyStudyStatus === 'APPLIED'
           ? applicantRecruitments.map((applicantRecruitment: ApplicantRecruitment) => (
               <MyStudyCard
-                id={applicantRecruitment.recruitmentId}
-                title={applicantRecruitment.title}
-                status={'UNCHECKED'}
-                position={applicantRecruitment.position}
-                key={applicantRecruitment.recruitmentId}
+                id={applicantRecruitment?.recruitmentId}
+                title={applicantRecruitment?.title}
+                status={applicantRecruitment?.applicantStatus}
+                position={applicantRecruitment?.position}
+                key={applicantRecruitment?.recruitmentId}
               />
             ))
           : completedStudies.map((completedStudy: CompletedStudy) => (
               <MyStudyCard
-                id={completedStudy.studyId}
-                title={completedStudy.title}
-                status={'COMPLETED'}
-                position={completedStudy.position}
-                period={getPeriod(completedStudy.startDateTime, completedStudy.endDateTime)}
-                participantCount={completedStudy.participantCount}
-                key={completedStudy.studyId}
+                id={completedStudy?.studyId}
+                title={completedStudy?.title}
+                status={completedStudy?.status}
+                position={completedStudy?.position}
+                period={getPeriod(completedStudy?.startDateTime, completedStudy?.endDateTime)}
+                participantCount={completedStudy?.participantCount}
+                key={completedStudy?.studyId}
               />
             ))}
       </CardsWrapper>

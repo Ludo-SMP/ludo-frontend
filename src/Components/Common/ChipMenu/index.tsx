@@ -14,7 +14,7 @@ const ChipMenu = ({ onClick, checked, children, disabled, className }: ChipMenuP
   </ChipMenuContainer>
 );
 
-const ChipMenuContainer = styled.button<{ checked: boolean }>`
+const ChipMenuContainer = styled.div<{ checked: boolean }>`
   display: flex;
   padding: 0px 16px;
   justify-content: center;
@@ -29,6 +29,10 @@ const ChipMenuContainer = styled.button<{ checked: boolean }>`
   font-style: normal;
   font-weight: 600;
   line-height: 40px;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export default ChipMenu;

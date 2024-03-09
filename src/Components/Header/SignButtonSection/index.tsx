@@ -4,17 +4,15 @@ import { media } from '@/Styles/theme';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useLogOutMutation } from '@/Apis/auth';
+import { useLoginStore } from '@/Store/auth';
 
-export interface SignButtonSectionProps {
-  isLoggedIn: boolean;
-}
-
-const SignButtonSection = ({ isLoggedIn }: SignButtonSectionProps) => {
+const SignButtonSection = () => {
   const navigate = useNavigate();
+  const { isLoggedIn } = useLoginStore();
   const { mutate: logoutMutate } = useLogOutMutation();
 
   return (
-    <SignButtonSectionWrapper {...{ isLoggedIn }}>
+    <SignButtonSectionWrapper isLoggedIn={isLoggedIn}>
       {isLoggedIn ? (
         <Button className="logout" type="button" onClick={() => logoutMutate()}>
           로그아웃
@@ -47,7 +45,7 @@ const SignButtonSection = ({ isLoggedIn }: SignButtonSectionProps) => {
 
 const SignButtonSectionWrapper = styled.div<{ isLoggedIn: boolean }>`
   display: flex;
-  gap: ${(props) => (props.isLoggedIn ? '8px' : '12px')};
+  gap: ${({ isLoggedIn }) => (isLoggedIn ? '8px' : '12px')};
   ${media.tablet} {
     display: none;
   }

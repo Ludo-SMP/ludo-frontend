@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import { useState, Dispatch, SetStateAction, useRef } from 'react';
 import { DownBold } from '@/Assets/icons/DownBold';
-import { FilterOptionsType, MainCategoryNameType, defaultFilterOptions } from '@/Types/study';
+import { FilterOptionsType, MainCategoryNameType } from '@/Types/study';
+import { defaultFilterOptions } from '@/Shared/category';
 import DropdownItem from './DropdownItem';
 import { UpBold } from '@/Assets/icons/UpBold';
 import { useOutSideClick } from '@/Hooks/useOutsideClick';

@@ -2,12 +2,16 @@ import axios, { AxiosRequestConfig } from 'axios';
 
 export const createClient = (config?: AxiosRequestConfig) => {
   const axiosInstance = axios.create({
-    baseURL: import.meta.env.VITE_BASE_API_URL,
+    baseURL: import.meta.env.VITE_MOCK_API_URL,
     headers: {
       'Content-Type': 'application/json',
     },
     withCredentials: true,
     ...config,
+  });
+  axiosInstance.interceptors.request.use((request) => {
+    // console.log(request);
+    return request;
   });
 
   axiosInstance.interceptors.response.use(

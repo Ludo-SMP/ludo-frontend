@@ -20,6 +20,7 @@ export const API_END_POINT = {
   CREATE_RECRUITMENT: (studyId: number) => `${API_PREFIX}/studies/${studyId}/recruitments`,
   EDIT_RECRUITMENT: (studyId: number) => `${API_PREFIX}/studies/${studyId}/recruitments`,
   DELETE_RECRUITMENT: (studyId: number) => `${API_PREFIX}/studies/${studyId}/recruitments`,
+  CLOSE_RECRUITMENT: (studyId: number) => `${API_PREFIX}/studies/${studyId}`,
 
   //STUDIES
   CREATE_STUDY: `${API_PREFIX}/studies`,
@@ -27,12 +28,11 @@ export const API_END_POINT = {
   EDIT_STUDY: (studyId: number) => `${API_PREFIX}/studies/${studyId}`,
   DELETE_STUDY: (studyId: number) => `${API_PREFIX}/studies/${studyId}`,
   LEAVE_STUDY: (studyId: number) => `${API_PREFIX}/studies/${studyId}/participants`,
+  APPLICANTS: (studyId: number) => `${API_PREFIX}/studies/${studyId}/applicants`,
 
   // APPLY
-  APPLY: (studyId: number, recruitmentId: number) =>
-    `${API_PREFIX}/studies/${studyId}/recruitments/${recruitmentId}/apply`,
-  APPLY_CANCEL: (studyId: number, recruitmentId: number) =>
-    `${API_PREFIX}/studies/${studyId}/recruitments/${recruitmentId}/cancel`,
+  APPLY: (recruitmentId: number) => `${API_PREFIX}/recruitments/${recruitmentId}/apply`,
+  APPLY_CANCEL: (recruitmentId: number) => `${API_PREFIX}/recruitments/${recruitmentId}/cancel`,
   APPLY_ACCEPT: (studyId: number, applicantId: number) =>
     `${API_PREFIX}/studies/${studyId}/apply-accept/${applicantId}`,
   APPLY_REFUSE: (studyId: number, applicantId: number) =>

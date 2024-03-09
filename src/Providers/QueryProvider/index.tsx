@@ -11,9 +11,9 @@ const ReactQueryProvider = ({ children }: ReactQueryProviderProps) => {
     new QueryClient({
       defaultOptions: {
         queries: {
-          refetchOnWindowFocus: true,
+          refetchOnWindowFocus: false,
           retryOnMount: true,
-          refetchOnReconnect: true,
+          refetchOnReconnect: false,
           retry: false,
         },
       },
