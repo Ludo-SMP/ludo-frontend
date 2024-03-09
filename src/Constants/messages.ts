@@ -38,6 +38,13 @@ export const CREATE_STUDY = Object.freeze({
   } as MessageType,
 });
 
+export const DELETE = Object.freeze({
+  STUDY: {
+    title: '스터디를 삭제하시겠습니까?',
+    content: '스터디를 삭제하면 관련한 정보는 모두 삭제되며 복구는 뷸가합니다.\n정말로 삭제하시겠습니까?',
+  },
+});
+
 export const PROFILE = Object.freeze({
   EDIT: {
     title: '닉네임 변경하기',

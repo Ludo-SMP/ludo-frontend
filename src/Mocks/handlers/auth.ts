@@ -1,6 +1,6 @@
 import { HttpResponse, http } from 'msw';
 import { mockUsers } from '../data/mockAuth';
-import { HttpStatus } from '@/Constants/StatusCodes';
+import { HttpStatus } from '@/Constants/statusCodes';
 
 const baseURL = import.meta.env.VITE_MOCK_API_URL;
 

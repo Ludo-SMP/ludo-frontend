@@ -24,7 +24,6 @@ const MyPage = () => {
   const { selectedCard, setSelectedCard } = useSelectedCardStore();
 
   const { mutate: logoutMutate } = useLogOutMutation();
-  console.log(selectedMyStudyStatus);
 
   return isLoading ? (
     <div>Loading ...</div>

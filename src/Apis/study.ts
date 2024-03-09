@@ -5,6 +5,8 @@ import { API_END_POINT } from '@/Constants/api';
 import { SetStateAction } from 'react';
 import { useModalStore } from '@/Store/modal';
 import { ApplicantsDetail, ApplyState, MyPageInfo, StudyDetail } from '@/Types/study';
+import { useNavigate } from 'react-router-dom';
+import { ROUTER_PATH } from '@/Constants/Router_Path';
 
 export const getStudyDetail = (studyId: number): Promise<{ data: { data: StudyDetail } }> =>
   httpClient.get(API_END_POINT.STUDY(studyId));
@@ -128,12 +130,16 @@ export const useCancelAppyMutation = (recruitmentId: number, successHandler: () 
 
 export const deleteStudy = (studyId: number) => httpClient.delete(API_END_POINT.DELETE_STUDY(studyId));
 
-export const useDeleteStudy = (studyId: number) => {
+export const useDeleteStudyMutation = (studyId: number) => {
+  const { closeModal } = useModalStore();
+  const navigate = useNavigate();
   const { mutate } = useMutation({
     mutationKey: [...STUDY.DELETE(studyId)],
     mutationFn: () => deleteStudy(studyId),
     onSuccess: () => {
       console.log('스터디 삭제 성공');
+      closeModal();
+      navigate(ROUTER_PATH.mypage);
     },
     onError: () => {
       console.log('스터디 삭제 실패');

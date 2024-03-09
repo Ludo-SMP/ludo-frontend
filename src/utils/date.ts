@@ -4,7 +4,6 @@ export const dateFormatter = (date: string) => {
 };
 
 export const getDday = (endDate: string) => {
-  console.log(endDate);
   const diff = new Date(endDate).getTime() - new Date().getTime();
   const dDay = Math.floor(diff / (60 * 60 * 24 * 1000));
   return dDay >= 0 ? dDay : 0;

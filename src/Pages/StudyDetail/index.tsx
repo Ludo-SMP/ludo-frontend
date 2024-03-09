@@ -6,25 +6,33 @@ import StudyToken from '@/Components/Common/StudyToken';
 import { useNavigate, useParams } from 'react-router-dom';
 import StudyInfoSection from './StudyInfoSection';
 import MemberSection from './MemberSection';
-import { useStudyDetail } from '@/Apis/study';
+import { useDeleteStudyMutation, useStudyDetail } from '@/Apis/study';
 import { getDday, getPeriod } from '@/Utils/date';
 import { useUserStore } from '@/Store/user';
 import { useCloseRecruitmentMutation } from '@/Apis/recruitment';
 import { useQueryClient } from '@tanstack/react-query';
 import { STUDY } from '@/Constants/queryString';
+import { useModalStore } from '@/Store/modal';
+import Modal from '@/Components/Common/Modal';
+import { DELETE } from '@/Constants/messages';
+import { useState } from 'react';
 
 export const StudyDetailPage = () => {
-  const { user } = useUserStore();
   const studyId = Number(useParams().studyId);
-  const { data: studyDetail, isLoading } = useStudyDetail(studyId);
-  const navigate = useNavigate();
+  const { user } = useUserStore();
+  const { isModalOpen, openModal } = useModalStore();
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  const [isDeletedBtnClicked, setIsDeletedBtnClicked] = useState<boolean>(false);
+
+  const { data: studyDetail, isLoading } = useStudyDetail(studyId);
+  const study = studyDetail?.study;
 
   const { mutate: closeRecruitmentMutate } = useCloseRecruitmentMutation(studyId, () => {
     queryClient.invalidateQueries({ queryKey: [...STUDY.STUDY(studyId)] });
   });
 
-  const study = studyDetail?.study;
+  const { mutate: deleteStudyMutate } = useDeleteStudyMutation(studyId);
 
   return isLoading ? (
     <div>Loading...</div>
@@ -56,7 +64,13 @@ export const StudyDetailPage = () => {
       <MemberSection memberLimit={study?.participantsLimit} members={study?.participants} />
       <StudyButtonsWrapper>
         {user?.id === study?.owner.id && study?.participants.length === 0 && (
-          <Button size="fullWidth" onClick={() => {}}>
+          <Button
+            size="fullWidth"
+            onClick={() => {
+              openModal();
+              setIsDeletedBtnClicked(true);
+            }}
+          >
             스터디 삭제하기
           </Button>
         )}
@@ -76,6 +90,20 @@ export const StudyDetailPage = () => {
           </Button>
         )}
       </StudyButtonsWrapper>
+      {isModalOpen && isDeletedBtnClicked && (
+        <Modal
+          handleApprove={() => {
+            deleteStudyMutate();
+            setIsDeletedBtnClicked(false);
+          }}
+          handleCancel={() => setIsDeletedBtnClicked(false)}
+          title={DELETE.STUDY.title}
+          approveBtnText="삭제하기"
+          cancelBtnText="아니요"
+        >
+          {DELETE.STUDY.content}{' '}
+        </Modal>
+      )}
     </StudyDetailWrapper>
   );
 };
