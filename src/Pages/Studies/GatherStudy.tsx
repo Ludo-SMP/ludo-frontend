@@ -18,6 +18,9 @@ import { useStack } from '@/Apis/stack';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { httpClient } from '@/Utils/axios';
+import { One, Two, Three, Four } from '@/Assets';
+import { SaveButton } from '@/Components/Button/Studies/SaveButton';
+// import { Border } from '@/Assets';
 
 axios.defaults.withCredentials = true;
 export type OptionalCreates = Partial<Gather>;
@@ -54,9 +57,10 @@ export const GatherStudy = () => {
       callUrl: useForm.callUrl,
       content: useForm.content,
       // studyId: useForm.studyId,
-      studyId: 37,
+      studyId: 47,
     });
     console.log(data);
+    localStorage.setItem('gather', JSON.stringify(data.data));
   }
 
   const handleSubmit = (event: any) => {
@@ -70,7 +74,12 @@ export const GatherStudy = () => {
       <StudyContainer onSubmit={handleSubmit}>
         <StudyMain>스터디 팀원 모집하기</StudyMain>
         <TopBox>
-          <StudyTitle>스터디 기본 안내</StudyTitle>
+          <StudyTitle>
+            <AssetContainer>
+              <One />
+            </AssetContainer>
+            스터디 기본 안내
+          </StudyTitle>
           <StudyTopInfo>
             <StudyWrapper>
               <ContentText>모집인원</ContentText>
@@ -100,8 +109,14 @@ export const GatherStudy = () => {
             </StudyWrapper>
           </StudyTopInfo>
         </TopBox>
+        <BorderBox />
         <MiddleBox>
-          <StudyTitle>스터디 진행관련</StudyTitle>
+          <StudyTitle>
+            <AssetContainer>
+              <Two />
+            </AssetContainer>
+            스터디 진행관련
+          </StudyTitle>
           <StudyMiddleInfo>
             <StudyWrapper>
               <ContentText>진행방식</ContentText>
@@ -117,8 +132,14 @@ export const GatherStudy = () => {
             </StudyWrapper>
           </StudyMiddleInfo>
         </MiddleBox>
+        <BorderBox />
         <StudyMidBottom>
-          <StudyTitle>스터디 기본구성</StudyTitle>
+          <StudyTitle>
+            <AssetContainer>
+              <Three />
+            </AssetContainer>
+            스터디 기본구성
+          </StudyTitle>
           <MiddleBottomWrapper>
             <ContentText>스터디 제목</ContentText>
             <SubContentTitle> 스터디 제목</SubContentTitle>
@@ -134,9 +155,14 @@ export const GatherStudy = () => {
             </MiddleBottomWrapper>
           </MiddleBottomInfo>
         </StudyMidBottom>
-
+        <BorderBox />
         <BottomBox>
-          <StudyTitle>스터디 팀원 모집 공고 제목</StudyTitle>
+          <StudyTitle>
+            <AssetContainer>
+              <Four />
+            </AssetContainer>
+            스터디 팀원 모집 공고 제목
+          </StudyTitle>
           <BottomWrapper>
             <ContentText>제목</ContentText>
             <Titlearea setForm={forms} useForm={useForm} />
@@ -147,7 +173,7 @@ export const GatherStudy = () => {
           </BottomWrapper>
         </BottomBox>
         <ButtonBox>
-          <SubmitButton type="submit">임시저장</SubmitButton>
+          <SaveButton type="submit">임시저장</SaveButton>
           <SubmitButton type="submit">등록하기</SubmitButton>
         </ButtonBox>
       </StudyContainer>
@@ -155,12 +181,23 @@ export const GatherStudy = () => {
   );
 };
 
+const BorderBox = styled.div`
+  width: 1200px;
+  margin-bottom: 16px;
+  border-bottom: 16px solid #f2f2f2;
+`;
+
+const AssetContainer = styled.image`
+  padding-right: 12px;
+`;
+
 const StudyMain = styled.p`
+  display: flex;
   font-size: ${(props) => props.theme.font.xxxlarge};
   text-align: left;
   font-weight: 800;
   line-height: 60px;
-  padding-bottom: 60px;
+  padding-bottom: 40px;
   ${media.custom(800)} {
     display: none;
   }
@@ -187,6 +224,7 @@ const SubContentTitle = styled.p`
 
 const StudyContainer = styled.form`
   height: 2000px;
+  margin: auto;
   padding-left: 348px;
   padding-right: 348px;
   display: flex;
@@ -196,11 +234,13 @@ const StudyContainer = styled.form`
 `;
 const TopBox = styled.div`
   height: 310px;
-  border-bottom: 1px solid #444444;
-  padding-top: 20px;
+  /* border-bottom: 16px solid #f2f2f2; */
+  /* padding-top: 60px; */
   padding-bottom: 40px;
-  margin-bottom: 40px;
+  /* margin: auto; */
+  /* margin-bottom: 60px; */
   text-align: left;
+  gap: 32px;
 `;
 
 const StudyTopInfo = styled.div`
@@ -213,8 +253,8 @@ const StudyTopInfo = styled.div`
 `;
 
 const MiddleBox = styled.div`
+  padding-top: 16px;
   height: 200px;
-  border-bottom: 1px solid #444444;
   align-items: center;
 `;
 
@@ -228,7 +268,6 @@ const StudyMiddleInfo = styled.div`
 
 const StudyMidBottom = styled.div`
   height: 340px;
-  border-bottom: 1px solid #444444;
   padding-top: 40px;
   padding-bottom: 40px;
   align-items: center;
