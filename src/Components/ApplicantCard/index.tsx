@@ -1,5 +1,5 @@
 import { Profile } from '@/Assets';
-import { ApplyAcceptState, Member } from '@/Types/study';
+import { Member, ApplyStatus } from '@/Types/study';
 import styled from 'styled-components';
 import { InfoField } from '../Common/InfoField';
 import Button from '../Common/Button';
@@ -15,14 +15,14 @@ interface ApplicantCardProps extends Omit<Member, 'role'> {
 }
 
 const ApplicantCard = ({ studyId, id: applicantId, title, nickname, email, position, isOwner }: ApplicantCardProps) => {
-  const [applyAcceptState, setApplyAcceptState] = useState<ApplyAcceptState>('NOT DETERMINED');
+  const [applyStatus, setApplyStatus] = useState<ApplyStatus>('UNCHECKED');
   const { isModalOpen, closeModal } = useModalStore();
 
   const { mutate: acceptMutate } = useAcceptApplyMutation(studyId, applicantId, () => {
-    setApplyAcceptState('ACCEPTED');
+    setApplyStatus('ACCEPTED');
   });
   const { mutate: refuseMutate } = useRefuseApplyMutation(studyId, applicantId, () => {
-    setApplyAcceptState('REFUSED');
+    setApplyStatus('REFUSED');
   });
 
   return (
@@ -55,12 +55,12 @@ const ApplicantCard = ({ studyId, id: applicantId, title, nickname, email, posit
           </Button>
         </ApplicantButtonsWrapper>
       )}
-      {isModalOpen && applyAcceptState === 'ACCEPTED' && (
+      {isModalOpen && applyStatus === 'ACCEPTED' && (
         <Modal handleApprove={closeModal} title={APPLY.ACCEPT.title} approveBtnText="확인하기">
           {APPLY.ACCEPT.content}
         </Modal>
       )}
-      {isModalOpen && applyAcceptState === 'REFUSED' && (
+      {isModalOpen && applyStatus === 'REFUSED' && (
         <Modal handleApprove={closeModal} title={APPLY.REFUSE.title} approveBtnText="확인하기">
           {APPLY.REFUSE.content}
         </Modal>
