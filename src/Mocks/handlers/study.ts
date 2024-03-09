@@ -160,7 +160,7 @@ const deleteStudy = http.delete(`${baseURL}/api/studies/:studyId`, async ({ para
   );
 });
 
-const failDeleteStudy = http.delete(`${baseURL}/api/studies/:studyId`, async ({ params }) => {
+const failDeleteStudy = http.delete(`${baseURL}/api/studies/:studyId`, async () => {
   return new HttpResponse(
     JSON.stringify({
       message: '스터디 삭제에 실패하였습니다.',
@@ -172,6 +172,19 @@ const failDeleteStudy = http.delete(`${baseURL}/api/studies/:studyId`, async ({ 
   );
 });
 
+const leaveStudy = http.delete(`${baseURL}/api/studies/:studyId/participants`, async () => {
+  return new HttpResponse(JSON.stringify({ message: '스터디 탈퇴에 성공하였습니다.' }), {
+    status: HttpStatus.OK,
+    statusText: 'OK',
+  });
+});
+
+const failLeaveStudy = http.delete(`${baseURL}/api/studies/:studyId/participants`, async () => {
+  return new HttpResponse(JSON.stringify({ message: '스터디 탈퇴에 실패하였습니다.' }), {
+    status: HttpStatus.INTERNAL_SERVER_ERROR,
+    statusText: 'INTERNAL_SERVER_ERROR',
+  });
+});
 export default [
   getStudyDetail,
   getApplicantsDetail,
@@ -181,4 +194,5 @@ export default [
   acceptApply,
   cancelApply,
   deleteStudy,
+  leaveStudy,
 ];

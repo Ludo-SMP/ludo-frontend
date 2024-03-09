@@ -45,6 +45,17 @@ export const DELETE = Object.freeze({
   },
 });
 
+export const LEAVE = Object.freeze({
+  MEMBER: {
+    title: '스터디 탈퇴하기',
+    content: `스터디를 탈퇴할 시, 해당 스터디에 접근이 불가합니다.\n 재입장을 원할 경우, 방장에게 연락을 취하거나\n방장이 모집 공고를 올릴 시에 지원해야합니다.\n탈퇴 하시겠습니까?`,
+  },
+  OWNER: {
+    title: '방장으로 있는 스터디 탈퇴하기',
+    content: `현재 이 스터디의 방장입니다.\n스터디를 탈퇴할 경우 다음 탐원에게 방장의 권한이 넘겨집니다.\n탈퇴하시겠습니까?`,
+  },
+});
+
 export const PROFILE = Object.freeze({
   EDIT: {
     title: '닉네임 변경하기',

@@ -6,7 +6,7 @@ import StudyToken from '@/Components/Common/StudyToken';
 import { useNavigate, useParams } from 'react-router-dom';
 import StudyInfoSection from './StudyInfoSection';
 import MemberSection from './MemberSection';
-import { useDeleteStudyMutation, useStudyDetail } from '@/Apis/study';
+import { useDeleteStudyMutation, useLeaveStudyMutation, useStudyDetail } from '@/Apis/study';
 import { getDday, getPeriod } from '@/Utils/date';
 import { useUserStore } from '@/Store/user';
 import { useCloseRecruitmentMutation } from '@/Apis/recruitment';
@@ -14,7 +14,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { STUDY } from '@/Constants/queryString';
 import { useModalStore } from '@/Store/modal';
 import Modal from '@/Components/Common/Modal';
-import { DELETE } from '@/Constants/messages';
+import { DELETE, LEAVE } from '@/Constants/messages';
 import { useState } from 'react';
 
 export const StudyDetailPage = () => {
@@ -24,6 +24,7 @@ export const StudyDetailPage = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const [isDeletedBtnClicked, setIsDeletedBtnClicked] = useState<boolean>(false);
+  const [isLeftBtnClicked, setIsLeftBtnClicked] = useState<boolean>(false);
 
   const { data: studyDetail, isLoading } = useStudyDetail(studyId);
   const study = studyDetail?.study;
@@ -33,6 +34,8 @@ export const StudyDetailPage = () => {
   });
 
   const { mutate: deleteStudyMutate } = useDeleteStudyMutation(studyId);
+
+  const { mutate: leaveStudyMutate } = useLeaveStudyMutation(studyId);
 
   return isLoading ? (
     <div>Loading...</div>
@@ -75,7 +78,13 @@ export const StudyDetailPage = () => {
           </Button>
         )}
         {study.participants.length && (
-          <Button size="fullWidth" onClick={() => {}}>
+          <Button
+            size="fullWidth"
+            onClick={() => {
+              openModal();
+              setIsLeftBtnClicked(true);
+            }}
+          >
             스터디 탈퇴하기
           </Button>
         )}
@@ -101,7 +110,21 @@ export const StudyDetailPage = () => {
           approveBtnText="삭제하기"
           cancelBtnText="아니요"
         >
-          {DELETE.STUDY.content}{' '}
+          {DELETE.STUDY.content}
+        </Modal>
+      )}
+      {isModalOpen && isLeftBtnClicked && (
+        <Modal
+          handleApprove={() => {
+            leaveStudyMutate();
+            setIsLeftBtnClicked(false);
+          }}
+          handleCancel={() => setIsLeftBtnClicked(false)}
+          approveBtnText="탈퇴하기"
+          cancelBtnText="아니요"
+          title={user?.id === study.owner.id ? LEAVE.OWNER.title : LEAVE.MEMBER.title}
+        >
+          {user?.id === study.owner.id ? LEAVE.OWNER.content : LEAVE.MEMBER.content}
         </Modal>
       )}
     </StudyDetailWrapper>

@@ -20,4 +20,5 @@ export const STUDY = {
   APPLICNATS: (studyId: number) => [BASE_KEY.STUDY, studyId, 'APPLICANTS'],
   MYPAGE_INFO: () => [BASE_KEY.STUDY, 'MYPAGE'],
   DELETE: (studyId: number) => [BASE_KEY.STUDY, studyId, 'DELETE'],
+  LEAVE: (studyId: number) => [BASE_KEY.STUDY, studyId, 'LEAVE'],
 };

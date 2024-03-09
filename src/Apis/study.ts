@@ -131,18 +131,34 @@ export const useCancelAppyMutation = (recruitmentId: number, successHandler: () 
 export const deleteStudy = (studyId: number) => httpClient.delete(API_END_POINT.DELETE_STUDY(studyId));
 
 export const useDeleteStudyMutation = (studyId: number) => {
-  const { closeModal } = useModalStore();
   const navigate = useNavigate();
   const { mutate } = useMutation({
     mutationKey: [...STUDY.DELETE(studyId)],
     mutationFn: () => deleteStudy(studyId),
     onSuccess: () => {
       console.log('스터디 삭제 성공');
-      closeModal();
       navigate(ROUTER_PATH.mypage);
     },
     onError: () => {
       console.log('스터디 삭제 실패');
+    },
+  });
+  return { mutate };
+};
+
+export const leaveStudy = (studyId: number) => httpClient.delete(API_END_POINT.LEAVE_STUDY(studyId));
+
+export const useLeaveStudyMutation = (studyId: number) => {
+  const navigate = useNavigate();
+  const { mutate } = useMutation({
+    mutationKey: [...STUDY.LEAVE(studyId)],
+    mutationFn: () => leaveStudy(studyId),
+    onSuccess: () => {
+      console.log('스터디 탈퇴 성공');
+      navigate(ROUTER_PATH.mypage);
+    },
+    onError: () => {
+      console.log('스터디 탈퇴 실패');
     },
   });
   return { mutate };
