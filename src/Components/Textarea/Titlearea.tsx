@@ -30,10 +30,10 @@ export const Titlearea = ({ setForm, useForm }: Props) => {
     setForm({ title: event.target.value });
   };
   // 글자수제한
-  const [inputCount, setInputCount] = useState(0);
+  const [inputsCount, setInputsCount] = useState(0);
 
   const onInputHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setInputCount(event.target.value.length);
+    setInputsCount(event.target.value.length);
   };
   return (
     <InputContainer>
@@ -45,7 +45,7 @@ export const Titlearea = ({ setForm, useForm }: Props) => {
         maxLength={50}
         placeholder="제목을 기입해주세요"
       />
-      <InputText>{inputCount}/50</InputText>
+      <InputText>{inputsCount}/50</InputText>
     </InputContainer>
   );
 };

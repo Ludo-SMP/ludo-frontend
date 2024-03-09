@@ -10,6 +10,7 @@ import StudyButtonSection from './StudyButtonSection';
 import SignButtonSection from './SignButtonSection';
 import HamburgerSection from './HamburgerSection';
 import Gnb from './Gnb';
+import { SignButtonSectionProps } from './SignButtonSection';
 
 const Header = () => {
   const { isLoggedIn } = useLoginStore();

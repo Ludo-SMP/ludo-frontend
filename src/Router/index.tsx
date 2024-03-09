@@ -12,6 +12,9 @@ import SignUp from '@/Pages/SignUp';
 import Header from '@/Components/Header';
 import ApplicantsPage from '@/Pages/Applicants';
 import StudyDetailPage from '@/Pages/StudyDetail';
+import { Footer } from '@/Components/Footer/Footer';
+import { Save } from '@/Pages/Studies/Save';
+
 
 export const RouterPath = createBrowserRouter([
   {
@@ -19,6 +22,7 @@ export const RouterPath = createBrowserRouter([
       <>
         <Header />
         <Outlet />
+        <Footer />
       </>
     ),
     children: [
@@ -66,6 +70,10 @@ export const RouterPath = createBrowserRouter([
       {
         path: ROUTER_PATH.applicants,
         element: <ApplicantsPage />,
+      },
+      {
+        path: ROUTER_PATH.save,
+        element: <Save />,
       },
     ],
   },

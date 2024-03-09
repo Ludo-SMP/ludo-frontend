@@ -13,5 +13,6 @@ export const ROUTER_PATH = {
   gatherStudy: 'studies/gather',
   decativate: '/deactivate', //회원탈퇴 페이지
   test: '/test',
+  save: '/mypage/save',
   applicants: '/studies/:studyId/applicants', //지원자 확인 페이지
 } as const;
