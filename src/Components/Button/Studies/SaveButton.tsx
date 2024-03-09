@@ -6,7 +6,7 @@ export type SubmitProps = {
   onClick?: any;
 };
 
-export const SubmitButton = ({ children }: SubmitProps) => {
+export const SaveButton = ({ children }: SubmitProps) => {
   return (
     <StudyContainer>
       <StudyText>{children}</StudyText>
@@ -15,10 +15,8 @@ export const SubmitButton = ({ children }: SubmitProps) => {
 };
 
 const StudyContainer = styled.button`
-  /* border: 1px solid var(--Stroke-Button-black, rgba(0, 0, 0, 0.10));
-background: var(--Background-Button-default-primary, #EFECFF); */
   border-radius: 8px;
-  background-color: ${(props) => props.theme.color.purple2};
+  background-color: ${(props) => props.theme.color.gray1};
   text-align: center;
   width: 600px;
   height: 44px;

@@ -1,21 +1,45 @@
 import styled from 'styled-components';
+import { ChangeEvent, useState } from 'react';
+import { OptionalCreates } from '@/Pages/Studies/GatherStudy';
+import { Creates } from '@/Types/studies';
 
-export const GatherButton = () => {
+export type Props = {
+  onClick?: () => void;
+  children?: React.ReactNode;
+  // onChange?: (event: string) => void;
+  setForm: (any: OptionalCreates) => void;
+  useForm: Creates;
+  value?: string;
+  type?: string;
+  name?: string;
+  maxlength?: number;
+  id?: string;
+  formData?: number | string;
+  ref?: string;
+};
+
+export const GatherButton = ({ setForm, useForm }: Props) => {
+  const GatherHandler = (event: ChangeEvent<HTMLSelectElement>) => {
+    setForm({ recruitmentLimit: event.target.selectedIndex });
+  };
   return (
-    <ButtonConTainer name="gather" className="select">
-      <Textwrapper disabled selected>
-        모집인원
-      </Textwrapper>
-      <Textwrapper value="1">1명</Textwrapper>
-      <Textwrapper value="2">2명</Textwrapper>
-      <Textwrapper value="3">3명</Textwrapper>
-      <Textwrapper value="4">4명</Textwrapper>
-      <Textwrapper value="5">5명</Textwrapper>
-      <Textwrapper value="6">6명</Textwrapper>
-      <Textwrapper value="7">7명</Textwrapper>
-      <Textwrapper value="8">8명</Textwrapper>
-      <Textwrapper value="9">9명</Textwrapper>
-      <Textwrapper value="10">10명</Textwrapper>
+    <ButtonConTainer
+      name="recruitmentLimit"
+      className="select"
+      value={useForm.recruitmentLimit}
+      onChange={GatherHandler}
+    >
+      <Textwrapper>모집인원</Textwrapper>
+      <Textwrapper value={1}>1명</Textwrapper>
+      <Textwrapper value={2}>2명</Textwrapper>
+      <Textwrapper value={3}>3명</Textwrapper>
+      <Textwrapper value={4}>4명</Textwrapper>
+      <Textwrapper value={5}>5명</Textwrapper>
+      <Textwrapper value={6}>6명</Textwrapper>
+      <Textwrapper value={7}>7명</Textwrapper>
+      <Textwrapper value={8}>8명</Textwrapper>
+      <Textwrapper value={9}>9명</Textwrapper>
+      <Textwrapper value={10}>10명</Textwrapper>
     </ButtonConTainer>
   );
 };

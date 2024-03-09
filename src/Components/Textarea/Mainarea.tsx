@@ -1,14 +1,44 @@
-import { useState } from 'react';
+import { useState, useRef, useCallback, ChangeEvent } from 'react';
 import styled from 'styled-components';
+import { OptionalCreates } from '@/Pages/Studies/GatherStudy';
+import { Creates } from '@/Types/studies';
 
-export const Mainarea = () => {
+export type Props = {
+  onClick?: () => void;
+  children?: React.ReactNode;
+  // onChange?: (event: string) => void;
+  setForm: (any: OptionalCreates) => void;
+  useForm: Creates;
+  value?: string;
+  type?: string;
+  name?: string;
+  maxlength?: number;
+  id?: string;
+  formData?: number | string;
+  ref?: string;
+};
+
+export const Mainarea = ({ setForm, useForm }: Props) => {
+  const [contentValue, setForms] = useState('');
+  const onContentHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setForm({ content: event.target.value });
+  };
+  // 글자수제한
   const [inputCount, setInputCount] = useState(0);
-  const onInputHandler = (event: any) => {
+  const onContentsHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setInputCount(event.target.value.length);
   };
+
   return (
     <MainContainer>
-      <Input onChange={onInputHandler} maxLength={2000} placeholder="상세내용을 기입하세요" />
+      <Input
+        id="content"
+        name="content"
+        value={useForm.content}
+        onChange={(event) => [onContentHandler(event), onContentsHandler(event)]}
+        maxLength={2000}
+        placeholder="상세내용을 기입하세요"
+      />
       <InputText>{inputCount}/2000</InputText>
     </MainContainer>
   );

@@ -12,13 +12,15 @@ import { media } from '../../Styles/theme';
 import { Creates } from '@/Types/studies';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { One, Two, Three } from '@/Assets';
+import { SaveButton } from '@/Components/Button/Studies/SaveButton';
 import axios from 'axios';
 axios.defaults.withCredentials = true;
 export type OptionalCreates = Partial<Creates>;
 export const CreateStudy = () => {
   // {register} = useForm
   // 폼 데이터
-  const navigate = useNavigate();
+  const Navigate = useNavigate();
   const [useForm, setuseForm] = useState<Creates>({
     title: '',
     categoryId: 0,
@@ -49,11 +51,14 @@ export const CreateStudy = () => {
       platform: useForm.platform,
     });
     console.log(data);
+    localStorage.setItem('create', JSON.stringify(data.data));
   }
+
+  const onSave = async () => {};
   const handleSubmit = (event: any) => {
     event.preventDefault();
     post();
-    navigate('/');
+    Navigate('/');
   };
 
   return (
@@ -61,14 +66,25 @@ export const CreateStudy = () => {
       <StudyContainer onSubmit={handleSubmit}>
         <StudyMain>스터디 생성하기</StudyMain>
         <TopBox>
-          <StudyTitle>스터디 제목</StudyTitle>
+          <StudyTitle>
+            <AssetContainer>
+              <One />
+            </AssetContainer>
+            스터디 제목
+          </StudyTitle>
           <BottomWrapper>
             <ContentText>제목</ContentText>
             <Titlearea setForm={forms} useForm={useForm} />
           </BottomWrapper>
         </TopBox>
+        <BorderBox />
         <MiddleBox>
-          <StudyTitle>스터디 상세 안내</StudyTitle>
+          <StudyTitle>
+            <AssetContainer>
+              <Two />
+            </AssetContainer>
+            스터디 상세 안내
+          </StudyTitle>
           <MiddleWrapper>
             <MiddleBottomInfo>
               <MiddleBottomWrapper>
@@ -86,8 +102,14 @@ export const CreateStudy = () => {
             </MiddleBottomInfo>
           </MiddleWrapper>
         </MiddleBox>
+        <BorderBox />
         <MiddleCenterBox>
-          <StudyTitle>스터디 진행관련</StudyTitle>
+          <StudyTitle>
+            <AssetContainer>
+              <Three />
+            </AssetContainer>
+            스터디 진행관련
+          </StudyTitle>
           <StudyMiddleInfo>
             <StudyWrapper>
               <ContentText>진행방식</ContentText>
@@ -106,7 +128,7 @@ export const CreateStudy = () => {
           </StudyMiddleInfo>
         </MiddleCenterBox>
         <ButtonBox>
-          <SubmitButton type="submit">임시저장</SubmitButton>
+          <SaveButton onClick={onSave}>임시저장</SaveButton>
           <SubmitButton type="submit">등록하기</SubmitButton>
         </ButtonBox>
       </StudyContainer>
@@ -114,7 +136,18 @@ export const CreateStudy = () => {
   );
 };
 
+const AssetContainer = styled.image`
+  padding-right: 12px;
+`;
+
+const BorderBox = styled.div`
+  width: 1200px;
+  margin-bottom: 16px;
+  border-bottom: 16px solid #f2f2f2;
+`;
+
 const StudyMain = styled.p`
+  display: flex;
   font-size: ${(props) => props.theme.font.xxxlarge};
   text-align: left;
   font-weight: 800;
@@ -136,7 +169,6 @@ const StudyContainer = styled.form`
 `;
 const TopBox = styled.div`
   height: 250px;
-  border-bottom: 1px solid #444444;
   padding-top: 40px;
   padding-bottom: 20px;
   text-align: left;
@@ -187,7 +219,6 @@ const MiddleWrapper = styled.div`
   flex-direction: column;
   padding-bottom: 40px;
   font-size: ${(props) => props.theme.font.medium};
-  border-bottom: 1px solid #444444;
 `;
 
 const BottomWrapper = styled.div`

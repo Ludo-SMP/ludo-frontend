@@ -1,10 +1,40 @@
+import { useState, useRef, useCallback, ChangeEvent } from 'react';
 import styled from 'styled-components';
+import { OptionalCreates } from '@/Pages/Studies/GatherStudy';
+import { Creates } from '@/Types/studies';
 
-export const ContactUrlInput = () => {
-  return <InputContainer placeholder="ex)오픈 카카오톡 링크" />;
+export type Props = {
+  onClick?: () => void;
+  children?: React.ReactNode;
+  // onChange?: (event: string) => void;
+  setForm: (any: OptionalCreates) => void;
+  useForm: Creates;
+  value?: string;
+  type?: string;
+  name?: string;
+  maxlength?: number;
+  id?: string;
+  formData?: number | string;
+  ref?: string;
 };
 
-const InputContainer = styled.input`
+export const ContactUrlInput = ({ setForm, useForm }: Props) => {
+  const [UrlValue, setForms] = useState('');
+  const onUrlHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setForm({ callUrl: event.target.value });
+  };
+  return (
+    <InputContainer
+      id="callUrl"
+      name="callUrl"
+      value={useForm.contactUrl}
+      onChange={(event) => onUrlHandler(event)}
+      placeholder="ex)오픈 카카오톡 링크"
+    />
+  );
+};
+
+const InputContainer = styled.textarea`
   width: 392px;
   height: 44px;
   background-color: ${(props) => props.theme.color.gray3};

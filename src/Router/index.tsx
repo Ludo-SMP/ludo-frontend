@@ -12,6 +12,8 @@ import Recruitments from '../Pages/Recruitments';
 import SignUp from '@/Pages/SignUp';
 import Header from '@/Components/Header';
 import Applicants from '@/Pages/Applicants';
+import { Footer } from '@/Components/Footer/Footer';
+import { Save } from '@/Pages/Studies/Save';
 
 export const RouterPath = createBrowserRouter([
   {
@@ -19,6 +21,7 @@ export const RouterPath = createBrowserRouter([
       <>
         <Header />
         <Outlet />
+        <Footer />
       </>
     ),
     children: [
@@ -66,6 +69,10 @@ export const RouterPath = createBrowserRouter([
       {
         path: ROUTER_PATH.applicants,
         element: <Applicants />,
+      },
+      {
+        path: ROUTER_PATH.save,
+        element: <Save />,
       },
     ],
   },
