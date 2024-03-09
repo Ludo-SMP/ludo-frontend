@@ -1,78 +1,51 @@
-import { useState, useRef, useCallback } from 'react';
-import { useForm, SubmitHandler, RegisterOptions } from 'react-hook-form';
-import { ErrorMessage } from '@hookform/error-message';
+import { useState, useRef, useCallback, ChangeEvent } from 'react';
 import styled from 'styled-components';
 // import { atom, useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { FieldErrors, FieldValues, UseFormRegister, FormState } from 'react-hook-form';
 import { Validation } from '../../Constants/Validation';
 import type { UseFormRegisterReturn } from 'react-hook-form';
+import { OptionalCreates } from '@/Pages/Studies/CreateStudy';
+import { Creates } from '@/Types/studies';
 
 export type Props = {
   onClick?: () => void;
   children?: React.ReactNode;
-  onChange?: (event: any) => void;
-  value?: any;
+  // onChange?: (event: string) => void;
+  setForm: (any: OptionalCreates) => void;
+  useForm: Creates;
+  value?: string;
   type?: string;
   name?: string;
-  maxlength?: any;
+  maxlength?: number;
   id?: string;
-  formData?: any;
-  ref?: any;
-};
-
-type InputProps = {
-  id?: any;
-  label?: string;
-  type?: string;
-  disabled?: boolean;
-  required?: boolean;
-  placeholder?: string;
-  errors?: FieldErrors;
-  defaultValue?: string;
-  onErrorMsg?: boolean;
-  smallLabel?: boolean;
-  validation?: RegisterOptions;
-  register?: any;
-  formState?: any;
-
-  // register: UseFormRegisterReturn;
-  [key: string]: any;
+  formData?: number | string;
+  ref?: string;
 };
 
 //작성
 
-// export const Titles = atom('');
-
-// {
-//   id,
-//   type,
-//   required,
-//   errors,
-//   placeholder,
-//   defaultValue,
-//   register,
-//   formstate,
-// }: InputProps
-export const Titlearea = (Props: any) => {
-  const useInput = (defaultValue: string) => {
-    const [value, setValue] = useState(defaultValue);
-    const onChange = ({ target }: { target: HTMLInputElement | HTMLTextAreaElement }) => {
-      const { value } = target;
-      setValue(value);
-    };
-    return { value, onChange, setValue };
+export const Titlearea = ({ setForm, useForm }: Props) => {
+  const [inputValue, setForms] = useState('');
+  const onValueHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setForm({ title: event.target.value });
   };
-
-  const newTitle = useInput('');
   // 글자수제한
-  const [inputCount, setInputCount] = useState(0);
-  const onInputHandler = (event: any) => {
-    setInputCount(event.target.value.length);
+  const [inputsCount, setInputsCount] = useState(0);
+
+  const onInputHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setInputsCount(event.target.value.length);
   };
   return (
     <InputContainer>
-      <Input onChange={onInputHandler} maxLength={50} placeholder="제목을 기입해주세요" />
-      <InputText>{inputCount}/50</InputText>
+      <Input
+        id="title"
+        name="title"
+        value={useForm.title}
+        onChange={(event) => [onValueHandler(event), onInputHandler(event)]}
+        maxLength={50}
+        placeholder="제목을 기입해주세요"
+      />
+      <InputText>{inputsCount}/50</InputText>
     </InputContainer>
   );
 };

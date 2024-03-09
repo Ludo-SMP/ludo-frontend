@@ -7,143 +7,128 @@ import { CalendarButton } from '../../Components/Selectbox/CalendarButton';
 import { BigCategoryButton } from '../../Components/Selectbox/BigCategoryButton';
 import { MaxPeopleButton } from '../../Components/Selectbox/MaxPeopleButton';
 import { ProgressPeriod } from '../../Components/Calendar/ProgressPeriod';
-import { useState, useEffect, Key, useRef } from 'react';
-import { Validation } from '../../Constants/Validation';
+import { PositionButton } from '@/Components/Selectbox/PositionButton';
 import { media } from '../../Styles/theme';
-// import { Titles } from '../../Components/Textarea/Titlearea';
+import { Creates } from '@/Types/studies';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { One, Two, Three } from '@/Assets';
+import { SaveButton } from '@/Components/Button/Studies/SaveButton';
 import axios from 'axios';
-import { useSetAtom, useAtomValue, useAtom } from 'jotai';
-import { useForm } from 'react-hook-form';
-
-interface IFormInput {
-  title: string;
-  pattern: string;
-}
-export const CreateStudy = (Props: any) => {
+axios.defaults.withCredentials = true;
+export type OptionalCreates = Partial<Creates>;
+export const CreateStudy = () => {
   // {register} = useForm
   // 폼 데이터
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
-  const [titleValue, settitleValue] = useState('');
-  // const setValue = useAtomValue(Titles);
-  // const titleHandler = (event: any) => {
-  //   settitleValue(event.target.value);
-  //   console.log(setValue);
-  // };
-  const [formData, setFormData] = useState({
+  const Navigate = useNavigate();
+  const [useForm, setuseForm] = useState<Creates>({
     title: '',
-    category: '',
+    categoryId: 0,
+    way: '',
+    participantLimit: 0,
+    startDateTime: '',
+    endDateTime: '',
+    positionId: 0,
+    platform: '',
   });
 
-  // const [isSubmitting, setIsSubmitting] = useState(false);
-  // const [formErrors, setFormErrors] = useState({});
+  function forms(fields: OptionalCreates) {
+    setuseForm({
+      ...useForm,
+      ...fields,
+    });
+  }
 
-  // const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-  //   const { name, value } = event.target;
-  //   setFormData((prevFormData) => ({
-  //     ...prevFormData,
-  //     [name]: value,
-  //   }));
-  //   console.log(formData);
-  // };
+  async function post() {
+    const { data } = await axios.post('https://ludoapi.store/api/studies', {
+      title: useForm.title,
+      categoryId: useForm.categoryId,
+      way: useForm.way,
+      participantLimit: useForm.participantLimit,
+      startDateTime: useForm.startDateTime,
+      endDateTime: useForm.endDateTime,
+      positionId: useForm.positionId,
+      platform: useForm.platform,
+    });
+    console.log(data);
+    localStorage.setItem('create', JSON.stringify(data.data));
+  }
 
-  // async function post() {
-  //   console.log('post');
-  //   const { data } = await axios.post('http://localhost:3000/api/test', {
-  //     name: 'a',
-  //     email: '이메일',
-  //     title: formData.title,
-  //     category: formData.category,
-  //   });
+  const onSave = async () => {};
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
+    post();
+    Navigate('/');
+  };
 
-  //   console.log(data);
-  // }
-
-  // const postData = () => {
-  //   // async function post() {
-  //   //   console.log('post');
-  //   //   const { data } = await axios.post('http://localhost:3000/api/test', {
-  //   //     name: 'a',
-  //   //     email: '이메일',
-  //   //     title: formData.title,
-  //   //     category: formData.category,
-  //   //   });
-
-  //   //   console.log(data);
-  //   // }
-  //   // return post();
-  //   return post();
-  // };
-
-  // const validateForm = (values: { title: string; category: string | any[] }) => {
-  //   if (!values.title) {
-  //     setFormErrors({ email: '제목을 입력해주세요' });
-  //   }
-  //   if (!values.category) {
-  //     setFormErrors({ password: '분야를 골라주세요' });
-  //   }
-  // };
-
-  // event: React.FormEvent<HTMLFormElement>
-  // const createHandler = (event: React.FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault();
-  //   setIsSubmitting(true);
-  //   postData();
-  // };
-  // action="http://localhost:3000/api/test" method="POST"
-  // onSubmit={createHandler}
-  // type="text" id="title" register={register}
   return (
     <>
-      <StudyContainer>
+      <StudyContainer onSubmit={handleSubmit}>
         <StudyMain>스터디 생성하기</StudyMain>
         <TopBox>
-          <StudyTitle>스터디 제목</StudyTitle>
+          <StudyTitle>
+            <AssetContainer>
+              <One />
+            </AssetContainer>
+            스터디 제목
+          </StudyTitle>
           <BottomWrapper>
             <ContentText>제목</ContentText>
-            <Titlearea />
+            <Titlearea setForm={forms} useForm={useForm} />
           </BottomWrapper>
         </TopBox>
+        <BorderBox />
         <MiddleBox>
-          <StudyTitle>스터디 상세 안내</StudyTitle>
+          <StudyTitle>
+            <AssetContainer>
+              <Two />
+            </AssetContainer>
+            스터디 상세 안내
+          </StudyTitle>
           <MiddleWrapper>
             <MiddleBottomInfo>
               <MiddleBottomWrapper>
                 <ContentText>카테고리</ContentText>
-                <BigCategoryButton />
+                <BigCategoryButton setForm={forms} useForm={useForm} />
               </MiddleBottomWrapper>
               <MiddleBottomWrapper>
                 <ContentText>스터디 최대 인원</ContentText>
-                <MaxPeopleButton />
+                <MaxPeopleButton setForm={forms} useForm={useForm} />
+              </MiddleBottomWrapper>
+              <MiddleBottomWrapper>
+                <ContentText>포지션</ContentText>
+                <PositionButton setForm={forms} useForm={useForm} />
               </MiddleBottomWrapper>
             </MiddleBottomInfo>
           </MiddleWrapper>
         </MiddleBox>
+        <BorderBox />
         <MiddleCenterBox>
-          <StudyTitle>스터디 진행관련</StudyTitle>
+          <StudyTitle>
+            <AssetContainer>
+              <Three />
+            </AssetContainer>
+            스터디 진행관련
+          </StudyTitle>
           <StudyMiddleInfo>
             <StudyWrapper>
               <ContentText>진행방식</ContentText>
-              <ProgressButton />
+              <ProgressButton setForm={forms} useForm={useForm} />
             </StudyWrapper>
             <StudyWrapper>
               <ContentText>진행 플랫폼</ContentText>
-              <PlatformButton />
+              <PlatformButton setForm={forms} useForm={useForm} />
             </StudyWrapper>
             <StudyWrapper>
               <ContentText> 진행기간</ContentText>
               <CalendarButton>
-                <ProgressPeriod />
+                <ProgressPeriod setForm={forms} useForm={useForm} />
               </CalendarButton>
             </StudyWrapper>
           </StudyMiddleInfo>
         </MiddleCenterBox>
         <ButtonBox>
-          <SubmitButton type="submit">임시저장</SubmitButton>
+          <SaveButton onClick={onSave}>임시저장</SaveButton>
           <SubmitButton type="submit">등록하기</SubmitButton>
         </ButtonBox>
       </StudyContainer>
@@ -151,7 +136,18 @@ export const CreateStudy = (Props: any) => {
   );
 };
 
+const AssetContainer = styled.image`
+  padding-right: 12px;
+`;
+
+const BorderBox = styled.div`
+  width: 1200px;
+  margin-bottom: 16px;
+  border-bottom: 16px solid #f2f2f2;
+`;
+
 const StudyMain = styled.p`
+  display: flex;
   font-size: ${(props) => props.theme.font.xxxlarge};
   text-align: left;
   font-weight: 800;
@@ -164,7 +160,6 @@ const StudyMain = styled.p`
 `;
 
 const StudyContainer = styled.form`
-
   height: 1300px;
   padding-left: 348px;
   padding-right: 348px;
@@ -174,7 +169,6 @@ const StudyContainer = styled.form`
 `;
 const TopBox = styled.div`
   height: 250px;
-  border-bottom: 1px solid #444444;
   padding-top: 40px;
   padding-bottom: 20px;
   text-align: left;
@@ -202,12 +196,17 @@ const StudyMiddleInfo = styled.div`
 
 const MiddleBottomInfo = styled.div`
   display: grid;
-  grid-template-columns: 630px 630px;
+  grid-template-columns: 430px 430px 430px;
   grid-template-rows: 80px;
-  font-size: ${(props) => props.theme.font.medium};
   row-gap: 24px 24px;
   column-gap: 24px 24px;
   padding-bottom: 40px;
+  font-size: ${(props) => props.theme.font.medium};
+  /* grid-template-columns: 630px 630px;
+  grid-template-rows: 80px;
+  row-gap: 24px 24px;
+  column-gap: 24px 24px;
+  padding-bottom: 40px; */
 `;
 const MiddleBottomWrapper = styled.section`
   font-size: ${(props) => props.theme.font.medium};
@@ -220,7 +219,6 @@ const MiddleWrapper = styled.div`
   flex-direction: column;
   padding-bottom: 40px;
   font-size: ${(props) => props.theme.font.medium};
-  border-bottom: 1px solid #444444;
 `;
 
 const BottomWrapper = styled.div`

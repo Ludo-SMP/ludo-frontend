@@ -1,17 +1,20 @@
 import { Outlet, createBrowserRouter } from 'react-router-dom';
 import { ROUTER_PATH } from '../Constants/Router_Path';
-import { MyPage } from '../Pages/MyPage';
+import MyPage from '../Pages/MyPage';
 import { Login } from '../Pages/Login';
 import { CreateStudy } from '../Pages/Studies/CreateStudy';
 import { ModifyStudy } from '../Pages/Studies/ModifyStudy';
 import { GatherStudy } from '../Pages/Studies/GatherStudy';
-import { StudyDetail } from '../Pages/StudyDetail';
 import Main from '../Pages/Main';
 import RecruitmentDetail from '../Pages/RecruitmentDetail';
 import Recruitments from '../Pages/Recruitments';
 import SignUp from '@/Pages/SignUp';
 import Header from '@/Components/Header';
-import Applicants from '@/Pages/Applicants';
+import ApplicantsPage from '@/Pages/Applicants';
+import StudyDetailPage from '@/Pages/StudyDetail';
+import { Footer } from '@/Components/Footer/Footer';
+import { Save } from '@/Pages/Studies/Save';
+
 
 export const RouterPath = createBrowserRouter([
   {
@@ -19,6 +22,7 @@ export const RouterPath = createBrowserRouter([
       <>
         <Header />
         <Outlet />
+        <Footer />
       </>
     ),
     children: [
@@ -49,7 +53,7 @@ export const RouterPath = createBrowserRouter([
 
       {
         path: ROUTER_PATH.study,
-        element: <StudyDetail />,
+        element: <StudyDetailPage />,
       },
       {
         path: ROUTER_PATH.recruitmentDetail,
@@ -65,7 +69,11 @@ export const RouterPath = createBrowserRouter([
       },
       {
         path: ROUTER_PATH.applicants,
-        element: <Applicants />,
+        element: <ApplicantsPage />,
+      },
+      {
+        path: ROUTER_PATH.save,
+        element: <Save />,
       },
     ],
   },

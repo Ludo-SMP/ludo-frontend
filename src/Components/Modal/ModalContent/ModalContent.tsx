@@ -68,6 +68,8 @@ const Modal = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  /* overflow-y: scroll; */
+  /* height: 932px; */
 `;
 
 const ModalContainers = styled.section`
@@ -75,7 +77,7 @@ const ModalContainers = styled.section`
   flex-direction: column;
   align-items: flex-start;
   width: 1200px;
-  height: 882px;
+  height: 932px;
 `;
 
 const ButtonWrapper = styled.section`

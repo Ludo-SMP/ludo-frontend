@@ -1,36 +1,36 @@
-import MemberProfile, { MemberProfileProps } from '@/Components/MemberProfile';
-import { Member } from '@/Assets';
+import MemberProfile from '@/Components/MemberProfile';
+import { MemberImage } from '@/Assets';
 import styled from 'styled-components';
 import { InfoField } from '@/Components/Common/InfoField';
-import MemberCarousel from './MemberCarousel';
+import { Member } from '@/Types/study';
 
 export interface MemberSectionProps {
-  goalMemberCnt: number;
-  memberProfiles: MemberProfileProps[];
+  memberLimit: number;
+  members: Member[];
 }
 
-const MemberSection = ({ goalMemberCnt, memberProfiles }: MemberSectionProps) => {
+const MemberSection = ({ memberLimit, members }: MemberSectionProps) => {
   return (
     <MemberSectionWrapper>
       <div className="title">
-        <Member width={40} height={40} />
+        <MemberImage width={40} height={40} />
         <span>구성원</span>
       </div>
       <div className="member__info">
         <div className="member__cnt">
-          <InfoField title="현재 인원수" content={memberProfiles.length} />
-          <InfoField title="목표 인원수" content={goalMemberCnt || '??명'} />
+          <InfoField title="현재 인원수" content={members?.length || '??명'} />
+          <InfoField title="목표 인원수" content={memberLimit || '??명'} />
         </div>
-        <MemberCarousel memberProfiles={[...memberProfiles]} />
 
-        {/* <div className="member__profiles">
-          <MemberProfile nickName="Hyun" email="ksci195@hanmail.net" teamPosition="팀원" skillPosition="FE" />
-          <MemberProfile nickName="Hyun" email="ksci195@hanmail.net" teamPosition="팀장" skillPosition="BE" />
-          <MemberProfile nickName="Hyun" email="ksci195@hanmail.net" teamPosition="팀원" skillPosition="디자이너" />
-          <MemberProfile nickName="Hyun" email="ksci195@hanmail.net" teamPosition="팀원" skillPosition="디자이너" />
-          <MemberProfile nickName="Hyun" email="ksci195@hanmail.net" teamPosition="팀원" skillPosition="디자이너" />
-          <MemberProfile nickName="Hyun" email="ksci195@hanmail.net" teamPosition="팀원" skillPosition="디자이너" />
-        </div> */}
+        <div className="member__profiles">
+          <ul>
+            {members?.map((member) => (
+              <li>
+                <MemberProfile {...member} />
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </MemberSectionWrapper>
   );
@@ -71,6 +71,13 @@ const MemberSectionWrapper = styled.div`
     grid-gap: 24px;
     align-self: stretch;
     flex-wrap: wrap;
+  }
+
+  .member__profiles > ul {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 24px;
   }
 `;
 

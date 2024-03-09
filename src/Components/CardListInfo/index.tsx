@@ -1,31 +1,31 @@
-import { StudyCategoryType } from '@/Types/study';
+import { StudyCategory } from '@/Types/study';
 import { useNavigate } from 'react-router-dom';
 import Button from '../Common/Button';
 import styled from 'styled-components';
 import { Right } from '@/Assets';
 
 export interface CardListInfoProps {
-  studyCategory?: StudyCategoryType;
+  studyCategory?: StudyCategory;
 }
 
 const CardListInfo = ({ studyCategory }: CardListInfoProps) => {
   const navigate = useNavigate();
   return (
-    <StudyCardListInfoWrapper studyCategory={studyCategory}>
+    <CardListInfoWrapper studyCategory={studyCategory}>
       <div className="studylist__title">
         {studyCategory ? `인기있는 ${studyCategory} 스터디` : `내가 필요한 스터디를 찾아보아요`}
       </div>
       {studyCategory ? (
-        <Button onClick={() => navigate('/studies')}>
+        <Button size="normal" onClick={() => navigate('/studies')}>
           <div>더보기</div>
           <Right />
         </Button>
       ) : null}
-    </StudyCardListInfoWrapper>
+    </CardListInfoWrapper>
   );
 };
 
-const StudyCardListInfoWrapper = styled.div<{ studyCategory?: StudyCategoryType }>`
+const CardListInfoWrapper = styled.div<{ studyCategory?: StudyCategory }>`
   display: flex;
   justify-content: ${(props) => (props.studyCategory ? 'space-between' : 'flex-start')};
   gap: ${(props) => props.studyCategory && '40px'};
@@ -40,16 +40,7 @@ const StudyCardListInfoWrapper = styled.div<{ studyCategory?: StudyCategoryType 
   }
 
   button {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: ${(props) => props.theme.color.black3};
-    font-size: calc((${(props) => props.theme.font.small} + ${(props) => props.theme.font.medium}) / 2);
-    text-align: center;
-    font-family: Pretendard;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 48px;
+    border: none;
   }
 `;
 

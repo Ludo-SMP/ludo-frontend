@@ -6,9 +6,8 @@ export const ContactButton = () => {
       <Textwrapper disabled selected>
         연락방법
       </Textwrapper>
-      <Textwrapper value="phone">핸드폰</Textwrapper>
-      <Textwrapper value="email">이메일</Textwrapper>
-      <Textwrapper value="kakaotalk">카카오톡</Textwrapper>
+      <Textwrapper value="EMAIL">이메일</Textwrapper>
+      <Textwrapper value="KAKAO">카카오톡</Textwrapper>
     </ButtonConTainer>
   );
 };

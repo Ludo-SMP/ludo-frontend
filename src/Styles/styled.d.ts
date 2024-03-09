@@ -26,6 +26,7 @@ declare module 'styled-components' {
       orange1: string;
       orange2: string;
       orange3: string;
+      orange4: string;
       naver: string;
       kakao: string;
       kakaoFontColor: string;
@@ -45,8 +46,8 @@ declare module 'styled-components' {
       xxxxlarge: string;
     };
     buttonSize: {
-      small: string;
-      medium: string;
+      normal: string;
+      fullWidth: string;
     };
     borderRadius: {
       small: string;

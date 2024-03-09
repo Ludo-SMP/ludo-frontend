@@ -9,8 +9,8 @@ export interface InfoFieldProps {
   contentWidth?: string;
   flexDirection?: string;
   gap?: string;
+  disabled?: boolean;
 }
-
 
 export const InfoField = ({
   width = 'auto',
@@ -20,8 +20,8 @@ export const InfoField = ({
   content,
   flexDirection,
   gap,
+  disabled = false,
 }: InfoFieldProps) => {
-
   return (
     <InfoFieldWrapper
       width={width}
@@ -29,6 +29,7 @@ export const InfoField = ({
       contentWidth={contentWidth}
       flexDirection={flexDirection}
       gap={gap}
+      disabled={disabled}
     >
       <div className="field__title">{title}</div>
       <div className="field__content">{content}</div>
@@ -42,6 +43,7 @@ const InfoFieldWrapper = styled.div<{
   contentWidth?: string;
   flexDirection?: string;
   gap?: string;
+  disabled?: boolean;
 }>`
   display: flex;
   flex-direction: ${(props) => props.flexDirection || 'row'};
@@ -56,14 +58,14 @@ const InfoFieldWrapper = styled.div<{
     &__title {
       text-align: start;
       width: ${(props) => props.flexDirection || '184px'};
-      color: ${(props) => props.theme.color.black4};
+      color: ${({ theme, disabled }) => (disabled ? 'rgba(0, 0, 0, 0.25)' : theme.color.black4)};
       ${media.tablet} {
         width: auto;
       }
     }
 
     &__content {
-      color: ${(props) => props.theme.color.black2};
+      color: ${({ theme, disabled }) => (disabled ? 'rgba(0, 0, 0, 0.25)' : theme.color.black2)};
     }
   }
 `;

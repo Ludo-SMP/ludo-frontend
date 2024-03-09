@@ -1,18 +1,33 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
+import { OptionalCreates } from '@/Pages/Studies/CreateStudy';
+import { Creates } from '@/Types/studies';
 
-export const PlatformButton = () => {
-  const [Value, setValue] = useState('');
-  const submitHandler = (event: any) => {
-    setValue(event.currentTarget.value);
+export type Props = {
+  onClick?: () => void;
+  children?: React.ReactNode;
+  // onChange?: (event: string) => void;
+  setForm: (any: OptionalCreates) => void;
+  useForm: Creates;
+  value?: string;
+  type?: string;
+  name?: string;
+  maxlength?: number;
+  id?: string;
+  formData?: number | string;
+  ref?: string;
+};
+
+export const PlatformButton = ({ setForm, useForm }: Props) => {
+  const [platformValue, setForms] = useState<string>('');
+  const submitHandler = (event: ChangeEvent<HTMLSelectElement>) => {
+    setForm({ platform: event.target.value });
   };
   return (
-    <ButtonConTainer name="platform" className="select" value={Value} onChange={submitHandler}>
-      <Textwrapper disabled selected>
-        플랫폼
-      </Textwrapper>
-      <Textwrapper value="gathertown">게더타운</Textwrapper>
-      <Textwrapper value="googlemeet">구글미트</Textwrapper>
+    <ButtonConTainer name="platform" className="select" value={useForm.platform} onChange={submitHandler}>
+      <Textwrapper>플랫폼</Textwrapper>
+      <Textwrapper value="GATHER">게더타운</Textwrapper>
+      <Textwrapper value="GOOGLE_MEAT">구글미트</Textwrapper>
     </ButtonConTainer>
   );
 };

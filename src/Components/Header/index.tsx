@@ -3,13 +3,14 @@ import styled from 'styled-components';
 import { media } from '@/Styles/theme';
 import { ROUTER_PATH } from '@/Constants/Router_Path';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
-import { BlankLogo, Alarm, Profile } from '@/Assets';
-import { useLoginStore } from '@/store/auth';
+import { Logo, Alarm, Profile } from '@/Assets';
+import { useLoginStore } from '@/Store/auth';
 import Button from '../Common/Button';
 import StudyButtonSection from './StudyButtonSection';
 import SignButtonSection from './SignButtonSection';
 import HamburgerSection from './HamburgerSection';
 import Gnb from './Gnb';
+import { SignButtonSectionProps } from './SignButtonSection';
 
 const Header = () => {
   const { isLoggedIn } = useLoginStore();
@@ -20,7 +21,7 @@ const Header = () => {
     <HeaderWrapper>
       <TopBarWrapper>
         <Link to="/">
-          <img src={BlankLogo} />
+          <img width="140" src={Logo} />
         </Link>
         <ElementsWrapper>
           {isLoggedIn ? (
@@ -29,7 +30,7 @@ const Header = () => {
                 <StudyButtonSection />
               ) : (
                 <div className="login__elements">
-                  <SignButtonSection isLoggedIn={true} />
+                  <SignButtonSection />
                   <Button
                     className="create__study"
                     type="button"
@@ -48,7 +49,7 @@ const Header = () => {
             </>
           ) : (
             <div className="signout__elements">
-              <SignButtonSection isLoggedIn={false} />
+              <SignButtonSection />
               <Button
                 className="create__study"
                 type="button"

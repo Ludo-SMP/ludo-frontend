@@ -1,27 +1,36 @@
-import { GET, POST } from '@/utils/axios';
-import axios, { AxiosInstance } from 'axios';
+import { API_END_POINT } from '@/Constants/api';
+import { useLoginStore } from '@/Store/auth';
+import { httpClient } from '@/Utils/axios';
+import { useMutation } from '@tanstack/react-query';
 
-export const apiRequester: AxiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_BASE_URL,
-  withCredentials: true,
-});
+import { useNavigate } from 'react-router-dom';
 
 export interface UserInfo {
   email: string;
   password: string;
 }
 
-export type SocialLoginType = 'google' | 'kakao' | 'naver';
+export const logOut = async () => httpClient.post(API_END_POINT.LOGOUT);
 
-export const signUp = async (signUpType: SocialLoginType) => {
-  await apiRequester.get(`/auth/login/${signUpType}`).then((res) => res);
+export const useLogOutMutation = () => {
+  const { setIsLoggedOut } = useLoginStore();
+  const navigate = useNavigate();
+  const { mutate } = useMutation({
+    mutationKey: ['logout'],
+    mutationFn: () => logOut(),
+    onSuccess: () => {
+      console.log('로그아웃 성공');
+      setIsLoggedOut();
+      navigate('/');
+    },
+    onError: () => {
+      console.log('로그아웃 실패');
+    },
+  });
+  return { mutate };
 };
-export const login = async (signUpType: SocialLoginType) => {
-  await apiRequester.get(`/auth/signup/${signUpType}`).then((res) => res);
+
+export const getUser = async () => {
+  const response = await httpClient.get(API_END_POINT.USER);
+  return response.data;
 };
-
-// 로그이웃
-export const logOut = async () => await POST('/auth/logout');
-
-// 토큰 검증
-export const verifyToken = async () => await GET('/api/usrs/me');

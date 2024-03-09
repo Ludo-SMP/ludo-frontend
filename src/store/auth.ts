@@ -1,5 +1,7 @@
 import { create } from 'zustand';
 
+const initialLoginState: boolean = false;
+
 export interface LoginState {
   isLoggedIn: boolean;
 }
@@ -10,7 +12,7 @@ export interface LoginAction {
 }
 
 export const useLoginStore = create<LoginState & LoginAction>((set) => ({
-  isLoggedIn: true,
-  setIsLoggedIn: () => set(() => ({ isLoggedIn: true })),
-  setIsLoggedOut: () => set(() => ({ isLoggedIn: false })),
+  isLoggedIn: initialLoginState,
+  setIsLoggedIn: () => set({ isLoggedIn: true }),
+  setIsLoggedOut: () => set({ isLoggedIn: false }),
 }));

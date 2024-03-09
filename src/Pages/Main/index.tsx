@@ -1,20 +1,16 @@
 import styled from 'styled-components';
 import { bannerDummy } from '../../Shared/dummy';
 import Banner from '../../Components/Banner';
-// import { usePopularRecruitments } from '@/Apis/recruitment';
-import { convertPopularRecruitmentsToStudyCardProps } from '@/utils/propertyConverter';
+import { usePopularRecruitments } from '@/Apis/recruitment';
 import CardListInfo from '@/Components/CardListInfo';
-import PopularStudyCardList from '@/Components/PopularCardList';
+import PopularRecruitmentCardList from '@/Components/PopularRecruitmentCardList';
 import Button from '@/Components/Common/Button';
 import { Up } from '@/Assets';
 import UtiltiyButtons from '@/Components/UtilityButtons';
-import { popularRecruitmentsMockData } from '../../Shared/dummy';
 
 const Main = () => {
-  // const { data, isLoading } = usePopularRecruitments();
-  // const popularRecruitments = isLoading ? null : convertPopularRecruitmentsToStudyCardProps(data.data);
-  const isLoading = false;
-  const popularRecruitments = convertPopularRecruitmentsToStudyCardProps(popularRecruitmentsMockData);
+  const { data, isLoading } = usePopularRecruitments();
+  const popularRecruitments = isLoading ? null : data;
 
   const handleScroll = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -27,15 +23,15 @@ const Main = () => {
       <Banner {...bannerDummy} />
       <StudyListWrapper>
         <CardListInfo studyCategory="코딩 테스트" />
-        <PopularStudyCardList studyCardsProps={popularRecruitments?.popularCodingRecruitments} />
+        <PopularRecruitmentCardList recruitmentCardsProps={popularRecruitments?.popularCodingRecruitments} />
       </StudyListWrapper>
       <StudyListWrapper>
         <CardListInfo studyCategory="모의 면접" />
-        <PopularStudyCardList studyCardsProps={popularRecruitments?.popularInterviewRecruitments} />
+        <PopularRecruitmentCardList recruitmentCardsProps={popularRecruitments?.popularInterviewRecruitments} />
       </StudyListWrapper>
       <StudyListWrapper>
         <CardListInfo studyCategory="프로젝트" />
-        <PopularStudyCardList studyCardsProps={popularRecruitments?.popularProjectRecruitments} />
+        <PopularRecruitmentCardList recruitmentCardsProps={popularRecruitments?.popularProjectRecruitments} />
       </StudyListWrapper>
       <UtiltiyButtons>
         <Button onClick={handleScroll} className="scroll__btn">

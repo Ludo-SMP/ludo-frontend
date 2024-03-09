@@ -3,14 +3,26 @@ import { media } from '@/Styles/theme';
 import Button from '@/Components/Common/Button';
 import { useNavigate } from 'react-router-dom';
 import { ROUTER_PATH } from '@/Constants/Router_Path';
+import { useSelectedMyStudyStore } from '@/Store/study';
 
 const StudyButtonSection = () => {
   const navigate = useNavigate();
+  const { setSelectedMyStudyStatus } = useSelectedMyStudyStore();
   return (
     <StudyButtonSectionWrapper>
       <Button
         type="button"
         onClick={() => {
+          setSelectedMyStudyStatus('PARTICIPATED');
+          navigate(ROUTER_PATH.mypage);
+        }}
+      >
+        참여중인 스터디
+      </Button>
+      <Button
+        type="button"
+        onClick={() => {
+          setSelectedMyStudyStatus('APPLIED');
           navigate(ROUTER_PATH.mypage);
         }}
       >
@@ -19,14 +31,7 @@ const StudyButtonSection = () => {
       <Button
         type="button"
         onClick={() => {
-          navigate(ROUTER_PATH.mypage);
-        }}
-      >
-        진행 중인 스터디
-      </Button>
-      <Button
-        type="button"
-        onClick={() => {
+          setSelectedMyStudyStatus('COMPLETED');
           navigate(ROUTER_PATH.mypage);
         }}
       >

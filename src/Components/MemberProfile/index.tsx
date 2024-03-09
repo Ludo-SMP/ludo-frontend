@@ -1,29 +1,25 @@
 import styled from 'styled-components';
 import { ColumnDivider } from '../Common/Divider/ColumnDivider';
 import { Profile } from '@/Assets';
+import { Member } from '@/Types/study';
+import { ROLE } from '@/Shared/study';
 
-export interface MemberProfileProps {
-
+export interface MemberProfileProps extends Member {
   imgUrl?: string;
-  nickName: string;
-  email: string;
-  teamPosition: string;
-  skillPosition: string;
+}
 
-};
-
-const MemberProfile = ({ imgUrl, nickName, email, teamPosition, skillPosition }: MemberProfileProps) => {
+const MemberProfile = ({ nickname, email, role, position }: MemberProfileProps) => {
   return (
     <MemberProfileWrapper>
       <Profile width={160} height={160} />
       <div className="private__info">
-        <div className="nickname">{nickName}</div>
+        <div className="nickname">{nickname}</div>
         <div className="email">{email}</div>
       </div>
       <div className="positions">
-        <div className="position">{teamPosition}</div>
+        <div className="position">{ROLE[role]}</div>
         <ColumnDivider />
-        <div className="position">{skillPosition}</div>
+        <div className="position">{position.name}</div>
       </div>
     </MemberProfileWrapper>
   );

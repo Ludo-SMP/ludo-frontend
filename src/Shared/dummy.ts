@@ -1,15 +1,12 @@
 import { BannerProps } from '../Components/Banner';
-import { StudyInfo } from '../Components/StudyCard';
-import { StudyCardListProps } from '../Components/StudyCardList';
 import { RecruitmentDetailRawDataType, PopularRecruitmentsRawDataType, RecruitmentRawDataType } from '@/Types/study';
-
-
+import { TemporarySavedCardProps } from '@/Components/TemporarySavedCard';
 export const bannerDummy: BannerProps = {
   brief: '함께 발견하는 가능성, 기회의 연결',
   title: 'Ludo Study',
 };
 
-export const studyInfoDummy: StudyInfo = {
+export const studyInfoDummy = {
   studyId: 1,
   studyCategory: '프로젝트',
   recruitDeadLine: '24. 03. 01',
@@ -23,7 +20,7 @@ export const studyInfoDummy: StudyInfo = {
   views: 1234,
 };
 
-export const algorithmStudyInfosDummy: StudyInfo[] = [
+export const algorithmStudyInfosDummy = [
   {
     studyId: 1,
     studyCategory: '코딩 테스트',
@@ -65,7 +62,7 @@ export const algorithmStudyInfosDummy: StudyInfo[] = [
   },
 ];
 
-export const interviewStudyInfosDummy: StudyInfo[] = [
+export const interviewStudyInfosDummy = [
   {
     studyId: 4,
     studyCategory: '모의 면접',
@@ -86,7 +83,7 @@ export const interviewStudyInfosDummy: StudyInfo[] = [
     studyName: 'Ludo Interview 2',
     studyPeriod: '3개월',
     activityType: '오프라인',
-    positions: ['디자이너', '기획'],
+    positions: ['디자이너', '데브옵스'],
     tools: ['Figma'],
     creator: 'BBak',
     createdAt: '2024.01.25',
@@ -107,7 +104,7 @@ export const interviewStudyInfosDummy: StudyInfo[] = [
   },
 ];
 
-export const projectStudyInfosDummy: StudyInfo[] = [
+export const projectStudyInfosDummy = [
   {
     studyId: 7,
     studyCategory: '프로젝트',
@@ -148,250 +145,6 @@ export const projectStudyInfosDummy: StudyInfo[] = [
     views: 12346789,
   },
 ];
-
-const StudyInfosDummy: StudyInfo[] = [
-  {
-    studyId: 10,
-    studyCategory: '프로젝트',
-    recruitDeadLine: '24.03.12',
-    studyName: 'Ludo Study Project 1',
-    studyPeriod: '6개월',
-    activityType: '오프라인',
-    positions: ['백엔드', '디자이너', '프론트엔드'],
-    tools: ['React', 'Figma', 'Spring'],
-    creator: 'Ludo',
-    createdAt: '2024.02.01',
-    views: 3333,
-  },
-  {
-    studyId: 11,
-    studyCategory: '프로젝트',
-    recruitDeadLine: '24.02.22',
-    studyName: 'Ludo Study Project 2',
-    studyPeriod: '3개월',
-    activityType: '오프라인',
-    positions: ['백엔드', '프론트엔드', '기획'],
-    tools: ['React', 'Figma', 'Spring'],
-    creator: 'Hyun',
-    createdAt: '2024.01.31',
-    views: 5555,
-  },
-  {
-    studyId: 12,
-    studyCategory: '프로젝트',
-    recruitDeadLine: '24.03.01',
-    studyName: 'Ludo Study Project 3',
-    studyPeriod: '3개월',
-    activityType: '오프라인',
-    positions: ['백엔드', '프론트엔드'],
-    tools: ['React', 'Spring'],
-    creator: 'Poca',
-    createdAt: '2024.2.18',
-    views: 12346789,
-  },
-  {
-    studyId: 13,
-    studyCategory: '코딩 테스트',
-    recruitDeadLine: '24.03.01',
-    studyName: 'Ludo Algorithm 1',
-    studyPeriod: '3개월',
-    activityType: '오프라인',
-    positions: ['백엔드', '프론트엔드'],
-    tools: ['Java', 'Javascript'],
-    creator: 'BBack',
-    createdAt: '2024.01.11',
-    views: 1234,
-  },
-  {
-    studyId: 14,
-    studyCategory: '코딩 테스트',
-    recruitDeadLine: '24.02.22',
-    studyName: 'Ludo Algorithm 2',
-    studyPeriod: '0.5개월',
-    activityType: '온라인',
-    positions: ['백엔드'],
-    tools: ['Java'],
-    creator: '휴',
-    createdAt: '2024.01.12',
-    views: 230,
-  },
-  {
-    studyId: 15,
-    studyCategory: '코딩 테스트',
-    recruitDeadLine: '24.04.23',
-    studyName: 'Ludo Algorithm 3',
-    studyPeriod: '4개월',
-    activityType: '오프라인',
-    positions: ['프론트엔드'],
-    tools: ['Javascript'],
-    creator: 'Hyun',
-    createdAt: '2024.01.15',
-    views: 999999,
-  },
-  {
-    studyId: 16,
-    studyCategory: '모의 면접',
-    recruitDeadLine: '24.02.01',
-    studyName: 'Ludo Interview 1',
-    studyPeriod: '2개월',
-    activityType: '오프라인',
-    positions: ['백엔드', '프론트엔드', '디자이너'],
-    tools: ['React', 'Spring', 'Figma'],
-    creator: '휴',
-    createdAt: '2024.01.16',
-    views: 24,
-  },
-  {
-    studyId: 17,
-    studyCategory: '모의 면접',
-    recruitDeadLine: '24.02.22',
-    studyName: 'Ludo Interview 2',
-    studyPeriod: '3개월',
-    activityType: '오프라인',
-    positions: ['디자이너', '기획'],
-    tools: ['Figma'],
-    creator: 'BBak',
-    createdAt: '2024.01.25',
-    views: 1111,
-  },
-  {
-    studyId: 18,
-    studyCategory: '모의 면접',
-    recruitDeadLine: '24.03.13',
-    studyName: 'Ludo Interview 3',
-    studyPeriod: '1개월',
-    activityType: '온라인',
-    positions: ['백엔드', '프론트엔드', '디자이너'],
-    tools: ['React', 'Figma', 'Spring'],
-    creator: 'Hyun',
-    createdAt: '2024.01.31',
-    views: 1234,
-  },
-  {
-    studyId: 19,
-    studyCategory: '코딩 테스트',
-    recruitDeadLine: '24.04.23',
-    studyName: 'Ludo Algorithm 3',
-    studyPeriod: '4개월',
-    activityType: '오프라인',
-    positions: ['프론트엔드'],
-    tools: ['Javascript'],
-    creator: 'Hyun',
-    createdAt: '2024.01.15',
-    views: 999999,
-  },
-  {
-    studyId: 20,
-    studyCategory: '모의 면접',
-    recruitDeadLine: '24.02.01',
-    studyName: 'Ludo Interview 1',
-    studyPeriod: '2개월',
-    activityType: '오프라인',
-    positions: ['백엔드', '프론트엔드', '디자이너'],
-    tools: ['React', 'Spring', 'Figma'],
-    creator: '휴',
-    createdAt: '2024.01.16',
-    views: 24,
-  },
-  {
-    studyId: 21,
-    studyCategory: '모의 면접',
-    recruitDeadLine: '24.02.22',
-    studyName: 'Ludo Interview 2',
-    studyPeriod: '3개월',
-    activityType: '오프라인',
-    positions: ['디자이너', '기획'],
-    tools: ['Figma'],
-    creator: 'BBak',
-    createdAt: '2024.01.25',
-    views: 1111,
-  },
-  {
-    studyId: 22,
-    studyCategory: '모의 면접',
-    recruitDeadLine: '24.03.13',
-    studyName: 'Ludo Interview 3',
-    studyPeriod: '1개월',
-    activityType: '온라인',
-    positions: ['백엔드', '프론트엔드', '디자이너'],
-    tools: ['React', 'Figma', 'Spring'],
-    creator: 'Hyun',
-    createdAt: '2024.01.31',
-    views: 1234,
-  },
-  {
-    studyId: 23,
-    studyCategory: '코딩 테스트',
-    recruitDeadLine: '24.04.23',
-    studyName: 'Ludo Algorithm 3',
-    studyPeriod: '4개월',
-    activityType: '오프라인',
-    positions: ['프론트엔드'],
-    tools: ['Javascript'],
-    creator: 'Hyun',
-    createdAt: '2024.01.15',
-    views: 999999,
-  },
-  {
-    studyId: 24,
-    studyCategory: '모의 면접',
-    recruitDeadLine: '24.02.01',
-    studyName: 'Ludo Interview 1',
-    studyPeriod: '2개월',
-    activityType: '오프라인',
-    positions: ['백엔드', '프론트엔드', '디자이너'],
-    tools: ['React', 'Spring', 'Figma'],
-    creator: '휴',
-    createdAt: '2024.01.16',
-    views: 24,
-  },
-  {
-    studyId: 25,
-    studyCategory: '모의 면접',
-    recruitDeadLine: '24.02.22',
-    studyName: 'Ludo Interview 2',
-    studyPeriod: '3개월',
-    activityType: '오프라인',
-    positions: ['디자이너', '기획'],
-    tools: ['Figma'],
-    creator: 'BBak',
-    createdAt: '2024.01.25',
-    views: 1111,
-  },
-  {
-    studyId: 26,
-    studyCategory: '모의 면접',
-    recruitDeadLine: '24.03.13',
-    studyName: 'Ludo Interview 3',
-    studyPeriod: '1개월',
-    activityType: '온라인',
-    positions: ['백엔드', '프론트엔드', '디자이너'],
-    tools: ['React', 'Figma', 'Spring'],
-    creator: 'Hyun',
-    createdAt: '2024.01.31',
-    views: 1234,
-  },
-];
-
-export const algorithmStudyCardListPropsDummy: StudyCardListProps = {
-  studyCategory: '코딩 테스트',
-  studyInfos: algorithmStudyInfosDummy,
-};
-
-export const interviewStudyCardListPropsDummy: StudyCardListProps = {
-  studyCategory: '모의 면접',
-  studyInfos: interviewStudyInfosDummy,
-};
-
-export const projectStudyCardListPropsDummy: StudyCardListProps = {
-  studyCategory: '프로젝트',
-  studyInfos: projectStudyInfosDummy,
-};
-
-export const StudyCardListPropsDummy: StudyCardListProps = {
-  studyCategory: 'All',
-  studyInfos: StudyInfosDummy,
-};
 
 export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
   {
@@ -978,7 +731,7 @@ export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
     id: 30,
     title: '인기 프로젝트 스터디 30',
     stacks: ['Java', 'React', 'Figma'],
-    positions: ['백엔드', '기획'],
+    positions: ['백엔드', '디자이너'],
     ownerNickname: '아카',
     way: '온라인',
     startDateTime: '2024-03-03',
@@ -1038,7 +791,7 @@ export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
     id: 33,
     title: '인기 코테 스터디 33',
     stacks: ['Java', 'Javascript'],
-    positions: ['백엔드', '기획'],
+    positions: ['프론트엔드', '디자이너', '백엔드'],
     ownerNickname: '아카',
     way: '미정',
     startDateTime: '2024-03-03',
@@ -1215,7 +968,7 @@ export const popularRecruitmentsMockData: PopularRecruitmentsRawDataType = {
           hits,
           category,
         } = recruitmentDetail;
-        const studycardRawData = {
+        const recruitmentCardRawData = {
           id,
           title,
           stacks,
@@ -1229,7 +982,7 @@ export const popularRecruitmentsMockData: PopularRecruitmentsRawDataType = {
           hits,
           category,
         };
-        return studycardRawData;
+        return recruitmentCardRawData;
       })
       .sort((a, b) => b.hits - a.hits)
       .slice(0, 3),
@@ -1252,7 +1005,7 @@ export const popularRecruitmentsMockData: PopularRecruitmentsRawDataType = {
           hits,
           category,
         } = recruitmentDetail;
-        const studycardRawData = {
+        const recruitmentCardRawData = {
           id,
           title,
           stacks,
@@ -1266,7 +1019,7 @@ export const popularRecruitmentsMockData: PopularRecruitmentsRawDataType = {
           hits,
           category,
         };
-        return studycardRawData;
+        return recruitmentCardRawData;
       })
       .sort((a, b) => b.hits - a.hits)
       .slice(0, 3),
@@ -1289,7 +1042,7 @@ export const popularRecruitmentsMockData: PopularRecruitmentsRawDataType = {
           hits,
           category,
         } = recruitmentDetail;
-        const studycardRawData = {
+        const recruitmentCardRawData = {
           id,
           title,
           stacks,
@@ -1303,7 +1056,7 @@ export const popularRecruitmentsMockData: PopularRecruitmentsRawDataType = {
           hits,
           category,
         };
-        return studycardRawData;
+        return recruitmentCardRawData;
       })
       .sort((a, b) => b.hits - a.hits)
       .slice(0, 3),
@@ -1326,7 +1079,7 @@ export const recruitmentsMockData: RecruitmentRawDataType[] = [
       hits,
       category,
     } = recruitmentDetail;
-    const studycardRawData = {
+    const recruitmentCardRawData = {
       id,
       title,
       stacks,
@@ -1340,8 +1093,8 @@ export const recruitmentsMockData: RecruitmentRawDataType[] = [
       hits,
       category,
     };
-    return studycardRawData;
-    return studycardRawData;
+    return recruitmentCardRawData;
+    return recruitmentCardRawData;
   }),
 ];
 
@@ -1349,3 +1102,13 @@ export const recruitmentDetailMockDataById = (recruitmentId: number) =>
   recruitmentDetailMockData.filter(
     (recruitmentDetail: RecruitmentDetailRawDataType) => recruitmentDetail.id === recruitmentId,
   )[0];
+export const temporarySavedCardMockData: TemporarySavedCardProps[] = [
+  { title: '모집공고 1', id: 1, card: 'RECRUITMENT' },
+  { title: '모집공고 2', id: 2, card: 'RECRUITMENT' },
+  { title: '모집공고 3', id: 3, card: 'RECRUITMENT' },
+  { title: '모집공고 4', id: 4, card: 'RECRUITMENT' },
+  { title: '스터디 1', card: 'STUDY' },
+  { title: '스터디 2', card: 'STUDY' },
+  { title: '스터디 3', card: 'STUDY' },
+  { title: '스터디 4', card: 'STUDY' },
+];

@@ -25,6 +25,7 @@ export const color = {
   orange1: '#E37756',
   orange2: '#F79D7E',
   orange3: '#F7A477',
+  orange4: '#DE723A',
   naver: '#03CF5D',
   kakao: '#FEE500',
   kakaoFontColor: '#521010',
@@ -44,9 +45,8 @@ export const font = {
 };
 
 export const buttonSize = {
-  small: '78px',
-  medium: '90px',
-  large: '100%',
+  normal: 'auto',
+  fullWidth: '100%',
 };
 
 const mediaQuery = (maxWidth: number): string => `@media (max-width: ${maxWidth}px)`;

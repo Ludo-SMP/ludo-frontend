@@ -7,9 +7,9 @@ export const Login = () => {
     <LoginWrapper>
       <LoginGuideWrapper />
       <LoginBtnsWrapper>
-        <SocialLogin socialType="네이버" signType="로그인" />
-        <SocialLogin socialType="카카오" signType="로그인" />
-        <SocialLogin socialType="구글" signType="로그인" />
+        <SocialLogin socialType="naver" signType="login" />
+        <SocialLogin socialType="kakao" signType="login" />
+        <SocialLogin socialType="google" signType="login" />
       </LoginBtnsWrapper>
     </LoginWrapper>
   );
