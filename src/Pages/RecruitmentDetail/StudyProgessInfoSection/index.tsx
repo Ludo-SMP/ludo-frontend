@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 import { Two } from '@/Assets';
 import { InfoField } from '@/Components/Common/InfoField';
+import { ProgressMethod } from '@/Types/study';
 
 export interface StudyProgressInfoSectionProps {
-  method?: string;
+  method?: ProgressMethod;
   platform?: string;
   period?: string;
 }

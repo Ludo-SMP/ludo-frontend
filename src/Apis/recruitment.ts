@@ -1,8 +1,7 @@
 import { httpClient } from '@/Utils/axios';
 import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
-import { convertRecruitmentDetailRawDataToRecruitmentDetail } from '@/Utils/propertyConverter';
 import { RECRUITMENT } from '@/Constants/queryString';
-import { FilterOptionsType, PopularRecruitments } from '@/Types/study';
+import { PopularRecruitments, Recruitments, FilterOptionParams, RecruitmentDetail } from '@/Types/study';
 import { API_END_POINT } from '@/Constants/api';
 import { AxiosError, AxiosResponse } from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -18,43 +17,78 @@ export const usePopularRecruitments = (count?: number) => {
   });
 };
 
-interface GetRecruitmentsParams {
-  pageParam: number;
-  filterOptions: FilterOptionsType;
-  recruitmentsPerPage: number;
-}
+// export const getRecruitments = ({
+//   last,
+//   count = 21,
+//   stackIds,
+//   progressMethods,
+//   positionIds,
+//   categoryIds,
+//   sort,
+// }: FilterOptionParams): Promise<{ data: { data: Recruitments } }> => {
+//   console.log(last, count, stackIds, progressMethods, positionIds, categoryIds, sort);
+//   return httpClient.get(API_END_POINT.RECRUITMENTS, {
+//     params: {
+//       last,
+//       count,
+//       stacks: [...stackIds],
+//       way: [...progressMethods],
+//       position: [...positionIds],
+//       category: [...categoryIds],
+//       sort: [...sort],
+//     },
+//   });
+// };
 
-export const getRecruitments = async ({ pageParam, filterOptions, recruitmentsPerPage }: GetRecruitmentsParams) => {
-  const fitlerOptionsQueryString = Object.entries(filterOptions)
-    .map((filterOption) => {
-      const [categoryProperty, categoryItems] = filterOption;
-      return `${categoryProperty}=${categoryItems.join(',')}`;
-    })
-    .join('&');
+// export const useRecruitments = ({ last, count = 21, stackIds, progressMethods, positionIds, categoryIds, sort }) =>
+//   useInfiniteQuery<AxiosResponse, AxiosError>({
+//     queryKey: [...RECRUITMENT.RECRUITMENTS({ stackIds, progressMethods, positionIds, categoryIds, sort })],
+//     queryFn: ({ count = 0 }) => getRecruitments({ pageParam, filterOptions, recruitmentsPerPage }),
+//     getNextPageParam: (result) => {
+//       if (!result.isLastPage) return result.pageNum;
+//       return null;
+//     },
+//     select: { data },
+//   });
 
-  const response = await httpClient.get(`${API_END_POINT.RECRUITMENTS}?${fitlerOptionsQueryString}`, {
-    params: { pageParam, recruitmentsPerPage },
-  });
-  return response.data;
-};
+// interface GetRecruitmentsParams {
+//   pageParam: number;
+//   filterOptions: FilterOptionsType;
+//   recruitmentsPerPage: number;
+// }
 
-export const useRecruitments = ({ filterOptions, recruitmentsPerPage }) =>
-  useInfiniteQuery<AxiosResponse, AxiosError>({
-    queryKey: [...RECRUITMENT.RECRUITMENTS(filterOptions)],
-    queryFn: ({ pageParam = 0 }) => getRecruitments({ pageParam, filterOptions, recruitmentsPerPage }),
-    getNextPageParam: (result) => {
-      if (!result.isLastPage) return result.pageNum;
-      return null;
-    },
-  });
+// export const getRecruitments = async ({ pageParam, filterOptions, recruitmentsPerPage }: GetRecruitmentsParams) => {
+//   const fitlerOptionsQueryString = Object.entries(filterOptions)
+//     .map((filterOption) => {
+//       const [categoryProperty, categoryItems] = filterOption;
+//       return `${categoryProperty}=${categoryItems.join(',')}`;
+//     })
+//     .join('&');
 
-export const getRecruitmentDetail = (recruitmentId: number) => httpClient.get(API_END_POINT.RECRUITMENT(recruitmentId));
+//   const response = await httpClient.get(`${API_END_POINT.RECRUITMENTS}?${fitlerOptionsQueryString}`, {
+//     params: { pageParam, recruitmentsPerPage },
+//   });
+//   return response.data;
+// };
+
+// export const useRecruitments = ({ filterOptions, recruitmentsPerPage }) =>
+//   useInfiniteQuery<AxiosResponse, AxiosError>({
+//     queryKey: [...RECRUITMENT.RECRUITMENTS(filterOptions)],
+//     queryFn: ({ pageParam = 0 }) => getRecruitments({ pageParam, filterOptions, recruitmentsPerPage }),
+//     getNextPageParam: (result) => {
+//       if (!result.isLastPage) return result.pageNum;
+//       return null;
+//     },
+//   });
+
+export const getRecruitmentDetail = (recruitmentId: number): Promise<{ data: { data: RecruitmentDetail } }> =>
+  httpClient.get(API_END_POINT.RECRUITMENT(recruitmentId));
 
 export const useRecruitmentDetail = (recruitmentId: number) => {
   return useQuery({
     queryKey: [...RECRUITMENT.RECRUITMENT(recruitmentId)],
     queryFn: () => getRecruitmentDetail(recruitmentId),
-    select: (data) => convertRecruitmentDetailRawDataToRecruitmentDetail(data?.data.data),
+    select: (data: { data: { data: RecruitmentDetail } }) => data?.data.data,
   });
 };
 

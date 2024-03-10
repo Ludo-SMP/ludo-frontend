@@ -2,6 +2,7 @@ import { HttpResponse, http } from 'msw';
 import { popularRecruitmentsMockData, recruitmentDetailMockData } from '../data/mockRecruitments';
 import { getfilterOptions } from '../utils/getQueryParams';
 import { getFilteredRecruitmentsMockData } from '../utils/getData';
+import { RecruitmentDetail } from '@/Types/study';
 
 const baseURL = import.meta.env.VITE_MOCK_API_URL;
 
@@ -43,7 +44,7 @@ const getRecruitmentDetail = http.get(`${baseURL}/api/recruitments/:recruitmentI
     JSON.stringify({
       data: {
         ...recruitmentDetailMockData.filter(
-          (recruitmentDetail: RecruitmentDetailRawDataType) => recruitmentDetail.id === recruitmentId,
+          (recruitmentDetail: RecruitmentDetail) => recruitmentDetail.recruitment.id === recruitmentId,
         )[0],
       },
 

@@ -11,6 +11,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
       contact: '디스코드',
       callUrl: 'https:z//open.kakao.com/o/222222',
       content: 'coding test',
+      createdDateTime: `2024-01-01T03:16:03.598Z`,
       endDateTime: '2024-02-01T03:16:03.598Z',
     },
     study: {
@@ -39,11 +40,13 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
       contact: '디스코드',
       callUrl: 'https:z//open.kakao.com/o/222222',
       content: 'coding test',
+      createdDateTime: `2024-01-02T03:16:03.598Z`,
       endDateTime: '2024-02-01T03:16:03.598Z',
     },
     study: {
       id: 2,
       title: '코테 스터디 2',
+      category: { id: 2, name: '코딩 테스트' },
       owner: {
         id: 1,
         nickname: '포키',
@@ -54,8 +57,6 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
       participantLimit: 7,
       startDateTime: '2024-02-03T03:16:03.598Z',
       endDateTime: '2024-02-29T03:16:03.598Z',
-
-      category: { id: 2, name: '코딩 테스트' },
     },
   },
   {
@@ -68,11 +69,13 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
       contact: '디스코드',
       callUrl: 'https:z//open.kakao.com/o/222222',
       content: 'coding test',
+      createdDateTime: `2024-01-03T03:16:03.598Z`,
       endDateTime: '2024-02-01T03:16:03.598Z',
     },
     study: {
       id: 3,
       title: '코테 스터디 3',
+      category: { id: 2, name: '코딩 테스트' },
       owner: {
         id: 1,
         nickname: '포키',
@@ -83,8 +86,6 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
       participantLimit: 7,
       startDateTime: '2024-03-03T03:16:03.598Z',
       endDateTime: '2024-04-03T03:16:03.598Z',
-
-      category: { id: 2, name: '코딩 테스트' },
     },
   },
   {
@@ -97,6 +98,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
       contact: '디스코드',
       callUrl: 'https:z//open.kakao.com/o/222222',
       content: 'interview',
+      createdDateTime: `2024-01-04T03:16:03.598Z`,
       endDateTime: '2024-02-01T03:16:03.598Z',
     },
     study: {
@@ -128,6 +130,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
       contact: '디스코드',
       callUrl: 'https:z//open.kakao.com/o/222222',
       content: 'interview',
+      createdDateTime: `2024-01-05T03:16:03.598Z`,
       endDateTime: '2024-02-01T03:16:03.598Z',
     },
     study: {
@@ -156,6 +159,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
       contact: '디스코드',
       callUrl: 'https:z//open.kakao.com/o/222222',
       content: 'interview',
+      createdDateTime: `2024-01-06T03:16:03.598Z`,
       endDateTime: '2024-02-01T03:16:03.598Z',
     },
     study: {
@@ -184,6 +188,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
       contact: '디스코드',
       callUrl: 'https:z//open.kakao.com/o/222222',
       content: 'project',
+      createdDateTime: `2024-01-07T03:16:03.598Z`,
       endDateTime: '2024-02-01T03:16:03.598Z',
     },
     study: {
@@ -215,6 +220,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
       contact: '디스코드',
       callUrl: 'https:z//open.kakao.com/o/222222',
       content: 'project',
+      createdDateTime: `2024-01-08T03:16:03.598Z`,
       endDateTime: '2024-02-01T03:16:03.598Z',
     },
     study: {
@@ -243,6 +249,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
       contact: '디스코드',
       callUrl: 'https:z//open.kakao.com/o/222222',
       content: 'project',
+      createdDateTime: `2024-01-09T03:16:03.598Z`,
       endDateTime: '2024-02-01T03:16:03.598Z',
     },
     study: {
@@ -271,6 +278,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
       contact: '디스코드',
       callUrl: 'https:z//open.kakao.com/o/222222',
       content: 'project',
+      createdDateTime: `2024-01-10T03:16:03.598Z`,
       endDateTime: '2024-02-01T03:16:03.598Z',
     },
     study: {
@@ -299,6 +307,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
       contact: '디스코드',
       callUrl: 'https:z//open.kakao.com/o/222222',
       content: 'coding test',
+      createdDateTime: `2024-01-11T03:16:03.598Z`,
       endDateTime: '2024-02-01T03:16:03.598Z',
     },
     study: {
@@ -330,6 +339,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
       contact: '디스코드',
       callUrl: 'https:z//open.kakao.com/o/222222',
       content: 'coding test',
+      createdDateTime: `2024-01-12T03:16:03.598Z`,
       endDateTime: '2024-02-01T03:16:03.598Z',
     },
     study: {
@@ -359,6 +369,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
       contact: '디스코드',
       callUrl: 'https:z//open.kakao.com/o/222222',
       content: 'coding test',
+      createdDateTime: `2024-01-13T03:16:03.598Z`,
       endDateTime: '2024-02-01T03:16:03.598Z',
     },
     study: {
@@ -388,6 +399,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
       contact: '디스코드',
       callUrl: 'https:z//open.kakao.com/o/222222',
       content: 'interview',
+      createdDateTime: `2024-01-14T03:16:03.598Z`,
       endDateTime: '2024-02-01T03:16:03.598Z',
     },
     study: {
@@ -419,6 +431,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
       contact: '디스코드',
       callUrl: 'https:z//open.kakao.com/o/222222',
       content: 'interview',
+      createdDateTime: `2024-01-15T03:16:03.598Z`,
       endDateTime: '2024-02-01T03:16:03.598Z',
     },
     study: {
@@ -447,6 +460,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
       contact: '디스코드',
       callUrl: 'https:z//open.kakao.com/o/222222',
       content: 'interview',
+      createdDateTime: `2024-01-16T03:16:03.598Z`,
       endDateTime: '2024-02-01T03:16:03.598Z',
     },
     study: {
@@ -475,6 +489,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
       contact: '디스코드',
       callUrl: 'https:z//open.kakao.com/o/222222',
       content: 'project',
+      createdDateTime: `2024-01-17T03:16:03.598Z`,
       endDateTime: '2024-02-01T03:16:03.598Z',
     },
     study: {
@@ -506,6 +521,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
       contact: '디스코드',
       callUrl: 'https:z//open.kakao.com/o/222222',
       content: 'project',
+      createdDateTime: `2024-01-18T03:16:03.598Z`,
       endDateTime: '2024-02-01T03:16:03.598Z',
     },
     study: {
@@ -534,6 +550,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
       contact: '디스코드',
       callUrl: 'https:z//open.kakao.com/o/222222',
       content: 'project',
+      createdDateTime: `2024-01-19T03:16:03.598Z`,
       endDateTime: '2024-02-01T03:16:03.598Z',
     },
     study: {
@@ -562,6 +579,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
       contact: '디스코드',
       callUrl: 'https:z//open.kakao.com/o/222222',
       content: 'project',
+      createdDateTime: `2024-01-20T03:16:03.598Z`,
       endDateTime: '2024-02-01T03:16:03.598Z',
     },
     study: {
@@ -590,6 +608,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
       contact: '디스코드',
       callUrl: 'https:z//open.kakao.com/o/222222',
       content: 'coding test',
+      createdDateTime: `2024-01-21T03:16:03.598Z`,
       endDateTime: '2024-02-01T03:16:03.598Z',
     },
     study: {
@@ -621,6 +640,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
       contact: '디스코드',
       callUrl: 'https:z//open.kakao.com/o/222222',
       content: 'coding test',
+      createdDateTime: `2024-01-22T03:16:03.598Z`,
       endDateTime: '2024-02-01T03:16:03.598Z',
     },
     study: {
@@ -650,6 +670,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
       contact: '디스코드',
       callUrl: 'https:z//open.kakao.com/o/222222',
       content: 'coding test',
+      createdDateTime: `2024-01-23T03:16:03.598Z`,
       endDateTime: '2024-02-01T03:16:03.598Z',
     },
     study: {
@@ -679,6 +700,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
       contact: '디스코드',
       callUrl: 'https:z//open.kakao.com/o/222222',
       content: 'interview',
+      createdDateTime: `2024-01-24T03:16:03.598Z`,
       endDateTime: '2024-02-01T03:16:03.598Z',
     },
     study: {
@@ -710,6 +732,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
       contact: '디스코드',
       callUrl: 'https:z//open.kakao.com/o/222222',
       content: 'interview',
+      createdDateTime: `2024-01-25T03:16:03.598Z`,
       endDateTime: '2024-02-01T03:16:03.598Z',
     },
     study: {
@@ -738,6 +761,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
       contact: '디스코드',
       callUrl: 'https:z//open.kakao.com/o/222222',
       content: 'interview',
+      createdDateTime: `2024-01-26T03:16:03.598Z`,
       endDateTime: '2024-02-01T03:16:03.598Z',
     },
     study: {
@@ -766,6 +790,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
       contact: '디스코드',
       callUrl: 'https:z//open.kakao.com/o/222222',
       content: 'project',
+      createdDateTime: `2024-01-27T03:16:03.598Z`,
       endDateTime: '2024-02-01T03:16:03.598Z',
     },
     study: {
@@ -797,6 +822,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
       contact: '디스코드',
       callUrl: 'https:z//open.kakao.com/o/222222',
       content: 'project',
+      createdDateTime: `2024-01-28T03:16:03.598Z`,
       endDateTime: '2024-02-01T03:16:03.598Z',
     },
     study: {
@@ -828,6 +854,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
       contact: '디스코드',
       callUrl: 'https:z//open.kakao.com/o/222222',
       content: 'project',
+      createdDateTime: `2024-01-29T03:16:03.598Z`,
       endDateTime: '2024-02-01T03:16:03.598Z',
     },
     study: {
@@ -863,6 +890,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
       contact: '디스코드',
       callUrl: 'https:z//open.kakao.com/o/222222',
       content: 'project',
+      createdDateTime: `2024-01-30T03:16:03.598Z`,
       endDateTime: '2024-02-01T03:16:03.598Z',
     },
     study: {
@@ -891,6 +919,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
       contact: '디스코드',
       callUrl: 'https:z//open.kakao.com/o/222222',
       content: 'coding test',
+      createdDateTime: `2024-01-31T03:16:03.598Z`,
       endDateTime: '2024-02-01T03:16:03.598Z',
     },
     study: {
@@ -925,6 +954,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
       contact: '디스코드',
       callUrl: 'https:z//open.kakao.com/o/222222',
       content: 'coding test',
+      createdDateTime: `2024-02-01T03:16:03.598Z`,
       endDateTime: '2024-02-01T03:16:03.598Z',
     },
     study: {
@@ -960,6 +990,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
       contact: '디스코드',
       callUrl: 'https:z//open.kakao.com/o/222222',
       content: 'coding test',
+      createdDateTime: `2024-02-02T03:16:03.598Z`,
       endDateTime: '2024-02-01T03:16:03.598Z',
     },
     study: {
@@ -992,6 +1023,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
       contact: '디스코드',
       callUrl: 'https:z//open.kakao.com/o/222222',
       content: 'interview',
+      createdDateTime: `2024-02-03T03:16:03.598Z`,
       endDateTime: '2024-02-01T03:16:03.598Z',
     },
     study: {
@@ -1028,6 +1060,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
       contact: '디스코드',
       callUrl: 'https:z//open.kakao.com/o/222222',
       content: 'interview',
+      createdDateTime: `2024-02-04T03:16:03.598Z`,
       endDateTime: '2024-02-01T03:16:03.598Z',
     },
     study: {
@@ -1056,6 +1089,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
       contact: '디스코드',
       callUrl: 'https:z//open.kakao.com/o/222222',
       content: 'interview',
+      createdDateTime: `2024-02-05T03:16:03.598Z`,
       endDateTime: '2024-02-01T03:16:03.598Z',
     },
     study: {
@@ -1084,6 +1118,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
       contact: '디스코드',
       callUrl: 'https:z//open.kakao.com/o/222222',
       content: 'project',
+      createdDateTime: `2024-02-06T03:16:03.598Z`,
       endDateTime: '2024-02-01T03:16:03.598Z',
     },
     study: {
@@ -1115,6 +1150,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
       contact: '디스코드',
       callUrl: 'https:z//open.kakao.com/o/222222',
       content: 'project',
+      createdDateTime: `2024-02-07T03:16:03.598Z`,
       endDateTime: '2024-02-01T03:16:03.598Z',
     },
     study: {
@@ -1143,6 +1179,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
       contact: '디스코드',
       callUrl: 'https:z//open.kakao.com/o/222222',
       content: 'project',
+      createdDateTime: `2024-02-08T03:16:03.598Z`,
       endDateTime: '2024-02-01T03:16:03.598Z',
     },
     study: {
@@ -1171,6 +1208,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
       contact: '디스코드',
       callUrl: 'https:z//open.kakao.com/o/222222',
       content: 'project',
+      createdDateTime: `2024-02-09T03:16:03.598Z`,
       endDateTime: '2024-02-01T03:16:03.598Z',
     },
     study: {
@@ -1193,17 +1231,16 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
 
 export const recruitmentsMockData: Recruitment[] = recruitmentDetailMockData.map(
   (recruitmentDetail: RecruitmentDetail, idx) => {
-    const { id, title, stacks, positions, endDateTime: recruitmentEndDateTime } = recruitmentDetail.recruitment;
+    const {
+      id,
+      title,
+      stacks,
+      positions,
+      endDateTime: recruitmentEndDateTime,
+      createdDateTime,
+    } = recruitmentDetail.recruitment;
     const { category, owner, way, startDateTime, endDateTime } = recruitmentDetail.study;
     const ownerNickname = owner.nickname;
-    const createdDateTime =
-      idx <= 8
-        ? `2024-01-0${idx + 1}T03:16:03.598Z`
-        : idx <= 30
-        ? `2024-01-${idx + 1}T03:16:03.598Z`
-        : idx <= 40
-        ? `2024-02-0${idx - 30}T03:16:03.598Z`
-        : `2024-02-10T03:16:03.598Z`;
     const hits = idx + 1000;
     return {
       id,

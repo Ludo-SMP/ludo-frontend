@@ -9,6 +9,8 @@ export type Role = keyof typeof ROLE;
 export type Platform = keyof typeof PLATFORM;
 export type Card = 'STUDY' | 'RECRUITMENT';
 export type Sort = '최신순' | '조회순';
+export type ApplyTryStatus = 'NOT APPLY' | 'SUCCESS' | 'FAIL';
+
 export interface Position {
   id: number;
   name: '백엔드' | '프론트엔드' | '디자이너' | '데브옵스';
@@ -59,6 +61,7 @@ export interface RecruitmentDetail {
     contact: string;
     callUrl: string;
     content: string;
+    createdDateTime: string;
     endDateTime: string;
   };
   study: {
@@ -93,6 +96,20 @@ export interface PopularRecruitments {
   popularCodingRecruitments: Recruitment[];
   popularInterviewRecruitments: Recruitment[];
   popularProjectRecruitments: Recruitment[];
+}
+
+export interface Recruitments {
+  recruitments: Recruitment[];
+}
+
+export interface FilterOptionParams {
+  last?: number;
+  count: number;
+  stackIds: number[];
+  progressMethods: ProgressMethod[];
+  positionIds: number[];
+  categoryIds: number[];
+  sort: Sort[];
 }
 
 ////////////////////////

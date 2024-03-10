@@ -5,10 +5,10 @@ import styled from 'styled-components';
 
 type ChipType = 'Primary' | 'Secondary';
 
-export interface ChipProps<T> {
+export interface ChipProps {
   chipType: ChipType;
   children?: React.ReactNode;
-  value: T;
+  value: '백엔드' | '프론트엔드' | '디자이너' | '데브옵스';
 }
 
 const Chip = ({ chipType, children, value }: ChipProps<Position>) => {

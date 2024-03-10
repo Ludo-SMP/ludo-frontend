@@ -6,7 +6,7 @@ import { CreateStudy } from '../Pages/Studies/CreateStudy';
 import { ModifyStudy } from '../Pages/Studies/ModifyStudy';
 import { GatherStudy } from '../Pages/Studies/GatherStudy';
 import Main from '../Pages/Main';
-import RecruitmentDetail from '../Pages/RecruitmentDetail';
+import RecruitmentDetailPage from '@/Pages/RecruitmentDetail';
 import Recruitments from '../Pages/Recruitments';
 import SignUp from '@/Pages/SignUp';
 import Header from '@/Components/Header';
@@ -14,7 +14,6 @@ import ApplicantsPage from '@/Pages/Applicants';
 import StudyDetailPage from '@/Pages/StudyDetail';
 import { Footer } from '@/Components/Footer/Footer';
 import { Save } from '@/Pages/Studies/Save';
-
 
 export const RouterPath = createBrowserRouter([
   {
@@ -57,7 +56,7 @@ export const RouterPath = createBrowserRouter([
       },
       {
         path: ROUTER_PATH.recruitmentDetail,
-        element: <RecruitmentDetail />,
+        element: <RecruitmentDetailPage />,
       },
       {
         path: ROUTER_PATH.recruitments,
