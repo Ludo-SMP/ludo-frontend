@@ -10,7 +10,7 @@ import DropdownFilter from '@/Components/DropdownFilter';
 import { FilterOptionsType } from '@/Types/study';
 import { useState } from 'react';
 import { media } from '@/Styles/theme';
-import { CreateStudy, Filter, Up } from '@/Assets';
+import { Create, Filter, Up } from '@/Assets';
 import Button from '@/Components/Common/Button';
 import UtiltiyButtons from '@/Components/UtilityButtons';
 import { useNavigate } from 'react-router-dom';
@@ -59,7 +59,7 @@ const Recruitments = () => {
           }}
           className="create__btn"
         >
-          <CreateStudy />
+          <Create />
           <span>스터디 생성</span>
         </Button>
       </UtiltiyButtons>

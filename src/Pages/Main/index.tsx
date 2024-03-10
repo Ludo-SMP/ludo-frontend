@@ -4,23 +4,22 @@ import { bannerDummy } from '../../Shared/dummy';
 import Banner from '../../Components/Banner';
 import { usePopularRecruitments } from '@/Apis/recruitment';
 import Button from '@/Components/Common/Button';
-import { Up } from '@/Assets';
-import UtiltiyButtons from '@/Components/UtilityButtons';
 import ChipMenu from '@/Components/Common/ChipMenu';
+import { Right, Create } from '@/Assets';
+import UtiltiyButtons from '@/Components/UtilityButtons';
 import { useSelectedCategoryStore } from '@/Store/category';
 import RecruitmentCard from '@/Components/RecruitmentCard';
+import { useNavigate } from 'react-router-dom';
+import { ROUTER_PATH } from '@/Constants/Router_Path';
 
 const Main = () => {
   const { data: popularRecruitments, isLoading } = usePopularRecruitments();
   const { selectedCategory, setSelectedCategory } = useSelectedCategoryStore();
+  const navigate = useNavigate();
 
   const popularCodingRecruitments: Recruitment[] = popularRecruitments?.popularCodingRecruitments;
   const popularInterviewRecruitments: Recruitment[] = popularRecruitments?.popularInterviewRecruitments;
   const popularProjectRecruitments: Recruitment[] = popularRecruitments?.popularProjectRecruitments;
-
-  const handleScroll = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
 
   return isLoading ? (
     <div>Loading...</div>
@@ -50,6 +49,14 @@ const Main = () => {
               사이드 프로젝트
             </ChipMenu>
           </CategoryMenusWrapper>
+          <MoreSectionWrapper
+            onClick={() => {
+              navigate(ROUTER_PATH.recruitments);
+            }}
+          >
+            <span className="more__text">전체 목록 보러가기</span>
+            <Right />
+          </MoreSectionWrapper>
         </SelectCategorySectionWrapper>
 
         <RecruitmentCardsWrapper>
@@ -67,9 +74,9 @@ const Main = () => {
         </RecruitmentCardsWrapper>
       </RecruitmentsSectionWrapper>
       <UtiltiyButtons>
-        <Button onClick={handleScroll} className="scroll__btn">
-          <Up />
-          <span>위로가기</span>
+        <Button onClick={() => navigate(ROUTER_PATH.createStudy)} className="create__btn">
+          <Create height={40} />
+          <span>스터디 생성</span>
         </Button>
       </UtiltiyButtons>
     </MainWrapper>
@@ -104,7 +111,8 @@ const RecruitmentsSectionWrapper = styled.div`
 
 const SelectCategorySectionWrapper = styled.div`
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  width: 100%;
   justify-content: space-between;
   gap: 12px;
 `;
@@ -120,6 +128,25 @@ const RecruitmentCardsWrapper = styled.div`
   align-content: flex-start;
   gap: 21px;
   flex-wrap: wrap;
+`;
+
+const MoreSectionWrapper = styled.div`
+  display: flex;
+  display: inline-flex;
+  padding: 0 16px 0 24px;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2px;
+  gap: 8px;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  .more__text {
+    color: ${({ theme }) => theme.color.black3};
+    padding-top: 2px;
+  }
 `;
 
 export default Main;
