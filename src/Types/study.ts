@@ -1,26 +1,26 @@
-import { APPLY_STATUS, MEMBER_STATUS, ROLE, STUDY_STATUS } from '@/Shared/study';
+import { APPLY_STATUS, MEMBER_STATUS, PLATFORM, PROCESS_METHOD, ROLE, STUDY_STATUS } from '@/Shared/study';
 
-export type Position = '백엔드' | '프론트엔드' | '디자이너' | '데브옵스';
-export type ActivityType = '온라인' | '오프라인' | '미정';
-export type ToolType = 'React' | 'Java' | 'Spring' | 'Figma' | 'Java' | 'Javascript';
-export type StackType = ToolType;
-export type ProgressMethod = ActivityType;
 export type StudyCategory = '코딩 테스트' | '모의 면접' | '프로젝트';
-export type SortType = '최신순' | '조회순';
 export type CategoryPropertyType = 'category' | 'stacks' | 'positions' | 'way' | 'sort';
 export type StudyStatus = keyof typeof STUDY_STATUS;
 export type MemberStatus = keyof typeof MEMBER_STATUS;
 export type ApplyStatus = keyof typeof APPLY_STATUS;
+export type ProgressMethod = keyof typeof PROCESS_METHOD;
 export type AllType = '전체';
 export type Role = keyof typeof ROLE;
-export type Platform = 'GATHER' | 'GOOGLE MEET';
+export type Platform = keyof typeof PLATFORM;
 export type Card = 'STUDY' | 'RECRUITMENT';
+export type Sort = '최신순' | '조회순';
+export interface Position {
+  id: number;
+  name: '백엔드' | '프론트엔드' | '디자이너' | '데브옵스';
+}
 
 export interface Member {
   id: number;
   nickname: string;
   email: string;
-  position: PositionType;
+  position: Position;
   role: Role;
 }
 
@@ -30,18 +30,12 @@ export interface User {
   email: string;
 }
 
-// 추후에 Position 타입과 통합하는 과정 필요
-export interface PositionType {
-  id: number;
-  name: Position;
-}
-
 export interface RecruitmentInfoType {
   recruitmentId: number;
   recruitmentTitle: string;
   applicantCnt: number;
   positions: Position[];
-  stacks: StackType[];
+  stacks: string[];
   contact: string;
   platformUrl: string;
   content: string;
@@ -66,38 +60,6 @@ export interface StudyBasicInfoType {
   memberCnt: number;
 }
 
-export interface RecruitmentDetailType extends RecruitmentInfoType, ProgressInfoType, StudyBasicInfoType {}
-
-export interface RecruitmentRawDataType {
-  id: number;
-  title: string;
-  stacks: ToolType[];
-  category: StudyCategory;
-  positions: Position[];
-  ownerNickname: string;
-  way: ActivityType;
-  startDateTime: string;
-  endDateTime: string;
-  recruitmentEndDateTime: string;
-  createdDateTime: string;
-  hits: number;
-}
-
-export interface PopularRecruitmentsRawDataType {
-  popularCodingRecruitments: RecruitmentRawDataType[];
-  popularInterviewRecruitments: RecruitmentRawDataType[];
-  popularProjectRecruitments: RecruitmentRawDataType[];
-}
-
-export interface RecruitmentDetailRawDataType extends RecruitmentRawDataType {
-  applicantCount: number;
-  platformUrl: string;
-  content: string;
-  platform: string;
-  memberCnt: number;
-  contact: string;
-}
-
 export type MainCategoryNameType = '스터디 유형' | '기술 스택' | '포지션' | '진행 방식' | '목록 정렬 기준';
 
 export interface MainCategoryType<T, S> {
@@ -108,18 +70,73 @@ export interface MainCategoryType<T, S> {
 
 export interface FilterOptionsType {
   category: StudyCategory[];
-  stacks: StackType[];
+  stacks: string[];
   positions: Position[];
   way: ProgressMethod;
-  sort: SortType[];
+  sort: Sort[];
 }
+
+//////////////////
+export interface Stack {
+  id: number;
+  name: string;
+  imageUrl: string;
+}
+
+export interface RecruitmentDetail {
+  recruitment: {
+    id: number;
+    title: string;
+    stacks: Stack[];
+    positions: Position[];
+    applicantCount: number;
+    contact: string;
+    callUrl: string;
+    content: string;
+    endDateTime: string;
+  };
+  study: {
+    id: number;
+    title: string;
+    category: { id: number; name: StudyCategory };
+    owner: User;
+    platform: Platform;
+    way: ProgressMethod;
+    participantLimit: number;
+    startDateTime: string;
+    endDateTime: string;
+  };
+}
+
+export interface Recruitment {
+  id: number;
+  title: string;
+  stacks: Stack[];
+  positions: Position[];
+  category: { id: number; name: StudyCategory };
+  ownerNickname: string;
+  way: ProgressMethod;
+  startDateTime: string;
+  endDateTime: string;
+  recruitmentEndDateTime: string;
+  createdDateTime: string;
+  hits: number;
+}
+
+export interface PopularRecruitments {
+  popularCodingRecruitments: Recruitment[];
+  popularInterviewRecruitments: Recruitment[];
+  popularProjectRecruitments: Recruitment[];
+}
+
+////////////////////////
 
 export interface Participant {
   id: number;
   nickname: string;
   role: Role;
   email: string;
-  position: PositionType;
+  position: Position;
 }
 export interface Applicant extends Omit<Member, 'role'> {}
 
@@ -129,7 +146,7 @@ export interface StudyDetail {
     status: StudyStatus;
     title: string;
     platform: Platform;
-    way: 'ONLINE' | 'OFFLINE';
+    way: ProgressMethod;
     participantsCount: number;
     participantsLimit: number;
     startDateTime: string;
@@ -160,7 +177,7 @@ export interface ApplicantsDetail {
 export interface ParticipateStudy {
   studyId: number;
   title: string;
-  position: PositionType;
+  position: Position;
   startDateTime: string;
   endDateTime: string;
   status: StudyStatus;
@@ -177,7 +194,7 @@ export interface ApplicantRecruitment {
 export interface CompletedStudy {
   studyId: number;
   title: string;
-  position: PositionType;
+  position: Position;
   startDateTime: string;
   endDateTime: string;
   status: StudyStatus;

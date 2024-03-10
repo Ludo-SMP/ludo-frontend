@@ -37,3 +37,8 @@ export const ROLE = {
   OWNER: '팀장',
   MEMBER: '팀원',
 };
+
+export const PLATFORM = {
+  GATHER: 'Gather',
+  GOOGLE_MEET: 'Google Meet',
+};
