@@ -4,7 +4,7 @@ import { STUDY } from '@/Constants/queryString';
 import { API_END_POINT } from '@/Constants/api';
 import { SetStateAction } from 'react';
 import { useModalStore } from '@/Store/modal';
-import { ApplicantsDetail, ApplyState, MyPageInfo, StudyDetail } from '@/Types/study';
+import { ApplicantsDetail, MyPageInfo, StudyDetail } from '@/Types/study';
 import { useNavigate } from 'react-router-dom';
 import { ROUTER_PATH } from '@/Constants/Router_Path';
 

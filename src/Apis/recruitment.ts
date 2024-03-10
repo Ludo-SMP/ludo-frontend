@@ -1,22 +1,20 @@
 import { httpClient } from '@/Utils/axios';
 import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
-import {
-  convertPopularRecruitmentsToRecruitmentCardProps,
-  convertRecruitmentDetailRawDataToRecruitmentDetail,
-} from '@/Utils/propertyConverter';
+import { convertRecruitmentDetailRawDataToRecruitmentDetail } from '@/Utils/propertyConverter';
 import { RECRUITMENT } from '@/Constants/queryString';
-import { FilterOptionsType } from '@/Types/study';
+import { FilterOptionsType, PopularRecruitments } from '@/Types/study';
 import { API_END_POINT } from '@/Constants/api';
 import { AxiosError, AxiosResponse } from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-export const getPopularRecruitments = async () => httpClient.get(API_END_POINT.POPULAR_RECRUITMENTS);
+export const getPopularRecruitments = (count: number = 6): Promise<{ data: { data: PopularRecruitments } }> =>
+  httpClient.get(API_END_POINT.POPULAR_RECRUITMENTS, { params: { count } });
 
-export const usePopularRecruitments = () => {
+export const usePopularRecruitments = (count?: number) => {
   return useQuery({
     queryKey: [...RECRUITMENT.POPULAR],
-    queryFn: () => getPopularRecruitments(),
-    select: (data) => convertPopularRecruitmentsToRecruitmentCardProps(data?.data.data),
+    queryFn: () => getPopularRecruitments(count),
+    select: (data: { data: { data: PopularRecruitments } }) => data?.data?.data,
   });
 };
 
