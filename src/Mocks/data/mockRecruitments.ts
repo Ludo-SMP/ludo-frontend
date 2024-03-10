@@ -4,7 +4,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
   {
     recruitment: {
       id: 1,
-      title: '인기 코테 스터디 1 - 모집공고',
+      title: '코테 스터디 1 - 모집공고',
       stacks: [{ id: 44, name: 'Java', imageUrl: '/static/stack/images/java.png' }],
       positions: [{ id: 1, name: '백엔드' }],
       applicantCount: 5,
@@ -15,7 +15,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
     },
     study: {
       id: 1,
-      title: '인기 코테 스터디 1',
+      title: '코테 스터디 1',
       category: { id: 2, name: '코딩 테스트' },
       owner: {
         id: 1,
@@ -32,7 +32,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
   {
     recruitment: {
       id: 2,
-      title: '인기 코테 스터디 2 - 모집공고',
+      title: '코테 스터디 2 - 모집공고',
       stacks: [{ id: 45, name: 'Javascript', imageUrl: '/static/stack/images/javascript.png' }],
       positions: [{ id: 2, name: '프론트엔드' }],
       applicantCount: 5,
@@ -43,7 +43,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
     },
     study: {
       id: 2,
-      title: '인기 코테 스터디 2',
+      title: '코테 스터디 2',
       owner: {
         id: 1,
         nickname: '포키',
@@ -61,7 +61,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
   {
     recruitment: {
       id: 3,
-      title: '인기 코테 스터디 3 - 모집공고',
+      title: '코테 스터디 3 - 모집공고',
       stacks: [{ id: 44, name: 'Java', imageUrl: '/static/stack/images/java.png' }],
       positions: [{ id: 1, name: '백엔드' }],
       applicantCount: 5,
@@ -72,7 +72,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
     },
     study: {
       id: 3,
-      title: '인기 코테 스터디 3',
+      title: '코테 스터디 3',
       owner: {
         id: 1,
         nickname: '포키',
@@ -90,7 +90,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
   {
     recruitment: {
       id: 4,
-      title: '인기 모의 면접 스터디 - 모집공고 4',
+      title: '모의 면접 스터디 - 모집공고 4',
       stacks: [{ id: 44, name: 'Java', imageUrl: '/static/stack/images/java.png' }],
       positions: [{ id: 1, name: '백엔드' }],
       applicantCount: 5,
@@ -101,7 +101,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
     },
     study: {
       id: 4,
-      title: '인기 모의 면접 스터디 4',
+      title: '모의 면접 스터디 4',
       category: { id: 3, name: '모의 면접' },
       owner: {
         id: 1,
@@ -118,7 +118,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
   {
     recruitment: {
       id: 5,
-      title: '인기 모의 면접 스터디 - 모집공고 5',
+      title: '모의 면접 스터디 - 모집공고 5',
       stacks: [{ id: 45, name: 'Javascript', imageUrl: '/static/stack/images/javascript.png' }],
       positions: [
         { id: 1, name: '백엔드' },
@@ -132,7 +132,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
     },
     study: {
       id: 5,
-      title: '인기 모의 면접 스터디 5',
+      title: '모의 면접 스터디 5',
       category: { id: 3, name: '모의 면접' },
       owner: {
         id: 1,
@@ -149,7 +149,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
   {
     recruitment: {
       id: 6,
-      title: '인기 모의 면접 스터디 - 모집공고 6',
+      title: '모의 면접 스터디 - 모집공고 6',
       stacks: [{ id: 44, name: 'Java', imageUrl: '/static/stack/images/java.png' }],
       positions: [{ id: 1, name: '백엔드' }],
       applicantCount: 5,
@@ -160,7 +160,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
     },
     study: {
       id: 6,
-      title: '인기 모의 면접 스터디 6',
+      title: '모의 면접 스터디 6',
       category: { id: 3, name: '모의 면접' },
       owner: {
         id: 1,
@@ -177,7 +177,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
   {
     recruitment: {
       id: 7,
-      title: '인기 프로젝트 스터디 - 모집공고 7',
+      title: '프로젝트 스터디 - 모집공고 7',
       stacks: [{ id: 44, name: 'Java', imageUrl: '/static/stack/images/java.png' }],
       positions: [{ id: 1, name: '백엔드' }],
       applicantCount: 5,
@@ -188,7 +188,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
     },
     study: {
       id: 7,
-      title: '인기 프로젝트 스터디 7',
+      title: '프로젝트 스터디 7',
       category: { id: 1, name: '프로젝트' },
       owner: {
         id: 1,
@@ -205,7 +205,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
   {
     recruitment: {
       id: 8,
-      title: '인기 프로젝트 스터디 - 모집공고 8',
+      title: '프로젝트 스터디 - 모집공고 8',
       stacks: [{ id: 45, name: 'Javascript', imageUrl: '/static/stack/images/javascript.png' }],
       positions: [
         { id: 1, name: '백엔드' },
@@ -219,7 +219,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
     },
     study: {
       id: 8,
-      title: '인기 프로젝트 스터디 8',
+      title: '프로젝트 스터디 8',
       category: { id: 1, name: '프로젝트' },
       owner: {
         id: 1,
@@ -236,7 +236,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
   {
     recruitment: {
       id: 9,
-      title: '인기 프로젝트 스터디 - 모집공고 9',
+      title: '프로젝트 스터디 - 모집공고 9',
       stacks: [{ id: 44, name: 'Java', imageUrl: '/static/stack/images/java.png' }],
       positions: [{ id: 1, name: '백엔드' }],
       applicantCount: 5,
@@ -247,7 +247,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
     },
     study: {
       id: 9,
-      title: '인기 프로젝트 스터디 9',
+      title: '프로젝트 스터디 9',
       category: { id: 1, name: '프로젝트' },
       owner: {
         id: 1,
@@ -264,7 +264,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
   {
     recruitment: {
       id: 10,
-      title: '인기 프로젝트 스터디 - 모집공고 10',
+      title: '프로젝트 스터디 - 모집공고 10',
       stacks: [{ id: 44, name: 'Java', imageUrl: '/static/stack/images/java.png' }],
       positions: [{ id: 1, name: '백엔드' }],
       applicantCount: 5,
@@ -275,7 +275,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
     },
     study: {
       id: 10,
-      title: '인기 프로젝트 스터디 10',
+      title: '프로젝트 스터디 10',
       category: { id: 1, name: '프로젝트' },
       owner: {
         id: 1,
@@ -292,7 +292,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
   {
     recruitment: {
       id: 11,
-      title: '인기 코테 스터디 1 - 모집공고1',
+      title: '코테 스터디 1 - 모집공고1',
       stacks: [{ id: 44, name: 'Java', imageUrl: '/static/stack/images/java.png' }],
       positions: [{ id: 1, name: '백엔드' }],
       applicantCount: 5,
@@ -303,7 +303,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
     },
     study: {
       id: 11,
-      title: '인기 코테 스터디 11',
+      title: '코테 스터디 11',
       category: { id: 2, name: '코딩 테스트' },
       owner: {
         id: 1,
@@ -320,7 +320,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
   {
     recruitment: {
       id: 12,
-      title: '인기 코테 스터디 1 - 모집공고2',
+      title: '코테 스터디 1 - 모집공고2',
       stacks: [{ id: 45, name: 'Javascript', imageUrl: '/static/stack/images/javascript.png' }],
       positions: [
         { id: 1, name: '백엔드' },
@@ -334,7 +334,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
     },
     study: {
       id: 12,
-      title: '인기 코테 스터디 12',
+      title: '코테 스터디 12',
       owner: {
         id: 1,
         nickname: '포키',
@@ -352,7 +352,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
   {
     recruitment: {
       id: 13,
-      title: '인기 코테 스터디 1 - 모집공고3',
+      title: '코테 스터디 1 - 모집공고3',
       stacks: [{ id: 44, name: 'Java', imageUrl: '/static/stack/images/java.png' }],
       positions: [{ id: 1, name: '백엔드' }],
       applicantCount: 5,
@@ -363,7 +363,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
     },
     study: {
       id: 13,
-      title: '인기 코테 스터디 13',
+      title: '코테 스터디 13',
       owner: {
         id: 1,
         nickname: '포키',
@@ -381,7 +381,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
   {
     recruitment: {
       id: 14,
-      title: '인기 모의 면접 스터디 - 모집공고 14',
+      title: '모의 면접 스터디 - 모집공고 14',
       stacks: [{ id: 44, name: 'Java', imageUrl: '/static/stack/images/java.png' }],
       positions: [{ id: 1, name: '백엔드' }],
       applicantCount: 5,
@@ -392,7 +392,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
     },
     study: {
       id: 14,
-      title: '인기 모의 면접 스터디 14',
+      title: '모의 면접 스터디 14',
       category: { id: 3, name: '모의 면접' },
       owner: {
         id: 1,
@@ -409,7 +409,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
   {
     recruitment: {
       id: 15,
-      title: '인기 모의 면접 스터디 - 모집공고 15',
+      title: '모의 면접 스터디 - 모집공고 15',
       stacks: [{ id: 45, name: 'Javascript', imageUrl: '/static/stack/images/javascript.png' }],
       positions: [
         { id: 1, name: '백엔드' },
@@ -423,7 +423,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
     },
     study: {
       id: 15,
-      title: '인기 모의 면접 스터디 15',
+      title: '모의 면접 스터디 15',
       category: { id: 3, name: '모의 면접' },
       owner: {
         id: 1,
@@ -440,7 +440,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
   {
     recruitment: {
       id: 16,
-      title: '인기 모의 면접 스터디 - 모집공고 16',
+      title: '모의 면접 스터디 - 모집공고 16',
       stacks: [{ id: 44, name: 'Java', imageUrl: '/static/stack/images/java.png' }],
       positions: [{ id: 1, name: '백엔드' }],
       applicantCount: 5,
@@ -451,7 +451,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
     },
     study: {
       id: 16,
-      title: '인기 모의 면접 스터디 16',
+      title: '모의 면접 스터디 16',
       category: { id: 3, name: '모의 면접' },
       owner: {
         id: 1,
@@ -468,7 +468,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
   {
     recruitment: {
       id: 17,
-      title: '인기 프로젝트 스터디 - 모집공고 17',
+      title: '프로젝트 스터디 - 모집공고 17',
       stacks: [{ id: 44, name: 'Java', imageUrl: '/static/stack/images/java.png' }],
       positions: [{ id: 1, name: '백엔드' }],
       applicantCount: 5,
@@ -479,7 +479,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
     },
     study: {
       id: 17,
-      title: '인기 프로젝트 스터디 17',
+      title: '프로젝트 스터디 17',
       category: { id: 1, name: '프로젝트' },
       owner: {
         id: 1,
@@ -496,7 +496,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
   {
     recruitment: {
       id: 18,
-      title: '인기 프로젝트 스터디 - 모집공고 18',
+      title: '프로젝트 스터디 - 모집공고 18',
       stacks: [{ id: 45, name: 'Javascript', imageUrl: '/static/stack/images/javascript.png' }],
       positions: [
         { id: 1, name: '백엔드' },
@@ -510,7 +510,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
     },
     study: {
       id: 18,
-      title: '인기 프로젝트 스터디 18',
+      title: '프로젝트 스터디 18',
       category: { id: 1, name: '프로젝트' },
       owner: {
         id: 1,
@@ -527,7 +527,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
   {
     recruitment: {
       id: 19,
-      title: '인기 프로젝트 스터디 - 모집공고 19',
+      title: '프로젝트 스터디 - 모집공고 19',
       stacks: [{ id: 44, name: 'Java', imageUrl: '/static/stack/images/java.png' }],
       positions: [{ id: 1, name: '백엔드' }],
       applicantCount: 5,
@@ -538,7 +538,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
     },
     study: {
       id: 19,
-      title: '인기 프로젝트 스터디 19',
+      title: '프로젝트 스터디 19',
       category: { id: 1, name: '프로젝트' },
       owner: {
         id: 1,
@@ -555,7 +555,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
   {
     recruitment: {
       id: 20,
-      title: '인기 프로젝트 스터디 - 모집공고 20',
+      title: '프로젝트 스터디 - 모집공고 20',
       stacks: [{ id: 44, name: 'Java', imageUrl: '/static/stack/images/java.png' }],
       positions: [{ id: 1, name: '백엔드' }],
       applicantCount: 5,
@@ -566,7 +566,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
     },
     study: {
       id: 20,
-      title: '인기 프로젝트 스터디 20',
+      title: '프로젝트 스터디 20',
       category: { id: 1, name: '프로젝트' },
       owner: {
         id: 1,
@@ -583,7 +583,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
   {
     recruitment: {
       id: 21,
-      title: '인기 코테 스터디 2 - 모집공고1',
+      title: '코테 스터디 2 - 모집공고1',
       stacks: [{ id: 44, name: 'Java', imageUrl: '/static/stack/images/java.png' }],
       positions: [{ id: 1, name: '백엔드' }],
       applicantCount: 5,
@@ -594,7 +594,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
     },
     study: {
       id: 21,
-      title: '인기 코테 스터디 21',
+      title: '코테 스터디 21',
       category: { id: 2, name: '코딩 테스트' },
       owner: {
         id: 1,
@@ -611,7 +611,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
   {
     recruitment: {
       id: 22,
-      title: '인기 코테 스터디 2 - 모집공고2',
+      title: '코테 스터디 2 - 모집공고2',
       stacks: [{ id: 45, name: 'Javascript', imageUrl: '/static/stack/images/javascript.png' }],
       positions: [
         { id: 1, name: '백엔드' },
@@ -625,7 +625,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
     },
     study: {
       id: 22,
-      title: '인기 코테 스터디 22',
+      title: '코테 스터디 22',
       owner: {
         id: 1,
         nickname: '포키',
@@ -643,7 +643,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
   {
     recruitment: {
       id: 23,
-      title: '인기 코테 스터디 2 - 모집공고3',
+      title: '코테 스터디 2 - 모집공고3',
       stacks: [{ id: 44, name: 'Java', imageUrl: '/static/stack/images/java.png' }],
       positions: [{ id: 1, name: '백엔드' }],
       applicantCount: 5,
@@ -654,7 +654,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
     },
     study: {
       id: 23,
-      title: '인기 코테 스터디 23',
+      title: '코테 스터디 23',
       owner: {
         id: 1,
         nickname: '포키',
@@ -672,7 +672,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
   {
     recruitment: {
       id: 24,
-      title: '인기 모의 면접 스터디 - 모집공고 24',
+      title: '모의 면접 스터디 - 모집공고 24',
       stacks: [{ id: 44, name: 'Java', imageUrl: '/static/stack/images/java.png' }],
       positions: [{ id: 1, name: '백엔드' }],
       applicantCount: 5,
@@ -683,7 +683,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
     },
     study: {
       id: 24,
-      title: '인기 모의 면접 스터디 24',
+      title: '모의 면접 스터디 24',
       category: { id: 3, name: '모의 면접' },
       owner: {
         id: 1,
@@ -700,7 +700,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
   {
     recruitment: {
       id: 25,
-      title: '인기 모의 면접 스터디 - 모집공고 25',
+      title: '모의 면접 스터디 - 모집공고 25',
       stacks: [{ id: 45, name: 'Javascript', imageUrl: '/static/stack/images/javascript.png' }],
       positions: [
         { id: 1, name: '백엔드' },
@@ -714,7 +714,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
     },
     study: {
       id: 25,
-      title: '인기 모의 면접 스터디 25',
+      title: '모의 면접 스터디 25',
       category: { id: 3, name: '모의 면접' },
       owner: {
         id: 1,
@@ -731,7 +731,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
   {
     recruitment: {
       id: 26,
-      title: '인기 모의 면접 스터디 - 모집공고 26',
+      title: '모의 면접 스터디 - 모집공고 26',
       stacks: [{ id: 44, name: 'Java', imageUrl: '/static/stack/images/java.png' }],
       positions: [{ id: 1, name: '백엔드' }],
       applicantCount: 5,
@@ -742,7 +742,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
     },
     study: {
       id: 26,
-      title: '인기 모의 면접 스터디 26',
+      title: '모의 면접 스터디 26',
       category: { id: 3, name: '모의 면접' },
       owner: {
         id: 1,
@@ -759,7 +759,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
   {
     recruitment: {
       id: 27,
-      title: '인기 프로젝트 스터디 - 모집공고 27',
+      title: '프로젝트 스터디 - 모집공고 27',
       stacks: [{ id: 44, name: 'Java', imageUrl: '/static/stack/images/java.png' }],
       positions: [{ id: 1, name: '백엔드' }],
       applicantCount: 5,
@@ -770,7 +770,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
     },
     study: {
       id: 27,
-      title: '인기 프로젝트 스터디 27',
+      title: '프로젝트 스터디 27',
       category: { id: 1, name: '프로젝트' },
       owner: {
         id: 1,
@@ -787,7 +787,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
   {
     recruitment: {
       id: 28,
-      title: '인기 프로젝트 스터디 - 모집공고 28',
+      title: '프로젝트 스터디 - 모집공고 28',
       stacks: [{ id: 45, name: 'Javascript', imageUrl: '/static/stack/images/javascript.png' }],
       positions: [
         { id: 1, name: '백엔드' },
@@ -801,7 +801,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
     },
     study: {
       id: 28,
-      title: '인기 프로젝트 스터디 28',
+      title: '프로젝트 스터디 28',
       category: { id: 1, name: '프로젝트' },
       owner: {
         id: 1,
@@ -818,7 +818,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
   {
     recruitment: {
       id: 29,
-      title: '인기 프로젝트 스터디 - 모집공고 29',
+      title: '프로젝트 스터디 - 모집공고 29',
       stacks: [{ id: 44, name: 'Java', imageUrl: '/static/stack/images/java.png' }],
       positions: [
         { id: 1, name: '백엔드' },
@@ -832,7 +832,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
     },
     study: {
       id: 29,
-      title: '인기 프로젝트 스터디 29',
+      title: '프로젝트 스터디 29',
       category: { id: 1, name: '프로젝트' },
       owner: {
         id: 1,
@@ -849,7 +849,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
   {
     recruitment: {
       id: 30,
-      title: '인기 프로젝트 스터디 - 모집공고 30',
+      title: '프로젝트 스터디 - 모집공고 30',
       stacks: [
         { id: 44, name: 'Java', imageUrl: '/static/stack/images/java.png' },
         { id: 93, name: 'ReactJS', imageUrl: '/static/stack/images/reactjs.png' },
@@ -867,7 +867,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
     },
     study: {
       id: 30,
-      title: '인기 프로젝트 스터디 30',
+      title: '프로젝트 스터디 30',
       category: { id: 1, name: '프로젝트' },
       owner: {
         id: 1,
@@ -884,7 +884,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
   {
     recruitment: {
       id: 31,
-      title: '인기 코테 스터디 3 - 모집공고1',
+      title: '코테 스터디 3 - 모집공고1',
       stacks: [{ id: 44, name: 'Java', imageUrl: '/static/stack/images/java.png' }],
       positions: [{ id: 1, name: '백엔드' }],
       applicantCount: 5,
@@ -895,7 +895,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
     },
     study: {
       id: 31,
-      title: '인기 코테 스터디 31',
+      title: '코테 스터디 31',
       category: { id: 2, name: '코딩 테스트' },
       owner: {
         id: 1,
@@ -912,7 +912,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
   {
     recruitment: {
       id: 32,
-      title: '인기 코테 스터디 3 - 모집공고2',
+      title: '코테 스터디 3 - 모집공고2',
       stacks: [
         { id: 45, name: 'Javascript', imageUrl: '/static/stack/images/javascript.png' },
         { id: 44, name: 'Java', imageUrl: '/static/stack/images/java.png' },
@@ -929,7 +929,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
     },
     study: {
       id: 32,
-      title: '인기 코테 스터디 32',
+      title: '코테 스터디 32',
       owner: {
         id: 1,
         nickname: '포키',
@@ -947,7 +947,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
   {
     recruitment: {
       id: 33,
-      title: '인기 코테 스터디 3 - 모집공고3',
+      title: '코테 스터디 3 - 모집공고3',
       stacks: [
         { id: 44, name: 'Java', imageUrl: '/static/stack/images/java.png' },
         { id: 45, name: 'Javascript', imageUrl: '/static/stack/images/javascript.png' },
@@ -964,7 +964,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
     },
     study: {
       id: 33,
-      title: '인기 코테 스터디 33',
+      title: '코테 스터디 33',
       owner: {
         id: 1,
         nickname: '포키',
@@ -982,7 +982,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
   {
     recruitment: {
       id: 34,
-      title: '인기 모의 면접 스터디 - 모집공고 34',
+      title: '모의 면접 스터디 - 모집공고 34',
       stacks: [
         { id: 44, name: 'Java', imageUrl: '/static/stack/images/java.png' },
         { id: 115, name: 'Spring', imageUrl: '/static/stack/images/spring.png' },
@@ -996,7 +996,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
     },
     study: {
       id: 34,
-      title: '인기 모의 면접 스터디 34',
+      title: '모의 면접 스터디 34',
       category: { id: 3, name: '모의 면접' },
       owner: {
         id: 1,
@@ -1013,7 +1013,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
   {
     recruitment: {
       id: 35,
-      title: '인기 모의 면접 스터디 - 모집공고 35',
+      title: '모의 면접 스터디 - 모집공고 35',
       stacks: [
         { id: 45, name: 'Javascript', imageUrl: '/static/stack/images/javascript.png' },
         { id: 93, name: 'ReactJS', imageUrl: '/static/stack/images/reactjs.png' },
@@ -1032,7 +1032,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
     },
     study: {
       id: 35,
-      title: '인기 모의 면접 스터디 35',
+      title: '모의 면접 스터디 35',
       category: { id: 3, name: '모의 면접' },
       owner: {
         id: 1,
@@ -1049,7 +1049,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
   {
     recruitment: {
       id: 36,
-      title: '인기 모의 면접 스터디 - 모집공고 36',
+      title: '모의 면접 스터디 - 모집공고 36',
       stacks: [{ id: 44, name: 'Java', imageUrl: '/static/stack/images/java.png' }],
       positions: [{ id: 1, name: '백엔드' }],
       applicantCount: 5,
@@ -1060,7 +1060,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
     },
     study: {
       id: 36,
-      title: '인기 모의 면접 스터디 36',
+      title: '모의 면접 스터디 36',
       category: { id: 3, name: '모의 면접' },
       owner: {
         id: 1,
@@ -1077,7 +1077,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
   {
     recruitment: {
       id: 37,
-      title: '인기 프로젝트 스터디 - 모집공고 37',
+      title: '프로젝트 스터디 - 모집공고 37',
       stacks: [{ id: 44, name: 'Java', imageUrl: '/static/stack/images/java.png' }],
       positions: [{ id: 1, name: '백엔드' }],
       applicantCount: 5,
@@ -1088,7 +1088,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
     },
     study: {
       id: 37,
-      title: '인기 프로젝트 스터디 37',
+      title: '프로젝트 스터디 37',
       category: { id: 1, name: '프로젝트' },
       owner: {
         id: 1,
@@ -1105,7 +1105,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
   {
     recruitment: {
       id: 38,
-      title: '인기 프로젝트 스터디 - 모집공고 38',
+      title: '프로젝트 스터디 - 모집공고 38',
       stacks: [{ id: 45, name: 'Javascript', imageUrl: '/static/stack/images/javascript.png' }],
       positions: [
         { id: 1, name: '백엔드' },
@@ -1119,7 +1119,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
     },
     study: {
       id: 38,
-      title: '인기 프로젝트 스터디 38',
+      title: '프로젝트 스터디 38',
       category: { id: 1, name: '프로젝트' },
       owner: {
         id: 1,
@@ -1136,7 +1136,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
   {
     recruitment: {
       id: 39,
-      title: '인기 프로젝트 스터디 - 모집공고 39',
+      title: '프로젝트 스터디 - 모집공고 39',
       stacks: [{ id: 44, name: 'Java', imageUrl: '/static/stack/images/java.png' }],
       positions: [{ id: 1, name: '백엔드' }],
       applicantCount: 5,
@@ -1147,7 +1147,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
     },
     study: {
       id: 39,
-      title: '인기 프로젝트 스터디 39',
+      title: '프로젝트 스터디 39',
       category: { id: 1, name: '프로젝트' },
       owner: {
         id: 1,
@@ -1164,7 +1164,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
   {
     recruitment: {
       id: 40,
-      title: '인기 프로젝트 스터디 - 모집공고 40',
+      title: '프로젝트 스터디 - 모집공고 40',
       stacks: [{ id: 44, name: 'Java', imageUrl: '/static/stack/images/java.png' }],
       positions: [{ id: 1, name: '백엔드' }],
       applicantCount: 5,
@@ -1175,7 +1175,7 @@ export const recruitmentDetailMockData: RecruitmentDetail[] = [
     },
     study: {
       id: 40,
-      title: '인기 프로젝트 스터디 40',
+      title: '프로젝트 스터디 40',
       category: { id: 1, name: '프로젝트' },
       owner: {
         id: 1,
@@ -1196,7 +1196,14 @@ export const recruitmentsMockData: Recruitment[] = recruitmentDetailMockData.map
     const { id, title, stacks, positions, endDateTime: recruitmentEndDateTime } = recruitmentDetail.recruitment;
     const { category, owner, way, startDateTime, endDateTime } = recruitmentDetail.study;
     const ownerNickname = owner.nickname;
-    const createdDateTime = idx <= 30 ? `2024-01-${idx + 1}T03:16:03.598Z` : `2024-02-${idx - 30}T03:16:03.598Z`;
+    const createdDateTime =
+      idx <= 8
+        ? `2024-01-0${idx + 1}T03:16:03.598Z`
+        : idx <= 30
+        ? `2024-01-${idx + 1}T03:16:03.598Z`
+        : idx <= 40
+        ? `2024-02-0${idx - 30}T03:16:03.598Z`
+        : `2024-02-10T03:16:03.598Z`;
     const hits = idx + 1000;
     return {
       id,
