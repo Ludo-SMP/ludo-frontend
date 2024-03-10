@@ -22,7 +22,7 @@ export const POSITION = {
   4: '데브옵스',
 };
 
-export const PROCESS_METHOD = {
+export const PROGRESS_METHOD = {
   ONLINE: '온라인',
   OFFLINE: '오프라인',
 };

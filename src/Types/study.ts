@@ -1,12 +1,10 @@
-import { APPLY_STATUS, MEMBER_STATUS, PLATFORM, PROCESS_METHOD, ROLE, STUDY_STATUS } from '@/Shared/study';
+import { APPLY_STATUS, MEMBER_STATUS, PLATFORM, PROGRESS_METHOD, ROLE, STUDY_STATUS } from '@/Shared/study';
 
-export type StudyCategory = '코딩 테스트' | '모의 면접' | '프로젝트';
 export type CategoryPropertyType = 'category' | 'stacks' | 'positions' | 'way' | 'sort';
 export type StudyStatus = keyof typeof STUDY_STATUS;
 export type MemberStatus = keyof typeof MEMBER_STATUS;
 export type ApplyStatus = keyof typeof APPLY_STATUS;
-export type ProgressMethod = keyof typeof PROCESS_METHOD;
-export type AllType = '전체';
+export type ProgressMethod = keyof typeof PROGRESS_METHOD;
 export type Role = keyof typeof ROLE;
 export type Platform = keyof typeof PLATFORM;
 export type Card = 'STUDY' | 'RECRUITMENT';
@@ -14,6 +12,11 @@ export type Sort = '최신순' | '조회순';
 export interface Position {
   id: number;
   name: '백엔드' | '프론트엔드' | '디자이너' | '데브옵스';
+}
+
+export interface Category {
+  id: number;
+  name: '프로젝트' | '코딩 테스트' | '모의 면접';
 }
 
 export interface Member {
@@ -30,36 +33,6 @@ export interface User {
   email: string;
 }
 
-export interface RecruitmentInfoType {
-  recruitmentId: number;
-  recruitmentTitle: string;
-  applicantCnt: number;
-  positions: Position[];
-  stacks: string[];
-  contact: string;
-  platformUrl: string;
-  content: string;
-  creator: string;
-  createdAt: string;
-  recruitmentEndDate: string;
-  isModified?: boolean;
-  views: number;
-}
-
-export interface ProgressInfoType {
-  progressMethod: ProgressMethod;
-  platform: string;
-  startDate: string;
-  endDate: string;
-}
-
-export interface StudyBasicInfoType {
-  studyId?: number;
-  studyTitle: string;
-  category: StudyCategory;
-  memberCnt: number;
-}
-
 export type MainCategoryNameType = '스터디 유형' | '기술 스택' | '포지션' | '진행 방식' | '목록 정렬 기준';
 
 export interface MainCategoryType<T, S> {
@@ -68,15 +41,8 @@ export interface MainCategoryType<T, S> {
   categoryItems?: (T | S)[];
 }
 
-export interface FilterOptionsType {
-  category: StudyCategory[];
-  stacks: string[];
-  positions: Position[];
-  way: ProgressMethod;
-  sort: Sort[];
-}
-
-//////////////////
+/////////////////////
+export type FilterOption = 'CATEGORY' | 'STACK' | 'POSITION' | 'PROGRESS_METHOD' | 'SORT';
 export interface Stack {
   id: number;
   name: string;
@@ -98,7 +64,7 @@ export interface RecruitmentDetail {
   study: {
     id: number;
     title: string;
-    category: { id: number; name: StudyCategory };
+    category: Category;
     owner: User;
     platform: Platform;
     way: ProgressMethod;
@@ -113,7 +79,7 @@ export interface Recruitment {
   title: string;
   stacks: Stack[];
   positions: Position[];
-  category: { id: number; name: StudyCategory };
+  category: Category;
   ownerNickname: string;
   way: ProgressMethod;
   startDateTime: string;
@@ -151,10 +117,7 @@ export interface StudyDetail {
     participantsLimit: number;
     startDateTime: string;
     endDateTime: string;
-    category: {
-      id: number;
-      name: StudyCategory;
-    };
+    category: Category;
     owner: User;
     participants: Participant[];
   };

@@ -1,10 +1,8 @@
 import styled from 'styled-components';
 import { Position } from '@/Types/study';
 
-export type PositionProps = { position?: Position };
-
-const PositionSection = ({ position }: PositionProps) => {
-  return <PositionWrapper>{position}</PositionWrapper>;
+const PositionToken = ({ name }: Position) => {
+  return <PositionWrapper>{name}</PositionWrapper>;
 };
 
 const PositionWrapper = styled.div`
@@ -13,7 +11,7 @@ const PositionWrapper = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 24px;
-  background: ${(props) => props.theme.color.purple2};
+  background: ${(props) => props.theme.color.gray1};
   color: ${(props) => props.theme.color.purple1};
   text-align: center;
   font-size: ${(props) => props.theme.font.small};
@@ -21,4 +19,4 @@ const PositionWrapper = styled.div`
   line-height: 30px;
 `;
 
-export default PositionSection;
+export default PositionToken;
