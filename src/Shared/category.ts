@@ -12,7 +12,7 @@ import {
 
 export const cateegoryProperties: CategoryPropertyType[] = ['category', 'stacks', 'positions', 'way', 'sort'];
 export const studyCategory: MainCategoryType<StudyCategory, AllType> = {
-  categoryName: '스터디 유형',
+  categoryName: '카테고리',
   categoryProperty: 'category',
   categoryItems: ['전체', '코딩 테스트', '모의 면접', '프로젝트'],
 };
@@ -35,7 +35,7 @@ export const progessMethodCategory: MainCategoryType<ProgressMethod, AllType> = 
 };
 
 export const sortCategory: MainCategoryType<SortType, AllType> = {
-  categoryName: '목록 정렬 기준',
+  categoryName: '정렬 기준',
   categoryProperty: 'sort',
   categoryItems: ['조회순', '최신순'],
 };
