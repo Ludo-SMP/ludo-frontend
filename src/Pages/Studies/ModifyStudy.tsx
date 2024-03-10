@@ -13,7 +13,6 @@ import { Creates } from '@/Types/studies';
 import { useNavigate } from 'react-router-dom';
 export type OptionalCreates = Partial<Creates>;
 export const ModifyStudy = () => {
-  const Navigate = useNavigate();
   const [useForm, setuseForm] = useState<Creates>({
     title: '',
     categoryId: 0,
