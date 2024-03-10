@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { ChangeEvent, useState } from 'react';
-import { OptionalCreates } from '@/Pages/Studies/GatherStudy';
+import { OptionalCreates } from '@/Pages/Studies/CreateRecruitment';
 import { Creates } from '@/Types/studies';
 
 export type Props = {

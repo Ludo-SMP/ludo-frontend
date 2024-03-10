@@ -3,7 +3,7 @@ import DatePicker from 'react-datepicker';
 import { useState, ChangeEvent } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
 import styled from 'styled-components';
-import { OptionalCreates } from '@/Pages/Studies/GatherStudy';
+import { OptionalCreates } from '@/Pages/Studies/CreateRecruitment';
 import { Creates } from '@/Types/studies';
 
 export type Props = {

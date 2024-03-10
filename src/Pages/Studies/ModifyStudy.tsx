@@ -8,8 +8,29 @@ import { CalendarButton } from '../../Components/Selectbox/CalendarButton';
 import { BigCategoryButton } from '../../Components/Selectbox/BigCategoryButton';
 import { ProgressPeriod } from '../../Components/Calendar/ProgressPeriod';
 import { media } from '../../Styles/theme';
-
+import { useState } from 'react';
+import { Creates } from '@/Types/studies';
+import { useNavigate } from 'react-router-dom';
+export type OptionalCreates = Partial<Creates>;
 export const ModifyStudy = () => {
+  const Navigate = useNavigate();
+  const [useForm, setuseForm] = useState<Creates>({
+    title: '',
+    categoryId: 0,
+    way: '',
+    participantLimit: 0,
+    startDateTime: '',
+    endDateTime: '',
+    positionId: 0,
+    platform: '',
+  });
+
+  function forms(fields: OptionalCreates) {
+    setuseForm({
+      ...useForm,
+      ...fields,
+    });
+  }
   return (
     <>
       <StudyContainer>
@@ -18,7 +39,7 @@ export const ModifyStudy = () => {
           <StudyTitle>스터디 제목</StudyTitle>
           <BottomWrapper>
             <ContentText>제목</ContentText>
-            <Titlearea />
+            <Titlearea setForm={forms} useForm={useForm} />
           </BottomWrapper>
         </TopBox>
         <MiddleBox>
@@ -27,11 +48,11 @@ export const ModifyStudy = () => {
             <MiddleBottomInfo>
               <MiddleBottomWrapper>
                 <ContentText>카테고리</ContentText>
-                <BigCategoryButton />
+                <BigCategoryButton setForm={forms} useForm={useForm} />
               </MiddleBottomWrapper>
               <MiddleBottomWrapper>
                 <ContentText>스터디 최대 인원</ContentText>
-                <BigCategoryButton />
+                <BigCategoryButton setForm={forms} useForm={useForm} />
               </MiddleBottomWrapper>
             </MiddleBottomInfo>
           </MiddleWrapper>
@@ -41,16 +62,16 @@ export const ModifyStudy = () => {
           <StudyMiddleInfo>
             <StudyWrapper>
               <ContentText>진행방식</ContentText>
-              <ProgressButton />
+              <ProgressButton setForm={forms} useForm={useForm} />
             </StudyWrapper>
             <StudyWrapper>
               <ContentText>진행 플랫폼</ContentText>
-              <PlatformButton />
+              <PlatformButton setForm={forms} useForm={useForm} />
             </StudyWrapper>
             <StudyWrapper>
               <ContentText> 진행기간</ContentText>
               <CalendarButton>
-                <ProgressPeriod />
+                <ProgressPeriod setForm={forms} useForm={useForm} />
               </CalendarButton>
             </StudyWrapper>
           </StudyMiddleInfo>
