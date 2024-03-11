@@ -8,35 +8,23 @@ export const Footer = () => {
         <FooterText>스터디 모집 공고 모아보기</FooterText>
         <FooterText>마이 페이지</FooterText>
         <BorderBox />
-
         <FooterBottom>
-          <AssetContainer>
-            <Ludo_Footer />
-          </AssetContainer>
-          {/* <ArticleTitles>함께 발견하는 가능성, 기회의 연결!</ArticleTitles>
-          <Articles>CopyrightⓒLudo All rights reserved.</Articles>
-          <Articles>[BE] 빽 , 아카 , 휴 | [FE] 타로 , 현 | [DE] 포키</Articles>
-          <ArticleContainer>
-            <Articles></Articles>
-          </ArticleContainer> */}
+          <Ludo_Footer />
+          <MiddleWrapper>
+            <ArticleTitles>함께 발견하는 가능성, 기회의 연결!</ArticleTitles>
+            <Articles>CopyrightⓒLudo All rights reserved.</Articles>
+            <Articles>[BE] 빽 , 아카 , 휴 | [FE] 타로 , 현 | [DE] 포키 </Articles>
+          </MiddleWrapper>
+          <LastWrapper>
+            <FooterText>서비스 소개</FooterText>
+            <FooterText>이용약관</FooterText>
+            <FooterText>개인정보 처리방침</FooterText>
+          </LastWrapper>
         </FooterBottom>
       </FooterWrapper>
-
-      {/* <Ludo_Footer />
-      <FooterBottom>
-        <ArticleContainer>
-          <ArticleTitles>함께 발견하는 가능성, 기회의 연결!</ArticleTitles>
-          <Articles>CopyrightⓒLudo All rights reserved.</Articles>
-          <Articles>[BE] 빽 , 아카 , 휴 | [FE] 타로 , 현 | [DE] 포키 </Articles>
-        </ArticleContainer>
-      </FooterBottom> */}
     </FooterContainer>
   );
 };
-
-const AssetContainer = styled.div`
-  align-items: center;
-`;
 
 const FooterContainer = styled.section`
   display: flex;
@@ -45,6 +33,14 @@ const FooterContainer = styled.section`
   flex-direction: row;
   margin-top: 40px;
   background-color: ${({ theme }) => theme.color.gray1};
+`;
+
+const MiddleWrapper = styled.div`
+  display: grid;
+  grid-template-rows: 30px 30px 30px;
+  flex-direction: row;
+  grid-template-columns: 504px;
+  padding-bottom: 24px;
 `;
 
 const BorderBox = styled.span`
@@ -61,17 +57,21 @@ const FooterWrapper = styled.div`
   flex-direction: row;
 `;
 
-const FooterBottom = styled.div`
-  flex-direction: row;
-  padding-bottom: 40px;
-  padding-top: 32px;
-  margin: auto;
+const LastWrapper = styled.div`
+  display: grid;
+  grid-template-rows: 78px;
+  grid-template-columns: 101px 101px 150px;
 `;
 
-const ArticleContainer = styled.div`
-  flex-direction: column;
-  /* height: 78px; */
+const FooterBottom = styled.div`
+  padding-bottom: 40px;
+  padding-top: 32px;
+  gap: 24px;
+  display: grid;
+  grid-template-rows: 78px;
+  grid-template-columns: 180px 513px 513px;
 `;
+
 const ArticleTitles = styled.span`
   font-size: 20px;
   font-style: normal;

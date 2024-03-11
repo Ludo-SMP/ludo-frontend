@@ -8,7 +8,7 @@ import { StackSelectButton } from '@/Components/Selectbox/StackSelectButton';
 import { Mainarea } from '../../Components/Textarea/Mainarea';
 import { Titlearea } from '../../Components/Textarea/Titlearea';
 import { GatherButton } from '../../Components/Selectbox/GatherButton';
-// import { StackModal } from '../../Components/Modal/StackModal';
+// import { StackModal } from '../../Components/Modal/
 import { EndDate } from '../../Components/Calendar/EndDate';
 import { media } from '../../Styles/theme';
 import { Creates, Gather } from '@/Types/studies';
@@ -17,15 +17,13 @@ import { useState } from 'react';
 import { useStack } from '@/Apis/stack';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { httpClient } from '@/Utils/axios';
 import { One, Two, Three, Four } from '@/Assets';
 import { SaveButton } from '@/Components/Button/Studies/SaveButton';
-// import { Border } from '@/Assets';
 
 axios.defaults.withCredentials = true;
 export type OptionalCreates = Partial<Gather>;
 
-export const GatherStudy = () => {
+export const CreateRecruitment = () => {
   const Navigation = useNavigate();
   const [useForm, setuseForm] = useState<Gather>({
     title: '',
@@ -57,7 +55,7 @@ export const GatherStudy = () => {
       callUrl: useForm.callUrl,
       content: useForm.content,
       // studyId: useForm.studyId,
-      studyId: 47,
+      studyId: 50,
     });
     console.log(data);
     localStorage.setItem('gather', JSON.stringify(data.data));

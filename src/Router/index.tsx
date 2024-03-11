@@ -4,16 +4,16 @@ import MyPage from '../Pages/MyPage';
 import { Login } from '../Pages/Login';
 import { CreateStudy } from '../Pages/Studies/CreateStudy';
 import { ModifyStudy } from '../Pages/Studies/ModifyStudy';
-import { GatherStudy } from '../Pages/Studies/GatherStudy';
 import MainPage from '@/Pages/Main';
 import RecruitmentDetailPage from '@/Pages/RecruitmentDetail';
+import { CreateRecruitment } from '../Pages/Studies/CreateRecruitment';
 import Recruitments from '../Pages/Recruitments';
 import SignUp from '@/Pages/SignUp';
 import Header from '@/Components/Header';
 import ApplicantsPage from '@/Pages/Applicants';
 import StudyDetailPage from '@/Pages/StudyDetail';
 import { Footer } from '@/Components/Footer/Footer';
-import { Save } from '@/Pages/Studies/Save';
+import { SaveStudy } from '@/Pages/Studies/SaveStudy';
 
 export const RouterPath = createBrowserRouter([
   {
@@ -47,7 +47,7 @@ export const RouterPath = createBrowserRouter([
       },
       {
         path: ROUTER_PATH.gatherStudy,
-        element: <GatherStudy />,
+        element: <CreateRecruitment />,
       },
 
       {
@@ -71,8 +71,8 @@ export const RouterPath = createBrowserRouter([
         element: <ApplicantsPage />,
       },
       {
-        path: ROUTER_PATH.save,
-        element: <Save />,
+        path: ROUTER_PATH.savestudy,
+        element: <SaveStudy />,
       },
     ],
   },

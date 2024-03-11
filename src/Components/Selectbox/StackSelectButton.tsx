@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { OptionalCreates } from '@/Pages/Studies/GatherStudy';
+import { OptionalCreates } from '@/Pages/Studies/CreateRecruitment';
 import { Creates, ItemCategory } from '@/Types/studies';
 import { ChangeEvent, useState, useRef } from 'react';
 import { StackItem } from '@/Types/studies';
