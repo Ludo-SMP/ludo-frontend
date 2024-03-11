@@ -1,18 +1,17 @@
+import { PROGRESS_METHOD } from '@/Shared/study';
+import { FilterOption } from '@/Types/study';
 import styled from 'styled-components';
 
-export type DropdownItemProps = {
-  catergoryItem: string;
-  handleClick: (categoryItem: string) => void;
-};
+export interface DropdownItemProps {
+  item: { id: number; name: string };
+  handleClick: () => void;
+  property: FilterOption;
+}
 
-const DropdownItem = ({ catergoryItem, handleClick }: DropdownItemProps) => {
+const DropdownItem = ({ item, property, handleClick }: DropdownItemProps) => {
   return (
-    <DropdownItemWrapper
-      onClick={() => {
-        handleClick(catergoryItem);
-      }}
-    >
-      {catergoryItem}
+    <DropdownItemWrapper onClick={handleClick}>
+      {property === 'PROGRESS_METHOD' && item.id !== 0 ? PROGRESS_METHOD[item.name] : item.name}
     </DropdownItemWrapper>
   );
 };

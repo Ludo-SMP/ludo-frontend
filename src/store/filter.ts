@@ -1,24 +1,24 @@
 import { create } from 'zustand';
-import { ProgressMethod, Sort, FilterOption } from '@/Types/study';
+import { FilterOption } from '@/Types/study';
 
 export interface FilterOptions {
   categoryIds: number[];
   stackIds: number[];
   positionIds: number[];
-  progressMethods: ProgressMethod[];
-  sort: Sort[];
+  progressMethodIds: number[];
+  sortIds: number[];
 }
 
 const defaultFilterOptions: FilterOptions = {
   categoryIds: [1, 2, 3],
   stackIds: [44, 45, 93, 137, 115],
   positionIds: [1, 2, 3, 4],
-  progressMethods: ['OFFLINE', 'ONLINE'],
-  sort: ['최신순'],
+  progressMethodIds: [1, 2],
+  sortIds: [1],
 };
 
 export interface SetFilterOptionsAction {
-  setFilterOptions: (filterOption: FilterOption, value: number[] | ProgressMethod[] | Sort[]) => void;
+  setFilterOptions: (filterOption: FilterOption, value: number[]) => void;
   resetFilterOptions: () => void;
 }
 
@@ -26,9 +26,9 @@ export const useFilterOptionsStore = create<FilterOptions & SetFilterOptionsActi
   categoryIds: [...defaultFilterOptions.categoryIds],
   stackIds: [...defaultFilterOptions.stackIds],
   positionIds: [...defaultFilterOptions.positionIds],
-  progressMethods: [...defaultFilterOptions.progressMethods],
-  sort: [...defaultFilterOptions.sort],
-  setFilterOptions: (filterOption: FilterOption, value: number[] | ProgressMethod[] | Sort[]) => {
+  progressMethodIds: [...defaultFilterOptions.progressMethodIds],
+  sortIds: [...defaultFilterOptions.sortIds],
+  setFilterOptions: (filterOption: FilterOption, value: number[]) => {
     switch (filterOption) {
       case 'CATEGORY':
         set({ categoryIds: [...value] });
@@ -40,10 +40,10 @@ export const useFilterOptionsStore = create<FilterOptions & SetFilterOptionsActi
         set({ positionIds: [...value] });
         break;
       case 'PROGRESS_METHOD':
-        set({ progressMethods: [...value] });
+        set({ progressMethodIds: [...value] });
         break;
       case 'SORT':
-        set({ sort: [...value] });
+        set({ sortIds: [...value] });
         break;
       default:
         break;
@@ -54,7 +54,7 @@ export const useFilterOptionsStore = create<FilterOptions & SetFilterOptionsActi
       categoryIds: [...defaultFilterOptions.categoryIds],
       stackIds: [...defaultFilterOptions.stackIds],
       positionIds: [...defaultFilterOptions.positionIds],
-      progressMethods: [...defaultFilterOptions.progressMethods],
-      sort: [...defaultFilterOptions.sort],
+      progressMethodIds: [...defaultFilterOptions.progressMethodIds],
+      sortIds: [...defaultFilterOptions.sortIds],
     }),
 }));

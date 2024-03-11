@@ -2,22 +2,20 @@ import styled from 'styled-components';
 import RecruitmentCardList from '../../Components/RecruitmentCardList';
 import { bannerDummy } from '../../Shared/dummy';
 import Banner from '../../Components/Banner';
-import CardListInfo from '@/Components/CardListInfo';
-import DropdownFilters from '@/Components/DropdownFilters';
-import { defaultFilterOptions } from '@/Shared/category';
-import { mainCategories } from '@/Shared/category';
 import DropdownFilter from '@/Components/DropdownFilter';
 import { useState } from 'react';
 import { media } from '@/Styles/theme';
-import { Create, Filter, Up } from '@/Assets';
+import { Create, Up } from '@/Assets';
 import Button from '@/Components/Common/Button';
 import UtiltiyButtons from '@/Components/UtilityButtons';
 import { useNavigate } from 'react-router-dom';
+import { useStack } from '@/Apis/stack';
+import { ALL, CATEGORIES, POSITIONS, PROGRESS_METHODS, SORTS } from '@/Shared/study';
+import { Stack } from '@/Types/study';
 
 const RecruitmentsPage = () => {
-  const [filterOptions, setFilterOptions] = useState<FilterOptionsType>(defaultFilterOptions);
+  const { data, isLoading } = useStack();
   const navigate = useNavigate();
-
   const handleScroll = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -25,28 +23,39 @@ const RecruitmentsPage = () => {
   return (
     <RecruitmentsPageWrapper>
       <Banner {...bannerDummy} />
-      <RecruitmentsSectionWrapper>
-        <SelectFilterSectionWrapper>
-          <div className="section__title">나에게 필요한 스터디를 찾아보아요</div>
-          <DropdownFilters className="filters">
-            {mainCategories.map((mainCategory) => {
-              return (
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : (
+        <RecruitmentsSectionWrapper>
+          <SelectFilterSectionWrapper>
+            <div className="section__title">나에게 필요한 스터디를 찾아보아요</div>
+            <DropdownFiltersWrapper>
+              <DropdownFilter filterName={'카테고리'} items={[{ ...ALL }, ...CATEGORIES]} property="CATEGORY" />
+              {data?.stacks && (
                 <DropdownFilter
-                  categoryName={mainCategory.categoryName}
-                  categoryProperty={mainCategory.categoryProperty}
-                  categoryItems={mainCategory.categoryItems}
-                  setFilterOptions={setFilterOptions}
-                  key={mainCategory.categoryName}
+                  filterName={'기술 스택'}
+                  items={[
+                    { ...ALL },
+                    ...data?.stacks?.map((stack: Stack) => {
+                      return { id: stack.id, name: stack.name };
+                    }),
+                    ,
+                  ]}
+                  property="STACK"
                 />
-              );
-            })}
-          </DropdownFilters>
-          <Button className="filterIcon">
-            <Filter />
-          </Button>
-        </SelectFilterSectionWrapper>
-        {/* <RecruitmentCardList filterOptions={filterOptions} /> */}
-      </RecruitmentsSectionWrapper>
+              )}
+              <DropdownFilter filterName={'포지션'} items={[{ ...ALL }, ...POSITIONS]} property="POSITION" />
+              <DropdownFilter
+                filterName={'진행방식'}
+                items={[{ ...ALL }, ...PROGRESS_METHODS]}
+                property="PROGRESS_METHOD"
+              />
+              <DropdownFilter filterName={'정렬 기준'} items={[...SORTS]} property="SORT" />
+            </DropdownFiltersWrapper>
+          </SelectFilterSectionWrapper>
+          <RecruitmentCardList />
+        </RecruitmentsSectionWrapper>
+      )}
       <UtiltiyButtons>
         <Button onClick={handleScroll} className="scroll__btn">
           <Up />
@@ -89,6 +98,13 @@ const RecruitmentsSectionWrapper = styled.div`
     font-weight: 800;
     line-height: 40px;
   }
+`;
+
+const DropdownFiltersWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  padding-top: 2px;
+  gap: 12px;
 `;
 
 const SelectFilterSectionWrapper = styled.div`

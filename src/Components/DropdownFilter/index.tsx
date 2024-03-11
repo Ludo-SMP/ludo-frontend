@@ -1,34 +1,34 @@
 import styled from 'styled-components';
-import { useState, Dispatch, SetStateAction, useRef } from 'react';
-import { FilterOptionsType, MainCategoryNameType } from '@/Types/study';
-import { defaultFilterOptions } from '@/Shared/category';
+import { useState, useRef } from 'react';
+import { FilterOption } from '@/Types/study';
 import DropdownItem from './DropdownItem';
 import { useOutSideClick } from '@/Hooks/useOutsideClick';
 import { Up, Down } from '@/Assets';
+import { useFilterOptionsStore } from '@/Store/filter';
+import { PROGRESS_METHOD } from '@/Shared/study';
 
-export type DropdownFilterProps = {
-  categoryName: MainCategoryNameType;
-  categoryItems: string[];
-  categoryProperty: string;
+export interface DropdownFilterProps {
+  filterName: string;
+  items: { id: number; name: string }[];
+  property: FilterOption;
   checked?: boolean;
-  setFilterOptions: Dispatch<SetStateAction<FilterOptionsType>>;
-};
+}
 
-const DropdownFilter = ({ categoryItems, categoryName, categoryProperty, setFilterOptions }: DropdownFilterProps) => {
+const DropdownFilter = ({ filterName, items, property }: DropdownFilterProps) => {
+  const { setFilterOptions } = useFilterOptionsStore();
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [selectedItem, setSelectedItem] = useState(categoryName);
+  const [content, setContent] = useState(filterName);
   const dropDownItemsRef = useRef(null);
-
   const toggleDropdonwItems = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleSelectedItem = (categoryItem) => {
-    setSelectedItem(categoryItem);
-    const filterOption = categoryItem === '전체' ? [...defaultFilterOptions[categoryProperty]] : [categoryItem];
-    setFilterOptions((prev) => {
-      return { ...prev, [categoryProperty]: [...filterOption] };
-    });
+  const handleSelectedItem = (item: { id: number; name: string }, property: FilterOption) => {
+    setContent(property === 'PROGRESS_METHOD' && item.id !== 0 ? PROGRESS_METHOD[item.name] : item.name);
+    setFilterOptions(
+      property,
+      item.id !== 0 ? [item.id] : items.filter((item) => item.id !== 0).map((item) => item.id),
+    );
     setIsOpen(!isOpen);
   };
 
@@ -36,17 +36,18 @@ const DropdownFilter = ({ categoryItems, categoryName, categoryProperty, setFilt
 
   return (
     <DropdownFilterWrapper>
-      <DropdownSelectWrapper onClick={toggleDropdonwItems}>
-        <span className="filter__text">{selectedItem}</span>
-        {isOpen ? <Up width={24} height={24} color="black" /> : <Down />}
+      <DropdownSelectWrapper onClick={toggleDropdonwItems} checked={content !== '전체' && content !== filterName}>
+        <span className="filter__text">{content}</span>
+        {isOpen ? <Up width={24} height={24} /> : <Down />}
       </DropdownSelectWrapper>
       {isOpen && (
-        <DropdownItemsWrapper ref={dropDownItemsRef}>
-          {categoryItems.map((categoryItem) => (
+        <DropdownItemsWrapper ref={dropDownItemsRef} property={property}>
+          {items.map((item) => (
             <DropdownItem
-              handleClick={() => handleSelectedItem(categoryItem)}
-              catergoryItem={categoryItem}
-              key={categoryItem}
+              handleClick={() => handleSelectedItem(item, property)}
+              item={item}
+              key={item.id}
+              property={property}
             />
           ))}
         </DropdownItemsWrapper>
@@ -55,7 +56,7 @@ const DropdownFilter = ({ categoryItems, categoryName, categoryProperty, setFilt
   );
 };
 
-const DropdownFilterWrapper = styled.div<{ checked?: boolean }>`
+const DropdownFilterWrapper = styled.ul`
   position: relative;
   display: flex;
   justify-content: center;
@@ -70,13 +71,13 @@ const DropdownFilterWrapper = styled.div<{ checked?: boolean }>`
   }
 `;
 
-const DropdownSelectWrapper = styled.button<{ checked?: boolean }>`
+const DropdownSelectWrapper = styled.div<{ checked?: boolean }>`
   display: flex;
   padding: 2px 12px 0px 16px;
   width: 130px;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   border-radius: 24px;
   color: ${(props) => (props.checked ? props.theme.color.orange2 : props.theme.color.black3)};
   border: 1px solid ${(props) => (props.checked ? props.theme.color.orange2 : props.theme.color.black2)};
@@ -86,18 +87,26 @@ const DropdownSelectWrapper = styled.button<{ checked?: boolean }>`
     background: ${(props) => props.theme.color.orange2};
     border: 1px solid ${(props) => props.theme.color.orange1};
     color: ${(props) => props.theme.color.white};
+    svg > path {
+      fill: ${(props) => props.theme.color.white};
+    }
+  }
+  svg > path {
+    fill: ${({ theme, checked }) => (checked ? theme.color.orange2 : theme.color.black3)};
   }
 `;
 
-const DropdownItemsWrapper = styled.div`
+const DropdownItemsWrapper = styled.div<{ property: FilterOption }>`
   position: absolute;
   width: 100%;
+  height: ${({ property }) => (property === 'STACK' ? '240px' : 'auto')};
   display: flex;
   border-radius: 18px;
   border: 1px solid ${(props) => props.theme.color.black1};
   top: 50px;
   font-weight: 700;
   flex-direction: column;
+  overflow-y: scroll;
   background: ${(props) => props.theme.color.white};
   & > li:first-child {
     border-top-left-radius: 18px;
