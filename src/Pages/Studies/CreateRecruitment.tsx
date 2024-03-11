@@ -8,7 +8,7 @@ import { StackSelectButton } from '@/Components/Selectbox/StackSelectButton';
 import { Mainarea } from '../../Components/Textarea/Mainarea';
 import { Titlearea } from '../../Components/Textarea/Titlearea';
 import { GatherButton } from '../../Components/Selectbox/GatherButton';
-import { StackModal } from '../../Components/Modal/StackModal';
+// import { StackModal } from '../../Components/Modal/
 import { EndDate } from '../../Components/Calendar/EndDate';
 import { media } from '../../Styles/theme';
 import { Creates, Gather } from '@/Types/studies';
