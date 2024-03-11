@@ -4,9 +4,9 @@ import MyPage from '../Pages/MyPage';
 import { Login } from '../Pages/Login';
 import { CreateStudy } from '../Pages/Studies/CreateStudy';
 import { ModifyStudy } from '../Pages/Studies/ModifyStudy';
+import MainPage from '@/Pages/Main';
+import RecruitmentDetailPage from '@/Pages/RecruitmentDetail';
 import { CreateRecruitment } from '../Pages/Studies/CreateRecruitment';
-import Main from '../Pages/Main';
-import RecruitmentDetail from '../Pages/RecruitmentDetail';
 import Recruitments from '../Pages/Recruitments';
 import SignUp from '@/Pages/SignUp';
 import Header from '@/Components/Header';
@@ -27,7 +27,7 @@ export const RouterPath = createBrowserRouter([
     children: [
       {
         path: ROUTER_PATH.main,
-        element: <Main />,
+        element: <MainPage />,
       },
       {
         path: ROUTER_PATH.login,
@@ -56,7 +56,7 @@ export const RouterPath = createBrowserRouter([
       },
       {
         path: ROUTER_PATH.recruitmentDetail,
-        element: <RecruitmentDetail />,
+        element: <RecruitmentDetailPage />,
       },
       {
         path: ROUTER_PATH.recruitments,

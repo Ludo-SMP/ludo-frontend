@@ -2,14 +2,13 @@ import Modal from '@/Components/Common/Modal';
 import { APPLY } from '@/Constants/messages';
 import Chip from '@/Components/Common/Chip';
 import { useApplyStudyMutation } from '@/Apis/study';
-import { Position } from '@/Types/study';
+import { ApplyTryStatus, Position } from '@/Types/study';
 import styled from 'styled-components';
 import { useSelectedPositionStore } from '@/Store/position';
 import { SetStateAction } from 'react';
-import { ApplyState } from '@/Types/study';
 
 interface ApplyModalProps {
-  handleApplyApprove: React.Dispatch<SetStateAction<ApplyState>>;
+  handleApplyApprove: React.Dispatch<SetStateAction<ApplyTryStatus>>;
   recruitmentId: number;
   positions: Position[];
 }
@@ -32,9 +31,9 @@ const ApplyModal = ({ handleApplyApprove, recruitmentId, positions }: ApplyModal
       handleCancel={() => resetSelectedPosition()}
     >
       <ChipsWrapper>
-        {positions.map((position) => (
-          <Chip chipType="Primary" value={position}>
-            {position}
+        {positions.map((position: Position) => (
+          <Chip chipType="Primary" value={position.name}>
+            {position.name}
           </Chip>
         ))}
       </ChipsWrapper>

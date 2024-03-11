@@ -11,7 +11,7 @@ export const color = {
   black3: 'rgba(0, 0, 0, 0.65)',
   black4: `rgba(0, 0, 0, 0.85)`,
   black5: `rgba(0, 0, 0, 0.95)`,
-  gray1: '#F2F3F3',
+  gray1: '#F2F2F2',
   gray2: '#D9D9D9',
   gray3: '#262D31',
   gray4: '#858585',

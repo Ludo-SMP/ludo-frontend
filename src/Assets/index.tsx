@@ -22,7 +22,7 @@ export { default as Two } from './icons/two.svg?react';
 export { default as Up } from './icons/up.svg?react';
 export { default as Views } from './icons/views.svg?react';
 export { default as Filter } from './icons/filter.svg?react';
-export { default as CreateStudy } from './icons/createstudy.svg?react';
+export { default as Create } from './icons/createstudy.svg?react';
 export { default as Ludo_Footer } from './icons/Ludo_Footer.svg?react';
 
 // logo

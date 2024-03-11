@@ -18,15 +18,25 @@ const UtiltiyButtonsWrapper = styled.div`
   bottom: 24px;
 
   button {
+    position: relative;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     width: 112px;
     height: 112px;
     border: 1px solid ${(props) => props.theme.color.black1};
     background-color: ${(props) => props.theme.color.white};
     border-radius: 50%;
     align-items: center;
+    gap: 0;
     text-align: center;
+    svg {
+      position: absolute;
+      top: -2px;
+    }
+    span {
+      padding-top: 30px;
+    }
   }
 
   svg {

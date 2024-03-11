@@ -1,70 +1,56 @@
 import styled from 'styled-components';
-import PositionSection from './PositionSection';
-import { Position, RecruitmentInfoType, StudyBasicInfoType, ProgressInfoType } from '@/Types/study';
-import { BlankSquare } from '../Common/BlankSquare';
+import PositionToken from '../Common/PositionToken';
+import { Position, Stack } from '@/Types/study';
 import { Link } from 'react-router-dom';
-import { dateFormatter } from '@/Utils/date';
+import { dateFormatter, getPeriod } from '@/Utils/date';
+import { Recruitment } from '@/Types/study';
+import { PROGRESS_METHOD } from '@/Shared/study';
+import Image from '../Common/Image';
+import { Views } from '@/Assets';
 
-export type RecruitmentCardProps = Pick<StudyBasicInfoType, 'category'> &
-  Omit<RecruitmentInfoType, 'applicantCnt' | 'contact' | 'platformUrl' | 'detail' | 'isModified'> &
-  Omit<ProgressInfoType, 'platform'>;
-
-const RecruitmentCard = ({
-  recruitmentId,
-  recruitmentTitle,
-  positions,
-  stacks,
-  creator,
-  createdAt,
-  recruitmentEndDate,
-  views,
-  category,
-  startDate,
-  endDate,
-  progressMethod,
-}: RecruitmentCardProps) => {
+const RecruitmentCard = (recruitment: Recruitment) => {
   return (
-    <Link to={`/studies/${recruitmentId}/recruitment`}>
+    <Link to={`/studies/${recruitment.id}/recruitment`}>
       <RecruitmentCardWrapper>
         <StudyRecruitInfoWrapper>
-          <div className="study__category">[{category}]</div>
+          <div className="study__category">[{recruitment.category.name}]</div>
           <div className="recruit__deadline">
             <div>모집 마감일</div>
-            <span>{recruitmentEndDate}</span>
+            <span>{dateFormatter(recruitment.endDateTime)}</span>
           </div>
         </StudyRecruitInfoWrapper>
         <StudyNameWrapper>
-          <div className="study__name">{recruitmentTitle}</div>
+          <div className="study__name">{recruitment.title}</div>
         </StudyNameWrapper>
         <StudyDetailInfoWrapper>
           <div>
             <span className="title">진행기간</span>
-            <span className="study__period">{`${dateFormatter(startDate)} ~ ${dateFormatter(endDate)}`}</span>
+            <span className="study__period">{getPeriod(recruitment.startDateTime, recruitment.endDateTime)}</span>
           </div>
           <div>
             <span className="title">진행방식</span>
-            <span className="study__type">{progressMethod}</span>
+            <span className="study__type">{PROGRESS_METHOD[recruitment.way]}</span>
           </div>
           <div className="study__positions">
-            {positions?.map((position: Position) => {
-              return <PositionSection key={position} position={position} />;
-            })}
+            {recruitment.positions?.map((position: Position) => (
+              <PositionToken key={position.id} id={position.id} name={position.name} />
+            ))}
           </div>
-          <div className="study__tools">
-            {stacks.map((stack) => {
-              return <BlankSquare key={stack} width="32px" height="32px" />;
-            })}
+          <div className="study__stacks">
+            {recruitment.stacks.map((stack: Stack) => (
+              <Image key={stack.id} size={32} src={stack.imageUrl} />
+            ))}
           </div>
         </StudyDetailInfoWrapper>
         <StudyAdditionalInfoWrapper>
           <div className="creation__info">
-            <div className="study__creator">{creator}</div>
+            <div className="study__creator">{recruitment.ownerNickname}</div>
             <div className="division-line"></div>
-            <div className="study__createdAt">{createdAt.slice(2)}</div>
+            <div className="study__createdAt">{dateFormatter(recruitment.createdDateTime)}</div>
           </div>
           <div className="views__info">
-            <BlankSquare width="18px" height="18px" />
-            <span className="views">{views}</span>
+            <Views width="18px" height="18px" />
+            <span className="views">{recruitment.hits}</span>
           </div>
         </StudyAdditionalInfoWrapper>
       </RecruitmentCardWrapper>
@@ -130,7 +116,7 @@ const StudyDetailInfoWrapper = styled.div`
     font-size: ${(props) => props.theme.font.medium};
     font-weight: 500;
     line-height: 40px;
-    width: 184px;
+    width: 120px;
   }
 
   .study {
@@ -143,7 +129,7 @@ const StudyDetailInfoWrapper = styled.div`
     }
 
     &__positions,
-    &__tools {
+    &__stacks {
       display: flex;
       padding: 4px;
       align-items: center;
@@ -174,19 +160,22 @@ const StudyAdditionalInfoWrapper = styled.div`
   .views__info {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 4px;
 
     .views {
+      padding-top: 2px;
       color: ${(props) => props.theme.color.black2};
     }
   }
 
   .study {
     &__creator {
+      padding-top: 2px;
       color: ${(props) => props.theme.color.black4};
     }
 
     &__createdAt {
+      padding-top: 2px;
       color: ${(props) => props.theme.color.black2};
     }
   }

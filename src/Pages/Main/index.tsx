@@ -1,49 +1,89 @@
 import styled from 'styled-components';
+import { Recruitment } from '@/Types/study';
 import { bannerDummy } from '../../Shared/dummy';
 import Banner from '../../Components/Banner';
 import { usePopularRecruitments } from '@/Apis/recruitment';
-import CardListInfo from '@/Components/CardListInfo';
-import PopularRecruitmentCardList from '@/Components/PopularRecruitmentCardList';
 import Button from '@/Components/Common/Button';
-import { Up } from '@/Assets';
+import ChipMenu from '@/Components/Common/ChipMenu';
+import { Right, Create } from '@/Assets';
 import UtiltiyButtons from '@/Components/UtilityButtons';
+import { useSelectedCategoryStore } from '@/Store/category';
+import RecruitmentCard from '@/Components/RecruitmentCard';
+import { useNavigate } from 'react-router-dom';
+import { ROUTER_PATH } from '@/Constants/Router_Path';
 
-const Main = () => {
-  const { data, isLoading } = usePopularRecruitments();
-  const popularRecruitments = isLoading ? null : data;
+const MainPage = () => {
+  const { data: popularRecruitments, isLoading } = usePopularRecruitments();
+  const { selectedCategory, setSelectedCategory } = useSelectedCategoryStore();
+  const navigate = useNavigate();
 
-  const handleScroll = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  const popularCodingRecruitments: Recruitment[] = popularRecruitments?.popularCodingRecruitments;
+  const popularInterviewRecruitments: Recruitment[] = popularRecruitments?.popularInterviewRecruitments;
+  const popularProjectRecruitments: Recruitment[] = popularRecruitments?.popularProjectRecruitments;
 
   return isLoading ? (
     <div>Loading...</div>
   ) : (
-    <MainWrapper>
+    <MainPageWrapper>
       <Banner {...bannerDummy} />
-      <StudyListWrapper>
-        <CardListInfo studyCategory="코딩 테스트" />
-        <PopularRecruitmentCardList recruitmentCardsProps={popularRecruitments?.popularCodingRecruitments} />
-      </StudyListWrapper>
-      <StudyListWrapper>
-        <CardListInfo studyCategory="모의 면접" />
-        <PopularRecruitmentCardList recruitmentCardsProps={popularRecruitments?.popularInterviewRecruitments} />
-      </StudyListWrapper>
-      <StudyListWrapper>
-        <CardListInfo studyCategory="프로젝트" />
-        <PopularRecruitmentCardList recruitmentCardsProps={popularRecruitments?.popularProjectRecruitments} />
-      </StudyListWrapper>
+      <RecruitmentsSectionWrapper>
+        <div className="section__title">이번주 인기 있는 스터디 모음 zip.</div>
+        <SelectCategorySectionWrapper>
+          <CategoryMenusWrapper>
+            <ChipMenu
+              checked={selectedCategory.name === '코딩 테스트'}
+              onClick={() => setSelectedCategory({ id: 2, name: '코딩 테스트' })}
+            >
+              코딩 테스트
+            </ChipMenu>
+            <ChipMenu
+              checked={selectedCategory.name === '모의 면접'}
+              onClick={() => setSelectedCategory({ id: 1, name: '모의 면접' })}
+            >
+              모의 면접
+            </ChipMenu>
+            <ChipMenu
+              checked={selectedCategory.name === '프로젝트'}
+              onClick={() => setSelectedCategory({ id: 3, name: '프로젝트' })}
+            >
+              사이드 프로젝트
+            </ChipMenu>
+          </CategoryMenusWrapper>
+          <MoreSectionWrapper
+            onClick={() => {
+              navigate(ROUTER_PATH.recruitments);
+            }}
+          >
+            <span className="more__text">전체 목록 보러가기</span>
+            <Right />
+          </MoreSectionWrapper>
+        </SelectCategorySectionWrapper>
+
+        <RecruitmentCardsWrapper>
+          {selectedCategory.name === '코딩 테스트'
+            ? popularCodingRecruitments.map((recruitment: Recruitment) => (
+                <RecruitmentCard {...recruitment} key={recruitment.id} />
+              ))
+            : selectedCategory.name === '모의 면접'
+            ? popularInterviewRecruitments.map((recruitment: Recruitment) => (
+                <RecruitmentCard {...recruitment} key={recruitment.id} />
+              ))
+            : popularProjectRecruitments.map((recruitment: Recruitment) => (
+                <RecruitmentCard {...recruitment} key={recruitment.id} />
+              ))}
+        </RecruitmentCardsWrapper>
+      </RecruitmentsSectionWrapper>
       <UtiltiyButtons>
-        <Button onClick={handleScroll} className="scroll__btn">
-          <Up />
-          <span>위로가기</span>
+        <Button onClick={() => navigate(ROUTER_PATH.createStudy)} className="create__btn">
+          <Create height={40} />
+          <span>스터디 생성</span>
         </Button>
       </UtiltiyButtons>
-    </MainWrapper>
+    </MainPageWrapper>
   );
 };
 
-const MainWrapper = styled.section`
+const MainPageWrapper = styled.section`
   display: flex;
   max-width: 1224px;
   margin: 0 auto;
@@ -52,11 +92,61 @@ const MainWrapper = styled.section`
   gap: 40px;
 `;
 
-const StudyListWrapper = styled.div`
+const RecruitmentsSectionWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: flex-start;
-  gap: 16px;
+  gap: 21px;
+
+  .section__title {
+    color: ${({ theme }) => theme.color.black5};
+    font-family: Pretendard;
+    font-size: ${({ theme }) => theme.font.xxlarge};
+    font-style: normal;
+    font-weight: 800;
+    line-height: 40px;
+  }
 `;
 
-export default Main;
+const SelectCategorySectionWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  gap: 12px;
+`;
+
+const CategoryMenusWrapper = styled.div`
+  display: flex;
+  gap: 12px;
+`;
+
+const RecruitmentCardsWrapper = styled.div`
+  display: flex;
+  align-items: flex-start;
+  align-content: flex-start;
+  gap: 21px;
+  flex-wrap: wrap;
+`;
+
+const MoreSectionWrapper = styled.div`
+  display: flex;
+  display: inline-flex;
+  padding: 0 16px 0 24px;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2px;
+  gap: 8px;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  .more__text {
+    color: ${({ theme }) => theme.color.black3};
+    padding-top: 2px;
+  }
+`;
+
+export default MainPage;
