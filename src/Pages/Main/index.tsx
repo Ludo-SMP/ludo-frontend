@@ -12,7 +12,7 @@ import RecruitmentCard from '@/Components/RecruitmentCard';
 import { useNavigate } from 'react-router-dom';
 import { ROUTER_PATH } from '@/Constants/Router_Path';
 
-const Main = () => {
+const MainPage = () => {
   const { data: popularRecruitments, isLoading } = usePopularRecruitments();
   const { selectedCategory, setSelectedCategory } = useSelectedCategoryStore();
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ const Main = () => {
   return isLoading ? (
     <div>Loading...</div>
   ) : (
-    <MainWrapper>
+    <MainPageWrapper>
       <Banner {...bannerDummy} />
       <RecruitmentsSectionWrapper>
         <div className="section__title">이번주 인기 있는 스터디 모음 zip.</div>
@@ -79,11 +79,11 @@ const Main = () => {
           <span>스터디 생성</span>
         </Button>
       </UtiltiyButtons>
-    </MainWrapper>
+    </MainPageWrapper>
   );
 };
 
-const MainWrapper = styled.section`
+const MainPageWrapper = styled.section`
   display: flex;
   max-width: 1224px;
   margin: 0 auto;
@@ -149,4 +149,4 @@ const MoreSectionWrapper = styled.div`
   }
 `;
 
-export default Main;
+export default MainPage;
