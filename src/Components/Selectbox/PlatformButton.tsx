@@ -27,7 +27,7 @@ export const PlatformButton = ({ setForm, useForm }: Props) => {
     <ButtonConTainer name="platform" className="select" value={useForm.platform} onChange={submitHandler}>
       <Textwrapper>플랫폼</Textwrapper>
       <Textwrapper value="GATHER">게더타운</Textwrapper>
-      <Textwrapper value="GOOGLE_MEAT">구글미트</Textwrapper>
+      <Textwrapper value="GOOGLE_MEET">구글미트</Textwrapper>
     </ButtonConTainer>
   );
 };

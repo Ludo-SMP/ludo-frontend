@@ -1,15 +1,13 @@
-import axios from 'axios';
+import { API_END_POINT } from '@/Constants/api';
+import { STACK } from '@/Constants/queryString';
+import { httpClient } from '@/Utils/axios';
 import { useQuery } from '@tanstack/react-query';
-// import { ItemCategory, StackItem } from '@/Types/studies';
 
-export const Stack_KEY = ['stack'];
-export const getStack = () => axios.get('https://ludoapi.store/api/stacks');
-
-// type Props = { d: ItemCategory[] };
+export const getStack = () => httpClient.get(API_END_POINT.STACK);
 
 export const useStack = () => {
   return useQuery({
-    queryKey: Stack_KEY,
+    queryKey: [...STACK.STACK],
     queryFn: () => getStack(),
     select: (data) => ({
       data: data?.data.data.stackCategory.flatMap((data: any) => data), // stackcategory 데이터
