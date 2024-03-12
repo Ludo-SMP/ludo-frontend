@@ -59,7 +59,7 @@ const MyPage = () => {
           </ChipMenu>
         </ChipMenusWrapper>
         {selectedMyStudyStatus === 'PARTICIPATED'
-          ? participateStudies.map((participateStudy: ParticipateStudy) => (
+          ? participateStudies?.map((participateStudy: ParticipateStudy) => (
               <MyStudyCard
                 id={participateStudy?.studyId}
                 title={participateStudy?.title}

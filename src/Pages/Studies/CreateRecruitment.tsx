@@ -15,19 +15,26 @@ import { Creates, Gather } from '@/Types/studies';
 import { useState } from 'react';
 // import { stackCategory } from '@/Shared/category';
 import { useStack } from '@/Apis/stack';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { One, Two, Three, Four } from '@/Assets';
 import { SaveButton } from '@/Components/Button/Studies/SaveButton';
+import { STUDY } from '@/Constants/queryString';
+import { ContactButton } from '@/Components/Selectbox/ContactButton';
+import { ApplicantButton } from '@/Components/Selectbox/ApplicantButton';
+import { useStudyDetail } from '@/Apis/study';
 
 axios.defaults.withCredentials = true;
 export type OptionalCreates = Partial<Gather>;
 
 export const CreateRecruitment = () => {
   const Navigation = useNavigate();
+  const studyId = Number(useParams().studyId);
+  useStudyDetail(studyId);
+  // console.log(studyId);
   const [useForm, setuseForm] = useState<Gather>({
     title: '',
-    recruitmentLimit: 0,
+    // recruitmentLimit: 0,
     recruitmentEndDateTime: '',
     positionId: 0,
     stackId: 0,
@@ -35,7 +42,9 @@ export const CreateRecruitment = () => {
     // stackId: 0,
     callUrl: '',
     content: '',
-    // studyId: data.study.id,
+    studyId: Number(useParams().studyId),
+    contact: '',
+    applicantCount: 0,
   });
 
   function forms(fields: OptionalCreates) {
@@ -46,26 +55,27 @@ export const CreateRecruitment = () => {
   }
   // studyId:number
   async function posts() {
-    const { data } = await axios.post(`https://ludoapi.store/api/studies/${0}/recruitments`, {
+    const { data } = await axios.post(`https://ludoapi.store/api/studies/${studyId}/recruitments`, {
       title: useForm.title,
-      recruitmentLimit: useForm.recruitmentLimit,
+      // recruitmentLimit: useForm.recruitmentLimit,
       recruitmentEndDateTime: useForm.recruitmentEndDateTime,
       positionIds: [useForm.positionId],
       stackIds: [useForm.stackId],
       callUrl: useForm.callUrl,
       content: useForm.content,
+      contact: useForm.contact,
+      applicantCount: useForm.applicantCount,
       // studyId: useForm.studyId,
-      studyId: 50,
     });
     console.log(data);
-
-    localStorage.setItem('gather', JSON.stringify(data.data));
+    Navigation(`/studies/${studyId}/recruitment`);
+    // localStorage.setItem('gather', JSON.stringify(data.data));
   }
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
     posts();
-    Navigation('/');
+    // Navigation('/');
   };
 
   return (
@@ -82,7 +92,7 @@ export const CreateRecruitment = () => {
           <StudyTopInfo>
             <StudyWrapper>
               <ContentText>모집인원</ContentText>
-              <GatherButton setForm={forms} useForm={useForm} />
+              <ApplicantButton setForm={forms} useForm={useForm} />
             </StudyWrapper>
             <StudyWrapper>
               <ContentText>모집마감일</ContentText>
@@ -98,10 +108,10 @@ export const CreateRecruitment = () => {
               <ContentText>기술스택</ContentText>
               <StackSelectButton setForm={forms} useForm={useForm} item={useStack as any} />
             </StudyWrapper>
-            {/* <StudyWrapper>
+            <StudyWrapper>
               <ContentText>연락방법</ContentText>
-              <ContactButton />
-            </StudyWrapper> */}
+              <ContactButton setForm={forms} useForm={useForm} />
+            </StudyWrapper>
             <StudyWrapper>
               <ContentText>연결url</ContentText>
               <ContactUrlInput setForm={forms} useForm={useForm} />

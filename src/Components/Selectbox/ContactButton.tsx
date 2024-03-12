@@ -1,11 +1,31 @@
+import { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
+import { OptionalCreates } from '@/Pages/Studies/CreateStudy';
+import { Creates } from '@/Types/studies';
 
-export const ContactButton = () => {
+export type Props = {
+  onClick?: () => void;
+  children?: React.ReactNode;
+  // onChange?: (event: string) => void;
+  setForm: (any: OptionalCreates) => void;
+  useForm: Creates;
+  value?: string;
+  type?: string;
+  name?: string;
+  maxlength?: number;
+  id?: string;
+  formData?: number | string;
+  ref?: string;
+};
+
+export const ContactButton = ({ setForm, useForm }: Props) => {
+  const [contactValue, setForms] = useState<string>('');
+  const submitHandler = (event: ChangeEvent<HTMLSelectElement>) => {
+    setForm({ contact: event.target.value });
+  };
   return (
-    <ButtonConTainer name="contact" className="select">
-      <Textwrapper disabled selected>
-        연락방법
-      </Textwrapper>
+    <ButtonConTainer name="contact" className="select" value={useForm.contact} onChange={submitHandler}>
+      <Textwrapper>연락방법</Textwrapper>
       <Textwrapper value="EMAIL">이메일</Textwrapper>
       <Textwrapper value="KAKAO">카카오톡</Textwrapper>
     </ButtonConTainer>

@@ -59,6 +59,7 @@ export const CreateStudy = () => {
   const handleSubmit = (event: any) => {
     event.preventDefault();
     post();
+    // Navigate(`/`);
   };
 
   return (

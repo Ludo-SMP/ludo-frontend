@@ -16,7 +16,7 @@ const StudyInfoSection = ({ category, progressMethod, platform, period, dDay }: 
   return (
     <StudyInfoSectionWrapper>
       <div className="study__category">
-        <InfoField title="카테고리" content={category.name || '카테고리'} />
+        <InfoField title="카테고리" content={category?.name || '카테고리'} />
       </div>
       <RowDivider />
       <div className="study__info">
