@@ -14,6 +14,7 @@ import ApplicantsPage from '@/Pages/Applicants';
 import StudyDetailPage from '@/Pages/StudyDetail';
 import { Footer } from '@/Components/Footer/Footer';
 import { SaveStudy } from '@/Pages/Studies/SaveStudy';
+import { ModifyRecruitment } from '@/Pages/Studies/ModifyRecruitment';
 
 export const RouterPath = createBrowserRouter([
   {
@@ -73,6 +74,10 @@ export const RouterPath = createBrowserRouter([
       {
         path: ROUTER_PATH.savestudy,
         element: <SaveStudy />,
+      },
+      {
+        path: ROUTER_PATH.modifyRecruitment,
+        element: <ModifyRecruitment />,
       },
     ],
   },

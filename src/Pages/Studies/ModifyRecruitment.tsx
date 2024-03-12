@@ -23,7 +23,7 @@ import { SaveButton } from '@/Components/Button/Studies/SaveButton';
 axios.defaults.withCredentials = true;
 export type OptionalCreates = Partial<Gather>;
 
-export const CreateRecruitment = () => {
+export const ModifyRecruitment = () => {
   const Navigation = useNavigate();
   const [useForm, setuseForm] = useState<Gather>({
     title: '',
@@ -46,7 +46,7 @@ export const CreateRecruitment = () => {
   }
 
   async function posts() {
-    const { data } = await axios.post(`https://ludoapi.store/api/studies/${1}/recruitments`, {
+    const { data } = await axios.put(`https://ludoapi.store/api/studies/${50}/recruitments`, {
       title: useForm.title,
       recruitmentLimit: useForm.recruitmentLimit,
       recruitmentEndDateTime: useForm.recruitmentEndDateTime,
@@ -55,7 +55,7 @@ export const CreateRecruitment = () => {
       callUrl: useForm.callUrl,
       content: useForm.content,
       // studyId: useForm.studyId,
-      studyId: 52,
+      // studyId: 41,
     });
     console.log(data);
     localStorage.setItem('gather', JSON.stringify(data.data));
@@ -70,7 +70,7 @@ export const CreateRecruitment = () => {
   return (
     <>
       <StudyContainer onSubmit={handleSubmit}>
-        <StudyMain>스터디 팀원 모집하기</StudyMain>
+        <StudyMain>스터디 팀원 수정하기</StudyMain>
         <TopBox>
           <StudyTitle>
             <AssetContainer>
@@ -98,9 +98,9 @@ export const CreateRecruitment = () => {
               <StackSelectButton setForm={forms} useForm={useForm} item={useStack as any} />
             </StudyWrapper>
             {/* <StudyWrapper>
-              <ContentText>연락방법</ContentText>
-              <ContactButton />
-            </StudyWrapper> */}
+                <ContentText>연락방법</ContentText>
+                <ContactButton />
+              </StudyWrapper> */}
             <StudyWrapper>
               <ContentText>연결url</ContentText>
               <ContactUrlInput setForm={forms} useForm={useForm} />
