@@ -1,14 +1,15 @@
 import styled from 'styled-components';
 import { Three } from '@/Assets';
 import { InfoField } from '@/Components/Common/InfoField';
+import { Category } from '@/Types/study';
 
 export interface StudyBasicInfoSectionProps {
   studyTitle?: string;
-  category?: string;
-  memberCnt?: number;
+  category?: Category;
+  participantLimit?: number;
 }
 
-const StudyBasicInfoSection = ({ studyTitle, category, memberCnt }: StudyBasicInfoSectionProps) => {
+const StudyBasicInfoSection = ({ studyTitle, category, participantLimit }: StudyBasicInfoSectionProps) => {
   return (
     <StudyBasicInfoSectionWrapper>
       <div className="title">
@@ -17,10 +18,10 @@ const StudyBasicInfoSection = ({ studyTitle, category, memberCnt }: StudyBasicIn
       </div>
       <div className="basic__info">
         <InfoField title="스터디 제목" content={studyTitle || '스터디 제목'} flexDirection="column" width="100%" />
-        <InfoField title="카테고리" content={category || '카테고리'} flexDirection="column" width="600px" />
+        <InfoField title="카테고리" content={category.name || '카테고리'} flexDirection="column" width="600px" />
         <InfoField
           title="스터디 최대 인원"
-          content={memberCnt || '스터디 최대 인원'}
+          content={participantLimit || '스터디 최대 인원'}
           flexDirection="column"
           width="600px"
         />

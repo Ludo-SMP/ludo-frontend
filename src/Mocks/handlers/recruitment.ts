@@ -1,13 +1,16 @@
 import { HttpResponse, http } from 'msw';
 import { popularRecruitmentsMockData, recruitmentDetailMockData } from '../data/mockRecruitments';
-import { RecruitmentDetailRawDataType } from '@/Types/study';
 import { getfilterOptions } from '../utils/getQueryParams';
 import { getFilteredRecruitmentsMockData } from '../utils/getData';
+import { RecruitmentDetail } from '@/Types/study';
 
 const baseURL = import.meta.env.VITE_MOCK_API_URL;
 
-const getPopularRecruitments = http.get(`${baseURL}/api/recruitments/popular`, () => {
-  return new HttpResponse(JSON.stringify({ data: popularRecruitmentsMockData, message: 'Success' }), {
+const getPopularRecruitments = http.get(`${baseURL}/api/recruitments/popular`, ({ request }) => {
+  const url = new URL(request.url);
+  const count = Number(url.searchParams.get('count'));
+
+  return new HttpResponse(JSON.stringify({ data: popularRecruitmentsMockData(count), message: 'Success' }), {
     status: 200,
     statusText: 'OK',
   });
@@ -41,7 +44,7 @@ const getRecruitmentDetail = http.get(`${baseURL}/api/recruitments/:recruitmentI
     JSON.stringify({
       data: {
         ...recruitmentDetailMockData.filter(
-          (recruitmentDetail: RecruitmentDetailRawDataType) => recruitmentDetail.id === recruitmentId,
+          (recruitmentDetail: RecruitmentDetail) => recruitmentDetail.recruitment.id === recruitmentId,
         )[0],
       },
 

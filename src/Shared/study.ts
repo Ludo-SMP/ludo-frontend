@@ -22,7 +22,7 @@ export const POSITION = {
   4: '데브옵스',
 };
 
-export const PROCESS_METHOD = {
+export const PROGRESS_METHOD = {
   ONLINE: '온라인',
   OFFLINE: '오프라인',
 };
@@ -36,4 +36,9 @@ export const CATEGORY = {
 export const ROLE = {
   OWNER: '팀장',
   MEMBER: '팀원',
+};
+
+export const PLATFORM = {
+  GATHER: 'Gather',
+  GOOGLE_MEET: 'Google Meet',
 };

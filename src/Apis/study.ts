@@ -4,7 +4,7 @@ import { STUDY } from '@/Constants/queryString';
 import { API_END_POINT } from '@/Constants/api';
 import { SetStateAction } from 'react';
 import { useModalStore } from '@/Store/modal';
-import { ApplicantsDetail, MyPageInfo, StudyDetail } from '@/Types/study';
+import { ApplicantsDetail, ApplyTryStatus, MyPageInfo, StudyDetail } from '@/Types/study';
 import { useNavigate } from 'react-router-dom';
 import { ROUTER_PATH } from '@/Constants/Router_Path';
 
@@ -46,7 +46,7 @@ export const applyStudy = async (recruitmentId: number, data: object) =>
 export const useApplyStudyMutation = (
   recruitmentId: number,
   data: object,
-  handleApplyApprove: React.Dispatch<SetStateAction<ApplyState>>,
+  handleApplyApprove: React.Dispatch<SetStateAction<ApplyTryStatus>>,
 ) => {
   const { openModal } = useModalStore();
   const { mutate } = useMutation({
@@ -54,7 +54,7 @@ export const useApplyStudyMutation = (
     mutationFn: () => applyStudy(recruitmentId, data),
     onSuccess: () => {
       console.log('success');
-      handleApplyApprove(() => 'APPROVE');
+      handleApplyApprove(() => 'SUCCESS');
       openModal();
     },
     onError: () => {

@@ -10,7 +10,6 @@ import StudyButtonSection from './StudyButtonSection';
 import SignButtonSection from './SignButtonSection';
 import HamburgerSection from './HamburgerSection';
 import Gnb from './Gnb';
-import { SignButtonSectionProps } from './SignButtonSection';
 
 const Header = () => {
   const { isLoggedIn } = useLoginStore();
@@ -43,8 +42,8 @@ const Header = () => {
                 </div>
               )}
               <UserInfoWrapper>
-                <Alarm />
-                <Profile />
+                <Alarm width={40} height={40} />
+                <Profile width={40} height={40} />
               </UserInfoWrapper>
             </>
           ) : (
@@ -142,7 +141,7 @@ const UserInfoWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: 32px;
+  gap: 12px;
 
   ${media.mobile} {
     display: none;

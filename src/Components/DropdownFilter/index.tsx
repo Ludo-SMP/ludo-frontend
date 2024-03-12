@@ -1,11 +1,10 @@
 import styled from 'styled-components';
 import { useState, Dispatch, SetStateAction, useRef } from 'react';
-import { DownBold } from '@/Assets/icons/DownBold';
 import { FilterOptionsType, MainCategoryNameType } from '@/Types/study';
 import { defaultFilterOptions } from '@/Shared/category';
 import DropdownItem from './DropdownItem';
-import { UpBold } from '@/Assets/icons/UpBold';
 import { useOutSideClick } from '@/Hooks/useOutsideClick';
+import { Up, Down } from '@/Assets';
 
 export type DropdownFilterProps = {
   categoryName: MainCategoryNameType;
@@ -39,7 +38,7 @@ const DropdownFilter = ({ categoryItems, categoryName, categoryProperty, setFilt
     <DropdownFilterWrapper>
       <DropdownSelectWrapper onClick={toggleDropdonwItems}>
         <span className="filter__text">{selectedItem}</span>
-        {isOpen ? <UpBold width={18} height={18} color="black" /> : <DownBold />}
+        {isOpen ? <Up width={24} height={24} color="black" /> : <Down />}
       </DropdownSelectWrapper>
       {isOpen && (
         <DropdownItemsWrapper ref={dropDownItemsRef}>
@@ -67,13 +66,14 @@ const DropdownFilterWrapper = styled.div<{ checked?: boolean }>`
     font-size: ${(props) => props.theme.font.small};
     font-weight: 500;
     line-height: 30px;
+    white-space: nowrap;
   }
 `;
 
 const DropdownSelectWrapper = styled.button<{ checked?: boolean }>`
   display: flex;
-  padding: 4px 8px 4px 12px;
-  width: 145px;
+  padding: 2px 12px 0px 16px;
+  width: 130px;
   justify-content: center;
   align-items: center;
   gap: 10px;

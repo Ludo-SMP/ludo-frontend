@@ -14,32 +14,29 @@ export interface RecruitmentCardListProps {
 }
 
 const RecruitmentCardList = ({ filterOptions }: RecruitmentCardListProps) => {
-  const { data, hasNextPage, isFetching, fetchNextPage, isFetchingNextPage } = useRecruitments({
-    filterOptions,
-    recruitmentsPerPage: INFINITE_RECRUITMENTS_COUMT_PER_PAGE,
-  });
-
-  const recruitments = convertRecruitmentsToRecruitmentCardProps(
-    useMemo(() => (data ? data.pages.flatMap(({ data }) => data) : []), [data]),
-  );
-
-  const ref = useIntersectionObservable((entry, observer) => {
-    observer.unobserve(entry.target);
-    if (hasNextPage && !isFetching) fetchNextPage();
-  });
-
-  return (
-    <RecruitmentCardsWrapper>
-      {recruitments.length ? (
-        recruitments?.map((recruitment: RecruitmentCardProps) => (
-          <RecruitmentCard key={recruitment.recruitmentId} {...recruitment} />
-        ))
-      ) : (
-        <NotFound />
-      )}
-      {filterOptions && <Target ref={ref}>{isFetchingNextPage && hasNextPage ? 'Loading...' : null}</Target>}
-    </RecruitmentCardsWrapper>
-  );
+  // const { data, hasNextPage, isFetching, fetchNextPage, isFetchingNextPage } = useRecruitments({
+  //   filterOptions,
+  //   recruitmentsPerPage: INFINITE_RECRUITMENTS_COUMT_PER_PAGE,
+  // });
+  // const recruitments = convertRecruitmentsToRecruitmentCardProps(
+  //   useMemo(() => (data ? data.pages.flatMap(({ data }) => data) : []), [data]),
+  // );
+  // const ref = useIntersectionObservable((entry, observer) => {
+  //   observer.unobserve(entry.target);
+  //   if (hasNextPage && !isFetching) fetchNextPage();
+  // });
+  // return (
+  //   <RecruitmentCardsWrapper>
+  //     {recruitments.length ? (
+  //       recruitments?.map((recruitment: RecruitmentCardProps) => (
+  //         <RecruitmentCard key={recruitment.recruitmentId} {...recruitment} />
+  //       ))
+  //     ) : (
+  //       <NotFound />
+  //     )}
+  //     {filterOptions && <Target ref={ref}>{isFetchingNextPage && hasNextPage ? 'Loading...' : null}</Target>}
+  //   </RecruitmentCardsWrapper>
+  // );
 };
 
 const RecruitmentCardsWrapper = styled.li`

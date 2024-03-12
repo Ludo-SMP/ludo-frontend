@@ -7,15 +7,14 @@ import DropdownFilters from '@/Components/DropdownFilters';
 import { defaultFilterOptions } from '@/Shared/category';
 import { mainCategories } from '@/Shared/category';
 import DropdownFilter from '@/Components/DropdownFilter';
-import { FilterOptionsType } from '@/Types/study';
 import { useState } from 'react';
 import { media } from '@/Styles/theme';
-import { CreateStudy, Filter, Up } from '@/Assets';
+import { Create, Filter, Up } from '@/Assets';
 import Button from '@/Components/Common/Button';
 import UtiltiyButtons from '@/Components/UtilityButtons';
 import { useNavigate } from 'react-router-dom';
 
-const Recruitments = () => {
+const RecruitmentsPage = () => {
   const [filterOptions, setFilterOptions] = useState<FilterOptionsType>(defaultFilterOptions);
   const navigate = useNavigate();
 
@@ -24,11 +23,11 @@ const Recruitments = () => {
   };
 
   return (
-    <ContentsWrapper>
+    <RecruitmentsPageWrapper>
       <Banner {...bannerDummy} />
-      <RecruitmentListWrapper>
-        <RecruitmentListSearchSectionWrapper>
-          <CardListInfo />
+      <RecruitmentsSectionWrapper>
+        <SelectFilterSectionWrapper>
+          <div className="section__title">나에게 필요한 스터디를 찾아보아요</div>
           <DropdownFilters className="filters">
             {mainCategories.map((mainCategory) => {
               return (
@@ -45,9 +44,9 @@ const Recruitments = () => {
           <Button className="filterIcon">
             <Filter />
           </Button>
-        </RecruitmentListSearchSectionWrapper>
-        <RecruitmentCardList filterOptions={filterOptions} />
-      </RecruitmentListWrapper>
+        </SelectFilterSectionWrapper>
+        {/* <RecruitmentCardList filterOptions={filterOptions} /> */}
+      </RecruitmentsSectionWrapper>
       <UtiltiyButtons>
         <Button onClick={handleScroll} className="scroll__btn">
           <Up />
@@ -59,15 +58,15 @@ const Recruitments = () => {
           }}
           className="create__btn"
         >
-          <CreateStudy />
+          <Create />
           <span>스터디 생성</span>
         </Button>
       </UtiltiyButtons>
-    </ContentsWrapper>
+    </RecruitmentsPageWrapper>
   );
 };
 
-const ContentsWrapper = styled.div`
+const RecruitmentsPageWrapper = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 1224px;
@@ -76,17 +75,27 @@ const ContentsWrapper = styled.div`
   gap: 40px;
 `;
 
-const RecruitmentListWrapper = styled.div`
+const RecruitmentsSectionWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;
+
+  .section__title {
+    color: ${({ theme }) => theme.color.black5};
+    font-family: Pretendard;
+    font-size: ${({ theme }) => theme.font.xxlarge};
+    font-style: normal;
+    font-weight: 800;
+    line-height: 40px;
+  }
 `;
 
-const RecruitmentListSearchSectionWrapper = styled.div`
+const SelectFilterSectionWrapper = styled.div`
   display: flex;
   align-items: center;
-  gap: 40px;
+  gap: 24px;
+  align-self: stretch;
 
   .filterIcon {
     display: none;
@@ -102,4 +111,4 @@ const RecruitmentListSearchSectionWrapper = styled.div`
   }
 `;
 
-export default Recruitments;
+export default RecruitmentsPage;

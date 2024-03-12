@@ -4,7 +4,7 @@ import { RowDivider } from '../../Components/Common/Divider/RowDivider';
 import { ColumnDivider } from '../../Components/Common/Divider/ColumnDivider';
 import { useRecruitmentDetail } from '@/Apis/recruitment';
 import { useNavigate, useParams } from 'react-router-dom';
-import { dateFormatter } from '@/Utils/date';
+import { dateFormatter, getPeriod } from '@/Utils/date';
 import RecruitmentInfoSection from './RecruitmentInfoSection';
 import StudyProgressInfoSection from './StudyProgessInfoSection';
 import StudyBasicInfoSection from './StudyBasicInfoSection';
@@ -17,18 +17,20 @@ import { useModalStore } from '@/Store/modal';
 import { useUserStore } from '@/Store/user';
 import { useEffect, useState } from 'react';
 import ApplyModal from '@/Components/Modal/ApplyModal';
-import { ApplyState } from '@/Types/study';
+import { ApplyTryStatus } from '@/Types/study';
 
-const RecruitmentDetail = () => {
+const RecruitmentDetailPage = () => {
   const recruitmentId = Number(useParams().studyId);
-  const navigate = useNavigate();
   const { isModalOpen, openModal, closeModal } = useModalStore();
   const { isLoggedIn } = useLoginStore();
   const { user } = useUserStore();
+  const [applyTryStatus, setApplyTryStatus] = useState<ApplyTryStatus>('NOT APPLY');
 
-  const [applyState, setApplyState] = useState<ApplyState>('NOT APPLY');
-  const { data, isLoading } = useRecruitmentDetail(recruitmentId);
-  const recruitmentDetail = isLoading ? null : data;
+  const navigate = useNavigate();
+  const { data: recruitmentDetail, isLoading } = useRecruitmentDetail(recruitmentId);
+
+  const recruitment = recruitmentDetail?.recruitment;
+  const study = recruitmentDetail?.study;
 
   useEffect(() => {
     closeModal();
@@ -39,43 +41,43 @@ const RecruitmentDetail = () => {
   ) : (
     <RecruitmentDetailWrapper>
       <RecruitmentTitleWrapper>
-        <div className="title">{recruitmentDetail?.recruitmentTitle}</div>
+        <div className="title">{recruitment.title}</div>
       </RecruitmentTitleWrapper>
       <RecruitmentInfoWrapper>
         <div className="recruitment__status">
-          <div className="creator">{recruitmentDetail?.creator}</div>
+          <div className="creator">{study.owner.nickname}</div>
           <ColumnDivider />
           <div className="edit__info">
-            <div className="createdAt">{recruitmentDetail?.createdAt}</div>
+            <div className="createdAt">{dateFormatter(recruitment.createdDateTime)}</div>
             <div className="edit__status">수정됨</div>
           </div>
         </div>
         <div className="recruitment__details">
           <RecruitmentInfoSection
-            applicantCnt={recruitmentDetail?.applicantCnt}
-            endDate={recruitmentDetail?.recruitmentEndDate}
-            positions={recruitmentDetail?.positions.join(', ')}
-            stacks={recruitmentDetail?.stacks.join(', ')}
-            contact={recruitmentDetail?.contact}
-            platformUrl={recruitmentDetail?.platformUrl}
+            applicantCnt={recruitment.applicantCount}
+            endDate={dateFormatter(recruitment.endDateTime)}
+            positions={recruitment.positions}
+            stacks={recruitment.stacks}
+            contact={recruitment.contact}
+            platformUrl={recruitment.callUrl}
           />
           <RowDivider rowHeight={16} />
           <StudyProgressInfoSection
-            method={recruitmentDetail?.progressMethod}
-            platform={recruitmentDetail?.platform}
-            period={dateFormatter(recruitmentDetail?.startDate) + ' ~ ' + dateFormatter(recruitmentDetail?.endDate)}
+            method={study.way}
+            platform={study.platform}
+            period={getPeriod(study.startDateTime, study.endDateTime)}
           />
           <RowDivider rowHeight={16} />
           <StudyBasicInfoSection
-            studyTitle={recruitmentDetail?.studyTitle}
-            category={recruitmentDetail?.category}
-            memberCnt={recruitmentDetail?.memberCnt}
+            studyTitle={study.title}
+            category={study.category}
+            participantLimit={study.participantLimit}
           />
           <RowDivider />
           <div className="study__detail">
             <InfoField
               title="상세내용"
-              content={recruitmentDetail?.content || '상세내용'}
+              content={recruitment.content || '상세내용'}
               flexDirection="column"
               width="100%"
             />
@@ -83,7 +85,7 @@ const RecruitmentDetail = () => {
         </div>
       </RecruitmentInfoWrapper>
       <StudyButtonsWrapper>
-        {user?.nickname === recruitmentDetail?.creator ? (
+        {user?.id === study.owner.id ? (
           <>
             <Button onClick={() => {}}>모집 마감하기</Button>
             <Button scheme="secondary" onClick={() => {}}>
@@ -107,18 +109,18 @@ const RecruitmentDetail = () => {
           {APPLY.LOGIN.content}
         </Modal>
       )}
-      {isLoggedIn && isModalOpen && applyState === 'NOT APPLY' && (
+      {isLoggedIn && isModalOpen && applyTryStatus === 'NOT APPLY' && (
         <ApplyModal
-          handleApplyApprove={setApplyState}
+          handleApplyApprove={setApplyTryStatus}
           recruitmentId={recruitmentId}
-          positions={recruitmentDetail?.positions}
+          positions={recruitment.positions}
         />
       )}
-      {isLoggedIn && isModalOpen && applyState === 'APPROVE' && (
+      {isLoggedIn && isModalOpen && applyTryStatus === 'SUCCESS' && (
         <Modal
           title={APPLY.APPROVE.title}
           handleApprove={() => {
-            setApplyState(() => 'NOT APPLY');
+            setApplyTryStatus(() => 'NOT APPLY');
             closeModal();
           }}
           approveBtnText="확인"
@@ -127,11 +129,11 @@ const RecruitmentDetail = () => {
           <div className="approve__image"></div>
         </Modal>
       )}
-      {isLoggedIn && isModalOpen && applyState === 'FAIL' && (
+      {isLoggedIn && isModalOpen && applyTryStatus === 'FAIL' && (
         <Modal
           title={APPLY.FAIL.title}
           handleApprove={() => {
-            setApplyState(() => 'NOT APPLY');
+            setApplyTryStatus(() => 'NOT APPLY');
             closeModal();
           }}
           approveBtnText="확인"
@@ -225,4 +227,4 @@ const StudyButtonsWrapper = styled.div`
   }
 `;
 
-export default RecruitmentDetail;
+export default RecruitmentDetailPage;

@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 import { InfoField } from '@/Components/Common/InfoField';
 import { One } from '@/Assets';
+import { Position, Stack } from '@/Types/study';
 
 interface RecruitmentInfoSectionProips {
   applicantCnt?: number;
   endDate?: string;
-  positions?: string;
-  stacks?: string;
+  positions?: Position[];
+  stacks?: Stack[];
   contact?: string;
   platformUrl?: string;
 }
@@ -28,8 +29,16 @@ const RecruitmentInfoSection = ({
       <div className="recruitment__info">
         <InfoField title="모집 인원" content={applicantCnt || '모집 인원'} flexDirection="column" />
         <InfoField title="모집 마감일" content={endDate || '모집 마감일'} flexDirection="column" />
-        <InfoField title="포지션" content={positions || '포지션'} flexDirection="column" />
-        <InfoField title="기술 스택" content={stacks || '기술 스택'} flexDirection="column" />
+        <InfoField
+          title="포지션"
+          content={positions.map((position: Position) => position.name).join(', ') || '포지션'}
+          flexDirection="column"
+        />
+        <InfoField
+          title="기술 스택"
+          content={stacks.map((stack: Stack) => stack.name).join(', ') || '기술 스택'}
+          flexDirection="column"
+        />
         <InfoField title="연락 방법" content={contact || '연락 방법'} flexDirection="column" />
         <InfoField title="연결 url" content={platformUrl || '연결 url'} flexDirection="column" />
       </div>
