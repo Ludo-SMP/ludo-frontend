@@ -7,7 +7,7 @@ export interface ImageProps {
 }
 
 const Image = ({ src, size }: ImageProps) => {
-  return src ? <SkeletonImage size={size} /> : <img src={src} width={`${size}px`} height={`${size}ㅔㅌ`} />;
+  return src ? <img src={src} width={`${size}px`} height={`${size}px`} /> : <SkeletonImage size={size} />;
 };
 
 const SkeletonImage = styled.div<{ size: number }>`

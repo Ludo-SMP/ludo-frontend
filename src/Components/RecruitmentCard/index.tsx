@@ -9,7 +9,6 @@ import Image from '../Common/Image';
 import { Views } from '@/Assets';
 
 const RecruitmentCard = (recruitment: Recruitment) => {
-  console.log(`${import.meta.env.VITE_BASE_API_URL}/static/stack/images/javascript.png`);
   return (
     <Link to={`/studies/${recruitment.id}/recruitment`}>
       <RecruitmentCardWrapper>

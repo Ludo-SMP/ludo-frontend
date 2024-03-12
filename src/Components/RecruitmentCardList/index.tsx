@@ -1,10 +1,9 @@
 import styled from 'styled-components';
-import RecruitmentCard, { RecruitmentCardProps } from '../RecruitmentCard';
+import RecruitmentCard from '../RecruitmentCard';
 import NotFound from '../NotFound';
-import { FilterOptionsType, Stack, StudyBasicInfoType } from '@/Types/study';
-import { useMemo } from 'react';
-import useIntersectionObservable from '@/Hooks/userIntersectionObservable';
-import { convertRecruitmentsToRecruitmentCardProps } from '@/Utils/propertyConverter';
+import { Recruitment } from '@/Types/study';
+import { useMemo, useRef } from 'react';
+import { useIntersectionObservable } from '@/Hooks/userIntersectionObservable';
 import { useRecruitments } from '@/Apis/recruitment';
 import { INFINITE_RECRUITMENTS_COUMT_PER_PAGE } from '@/Constants/common';
 import { useFilterOptionsStore } from '@/Store/filter';
@@ -14,28 +13,33 @@ const RecruitmentCardList = () => {
   const { categoryId, stackId, positionId, progressMethodId } = useFilterOptionsStore();
   const progressMethod = getProgressMethod(progressMethodId);
 
-  const { data, hasNextPage, isFetching, fetchNextPage, isFetchingNextPage } = useRecruitments({
+  const observeRef = useRef<HTMLDivElement>(null);
+
+  const { data, hasNextPage, fetchNextPage } = useRecruitments({
     filterOptions: { categoryId, stackId, positionId, progressMethod },
     count: INFINITE_RECRUITMENTS_COUMT_PER_PAGE,
   });
-  // const recruitments = convertRecruitmentsToRecruitmentCardProps(
-  //   useMemo(() => (data ? data.pages.flatMap(({ data }) => data) : []), [data]),
-  // );
-  // const ref = useIntersectionObservable((entry, observer) => {
-  //   observer.unobserve(entry.target);
-  //   if (hasNextPage && !isFetching) fetchNextPage();
-  // });
+
+  const onIntersect: IntersectionObserverCallback = ([entry]) => {
+    if (entry.isIntersecting) fetchNextPage();
+  };
+  useIntersectionObservable(observeRef, onIntersect, hasNextPage);
+
+  const recruitmentsPages = useMemo(() => (data ? data.pages.flatMap(({ data }) => data.data) : []), [data]);
+
   return (
     <RecruitmentCardsWrapper>
-      <NotFound />
-      {/* {recruitments.length ? (
-        recruitments?.map((recruitment: RecruitmentCardProps) => (
-          <RecruitmentCard key={recruitment.recruitmentId} {...recruitment} />
-        ))
+      {recruitmentsPages.length ? (
+        recruitmentsPages.map((recruitmentsPage) =>
+          recruitmentsPage?.recruitments.map((recruitment: Recruitment) => (
+            <RecruitmentCard key={recruitment.id} {...recruitment} />
+          )),
+        )
       ) : (
         <NotFound />
       )}
-      {filterOptions && <Target ref={ref}>{isFetchingNextPage && hasNextPage ? 'Loading...' : null}</Target>} */}
+
+      <Target ref={observeRef} />
     </RecruitmentCardsWrapper>
   );
 };

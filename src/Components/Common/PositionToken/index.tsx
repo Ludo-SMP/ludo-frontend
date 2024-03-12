@@ -17,6 +17,7 @@ const PositionWrapper = styled.div`
   font-size: ${(props) => props.theme.font.small};
   font-weight: 500;
   line-height: 30px;
+  white-space: nowrap;
 `;
 
 export default PositionToken;

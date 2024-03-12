@@ -22,3 +22,7 @@ export const STUDY = {
   DELETE: (studyId: number) => [BASE_KEY.STUDY, studyId, 'DELETE'],
   LEAVE: (studyId: number) => [BASE_KEY.STUDY, studyId, 'LEAVE'],
 };
+
+export const STACK = {
+  STACK: ['STACK'],
+};

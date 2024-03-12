@@ -1,32 +1,27 @@
-import { useRef, useCallback, useEffect } from 'react';
+import { useEffect, type RefObject, useRef } from 'react';
 
-const useIntersectionObservable = (
-  onIntersection: (entry: IntersectionObserverEntry, observer: IntersectionObserver) => void,
-  options?: IntersectionObserverInit,
+export const useIntersectionObservable = <T extends HTMLElement>(
+  targetRef: RefObject<T>,
+  onIntersect: IntersectionObserverCallback,
+  hasNextPage: boolean | undefined,
 ) => {
-  const ref = useRef<HTMLElement>(null);
-
-  const callback = useCallback(
-    (entries: IntersectionObserverEntry[], _observer: IntersectionObserver) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          onIntersection(entry, _observer);
-        }
-      });
-    },
-    [onIntersection],
-  );
-
+  const observer = useRef<IntersectionObserver>();
   useEffect(() => {
-    if (!ref.current) return;
+    if (targetRef && targetRef.current) {
+      observer.current = new IntersectionObserver(onIntersect, {
+        root: null,
+        rootMargin: '0px',
+        threshold: 1.0,
+      });
 
-    const observer = new IntersectionObserver(callback, options);
-    observer.observe(ref.current);
+      if (!hasNextPage) {
+        observer.current?.unobserve(targetRef.current);
+        return;
+      }
 
-    return () => observer.disconnect();
-  }, [ref, options, callback]);
+      observer.current.observe(targetRef.current);
+    }
 
-  return ref;
+    return () => observer && observer.current?.disconnect();
+  }, [targetRef, onIntersect]);
 };
-
-export default useIntersectionObservable;
