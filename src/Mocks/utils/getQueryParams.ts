@@ -1,10 +1,8 @@
-import { cateegoryProperties } from '@/Shared/category';
+import { PROGRESS_METHODS } from '@/Shared/study';
 
-export const getfilterOptions = (searchParams) => {
-  const filterOptions = {};
-  cateegoryProperties.forEach((categoryProperty) => {
-    const filterValues = searchParams.get(categoryProperty).split(',');
-    filterOptions[categoryProperty] = [...filterValues];
-  });
-  return filterOptions;
+export const getProgressMethod = (progressMethodId: number) => {
+  const selectedProgressMethod = PROGRESS_METHODS.filter(
+    (progressMethod: { id: number; name: string }) => progressMethod.id === progressMethodId,
+  )[0];
+  return selectedProgressMethod?.name;
 };

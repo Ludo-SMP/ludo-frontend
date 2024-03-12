@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { InfoField } from '../../Components/Common/InfoField';
 import { RowDivider } from '../../Components/Common/Divider/RowDivider';
 import { ColumnDivider } from '../../Components/Common/Divider/ColumnDivider';
-import { useRecruitmentDetail } from '@/Apis/recruitment';
+import { useCloseRecruitmentMutation, useRecruitmentDetail } from '@/Apis/recruitment';
 import { useNavigate, useParams } from 'react-router-dom';
 import { dateFormatter, getPeriod } from '@/Utils/date';
 import RecruitmentInfoSection from './RecruitmentInfoSection';
@@ -31,6 +31,8 @@ const RecruitmentDetailPage = () => {
 
   const recruitment = recruitmentDetail?.recruitment;
   const study = recruitmentDetail?.study;
+
+  const { mutate: closeRecruitmentMutate } = useCloseRecruitmentMutation(study?.id);
 
   useEffect(() => {
     closeModal();
@@ -87,7 +89,7 @@ const RecruitmentDetailPage = () => {
       <StudyButtonsWrapper>
         {user?.id === study.owner.id ? (
           <>
-            <Button onClick={() => {}}>모집 마감하기</Button>
+            <Button onClick={() => closeRecruitmentMutate()}>모집 마감하기</Button>
             <Button scheme="secondary" onClick={() => {}}>
               스터디 모집 공고 수정하기
             </Button>
