@@ -31,7 +31,7 @@ export const CreateRecruitment = () => {
   const Navigation = useNavigate();
   const studyId = Number(useParams().studyId);
   useStudyDetail(studyId);
-  // console.log(studyId);
+  console.log(studyId);
   const [useForm, setuseForm] = useState<Gather>({
     title: '',
     // recruitmentLimit: 0,
@@ -233,9 +233,9 @@ const SubContentTitle = styled.p`
 
 const StudyContainer = styled.form`
   height: 2000px;
-  margin: auto;
-  padding-left: 348px;
-  padding-right: 348px;
+  /* margin: auto; */
+  padding-left: 200px;
+  /* padding-right: 348px; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -243,11 +243,7 @@ const StudyContainer = styled.form`
 `;
 const TopBox = styled.div`
   height: 310px;
-  /* border-bottom: 16px solid #f2f2f2; */
-  /* padding-top: 60px; */
   padding-bottom: 40px;
-  /* margin: auto; */
-  /* margin-bottom: 60px; */
   text-align: left;
   gap: 32px;
 `;

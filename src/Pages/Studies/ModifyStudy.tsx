@@ -1,23 +1,25 @@
 import styled from 'styled-components';
-// import { BackHeader } from '../../Components/Header/BackHeader';
 import { ProgressButton } from '../../Components/Selectbox/ProgressButton';
 import { PlatformButton } from '../../Components/Selectbox/PlatformButton';
 import { Titlearea } from '../../Components/Textarea/Titlearea';
 import { SubmitButton } from '../../Components/Button/Studies/SubmitButton';
 import { CalendarButton } from '../../Components/Selectbox/CalendarButton';
 import { BigCategoryButton } from '../../Components/Selectbox/BigCategoryButton';
+import { MaxPeopleButton } from '../../Components/Selectbox/MaxPeopleButton';
 import { ProgressPeriod } from '../../Components/Calendar/ProgressPeriod';
+import { PositionButton } from '@/Components/Selectbox/PositionButton';
 import { media } from '../../Styles/theme';
-import { useState } from 'react';
 import { Creates } from '@/Types/studies';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { MaxPeopleButton } from '@/Components/Selectbox/MaxPeopleButton';
-import { SaveButton } from '@/Components/Button/Studies/SaveButton';
+import { useState } from 'react';
 import { One, Two, Three } from '@/Assets';
-import { PositionButton } from '@/Components/Selectbox/PositionButton';
+import { SaveButton } from '@/Components/Button/Studies/SaveButton';
+import axios from 'axios';
+axios.defaults.withCredentials = true;
 export type OptionalCreates = Partial<Creates>;
 export const ModifyStudy = () => {
+  // {register} = useForm
+  // 폼 데이터
   const Navigate = useNavigate();
   const [useForm, setuseForm] = useState<Creates>({
     title: '',
@@ -28,7 +30,6 @@ export const ModifyStudy = () => {
     endDateTime: '',
     positionId: 0,
     platform: '',
-    // studyId: 0,
   });
 
   function forms(fields: OptionalCreates) {
@@ -39,7 +40,7 @@ export const ModifyStudy = () => {
   }
 
   async function post() {
-    const { data } = await axios.patch(`https://ludoapi.store/api/studies/${51}`, {
+    const { data } = await axios.put('https://ludoapi.store/api/studies', {
       title: useForm.title,
       categoryId: useForm.categoryId,
       way: useForm.way,
@@ -48,17 +49,17 @@ export const ModifyStudy = () => {
       endDateTime: useForm.endDateTime,
       positionId: useForm.positionId,
       platform: useForm.platform,
-      studyId: 57,
     });
     console.log(data);
-    // localStorage.setItem('create', JSON.stringify(data.data));
+    const studyId = data.data.study.id;
+    Navigate(`/studies/${studyId}`);
   }
 
   const onSave = async () => {};
   const handleSubmit = (event: any) => {
     event.preventDefault();
     post();
-    Navigate('/');
+    // Navigate(`/`);
   };
 
   return (
@@ -141,7 +142,7 @@ const AssetContainer = styled.image`
 `;
 
 const BorderBox = styled.div`
-  width: 1200px;
+  max-width: 1200px;
   margin-bottom: 16px;
   border-bottom: 16px solid #f2f2f2;
 `;
@@ -161,11 +162,13 @@ const StudyMain = styled.p`
 
 const StudyContainer = styled.form`
   height: 1300px;
-  padding-left: 348px;
-  padding-right: 348px;
+  padding-left: 200px;
   display: flex;
   flex-direction: column;
   text-align: left;
+  ${media.custom(200)} {
+    display: none;
+  }
 `;
 const TopBox = styled.div`
   height: 250px;
@@ -202,11 +205,6 @@ const MiddleBottomInfo = styled.div`
   column-gap: 24px 24px;
   padding-bottom: 40px;
   font-size: ${(props) => props.theme.font.medium};
-  /* grid-template-columns: 630px 630px;
-  grid-template-rows: 80px;
-  row-gap: 24px 24px;
-  column-gap: 24px 24px;
-  padding-bottom: 40px; */
 `;
 const MiddleBottomWrapper = styled.section`
   font-size: ${(props) => props.theme.font.medium};

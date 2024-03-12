@@ -44,7 +44,7 @@ const MiddleWrapper = styled.div`
 `;
 
 const BorderBox = styled.span`
-  width: 100%;
+  max-width: 1200px;
   height: 104px;
   border-bottom: 1px solid #444444;
   padding-bottom: 32px;

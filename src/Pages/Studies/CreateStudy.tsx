@@ -142,7 +142,7 @@ const AssetContainer = styled.image`
 `;
 
 const BorderBox = styled.div`
-  width: 1200px;
+  max-width: 1200px;
   margin-bottom: 16px;
   border-bottom: 16px solid #f2f2f2;
 `;
@@ -162,11 +162,13 @@ const StudyMain = styled.p`
 
 const StudyContainer = styled.form`
   height: 1300px;
-  padding-left: 348px;
-  padding-right: 348px;
+  padding-left: 200px;
   display: flex;
   flex-direction: column;
   text-align: left;
+  ${media.custom(200)} {
+    display: none;
+  }
 `;
 const TopBox = styled.div`
   height: 250px;
@@ -203,11 +205,6 @@ const MiddleBottomInfo = styled.div`
   column-gap: 24px 24px;
   padding-bottom: 40px;
   font-size: ${(props) => props.theme.font.medium};
-  /* grid-template-columns: 630px 630px;
-  grid-template-rows: 80px;
-  row-gap: 24px 24px;
-  column-gap: 24px 24px;
-  padding-bottom: 40px; */
 `;
 const MiddleBottomWrapper = styled.section`
   font-size: ${(props) => props.theme.font.medium};
