@@ -1,49 +1,49 @@
 import { create } from 'zustand';
-import { ProgressMethod, Sort, FilterOption } from '@/Types/study';
+import { FilterOption } from '@/Types/study';
 
 export interface FilterOptions {
-  categoryIds: number[];
-  stackIds: number[];
-  positionIds: number[];
-  progressMethods: ProgressMethod[];
-  sort: Sort[];
+  categoryId: number;
+  stackId: number;
+  positionId: number;
+  progressMethodId: number;
+  sortId: number;
 }
 
 const defaultFilterOptions: FilterOptions = {
-  categoryIds: [1, 2, 3],
-  stackIds: [44, 45, 93, 137, 115],
-  positionIds: [1, 2, 3, 4],
-  progressMethods: ['OFFLINE', 'ONLINE'],
-  sort: ['최신순'],
+  categoryId: 0,
+  stackId: 0,
+  positionId: 0,
+  progressMethodId: 0,
+  sortId: 0,
 };
 
 export interface SetFilterOptionsAction {
-  setFilterOptions: (filterOption: FilterOption, value: number[] | ProgressMethod[] | Sort[]) => void;
+  setFilterOptions: (filterOption: FilterOption, value: number) => void;
   resetFilterOptions: () => void;
 }
 
 export const useFilterOptionsStore = create<FilterOptions & SetFilterOptionsAction>((set) => ({
-  categoryIds: [...defaultFilterOptions.categoryIds],
-  stackIds: [...defaultFilterOptions.stackIds],
-  positionIds: [...defaultFilterOptions.positionIds],
-  progressMethods: [...defaultFilterOptions.progressMethods],
-  sort: [...defaultFilterOptions.sort],
-  setFilterOptions: (filterOption: FilterOption, value: number[] | ProgressMethod[] | Sort[]) => {
+  categoryId: defaultFilterOptions.categoryId,
+  stackId: defaultFilterOptions.stackId,
+  positionId: defaultFilterOptions.positionId,
+  progressMethodId: defaultFilterOptions.progressMethodId,
+  sortId: defaultFilterOptions.sortId,
+  setFilterOptions: (filterOption: FilterOption, value: number) => {
     switch (filterOption) {
       case 'CATEGORY':
-        set({ categoryIds: [...value] });
+        set({ categoryId: value });
         break;
       case 'STACK':
-        set({ stackIds: [...value] });
+        set({ stackId: value });
         break;
       case 'POSITION':
-        set({ positionIds: [...value] });
+        set({ positionId: value });
         break;
       case 'PROGRESS_METHOD':
-        set({ progressMethods: [...value] });
+        set({ progressMethodId: value });
         break;
       case 'SORT':
-        set({ sort: [...value] });
+        set({ sortId: value });
         break;
       default:
         break;
@@ -51,10 +51,10 @@ export const useFilterOptionsStore = create<FilterOptions & SetFilterOptionsActi
   },
   resetFilterOptions: () =>
     set({
-      categoryIds: [...defaultFilterOptions.categoryIds],
-      stackIds: [...defaultFilterOptions.stackIds],
-      positionIds: [...defaultFilterOptions.positionIds],
-      progressMethods: [...defaultFilterOptions.progressMethods],
-      sort: [...defaultFilterOptions.sort],
+      categoryId: defaultFilterOptions.categoryId,
+      stackId: defaultFilterOptions.stackId,
+      positionId: defaultFilterOptions.positionId,
+      progressMethodId: defaultFilterOptions.progressMethodId,
+      sortId: defaultFilterOptions.sortId,
     }),
 }));

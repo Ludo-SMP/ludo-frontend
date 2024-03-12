@@ -33,6 +33,7 @@ const DropDownWrapper = styled.div`
         ${({ theme }) => theme.color.black1} 100%
       ),
       ${({ theme }) => theme.color.white};
+    cursor: pointer;
   }
 `;
 

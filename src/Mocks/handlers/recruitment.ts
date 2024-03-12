@@ -1,6 +1,5 @@
 import { HttpResponse, http } from 'msw';
 import { popularRecruitmentsMockData, recruitmentDetailMockData } from '../data/mockRecruitments';
-import { getfilterOptions } from '../utils/getQueryParams';
 import { getFilteredRecruitmentsMockData } from '../utils/getData';
 import { RecruitmentDetail } from '@/Types/study';
 
@@ -18,16 +17,23 @@ const getPopularRecruitments = http.get(`${baseURL}/api/recruitments/popular`, (
 
 const getRecruitments = http.get(`${baseURL}/api/recruitments`, ({ request }) => {
   const url = new URL(request.url);
-  const filterOptions = getfilterOptions(url.searchParams);
-  const pageNum = Number(url.searchParams.get('pageParam'));
-  const recruitmentsPerPage = Number(url.searchParams.get('recruitmentsPerPage'));
-  const filteredRecruitmentsMockData = getFilteredRecruitmentsMockData(filterOptions);
+  const stackId = url.searchParams.get('stack');
+  const positionId = url.searchParams.get('position');
+  const way = url.searchParams.get('way');
+  const categoryId = url.searchParams.get('category');
+  const last = Number(url.searchParams.get('last'));
+  const count = Number(url.searchParams.get('count'));
+  const pageNum = Number(url.searchParams.get('pageNum'));
+  console.log(pageNum, last);
+
+  // const pageNum = Number(url.searchParams.get('pageParam'));
+  // const recruitmentsPerPage = Number(url.searchParams.get('recruitmentsPerPage'));
+  const filteredRecruitmentsMockData = getFilteredRecruitmentsMockData({ stackId, positionId, way, categoryId });
+  console.log(filteredRecruitmentsMockData);
 
   return new HttpResponse(
     JSON.stringify({
-      data: filteredRecruitmentsMockData.slice(pageNum * recruitmentsPerPage, (pageNum + 1) * recruitmentsPerPage),
-      pageNum: pageNum + 1,
-      isLastPage: filteredRecruitmentsMockData.length <= (pageNum + 1) * recruitmentsPerPage,
+      data: { recruitments: filteredRecruitmentsMockData.slice(pageNum * count, (pageNum + 1) * count) },
       message: 'Success',
     }),
     {

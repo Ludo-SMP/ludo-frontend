@@ -1,21 +1,23 @@
-import { FilterOptionsType, StudyCategory } from '@/Types/study';
+import { Position, Recruitment, Stack } from '@/Types/study';
 import { recruitmentsMockData } from '../data/mockRecruitments';
 
-export const getFilteredRecruitmentsMockData = (filteredOptions: FilterOptionsType) => {
-  const { category, way, positions, stacks } = filteredOptions;
+interface FilterOptionParams {
+  categoryId: number;
+  way: string;
+  positionId: number;
+  stackId: number;
+}
 
-  const filteredRecruitmentsMockData = recruitmentsMockData.filter((data) => {
-    const {
-      category: recruitmentCategory,
-      way: recruitmentWay,
-      positions: recruitmentPositions,
-      stacks: recruitmentStacks,
-    } = data;
+export const getFilteredRecruitmentsMockData = ({ categoryId, way, positionId, stackId }: FilterOptionParams) => {
+  console.log(categoryId, way, positionId, stackId);
+
+  const filteredRecruitmentsMockData: Recruitment[] = recruitmentsMockData.filter((data: Recruitment) => {
+    const { category, positions, stacks, way: _way } = data;
     return (
-      category.some((studyCategory: StudyCategory) => recruitmentCategory.includes(studyCategory)) &&
-      way.some((progressMethod) => recruitmentWay.includes(progressMethod)) &&
-      positions.some((position) => recruitmentPositions.includes(position)) &&
-      stacks.some((stack) => recruitmentStacks.includes(stack))
+      (!categoryId || category.id === categoryId) &&
+      (!way || _way === way) &&
+      (!positionId || positions.some((position: Position) => position.id === positionId)) &&
+      (!stackId || stacks.some((stack: Stack) => stack.id === stackId))
     );
   });
 
