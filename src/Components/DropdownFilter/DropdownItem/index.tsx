@@ -5,13 +5,13 @@ import styled from 'styled-components';
 export interface DropdownItemProps {
   item: { id: number; name: string };
   handleClick: () => void;
-  property: FilterOption;
+  filterOption: FilterOption;
 }
 
-const DropdownItem = ({ item, property, handleClick }: DropdownItemProps) => {
+const DropdownItem = ({ item, filterOption, handleClick }: DropdownItemProps) => {
   return (
     <DropdownItemWrapper onClick={handleClick}>
-      {property === 'PROGRESS_METHOD' && item.id !== 0 ? PROGRESS_METHOD[item.name] : item.name}
+      {filterOption === 'PROGRESS_METHOD' && item.id !== 0 ? PROGRESS_METHOD[item.name] : item.name}
     </DropdownItemWrapper>
   );
 };

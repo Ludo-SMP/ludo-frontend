@@ -1,23 +1,23 @@
 import styled from 'styled-components';
 import RecruitmentCard, { RecruitmentCardProps } from '../RecruitmentCard';
 import NotFound from '../NotFound';
-import { FilterOptionsType, StudyBasicInfoType } from '@/Types/study';
+import { FilterOptionsType, Stack, StudyBasicInfoType } from '@/Types/study';
 import { useMemo } from 'react';
 import useIntersectionObservable from '@/Hooks/userIntersectionObservable';
 import { convertRecruitmentsToRecruitmentCardProps } from '@/Utils/propertyConverter';
 import { useRecruitments } from '@/Apis/recruitment';
 import { INFINITE_RECRUITMENTS_COUMT_PER_PAGE } from '@/Constants/common';
 import { useFilterOptionsStore } from '@/Store/filter';
-
-export interface RecruitmentCardListProps {}
+import { getProgressMethod } from '@/Mocks/utils/getQueryParams';
 
 const RecruitmentCardList = () => {
-  const { categoryIds, stackIds, positionIds, progressMethodIds, sortIds } = useFilterOptionsStore();
-  console.log(categoryIds, stackIds, positionIds, progressMethodIds, sortIds);
-  // const { data, hasNextPage, isFetching, fetchNextPage, isFetchingNextPage } = useRecruitments({
-  //   filterOptions,
-  //   recruitmentsPerPage: INFINITE_RECRUITMENTS_COUMT_PER_PAGE,
-  // });
+  const { categoryId, stackId, positionId, progressMethodId } = useFilterOptionsStore();
+  const progressMethod = getProgressMethod(progressMethodId);
+
+  const { data, hasNextPage, isFetching, fetchNextPage, isFetchingNextPage } = useRecruitments({
+    filterOptions: { categoryId, stackId, positionId, progressMethod },
+    count: INFINITE_RECRUITMENTS_COUMT_PER_PAGE,
+  });
   // const recruitments = convertRecruitmentsToRecruitmentCardProps(
   //   useMemo(() => (data ? data.pages.flatMap(({ data }) => data) : []), [data]),
   // );

@@ -10,11 +10,11 @@ import { PROGRESS_METHOD } from '@/Shared/study';
 export interface DropdownFilterProps {
   filterName: string;
   items: { id: number; name: string }[];
-  property: FilterOption;
+  filterOption: FilterOption;
   checked?: boolean;
 }
 
-const DropdownFilter = ({ filterName, items, property }: DropdownFilterProps) => {
+const DropdownFilter = ({ filterName, items, filterOption }: DropdownFilterProps) => {
   const { setFilterOptions } = useFilterOptionsStore();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [content, setContent] = useState(filterName);
@@ -23,12 +23,9 @@ const DropdownFilter = ({ filterName, items, property }: DropdownFilterProps) =>
     setIsOpen(!isOpen);
   };
 
-  const handleSelectedItem = (item: { id: number; name: string }, property: FilterOption) => {
-    setContent(property === 'PROGRESS_METHOD' && item.id !== 0 ? PROGRESS_METHOD[item.name] : item.name);
-    setFilterOptions(
-      property,
-      item.id !== 0 ? [item.id] : items.filter((item) => item.id !== 0).map((item) => item.id),
-    );
+  const handleSelectedItem = (item: { id: number; name: string }, filterOption: FilterOption) => {
+    setContent(filterOption === 'PROGRESS_METHOD' && item.id !== 0 ? PROGRESS_METHOD[item.name] : item.name);
+    setFilterOptions(filterOption, item.id !== 0 ? item.id : 0);
     setIsOpen(!isOpen);
   };
 
@@ -41,13 +38,13 @@ const DropdownFilter = ({ filterName, items, property }: DropdownFilterProps) =>
         {isOpen ? <Up width={24} height={24} /> : <Down />}
       </DropdownSelectWrapper>
       {isOpen && (
-        <DropdownItemsWrapper ref={dropDownItemsRef} property={property}>
+        <DropdownItemsWrapper ref={dropDownItemsRef} filterOption={filterOption}>
           {items.map((item) => (
             <DropdownItem
-              handleClick={() => handleSelectedItem(item, property)}
+              handleClick={() => handleSelectedItem(item, filterOption)}
               item={item}
               key={item.id}
-              property={property}
+              filterOption={filterOption}
             />
           ))}
         </DropdownItemsWrapper>
@@ -68,6 +65,10 @@ const DropdownFilterWrapper = styled.ul`
     font-weight: 500;
     line-height: 30px;
     white-space: nowrap;
+  }
+
+  &:hover {
+    cursor: pointer;
   }
 `;
 
@@ -96,10 +97,10 @@ const DropdownSelectWrapper = styled.div<{ checked?: boolean }>`
   }
 `;
 
-const DropdownItemsWrapper = styled.div<{ property: FilterOption }>`
+const DropdownItemsWrapper = styled.div<{ filterOption: FilterOption }>`
   position: absolute;
   width: 100%;
-  height: ${({ property }) => (property === 'STACK' ? '240px' : 'auto')};
+  height: ${({ filterOption }) => (filterOption === 'STACK' ? '240px' : 'auto')};
   display: flex;
   border-radius: 18px;
   border: 1px solid ${(props) => props.theme.color.black1};

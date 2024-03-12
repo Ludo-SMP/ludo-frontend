@@ -104,12 +104,13 @@ export interface Recruitments {
 
 export interface FilterOptionParams {
   last?: number;
+  pageNum: number;
   count: number;
-  stackIds: number[];
-  progressMethods: ProgressMethod[];
-  positionIds: number[];
-  categoryIds: number[];
-  sort: Sort[];
+  stackId: number;
+  progressMethod: string;
+  positionId: number;
+  categoryId: number;
+  sort?: Sort[];
 }
 
 ////////////////////////

@@ -3,7 +3,6 @@ import RecruitmentCardList from '../../Components/RecruitmentCardList';
 import { bannerDummy } from '../../Shared/dummy';
 import Banner from '../../Components/Banner';
 import DropdownFilter from '@/Components/DropdownFilter';
-import { useState } from 'react';
 import { media } from '@/Styles/theme';
 import { Create, Up } from '@/Assets';
 import Button from '@/Components/Common/Button';
@@ -16,9 +15,14 @@ import { Stack } from '@/Types/study';
 const RecruitmentsPage = () => {
   const { data, isLoading } = useStack();
   const navigate = useNavigate();
+
   const handleScroll = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  const stacks = data?.stacks?.map((stack: Stack) => {
+    return { id: stack.id, name: stack.name };
+  });
 
   return (
     <RecruitmentsPageWrapper>
@@ -30,27 +34,26 @@ const RecruitmentsPage = () => {
           <SelectFilterSectionWrapper>
             <div className="section__title">나에게 필요한 스터디를 찾아보아요</div>
             <DropdownFiltersWrapper>
-              <DropdownFilter filterName={'카테고리'} items={[{ ...ALL }, ...CATEGORIES]} property="CATEGORY" />
+              <DropdownFilter filterName={'카테고리'} items={[{ ...ALL }, ...CATEGORIES]} filterOption="CATEGORY" />
               {data?.stacks && (
                 <DropdownFilter
                   filterName={'기술 스택'}
                   items={[
                     { ...ALL },
-                    ...data?.stacks?.map((stack: Stack) => {
+                    ...stacks.map((stack: Stack) => {
                       return { id: stack.id, name: stack.name };
                     }),
-                    ,
                   ]}
-                  property="STACK"
+                  filterOption="STACK"
                 />
               )}
-              <DropdownFilter filterName={'포지션'} items={[{ ...ALL }, ...POSITIONS]} property="POSITION" />
+              <DropdownFilter filterName={'포지션'} items={[{ ...ALL }, ...POSITIONS]} filterOption="POSITION" />
               <DropdownFilter
                 filterName={'진행방식'}
                 items={[{ ...ALL }, ...PROGRESS_METHODS]}
-                property="PROGRESS_METHOD"
+                filterOption="PROGRESS_METHOD"
               />
-              <DropdownFilter filterName={'정렬 기준'} items={[...SORTS]} property="SORT" />
+              <DropdownFilter filterName={'정렬 기준'} items={[...SORTS]} filterOption="SORT" />
             </DropdownFiltersWrapper>
           </SelectFilterSectionWrapper>
           <RecruitmentCardList />

@@ -1,5 +1,3 @@
-import { Category, Position, ProgressMethod, Sort } from '@/Types/study';
-
 export const STUDY_STATUS = {
   PROGRESS: '진행 중',
   RECRUITING: '모집 중',

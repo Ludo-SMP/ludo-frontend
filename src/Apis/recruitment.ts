@@ -1,7 +1,7 @@
 import { httpClient } from '@/Utils/axios';
 import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
 import { RECRUITMENT } from '@/Constants/queryString';
-import { PopularRecruitments, Recruitments, FilterOptionParams, RecruitmentDetail } from '@/Types/study';
+import { PopularRecruitments, Recruitments, FilterOptionParams, RecruitmentDetail, Recruitment } from '@/Types/study';
 import { API_END_POINT } from '@/Constants/api';
 import { AxiosError, AxiosResponse } from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -17,45 +17,48 @@ export const usePopularRecruitments = (count?: number) => {
   });
 };
 
-// export const getRecruitments = ({
-//   last,
-//   count = 21,
-//   stackIds,
-//   progressMethods,
-//   positionIds,
-//   categoryIds,
-//   sort,
-// }: FilterOptionParams): Promise<{ data: { data: Recruitments } }> => {
-//   console.log(last, count, stackIds, progressMethods, positionIds, categoryIds, sort);
-//   return httpClient.get(API_END_POINT.RECRUITMENTS, {
-//     params: {
-//       last,
-//       count,
-//       stacks: [...stackIds],
-//       way: [...progressMethods],
-//       position: [...positionIds],
-//       category: [...categoryIds],
-//       sort: [...sort],
-//     },
-//   });
-// };
+export const getRecruitments = ({
+  last,
+  pageNum,
+  count = 9,
+  stackId,
+  progressMethod,
+  positionId,
+  categoryId,
+}: FilterOptionParams): Promise<{ data: { data: Recruitments } }> => {
+  return httpClient.get(API_END_POINT.RECRUITMENTS, {
+    params: {
+      pageNum,
+      last,
+      count,
+      stack: stackId ? stackId : '',
+      way: progressMethod ? progressMethod : '',
+      position: positionId ? positionId : '',
+      category: categoryId ? categoryId : '',
+    },
+  });
+};
 
-// export const useRecruitments = ({ last, count = 21, stackIds, progressMethods, positionIds, categoryIds, sort }) =>
-//   useInfiniteQuery<AxiosResponse, AxiosError>({
-//     queryKey: [...RECRUITMENT.RECRUITMENTS({ stackIds, progressMethods, positionIds, categoryIds, sort })],
-//     queryFn: ({ count = 0 }) => getRecruitments({ pageParam, filterOptions, recruitmentsPerPage }),
-//     getNextPageParam: (result) => {
-//       if (!result.isLastPage) return result.pageNum;
-//       return null;
-//     },
-//     select: { data },
-//   });
-
-// interface GetRecruitmentsParams {
-//   pageParam: number;
-//   filterOptions: FilterOptionsType;
-//   recruitmentsPerPage: number;
-// }
+export const useRecruitments = ({
+  filterOptions,
+}: {
+  last?: number;
+  count: number;
+  filterOptions: Pick<FilterOptionParams, 'categoryId' | 'positionId' | 'progressMethod' | 'stackId'>;
+}) =>
+  useInfiniteQuery<AxiosResponse, AxiosError, Recruitment[]>({
+    queryKey: [...RECRUITMENT.RECRUITMENTS(filterOptions)],
+    queryFn: ({ last = 0 }) => getRecruitments({ last, ...filterOptions }),
+    getNextPageParam: (data) => {
+      const recruitments = data?.data?.data?.recruitments;
+      console.log(recruitments);
+      if (!recruitments) return null;
+      const lastId = recruitments[recruitments.length - 1].id;
+      console.log(lastId);
+      return lastId;
+    },
+    select: (data: { data: { data: Recruitment[] } }) => data?.data?.data,
+  });
 
 // export const getRecruitments = async ({ pageParam, filterOptions, recruitmentsPerPage }: GetRecruitmentsParams) => {
 //   const fitlerOptionsQueryString = Object.entries(filterOptions)
