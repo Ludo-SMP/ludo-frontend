@@ -51,14 +51,14 @@ export const CreateStudy = () => {
       platform: useForm.platform,
     });
     console.log(data);
-    localStorage.setItem('create', JSON.stringify(data.data));
+    const studyId = data.data.study.id;
+    Navigate(`/studies/${studyId}`);
   }
 
   const onSave = async () => {};
   const handleSubmit = (event: any) => {
     event.preventDefault();
     post();
-    Navigate('/');
   };
 
   return (

@@ -57,7 +57,7 @@ export const StudyDetailPage = () => {
         </Button>
       </StudyDetailTitleWrapper>
       <StudyInfoSection
-        category={study?.category.name}
+        // category={study?.category.name}
         progressMethod={study?.way}
         platform={study?.platform}
         period={getPeriod(study?.startDateTime, study?.endDateTime)}

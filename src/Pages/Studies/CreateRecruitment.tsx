@@ -35,7 +35,7 @@ export const CreateRecruitment = () => {
     // stackId: 0,
     callUrl: '',
     content: '',
-    // studyId: 0,
+    // studyId: data.study.id,
   });
 
   function forms(fields: OptionalCreates) {
@@ -44,9 +44,9 @@ export const CreateRecruitment = () => {
       ...fields,
     });
   }
-
+  // studyId:number
   async function posts() {
-    const { data } = await axios.post(`https://ludoapi.store/api/studies/${1}/recruitments`, {
+    const { data } = await axios.post(`https://ludoapi.store/api/studies/${0}/recruitments`, {
       title: useForm.title,
       recruitmentLimit: useForm.recruitmentLimit,
       recruitmentEndDateTime: useForm.recruitmentEndDateTime,
@@ -58,6 +58,7 @@ export const CreateRecruitment = () => {
       studyId: 50,
     });
     console.log(data);
+
     localStorage.setItem('gather', JSON.stringify(data.data));
   }
 
