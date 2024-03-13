@@ -11,6 +11,7 @@
 export type Creates = {
   title?: string;
   categoryId?: number;
+  studyId?: number;
   participantLimit?: number;
   way?: string;
   platform?: string;
