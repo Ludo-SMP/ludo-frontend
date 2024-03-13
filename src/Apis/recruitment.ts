@@ -1,11 +1,11 @@
-import { httpClient } from '@/Utils/axios';
+import { httpClient } from '@/utils/axios';
 import { useMutation, useQuery } from '@tanstack/react-query';
 // import { useInfiniteQuery } from '@tanstack/react-query';
 import { RECRUITMENT } from '@/Constants/queryString';
 import { PopularRecruitments, Recruitments, FilterOptionParams, RecruitmentDetail } from '@/Types/study';
 import { API_END_POINT } from '@/Constants/api';
 import { useNavigate } from 'react-router-dom';
-import { getFilterOptions } from '@/Utils/filter';
+import { getFilterOptions } from '@/utils/filter';
 
 export const getPopularRecruitments = (count: number = 6): Promise<{ data: { data: PopularRecruitments } }> =>
   httpClient.get(API_END_POINT.POPULAR_RECRUITMENTS, { params: { count } });

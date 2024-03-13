@@ -4,7 +4,7 @@ import { FilterOption } from '@/Types/study';
 import DropdownItem from './DropdownItem';
 import { useOutSideClick } from '@/Hooks/useOutsideClick';
 import { Up, Down } from '@/Assets';
-import { useFilterOptionsStore } from '@/Store/filter';
+import { useFilterOptionsStore } from '@/store/filter';
 
 export interface DropdownFilterProps {
   filterName: string;

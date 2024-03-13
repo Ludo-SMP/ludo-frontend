@@ -6,12 +6,12 @@ import Button from '@/Components/Common/Button';
 import ChipMenu from '@/Components/Common/ChipMenu';
 import { Right, Create, LudoBanner } from '@/Assets';
 import UtiltiyButtons from '@/Components/UtilityButtons';
-import { useSelectedCategoryStore } from '@/Store/category';
+import { useSelectedCategoryStore } from '@/store/category';
 import RecruitmentCard from '@/Components/RecruitmentCard';
 import { useNavigate } from 'react-router-dom';
 import { ROUTER_PATH } from '@/Constants/Router_Path';
-import { useLoginStore } from '@/Store/auth';
-import { useModalStore } from '@/Store/modal';
+import { useLoginStore } from '@/store/auth';
+import { useModalStore } from '@/store/modal';
 import Modal from '@/Components/Common/Modal';
 import { CREATE_STUDY } from '@/Constants/messages';
 
