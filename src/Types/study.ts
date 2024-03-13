@@ -160,12 +160,14 @@ export interface ParticipateStudy {
   endDateTime: string;
   status: StudyStatus;
   participantCount: number;
+  isOwer: boolean;
+  hasRecruitment: boolean;
 }
 
 export interface ApplicantRecruitment {
   recruitmentId: number;
   title: string;
-  position: { id: number; name: Position };
+  position: Position;
   applicantStatus: ApplyStatus;
 }
 
@@ -177,6 +179,8 @@ export interface CompletedStudy {
   endDateTime: string;
   status: StudyStatus;
   participantCount: number;
+  isOwer: boolean;
+  hasRecruitment: boolean;
 }
 
 export interface MyStudies {

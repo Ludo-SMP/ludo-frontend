@@ -61,12 +61,12 @@ export const StudyDetailPage = () => {
         category={study?.category}
         progressMethod={study?.way}
         platform={study?.platform}
-        period={study?.startDateTime}
+        period={getPeriod(study?.startDateTime, study?.endDateTime)}
         dDay={getDday(study?.endDateTime)}
       />
       <RowDivider rowHeight={16} />
       <MemberSection memberLimit={study?.participantsLimit} members={study?.participants} />
-      {/* <StudyButtonsWrapper>
+      <StudyButtonsWrapper>
         {user?.id === study?.owner.id && study?.participants.length === 0 && (
           <Button
             size="fullWidth"
@@ -101,7 +101,7 @@ export const StudyDetailPage = () => {
               스터디 수정하기
             </Button>
           )}
-      </StudyButtonsWrapper> */}
+      </StudyButtonsWrapper>
       {isModalOpen && isDeletedBtnClicked && (
         <Modal
           handleApprove={() => {

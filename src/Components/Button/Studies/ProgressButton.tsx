@@ -3,9 +3,7 @@ import styled from 'styled-components';
 export const ProgressButton = () => {
   return (
     <ButtonConTainer name="Progress" className="select">
-      <Textwrapper disabled selected>
-        진행방식
-      </Textwrapper>
+      <Textwrapper>진행방식</Textwrapper>
       <Textwrapper value="gathertown">온라인</Textwrapper>
       <Textwrapper value="googlemeet">오프라인</Textwrapper>
     </ButtonConTainer>
