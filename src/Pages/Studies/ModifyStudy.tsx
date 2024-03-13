@@ -59,13 +59,12 @@ export const ModifyStudy = () => {
   const handleSubmit = (event: any) => {
     event.preventDefault();
     post();
-    // Navigate(`/`);
   };
 
   return (
     <>
       <StudyContainer onSubmit={handleSubmit}>
-        <StudyMain>스터디 생성하기</StudyMain>
+        <StudyMain>스터디 수정하기</StudyMain>
         <TopBox>
           <StudyTitle>
             <AssetContainer>
@@ -161,6 +160,7 @@ const StudyMain = styled.p`
 `;
 
 const StudyContainer = styled.form`
+  max-width: 1920px;
   height: 1300px;
   padding-left: 200px;
   display: flex;

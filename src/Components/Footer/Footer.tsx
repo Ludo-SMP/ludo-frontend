@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Ludo_Footer } from '@/Assets';
+import { media } from '@/Styles/theme';
 export const Footer = () => {
   return (
     <FooterContainer>
@@ -28,11 +29,20 @@ export const Footer = () => {
 
 const FooterContainer = styled.section`
   display: flex;
+  max-width: 1920px;
   height: 308px;
   align-items: flex-start;
   flex-direction: row;
   margin-top: 40px;
   background-color: ${({ theme }) => theme.color.gray1};
+  ${media.custom(500)} {
+    background-color: ${({ theme }) => theme.color.gray1};
+    max-width: 500px;
+  }
+  ${media.custom(1024)} {
+    background-color: ${({ theme }) => theme.color.gray1};
+    max-width: 1024px;
+  }
 `;
 
 const MiddleWrapper = styled.div`
@@ -44,7 +54,7 @@ const MiddleWrapper = styled.div`
 `;
 
 const BorderBox = styled.span`
-  max-width: 1200px;
+  width: 1200px;
   height: 104px;
   border-bottom: 1px solid #444444;
   padding-bottom: 32px;

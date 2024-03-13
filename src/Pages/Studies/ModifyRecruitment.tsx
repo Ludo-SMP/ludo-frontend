@@ -81,7 +81,7 @@ export const ModifyRecruitment = () => {
   return (
     <>
       <StudyContainer onSubmit={handleSubmit}>
-        <StudyMain>스터디 팀원 모집하기</StudyMain>
+        <StudyMain>스터디 팀원 모집공고 수정하기</StudyMain>
         <TopBox>
           <StudyTitle>
             <AssetContainer>
