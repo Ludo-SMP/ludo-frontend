@@ -1,6 +1,6 @@
 import { API_END_POINT } from '@/Constants/api';
-import { useLoginStore } from '@/Store/auth';
-import { httpClient } from '@/Utils/axios';
+import { useLoginStore } from '@/store/auth';
+import { httpClient } from '@/utils/axios';
 import { useMutation } from '@tanstack/react-query';
 
 import { useNavigate } from 'react-router-dom';

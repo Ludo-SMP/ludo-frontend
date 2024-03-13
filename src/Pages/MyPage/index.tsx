@@ -6,10 +6,10 @@ import { BlankSquare } from '@/Components/Common/BlankSquare';
 import TemporarySavedCard, { TemporarySavedCardProps } from '@/Components/TemporarySavedCard';
 import Button from '@/Components/Common/Button';
 import { useMyPageInfo } from '@/Apis/study';
-import { getPeriod } from '@/Utils/date';
+import { getPeriod } from '@/utils/date';
 import ChipMenu from '@/Components/Common/ChipMenu';
 import { User, ParticipateStudy, ApplicantRecruitment, CompletedStudy } from '@/Types/study';
-import { useSelectedCardStore, useSelectedMyStudyStore } from '@/Store/study';
+import { useSelectedCardStore, useSelectedMyStudyStore } from '@/store/study';
 import { useLogOutMutation } from '@/Apis/auth';
 import { temporarySavedCardMockData } from '@/Shared/dummy';
 
