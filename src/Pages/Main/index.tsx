@@ -10,11 +10,17 @@ import { useSelectedCategoryStore } from '@/Store/category';
 import RecruitmentCard from '@/Components/RecruitmentCard';
 import { useNavigate } from 'react-router-dom';
 import { ROUTER_PATH } from '@/Constants/Router_Path';
+import { useLoginStore } from '@/Store/auth';
+import { useModalStore } from '@/Store/modal';
+import Modal from '@/Components/Common/Modal';
+import { CREATE_STUDY } from '@/Constants/messages';
 
 const MainPage = () => {
   const { data: popularRecruitments, isLoading } = usePopularRecruitments();
   const { selectedCategory, setSelectedCategory } = useSelectedCategoryStore();
   const navigate = useNavigate();
+  const { isLoggedIn } = useLoginStore();
+  const { isModalOpen, openModal } = useModalStore();
 
   const popularCodingRecruitments: Recruitment[] = popularRecruitments?.popularCodingRecruitments;
   const popularInterviewRecruitments: Recruitment[] = popularRecruitments?.popularInterviewRecruitments;
@@ -76,11 +82,25 @@ const MainPage = () => {
         </RecruitmentCardsWrapper>
       </RecruitmentsSectionWrapper>
       <UtiltiyButtons>
-        <Button onClick={() => navigate(ROUTER_PATH.createStudy)} className="create__btn">
+        <Button
+          onClick={isLoggedIn ? () => navigate(ROUTER_PATH.createStudy) : () => openModal()}
+          className="create__btn"
+        >
           <Create height={40} />
           <span>스터디 생성</span>
         </Button>
       </UtiltiyButtons>
+      {!isLoggedIn && isModalOpen && (
+        <Modal
+          title={CREATE_STUDY.LOGIN.title}
+          handleApprove={() => navigate(ROUTER_PATH.login)}
+          approveBtnText="로그인하기"
+          cancelBtnText="나중에 할래요"
+          isBtnWidthEqual={false}
+        >
+          {CREATE_STUDY.LOGIN.content}
+        </Modal>
+      )}
     </MainPageWrapper>
   );
 };

@@ -10,9 +10,11 @@ import StudyButtonSection from './StudyButtonSection';
 import SignButtonSection from './SignButtonSection';
 import HamburgerSection from './HamburgerSection';
 import Gnb from './Gnb';
+import { useModalStore } from '@/Store/modal';
 
 const Header = () => {
   const { isLoggedIn } = useLoginStore();
+  const { openModal } = useModalStore();
   const navigate = useNavigate();
   const currentLocation = useLocation()?.pathname;
 
@@ -52,9 +54,7 @@ const Header = () => {
               <Button
                 className="create__study"
                 type="button"
-                onClick={() => {
-                  navigate(ROUTER_PATH.createStudy);
-                }}
+                onClick={isLoggedIn ? () => navigate(ROUTER_PATH.createStudy) : () => openModal()}
               >
                 스터디 생성하기
               </Button>
