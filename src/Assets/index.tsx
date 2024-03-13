@@ -28,3 +28,6 @@ export { default as Ludo_Footer } from './icons/Ludo_Footer.svg?react';
 // logo
 export { default as BlankLogo } from './images/blank-logo.png';
 export { default as Logo } from './images/logo.png';
+
+// Banner
+export { default as LudoBanner } from './images/banner.png';
