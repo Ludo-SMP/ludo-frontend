@@ -20,7 +20,7 @@ import ApplyModal from '@/Components/Modal/ApplyModal';
 import { ApplyTryStatus } from '@/Types/study';
 
 const RecruitmentDetailPage = () => {
-  const recruitmentId = Number(useParams().studyId);
+  const recruitmentId = Number(useParams().recruitmentId);
   const { isModalOpen, openModal, closeModal } = useModalStore();
   const { isLoggedIn } = useLoginStore();
   const { user } = useUserStore();
