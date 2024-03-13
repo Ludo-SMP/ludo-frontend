@@ -1,5 +1,6 @@
 import { httpClient } from '@/Utils/axios';
-import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
+// import { useInfiniteQuery } from '@tanstack/react-query';
 import { RECRUITMENT } from '@/Constants/queryString';
 import { PopularRecruitments, Recruitments, FilterOptionParams, RecruitmentDetail } from '@/Types/study';
 import { API_END_POINT } from '@/Constants/api';
@@ -31,25 +32,25 @@ export const getRecruitments = (
   });
 };
 
-export const useRecruitments = ({
-  filterOptions,
-  count,
-}: {
-  last?: number;
-  count: number;
-  filterOptions: Pick<FilterOptionParams, 'categoryId' | 'positionId' | 'progressMethod' | 'stackId'>;
-}) => {
-  const { data, hasNextPage, fetchNextPage } = useInfiniteQuery({
-    queryKey: [...RECRUITMENT.RECRUITMENTS(filterOptions)],
-    queryFn: ({ pageParam = undefined }) => getRecruitments(filterOptions, count, pageParam),
-    getNextPageParam: (lastPage) => {
-      const recruitments = lastPage?.data?.data?.recruitments;
-      if (recruitments.length !== count) return undefined;
-      return recruitments[recruitments.length - 1].id;
-    },
-  });
-  return { data, hasNextPage, fetchNextPage };
-};
+// export const useRecruitments = ({
+//   filterOptions,
+//   count,
+// }: {
+//   last?: number;
+//   count: number;
+//   filterOptions: Pick<FilterOptionParams, 'categoryId' | 'positionId' | 'progressMethod' | 'stackId'>;
+// }) => {
+//   const { data, hasNextPage, fetchNextPage } = useInfiniteQuery({
+//     queryKey: [...RECRUITMENT.RECRUITMENTS(filterOptions)],
+//     queryFn: ({ pageParam = undefined }) => getRecruitments(filterOptions, count, pageParam),
+//     getNextPageParam: (lastPage) => {
+//       const recruitments = lastPage?.data?.data?.recruitments;
+//       if (recruitments.length !== count) return undefined;
+//       return recruitments[recruitments.length - 1].id;
+//     },
+//   });
+//   return { data, hasNextPage, fetchNextPage };
+// };
 
 export const getRecruitmentDetail = (recruitmentId: number): Promise<{ data: { data: RecruitmentDetail } }> =>
   httpClient.get(API_END_POINT.RECRUITMENT(recruitmentId));
