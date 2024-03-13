@@ -1,9 +1,9 @@
-import { httpClient } from '@/Utils/axios';
+import { httpClient } from '@/utils/axios';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { STUDY } from '@/Constants/queryString';
 import { API_END_POINT } from '@/Constants/api';
 import { SetStateAction } from 'react';
-import { useModalStore } from '@/Store/modal';
+import { useModalStore } from '@/store/modal';
 import { ApplicantsDetail, ApplyTryStatus, MyPageInfo, StudyDetail } from '@/Types/study';
 import { useNavigate } from 'react-router-dom';
 import { ROUTER_PATH } from '@/Constants/Router_Path';

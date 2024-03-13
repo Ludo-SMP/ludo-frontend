@@ -1,6 +1,6 @@
 import { API_END_POINT } from '@/Constants/api';
 import { STACK } from '@/Constants/queryString';
-import { httpClient } from '@/Utils/axios';
+import { httpClient } from '@/utils/axios';
 import { useQuery } from '@tanstack/react-query';
 
 export const getStack = () => httpClient.get(API_END_POINT.STACK);

@@ -4,7 +4,7 @@ import Chip from '@/Components/Common/Chip';
 import { useApplyStudyMutation } from '@/Apis/study';
 import { ApplyTryStatus, Position } from '@/Types/study';
 import styled from 'styled-components';
-import { useSelectedPositionStore } from '@/Store/position';
+import { useSelectedPositionStore } from '@/store/position';
 import { SetStateAction } from 'react';
 
 interface ApplyModalProps {

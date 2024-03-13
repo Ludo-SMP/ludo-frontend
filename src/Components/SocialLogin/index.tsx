@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Kakao, Naver, Google } from '@/Assets';
 import { media } from '@/Styles/theme';
-import { useLoginStore } from '@/Store/auth';
+import { useLoginStore } from '@/store/auth';
 import { API_END_POINT } from '@/Constants/api';
 import { SocialType, SignType } from '@/Types/auth';
 

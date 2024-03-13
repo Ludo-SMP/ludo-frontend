@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Button from '../Button';
-import { useModalStore } from '@/Store/modal';
+import { useModalStore } from '@/store/modal';
 
 export interface ModalProps {
   children: React.ReactNode;

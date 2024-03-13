@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import PositionToken from '../Common/PositionToken';
 import { Position, Stack } from '@/Types/study';
 import { Link } from 'react-router-dom';
-import { dateFormatter, getPeriod } from '@/Utils/date';
+import { dateFormatter, getPeriod } from '@/utils/date';
 import { Recruitment } from '@/Types/study';
 import { PROGRESS_METHOD } from '@/Shared/study';
 import Image from '../Common/Image';

@@ -1,4 +1,4 @@
-import { useSelectedPositionStore } from '@/Store/position';
+import { useSelectedPositionStore } from '@/store/position';
 import { Position } from '@/Types/study';
 
 import styled from 'styled-components';

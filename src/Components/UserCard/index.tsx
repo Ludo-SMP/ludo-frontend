@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Button from '../Common/Button';
 import Dropdown from '../Common/Dropdown';
 import { useState } from 'react';
-import { useModalStore } from '@/Store/modal';
+import { useModalStore } from '@/store/modal';
 import EditProfileModal from '../Modal/EditProfileModal';
 import Modal from '../Common/Modal';
 import { PROFILE } from '@/Constants/messages';

@@ -4,13 +4,13 @@ import { media } from '@/Styles/theme';
 import { ROUTER_PATH } from '@/Constants/Router_Path';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
 import { Logo, Alarm, Profile } from '@/Assets';
-import { useLoginStore } from '@/Store/auth';
+import { useLoginStore } from '@/store/auth';
 import Button from '../Common/Button';
 import StudyButtonSection from './StudyButtonSection';
 import SignButtonSection from './SignButtonSection';
 import HamburgerSection from './HamburgerSection';
 import Gnb from './Gnb';
-import { useModalStore } from '@/Store/modal';
+import { useModalStore } from '@/store/modal';
 
 const Header = () => {
   const { isLoggedIn } = useLoginStore();

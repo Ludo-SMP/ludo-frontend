@@ -1,6 +1,6 @@
 import { API_END_POINT } from '@/Constants/api';
 import { USER } from '@/Constants/queryString';
-import { httpClient } from '@/Utils/axios';
+import { httpClient } from '@/utils/axios';
 import { useMutation } from '@tanstack/react-query';
 
 export const editProfileNickname = (nickname: string) =>

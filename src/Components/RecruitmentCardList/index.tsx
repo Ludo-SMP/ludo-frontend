@@ -6,7 +6,7 @@ import NotFound from '../NotFound';
 // import { useIntersectionObservable } from '@/Hooks/userIntersectionObservable';
 // // import { useRecruitments } from '@/Apis/recruitment';
 // import { INFINITE_RECRUITMENTS_COUMT_PER_PAGE } from '@/Constants/common';
-import { useFilterOptionsStore } from '@/Store/filter';
+import { useFilterOptionsStore } from '@/store/filter';
 import { getProgressMethod } from '@/Mocks/utils/getQueryParams';
 
 const RecruitmentCardList = () => {
