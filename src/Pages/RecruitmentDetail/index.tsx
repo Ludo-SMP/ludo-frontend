@@ -4,7 +4,7 @@ import { RowDivider } from '../../Components/Common/Divider/RowDivider';
 import { ColumnDivider } from '../../Components/Common/Divider/ColumnDivider';
 import { useCloseRecruitmentMutation, useRecruitmentDetail } from '@/Apis/recruitment';
 import { useNavigate, useParams } from 'react-router-dom';
-import { dateFormatter, getPeriod } from '@/Utils/date';
+import { dateFormatter, getPeriod, isEdited } from '@/Utils/date';
 import RecruitmentInfoSection from './RecruitmentInfoSection';
 import StudyProgressInfoSection from './StudyProgessInfoSection';
 import StudyBasicInfoSection from './StudyBasicInfoSection';
@@ -51,7 +51,9 @@ const RecruitmentDetailPage = () => {
           <ColumnDivider />
           <div className="edit__info">
             <div className="createdAt">{dateFormatter(recruitment.createdDateTime)}</div>
-            <div className="edit__status">수정됨</div>
+            <div className="edit__status">
+              {isEdited(recruitment.createdDateTime, recruitment.updatedDateTime) ? '수정됨' : '생성'}
+            </div>
           </div>
         </div>
         <div className="recruitment__details">
@@ -114,13 +116,14 @@ const RecruitmentDetailPage = () => {
       {isLoggedIn && isModalOpen && applyTryStatus === 'NOT APPLY' && (
         <ApplyModal
           handleApplyApprove={setApplyTryStatus}
-          recruitmentId={recruitmentId}
+          studyId={study.id}
+          recruitmentId={recruitment.id}
           positions={recruitment.positions}
         />
       )}
       {isLoggedIn && isModalOpen && applyTryStatus === 'SUCCESS' && (
         <Modal
-          title={APPLY.APPROVE.title}
+          title={APPLY.SUCCESS.title}
           handleApprove={() => {
             setApplyTryStatus(() => 'NOT APPLY');
             closeModal();
@@ -131,16 +134,16 @@ const RecruitmentDetailPage = () => {
           <div className="approve__image"></div>
         </Modal>
       )}
-      {isLoggedIn && isModalOpen && applyTryStatus === 'FAIL' && (
+      {isLoggedIn && isModalOpen && (applyTryStatus === 'CLOSED' || applyTryStatus === 'ALREDAY_APPLY') && (
         <Modal
-          title={APPLY.FAIL.title}
+          title={applyTryStatus === 'CLOSED' ? APPLY.CLOSED.title : APPLY.ALREADY_APPLY.title}
           handleApprove={() => {
             setApplyTryStatus(() => 'NOT APPLY');
             closeModal();
           }}
           approveBtnText="확인"
         >
-          {APPLY.FAIL.content}
+          {applyTryStatus === 'CLOSED' ? APPLY.CLOSED.content : APPLY.ALREADY_APPLY.content}
         </Modal>
       )}
     </RecruitmentDetailWrapper>

@@ -34,10 +34,8 @@ export const StudyDetailPage = () => {
   });
 
   const { mutate: deleteStudyMutate } = useDeleteStudyMutation(studyId);
-
   const { mutate: leaveStudyMutate } = useLeaveStudyMutation(studyId);
 
-  console.log(studyId);
   return isLoading ? (
     <div>Loading...</div>
   ) : (
@@ -61,13 +59,13 @@ export const StudyDetailPage = () => {
         category={study?.category}
         progressMethod={study?.way}
         platform={study?.platform}
-        period={study?.startDateTime}
+        period={getPeriod(study?.startDateTime, study?.endDateTime)}
         dDay={getDday(study?.endDateTime)}
       />
       <RowDivider rowHeight={16} />
       <MemberSection memberLimit={study?.participantsLimit} members={study?.participants} />
-      {/* <StudyButtonsWrapper>
-        {user?.id === study?.owner.id && study?.participants.length === 0 && (
+      <StudyButtonsWrapper>
+        {user?.id === study?.owner.id && study?.participants.length === 1 && (
           <Button
             size="fullWidth"
             onClick={() => {
@@ -101,7 +99,7 @@ export const StudyDetailPage = () => {
               스터디 수정하기
             </Button>
           )}
-      </StudyButtonsWrapper> */}
+      </StudyButtonsWrapper>
       {isModalOpen && isDeletedBtnClicked && (
         <Modal
           handleApprove={() => {

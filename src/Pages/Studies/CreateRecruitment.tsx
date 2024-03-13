@@ -31,7 +31,10 @@ export const CreateRecruitment = () => {
   const Navigation = useNavigate();
   const studyId = Number(useParams().studyId);
   useStudyDetail(studyId);
-  console.log(studyId);
+  const { data: studyDetail } = useStudyDetail(studyId);
+  const study = studyDetail?.study;
+
+  // console.log(studyId);
   const [useForm, setuseForm] = useState<Gather>({
     title: '',
     // recruitmentLimit: 0,
@@ -67,8 +70,9 @@ export const CreateRecruitment = () => {
       applicantCount: useForm.applicantCount,
       // studyId: useForm.studyId,
     });
-    console.log(data);
-    Navigation(`/studies/${studyId}/recruitment`);
+    // console.log(data);
+    const recruitmentId = data?.data?.recruitment?.id;
+    Navigation(`/studies/${recruitmentId}/recruitment`);
     // localStorage.setItem('gather', JSON.stringify(data.data));
   }
 
@@ -129,15 +133,17 @@ export const CreateRecruitment = () => {
           <StudyMiddleInfo>
             <StudyWrapper>
               <ContentText>진행방식</ContentText>
-              <SubContentTitle>진행방식</SubContentTitle>
+              <SubContentTitle>{study?.way}</SubContentTitle>
             </StudyWrapper>
             <StudyWrapper>
               <ContentText>진행 플랫폼</ContentText>
-              <SubContentTitle>진행 플랫폼</SubContentTitle>
+              <SubContentTitle>{study?.platform}</SubContentTitle>
             </StudyWrapper>
             <StudyWrapper>
               <ContentText> 진행기간</ContentText>
-              <SubContentTitle>진행기간</SubContentTitle>
+              <SubContentTitle>
+                {study?.startDateTime} ~ {study?.endDateTime}
+              </SubContentTitle>
             </StudyWrapper>
           </StudyMiddleInfo>
         </MiddleBox>
@@ -151,16 +157,16 @@ export const CreateRecruitment = () => {
           </StudyTitle>
           <MiddleBottomWrapper>
             <ContentText>스터디 제목</ContentText>
-            <SubContentTitle> 스터디 제목</SubContentTitle>
+            <SubContentTitle>{study?.title}</SubContentTitle>
           </MiddleBottomWrapper>
           <MiddleBottomInfo>
             <MiddleBottomWrapper>
               <ContentText>카테고리</ContentText>
-              <SubContentTitle>카테고리</SubContentTitle>
+              <SubContentTitle>{study?.category as any}</SubContentTitle>
             </MiddleBottomWrapper>
             <MiddleBottomWrapper>
               <ContentText>스터디 최대 인원</ContentText>
-              <SubContentTitle>스터디 최대 인원</SubContentTitle>
+              <SubContentTitle>{study?.participantsLimit}</SubContentTitle>
             </MiddleBottomWrapper>
           </MiddleBottomInfo>
         </StudyMidBottom>

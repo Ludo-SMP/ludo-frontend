@@ -9,8 +9,6 @@ interface FilterOptionParams {
 }
 
 export const getFilteredRecruitmentsMockData = ({ categoryId, way, positionId, stackId }: FilterOptionParams) => {
-  console.log(categoryId, way, positionId, stackId);
-
   const filteredRecruitmentsMockData: Recruitment[] = recruitmentsMockData.filter((data: Recruitment) => {
     const { category, positions, stacks, way: _way } = data;
     return (

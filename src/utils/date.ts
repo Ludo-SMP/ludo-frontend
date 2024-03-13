@@ -14,3 +14,10 @@ export const getPeriod = (startDate: string, endDate: string) => {
   const end = dateFormatter(endDate);
   return start + '~' + end;
 };
+
+export const isEdited = (createdDate: string, updatedDate: string) => {
+  const updatedDateTime = new Date(updatedDate).getTime();
+  const createdDateTime = new Date(createdDate).getTime();
+
+  return updatedDateTime - createdDateTime > 0;
+};

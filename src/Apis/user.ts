@@ -11,13 +11,13 @@ export const useEditProfileNickname = (successHandler: () => void, failHandler: 
     mutationKey: [...USER.EDIT_PROFILE()],
     mutationFn: (nickname: string) => editProfileNickname(nickname),
     onSuccess: (e) => {
-      console.log(e);
+      // console.log(e);
       successHandler();
-      console.log('닉네임 변경 성공');
+      // console.log('닉네임 변경 성공');
     },
     onError: () => {
       failHandler();
-      console.log('닉네임 변경 실패');
+      // console.log('닉네임 변경 실패');
     },
   });
   return { mutate, error };

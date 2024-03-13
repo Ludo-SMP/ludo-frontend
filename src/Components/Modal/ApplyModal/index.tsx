@@ -9,13 +9,14 @@ import { SetStateAction } from 'react';
 
 interface ApplyModalProps {
   handleApplyApprove: React.Dispatch<SetStateAction<ApplyTryStatus>>;
+  studyId: number;
   recruitmentId: number;
   positions: Position[];
 }
 
-const ApplyModal = ({ handleApplyApprove, recruitmentId, positions }: ApplyModalProps) => {
+const ApplyModal = ({ handleApplyApprove, studyId, recruitmentId, positions }: ApplyModalProps) => {
   const { selectedPosition, resetSelectedPosition } = useSelectedPositionStore();
-  const { mutate } = useApplyStudyMutation(recruitmentId, { positionId: selectedPosition }, handleApplyApprove);
+  const { mutate: applyMutate } = useApplyStudyMutation(studyId, recruitmentId, handleApplyApprove);
 
   return (
     <Modal
@@ -25,17 +26,15 @@ const ApplyModal = ({ handleApplyApprove, recruitmentId, positions }: ApplyModal
       cancelBtnText="나중에 하기"
       handleApprove={() => {
         if (!selectedPosition) return;
-        mutate();
+        applyMutate(selectedPosition);
         resetSelectedPosition();
       }}
       handleCancel={() => resetSelectedPosition()}
     >
       <ChipsWrapper>
-        {positions.map((position: Position) => (
-          <Chip chipType="Primary" value={position.name}>
-            {position.name}
-          </Chip>
-        ))}
+        {positions.length !== 0
+          ? positions.map((position: Position) => <Chip chipType="Primary" position={position} />)
+          : '선택할 수 있는 포지션이 없습니다.'}
       </ChipsWrapper>
     </Modal>
   );

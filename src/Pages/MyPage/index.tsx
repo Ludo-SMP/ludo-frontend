@@ -67,6 +67,8 @@ const MyPage = () => {
                 position={participateStudy?.position}
                 period={getPeriod(participateStudy?.startDateTime, participateStudy?.endDateTime)}
                 participantCount={participateStudy?.participantCount}
+                isOwner={participateStudy?.isOwner}
+                hasRecruitment={participateStudy?.hasRecruitment}
                 key={participateStudy?.studyId}
               />
             ))
@@ -88,6 +90,8 @@ const MyPage = () => {
                 position={completedStudy?.position}
                 period={getPeriod(completedStudy?.startDateTime, completedStudy?.endDateTime)}
                 participantCount={completedStudy?.participantCount}
+                isOwner={completedStudy?.isOwner}
+                hasRecruitment={completedStudy?.hasRecruitment}
                 key={completedStudy?.studyId}
               />
             ))}

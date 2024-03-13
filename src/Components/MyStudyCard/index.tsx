@@ -3,7 +3,7 @@ import { BlankSquare } from '../Common/BlankSquare';
 import StudyToken from '../Common/StudyToken';
 import { InfoField } from '../Common/InfoField';
 import Button from '../Common/Button';
-import { ApplyStatus, StudyStatus, PositionType } from '@/Types/study';
+import { ApplyStatus, StudyStatus, Position } from '@/Types/study';
 import { useNavigate } from 'react-router-dom';
 import { useCancelAppyMutation } from '@/Apis/study';
 import { useQueryClient } from '@tanstack/react-query';
@@ -13,12 +13,23 @@ interface MyStudyCardProps {
   id: number;
   title: string;
   status: StudyStatus | ApplyStatus;
-  position: PositionType;
+  position: Position;
   period?: string;
+  isOwner?: boolean;
+  hasRecruitment?: boolean;
   participantCount?: number;
 }
 
-const MyStudyCard = ({ id, title, status, position, period, participantCount }: MyStudyCardProps) => {
+const MyStudyCard = ({
+  id,
+  title,
+  status,
+  position,
+  period,
+  participantCount,
+  isOwner,
+  hasRecruitment,
+}: MyStudyCardProps) => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const cancelApplySuccessHandler = () => {
@@ -53,6 +64,17 @@ const MyStudyCard = ({ id, title, status, position, period, participantCount }: 
         </div>
       </StudyInfoWrapper>
       <MyStudyCardButtonsWrapper>
+        {(status === 'PROGRESS' || status === 'RECRUITING') && !hasRecruitment && isOwner && (
+          <Button
+            scheme="primary"
+            onClick={(e) => {
+              e.stopPropagation();
+              navigate(`/studies/${id}/recruitments/create`);
+            }}
+          >
+            스터디원 모집 공고 작성하기
+          </Button>
+        )}
         {status === 'UNCHECKED' && (
           <Button
             onClick={(e) => {
