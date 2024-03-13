@@ -36,7 +36,6 @@ const MyStudyCard = ({
     queryClient.invalidateQueries({ queryKey: [...STUDY.MYPAGE_INFO()] });
   };
   const { mutate: cancelMutate } = useCancelAppyMutation(id, cancelApplySuccessHandler);
-  console.log(title, isOwner, hasRecruitment);
 
   return (
     <MyStudyCardWrapper

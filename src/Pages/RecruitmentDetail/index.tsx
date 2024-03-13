@@ -116,13 +116,14 @@ const RecruitmentDetailPage = () => {
       {isLoggedIn && isModalOpen && applyTryStatus === 'NOT APPLY' && (
         <ApplyModal
           handleApplyApprove={setApplyTryStatus}
-          recruitmentId={recruitmentId}
+          studyId={study.id}
+          recruitmentId={recruitment.id}
           positions={recruitment.positions}
         />
       )}
       {isLoggedIn && isModalOpen && applyTryStatus === 'SUCCESS' && (
         <Modal
-          title={APPLY.APPROVE.title}
+          title={APPLY.SUCCESS.title}
           handleApprove={() => {
             setApplyTryStatus(() => 'NOT APPLY');
             closeModal();
@@ -133,16 +134,16 @@ const RecruitmentDetailPage = () => {
           <div className="approve__image"></div>
         </Modal>
       )}
-      {isLoggedIn && isModalOpen && applyTryStatus === 'FAIL' && (
+      {isLoggedIn && isModalOpen && (applyTryStatus === 'CLOSED' || applyTryStatus === 'ALREDAY_APPLY') && (
         <Modal
-          title={APPLY.FAIL.title}
+          title={applyTryStatus === 'CLOSED' ? APPLY.CLOSED.title : APPLY.ALREADY_APPLY.title}
           handleApprove={() => {
             setApplyTryStatus(() => 'NOT APPLY');
             closeModal();
           }}
           approveBtnText="확인"
         >
-          {APPLY.FAIL.content}
+          {applyTryStatus === 'CLOSED' ? APPLY.CLOSED.content : APPLY.ALREADY_APPLY.content}
         </Modal>
       )}
     </RecruitmentDetailWrapper>

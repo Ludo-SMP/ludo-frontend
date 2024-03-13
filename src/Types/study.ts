@@ -9,7 +9,7 @@ export type Role = keyof typeof ROLE;
 export type Platform = keyof typeof PLATFORM;
 export type Card = 'STUDY' | 'RECRUITMENT';
 export type Sort = '최신순' | '조회순';
-export type ApplyTryStatus = 'NOT APPLY' | 'SUCCESS' | 'FAIL';
+export type ApplyTryStatus = 'NOT APPLY' | 'SUCCESS' | 'CLOSED' | 'ALREDAY_APPLY' | 'ALREDY_PARTICIPATED';
 
 export interface Position {
   id: number;

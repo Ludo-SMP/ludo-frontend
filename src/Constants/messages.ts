@@ -8,12 +8,20 @@ export const APPLY = Object.freeze({
   CHOSSE_POSITION: {
     title: '지원하려는 스터디의 포지션을 골라주세요',
   },
-  APPROVE: {
+  SUCCESS: {
     title: '스터디 지원을 완료했습니다!',
   },
-  FAIL: {
+  CLOSED: {
     title: '앗, 지원이 마감된 스터디입니다ㅠㅠ',
     content: `방금 전 스터디 모집이 마감되었습니다.\n 해당 스터디에 관심 가져주셔서 감사합니다.`,
+  },
+  ALREADY_APPLY: {
+    title: '이미 지원한 스터디입니다.',
+    content: '이미 지원한 스터디입니다. 다른 스터디를 지원해주세요',
+  },
+  ALREADY_PARTICIPATED: {
+    title: '이미 참여중인 스터디입니다.',
+    content: '이미 참여중인 스터디입니다. 다른 스터디를 지원해주세요',
   },
   ACCEPT: {
     title: '스터디 지원자를 수락했습니다!',

@@ -40,25 +40,27 @@ export const useApplicantsDetail = (studyId: number) => {
   });
 };
 
-export const applyStudy = async (recruitmentId: number, data: object) =>
-  httpClient.post(API_END_POINT.APPLY(recruitmentId), { ...data });
+export const applyStudy = async (studyId: number, recruitmentId: number, data: { positionId: number }) =>
+  httpClient.post(API_END_POINT.APPLY(studyId, recruitmentId), { ...data });
 
 export const useApplyStudyMutation = (
+  studyId: number,
   recruitmentId: number,
-  data: object,
   handleApplyApprove: React.Dispatch<SetStateAction<ApplyTryStatus>>,
 ) => {
   const { openModal } = useModalStore();
   const { mutate } = useMutation({
-    mutationKey: [STUDY.APPLY(recruitmentId)],
-    mutationFn: () => applyStudy(recruitmentId, data),
+    mutationKey: [STUDY.APPLY(studyId, recruitmentId)],
+    mutationFn: (selectedPosition: number) => applyStudy(studyId, recruitmentId, { positionId: selectedPosition }),
     onSuccess: () => {
       console.log('success');
-      handleApplyApprove(() => 'SUCCESS');
+      handleApplyApprove('SUCCESS');
       openModal();
     },
-    onError: () => {
-      handleApplyApprove(() => 'FAIL');
+    onError: (e) => {
+      const message = e?.response?.data?.message;
+      if (message === '현재 모집 중인 스터디가 아닙니다.') handleApplyApprove(() => 'CLOSED');
+      if (message === '이미 지원한 모집 공고입니다.') handleApplyApprove(() => 'ALREDAY_APPLY');
       openModal();
     },
   });

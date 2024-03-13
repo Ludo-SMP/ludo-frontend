@@ -19,6 +19,6 @@ export interface SetSelectedPositionsAction {
 
 export const useSelectedPositionStore = create<SelectedPositionState & SetSelectedPositionsAction>((set) => ({
   selectedPosition: null,
-  setSelectedPosition: (selectedTarget: Position) => set({ selectedPosition: POSITION[selectedTarget] }),
+  setSelectedPosition: (selectedTarget: Position) => set({ selectedPosition: selectedTarget.id }),
   resetSelectedPosition: () => set({ selectedPosition: null }),
 }));

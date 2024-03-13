@@ -34,10 +34,8 @@ export const StudyDetailPage = () => {
   });
 
   const { mutate: deleteStudyMutate } = useDeleteStudyMutation(studyId);
-
   const { mutate: leaveStudyMutate } = useLeaveStudyMutation(studyId);
 
-  console.log(studyId);
   return isLoading ? (
     <div>Loading...</div>
   ) : (
