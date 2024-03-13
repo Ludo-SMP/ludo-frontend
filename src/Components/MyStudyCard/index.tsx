@@ -8,7 +8,6 @@ import { useNavigate } from 'react-router-dom';
 import { useCancelAppyMutation } from '@/Apis/study';
 import { useQueryClient } from '@tanstack/react-query';
 import { STUDY } from '@/Constants/queryString';
-import { ROUTER_PATH } from '@/Constants/Router_Path';
 
 interface MyStudyCardProps {
   id: number;
@@ -37,6 +36,7 @@ const MyStudyCard = ({
     queryClient.invalidateQueries({ queryKey: [...STUDY.MYPAGE_INFO()] });
   };
   const { mutate: cancelMutate } = useCancelAppyMutation(id, cancelApplySuccessHandler);
+  console.log(title, isOwner, hasRecruitment);
 
   return (
     <MyStudyCardWrapper
@@ -70,7 +70,7 @@ const MyStudyCard = ({
             scheme="primary"
             onClick={(e) => {
               e.stopPropagation();
-              navigate(ROUTER_PATH.gatherStudy);
+              navigate(`/studies/${id}/recruitments/create`);
             }}
           >
             스터디원 모집 공고 작성하기

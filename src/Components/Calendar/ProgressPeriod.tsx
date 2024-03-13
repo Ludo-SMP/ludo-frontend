@@ -47,7 +47,7 @@ export const ProgressPeriod = ({ setForm, useForm }: Props) => {
         selected={endDateTime}
         value={(useForm.endDateTime = endDateTime.toISOString().slice(0, -5))}
         name="endDateTime"
-        onChange={(date: any) => setForms(date)}
+        onChange={(date: any) => setFormss(date)}
         selectsEnd
         endDate={endDateTime}
         minDate={startDateTime}

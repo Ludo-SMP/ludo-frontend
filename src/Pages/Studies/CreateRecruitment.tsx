@@ -67,8 +67,9 @@ export const CreateRecruitment = () => {
       applicantCount: useForm.applicantCount,
       // studyId: useForm.studyId,
     });
-    console.log(data);
-    Navigation(`/studies/${studyId}/recruitment`);
+    // console.log(data);
+    const recruitmentId = data?.data?.recruitment?.id;
+    Navigation(`/studies/${recruitmentId}/recruitment`);
     // localStorage.setItem('gather', JSON.stringify(data.data));
   }
 
