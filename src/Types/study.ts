@@ -61,6 +61,7 @@ export interface RecruitmentDetail {
     callUrl: string;
     content: string;
     createdDateTime: string;
+    updatedDateTime: string;
     endDateTime: string;
   };
   study: {
@@ -135,6 +136,9 @@ export interface StudyDetail {
     category: Category;
     owner: User;
     participants: Participant[];
+    hasRecruitment: boolean;
+    createdDateTime: string;
+    updatedDateTime: string;
   };
 }
 
@@ -160,7 +164,7 @@ export interface ParticipateStudy {
   endDateTime: string;
   status: StudyStatus;
   participantCount: number;
-  isOwer: boolean;
+  isOwner: boolean;
   hasRecruitment: boolean;
 }
 
@@ -179,7 +183,7 @@ export interface CompletedStudy {
   endDateTime: string;
   status: StudyStatus;
   participantCount: number;
-  isOwer: boolean;
+  isOwner: boolean;
   hasRecruitment: boolean;
 }
 

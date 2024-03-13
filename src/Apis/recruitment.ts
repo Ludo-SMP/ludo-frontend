@@ -51,30 +51,6 @@ export const useRecruitments = ({
   return { data, hasNextPage, fetchNextPage };
 };
 
-// export const getRecruitments = async ({ pageParam, filterOptions, recruitmentsPerPage }: GetRecruitmentsParams) => {
-//   const fitlerOptionsQueryString = Object.entries(filterOptions)
-//     .map((filterOption) => {
-//       const [categoryProperty, categoryItems] = filterOption;
-//       return `${categoryProperty}=${categoryItems.join(',')}`;
-//     })
-//     .join('&');
-
-//   const response = await httpClient.get(`${API_END_POINT.RECRUITMENTS}?${fitlerOptionsQueryString}`, {
-//     params: { pageParam, recruitmentsPerPage },
-//   });
-//   return response.data;
-// };
-
-// export const useRecruitments = ({ filterOptions, recruitmentsPerPage }) =>
-//   useInfiniteQuery<AxiosResponse, AxiosError>({
-//     queryKey: [...RECRUITMENT.RECRUITMENTS(filterOptions)],
-//     queryFn: ({ pageParam = 0 }) => getRecruitments({ pageParam, filterOptions, recruitmentsPerPage }),
-//     getNextPageParam: (result) => {
-//       if (!result.isLastPage) return result.pageNum;
-//       return null;
-//     },
-//   });
-
 export const getRecruitmentDetail = (recruitmentId: number): Promise<{ data: { data: RecruitmentDetail } }> =>
   httpClient.get(API_END_POINT.RECRUITMENT(recruitmentId));
 

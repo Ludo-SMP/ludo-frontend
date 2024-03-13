@@ -4,7 +4,7 @@ import { RowDivider } from '../../Components/Common/Divider/RowDivider';
 import { ColumnDivider } from '../../Components/Common/Divider/ColumnDivider';
 import { useCloseRecruitmentMutation, useRecruitmentDetail } from '@/Apis/recruitment';
 import { useNavigate, useParams } from 'react-router-dom';
-import { dateFormatter, getPeriod } from '@/Utils/date';
+import { dateFormatter, getPeriod, isEdited } from '@/Utils/date';
 import RecruitmentInfoSection from './RecruitmentInfoSection';
 import StudyProgressInfoSection from './StudyProgessInfoSection';
 import StudyBasicInfoSection from './StudyBasicInfoSection';
@@ -51,7 +51,9 @@ const RecruitmentDetailPage = () => {
           <ColumnDivider />
           <div className="edit__info">
             <div className="createdAt">{dateFormatter(recruitment.createdDateTime)}</div>
-            <div className="edit__status">수정됨</div>
+            <div className="edit__status">
+              {isEdited(recruitment.createdDateTime, recruitment.updatedDateTime) ? '수정됨' : '생성'}
+            </div>
           </div>
         </div>
         <div className="recruitment__details">
