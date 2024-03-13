@@ -24,6 +24,7 @@ export type Creates = {
   contact?: string;
   contactUrl?: string;
   content?: string;
+  applicantCount?: number;
 };
 
 export type Gather = {
@@ -38,6 +39,7 @@ export type Gather = {
   stackIds?: Array<number>;
   positionIds?: Array<number>;
   positionId?: number;
+  applicantCount?: number;
 };
 
 // export type Position = '프론트엔드' | '백엔드' | '디자이너' | '기획자';

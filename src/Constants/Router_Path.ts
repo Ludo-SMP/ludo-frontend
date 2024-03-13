@@ -9,8 +9,11 @@ export const ROUTER_PATH = {
   studyList: '/studies', //스터디 모아보기 페이지
   recruitments: '/studies', //스터디 모아보기 페이지
   createStudy: '/studies/create', //스터디생성페이지
-  modifyStudy: 'studies/modify',
-  gatherStudy: 'studies/recruitment',
+  // modifyStudy: 'studies/modify',
+  // modifyRecruitment: 'studies/modifyrecruitment',
+  modifyStudy: '/studies/:studyId/edit',
+  modifyRecruitment: '/studies/:studyId/recruitments/edit',
+  gatherStudy: '/studies/:studyId/recruitments/create',
   decativate: '/deactivate', //회원탈퇴 페이지
   test: '/test',
   savestudy: '/mypage/savestudy',

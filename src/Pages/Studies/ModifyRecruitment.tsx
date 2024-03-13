@@ -27,7 +27,7 @@ import { useStudyDetail } from '@/Apis/study';
 axios.defaults.withCredentials = true;
 export type OptionalCreates = Partial<Gather>;
 
-export const CreateRecruitment = () => {
+export const ModifyRecruitment = () => {
   const Navigation = useNavigate();
   const studyId = Number(useParams().studyId);
   useStudyDetail(studyId);
@@ -55,7 +55,7 @@ export const CreateRecruitment = () => {
   }
   // studyId:number
   async function posts() {
-    const { data } = await axios.post(`https://ludoapi.store/api/studies/${studyId}/recruitments`, {
+    const { data } = await axios.put(`https://ludoapi.store/api/studies/${studyId}/recruitments`, {
       title: useForm.title,
       // recruitmentLimit: useForm.recruitmentLimit,
       recruitmentEndDateTime: useForm.recruitmentEndDateTime,
@@ -81,7 +81,7 @@ export const CreateRecruitment = () => {
   return (
     <>
       <StudyContainer onSubmit={handleSubmit}>
-        <StudyMain>스터디 팀원 모집하기</StudyMain>
+        <StudyMain>스터디 팀원 모집공고 수정하기</StudyMain>
         <TopBox>
           <StudyTitle>
             <AssetContainer>

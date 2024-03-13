@@ -18,7 +18,7 @@ const StudyBasicInfoSection = ({ studyTitle, category, participantLimit }: Study
       </div>
       <div className="basic__info">
         <InfoField title="스터디 제목" content={studyTitle || '스터디 제목'} flexDirection="column" width="100%" />
-        <InfoField title="카테고리" content={category.name || '카테고리'} flexDirection="column" width="600px" />
+        <InfoField title="카테고리" content={category?.name || '카테고리'} flexDirection="column" width="600px" />
         <InfoField
           title="스터디 최대 인원"
           content={participantLimit || '스터디 최대 인원'}

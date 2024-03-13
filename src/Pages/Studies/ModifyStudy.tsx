@@ -1,18 +1,25 @@
 import styled from 'styled-components';
-// import { BackHeader } from '../../Components/Header/BackHeader';
 import { ProgressButton } from '../../Components/Selectbox/ProgressButton';
 import { PlatformButton } from '../../Components/Selectbox/PlatformButton';
 import { Titlearea } from '../../Components/Textarea/Titlearea';
 import { SubmitButton } from '../../Components/Button/Studies/SubmitButton';
 import { CalendarButton } from '../../Components/Selectbox/CalendarButton';
 import { BigCategoryButton } from '../../Components/Selectbox/BigCategoryButton';
+import { MaxPeopleButton } from '../../Components/Selectbox/MaxPeopleButton';
 import { ProgressPeriod } from '../../Components/Calendar/ProgressPeriod';
+import { PositionButton } from '@/Components/Selectbox/PositionButton';
 import { media } from '../../Styles/theme';
-import { useState } from 'react';
 import { Creates } from '@/Types/studies';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { One, Two, Three } from '@/Assets';
+import { SaveButton } from '@/Components/Button/Studies/SaveButton';
+import axios from 'axios';
+axios.defaults.withCredentials = true;
 export type OptionalCreates = Partial<Creates>;
 export const ModifyStudy = () => {
+  // {register} = useForm
+  // 폼 데이터
   const Navigate = useNavigate();
   const [useForm, setuseForm] = useState<Creates>({
     title: '',
@@ -31,19 +38,53 @@ export const ModifyStudy = () => {
       ...fields,
     });
   }
+
+  async function post() {
+    const { data } = await axios.put('https://ludoapi.store/api/studies', {
+      title: useForm.title,
+      categoryId: useForm.categoryId,
+      way: useForm.way,
+      participantLimit: useForm.participantLimit,
+      startDateTime: useForm.startDateTime,
+      endDateTime: useForm.endDateTime,
+      positionId: useForm.positionId,
+      platform: useForm.platform,
+    });
+    console.log(data);
+    const studyId = data.data.study.id;
+    Navigate(`/studies/${studyId}`);
+  }
+
+  const onSave = async () => {};
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
+    post();
+  };
+
   return (
     <>
-      <StudyContainer>
+      <StudyContainer onSubmit={handleSubmit}>
         <StudyMain>스터디 수정하기</StudyMain>
         <TopBox>
-          <StudyTitle>스터디 제목</StudyTitle>
+          <StudyTitle>
+            <AssetContainer>
+              <One />
+            </AssetContainer>
+            스터디 제목
+          </StudyTitle>
           <BottomWrapper>
             <ContentText>제목</ContentText>
             <Titlearea setForm={forms} useForm={useForm} />
           </BottomWrapper>
         </TopBox>
+        <BorderBox />
         <MiddleBox>
-          <StudyTitle>스터디 상세 안내</StudyTitle>
+          <StudyTitle>
+            <AssetContainer>
+              <Two />
+            </AssetContainer>
+            스터디 상세 안내
+          </StudyTitle>
           <MiddleWrapper>
             <MiddleBottomInfo>
               <MiddleBottomWrapper>
@@ -52,13 +93,23 @@ export const ModifyStudy = () => {
               </MiddleBottomWrapper>
               <MiddleBottomWrapper>
                 <ContentText>스터디 최대 인원</ContentText>
-                <BigCategoryButton setForm={forms} useForm={useForm} />
+                <MaxPeopleButton setForm={forms} useForm={useForm} />
+              </MiddleBottomWrapper>
+              <MiddleBottomWrapper>
+                <ContentText>포지션</ContentText>
+                <PositionButton setForm={forms} useForm={useForm} />
               </MiddleBottomWrapper>
             </MiddleBottomInfo>
           </MiddleWrapper>
         </MiddleBox>
+        <BorderBox />
         <MiddleCenterBox>
-          <StudyTitle>스터디 진행관련</StudyTitle>
+          <StudyTitle>
+            <AssetContainer>
+              <Three />
+            </AssetContainer>
+            스터디 진행관련
+          </StudyTitle>
           <StudyMiddleInfo>
             <StudyWrapper>
               <ContentText>진행방식</ContentText>
@@ -77,38 +128,50 @@ export const ModifyStudy = () => {
           </StudyMiddleInfo>
         </MiddleCenterBox>
         <ButtonBox>
-          <SubmitButton>임시저장</SubmitButton>
-          <SubmitButton>등록하기</SubmitButton>
+          <SaveButton onClick={onSave}>임시저장</SaveButton>
+          <SubmitButton type="submit">등록하기</SubmitButton>
         </ButtonBox>
       </StudyContainer>
     </>
   );
 };
 
+const AssetContainer = styled.image`
+  padding-right: 12px;
+`;
+
+const BorderBox = styled.div`
+  max-width: 1200px;
+  margin-bottom: 16px;
+  border-bottom: 16px solid #f2f2f2;
+`;
+
 const StudyMain = styled.p`
+  display: flex;
   font-size: ${(props) => props.theme.font.xxxlarge};
   text-align: left;
   font-weight: 800;
   line-height: 60px;
   padding-bottom: 60px;
   padding-top: 40px;
-  /* padding-bottom: 60px; */
   ${media.custom(800)} {
     display: none;
   }
 `;
 
-const StudyContainer = styled.div`
+const StudyContainer = styled.form`
+  max-width: 1920px;
   height: 1300px;
-  padding-left: 348px;
-  padding-right: 348px;
+  padding-left: 200px;
   display: flex;
   flex-direction: column;
   text-align: left;
+  ${media.custom(200)} {
+    display: none;
+  }
 `;
 const TopBox = styled.div`
   height: 250px;
-  border-bottom: 1px solid #444444;
   padding-top: 40px;
   padding-bottom: 20px;
   text-align: left;
@@ -136,12 +199,12 @@ const StudyMiddleInfo = styled.div`
 
 const MiddleBottomInfo = styled.div`
   display: grid;
-  grid-template-columns: 630px 630px;
+  grid-template-columns: 430px 430px 430px;
   grid-template-rows: 80px;
-  font-size: 20px;
   row-gap: 24px 24px;
   column-gap: 24px 24px;
   padding-bottom: 40px;
+  font-size: ${(props) => props.theme.font.medium};
 `;
 const MiddleBottomWrapper = styled.section`
   font-size: ${(props) => props.theme.font.medium};
@@ -154,7 +217,6 @@ const MiddleWrapper = styled.div`
   flex-direction: column;
   padding-bottom: 40px;
   font-size: ${(props) => props.theme.font.medium};
-  border-bottom: 1px solid #444444;
 `;
 
 const BottomWrapper = styled.div`
