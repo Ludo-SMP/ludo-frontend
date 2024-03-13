@@ -4,7 +4,7 @@ import { Position, Stack } from '@/Types/study';
 import { Link } from 'react-router-dom';
 import { dateFormatter, getPeriod } from '@/Utils/date';
 import { Recruitment } from '@/Types/study';
-import { POSITIONS, PROGRESS_METHOD } from '@/Shared/study';
+import { PROGRESS_METHOD } from '@/Shared/study';
 import Image from '../Common/Image';
 import { Views } from '@/Assets';
 
@@ -32,23 +32,22 @@ const RecruitmentCard = (recruitment: Recruitment) => {
             <span className="study__type">{PROGRESS_METHOD[recruitment.way]}</span>
           </div>
           <div className="study__positions">
-            {recruitment.positions?.map((position: Position) => (
-              <PositionToken key={position.id} id={position.id} name={position.name} />
-            ))}
-            {POSITIONS.map(
-              (position: Position, id) =>
-                id !== 3 && <PositionToken key={position.id} id={position.id} name={position.name} />,
+            {recruitment.positions.length !== 0 ? (
+              recruitment.positions?.map((position: Position) => (
+                <PositionToken key={position.id} id={position.id} name={position.name} />
+              ))
+            ) : (
+              <PositionToken />
             )}
           </div>
           <div className="study__stacks">
-            {recruitment.stacks.map((stack: Stack) => (
-              <Image key={stack.id} size={32} src={`${import.meta.env.VITE_BASE_API_URL}${stack.imageUrl}`} />
-            ))}
-            <Image key={45} size={32} src={`${import.meta.env.VITE_BASE_API_URL}/static/stack/images/javascript.png`} />
-            <Image key={44} size={32} src={`${import.meta.env.VITE_BASE_API_URL}/static/stack/images/java.png`} />
-            <Image key={137} size={32} src={`${import.meta.env.VITE_BASE_API_URL}/static/stack/images/figma.png`} />
-            <Image key={115} size={32} src={`${import.meta.env.VITE_BASE_API_URL}/static/stack/images/spring.png`} />
-            <Image key={93} size={32} src={`${import.meta.env.VITE_BASE_API_URL}/static/stack/images/reactjs.png`} />
+            {recruitment.stacks.length !== 0 ? (
+              recruitment.stacks.map((stack: Stack) => (
+                <Image key={stack.id} size={32} src={`${import.meta.env.VITE_BASE_API_URL}${stack.imageUrl}`} />
+              ))
+            ) : (
+              <Image size={32} />
+            )}
           </div>
         </StudyDetailInfoWrapper>
         <StudyAdditionalInfoWrapper>

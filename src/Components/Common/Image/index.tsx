@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export interface ImageProps {
-  src: string;
+  src?: string;
   alt?: string;
   size: number;
 }

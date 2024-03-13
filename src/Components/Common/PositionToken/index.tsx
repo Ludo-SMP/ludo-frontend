@@ -1,8 +1,7 @@
 import styled from 'styled-components';
-import { Position } from '@/Types/study';
 
-const PositionToken = ({ name }: Position) => {
-  return <PositionWrapper>{name}</PositionWrapper>;
+const PositionToken = ({ name }: { name?: string; id?: number }) => {
+  return <PositionWrapper>{name ? name : '포지션'}</PositionWrapper>;
 };
 
 const PositionWrapper = styled.div`
