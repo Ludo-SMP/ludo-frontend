@@ -1,5 +1,4 @@
 import { Right, Left } from '@/Assets';
-import Button from '@/Components/Common/Button';
 import MemberProfile, { MemberProfileProps } from '@/Components/MemberProfile';
 import { useState } from 'react';
 import styled from 'styled-components';

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { OptionalCreates } from '@/Pages/Studies/CreateRecruitment';
 import { Creates, ItemCategory } from '@/Types/studies';
-import { ChangeEvent, useState, useRef } from 'react';
+import { ChangeEvent } from 'react';
 import { StackItem } from '@/Types/studies';
 import { useStack } from '@/Apis/stack';
 
@@ -20,7 +20,7 @@ export type Props = {
   item?: StackItem;
 };
 
-export const StackSelectButton = ({ setForm, useForm, item }: Props) => {
+export const StackSelectButton = ({ setForm, useForm }: Props) => {
   const { data } = useStack();
   const StackHandler = (event: ChangeEvent<HTMLSelectElement>) => {
     setForm({ stackId: event.target.selectedIndex });

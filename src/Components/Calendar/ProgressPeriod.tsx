@@ -1,6 +1,6 @@
 // react-datepicker를 사용해서 진행기간 구현 328px, 24px, ex) 24.01.23 - 24.03.23
 import DatePicker from 'react-datepicker';
-import { useState, ChangeEvent } from 'react';
+import { useState } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
 import styled from 'styled-components';
 import { OptionalCreates } from '@/Pages/Studies/CreateStudy';
@@ -24,7 +24,7 @@ export type Props = {
 export const ProgressPeriod = ({ setForm, useForm }: Props) => {
   const [startDateTime, setForms] = useState(new Date());
   const [endDateTime, setFormss] = useState(new Date());
-
+  console.log(setForm);
   // const StartHandler = (event: ChangeEvent<HTMLSelectElement>) => {
   //   setForm({ startDateTime: event.target.value });
   // };

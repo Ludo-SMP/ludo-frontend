@@ -1,6 +1,6 @@
 // react-datepicker를 사용해서 마감날짜 구현 328px, 44px, ex) 24.01.23
 import DatePicker from 'react-datepicker';
-import { useState, ChangeEvent } from 'react';
+import { useState } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
 import styled from 'styled-components';
 import { OptionalCreates } from '@/Pages/Studies/CreateRecruitment';
@@ -23,6 +23,7 @@ export type Props = {
 
 export const EndDate = ({ setForm, useForm }: Props) => {
   const [startDateTime, setForms] = useState(new Date());
+  console.log(setForm);
   return (
     <DateContainer
       value={(useForm.recruitmentEndDateTime = startDateTime.toISOString().slice(0, -5))}
