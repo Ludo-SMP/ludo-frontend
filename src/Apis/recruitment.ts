@@ -72,11 +72,11 @@ export const useCloseRecruitmentMutation = (studyId: number, successHandler?: ()
     mutationFn: () => closeRecruitment(studyId),
     onSuccess: () => {
       navigate(`/studies/${studyId}`);
-      console.log('스터디원 모집 마감하기 성공');
+      // console.log('스터디원 모집 마감하기 성공');
       successHandler && successHandler();
     },
     onError: () => {
-      console.log('스터디원 모집 마감하기 실패');
+      // console.log('스터디원 모집 마감하기 실패');
     },
   });
   return { mutate };

@@ -25,7 +25,7 @@ export const ModifyStudy = () => {
   const Navigate = useNavigate();
   const studyId = Number(useParams().studyId);
   useStudyDetail(studyId);
-  console.log(studyId);
+  // console.log(studyId);
 
   const [useForm, setuseForm] = useState<Creates>({
     title: '',
@@ -57,7 +57,7 @@ export const ModifyStudy = () => {
       positionId: useForm.positionId,
       platform: useForm.platform,
     });
-    console.log(data);
+    // console.log(data);
     // const studyId = data.data.study.id;
     Navigate(`/studies/${studyId}`);
   }

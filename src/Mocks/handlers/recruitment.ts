@@ -24,12 +24,12 @@ const getRecruitments = http.get(`${baseURL}/api/recruitments`, ({ request }) =>
   const last = Number(url.searchParams.get('last'));
   const count = Number(url.searchParams.get('count'));
   const pageNum = Number(url.searchParams.get('pageNum'));
-  console.log(pageNum, last);
+  // console.log(pageNum, last);
 
   // const pageNum = Number(url.searchParams.get('pageParam'));
   // const recruitmentsPerPage = Number(url.searchParams.get('recruitmentsPerPage'));
   const filteredRecruitmentsMockData = getFilteredRecruitmentsMockData({ stackId, positionId, way, categoryId });
-  console.log(filteredRecruitmentsMockData);
+  // console.log(filteredRecruitmentsMockData);
 
   return new HttpResponse(
     JSON.stringify({

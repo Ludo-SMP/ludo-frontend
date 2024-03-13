@@ -31,7 +31,7 @@ export const ModifyRecruitment = () => {
   const Navigation = useNavigate();
   const studyId = Number(useParams().studyId);
   useStudyDetail(studyId);
-  console.log(studyId);
+  // console.log(studyId);
   const [useForm, setuseForm] = useState<Gather>({
     title: '',
     // recruitmentLimit: 0,
@@ -67,7 +67,7 @@ export const ModifyRecruitment = () => {
       applicantCount: useForm.applicantCount,
       // studyId: useForm.studyId,
     });
-    console.log(data);
+    // console.log(data);
     const recruitmentId = data?.data?.recruitment?.id;
     Navigation(`/studies/${recruitmentId}/recruitment`);
     // localStorage.setItem('gather', JSON.stringify(data.data));

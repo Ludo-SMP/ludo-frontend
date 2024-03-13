@@ -64,7 +64,7 @@ const MyStudyCard = ({
         </div>
       </StudyInfoWrapper>
       <MyStudyCardButtonsWrapper>
-        {(status === 'PROGRESS' || status === 'RECRUITED') && !hasRecruitment && isOwner && (
+        {(status === 'PROGRESS' || status === 'RECRUITING') && !hasRecruitment && isOwner && (
           <Button
             scheme="primary"
             onClick={(e) => {
