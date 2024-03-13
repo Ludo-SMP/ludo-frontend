@@ -68,7 +68,8 @@ export const ModifyRecruitment = () => {
       // studyId: useForm.studyId,
     });
     console.log(data);
-    Navigation(`/studies/${studyId}/recruitment`);
+    const recruitmentId = data?.data?.recruitment?.id;
+    Navigation(`/studies/${recruitmentId}/recruitment`);
     // localStorage.setItem('gather', JSON.stringify(data.data));
   }
 
