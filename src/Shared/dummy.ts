@@ -1,5 +1,4 @@
 import { BannerProps } from '../Components/Banner';
-import { RecruitmentDetailRawDataType, PopularRecruitmentsRawDataType, RecruitmentRawDataType } from '@/Types/study';
 import { TemporarySavedCardProps } from '@/Components/TemporarySavedCard';
 export const bannerDummy: BannerProps = {
   brief: '함께 발견하는 가능성, 기회의 연결',
@@ -146,7 +145,7 @@ export const projectStudyInfosDummy = [
   },
 ];
 
-export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
+export const recruitmentDetailMockData = [
   {
     id: 1,
     title: '인기 코테 스터디 1',
@@ -949,8 +948,8 @@ export const recruitmentDetailMockData: RecruitmentDetailRawDataType[] = [
   },
 ];
 
-export const recruitmentsMockData: RecruitmentRawDataType[] = [
-  ...recruitmentDetailMockData.map((recruitmentDetail: RecruitmentDetailRawDataType) => {
+export const recruitmentsMockData = [
+  ...recruitmentDetailMockData.map((recruitmentDetail) => {
     const {
       id,
       title,
@@ -985,9 +984,7 @@ export const recruitmentsMockData: RecruitmentRawDataType[] = [
 ];
 
 export const recruitmentDetailMockDataById = (recruitmentId: number) =>
-  recruitmentDetailMockData.filter(
-    (recruitmentDetail: RecruitmentDetailRawDataType) => recruitmentDetail.id === recruitmentId,
-  )[0];
+  recruitmentDetailMockData.filter((recruitmentDetail) => recruitmentDetail.id === recruitmentId)[0];
 export const temporarySavedCardMockData: TemporarySavedCardProps[] = [
   { title: '모집공고 1', id: 1, card: 'RECRUITMENT' },
   { title: '모집공고 2', id: 2, card: 'RECRUITMENT' },

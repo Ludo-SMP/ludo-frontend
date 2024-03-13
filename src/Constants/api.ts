@@ -10,7 +10,7 @@ export const API_END_POINT = {
 
   // USER
   USER: `${API_PREFIX}/users/me`,
-  EDIT_USER: `${API_PREFIX}/users/mypage/profile`,
+  EDIT_NICKNAME: `${API_PREFIX}/users/me/nickname`,
   DEACTIVATE: `${API_PREFIX}/users/deactivate`,
 
   // RECRUITMENTS

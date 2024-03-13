@@ -1,11 +1,10 @@
 import styled from 'styled-components';
 import { Recruitment } from '@/Types/study';
-import { bannerDummy } from '../../Shared/dummy';
 import Banner from '../../Components/Banner';
 import { usePopularRecruitments } from '@/Apis/recruitment';
 import Button from '@/Components/Common/Button';
 import ChipMenu from '@/Components/Common/ChipMenu';
-import { Right, Create } from '@/Assets';
+import { Right, Create, LudoBanner } from '@/Assets';
 import UtiltiyButtons from '@/Components/UtilityButtons';
 import { useSelectedCategoryStore } from '@/Store/category';
 import RecruitmentCard from '@/Components/RecruitmentCard';
@@ -25,7 +24,10 @@ const MainPage = () => {
     <div>Loading...</div>
   ) : (
     <MainPageWrapper>
-      <Banner {...bannerDummy} />
+      <BannerSectionWrapper>
+        <Banner src={LudoBanner} />
+      </BannerSectionWrapper>
+
       <RecruitmentsSectionWrapper>
         <div className="section__title">이번주 인기 있는 스터디 모음 zip.</div>
         <SelectCategorySectionWrapper>
@@ -85,15 +87,21 @@ const MainPage = () => {
 
 const MainPageWrapper = styled.section`
   display: flex;
-  max-width: 1224px;
   margin: 0 auto;
   margin-top: 40px;
   flex-direction: column;
   gap: 40px;
 `;
 
+const BannerSectionWrapper = styled.section`
+  display: flex;
+  margin: 0 auto;
+`;
+
 const RecruitmentsSectionWrapper = styled.div`
   display: flex;
+  margin: 0 auto;
+  max-width: 1224px;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;

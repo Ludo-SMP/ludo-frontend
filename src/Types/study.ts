@@ -43,7 +43,6 @@ export interface MainCategoryType<T, S> {
   categoryItems?: (T | S)[];
 }
 
-/////////////////////
 export type FilterOption = 'CATEGORY' | 'STACK' | 'POSITION' | 'PROGRESS_METHOD' | 'SORT';
 export interface Stack {
   id: number;
@@ -103,17 +102,15 @@ export interface Recruitments {
 }
 
 export interface FilterOptionParams {
+  pageParam?: number;
   last?: number;
-  pageNum: number;
   count: number;
-  stackId: number;
-  progressMethod: string;
-  positionId: number;
-  categoryId: number;
+  stackId?: number;
+  progressMethod?: string;
+  positionId?: number;
+  categoryId?: number;
   sort?: Sort[];
 }
-
-////////////////////////
 
 export interface Participant {
   id: number;

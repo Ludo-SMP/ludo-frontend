@@ -6,11 +6,14 @@ import Dropdown from '../Common/Dropdown';
 import { useState } from 'react';
 import { useModalStore } from '@/Store/modal';
 import EditProfileModal from '../Modal/EditProfileModal';
+import Modal from '../Common/Modal';
+import { PROFILE } from '@/Constants/messages';
 
 type UserCardProps = Pick<Member, 'nickname' | 'email'>;
 
 const UserCard = ({ nickname, email }: UserCardProps) => {
   const [isOpened, setIsOpened] = useState<boolean>(false);
+  const [editState, setEditState] = useState<'NOT START' | 'EDIT' | 'END'>('NOT START');
   const { isModalOpen, openModal } = useModalStore();
   return (
     <UserCardWrapper>
@@ -28,6 +31,7 @@ const UserCard = ({ nickname, email }: UserCardProps) => {
             <Dropdown
               onClick={() => {
                 setIsOpened(false);
+                setEditState('EDIT');
                 openModal();
               }}
             >
@@ -42,7 +46,17 @@ const UserCard = ({ nickname, email }: UserCardProps) => {
             </Dropdown>
           </DropdownListWrapper>
         )}
-        {isModalOpen && <EditProfileModal />}
+        {editState === 'EDIT' && isModalOpen && <EditProfileModal userNickname={nickname} handleEdit={setEditState} />}
+        {editState === 'END' && isModalOpen && (
+          <Modal
+            approveBtnText="확인"
+            handleApprove={() => setEditState('NOT START')}
+            alignTitle="center"
+            title={PROFILE.NICNAME_ERROR.DUPLICATED.title}
+          >
+            {PROFILE.NICNAME_ERROR.DUPLICATED.content}
+          </Modal>
+        )}
       </UserProfileEditSectionWrapper>
     </UserCardWrapper>
   );

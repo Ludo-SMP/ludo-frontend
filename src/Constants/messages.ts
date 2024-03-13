@@ -60,4 +60,11 @@ export const PROFILE = Object.freeze({
   EDIT: {
     title: '닉네임 변경하기',
   },
+  NICNAME_ERROR: {
+    REQUIRED: '닉네임을 입력해주세요.',
+    SAME: '기존 닉네임과 동일합니다',
+    LEGNTH: '글자수는 1자 이상, 20자 이하이여야 합니다.',
+    WHITE_SPACE: '닉네임의 앞뒤에는 공백이 올 수 없습니다.',
+    DUPLICATED: { title: '닉네임 변경 실패', content: '이미 존재하는 닉네임입니다.' },
+  },
 });

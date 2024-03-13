@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import RecruitmentCardList from '../../Components/RecruitmentCardList';
-import { bannerDummy } from '../../Shared/dummy';
+import { LudoBanner } from '@/Assets';
 import Banner from '../../Components/Banner';
 import DropdownFilter from '@/Components/DropdownFilter';
 import { media } from '@/Styles/theme';
@@ -26,7 +26,9 @@ const RecruitmentsPage = () => {
 
   return (
     <RecruitmentsPageWrapper>
-      <Banner {...bannerDummy} />
+      <BannerSectionWrapper>
+        <Banner src={LudoBanner} />
+      </BannerSectionWrapper>
       {isLoading ? (
         <div>Loading...</div>
       ) : (
@@ -81,15 +83,21 @@ const RecruitmentsPage = () => {
 const RecruitmentsPageWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 1224px;
+
   margin: 0 auto;
   margin-top: 40px;
   gap: 40px;
 `;
+const BannerSectionWrapper = styled.section`
+  display: flex;
+  margin: 0 auto;
+`;
 
 const RecruitmentsSectionWrapper = styled.div`
   display: flex;
+  margin: 0 auto;
   flex-direction: column;
+  max-width: 1224px;
   align-items: flex-start;
   gap: 16px;
 

@@ -2,6 +2,7 @@ export const BASE_KEY = {
   RECRUITMENT: 'RECRUITMENT',
   STUDY: 'STUDY',
   STACK: 'STACK',
+  USER: 'USER',
 };
 
 export const RECRUITMENT = {
@@ -21,4 +22,12 @@ export const STUDY = {
   MYPAGE_INFO: () => [BASE_KEY.STUDY, 'MYPAGE'],
   DELETE: (studyId: number) => [BASE_KEY.STUDY, studyId, 'DELETE'],
   LEAVE: (studyId: number) => [BASE_KEY.STUDY, studyId, 'LEAVE'],
+};
+
+export const USER = {
+  EDIT_PROFILE: () => [BASE_KEY.USER, 'NICKNAME'],
+};
+
+export const STACK = {
+  STACK: ['STACK'],
 };

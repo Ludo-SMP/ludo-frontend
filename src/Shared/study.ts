@@ -1,3 +1,5 @@
+import { Position } from '@/Types/study';
+
 export const STUDY_STATUS = {
   PROGRESS: '진행 중',
   RECRUITING: '모집 중',
@@ -64,7 +66,7 @@ export const CATEGORIES = [
   { id: 3, name: '모의 면접' },
 ];
 
-export const POSITIONS = [
+export const POSITIONS: Position[] = [
   { id: 1, name: '백엔드' },
   { id: 2, name: '프론트엔드' },
   { id: 3, name: '디자이너' },
