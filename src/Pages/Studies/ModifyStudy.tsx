@@ -57,7 +57,7 @@ export const ModifyStudy = () => {
       positionId: useForm.positionId,
       platform: useForm.platform,
     });
-    // console.log(data);
+    console.log(data);
     // const studyId = data.data.study.id;
     Navigate(`/studies/${studyId}`);
   }
