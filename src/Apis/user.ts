@@ -10,8 +10,7 @@ export const useEditProfileNickname = (successHandler: () => void, failHandler: 
   const { mutate, error } = useMutation({
     mutationKey: [...USER.EDIT_PROFILE()],
     mutationFn: (nickname: string) => editProfileNickname(nickname),
-    onSuccess: (e) => {
-      // console.log(e);
+    onSuccess: () => {
       successHandler();
       // console.log('닉네임 변경 성공');
     },
