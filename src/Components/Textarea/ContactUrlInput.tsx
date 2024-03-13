@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback, ChangeEvent } from 'react';
+import { ChangeEvent } from 'react';
 import styled from 'styled-components';
 import { OptionalCreates } from '@/Pages/Studies/CreateRecruitment';
 import { Creates } from '@/Types/studies';
@@ -19,7 +19,7 @@ export type Props = {
 };
 
 export const ContactUrlInput = ({ setForm, useForm }: Props) => {
-  const [UrlValue, setForms] = useState('');
+  // const [UrlValue, setForms] = useState('');
   const onUrlHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setForm({ callUrl: event.target.value });
   };

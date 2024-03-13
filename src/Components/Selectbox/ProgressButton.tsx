@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from 'react';
+import { ChangeEvent } from 'react';
 import styled from 'styled-components';
 import { OptionalCreates } from '@/Pages/Studies/CreateStudy';
 import { Creates } from '@/Types/studies';
@@ -19,7 +19,7 @@ export type Props = {
 };
 
 export const ProgressButton = ({ setForm, useForm }: Props) => {
-  const [wayValue, setForms] = useState<string>('');
+  // const [wayValue, setForms] = useState<string>('');
   const submitHandler = (event: ChangeEvent<HTMLSelectElement>) => {
     setForm({ way: event.target.value });
   };

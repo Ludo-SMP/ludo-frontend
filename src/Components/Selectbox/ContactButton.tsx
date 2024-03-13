@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent } from 'react';
 import styled from 'styled-components';
 import { OptionalCreates } from '@/Pages/Studies/CreateStudy';
 import { Creates } from '@/Types/studies';
@@ -19,7 +19,7 @@ export type Props = {
 };
 
 export const ContactButton = ({ setForm, useForm }: Props) => {
-  const [contactValue, setForms] = useState<string>('');
+  // const [contactValue, setForms] = useState<string>('');
   const submitHandler = (event: ChangeEvent<HTMLSelectElement>) => {
     setForm({ contact: event.target.value });
   };

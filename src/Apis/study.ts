@@ -57,7 +57,7 @@ export const useApplyStudyMutation = (
       handleApplyApprove('SUCCESS');
       openModal();
     },
-    onError: (e) => {
+    onError: () => {
       // const message = e?.response?.data?.message;
       // if (message === '현재 모집 중인 스터디가 아닙니다.') handleApplyApprove(() => 'CLOSED');
       // if (message === '이미 지원한 모집 공고입니다.') handleApplyApprove(() => 'ALREDAY_APPLY');
