@@ -7,11 +7,12 @@ import { PositionButton } from '../../Components/Selectbox/PositionButton';
 import { StackSelectButton } from '@/Components/Selectbox/StackSelectButton';
 import { Mainarea } from '../../Components/Textarea/Mainarea';
 import { Titlearea } from '../../Components/Textarea/Titlearea';
-import { GatherButton } from '../../Components/Selectbox/GatherButton';
+// import { GatherButton } from '../../Components/Selectbox/GatherButton';
 // import { StackModal } from '../../Components/Modal/
 import { EndDate } from '../../Components/Calendar/EndDate';
 import { media } from '../../Styles/theme';
-import { Creates, Gather } from '@/Types/studies';
+import { Gather } from '@/Types/studies';
+// Creates,
 import { useState } from 'react';
 // import { stackCategory } from '@/Shared/category';
 import { useStack } from '@/Apis/stack';
@@ -19,27 +20,31 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { One, Two, Three, Four } from '@/Assets';
 import { SaveButton } from '@/Components/Button/Studies/SaveButton';
-import { STUDY } from '@/Constants/queryString';
+// import { STUDY } from '@/Constants/queryString';
 import { ContactButton } from '@/Components/Selectbox/ContactButton';
 import { ApplicantButton } from '@/Components/Selectbox/ApplicantButton';
 import { useStudyDetail } from '@/Apis/study';
+// import { useStudyId } from '@/Apis/studies';
 
 axios.defaults.withCredentials = true;
 export type OptionalCreates = Partial<Gather>;
 
 export const CreateRecruitment = () => {
-  const Navigation = useNavigate();
   const studyId = Number(useParams().studyId);
-  useStudyDetail(studyId);
+
+  // console.log(data);
+  // const { d } = useStudyId(studyId as any);
+  // console.log(d);
+  const Navigation = useNavigate();
+
+  const { data: studyDetail } = useStudyDetail(studyId);
+  const study = studyDetail?.study;
   console.log(studyId);
   const [useForm, setuseForm] = useState<Gather>({
     title: '',
-    // recruitmentLimit: 0,
     recruitmentEndDateTime: '',
     positionId: 0,
     stackId: 0,
-    // positionId: 0,
-    // stackId: 0,
     callUrl: '',
     content: '',
     studyId: Number(useParams().studyId),
@@ -57,7 +62,6 @@ export const CreateRecruitment = () => {
   async function posts() {
     const { data } = await axios.post(`https://ludoapi.store/api/studies/${studyId}/recruitments`, {
       title: useForm.title,
-      // recruitmentLimit: useForm.recruitmentLimit,
       recruitmentEndDateTime: useForm.recruitmentEndDateTime,
       positionIds: [useForm.positionId],
       stackIds: [useForm.stackId],
@@ -129,15 +133,17 @@ export const CreateRecruitment = () => {
           <StudyMiddleInfo>
             <StudyWrapper>
               <ContentText>진행방식</ContentText>
-              <SubContentTitle>진행방식</SubContentTitle>
+              <SubContentTitle>{study?.way}</SubContentTitle>
             </StudyWrapper>
             <StudyWrapper>
               <ContentText>진행 플랫폼</ContentText>
-              <SubContentTitle>진행 플랫폼</SubContentTitle>
+              <SubContentTitle>{study?.platform}</SubContentTitle>
             </StudyWrapper>
             <StudyWrapper>
               <ContentText> 진행기간</ContentText>
-              <SubContentTitle>진행기간</SubContentTitle>
+              <SubContentTitle>
+                {study?.startDateTime} ~ {study?.endDateTime}
+              </SubContentTitle>
             </StudyWrapper>
           </StudyMiddleInfo>
         </MiddleBox>
@@ -151,16 +157,16 @@ export const CreateRecruitment = () => {
           </StudyTitle>
           <MiddleBottomWrapper>
             <ContentText>스터디 제목</ContentText>
-            <SubContentTitle> 스터디 제목</SubContentTitle>
+            <SubContentTitle>{study?.title}</SubContentTitle>
           </MiddleBottomWrapper>
           <MiddleBottomInfo>
             <MiddleBottomWrapper>
               <ContentText>카테고리</ContentText>
-              <SubContentTitle>카테고리</SubContentTitle>
+              <SubContentTitle>{study?.category as any}</SubContentTitle>
             </MiddleBottomWrapper>
             <MiddleBottomWrapper>
               <ContentText>스터디 최대 인원</ContentText>
-              <SubContentTitle>스터디 최대 인원</SubContentTitle>
+              <SubContentTitle>{study?.participantsLimit}</SubContentTitle>
             </MiddleBottomWrapper>
           </MiddleBottomInfo>
         </StudyMidBottom>

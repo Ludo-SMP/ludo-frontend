@@ -1,4 +1,3 @@
-import { all } from 'axios';
 import { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
 import { OptionalCreates } from '@/Pages/Studies/CreateStudy';
@@ -21,6 +20,7 @@ export type Props = {
 
 export const BigCategoryButton = ({ setForm, useForm }: Props) => {
   const [selectValue, setForms] = useState<number>(0);
+  console.log(selectValue, setForms);
   const submitHandler = (event: ChangeEvent<HTMLSelectElement>) => {
     setForm({ categoryId: event.target.selectedIndex });
   };

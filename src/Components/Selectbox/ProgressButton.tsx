@@ -20,14 +20,13 @@ export type Props = {
 
 export const ProgressButton = ({ setForm, useForm }: Props) => {
   const [wayValue, setForms] = useState<string>('');
+  console.log(wayValue, setForms);
   const submitHandler = (event: ChangeEvent<HTMLSelectElement>) => {
     setForm({ way: event.target.value });
   };
   return (
     <ButtonConTainer name="way" className="select" value={useForm.way} onChange={submitHandler}>
-      <Textwrapper disabled selected>
-        진행방식
-      </Textwrapper>
+      <Textwrapper>진행방식</Textwrapper>
       <Textwrapper value="ONLINE">온라인</Textwrapper>
       <Textwrapper value="OFFLINE">오프라인</Textwrapper>
     </ButtonConTainer>

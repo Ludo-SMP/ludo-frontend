@@ -10,15 +10,19 @@ import { ProgressPeriod } from '../../Components/Calendar/ProgressPeriod';
 import { PositionButton } from '@/Components/Selectbox/PositionButton';
 import { media } from '../../Styles/theme';
 import { Creates } from '@/Types/studies';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { One, Two, Three } from '@/Assets';
 import { SaveButton } from '@/Components/Button/Studies/SaveButton';
 import axios from 'axios';
+import { useStudyDetail } from '@/Apis/study';
 axios.defaults.withCredentials = true;
 export type OptionalCreates = Partial<Creates>;
 export const ModifyStudy = () => {
   // {register} = useForm
+  const studyId = Number(useParams().studyId);
+  useStudyDetail(studyId);
+  console.log(studyId);
   // 폼 데이터
   const Navigate = useNavigate();
   const [useForm, setuseForm] = useState<Creates>({
@@ -30,6 +34,7 @@ export const ModifyStudy = () => {
     endDateTime: '',
     positionId: 0,
     platform: '',
+    studyId: Number(useParams().studyId),
   });
 
   function forms(fields: OptionalCreates) {
@@ -40,7 +45,7 @@ export const ModifyStudy = () => {
   }
 
   async function post() {
-    const { data } = await axios.put('https://ludoapi.store/api/studies', {
+    const { data } = await axios.put(`https://ludoapi.store/api/studies/${studyId}`, {
       title: useForm.title,
       categoryId: useForm.categoryId,
       way: useForm.way,
@@ -51,7 +56,7 @@ export const ModifyStudy = () => {
       platform: useForm.platform,
     });
     console.log(data);
-    const studyId = data.data.study.id;
+    // const studyId = data.data.study.id;
     Navigate(`/studies/${studyId}`);
   }
 

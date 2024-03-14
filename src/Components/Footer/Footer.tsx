@@ -27,9 +27,9 @@ export const Footer = () => {
   );
 };
 
-const FooterContainer = styled.section`
+const FooterContainer = styled.div`
   display: flex;
-  max-width: 1920px;
+  width: 1920px;
   height: 308px;
   align-items: flex-start;
   flex-direction: row;
@@ -37,15 +37,15 @@ const FooterContainer = styled.section`
   background-color: ${({ theme }) => theme.color.gray1};
   ${media.custom(500)} {
     background-color: ${({ theme }) => theme.color.gray1};
-    max-width: 500px;
+    max-width: 1920px;
   }
   ${media.custom(1024)} {
     background-color: ${({ theme }) => theme.color.gray1};
-    max-width: 1024px;
+    max-width: 1920px;
   }
 `;
 
-const MiddleWrapper = styled.div`
+const MiddleWrapper = styled.section`
   display: grid;
   grid-template-rows: 30px 30px 30px;
   flex-direction: row;

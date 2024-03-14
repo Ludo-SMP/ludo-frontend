@@ -25,6 +25,7 @@ export type Creates = {
   contactUrl?: string;
   content?: string;
   applicantCount?: number;
+  studyId?: number;
 };
 
 export type Gather = {

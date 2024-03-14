@@ -20,6 +20,7 @@ export type Props = {
 
 export const ContactButton = ({ setForm, useForm }: Props) => {
   const [contactValue, setForms] = useState<string>('');
+  console.log(contactValue, setForms);
   const submitHandler = (event: ChangeEvent<HTMLSelectElement>) => {
     setForm({ contact: event.target.value });
   };

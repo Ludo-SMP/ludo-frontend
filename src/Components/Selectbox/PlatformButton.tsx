@@ -20,6 +20,7 @@ export type Props = {
 
 export const PlatformButton = ({ setForm, useForm }: Props) => {
   const [platformValue, setForms] = useState<string>('');
+  console.log([platformValue, setForms]);
   const submitHandler = (event: ChangeEvent<HTMLSelectElement>) => {
     setForm({ platform: event.target.value });
   };
