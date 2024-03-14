@@ -29,9 +29,9 @@ export const Footer = () => {
 
 const FooterContainer = styled.div`
   display: flex;
-  width: 3000px;
+  max-width: 3000px;
   height: 308px;
-  align-items: flex-start;
+  align-items: center;
   flex-direction: row;
   margin-top: 40px;
   background-color: ${({ theme }) => theme.color.gray1};
@@ -51,6 +51,8 @@ const MiddleWrapper = styled.section`
   flex-direction: row;
   grid-template-columns: 504px;
   padding-bottom: 24px;
+  align-items: center;
+  text-align: center;
 `;
 
 const BorderBox = styled.span`
