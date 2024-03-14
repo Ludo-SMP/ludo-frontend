@@ -200,9 +200,12 @@ const AssetContainer = styled.image`
 `;
 
 const StudyMain = styled.p`
+  width: 1200px;
   display: flex;
   font-size: ${(props) => props.theme.font.xxxlarge};
   text-align: left;
+  align-items: left;
+  margin-right: 30px;
   font-weight: 800;
   line-height: 60px;
   padding-bottom: 40px;
@@ -232,13 +235,12 @@ const SubContentTitle = styled.p`
 
 const StudyContainer = styled.form`
   height: 2000px;
-  /* margin: auto; */
   padding-left: 200px;
-  /* padding-right: 348px; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: left;
+  align-items: center;
 `;
 const TopBox = styled.div`
   height: 310px;

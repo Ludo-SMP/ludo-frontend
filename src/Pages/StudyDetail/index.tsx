@@ -7,7 +7,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import StudyInfoSection from './StudyInfoSection';
 import MemberSection from './MemberSection';
 import { useDeleteStudyMutation, useLeaveStudyMutation, useStudyDetail } from '@/Apis/study';
-import { getDday, getPeriod } from '@/utils/date';
+import { getDday } from '@/utils/date';
 import { useUserStore } from '@/store/user';
 import { useCloseRecruitmentMutation } from '@/Apis/recruitment';
 import { useQueryClient } from '@tanstack/react-query';

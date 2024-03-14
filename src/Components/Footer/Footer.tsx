@@ -29,7 +29,7 @@ export const Footer = () => {
 
 const FooterContainer = styled.div`
   display: flex;
-  width: 1920px;
+  width: 3000px;
   height: 308px;
   align-items: flex-start;
   flex-direction: row;

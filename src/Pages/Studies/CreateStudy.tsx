@@ -65,7 +65,9 @@ export const CreateStudy = () => {
   return (
     <>
       <StudyContainer onSubmit={handleSubmit}>
+        {/* <TitleBox> */}
         <StudyMain>스터디 생성하기</StudyMain>
+        {/* </TitleBox> */}
         <TopBox>
           <StudyTitle>
             <AssetContainer>
@@ -148,12 +150,14 @@ const BorderBox = styled.div`
 `;
 
 const StudyMain = styled.p`
-  display: flex;
+  width: 1200px;
   font-size: ${(props) => props.theme.font.xxxlarge};
   text-align: left;
+  align-items: left;
+  margin-right: 50px;
   font-weight: 800;
   line-height: 60px;
-  padding-bottom: 60px;
+  /* padding-bottom: 60px; */
   padding-top: 40px;
   ${media.custom(800)} {
     display: none;
@@ -166,26 +170,32 @@ const StudyContainer = styled.form`
   display: flex;
   flex-direction: column;
   text-align: left;
+  align-items: center;
   ${media.custom(200)} {
     display: none;
   }
 `;
+
 const TopBox = styled.div`
   height: 250px;
   padding-top: 40px;
-  padding-bottom: 20px;
   text-align: left;
+  align-items: center;
+  margin-right: 50px;
 `;
 
 const MiddleBox = styled.div`
   height: 300px;
   align-items: center;
   padding-top: 40px;
+  text-align: left;
 `;
 
 const MiddleCenterBox = styled.div`
   height: 250px;
   align-items: center;
+  text-align: left;
+
   padding-top: 20px;
 `;
 
