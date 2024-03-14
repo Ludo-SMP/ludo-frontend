@@ -10,7 +10,7 @@ export const API_END_POINT = {
 
   // USER
   USER: `${API_PREFIX}/users/me`,
-  EDIT_USER: `${API_PREFIX}/users/mypage/profile`,
+  EDIT_NICKNAME: `${API_PREFIX}/users/me/nickname`,
   DEACTIVATE: `${API_PREFIX}/users/deactivate`,
 
   // RECRUITMENTS
@@ -31,7 +31,8 @@ export const API_END_POINT = {
   APPLICANTS: (studyId: number) => `${API_PREFIX}/studies/${studyId}/applicants`,
 
   // APPLY
-  APPLY: (recruitmentId: number) => `${API_PREFIX}/recruitments/${recruitmentId}/apply`,
+  APPLY: (studyId: number, recruitmentId: number) =>
+    `${API_PREFIX}/studies/${studyId}/recruitments/${recruitmentId}/apply`,
   APPLY_CANCEL: (recruitmentId: number) => `${API_PREFIX}/recruitments/${recruitmentId}/cancel`,
   APPLY_ACCEPT: (studyId: number, applicantId: number) =>
     `${API_PREFIX}/studies/${studyId}/apply-accept/${applicantId}`,

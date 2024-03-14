@@ -7,12 +7,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 import StudyInfoSection from './StudyInfoSection';
 import MemberSection from './MemberSection';
 import { useDeleteStudyMutation, useLeaveStudyMutation, useStudyDetail } from '@/Apis/study';
-import { getDday, getPeriod } from '@/Utils/date';
-import { useUserStore } from '@/Store/user';
+import { getDday, getPeriod } from '@/utils/date';
+import { useUserStore } from '@/store/user';
 import { useCloseRecruitmentMutation } from '@/Apis/recruitment';
 import { useQueryClient } from '@tanstack/react-query';
 import { STUDY } from '@/Constants/queryString';
-import { useModalStore } from '@/Store/modal';
+import { useModalStore } from '@/store/modal';
 import Modal from '@/Components/Common/Modal';
 import { DELETE, LEAVE } from '@/Constants/messages';
 import { useState } from 'react';
@@ -34,7 +34,6 @@ export const StudyDetailPage = () => {
   });
 
   const { mutate: deleteStudyMutate } = useDeleteStudyMutation(studyId);
-
   const { mutate: leaveStudyMutate } = useLeaveStudyMutation(studyId);
 
   console.log(studyId);
@@ -66,8 +65,8 @@ export const StudyDetailPage = () => {
       />
       <RowDivider rowHeight={16} />
       <MemberSection memberLimit={study?.participantsLimit} members={study?.participants} />
-      {/* <StudyButtonsWrapper>
-        {user?.id === study?.owner.id && study?.participants.length === 0 && (
+      <StudyButtonsWrapper>
+        {user?.id === study?.owner.id && study?.participants.length === 1 && (
           <Button
             size="fullWidth"
             onClick={() => {
@@ -101,7 +100,7 @@ export const StudyDetailPage = () => {
               스터디 수정하기
             </Button>
           )}
-      </StudyButtonsWrapper> */}
+      </StudyButtonsWrapper>
       {isModalOpen && isDeletedBtnClicked && (
         <Modal
           handleApprove={() => {

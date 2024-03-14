@@ -1,9 +1,6 @@
 import { useState, ChangeEvent } from 'react';
 import styled from 'styled-components';
 // import { atom, useAtom, useAtomValue, useSetAtom } from 'jotai';
-// import { FieldErrors, FieldValues, UseFormRegister, FormState } from 'react-hook-form';
-// import { Validation } from '../../Constants/Validation';
-// import type { UseFormRegisterReturn } from 'react-hook-form';
 import { OptionalCreates } from '@/Pages/Studies/CreateStudy';
 import { Creates } from '@/Types/studies';
 
@@ -25,9 +22,10 @@ export type Props = {
 //작성
 
 export const Titlearea = ({ setForm, useForm }: Props) => {
-  const [inputValue, setForms] = useState('');
-  console.log(inputValue);
-  console.log(setForms);
+  // const [inputValue, setForms] = useState('');
+  // console.log(inputValue);
+  // console.log(setForms);
+  // const [inputValue, setForms] = useState('');
   const onValueHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setForm({ title: event.target.value });
   };

@@ -4,15 +4,17 @@ import { media } from '@/Styles/theme';
 import { ROUTER_PATH } from '@/Constants/Router_Path';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
 import { Logo, Alarm, Profile } from '@/Assets';
-import { useLoginStore } from '@/Store/auth';
+import { useLoginStore } from '@/store/auth';
 import Button from '../Common/Button';
 import StudyButtonSection from './StudyButtonSection';
 import SignButtonSection from './SignButtonSection';
 import HamburgerSection from './HamburgerSection';
 import Gnb from './Gnb';
+import { useModalStore } from '@/store/modal';
 
 const Header = () => {
   const { isLoggedIn } = useLoginStore();
+  const { openModal } = useModalStore();
   const navigate = useNavigate();
   const currentLocation = useLocation()?.pathname;
 
@@ -52,9 +54,7 @@ const Header = () => {
               <Button
                 className="create__study"
                 type="button"
-                onClick={() => {
-                  navigate(ROUTER_PATH.createStudy);
-                }}
+                onClick={isLoggedIn ? () => navigate(ROUTER_PATH.createStudy) : () => openModal()}
               >
                 스터디 생성하기
               </Button>

@@ -1,21 +1,26 @@
 import styled from 'styled-components';
 import { Recruitment } from '@/Types/study';
-import { bannerDummy } from '../../Shared/dummy';
 import Banner from '../../Components/Banner';
 import { usePopularRecruitments } from '@/Apis/recruitment';
 import Button from '@/Components/Common/Button';
 import ChipMenu from '@/Components/Common/ChipMenu';
-import { Right, Create } from '@/Assets';
+import { Right, Create, LudoBanner } from '@/Assets';
 import UtiltiyButtons from '@/Components/UtilityButtons';
-import { useSelectedCategoryStore } from '@/Store/category';
+import { useSelectedCategoryStore } from '@/store/category';
 import RecruitmentCard from '@/Components/RecruitmentCard';
 import { useNavigate } from 'react-router-dom';
 import { ROUTER_PATH } from '@/Constants/Router_Path';
+import { useLoginStore } from '@/store/auth';
+import { useModalStore } from '@/store/modal';
+import Modal from '@/Components/Common/Modal';
+import { CREATE_STUDY } from '@/Constants/messages';
 
 const MainPage = () => {
   const { data: popularRecruitments, isLoading } = usePopularRecruitments();
   const { selectedCategory, setSelectedCategory } = useSelectedCategoryStore();
   const navigate = useNavigate();
+  const { isLoggedIn } = useLoginStore();
+  const { isModalOpen, openModal } = useModalStore();
 
   const popularCodingRecruitments: Recruitment[] = popularRecruitments?.popularCodingRecruitments;
   const popularInterviewRecruitments: Recruitment[] = popularRecruitments?.popularInterviewRecruitments;
@@ -25,7 +30,10 @@ const MainPage = () => {
     <div>Loading...</div>
   ) : (
     <MainPageWrapper>
-      <Banner {...bannerDummy} />
+      <BannerSectionWrapper>
+        <Banner src={LudoBanner} />
+      </BannerSectionWrapper>
+
       <RecruitmentsSectionWrapper>
         <div className="section__title">이번주 인기 있는 스터디 모음 zip.</div>
         <SelectCategorySectionWrapper>
@@ -74,26 +82,46 @@ const MainPage = () => {
         </RecruitmentCardsWrapper>
       </RecruitmentsSectionWrapper>
       <UtiltiyButtons>
-        <Button onClick={() => navigate(ROUTER_PATH.createStudy)} className="create__btn">
+        <Button
+          onClick={isLoggedIn ? () => navigate(ROUTER_PATH.createStudy) : () => openModal()}
+          className="create__btn"
+        >
           <Create height={40} />
           <span>스터디 생성</span>
         </Button>
       </UtiltiyButtons>
+      {!isLoggedIn && isModalOpen && (
+        <Modal
+          title={CREATE_STUDY.LOGIN.title}
+          handleApprove={() => navigate(ROUTER_PATH.login)}
+          approveBtnText="로그인하기"
+          cancelBtnText="나중에 할래요"
+          isBtnWidthEqual={false}
+        >
+          {CREATE_STUDY.LOGIN.content}
+        </Modal>
+      )}
     </MainPageWrapper>
   );
 };
 
 const MainPageWrapper = styled.section`
   display: flex;
-  max-width: 1224px;
   margin: 0 auto;
   margin-top: 40px;
   flex-direction: column;
   gap: 40px;
 `;
 
+const BannerSectionWrapper = styled.section`
+  display: flex;
+  margin: 0 auto;
+`;
+
 const RecruitmentsSectionWrapper = styled.div`
   display: flex;
+  margin: 0 auto;
+  max-width: 1224px;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;

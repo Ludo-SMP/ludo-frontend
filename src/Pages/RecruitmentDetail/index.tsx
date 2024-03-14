@@ -4,23 +4,23 @@ import { RowDivider } from '../../Components/Common/Divider/RowDivider';
 import { ColumnDivider } from '../../Components/Common/Divider/ColumnDivider';
 import { useCloseRecruitmentMutation, useRecruitmentDetail } from '@/Apis/recruitment';
 import { useNavigate, useParams } from 'react-router-dom';
-import { dateFormatter, getPeriod } from '@/Utils/date';
+import { dateFormatter, getPeriod, isEdited } from '@/utils/date';
 import RecruitmentInfoSection from './RecruitmentInfoSection';
 import StudyProgressInfoSection from './StudyProgessInfoSection';
 import StudyBasicInfoSection from './StudyBasicInfoSection';
 import Button from '@/Components/Common/Button';
 import Modal from '@/Components/Common/Modal';
 import { APPLY } from '@/Constants/messages';
-import { useLoginStore } from '@/Store/auth';
+import { useLoginStore } from '@/store/auth';
 import { ROUTER_PATH } from '@/Constants/Router_Path';
-import { useModalStore } from '@/Store/modal';
-import { useUserStore } from '@/Store/user';
+import { useModalStore } from '@/store/modal';
+import { useUserStore } from '@/store/user';
 import { useEffect, useState } from 'react';
 import ApplyModal from '@/Components/Modal/ApplyModal';
 import { ApplyTryStatus } from '@/Types/study';
 
 const RecruitmentDetailPage = () => {
-  const recruitmentId = Number(useParams().studyId);
+  const recruitmentId = Number(useParams().recruitmentId);
   const { isModalOpen, openModal, closeModal } = useModalStore();
   const { isLoggedIn } = useLoginStore();
   const { user } = useUserStore();
@@ -51,7 +51,9 @@ const RecruitmentDetailPage = () => {
           <ColumnDivider />
           <div className="edit__info">
             <div className="createdAt">{dateFormatter(recruitment.createdDateTime)}</div>
-            <div className="edit__status">수정됨</div>
+            <div className="edit__status">
+              {isEdited(recruitment.createdDateTime, recruitment.updatedDateTime) ? '수정됨' : '생성'}
+            </div>
           </div>
         </div>
         <div className="recruitment__details">
@@ -114,13 +116,14 @@ const RecruitmentDetailPage = () => {
       {isLoggedIn && isModalOpen && applyTryStatus === 'NOT APPLY' && (
         <ApplyModal
           handleApplyApprove={setApplyTryStatus}
-          recruitmentId={recruitmentId}
+          studyId={study.id}
+          recruitmentId={recruitment.id}
           positions={recruitment.positions}
         />
       )}
       {isLoggedIn && isModalOpen && applyTryStatus === 'SUCCESS' && (
         <Modal
-          title={APPLY.APPROVE.title}
+          title={APPLY.SUCCESS.title}
           handleApprove={() => {
             setApplyTryStatus(() => 'NOT APPLY');
             closeModal();
@@ -131,16 +134,16 @@ const RecruitmentDetailPage = () => {
           <div className="approve__image"></div>
         </Modal>
       )}
-      {isLoggedIn && isModalOpen && applyTryStatus === 'FAIL' && (
+      {isLoggedIn && isModalOpen && (applyTryStatus === 'CLOSED' || applyTryStatus === 'ALREDAY_APPLY') && (
         <Modal
-          title={APPLY.FAIL.title}
+          title={applyTryStatus === 'CLOSED' ? APPLY.CLOSED.title : APPLY.ALREADY_APPLY.title}
           handleApprove={() => {
             setApplyTryStatus(() => 'NOT APPLY');
             closeModal();
           }}
           approveBtnText="확인"
         >
-          {APPLY.FAIL.content}
+          {applyTryStatus === 'CLOSED' ? APPLY.CLOSED.content : APPLY.ALREADY_APPLY.content}
         </Modal>
       )}
     </RecruitmentDetailWrapper>

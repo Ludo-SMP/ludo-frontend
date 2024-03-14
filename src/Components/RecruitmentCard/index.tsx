@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import PositionToken from '../Common/PositionToken';
 import { Position, Stack } from '@/Types/study';
 import { Link } from 'react-router-dom';
-import { dateFormatter, getPeriod } from '@/Utils/date';
+import { dateFormatter, getPeriod } from '@/utils/date';
 import { Recruitment } from '@/Types/study';
 import { PROGRESS_METHOD } from '@/Shared/study';
 import Image from '../Common/Image';
@@ -32,14 +32,22 @@ const RecruitmentCard = (recruitment: Recruitment) => {
             <span className="study__type">{PROGRESS_METHOD[recruitment.way]}</span>
           </div>
           <div className="study__positions">
-            {recruitment.positions?.map((position: Position) => (
-              <PositionToken key={position.id} id={position.id} name={position.name} />
-            ))}
+            {recruitment.positions.length !== 0 ? (
+              recruitment.positions?.map((position: Position) => (
+                <PositionToken key={position.id} id={position.id} name={position.name} />
+              ))
+            ) : (
+              <PositionToken />
+            )}
           </div>
           <div className="study__stacks">
-            {recruitment.stacks.map((stack: Stack) => (
-              <Image key={stack.id} size={32} src={stack.imageUrl} />
-            ))}
+            {recruitment.stacks.length !== 0 ? (
+              recruitment.stacks.map((stack: Stack) => (
+                <Image key={stack.id} size={32} src={`${import.meta.env.VITE_BASE_API_URL}${stack.imageUrl}`} />
+              ))
+            ) : (
+              <Image size={32} />
+            )}
           </div>
         </StudyDetailInfoWrapper>
         <StudyAdditionalInfoWrapper>
@@ -133,7 +141,7 @@ const StudyDetailInfoWrapper = styled.div`
       display: flex;
       padding: 4px;
       align-items: center;
-      gap: 4px;
+      gap: 8px;
       align-self: stretch;
     }
   }

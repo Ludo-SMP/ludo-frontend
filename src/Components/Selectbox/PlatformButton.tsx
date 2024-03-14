@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent } from 'react';
 import styled from 'styled-components';
 import { OptionalCreates } from '@/Pages/Studies/CreateStudy';
 import { Creates } from '@/Types/studies';
@@ -19,8 +19,7 @@ export type Props = {
 };
 
 export const PlatformButton = ({ setForm, useForm }: Props) => {
-  const [platformValue, setForms] = useState<string>('');
-  console.log([platformValue, setForms]);
+  // const [platformValue, setForms] = useState<string>('');
   const submitHandler = (event: ChangeEvent<HTMLSelectElement>) => {
     setForm({ platform: event.target.value });
   };

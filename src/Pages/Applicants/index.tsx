@@ -5,7 +5,7 @@ import ApplicantCard from '@/Components/ApplicantCard';
 import { Applicant } from '@/Types/study';
 import Button from '@/Components/Common/Button';
 import StudyToken from '@/Components/Common/StudyToken';
-import { useUserStore } from '@/Store/user';
+import { useUserStore } from '@/store/user';
 import { useParams } from 'react-router-dom';
 import { useApplicantsDetail } from '@/Apis/study';
 import { useCloseRecruitmentMutation } from '@/Apis/recruitment';

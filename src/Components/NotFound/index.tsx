@@ -1,10 +1,10 @@
 import { CREATE_STUDY, SEARCH } from '@/Constants/messages';
-import { useLoginStore } from '@/Store/auth';
+import { useLoginStore } from '@/store/auth';
 import { useNavigate } from 'react-router-dom';
 import Button from '../Common/Button';
 import styled from 'styled-components';
 import { ROUTER_PATH } from '@/Constants/Router_Path';
-import { useModalStore } from '@/Store/modal';
+import { useModalStore } from '@/store/modal';
 import Modal from '../Common/Modal';
 
 const NotFound = () => {

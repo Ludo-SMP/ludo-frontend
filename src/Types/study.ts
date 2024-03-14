@@ -9,7 +9,7 @@ export type Role = keyof typeof ROLE;
 export type Platform = keyof typeof PLATFORM;
 export type Card = 'STUDY' | 'RECRUITMENT';
 export type Sort = '최신순' | '조회순';
-export type ApplyTryStatus = 'NOT APPLY' | 'SUCCESS' | 'FAIL';
+export type ApplyTryStatus = 'NOT APPLY' | 'SUCCESS' | 'CLOSED' | 'ALREDAY_APPLY' | 'ALREDY_PARTICIPATED';
 
 export interface Position {
   id: number;
@@ -43,7 +43,6 @@ export interface MainCategoryType<T, S> {
   categoryItems?: (T | S)[];
 }
 
-/////////////////////
 export type FilterOption = 'CATEGORY' | 'STACK' | 'POSITION' | 'PROGRESS_METHOD' | 'SORT';
 export interface Stack {
   id: number;
@@ -62,6 +61,7 @@ export interface RecruitmentDetail {
     callUrl: string;
     content: string;
     createdDateTime: string;
+    updatedDateTime: string;
     endDateTime: string;
   };
   study: {
@@ -103,17 +103,15 @@ export interface Recruitments {
 }
 
 export interface FilterOptionParams {
+  pageParam?: number;
   last?: number;
-  pageNum: number;
   count: number;
-  stackId: number;
-  progressMethod: string;
-  positionId: number;
-  categoryId: number;
+  stackId?: number;
+  progressMethod?: string;
+  positionId?: number;
+  categoryId?: number;
   sort?: Sort[];
 }
-
-////////////////////////
 
 export interface Participant {
   id: number;
@@ -138,6 +136,9 @@ export interface StudyDetail {
     category: Category;
     owner: User;
     participants: Participant[];
+    hasRecruitment: boolean;
+    createdDateTime: string;
+    updatedDateTime: string;
   };
 }
 
@@ -163,12 +164,14 @@ export interface ParticipateStudy {
   endDateTime: string;
   status: StudyStatus;
   participantCount: number;
+  isOwner: boolean;
+  hasRecruitment: boolean;
 }
 
 export interface ApplicantRecruitment {
   recruitmentId: number;
   title: string;
-  position: { id: number; name: Position };
+  position: Position;
   applicantStatus: ApplyStatus;
 }
 
@@ -180,6 +183,8 @@ export interface CompletedStudy {
   endDateTime: string;
   status: StudyStatus;
   participantCount: number;
+  isOwner: boolean;
+  hasRecruitment: boolean;
 }
 
 export interface MyStudies {

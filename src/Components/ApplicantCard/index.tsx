@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { useAcceptApplyMutation, useRefuseApplyMutation } from '@/Apis/study';
 import Modal from '../Common/Modal';
 import { APPLY } from '@/Constants/messages';
-import { useModalStore } from '@/Store/modal';
+import { useModalStore } from '@/store/modal';
 interface ApplicantCardProps extends Omit<Member, 'role'> {
   studyId: number;
   title: string;

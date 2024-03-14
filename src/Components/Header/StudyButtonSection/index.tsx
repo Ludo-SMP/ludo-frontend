@@ -3,7 +3,7 @@ import { media } from '@/Styles/theme';
 import Button from '@/Components/Common/Button';
 import { useNavigate } from 'react-router-dom';
 import { ROUTER_PATH } from '@/Constants/Router_Path';
-import { useSelectedMyStudyStore } from '@/Store/study';
+import { useSelectedMyStudyStore } from '@/store/study';
 
 const StudyButtonSection = () => {
   const navigate = useNavigate();

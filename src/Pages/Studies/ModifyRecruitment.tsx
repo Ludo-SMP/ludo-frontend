@@ -7,12 +7,10 @@ import { PositionButton } from '../../Components/Selectbox/PositionButton';
 import { StackSelectButton } from '@/Components/Selectbox/StackSelectButton';
 import { Mainarea } from '../../Components/Textarea/Mainarea';
 import { Titlearea } from '../../Components/Textarea/Titlearea';
-// import { GatherButton } from '../../Components/Selectbox/GatherButton';
 // import { StackModal } from '../../Components/Modal/
 import { EndDate } from '../../Components/Calendar/EndDate';
 import { media } from '../../Styles/theme';
 import { Gather } from '@/Types/studies';
-//  Creates,
 import { useState } from 'react';
 // import { stackCategory } from '@/Shared/category';
 import { useStack } from '@/Apis/stack';
@@ -20,7 +18,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { One, Two, Three, Four } from '@/Assets';
 import { SaveButton } from '@/Components/Button/Studies/SaveButton';
-// import { STUDY } from '@/Constants/queryString';
 import { ContactButton } from '@/Components/Selectbox/ContactButton';
 import { ApplicantButton } from '@/Components/Selectbox/ApplicantButton';
 import { useStudyDetail } from '@/Apis/study';
@@ -32,7 +29,7 @@ export const ModifyRecruitment = () => {
   const Navigation = useNavigate();
   const studyId = Number(useParams().studyId);
   useStudyDetail(studyId);
-  console.log(studyId);
+  // console.log(studyId);
   const [useForm, setuseForm] = useState<Gather>({
     title: '',
     // recruitmentLimit: 0,
@@ -68,9 +65,9 @@ export const ModifyRecruitment = () => {
       applicantCount: useForm.applicantCount,
       // studyId: useForm.studyId,
     });
-    console.log(data);
-    const recruitmentsId = data.data.study.id;
-    Navigation(`/studies/${recruitmentsId}/recruitment`);
+    // console.log(data);
+    const recruitmentId = data?.data?.recruitment?.id;
+    Navigation(`/studies/${recruitmentId}/recruitment`);
     // localStorage.setItem('gather', JSON.stringify(data.data));
   }
 

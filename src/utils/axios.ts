@@ -7,6 +7,7 @@ export const createClient = (config?: AxiosRequestConfig) => {
       'Content-Type': 'application/json',
     },
     withCredentials: true,
+    timeout: 5000,
     ...config,
   });
   axiosInstance.interceptors.request.use((request) => {
@@ -20,7 +21,7 @@ export const createClient = (config?: AxiosRequestConfig) => {
       return response;
     },
     (error) => {
-      console.log(error);
+      // console.log(error);
       return Promise.reject(error);
     },
   );

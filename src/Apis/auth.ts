@@ -1,6 +1,6 @@
 import { API_END_POINT } from '@/Constants/api';
-import { useLoginStore } from '@/Store/auth';
-import { httpClient } from '@/Utils/axios';
+import { useLoginStore } from '@/store/auth';
+import { httpClient } from '@/utils/axios';
 import { useMutation } from '@tanstack/react-query';
 
 import { useNavigate } from 'react-router-dom';
@@ -19,12 +19,12 @@ export const useLogOutMutation = () => {
     mutationKey: ['logout'],
     mutationFn: () => logOut(),
     onSuccess: () => {
-      console.log('로그아웃 성공');
+      // console.log('로그아웃 성공');
       setIsLoggedOut();
       navigate('/');
     },
     onError: () => {
-      console.log('로그아웃 실패');
+      // console.log('로그아웃 실패');
     },
   });
   return { mutate };

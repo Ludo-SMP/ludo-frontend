@@ -11,8 +11,7 @@ import { Titlearea } from '../../Components/Textarea/Titlearea';
 // import { StackModal } from '../../Components/Modal/
 import { EndDate } from '../../Components/Calendar/EndDate';
 import { media } from '../../Styles/theme';
-import { Gather } from '@/Types/studies';
-// Creates,
+// import { Gather } from '@/Types/studies';
 import { useState } from 'react';
 // import { stackCategory } from '@/Shared/category';
 import { useStack } from '@/Apis/stack';
@@ -21,10 +20,10 @@ import axios from 'axios';
 import { One, Two, Three, Four } from '@/Assets';
 import { SaveButton } from '@/Components/Button/Studies/SaveButton';
 // import { STUDY } from '@/Constants/queryString';
+import { Gather } from '@/Types/studies';
 import { ContactButton } from '@/Components/Selectbox/ContactButton';
 import { ApplicantButton } from '@/Components/Selectbox/ApplicantButton';
 import { useStudyDetail } from '@/Apis/study';
-// import { useStudyId } from '@/Apis/studies';
 
 axios.defaults.withCredentials = true;
 export type OptionalCreates = Partial<Gather>;
@@ -36,12 +35,15 @@ export const CreateRecruitment = () => {
   // const { d } = useStudyId(studyId as any);
   // console.log(d);
   const Navigation = useNavigate();
-
+  // const studyId = Number(useParams().studyId);
+  useStudyDetail(studyId);
   const { data: studyDetail } = useStudyDetail(studyId);
   const study = studyDetail?.study;
-  console.log(studyId);
+
+  // console.log(studyId);
   const [useForm, setuseForm] = useState<Gather>({
     title: '',
+    // recruitmentLimit: 0,
     recruitmentEndDateTime: '',
     positionId: 0,
     stackId: 0,
@@ -62,6 +64,7 @@ export const CreateRecruitment = () => {
   async function posts() {
     const { data } = await axios.post(`https://ludoapi.store/api/studies/${studyId}/recruitments`, {
       title: useForm.title,
+      // recruitmentLimit: useForm.recruitmentLimit,
       recruitmentEndDateTime: useForm.recruitmentEndDateTime,
       positionIds: [useForm.positionId],
       stackIds: [useForm.stackId],
@@ -71,8 +74,9 @@ export const CreateRecruitment = () => {
       applicantCount: useForm.applicantCount,
       // studyId: useForm.studyId,
     });
-    console.log(data);
-    Navigation(`/studies/${studyId}/recruitment`);
+    // console.log(data);
+    const recruitmentId = data?.data?.recruitment?.id;
+    Navigation(`/studies/${recruitmentId}/recruitment`);
     // localStorage.setItem('gather', JSON.stringify(data.data));
   }
 

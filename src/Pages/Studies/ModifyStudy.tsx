@@ -20,11 +20,13 @@ axios.defaults.withCredentials = true;
 export type OptionalCreates = Partial<Creates>;
 export const ModifyStudy = () => {
   // {register} = useForm
+  // 폼 데이터
+
+  const Navigate = useNavigate();
   const studyId = Number(useParams().studyId);
   useStudyDetail(studyId);
-  console.log(studyId);
-  // 폼 데이터
-  const Navigate = useNavigate();
+  // console.log(studyId);
+
   const [useForm, setuseForm] = useState<Creates>({
     title: '',
     categoryId: 0,

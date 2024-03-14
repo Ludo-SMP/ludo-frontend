@@ -1,6 +1,6 @@
 import { getUser } from '@/Apis/auth';
-import { useLoginStore } from '@/Store/auth';
-import { useUserStore } from '@/Store/user';
+import { useLoginStore } from '@/store/auth';
+import { useUserStore } from '@/store/user';
 import { useEffect } from 'react';
 
 interface LoginProviderProps {
@@ -18,7 +18,7 @@ const LoginProvider = ({ children }: LoginProviderProps) => {
         setIsLoggedIn();
         setUser(data);
       } catch (e) {
-        console.log(e);
+        // console.log(e);
         setIsLoggedOut();
         resetUser();
       }

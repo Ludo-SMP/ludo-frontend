@@ -4,8 +4,7 @@ import { FilterOption } from '@/Types/study';
 import DropdownItem from './DropdownItem';
 import { useOutSideClick } from '@/Hooks/useOutsideClick';
 import { Up, Down } from '@/Assets';
-import { useFilterOptionsStore } from '@/Store/filter';
-import { PROGRESS_METHOD } from '@/Shared/study';
+import { useFilterOptionsStore } from '@/store/filter';
 
 export interface DropdownFilterProps {
   filterName: string;
@@ -24,7 +23,9 @@ const DropdownFilter = ({ filterName, items, filterOption }: DropdownFilterProps
   };
 
   const handleSelectedItem = (item: { id: number; name: string }, filterOption: FilterOption) => {
-    setContent(filterOption === 'PROGRESS_METHOD' && item.id !== 0 ? PROGRESS_METHOD[item.name] : item.name);
+    setContent(
+      filterOption === 'PROGRESS_METHOD' && item.id !== 0 ? (item.id === 1 ? '온라인' : '오프라인') : item.name,
+    );
     setFilterOptions(filterOption, item.id !== 0 ? item.id : 0);
     setIsOpen(!isOpen);
   };

@@ -2,35 +2,27 @@ import styled from 'styled-components';
 
 export interface BannerProps {
   brief?: string;
-  title: string;
+  title?: string;
   src?: any;
   id?: number;
 }
-const Banner = ({ src, brief, title }: BannerProps) => {
+const Banner = ({ src }: BannerProps) => {
   return (
     <BannerWrapper>
-      <div className="banner__contents">
-        <div className="banner__info">
-          <div className="banner__brief">{brief ?? 'Brief'} </div>
-          <div className="banner__title">{title ?? 'Banner Title'}</div>
-        </div>
-        <div className="banner__image">{src ?? <img src={src} />}</div>
-      </div>
-      <div className="banner__button">
-        <span className="banner__button__text">1 / 3</span>
-      </div>
+      <div className="banner__image">{src ? <img src={src} /> : '이미지'}</div>
+      <div className="banner__button">{/* <span className="banner__button__text">1 / 3</span> */}</div>
     </BannerWrapper>
   );
 };
 
 const BannerWrapper = styled.div`
   display: flex;
+  position: relative;
+  margin: 0 auto;
   flex-direction: column;
   justify-content: flex-end;
   width: 100%;
   height: 320px;
-  background-color: ${(props) => props.theme.color.gray5};
-  padding: 20px 24px;
   .banner {
     &__contents {
       height: 256px;
@@ -53,6 +45,7 @@ const BannerWrapper = styled.div`
 
     &__button {
       display: flex;
+      position: absolute;
       justify-content: flex-end;
     }
 
@@ -64,10 +57,6 @@ const BannerWrapper = styled.div`
       gap: 4px;
       font-size: ${(props) => props.theme.font.small};
       color: ${(props) => props.theme.color.white};
-    }
-
-    &__image {
-      width: 100%;
     }
   }
 `;

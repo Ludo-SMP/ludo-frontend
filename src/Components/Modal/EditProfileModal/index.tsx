@@ -1,12 +1,33 @@
+import { useEditProfileNickname } from '@/Apis/user';
 import Button from '@/Components/Common/Button';
 import InputText from '@/Components/Common/InputText/iindex';
 import { PROFILE } from '@/Constants/messages';
-import { useModalStore } from '@/Store/modal';
+import { STUDY } from '@/Constants/queryString';
+import { useModalStore } from '@/store/modal';
+import { useQueryClient } from '@tanstack/react-query';
+import { SetStateAction } from 'react';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 
-const EditProfileModal = () => {
+interface EdiptProfileModalProps {
+  userNickname: string;
+  handleEdit: React.Dispatch<SetStateAction<'NOT START' | 'EDIT' | 'END'>>;
+}
+
+const EditProfileModal = ({ userNickname, handleEdit }: EdiptProfileModalProps) => {
   const { closeModal } = useModalStore();
+  const queryClient = useQueryClient();
+  const submitSuccessHandler = () => {
+    closeModal();
+    handleEdit('NOT START');
+    queryClient.invalidateQueries({ queryKey: [...STUDY.MYPAGE_INFO()] });
+  };
+
+  const submitFailHandler = () => {
+    handleEdit('END');
+  };
+  const { mutate: editProfileMutate } = useEditProfileNickname(submitSuccessHandler, submitFailHandler);
+
   const {
     register,
     handleSubmit,
@@ -14,8 +35,9 @@ const EditProfileModal = () => {
   } = useForm<{ nickname: string }>();
 
   const onSubmit = (data: { nickname: string }) => {
-    console.log('중복확인');
+    editProfileMutate(data?.nickname);
   };
+
   return (
     <ModalBackDropWrapper>
       <ModalWrapper>
@@ -30,18 +52,32 @@ const EditProfileModal = () => {
                 <InputText
                   placeholder="닉네임 (최대 20자)"
                   inputType="text"
-                  {...register('nickname', { required: true, minLength: 1, maxLength: 20 })}
+                  {...register('nickname', {
+                    required: true,
+                    minLength: 1,
+                    maxLength: 20,
+                    pattern: /^(?!\s).{1,20}(?<!\s)$/,
+                    validate: (value) => value !== userNickname,
+                  })}
                 />
               </div>
-              <ErrorWrapper isError={errors.nickname}>
-                <p className="error__message">글자수는 1자 이상, 20자 이하이여야 합니다.</p>
+              <ErrorWrapper isError={!!errors?.nickname}>
+                <p className="error__message">
+                  {errors?.nickname?.type && errors?.nickname?.type === 'required'
+                    ? PROFILE.NICNAME_ERROR.REQUIRED
+                    : errors?.nickname?.type === 'pattern'
+                    ? PROFILE.NICNAME_ERROR.WHITE_SPACE
+                    : errors?.nickname?.type === 'validate'
+                    ? PROFILE.NICNAME_ERROR.SAME
+                    : PROFILE.NICNAME_ERROR.LEGNTH}
+                </p>
               </ErrorWrapper>
             </fieldset>
             <ModalBtnsWrapper>
-              <Button scheme="normal" className="approve__btn" onClick={closeModal}>
+              <Button type="submit" scheme="normal" className="approve__btn" onClick={closeModal}>
                 취소하기
               </Button>
-              <Button className="submit__btn" scheme="primary" onClick={closeModal}>
+              <Button className="submit__btn" scheme="primary" onClick={() => {}}>
                 변경하기
               </Button>
             </ModalBtnsWrapper>

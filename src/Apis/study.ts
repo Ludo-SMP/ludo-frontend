@@ -1,9 +1,9 @@
-import { httpClient } from '@/Utils/axios';
+import { httpClient } from '@/utils/axios';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { STUDY } from '@/Constants/queryString';
 import { API_END_POINT } from '@/Constants/api';
 import { SetStateAction } from 'react';
-import { useModalStore } from '@/Store/modal';
+import { useModalStore } from '@/store/modal';
 import { ApplicantsDetail, ApplyTryStatus, MyPageInfo, StudyDetail } from '@/Types/study';
 import { useNavigate } from 'react-router-dom';
 import { ROUTER_PATH } from '@/Constants/Router_Path';
@@ -40,25 +40,27 @@ export const useApplicantsDetail = (studyId: number) => {
   });
 };
 
-export const applyStudy = async (recruitmentId: number, data: object) =>
-  httpClient.post(API_END_POINT.APPLY(recruitmentId), { ...data });
+export const applyStudy = async (studyId: number, recruitmentId: number, data: { positionId: number }) =>
+  httpClient.post(API_END_POINT.APPLY(studyId, recruitmentId), { ...data });
 
 export const useApplyStudyMutation = (
+  studyId: number,
   recruitmentId: number,
-  data: object,
   handleApplyApprove: React.Dispatch<SetStateAction<ApplyTryStatus>>,
 ) => {
   const { openModal } = useModalStore();
   const { mutate } = useMutation({
-    mutationKey: [STUDY.APPLY(recruitmentId)],
-    mutationFn: () => applyStudy(recruitmentId, data),
+    mutationKey: [STUDY.APPLY(studyId, recruitmentId)],
+    mutationFn: (selectedPosition: number) => applyStudy(studyId, recruitmentId, { positionId: selectedPosition }),
     onSuccess: () => {
-      console.log('success');
-      handleApplyApprove(() => 'SUCCESS');
+      // console.log('success');
+      handleApplyApprove('SUCCESS');
       openModal();
     },
     onError: () => {
-      handleApplyApprove(() => 'FAIL');
+      // const message = e?.response?.data?.message;
+      // if (message === '현재 모집 중인 스터디가 아닙니다.') handleApplyApprove(() => 'CLOSED');
+      // if (message === '이미 지원한 모집 공고입니다.') handleApplyApprove(() => 'ALREDAY_APPLY');
       openModal();
     },
   });
@@ -78,10 +80,10 @@ export const useRefuseApplyMutation = (studyId: number, applicantId: number, suc
       successHandler();
       openModal();
       queryClient.invalidateQueries({ queryKey: [...STUDY.APPLICNATS(studyId)] });
-      console.log('지원 거절 성공');
+      // console.log('지원 거절 성공');
     },
     onError: () => {
-      console.log('지원 거절 실패');
+      // console.log('지원 거절 실패');
     },
   });
   return { mutate };
@@ -102,10 +104,10 @@ export const useAcceptApplyMutation = (studyId: number, applicantId: number, suc
       openModal();
       queryClient.invalidateQueries({ queryKey: [...STUDY.APPLICNATS(studyId)] });
 
-      console.log('지원 수락 성공');
+      // console.log('지원 수락 성공');
     },
     onError: () => {
-      console.log('지원 수락 실패');
+      // console.log('지원 수락 실패');
     },
   });
   return { mutate };
@@ -119,10 +121,10 @@ export const useCancelAppyMutation = (recruitmentId: number, successHandler: () 
     mutationFn: () => cancelApply(recruitmentId),
     onSuccess: () => {
       successHandler();
-      console.log('지원 취소 성공');
+      // console.log('지원 취소 성공');
     },
     onError: () => {
-      console.log('지원 취소 실패');
+      // console.log('지원 취소 실패');
     },
   });
   return { mutate };
@@ -136,11 +138,11 @@ export const useDeleteStudyMutation = (studyId: number) => {
     mutationKey: [...STUDY.DELETE(studyId)],
     mutationFn: () => deleteStudy(studyId),
     onSuccess: () => {
-      console.log('스터디 삭제 성공');
+      // console.log('스터디 삭제 성공');
       navigate(ROUTER_PATH.mypage);
     },
     onError: () => {
-      console.log('스터디 삭제 실패');
+      // console.log('스터디 삭제 실패');
     },
   });
   return { mutate };
@@ -154,11 +156,11 @@ export const useLeaveStudyMutation = (studyId: number) => {
     mutationKey: [...STUDY.LEAVE(studyId)],
     mutationFn: () => leaveStudy(studyId),
     onSuccess: () => {
-      console.log('스터디 탈퇴 성공');
+      // console.log('스터디 탈퇴 성공');
       navigate(ROUTER_PATH.mypage);
     },
     onError: () => {
-      console.log('스터디 탈퇴 실패');
+      // console.log('스터디 탈퇴 실패');
     },
   });
   return { mutate };

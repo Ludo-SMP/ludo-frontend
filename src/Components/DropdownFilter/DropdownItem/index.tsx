@@ -1,4 +1,3 @@
-import { PROGRESS_METHOD } from '@/Shared/study';
 import { FilterOption } from '@/Types/study';
 import styled from 'styled-components';
 
@@ -11,7 +10,7 @@ export interface DropdownItemProps {
 const DropdownItem = ({ item, filterOption, handleClick }: DropdownItemProps) => {
   return (
     <DropdownItemWrapper onClick={handleClick}>
-      {filterOption === 'PROGRESS_METHOD' && item.id !== 0 ? PROGRESS_METHOD[item.name] : item.name}
+      {filterOption === 'PROGRESS_METHOD' && item.id !== 0 ? (item.id === 1 ? '온라인' : '오프라인') : item.name}
     </DropdownItemWrapper>
   );
 };

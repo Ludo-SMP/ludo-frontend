@@ -19,8 +19,7 @@ export type Props = {
 };
 
 export const Mainarea = ({ setForm, useForm }: Props) => {
-  const [contentValue, setForms] = useState('');
-  console.log(contentValue, setForms);
+  // const [contentValue, setForms] = useState('');
   const onContentHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setForm({ content: event.target.value });
   };

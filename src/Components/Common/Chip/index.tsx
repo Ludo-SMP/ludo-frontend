@@ -1,31 +1,30 @@
-import { useSelectedPositionStore } from '@/Store/position';
+import { useSelectedPositionStore } from '@/store/position';
 import { Position } from '@/Types/study';
-import { POSITION } from '@/Store/position';
+
 import styled from 'styled-components';
 
 type ChipType = 'Primary' | 'Secondary';
 
 export interface ChipProps {
   chipType: ChipType;
-  children?: React.ReactNode;
-  value: '백엔드' | '프론트엔드' | '디자이너' | '데브옵스';
+  position: Position;
 }
 
-const Chip = ({ chipType, children, value }: ChipProps<Position>) => {
+const Chip = ({ chipType, position }: ChipProps) => {
   const { selectedPosition, setSelectedPosition, resetSelectedPosition } = useSelectedPositionStore();
 
-  const isSelected: boolean = selectedPosition === POSITION[value];
+  const isSelected: boolean = selectedPosition === position.id;
 
   return (
     <ChipWrapper
       chipType={chipType}
       isSelected={isSelected}
       onClick={() => {
-        if (!isSelected) setSelectedPosition(value);
+        if (!isSelected) setSelectedPosition(position);
         else resetSelectedPosition();
       }}
     >
-      {children}
+      {position.name}
     </ChipWrapper>
   );
 };

@@ -13,7 +13,7 @@ export const Footer = () => {
           <Ludo_Footer />
           <MiddleWrapper>
             <ArticleTitles>함께 발견하는 가능성, 기회의 연결!</ArticleTitles>
-            <Articles>CopyrightⓒLudo All rights reserved.</Articles>
+            <Articles>CopyrightⓒLudo All rights reserved.</Articles>
             <Articles>[BE] 빽 , 아카 , 휴 | [FE] 타로 , 현 | [DE] 포키 </Articles>
           </MiddleWrapper>
           <LastWrapper>
