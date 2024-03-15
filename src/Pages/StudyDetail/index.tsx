@@ -7,7 +7,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import StudyInfoSection from './StudyInfoSection';
 import MemberSection from './MemberSection';
 import { useDeleteStudyMutation, useLeaveStudyMutation, useStudyDetail } from '@/Apis/study';
-import { getDday, getPeriod } from '@/utils/date';
+import { getDday } from '@/utils/date';
 import { useUserStore } from '@/store/user';
 import { useCloseRecruitmentMutation } from '@/Apis/recruitment';
 import { useQueryClient } from '@tanstack/react-query';
@@ -36,6 +36,7 @@ export const StudyDetailPage = () => {
   const { mutate: deleteStudyMutate } = useDeleteStudyMutation(studyId);
   const { mutate: leaveStudyMutate } = useLeaveStudyMutation(studyId);
 
+  console.log(studyId);
   return isLoading ? (
     <div>Loading...</div>
   ) : (
@@ -59,7 +60,7 @@ export const StudyDetailPage = () => {
         category={study?.category}
         progressMethod={study?.way}
         platform={study?.platform}
-        period={getPeriod(study?.startDateTime, study?.endDateTime)}
+        period={study?.startDateTime}
         dDay={getDday(study?.endDateTime)}
       />
       <RowDivider rowHeight={16} />

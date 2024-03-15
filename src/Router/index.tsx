@@ -2,11 +2,8 @@ import { Outlet, createBrowserRouter } from 'react-router-dom';
 import { ROUTER_PATH } from '../Constants/Router_Path';
 import MyPage from '../Pages/MyPage';
 import { Login } from '../Pages/Login';
-import { CreateStudy } from '../Pages/Studies/CreateStudy';
-import { ModifyStudy } from '../Pages/Studies/ModifyStudy';
 import MainPage from '@/Pages/Main';
 import RecruitmentDetailPage from '@/Pages/RecruitmentDetail';
-import { CreateRecruitment } from '../Pages/Studies/CreateRecruitment';
 import Recruitments from '../Pages/Recruitments';
 import SignUp from '@/Pages/SignUp';
 import Header from '@/Components/Header';
@@ -14,7 +11,17 @@ import ApplicantsPage from '@/Pages/Applicants';
 import StudyDetailPage from '@/Pages/StudyDetail';
 import { Footer } from '@/Components/Footer/Footer';
 import { SaveStudy } from '@/Pages/Studies/SaveStudy';
-import { ModifyRecruitment } from '@/Pages/Studies/ModifyRecruitment';
+// import { CreateStudy } from '../Pages/Studies/CreateStudy';
+// import { ModifyStudy } from '../Pages/Studies/ModifyStudy';
+// import { ModifyRecruitment } from '@/Pages/Studies/ModifyRecruitment';
+// import { CreateRecruitment } from '../Pages/Studies/CreateRecruitment';
+
+import { lazy } from 'react';
+
+const CreateStudy = lazy(() => import('../Pages/Studies/CreateStudy'));
+const ModifyStudy = lazy(() => import('../Pages/Studies/ModifyStudy'));
+const CreateRecruitment = lazy(() => import('../Pages/Studies/CreateRecruitment'));
+const ModifyRecruitment = lazy(() => import('@/Pages/Studies/ModifyRecruitment'));
 
 export const RouterPath = createBrowserRouter([
   {

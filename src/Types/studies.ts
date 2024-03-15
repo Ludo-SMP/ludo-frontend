@@ -26,6 +26,10 @@ export type Creates = {
   contactUrl?: string;
   content?: string;
   applicantCount?: number;
+<<<<<<< HEAD
+  studyId?: number;
+=======
+>>>>>>> 01f4d7bc307aad0915bbfeb356772c19299602f5
 };
 
 export type Gather = {

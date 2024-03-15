@@ -28,9 +28,14 @@ import { useStudyDetail } from '@/Apis/study';
 axios.defaults.withCredentials = true;
 export type OptionalCreates = Partial<Gather>;
 
-export const CreateRecruitment = () => {
-  const Navigation = useNavigate();
+const CreateRecruitment = () => {
   const studyId = Number(useParams().studyId);
+
+  // console.log(data);
+  // const { d } = useStudyId(studyId as any);
+  // console.log(d);
+  const Navigation = useNavigate();
+  // const studyId = Number(useParams().studyId);
   useStudyDetail(studyId);
   const { data: studyDetail } = useStudyDetail(studyId);
   const study = studyDetail?.study;
@@ -42,8 +47,6 @@ export const CreateRecruitment = () => {
     recruitmentEndDateTime: '',
     positionId: 0,
     stackId: 0,
-    // positionId: 0,
-    // stackId: 0,
     callUrl: '',
     content: '',
     studyId: Number(useParams().studyId),
@@ -197,6 +200,8 @@ export const CreateRecruitment = () => {
   );
 };
 
+export default CreateRecruitment;
+
 const BorderBox = styled.div`
   width: 1200px;
   margin-bottom: 16px;
@@ -208,9 +213,12 @@ const AssetContainer = styled.image`
 `;
 
 const StudyMain = styled.p`
+  width: 1200px;
   display: flex;
   font-size: ${(props) => props.theme.font.xxxlarge};
   text-align: left;
+  align-items: left;
+  margin-right: 30px;
   font-weight: 800;
   line-height: 60px;
   padding-bottom: 40px;
@@ -240,13 +248,12 @@ const SubContentTitle = styled.p`
 
 const StudyContainer = styled.form`
   height: 2000px;
-  /* margin: auto; */
   padding-left: 200px;
-  /* padding-right: 348px; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: left;
+  align-items: center;
 `;
 const TopBox = styled.div`
   height: 310px;

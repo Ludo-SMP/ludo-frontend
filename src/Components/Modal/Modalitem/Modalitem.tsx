@@ -9,8 +9,7 @@ type Props = { item: StackItem[] };
 
 export const ModalItem = ({ item }: Props) => {
   const { data } = useStack();
-  console.log(item);
-  // console.log({ data });
+  console.log({ item });
   const imgRef = useRef<HTMLImageElement>(null);
   // const [isValid, setIsValid] = useState(true);
   return (
