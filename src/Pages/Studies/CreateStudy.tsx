@@ -17,9 +17,7 @@ import { SaveButton } from '@/Components/Button/Studies/SaveButton';
 import axios from 'axios';
 axios.defaults.withCredentials = true;
 export type OptionalCreates = Partial<Creates>;
-export const CreateStudy = () => {
-  // {register} = useForm
-  // 폼 데이터
+const CreateStudy = () => {
   const Navigate = useNavigate();
   const [useForm, setuseForm] = useState<Creates>({
     title: '',
@@ -50,24 +48,19 @@ export const CreateStudy = () => {
       positionId: useForm.positionId,
       platform: useForm.platform,
     });
-    // console.log(data);
     const studyId = data.data.study.id;
     Navigate(`/studies/${studyId}`);
   }
 
-  const onSave = async () => {};
   const handleSubmit = (event: any) => {
     event.preventDefault();
     post();
-    // Navigate(`/`);
   };
 
   return (
     <>
       <StudyContainer onSubmit={handleSubmit}>
-        {/* <TitleBox> */}
         <StudyMain>스터디 생성하기</StudyMain>
-        {/* </TitleBox> */}
         <TopBox>
           <StudyTitle>
             <AssetContainer>
@@ -76,7 +69,9 @@ export const CreateStudy = () => {
             스터디 제목
           </StudyTitle>
           <BottomWrapper>
-            <ContentText>제목</ContentText>
+            <ContentText>
+              <label>제목</label>
+            </ContentText>
             <Titlearea setForm={forms} useForm={useForm} />
           </BottomWrapper>
         </TopBox>
@@ -91,15 +86,21 @@ export const CreateStudy = () => {
           <MiddleWrapper>
             <MiddleBottomInfo>
               <MiddleBottomWrapper>
-                <ContentText>카테고리</ContentText>
+                <ContentText>
+                  <label>카테고리</label>
+                </ContentText>
                 <BigCategoryButton setForm={forms} useForm={useForm} />
               </MiddleBottomWrapper>
               <MiddleBottomWrapper>
-                <ContentText>스터디 최대 인원</ContentText>
+                <ContentText>
+                  <label>스터디 최대 인원</label>
+                </ContentText>
                 <MaxPeopleButton setForm={forms} useForm={useForm} />
               </MiddleBottomWrapper>
               <MiddleBottomWrapper>
-                <ContentText>포지션</ContentText>
+                <ContentText>
+                  <label>포지션</label>
+                </ContentText>
                 <PositionButton setForm={forms} useForm={useForm} />
               </MiddleBottomWrapper>
             </MiddleBottomInfo>
@@ -115,15 +116,21 @@ export const CreateStudy = () => {
           </StudyTitle>
           <StudyMiddleInfo>
             <StudyWrapper>
-              <ContentText>진행방식</ContentText>
+              <ContentText>
+                <label>진행방식</label>
+              </ContentText>
               <ProgressButton setForm={forms} useForm={useForm} />
             </StudyWrapper>
             <StudyWrapper>
-              <ContentText>진행 플랫폼</ContentText>
+              <ContentText>
+                <label>진행 플랫폼</label>
+              </ContentText>
               <PlatformButton setForm={forms} useForm={useForm} />
             </StudyWrapper>
             <StudyWrapper>
-              <ContentText> 진행기간</ContentText>
+              <ContentText>
+                <label>진행기간</label>
+              </ContentText>
               <CalendarButton>
                 <ProgressPeriod setForm={forms} useForm={useForm} />
               </CalendarButton>
@@ -131,7 +138,7 @@ export const CreateStudy = () => {
           </StudyMiddleInfo>
         </MiddleCenterBox>
         <ButtonBox>
-          <SaveButton onClick={onSave}>임시저장</SaveButton>
+          <SaveButton>임시저장</SaveButton>
           <SubmitButton type="submit">등록하기</SubmitButton>
         </ButtonBox>
       </StudyContainer>
@@ -139,6 +146,7 @@ export const CreateStudy = () => {
   );
 };
 
+export default CreateStudy;
 const AssetContainer = styled.image`
   padding-right: 12px;
 `;

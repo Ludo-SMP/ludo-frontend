@@ -25,7 +25,7 @@ import { useStudyDetail } from '@/Apis/study';
 axios.defaults.withCredentials = true;
 export type OptionalCreates = Partial<Gather>;
 
-export const ModifyRecruitment = () => {
+const ModifyRecruitment = () => {
   const Navigation = useNavigate();
   const studyId = Number(useParams().studyId);
   useStudyDetail(studyId);
@@ -188,6 +188,8 @@ export const ModifyRecruitment = () => {
     </>
   );
 };
+
+export default ModifyRecruitment;
 
 const BorderBox = styled.div`
   width: 1200px;

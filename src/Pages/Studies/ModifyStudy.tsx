@@ -18,14 +18,10 @@ import axios from 'axios';
 import { useStudyDetail } from '@/Apis/study';
 axios.defaults.withCredentials = true;
 export type OptionalCreates = Partial<Creates>;
-export const ModifyStudy = () => {
-  // {register} = useForm
-  // 폼 데이터
-
+const ModifyStudy = () => {
   const Navigate = useNavigate();
   const studyId = Number(useParams().studyId);
   useStudyDetail(studyId);
-  // console.log(studyId);
 
   const [useForm, setuseForm] = useState<Creates>({
     title: '',
@@ -143,6 +139,7 @@ export const ModifyStudy = () => {
   );
 };
 
+export default ModifyStudy;
 const AssetContainer = styled.image`
   padding-right: 12px;
 `;

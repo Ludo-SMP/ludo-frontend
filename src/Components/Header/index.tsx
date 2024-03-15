@@ -22,7 +22,7 @@ const Header = () => {
     <HeaderWrapper>
       <TopBarWrapper>
         <Link to="/">
-          <img width="140" src={Logo} />
+          <img width="140" src={Logo} alt="Ludo" />
         </Link>
         <ElementsWrapper>
           {isLoggedIn ? (
