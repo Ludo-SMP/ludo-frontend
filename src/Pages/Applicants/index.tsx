@@ -7,8 +7,8 @@ import Button from '@/Components/Common/Button';
 import StudyToken from '@/Components/Common/StudyToken';
 import { useUserStore } from '@/store/user';
 import { useParams } from 'react-router-dom';
-import { useApplicantsDetail } from '@/Apis/study';
-import { useCloseRecruitmentMutation } from '@/Apis/recruitment';
+import { useApplicantsDetail } from '@/Hooks/study/useApplicantsDetail';
+import { useCloseRecruitmentMutation } from '@/Hooks/recruitments/useCloseRecruitmentMutation';
 
 const ApplicantsPage = () => {
   const studyId = Number(useParams().studyId);

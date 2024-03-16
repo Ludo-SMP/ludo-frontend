@@ -15,7 +15,7 @@ import { useState } from 'react';
 import { One, Two, Three } from '@/Assets';
 import { SaveButton } from '@/Components/Button/Studies/SaveButton';
 import axios from 'axios';
-import { useStudyDetail } from '@/Apis/study';
+import { useStudyDetail } from '@/Hooks/study/useStudyDetail';
 axios.defaults.withCredentials = true;
 export type OptionalCreates = Partial<Creates>;
 const ModifyStudy = () => {
@@ -177,10 +177,6 @@ const StudyContainer = styled.form`
   }
 `;
 
-const TitleBox = styled.div`
-  text-align: left;
-  align-items: center;
-`;
 const TopBox = styled.div`
   height: 250px;
   padding-top: 40px;

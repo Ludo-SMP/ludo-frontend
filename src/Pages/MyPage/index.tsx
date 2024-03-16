@@ -5,12 +5,12 @@ import styled from 'styled-components';
 import { BlankSquare } from '@/Components/Common/BlankSquare';
 import TemporarySavedCard, { TemporarySavedCardProps } from '@/Components/TemporarySavedCard';
 import Button from '@/Components/Common/Button';
-import { useMyPageInfo } from '@/Apis/study';
+import { useMyPageInfo } from '@/Hooks/study/useMyPageInfo';
 import { getPeriod } from '@/utils/date';
 import ChipMenu from '@/Components/Common/ChipMenu';
 import { User, ParticipateStudy, ApplicantRecruitment, CompletedStudy } from '@/Types/study';
 import { useSelectedCardStore, useSelectedMyStudyStore } from '@/store/study';
-import { useLogOutMutation } from '@/Apis/auth';
+import { useLogOutMutation } from '@/Hooks/auth/useLogOutMutation';
 import { temporarySavedCardMockData } from '@/Shared/dummy';
 
 const MyPage = () => {

@@ -22,4 +22,5 @@ const Layout = styled.div`
 
 const LayoutContainer = styled.main`
   width: 100%;
+  max-height: 1224px;
 `;

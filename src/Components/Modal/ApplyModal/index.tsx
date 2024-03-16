@@ -1,7 +1,7 @@
 import Modal from '@/Components/Common/Modal';
 import { APPLY } from '@/Constants/messages';
 import Chip from '@/Components/Common/Chip';
-import { useApplyStudyMutation } from '@/Apis/study';
+import { useApplyStudyMutation } from '@/Hooks/study/useApplyStudyMutation';
 import { ApplyTryStatus, Position } from '@/Types/study';
 import styled from 'styled-components';
 import { useSelectedPositionStore } from '@/store/position';

@@ -1,36 +1,36 @@
 import styled from 'styled-components';
-// import RecruitmentCard from '../RecruitmentCard';
+import RecruitmentCard from '../RecruitmentCard';
 import NotFound from '../NotFound';
-// import { Recruitment } from '@/Types/study';
-// import { useMemo, useRef } from 'react';
-// import { useIntersectionObservable } from '@/Hooks/userIntersectionObservable';
-// // import { useRecruitments } from '@/Apis/recruitment';
-// import { INFINITE_RECRUITMENTS_COUMT_PER_PAGE } from '@/Constants/common';
+import { Recruitment } from '@/Types/study';
+import { useMemo, useRef } from 'react';
+import { useIntersectionObservable } from '@/Hooks/userIntersectionObservable';
+import { useRecruitments } from '@/Hooks/recruitments/useRecruitments';
+import { INFINITE_RECRUITMENTS_COUMT_PER_PAGE } from '@/Constants/common';
 import { useFilterOptionsStore } from '@/store/filter';
 import { getProgressMethod } from '@/Mocks/utils/getQueryParams';
 
 const RecruitmentCardList = () => {
   const { categoryId, stackId, positionId, progressMethodId } = useFilterOptionsStore();
   const progressMethod = getProgressMethod(progressMethodId);
-  console.log(categoryId, stackId, positionId, progressMethod);
 
-  // const observeRef = useRef<HTMLDivElement>(null);
+  const observeRef = useRef<HTMLDivElement>(null);
 
-  // const { data, hasNextPage, fetchNextPage } = useRecruitments({
-  //   filterOptions: { categoryId, stackId, positionId, progressMethod },
-  //   count: INFINITE_RECRUITMENTS_COUMT_PER_PAGE,
-  // });
+  const { data, hasNextPage, fetchNextPage } = useRecruitments({
+    filterOptions: { categoryId, stackId, positionId, progressMethod },
+    count: INFINITE_RECRUITMENTS_COUMT_PER_PAGE,
+  });
 
-  // const onIntersect: IntersectionObserverCallback = ([entry]) => {
-  //   if (entry.isIntersecting) fetchNextPage();
-  // };
-  // useIntersectionObservable(observeRef, onIntersect, hasNextPage);
+  const onIntersect: IntersectionObserverCallback = ([entry]) => {
+    if (entry.isIntersecting) fetchNextPage();
+  };
+  useIntersectionObservable(observeRef, onIntersect, hasNextPage);
 
-  // const recruitmentsPages = useMemo(() => (data ? data.pages.flatMap(({ data }) => data.data) : []), [data]);
+  const recruitmentsPages = useMemo(() => (data ? data.pages.flatMap(({ data }) => data.data) : []), [data]);
+  console.log(recruitmentsPages);
 
   return (
     <RecruitmentCardsWrapper>
-      {/* {recruitmentsPages.length ? (
+      {recruitmentsPages.length ? (
         recruitmentsPages.map((recruitmentsPage) =>
           recruitmentsPage?.recruitments.map((recruitment: Recruitment) => (
             <RecruitmentCard key={recruitment.id} {...recruitment} />
@@ -38,10 +38,9 @@ const RecruitmentCardList = () => {
         )
       ) : (
         <NotFound />
-      )} */}
-      <NotFound />
+      )}
 
-      {/* <Target ref={observeRef} /> */}
+      <Target ref={observeRef} />
     </RecruitmentCardsWrapper>
   );
 };
@@ -55,7 +54,7 @@ const RecruitmentCardsWrapper = styled.li`
   gap: 21px;
 `;
 
-// const Target = styled.div`
-//   height: 1px;
-// `;
+const Target = styled.div`
+  height: 1px;
+`;
 export default RecruitmentCardList;

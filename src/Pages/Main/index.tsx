@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Recruitment } from '@/Types/study';
 import Banner from '../../Components/Banner';
-import { usePopularRecruitments } from '@/Apis/recruitment';
+import { usePopularRecruitments } from '@/Hooks/recruitments/usePopularRecruitments';
 import Button from '@/Components/Common/Button';
 import ChipMenu from '@/Components/Common/ChipMenu';
 import { Right, Create, LudoBanner } from '@/Assets';

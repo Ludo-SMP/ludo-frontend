@@ -4,7 +4,6 @@ import { SubmitButton } from '../../Components/Button/Studies/SubmitButton';
 import { useNavigate } from 'react-router-dom';
 export const SaveStudy = () => {
   const localData = JSON.parse(localStorage.getItem('create'));
-  // console.log(localData.study);
   const navigate = useNavigate();
   const navigateToModify = () => {
     navigate('/studies/modify');

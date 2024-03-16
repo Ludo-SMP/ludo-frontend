@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { StackItem } from '@/Types/studies';
 // import axios from 'axios';
-import { useStack } from '@/Apis/stack';
+import { useStack } from '@/Hooks/stack/useStack';
 import { useRef } from 'react';
 
 const VITE_BASE_URL = 'https://ludoapi.store';

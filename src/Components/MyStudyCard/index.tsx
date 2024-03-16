@@ -5,7 +5,7 @@ import { InfoField } from '../Common/InfoField';
 import Button from '../Common/Button';
 import { ApplyStatus, StudyStatus, Position } from '@/Types/study';
 import { useNavigate } from 'react-router-dom';
-import { useCancelAppyMutation } from '@/Apis/study';
+import { useCancelAppyMutation } from '@/Hooks/study/useCancelAppyMutation';
 import { useQueryClient } from '@tanstack/react-query';
 import { STUDY } from '@/Constants/queryString';
 

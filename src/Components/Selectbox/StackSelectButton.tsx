@@ -3,7 +3,7 @@ import { OptionalCreates } from '@/Pages/Studies/CreateRecruitment';
 import { Creates, ItemCategory } from '@/Types/studies';
 import { ChangeEvent } from 'react';
 import { StackItem } from '@/Types/studies';
-import { useStack } from '@/Apis/stack';
+import { useStack } from '@/Hooks/stack/useStack';
 
 export type Props = {
   onClick?: () => void;

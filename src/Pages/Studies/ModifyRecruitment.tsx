@@ -13,14 +13,14 @@ import { media } from '../../Styles/theme';
 import { Gather } from '@/Types/studies';
 import { useState } from 'react';
 // import { stackCategory } from '@/Shared/category';
-import { useStack } from '@/Apis/stack';
+import { useStack } from '@/Hooks/stack/useStack';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { One, Two, Three, Four } from '@/Assets';
 import { SaveButton } from '@/Components/Button/Studies/SaveButton';
 import { ContactButton } from '@/Components/Selectbox/ContactButton';
 import { ApplicantButton } from '@/Components/Selectbox/ApplicantButton';
-import { useStudyDetail } from '@/Apis/study';
+import { useStudyDetail } from '@/Hooks/study/useStudyDetail';
 
 axios.defaults.withCredentials = true;
 export type OptionalCreates = Partial<Gather>;

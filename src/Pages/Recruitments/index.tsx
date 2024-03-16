@@ -8,7 +8,7 @@ import { Create, Up } from '@/Assets';
 import Button from '@/Components/Common/Button';
 import UtiltiyButtons from '@/Components/UtilityButtons';
 import { useNavigate } from 'react-router-dom';
-import { useStack } from '@/Apis/stack';
+import { useStack } from '@/Hooks/stack/useStack';
 import { ALL, CATEGORIES, POSITIONS, PROGRESS_METHODS, SORTS } from '@/Shared/study';
 import { Stack } from '@/Types/study';
 import { useLoginStore } from '@/store/auth';

@@ -6,10 +6,12 @@ import StudyToken from '@/Components/Common/StudyToken';
 import { useNavigate, useParams } from 'react-router-dom';
 import StudyInfoSection from './StudyInfoSection';
 import MemberSection from './MemberSection';
-import { useDeleteStudyMutation, useLeaveStudyMutation, useStudyDetail } from '@/Apis/study';
+import { useLeaveStudyMutation } from '@/Hooks/study/useLeaveStudyMutation ';
+import { useDeleteStudyMutation } from '@/Hooks/study/useDeleteStudyMutation';
+import { useStudyDetail } from '@/Hooks/study/useStudyDetail';
 import { getDday } from '@/utils/date';
 import { useUserStore } from '@/store/user';
-import { useCloseRecruitmentMutation } from '@/Apis/recruitment';
+import { useCloseRecruitmentMutation } from '@/Hooks/recruitments/useCloseRecruitmentMutation';
 import { useQueryClient } from '@tanstack/react-query';
 import { STUDY } from '@/Constants/queryString';
 import { useModalStore } from '@/store/modal';
@@ -36,7 +38,6 @@ export const StudyDetailPage = () => {
   const { mutate: deleteStudyMutate } = useDeleteStudyMutation(studyId);
   const { mutate: leaveStudyMutate } = useLeaveStudyMutation(studyId);
 
-  console.log(studyId);
   return isLoading ? (
     <div>Loading...</div>
   ) : (

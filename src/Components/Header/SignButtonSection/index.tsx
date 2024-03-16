@@ -3,7 +3,7 @@ import { ROUTES } from '@/Constants/route';
 import { media } from '@/Styles/theme';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { useLogOutMutation } from '@/Apis/auth';
+import { useLogOutMutation } from '@/Hooks/auth/useLogOutMutation';
 import { useLoginStore } from '@/store/auth';
 
 const SignButtonSection = () => {
