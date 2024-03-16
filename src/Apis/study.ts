@@ -6,7 +6,7 @@ import { SetStateAction } from 'react';
 import { useModalStore } from '@/store/modal';
 import { ApplicantsDetail, ApplyTryStatus, MyPageInfo, StudyDetail } from '@/Types/study';
 import { useNavigate } from 'react-router-dom';
-import { ROUTER_PATH } from '@/Constants/Router_Path';
+import { ROUTES } from '@/Constants/route';
 
 export const getStudyDetail = (studyId: number): Promise<{ data: { data: StudyDetail } }> =>
   httpClient.get(API_END_POINT.STUDY(studyId));
@@ -80,11 +80,8 @@ export const useRefuseApplyMutation = (studyId: number, applicantId: number, suc
       successHandler();
       openModal();
       queryClient.invalidateQueries({ queryKey: [...STUDY.APPLICNATS(studyId)] });
-      // console.log('지원 거절 성공');
     },
-    onError: () => {
-      // console.log('지원 거절 실패');
-    },
+    onError: () => {},
   });
   return { mutate };
 };
@@ -103,12 +100,8 @@ export const useAcceptApplyMutation = (studyId: number, applicantId: number, suc
       successHandler();
       openModal();
       queryClient.invalidateQueries({ queryKey: [...STUDY.APPLICNATS(studyId)] });
-
-      // console.log('지원 수락 성공');
     },
-    onError: () => {
-      // console.log('지원 수락 실패');
-    },
+    onError: () => {},
   });
   return { mutate };
 };
@@ -121,11 +114,8 @@ export const useCancelAppyMutation = (recruitmentId: number, successHandler: () 
     mutationFn: () => cancelApply(recruitmentId),
     onSuccess: () => {
       successHandler();
-      // console.log('지원 취소 성공');
     },
-    onError: () => {
-      // console.log('지원 취소 실패');
-    },
+    onError: () => {},
   });
   return { mutate };
 };
@@ -138,12 +128,9 @@ export const useDeleteStudyMutation = (studyId: number) => {
     mutationKey: [...STUDY.DELETE(studyId)],
     mutationFn: () => deleteStudy(studyId),
     onSuccess: () => {
-      // console.log('스터디 삭제 성공');
-      navigate(ROUTER_PATH.mypage);
+      navigate(ROUTES.MYPAGE);
     },
-    onError: () => {
-      // console.log('스터디 삭제 실패');
-    },
+    onError: () => {},
   });
   return { mutate };
 };
@@ -156,12 +143,9 @@ export const useLeaveStudyMutation = (studyId: number) => {
     mutationKey: [...STUDY.LEAVE(studyId)],
     mutationFn: () => leaveStudy(studyId),
     onSuccess: () => {
-      // console.log('스터디 탈퇴 성공');
-      navigate(ROUTER_PATH.mypage);
+      navigate(ROUTES.MYPAGE);
     },
-    onError: () => {
-      // console.log('스터디 탈퇴 실패');
-    },
+    onError: () => {},
   });
   return { mutate };
 };

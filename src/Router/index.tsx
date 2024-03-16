@@ -1,5 +1,5 @@
 import { Outlet, createBrowserRouter } from 'react-router-dom';
-import { ROUTER_PATH } from '../Constants/Router_Path';
+import { ROUTES } from '@/Constants/route';
 import MyPage from '../Pages/MyPage';
 import { Login } from '../Pages/Login';
 import MainPage from '@/Pages/Main';
@@ -11,11 +11,6 @@ import ApplicantsPage from '@/Pages/Applicants';
 import StudyDetailPage from '@/Pages/StudyDetail';
 import { Footer } from '@/Components/Footer/Footer';
 import { SaveStudy } from '@/Pages/Studies/SaveStudy';
-// import { CreateStudy } from '../Pages/Studies/CreateStudy';
-// import { ModifyStudy } from '../Pages/Studies/ModifyStudy';
-// import { ModifyRecruitment } from '@/Pages/Studies/ModifyRecruitment';
-// import { CreateRecruitment } from '../Pages/Studies/CreateRecruitment';
-
 import { lazy } from 'react';
 
 const CreateStudy = lazy(() => import('../Pages/Studies/CreateStudy'));
@@ -34,56 +29,56 @@ export const RouterPath = createBrowserRouter([
     ),
     children: [
       {
-        path: ROUTER_PATH.main,
+        path: ROUTES.MAIN,
         element: <MainPage />,
       },
       {
-        path: ROUTER_PATH.login,
+        path: ROUTES.AUTH.LOGIN,
         element: <Login />,
       },
       {
-        path: ROUTER_PATH.mypage,
+        path: ROUTES.MYPAGE,
         element: <MyPage />,
       },
       {
-        path: ROUTER_PATH.createStudy,
+        path: ROUTES.STUDY.CREATE,
         element: <CreateStudy />,
       },
       {
-        path: ROUTER_PATH.modifyStudy,
+        path: ROUTES.STUDY.MODIFY,
         element: <ModifyStudy />,
       },
       {
-        path: ROUTER_PATH.gatherStudy,
+        path: ROUTES.RECRUITMENT.CREATE,
         element: <CreateRecruitment />,
       },
 
       {
-        path: ROUTER_PATH.study,
+        path: ROUTES.STUDY.DETAIL,
         element: <StudyDetailPage />,
       },
       {
-        path: ROUTER_PATH.recruitmentDetail,
+        path: ROUTES.RECRUITMENT.DETAIL,
         element: <RecruitmentDetailPage />,
       },
       {
-        path: ROUTER_PATH.recruitments,
+        path: ROUTES.RECRUITMENT.RECRUITMENTS,
         element: <Recruitments />,
       },
       {
-        path: ROUTER_PATH.signup,
+        path: ROUTES.AUTH.SIGNUP,
         element: <SignUp />,
       },
       {
-        path: ROUTER_PATH.applicants,
+        path: ROUTES.STUDY.APPLICNATS,
         element: <ApplicantsPage />,
       },
       {
-        path: ROUTER_PATH.savestudy,
+        path: ROUTES.STUDY.SAVE,
         element: <SaveStudy />,
       },
       {
-        path: ROUTER_PATH.modifyRecruitment,
+        path: ROUTES.RECRUITMENT.MODIFY,
         element: <ModifyRecruitment />,
       },
     ],

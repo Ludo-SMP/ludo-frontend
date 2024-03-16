@@ -12,7 +12,7 @@ import Button from '@/Components/Common/Button';
 import Modal from '@/Components/Common/Modal';
 import { APPLY } from '@/Constants/messages';
 import { useLoginStore } from '@/store/auth';
-import { ROUTER_PATH } from '@/Constants/Router_Path';
+import { ROUTES } from '@/Constants/route';
 import { useModalStore } from '@/store/modal';
 import { useUserStore } from '@/store/user';
 import { useEffect, useState } from 'react';
@@ -105,7 +105,7 @@ const RecruitmentDetailPage = () => {
       {!isLoggedIn && isModalOpen && (
         <Modal
           title={APPLY.LOGIN.title}
-          handleApprove={() => navigate(ROUTER_PATH.login)}
+          handleApprove={() => navigate(ROUTES.AUTH.LOGIN)}
           approveBtnText="로그인하기"
           cancelBtnText="나중에 하기"
           isBtnWidthEqual={false}

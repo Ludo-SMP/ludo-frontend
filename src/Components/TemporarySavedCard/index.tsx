@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { ROUTER_PATH } from '@/Constants/Router_Path';
+import { ROUTES } from '@/Constants/route';
 import { Card } from '@/Types/study';
 
 export interface TemporarySavedCardProps {
@@ -15,7 +15,7 @@ const TemporarySavedCard = ({ id, title, card, content }: TemporarySavedCardProp
   return (
     <TemporarySavedCardWrapper
       onClick={() => {
-        navigate(card === 'STUDY' ? ROUTER_PATH.createStudy : `/studies/${id}/recruitments/create`);
+        navigate(card === 'STUDY' ? ROUTES.STUDY.CREATE : `/studies/${id}/recruitments/create`);
       }}
     >
       <span className="title">{title}</span>

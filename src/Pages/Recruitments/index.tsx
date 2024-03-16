@@ -15,7 +15,7 @@ import { useLoginStore } from '@/store/auth';
 import { useModalStore } from '@/store/modal';
 import { CREATE_STUDY } from '@/Constants/messages';
 import Modal from '@/Components/Common/Modal';
-import { ROUTER_PATH } from '@/Constants/Router_Path';
+import { ROUTES } from '@/Constants/route';
 
 const RecruitmentsPage = () => {
   const { data, isLoading } = useStack();
@@ -73,10 +73,7 @@ const RecruitmentsPage = () => {
           <Up />
           <span>위로가기</span>
         </Button>
-        <Button
-          onClick={isLoggedIn ? () => navigate(ROUTER_PATH.createStudy) : () => openModal()}
-          className="create__btn"
-        >
+        <Button onClick={isLoggedIn ? () => navigate(ROUTES.STUDY.CREATE) : () => openModal()} className="create__btn">
           <Create />
           <span>스터디 생성</span>
         </Button>
@@ -84,7 +81,7 @@ const RecruitmentsPage = () => {
       {!isLoggedIn && isModalOpen && (
         <Modal
           title={CREATE_STUDY.LOGIN.title}
-          handleApprove={() => navigate(ROUTER_PATH.login)}
+          handleApprove={() => navigate(ROUTES.AUTH.LOGIN)}
           approveBtnText="로그인하기"
           cancelBtnText="나중에 할래요"
           isBtnWidthEqual={false}

@@ -1,7 +1,7 @@
 //header.tsx
 import styled from 'styled-components';
 import { media } from '@/Styles/theme';
-import { ROUTER_PATH } from '@/Constants/Router_Path';
+import { ROUTES } from '@/Constants/route';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
 import { Logo, Alarm, Profile } from '@/Assets';
 import { useLoginStore } from '@/store/auth';
@@ -27,7 +27,7 @@ const Header = () => {
         <ElementsWrapper>
           {isLoggedIn ? (
             <>
-              {currentLocation === ROUTER_PATH.main || currentLocation === ROUTER_PATH.recruitments ? (
+              {currentLocation === ROUTES.MAIN || currentLocation === ROUTES.RECRUITMENT.RECRUITMENTS ? (
                 <StudyButtonSection />
               ) : (
                 <div className="login__elements">
@@ -36,7 +36,7 @@ const Header = () => {
                     className="create__study"
                     type="button"
                     onClick={() => {
-                      navigate(ROUTER_PATH.createStudy);
+                      navigate(ROUTES.STUDY.CREATE);
                     }}
                   >
                     스터디 생성하기
@@ -54,7 +54,7 @@ const Header = () => {
               <Button
                 className="create__study"
                 type="button"
-                onClick={isLoggedIn ? () => navigate(ROUTER_PATH.createStudy) : () => openModal()}
+                onClick={isLoggedIn ? () => navigate(ROUTES.STUDY.CREATE) : () => openModal()}
               >
                 스터디 생성하기
               </Button>

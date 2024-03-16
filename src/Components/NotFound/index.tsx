@@ -3,7 +3,7 @@ import { useLoginStore } from '@/store/auth';
 import { useNavigate } from 'react-router-dom';
 import Button from '../Common/Button';
 import styled from 'styled-components';
-import { ROUTER_PATH } from '@/Constants/Router_Path';
+import { ROUTES } from '@/Constants/route';
 import { useModalStore } from '@/store/modal';
 import Modal from '../Common/Modal';
 
@@ -13,7 +13,7 @@ const NotFound = () => {
   const navigate = useNavigate();
   const handleNotFound = () => {
     if (isLoggedIn) {
-      navigate(ROUTER_PATH.createStudy);
+      navigate(ROUTES.STUDY.CREATE);
       return;
     }
     openModal();
@@ -28,7 +28,7 @@ const NotFound = () => {
       {!isLoggedIn && isModalOpen && (
         <Modal
           title={CREATE_STUDY.LOGIN.title}
-          handleApprove={() => navigate(ROUTER_PATH.login)}
+          handleApprove={() => navigate(ROUTES.AUTH.LOGIN)}
           approveBtnText="로그인하기"
           cancelBtnText="나중에 할래요"
           isBtnWidthEqual={false}

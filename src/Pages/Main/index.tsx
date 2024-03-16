@@ -9,7 +9,7 @@ import UtiltiyButtons from '@/Components/UtilityButtons';
 import { useSelectedCategoryStore } from '@/store/category';
 import RecruitmentCard from '@/Components/RecruitmentCard';
 import { useNavigate } from 'react-router-dom';
-import { ROUTER_PATH } from '@/Constants/Router_Path';
+import { ROUTES } from '@/Constants/route';
 import { useLoginStore } from '@/store/auth';
 import { useModalStore } from '@/store/modal';
 import Modal from '@/Components/Common/Modal';
@@ -59,7 +59,7 @@ const MainPage = () => {
           </CategoryMenusWrapper>
           <MoreSectionWrapper
             onClick={() => {
-              navigate(ROUTER_PATH.recruitments);
+              navigate(ROUTES.RECRUITMENT.RECRUITMENTS);
             }}
           >
             <span className="more__text">전체 목록 보러가기</span>
@@ -82,10 +82,7 @@ const MainPage = () => {
         </RecruitmentCardsWrapper>
       </RecruitmentsSectionWrapper>
       <UtiltiyButtons>
-        <Button
-          onClick={isLoggedIn ? () => navigate(ROUTER_PATH.createStudy) : () => openModal()}
-          className="create__btn"
-        >
+        <Button onClick={isLoggedIn ? () => navigate(ROUTES.STUDY.CREATE) : () => openModal()} className="create__btn">
           <Create height={40} />
           <span>스터디 생성</span>
         </Button>
@@ -93,7 +90,7 @@ const MainPage = () => {
       {!isLoggedIn && isModalOpen && (
         <Modal
           title={CREATE_STUDY.LOGIN.title}
-          handleApprove={() => navigate(ROUTER_PATH.login)}
+          handleApprove={() => navigate(ROUTES.AUTH.LOGIN)}
           approveBtnText="로그인하기"
           cancelBtnText="나중에 할래요"
           isBtnWidthEqual={false}

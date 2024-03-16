@@ -1,5 +1,5 @@
 import SocialLogin from '@/Components/SocialLogin';
-import { ROUTER_PATH } from '@/Constants/Router_Path';
+import { ROUTES } from '@/Constants/route';
 import { media } from '@/Styles/theme';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -16,7 +16,7 @@ export const SignUp = () => {
       </SignUpBtnsWrapper>
       <LoginWrapper>
         <span>이미 ㅇㅇ 계정이 있으신가요?</span>
-        <button onClick={() => navigate(ROUTER_PATH.login)}>로그인하기</button>
+        <button onClick={() => navigate(ROUTES.AUTH.LOGIN)}>로그인하기</button>
       </LoginWrapper>
     </SignUpWrapper>
   );
