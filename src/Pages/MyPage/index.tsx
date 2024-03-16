@@ -2,16 +2,13 @@ import { MemberImage, StudyInfo } from '@/Assets';
 import UserCard from '@/Components/UserCard';
 import MyStudyCard from '@/Components/MyStudyCard';
 import styled from 'styled-components';
-import { BlankSquare } from '@/Components/Common/BlankSquare';
-import TemporarySavedCard, { TemporarySavedCardProps } from '@/Components/TemporarySavedCard';
 import Button from '@/Components/Common/Button';
 import { useMyPageInfo } from '@/Hooks/study/useMyPageInfo';
 import { getPeriod } from '@/utils/date';
 import ChipMenu from '@/Components/Common/ChipMenu';
 import { User, ParticipateStudy, ApplicantRecruitment, CompletedStudy } from '@/Types/study';
-import { useSelectedCardStore, useSelectedMyStudyStore } from '@/store/study';
+import { useSelectedMyStudyStore } from '@/store/study';
 import { useLogOutMutation } from '@/Hooks/auth/useLogOutMutation';
-import { temporarySavedCardMockData } from '@/Shared/dummy';
 
 const MyPage = () => {
   const { data: myPageInfo, isLoading } = useMyPageInfo();
@@ -21,7 +18,6 @@ const MyPage = () => {
   const completedStudies: CompletedStudy[] = myPageInfo?.completedStudies;
 
   const { selectedMyStudyStatus, setSelectedMyStudyStatus } = useSelectedMyStudyStore();
-  const { selectedCard, setSelectedCard } = useSelectedCardStore();
 
   const { mutate: logoutMutate } = useLogOutMutation();
 
@@ -95,28 +91,6 @@ const MyPage = () => {
                 key={completedStudy?.studyId}
               />
             ))}
-      </CardsWrapper>
-
-      <CardsWrapper>
-        <div className="title">
-          <BlankSquare width="40px" height="40px" />
-          <span>임시 저장된 글</span>
-        </div>
-        <ChipMenusWrapper>
-          <ChipMenu checked={selectedCard === 'STUDY'} onClick={() => setSelectedCard('STUDY')}>
-            스터디 생성
-          </ChipMenu>
-          <ChipMenu checked={selectedCard === 'RECRUITMENT'} onClick={() => setSelectedCard('RECRUITMENT')}>
-            스터디 모집공고
-          </ChipMenu>
-        </ChipMenusWrapper>
-        {selectedCard === 'STUDY'
-          ? temporarySavedCardMockData
-              .filter((temporarySavedCard: TemporarySavedCardProps) => temporarySavedCard.card === 'STUDY')
-              .map((studySavedCard: TemporarySavedCardProps) => <TemporarySavedCard {...studySavedCard} />)
-          : temporarySavedCardMockData
-              .filter((temporarySavedCard: TemporarySavedCardProps) => temporarySavedCard.card === 'RECRUITMENT')
-              .map((recruitmentSavedCard: TemporarySavedCardProps) => <TemporarySavedCard {...recruitmentSavedCard} />)}
       </CardsWrapper>
 
       <MypageButtonsWrapper>
