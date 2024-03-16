@@ -14,6 +14,7 @@ import { useLoginStore } from '@/store/auth';
 import { useModalStore } from '@/store/modal';
 import Modal from '@/Components/Common/Modal';
 import { CREATE_STUDY } from '@/Constants/messages';
+import SkeletonRecruitmentCardList from '@/Components/Skeleton/SkeletonRecruitmentCardList';
 
 const MainPage = () => {
   const { data: popularRecruitments, isLoading } = usePopularRecruitments();
@@ -26,9 +27,7 @@ const MainPage = () => {
   const popularInterviewRecruitments: Recruitment[] = popularRecruitments?.popularInterviewRecruitments;
   const popularProjectRecruitments: Recruitment[] = popularRecruitments?.popularProjectRecruitments;
 
-  return isLoading ? (
-    <div>Loading...</div>
-  ) : (
+  return (
     <MainPageWrapper>
       <BannerSectionWrapper>
         <Banner src={LudoBanner} />
@@ -68,17 +67,21 @@ const MainPage = () => {
         </SelectCategorySectionWrapper>
 
         <RecruitmentCardsWrapper>
-          {selectedCategory.name === '코딩 테스트'
-            ? popularCodingRecruitments.map((recruitment: Recruitment) => (
-                <RecruitmentCard {...recruitment} key={recruitment.id} />
-              ))
-            : selectedCategory.name === '모의 면접'
-            ? popularInterviewRecruitments.map((recruitment: Recruitment) => (
-                <RecruitmentCard {...recruitment} key={recruitment.id} />
-              ))
-            : popularProjectRecruitments.map((recruitment: Recruitment) => (
-                <RecruitmentCard {...recruitment} key={recruitment.id} />
-              ))}
+          {isLoading ? (
+            <SkeletonRecruitmentCardList />
+          ) : selectedCategory.name === '코딩 테스트' ? (
+            popularCodingRecruitments.map((recruitment: Recruitment) => (
+              <RecruitmentCard {...recruitment} key={recruitment.id} />
+            ))
+          ) : selectedCategory.name === '모의 면접' ? (
+            popularInterviewRecruitments.map((recruitment: Recruitment) => (
+              <RecruitmentCard {...recruitment} key={recruitment.id} />
+            ))
+          ) : (
+            popularProjectRecruitments.map((recruitment: Recruitment) => (
+              <RecruitmentCard {...recruitment} key={recruitment.id} />
+            ))
+          )}
         </RecruitmentCardsWrapper>
       </RecruitmentsSectionWrapper>
       <UtiltiyButtons>
@@ -125,6 +128,7 @@ const RecruitmentsSectionWrapper = styled.div`
   gap: 21px;
 
   .section__title {
+    width: 100%;
     color: ${({ theme }) => theme.color.black5};
     font-family: Pretendard;
     font-size: ${({ theme }) => theme.font.xxlarge};

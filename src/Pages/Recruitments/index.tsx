@@ -36,15 +36,17 @@ const RecruitmentsPage = () => {
       <BannerSectionWrapper>
         <Banner src={LudoBanner} />
       </BannerSectionWrapper>
-      {isLoading ? (
-        <div>Loading...</div>
-      ) : (
-        <RecruitmentsSectionWrapper>
-          <SelectFilterSectionWrapper>
-            <div className="section__title">나에게 필요한 스터디를 찾아보아요</div>
-            <DropdownFiltersWrapper>
-              <DropdownFilter filterName={'카테고리'} items={[{ ...ALL }, ...CATEGORIES]} filterOption="CATEGORY" />
-              {data?.stacks && (
+
+      <RecruitmentsSectionWrapper>
+        <SelectFilterSectionWrapper>
+          <div className="section__title">나에게 필요한 스터디를 찾아보아요</div>
+
+          <DropdownFiltersWrapper>
+            <DropdownFilter filterName={'카테고리'} items={[{ ...ALL }, ...CATEGORIES]} filterOption="CATEGORY" />
+            {isLoading ? (
+              <DropdownFilter filterName={'기술 스택'} items={[]} filterOption="STACK" />
+            ) : (
+              data?.stacks && (
                 <DropdownFilter
                   filterName={'기술 스택'}
                   items={[
@@ -55,19 +57,21 @@ const RecruitmentsPage = () => {
                   ]}
                   filterOption="STACK"
                 />
-              )}
-              <DropdownFilter filterName={'포지션'} items={[{ ...ALL }, ...POSITIONS]} filterOption="POSITION" />
-              <DropdownFilter
-                filterName={'진행방식'}
-                items={[{ ...ALL }, ...PROGRESS_METHODS]}
-                filterOption="PROGRESS_METHOD"
-              />
-              <DropdownFilter filterName={'정렬 기준'} items={[...SORTS]} filterOption="SORT" />
-            </DropdownFiltersWrapper>
-          </SelectFilterSectionWrapper>
-          <RecruitmentCardList />
-        </RecruitmentsSectionWrapper>
-      )}
+              )
+            )}
+
+            <DropdownFilter filterName={'포지션'} items={[{ ...ALL }, ...POSITIONS]} filterOption="POSITION" />
+            <DropdownFilter
+              filterName={'진행방식'}
+              items={[{ ...ALL }, ...PROGRESS_METHODS]}
+              filterOption="PROGRESS_METHOD"
+            />
+            <DropdownFilter filterName={'정렬 기준'} items={[...SORTS]} filterOption="SORT" />
+          </DropdownFiltersWrapper>
+        </SelectFilterSectionWrapper>
+        <RecruitmentCardList />
+      </RecruitmentsSectionWrapper>
+
       <UtiltiyButtons>
         <Button onClick={handleScroll} className="scroll__btn">
           <Up />

@@ -8,6 +8,7 @@ import { useRecruitments } from '@/Hooks/recruitments/useRecruitments';
 import { INFINITE_RECRUITMENTS_COUMT_PER_PAGE } from '@/Constants/common';
 import { useFilterOptionsStore } from '@/store/filter';
 import { getProgressMethod } from '@/Mocks/utils/getQueryParams';
+import SkeletonRecruitmentCardList from '../Skeleton/SkeletonRecruitmentCardList';
 
 const RecruitmentCardList = () => {
   const { categoryId, stackId, positionId, progressMethodId } = useFilterOptionsStore();
@@ -15,7 +16,7 @@ const RecruitmentCardList = () => {
 
   const observeRef = useRef<HTMLDivElement>(null);
 
-  const { data, hasNextPage, fetchNextPage } = useRecruitments({
+  const { data, hasNextPage, fetchNextPage, isLoading } = useRecruitments({
     filterOptions: { categoryId, stackId, positionId, progressMethod },
     count: INFINITE_RECRUITMENTS_COUMT_PER_PAGE,
   });
@@ -26,11 +27,13 @@ const RecruitmentCardList = () => {
   useIntersectionObservable(observeRef, onIntersect, hasNextPage);
 
   const recruitmentsPages = useMemo(() => (data ? data.pages.flatMap(({ data }) => data.data) : []), [data]);
-  console.log(recruitmentsPages);
+  console.log(isLoading);
 
   return (
     <RecruitmentCardsWrapper>
-      {recruitmentsPages.length ? (
+      {isLoading ? (
+        <SkeletonRecruitmentCardList count={21} />
+      ) : recruitmentsPages.length ? (
         recruitmentsPages.map((recruitmentsPage) =>
           recruitmentsPage?.recruitments.map((recruitment: Recruitment) => (
             <RecruitmentCard key={recruitment.id} {...recruitment} />

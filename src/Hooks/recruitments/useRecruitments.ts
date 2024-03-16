@@ -11,7 +11,7 @@ export const useRecruitments = ({
   count: number;
   filterOptions: Pick<FilterOptionParams, 'categoryId' | 'positionId' | 'progressMethod' | 'stackId'>;
 }) => {
-  const { data, hasNextPage, fetchNextPage } = useInfiniteQuery({
+  const { data, hasNextPage, fetchNextPage, isLoading } = useInfiniteQuery({
     queryKey: [...RECRUITMENT.RECRUITMENTS(filterOptions)],
     queryFn: ({ pageParam }) => getRecruitments(filterOptions, count, pageParam),
     getNextPageParam: (lastPage) => {
@@ -21,5 +21,5 @@ export const useRecruitments = ({
     },
     initialPageParam: undefined,
   });
-  return { data, hasNextPage, fetchNextPage };
+  return { data, hasNextPage, fetchNextPage, isLoading };
 };
