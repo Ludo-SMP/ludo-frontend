@@ -30,4 +30,5 @@ export { default as BlankLogo } from './images/blank-logo.png';
 export { default as Logo } from './images/logo.png';
 
 // Banner
-export { default as LudoBanner } from './images/banner.png';
+export { default as Banner1 } from './images/banner1.png';
+export { default as Banner2 } from './images/banner2.png';
