@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { RowDivider } from '../../Components/Common/Divider/RowDivider';
-import { Right, StudyInfo } from '@/Assets';
+import { Loading, Right, StudyInfo } from '@/Assets';
 import Button from '@/Components/Common/Button';
 import StudyToken from '@/Components/Common/StudyToken';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -38,97 +38,101 @@ export const StudyDetailPage = () => {
   const { mutate: deleteStudyMutate } = useDeleteStudyMutation(studyId);
   const { mutate: leaveStudyMutate } = useLeaveStudyMutation(studyId);
 
-  return isLoading ? (
-    <div>Loading...</div>
-  ) : (
+  return (
     <StudyDetailWrapper>
-      <StudyDetailTitleWrapper>
-        <StudyTitleWrapper>
-          <StudyInfo width="48" height="48" />
-          <span className="title">{study?.title}</span>
-          <div className="study__tokens">
-            {study?.status !== 'COMPLETED' && <StudyToken status={'PARTICIPATED'} />}
-            <StudyToken status={study?.status} />
-          </div>
-        </StudyTitleWrapper>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <StudyDetailTitleWrapper>
+            <StudyTitleWrapper>
+              <StudyInfo width="48" height="48" />
+              <span className="title">{study?.title}</span>
+              <div className="study__tokens">
+                {study?.status !== 'COMPLETED' && <StudyToken status={'PARTICIPATED'} />}
+                <StudyToken status={study?.status} />
+              </div>
+            </StudyTitleWrapper>
 
-        <Button onClick={() => navigate(`/studies/${studyId}/applicants`)}>
-          <span>스터디 지원자가 있어요!</span>
-          <Right />
-        </Button>
-      </StudyDetailTitleWrapper>
-      <StudyInfoSection
-        category={study?.category}
-        progressMethod={study?.way}
-        platform={study?.platform}
-        period={study?.startDateTime}
-        dDay={getDday(study?.endDateTime)}
-      />
-      <RowDivider rowHeight={16} />
-      <MemberSection memberLimit={study?.participantsLimit} members={study?.participants} />
-      <StudyButtonsWrapper>
-        {user?.id === study?.owner.id && study?.participants.length === 1 && (
-          <Button
-            size="fullWidth"
-            onClick={() => {
-              openModal();
-              setIsDeletedBtnClicked(true);
-            }}
-          >
-            스터디 삭제하기
-          </Button>
-        )}
-        {study.participants.length && (
-          <Button
-            size="fullWidth"
-            onClick={() => {
-              openModal();
-              setIsLeftBtnClicked(true);
-            }}
-          >
-            스터디 탈퇴하기
-          </Button>
-        )}
-        {user?.id === study.owner.id && study.participants.length && study.status === 'RECRUITING' && (
-          <Button scheme="secondary" size="fullWidth" onClick={() => closeRecruitmentMutate()}>
-            스터디원 모집 마감하기
-          </Button>
-        )}
-        {user?.id === study.owner.id &&
-          study.participants.length &&
-          (study.status === 'RECRUITED' || study.status === 'PROGRESS') && (
-            <Button scheme="secondary" size="fullWidth" onClick={() => {}}>
-              스터디 수정하기
+            <Button onClick={() => navigate(`/studies/${studyId}/applicants`)}>
+              <span>스터디 지원자가 있어요!</span>
+              <Right />
             </Button>
+          </StudyDetailTitleWrapper>
+          <StudyInfoSection
+            category={study?.category}
+            progressMethod={study?.way}
+            platform={study?.platform}
+            period={study?.startDateTime}
+            dDay={getDday(study?.endDateTime)}
+          />
+          <RowDivider rowHeight={16} />
+          <MemberSection memberLimit={study?.participantsLimit} members={study?.participants} />
+          <StudyButtonsWrapper>
+            {user?.id === study?.owner.id && study?.participants.length === 1 && (
+              <Button
+                size="fullWidth"
+                onClick={() => {
+                  openModal();
+                  setIsDeletedBtnClicked(true);
+                }}
+              >
+                스터디 삭제하기
+              </Button>
+            )}
+            {study.participants.length && (
+              <Button
+                size="fullWidth"
+                onClick={() => {
+                  openModal();
+                  setIsLeftBtnClicked(true);
+                }}
+              >
+                스터디 탈퇴하기
+              </Button>
+            )}
+            {user?.id === study.owner.id && study.participants.length && study.status === 'RECRUITING' && (
+              <Button scheme="secondary" size="fullWidth" onClick={() => closeRecruitmentMutate()}>
+                스터디원 모집 마감하기
+              </Button>
+            )}
+            {user?.id === study.owner.id &&
+              study.participants.length &&
+              (study.status === 'RECRUITED' || study.status === 'PROGRESS') && (
+                <Button scheme="secondary" size="fullWidth" onClick={() => {}}>
+                  스터디 수정하기
+                </Button>
+              )}
+          </StudyButtonsWrapper>
+          {isModalOpen && isDeletedBtnClicked && (
+            <Modal
+              handleApprove={() => {
+                deleteStudyMutate();
+                setIsDeletedBtnClicked(false);
+              }}
+              handleCancel={() => setIsDeletedBtnClicked(false)}
+              title={DELETE.STUDY.title}
+              approveBtnText="삭제하기"
+              cancelBtnText="아니요"
+            >
+              {DELETE.STUDY.content}
+            </Modal>
           )}
-      </StudyButtonsWrapper>
-      {isModalOpen && isDeletedBtnClicked && (
-        <Modal
-          handleApprove={() => {
-            deleteStudyMutate();
-            setIsDeletedBtnClicked(false);
-          }}
-          handleCancel={() => setIsDeletedBtnClicked(false)}
-          title={DELETE.STUDY.title}
-          approveBtnText="삭제하기"
-          cancelBtnText="아니요"
-        >
-          {DELETE.STUDY.content}
-        </Modal>
-      )}
-      {isModalOpen && isLeftBtnClicked && (
-        <Modal
-          handleApprove={() => {
-            leaveStudyMutate();
-            setIsLeftBtnClicked(false);
-          }}
-          handleCancel={() => setIsLeftBtnClicked(false)}
-          approveBtnText="탈퇴하기"
-          cancelBtnText="아니요"
-          title={user?.id === study.owner.id ? LEAVE.OWNER.title : LEAVE.MEMBER.title}
-        >
-          {user?.id === study.owner.id ? LEAVE.OWNER.content : LEAVE.MEMBER.content}
-        </Modal>
+          {isModalOpen && isLeftBtnClicked && (
+            <Modal
+              handleApprove={() => {
+                leaveStudyMutate();
+                setIsLeftBtnClicked(false);
+              }}
+              handleCancel={() => setIsLeftBtnClicked(false)}
+              approveBtnText="탈퇴하기"
+              cancelBtnText="아니요"
+              title={user?.id === study.owner.id ? LEAVE.OWNER.title : LEAVE.MEMBER.title}
+            >
+              {user?.id === study.owner.id ? LEAVE.OWNER.content : LEAVE.MEMBER.content}
+            </Modal>
+          )}
+        </>
       )}
     </StudyDetailWrapper>
   );

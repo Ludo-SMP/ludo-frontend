@@ -1,4 +1,4 @@
-import { MemberImage, StudyInfo } from '@/Assets';
+import { Loading, MemberImage, StudyInfo } from '@/Assets';
 import UserCard from '@/Components/UserCard';
 import MyStudyCard from '@/Components/MyStudyCard';
 import styled from 'styled-components';
@@ -21,83 +21,90 @@ const MyPage = () => {
 
   const { mutate: logoutMutate } = useLogOutMutation();
 
-  return isLoading ? (
-    <div>Loading ...</div>
-  ) : (
+  return (
     <MyPageWrapper>
-      <UserInfoWrapper>
-        <div className="title">
-          <MemberImage />
-          <span>회원정보</span>
-        </div>
-        <UserCard nickname={user?.nickname || '닉네임'} email={user?.email || '이메일'} />
-      </UserInfoWrapper>
-      <CardsWrapper>
-        <MyStudyTitleWrapper>
-          <StudyInfo width={40} height={40} />
-          <span className="title">스따-디</span>
-        </MyStudyTitleWrapper>
-        <ChipMenusWrapper>
-          <ChipMenu
-            checked={selectedMyStudyStatus === 'PARTICIPATED'}
-            onClick={() => setSelectedMyStudyStatus('PARTICIPATED')}
-          >
-            참여중인 스터디
-          </ChipMenu>
-          <ChipMenu checked={selectedMyStudyStatus === 'APPLIED'} onClick={() => setSelectedMyStudyStatus('APPLIED')}>
-            내가 지원한 스터디
-          </ChipMenu>
-          <ChipMenu
-            checked={selectedMyStudyStatus === 'COMPLETED'}
-            onClick={() => setSelectedMyStudyStatus('COMPLETED')}
-          >
-            진행 완료된 스터디
-          </ChipMenu>
-        </ChipMenusWrapper>
-        {selectedMyStudyStatus === 'PARTICIPATED'
-          ? participateStudies?.map((participateStudy: ParticipateStudy) => (
-              <MyStudyCard
-                id={participateStudy?.studyId}
-                title={participateStudy?.title}
-                status={participateStudy.status}
-                position={participateStudy?.position}
-                period={getPeriod(participateStudy?.startDateTime, participateStudy?.endDateTime)}
-                participantCount={participateStudy?.participantCount}
-                isOwner={participateStudy?.isOwner}
-                hasRecruitment={participateStudy?.hasRecruitment}
-                key={participateStudy?.studyId}
-              />
-            ))
-          : selectedMyStudyStatus === 'APPLIED'
-          ? applicantRecruitments.map((applicantRecruitment: ApplicantRecruitment) => (
-              <MyStudyCard
-                id={applicantRecruitment?.recruitmentId}
-                title={applicantRecruitment?.title}
-                status={applicantRecruitment?.applicantStatus}
-                position={applicantRecruitment?.position}
-                key={applicantRecruitment?.recruitmentId}
-              />
-            ))
-          : completedStudies.map((completedStudy: CompletedStudy) => (
-              <MyStudyCard
-                id={completedStudy?.studyId}
-                title={completedStudy?.title}
-                status={completedStudy?.status}
-                position={completedStudy?.position}
-                period={getPeriod(completedStudy?.startDateTime, completedStudy?.endDateTime)}
-                participantCount={completedStudy?.participantCount}
-                isOwner={completedStudy?.isOwner}
-                hasRecruitment={completedStudy?.hasRecruitment}
-                key={completedStudy?.studyId}
-              />
-            ))}
-      </CardsWrapper>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <UserInfoWrapper>
+            <div className="title">
+              <MemberImage />
+              <span>회원정보</span>
+            </div>
+            <UserCard nickname={user?.nickname || '닉네임'} email={user?.email || '이메일'} />
+          </UserInfoWrapper>
+          <CardsWrapper>
+            <MyStudyTitleWrapper>
+              <StudyInfo width={40} height={40} />
+              <span className="title">스따-디</span>
+            </MyStudyTitleWrapper>
+            <ChipMenusWrapper>
+              <ChipMenu
+                checked={selectedMyStudyStatus === 'PARTICIPATED'}
+                onClick={() => setSelectedMyStudyStatus('PARTICIPATED')}
+              >
+                참여중인 스터디
+              </ChipMenu>
+              <ChipMenu
+                checked={selectedMyStudyStatus === 'APPLIED'}
+                onClick={() => setSelectedMyStudyStatus('APPLIED')}
+              >
+                내가 지원한 스터디
+              </ChipMenu>
+              <ChipMenu
+                checked={selectedMyStudyStatus === 'COMPLETED'}
+                onClick={() => setSelectedMyStudyStatus('COMPLETED')}
+              >
+                진행 완료된 스터디
+              </ChipMenu>
+            </ChipMenusWrapper>
+            {selectedMyStudyStatus === 'PARTICIPATED'
+              ? participateStudies?.map((participateStudy: ParticipateStudy) => (
+                  <MyStudyCard
+                    id={participateStudy?.studyId}
+                    title={participateStudy?.title}
+                    status={participateStudy.status}
+                    position={participateStudy?.position}
+                    period={getPeriod(participateStudy?.startDateTime, participateStudy?.endDateTime)}
+                    participantCount={participateStudy?.participantCount}
+                    isOwner={participateStudy?.isOwner}
+                    hasRecruitment={participateStudy?.hasRecruitment}
+                    key={participateStudy?.studyId}
+                  />
+                ))
+              : selectedMyStudyStatus === 'APPLIED'
+              ? applicantRecruitments.map((applicantRecruitment: ApplicantRecruitment) => (
+                  <MyStudyCard
+                    id={applicantRecruitment?.recruitmentId}
+                    title={applicantRecruitment?.title}
+                    status={applicantRecruitment?.applicantStatus}
+                    position={applicantRecruitment?.position}
+                    key={applicantRecruitment?.recruitmentId}
+                  />
+                ))
+              : completedStudies.map((completedStudy: CompletedStudy) => (
+                  <MyStudyCard
+                    id={completedStudy?.studyId}
+                    title={completedStudy?.title}
+                    status={completedStudy?.status}
+                    position={completedStudy?.position}
+                    period={getPeriod(completedStudy?.startDateTime, completedStudy?.endDateTime)}
+                    participantCount={completedStudy?.participantCount}
+                    isOwner={completedStudy?.isOwner}
+                    hasRecruitment={completedStudy?.hasRecruitment}
+                    key={completedStudy?.studyId}
+                  />
+                ))}
+          </CardsWrapper>
 
-      <MypageButtonsWrapper>
-        <Button onClick={() => logoutMutate()} size="fullWidth">
-          로그아웃
-        </Button>
-      </MypageButtonsWrapper>
+          <MypageButtonsWrapper>
+            <Button onClick={() => logoutMutate()} size="fullWidth">
+              로그아웃
+            </Button>
+          </MypageButtonsWrapper>
+        </>
+      )}
     </MyPageWrapper>
   );
 };

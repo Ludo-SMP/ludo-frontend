@@ -24,6 +24,7 @@ export { default as Views } from './icons/views.svg?react';
 export { default as Filter } from './icons/filter.svg?react';
 export { default as Create } from './icons/createstudy.svg?react';
 export { default as Ludo_Footer } from './icons/Ludo_Footer.svg?react';
+export { default as Loading } from './icons/lodaing.svg?react';
 
 // logo
 export { default as BlankLogo } from './images/blank-logo.png';

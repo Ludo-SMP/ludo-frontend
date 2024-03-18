@@ -19,6 +19,7 @@ import { useUserStore } from '@/store/user';
 import { useEffect, useState } from 'react';
 import ApplyModal from '@/Components/Modal/ApplyModal';
 import { ApplyTryStatus } from '@/Types/study';
+import { Loading } from '@/Assets';
 
 const RecruitmentDetailPage = () => {
   const recruitmentId = Number(useParams().recruitmentId);
@@ -39,113 +40,117 @@ const RecruitmentDetailPage = () => {
     closeModal();
   }, [closeModal]);
 
-  return isLoading ? (
-    <div>Loading...</div>
-  ) : (
+  return (
     <RecruitmentDetailWrapper>
-      <RecruitmentTitleWrapper>
-        <div className="title">{recruitment.title}</div>
-      </RecruitmentTitleWrapper>
-      <RecruitmentInfoWrapper>
-        <div className="recruitment__status">
-          <div className="creator">{study.owner.nickname}</div>
-          <ColumnDivider />
-          <div className="edit__info">
-            <div className="createdAt">{dateFormatter(recruitment.createdDateTime)}</div>
-            <div className="edit__status">
-              {isEdited(recruitment.createdDateTime, recruitment.updatedDateTime) ? '수정됨' : '생성'}
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <RecruitmentTitleWrapper>
+            <div className="title">{recruitment.title}</div>
+          </RecruitmentTitleWrapper>
+          <RecruitmentInfoWrapper>
+            <div className="recruitment__status">
+              <div className="creator">{study.owner.nickname}</div>
+              <ColumnDivider />
+              <div className="edit__info">
+                <div className="createdAt">{dateFormatter(recruitment.createdDateTime)}</div>
+                <div className="edit__status">
+                  {isEdited(recruitment.createdDateTime, recruitment.updatedDateTime) ? '수정됨' : '생성'}
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        <div className="recruitment__details">
-          <RecruitmentInfoSection
-            applicantCnt={recruitment.applicantCount}
-            endDate={dateFormatter(recruitment.endDateTime)}
-            positions={recruitment.positions}
-            stacks={recruitment.stacks}
-            contact={recruitment.contact}
-            platformUrl={recruitment.callUrl}
-          />
-          <RowDivider rowHeight={16} />
-          <StudyProgressInfoSection
-            method={study.way}
-            platform={study.platform}
-            period={getPeriod(study.startDateTime, study.endDateTime)}
-          />
-          <RowDivider rowHeight={16} />
-          <StudyBasicInfoSection
-            studyTitle={study.title}
-            category={study.category}
-            participantLimit={study.participantLimit}
-          />
-          <RowDivider />
-          <div className="study__detail">
-            <InfoField
-              title="상세내용"
-              content={recruitment.content || '상세내용'}
-              flexDirection="column"
-              width="100%"
+            <div className="recruitment__details">
+              <RecruitmentInfoSection
+                applicantCnt={recruitment.applicantCount}
+                endDate={dateFormatter(recruitment.endDateTime)}
+                positions={recruitment.positions}
+                stacks={recruitment.stacks}
+                contact={recruitment.contact}
+                platformUrl={recruitment.callUrl}
+              />
+              <RowDivider rowHeight={16} />
+              <StudyProgressInfoSection
+                method={study.way}
+                platform={study.platform}
+                period={getPeriod(study.startDateTime, study.endDateTime)}
+              />
+              <RowDivider rowHeight={16} />
+              <StudyBasicInfoSection
+                studyTitle={study.title}
+                category={study.category}
+                participantLimit={study.participantLimit}
+              />
+              <RowDivider />
+              <div className="study__detail">
+                <InfoField
+                  title="상세내용"
+                  content={recruitment.content || '상세내용'}
+                  flexDirection="column"
+                  width="100%"
+                />
+              </div>
+            </div>
+          </RecruitmentInfoWrapper>
+          <StudyButtonsWrapper>
+            {user?.id === study.owner.id ? (
+              <>
+                <Button onClick={() => closeRecruitmentMutate()}>모집 마감하기</Button>
+                <Button scheme="secondary" onClick={() => {}}>
+                  스터디 모집 공고 수정하기
+                </Button>
+              </>
+            ) : (
+              <Button scheme="secondary" onClick={openModal}>
+                스터디 지원하기
+              </Button>
+            )}
+          </StudyButtonsWrapper>
+          {!isLoggedIn && isModalOpen && (
+            <Modal
+              title={APPLY.LOGIN.title}
+              handleApprove={() => navigate(ROUTES.AUTH.LOGIN)}
+              approveBtnText="로그인하기"
+              cancelBtnText="나중에 하기"
+              isBtnWidthEqual={false}
+            >
+              {APPLY.LOGIN.content}
+            </Modal>
+          )}
+          {isLoggedIn && isModalOpen && applyTryStatus === 'NOT APPLY' && (
+            <ApplyModal
+              handleApplyApprove={setApplyTryStatus}
+              studyId={study.id}
+              recruitmentId={recruitment.id}
+              positions={recruitment.positions}
             />
-          </div>
-        </div>
-      </RecruitmentInfoWrapper>
-      <StudyButtonsWrapper>
-        {user?.id === study.owner.id ? (
-          <>
-            <Button onClick={() => closeRecruitmentMutate()}>모집 마감하기</Button>
-            <Button scheme="secondary" onClick={() => {}}>
-              스터디 모집 공고 수정하기
-            </Button>
-          </>
-        ) : (
-          <Button scheme="secondary" onClick={openModal}>
-            스터디 지원하기
-          </Button>
-        )}
-      </StudyButtonsWrapper>
-      {!isLoggedIn && isModalOpen && (
-        <Modal
-          title={APPLY.LOGIN.title}
-          handleApprove={() => navigate(ROUTES.AUTH.LOGIN)}
-          approveBtnText="로그인하기"
-          cancelBtnText="나중에 하기"
-          isBtnWidthEqual={false}
-        >
-          {APPLY.LOGIN.content}
-        </Modal>
-      )}
-      {isLoggedIn && isModalOpen && applyTryStatus === 'NOT APPLY' && (
-        <ApplyModal
-          handleApplyApprove={setApplyTryStatus}
-          studyId={study.id}
-          recruitmentId={recruitment.id}
-          positions={recruitment.positions}
-        />
-      )}
-      {isLoggedIn && isModalOpen && applyTryStatus === 'SUCCESS' && (
-        <Modal
-          title={APPLY.SUCCESS.title}
-          handleApprove={() => {
-            setApplyTryStatus(() => 'NOT APPLY');
-            closeModal();
-          }}
-          approveBtnText="확인"
-          alignTitle="center"
-        >
-          <div className="approve__image"></div>
-        </Modal>
-      )}
-      {isLoggedIn && isModalOpen && (applyTryStatus === 'CLOSED' || applyTryStatus === 'ALREDAY_APPLY') && (
-        <Modal
-          title={applyTryStatus === 'CLOSED' ? APPLY.CLOSED.title : APPLY.ALREADY_APPLY.title}
-          handleApprove={() => {
-            setApplyTryStatus(() => 'NOT APPLY');
-            closeModal();
-          }}
-          approveBtnText="확인"
-        >
-          {applyTryStatus === 'CLOSED' ? APPLY.CLOSED.content : APPLY.ALREADY_APPLY.content}
-        </Modal>
+          )}
+          {isLoggedIn && isModalOpen && applyTryStatus === 'SUCCESS' && (
+            <Modal
+              title={APPLY.SUCCESS.title}
+              handleApprove={() => {
+                setApplyTryStatus(() => 'NOT APPLY');
+                closeModal();
+              }}
+              approveBtnText="확인"
+              alignTitle="center"
+            >
+              <div className="approve__image"></div>
+            </Modal>
+          )}
+          {isLoggedIn && isModalOpen && (applyTryStatus === 'CLOSED' || applyTryStatus === 'ALREDAY_APPLY') && (
+            <Modal
+              title={applyTryStatus === 'CLOSED' ? APPLY.CLOSED.title : APPLY.ALREADY_APPLY.title}
+              handleApprove={() => {
+                setApplyTryStatus(() => 'NOT APPLY');
+                closeModal();
+              }}
+              approveBtnText="확인"
+            >
+              {applyTryStatus === 'CLOSED' ? APPLY.CLOSED.content : APPLY.ALREADY_APPLY.content}
+            </Modal>
+          )}
+        </>
       )}
     </RecruitmentDetailWrapper>
   );
