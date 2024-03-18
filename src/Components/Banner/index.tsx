@@ -31,7 +31,6 @@ const Banner = () => {
   const banners = [Banner2, Banner1, Banner2];
   const [slideIdx, setSlideIdx] = useState(1);
   const [slideInterval, setSlideInterval] = useState(5000);
-  console.log(slideIdx);
   useInterval(() => setSlideIdx((slideIdx) => slideIdx + 1), slideInterval);
 
   if (slideIdx === 3) {

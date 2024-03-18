@@ -12,6 +12,7 @@ export const getRecruitments = (
   last?: number,
 ): Promise<{ data: { data: Recruitments } }> => {
   const filterOptionsParams = getFilterOptions({ ...filterOptions, last });
+
   return httpClient.get(API_END_POINT.RECRUITMENTS, {
     params: {
       count,

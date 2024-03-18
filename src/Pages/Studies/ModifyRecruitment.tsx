@@ -7,12 +7,10 @@ import { PositionButton } from '../../Components/Selectbox/PositionButton';
 import { StackSelectButton } from '@/Components/Selectbox/StackSelectButton';
 import { Mainarea } from '../../Components/Textarea/Mainarea';
 import { Titlearea } from '../../Components/Textarea/Titlearea';
-// import { StackModal } from '../../Components/Modal/
 import { EndDate } from '../../Components/Calendar/EndDate';
 import { media } from '../../Styles/theme';
 import { Gather } from '@/Types/studies';
 import { useState } from 'react';
-// import { stackCategory } from '@/Shared/category';
 import { useStack } from '@/Hooks/stack/useStack';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -29,7 +27,6 @@ const ModifyRecruitment = () => {
   const Navigation = useNavigate();
   const studyId = Number(useParams().studyId);
   useStudyDetail(studyId);
-  // console.log(studyId);
   const [useForm, setuseForm] = useState<Gather>({
     title: '',
     // recruitmentLimit: 0,
@@ -65,10 +62,9 @@ const ModifyRecruitment = () => {
       applicantCount: useForm.applicantCount,
       // studyId: useForm.studyId,
     });
-    // console.log(data);
+
     const recruitmentId = data?.data?.recruitment?.id;
     Navigation(`/studies/${recruitmentId}/recruitment`);
-    // localStorage.setItem('gather', JSON.stringify(data.data));
   }
 
   const handleSubmit = (event: any) => {

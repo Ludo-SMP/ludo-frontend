@@ -9,7 +9,7 @@ import MemberSection from './MemberSection';
 import { useLeaveStudyMutation } from '@/Hooks/study/useLeaveStudyMutation ';
 import { useDeleteStudyMutation } from '@/Hooks/study/useDeleteStudyMutation';
 import { useStudyDetail } from '@/Hooks/study/useStudyDetail';
-import { getDday } from '@/utils/date';
+import { getDday, getPeriod } from '@/utils/date';
 import { useUserStore } from '@/store/user';
 import { useCloseRecruitmentMutation } from '@/Hooks/recruitments/useCloseRecruitmentMutation';
 import { useQueryClient } from '@tanstack/react-query';
@@ -63,7 +63,7 @@ export const StudyDetailPage = () => {
             category={study?.category}
             progressMethod={study?.way}
             platform={study?.platform}
-            period={study?.startDateTime}
+            period={getPeriod(study?.startDateTime, study?.endDateTime)}
             dDay={getDday(study?.endDateTime)}
           />
           <RowDivider rowHeight={16} />

@@ -50,7 +50,7 @@ const Header = () => {
                 <Alarm width={40} height={40} />
                 <Dropdown toggleButton={<Profile width={40} height={40} />}>
                   <div className="logout" onClick={() => logoutMutate()}>
-                    <Logout />
+                    <Logout width={20} height={20} />
                     <span>로그아웃</span>
                   </div>
                 </Dropdown>

@@ -9,6 +9,7 @@ import { INFINITE_RECRUITMENTS_COUMT_PER_PAGE } from '@/Constants/common';
 import { useFilterOptionsStore } from '@/store/filter';
 import { getProgressMethod } from '@/Mocks/utils/getQueryParams';
 import SkeletonRecruitmentCardList from '../Skeleton/SkeletonRecruitmentCardList';
+import { media } from '@/Styles/theme';
 
 const RecruitmentCardList = () => {
   const { categoryId, stackId, positionId, progressMethodId } = useFilterOptionsStore();
@@ -32,7 +33,7 @@ const RecruitmentCardList = () => {
     <RecruitmentCardsWrapper>
       {isLoading ? (
         <SkeletonRecruitmentCardList count={21} />
-      ) : recruitmentsPages.length ? (
+      ) : recruitmentsPages.length && recruitmentsPages[0].recruitments.length ? (
         recruitmentsPages.map((recruitmentsPage) =>
           recruitmentsPage?.recruitments.map((recruitment: Recruitment) => (
             <RecruitmentCard key={recruitment.id} {...recruitment} />
@@ -50,10 +51,13 @@ const RecruitmentCardList = () => {
 const RecruitmentCardsWrapper = styled.li`
   display: flex;
   flex-wrap: wrap;
-  width: 100%;
+  width: 1224px;
   align-items: flex-start;
   align-content: flex-start;
   gap: 21px;
+  ${media.custom(1224)} {
+    width: 100%;
+  }
 `;
 
 const Target = styled.div`

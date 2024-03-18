@@ -4,7 +4,7 @@ import Banner from '../../Components/Banner';
 import { usePopularRecruitments } from '@/Hooks/recruitments/usePopularRecruitments';
 import Button from '@/Components/Common/Button';
 import ChipMenu from '@/Components/Common/ChipMenu';
-import { Right, Create, LudoBanner } from '@/Assets';
+import { Right, Create } from '@/Assets';
 import UtiltiyButtons from '@/Components/UtilityButtons';
 import { useSelectedCategoryStore } from '@/store/category';
 import RecruitmentCard from '@/Components/RecruitmentCard';
@@ -30,7 +30,7 @@ const MainPage = () => {
   return (
     <MainPageWrapper>
       <BannerSectionWrapper>
-        <Banner src={LudoBanner} />
+        <Banner />
       </BannerSectionWrapper>
 
       <RecruitmentsSectionWrapper>

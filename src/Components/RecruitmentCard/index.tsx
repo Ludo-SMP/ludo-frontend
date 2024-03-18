@@ -95,7 +95,11 @@ const StudyRecruitInfoWrapper = styled.div`
 `;
 
 const StudyNameWrapper = styled.div`
-  & > div:first-child {
+  .study__name {
+    max-width: 314px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     color: ${(props) => props.theme.color.black4};
     font-size: ${(props) => props.theme.font.large};
     font-weight: 700;
@@ -178,6 +182,7 @@ const StudyAdditionalInfoWrapper = styled.div`
 
   .study {
     &__creator {
+      white-space: nowrap;
       padding-top: 2px;
       color: ${(props) => props.theme.color.black4};
     }

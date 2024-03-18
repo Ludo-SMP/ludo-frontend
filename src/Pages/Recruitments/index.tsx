@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import RecruitmentCardList from '../../Components/RecruitmentCardList';
-import { LudoBanner } from '@/Assets';
 import Banner from '../../Components/Banner';
 import DropdownFilter from '@/Components/DropdownFilter';
 import { media } from '@/Styles/theme';
@@ -9,7 +8,7 @@ import Button from '@/Components/Common/Button';
 import UtiltiyButtons from '@/Components/UtilityButtons';
 import { useNavigate } from 'react-router-dom';
 import { useStack } from '@/Hooks/stack/useStack';
-import { ALL, CATEGORIES, POSITIONS, PROGRESS_METHODS, SORTS } from '@/Shared/study';
+import { ALL, CATEGORIES, POSITIONS, PROGRESS_METHODS } from '@/Shared/study';
 import { Stack } from '@/Types/study';
 import { useLoginStore } from '@/store/auth';
 import { useModalStore } from '@/store/modal';
@@ -34,7 +33,7 @@ const RecruitmentsPage = () => {
   return (
     <RecruitmentsPageWrapper>
       <BannerSectionWrapper>
-        <Banner src={LudoBanner} />
+        <Banner />
       </BannerSectionWrapper>
 
       <RecruitmentsSectionWrapper>
@@ -66,7 +65,6 @@ const RecruitmentsPage = () => {
               items={[{ ...ALL }, ...PROGRESS_METHODS]}
               filterOption="PROGRESS_METHOD"
             />
-            <DropdownFilter filterName={'정렬 기준'} items={[...SORTS]} filterOption="SORT" />
           </DropdownFiltersWrapper>
         </SelectFilterSectionWrapper>
         <RecruitmentCardList />
