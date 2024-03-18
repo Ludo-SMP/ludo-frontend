@@ -27,7 +27,6 @@ const RecruitmentCardList = () => {
   useIntersectionObservable(observeRef, onIntersect, hasNextPage);
 
   const recruitmentsPages = useMemo(() => (data ? data.pages.flatMap(({ data }) => data.data) : []), [data]);
-  console.log(isLoading);
 
   return (
     <RecruitmentCardsWrapper>
