@@ -9,7 +9,7 @@ import SignUp from '@/Pages/SignUp';
 import Header from '@/Components/Header';
 import ApplicantsPage from '@/Pages/Applicants';
 import StudyDetailPage from '@/Pages/StudyDetail';
-import { Footer } from '@/Components/Footer/Footer';
+import Footer from '@/Components/Footer';
 import { SaveStudy } from '@/Pages/Studies/SaveStudy';
 import CreateStudy from '@/Pages/Studies/CreateStudy';
 import ModifyStudy from '@/Pages/Studies/ModifyStudy';
