@@ -23,6 +23,7 @@ export type Props = {
 
 export const EndDate = ({ setForm, useForm }: Props) => {
   const [startDateTime, setForms] = useState(new Date());
+  console.log(setForm);
   return (
     <DateContainer
       value={(useForm.recruitmentEndDateTime = startDateTime.toISOString().slice(0, -5))}
