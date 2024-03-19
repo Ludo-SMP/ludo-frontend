@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import RecruitmentCard from '../RecruitmentCard';
-import NotFound from '../NotFound';
+import NotFoundResult from '../NotFoundResult';
 import { Recruitment } from '@/Types/study';
 import { useMemo, useRef } from 'react';
 import { useIntersectionObservable } from '@/Hooks/userIntersectionObservable';
@@ -40,7 +40,7 @@ const RecruitmentCardList = () => {
           )),
         )
       ) : (
-        <NotFound />
+        <NotFoundResult />
       )}
 
       <Target ref={observeRef} />

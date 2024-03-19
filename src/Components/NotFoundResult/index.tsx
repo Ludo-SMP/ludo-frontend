@@ -7,11 +7,11 @@ import { ROUTES } from '@/Constants/route';
 import { useModalStore } from '@/store/modal';
 import Modal from '../Common/Modal';
 
-const NotFound = () => {
+const NotFoundResult = () => {
   const { isLoggedIn } = useLoginStore();
   const { isModalOpen, openModal } = useModalStore();
   const navigate = useNavigate();
-  const handleNotFound = () => {
+  const handleNotFoundResult = () => {
     if (isLoggedIn) {
       navigate(ROUTES.STUDY.CREATE);
       return;
@@ -19,10 +19,10 @@ const NotFound = () => {
     openModal();
   };
   return (
-    <NotFoundWrapper>
-      <div className="notFound__image"></div>
-      <div className="notFound__text">{SEARCH.NOT_FONND.content}</div>
-      <Button scheme="primary" onClick={() => handleNotFound()}>
+    <NotFoundResultWrapper>
+      <div className="notFoundResult__image"></div>
+      <div className="notFoundResult__text">{SEARCH.NOT_FONND_RESULT.content}</div>
+      <Button scheme="primary" onClick={() => handleNotFoundResult()}>
         <span>스터디 직접 생성하기</span>
       </Button>
       {!isLoggedIn && isModalOpen && (
@@ -36,11 +36,11 @@ const NotFound = () => {
           {CREATE_STUDY.LOGIN.content}
         </Modal>
       )}
-    </NotFoundWrapper>
+    </NotFoundResultWrapper>
   );
 };
 
-const NotFoundWrapper = styled.div`
+const NotFoundResultWrapper = styled.div`
   display: flex;
   padding: 40px 0px;
   flex-direction: column;
@@ -48,14 +48,14 @@ const NotFoundWrapper = styled.div`
   margin: 0 auto;
   gap: 40px;
 
-  .notFound__image {
+  .notFoundResult__image {
     margin: 0 auto;
     width: 316px;
     height: 160px;
     background-color: ${({ theme }) => theme.color.gray1};
   }
 
-  .notFound__text {
+  .notFoundResult__text {
     color: ${({ theme }) => theme.color.black4};
     text-align: center;
     font-size: ${({ theme }) => theme.font.medium};
@@ -71,4 +71,4 @@ const NotFoundWrapper = styled.div`
   }
 `;
 
-export default NotFound;
+export default NotFoundResult;

@@ -15,6 +15,7 @@ import CreateStudy from '@/Pages/Studies/CreateStudy';
 import ModifyStudy from '@/Pages/Studies/ModifyStudy';
 import CreateRecruitment from '@/Pages/Studies/CreateRecruitment';
 import ModifyRecruitment from '@/Pages/Studies/ModifyRecruitment';
+import ErrorBoundary from '@/Components/ErrorBoundary';
 
 export const RouterPath = createBrowserRouter([
   {
@@ -26,7 +27,7 @@ export const RouterPath = createBrowserRouter([
       </>
     ),
 
-    errorElement: <div>에러입니다.</div>,
+    errorElement: <ErrorBoundary />,
     children: [
       {
         path: ROUTES.MAIN,
