@@ -35,6 +35,7 @@ const RecruitmentDetailPage = () => {
   const study = recruitmentDetail?.study;
 
   const { mutate: closeRecruitmentMutate } = useCloseRecruitmentMutation(study?.id);
+  console.log(recruitmentDetail);
 
   useEffect(() => {
     closeModal();
@@ -100,7 +101,12 @@ const RecruitmentDetailPage = () => {
             {user?.id === study.owner.id ? (
               <>
                 <Button onClick={() => closeRecruitmentMutate()}>모집 마감하기</Button>
-                <Button scheme="secondary" onClick={() => {}}>
+                <Button
+                  scheme="secondary"
+                  onClick={() => {
+                    navigate(`/studies/${study.id}/recruitments/edit`);
+                  }}
+                >
                   스터디 모집 공고 수정하기
                 </Button>
               </>

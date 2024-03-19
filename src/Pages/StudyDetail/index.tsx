@@ -59,10 +59,12 @@ export const StudyDetailPage = () => {
               </div>
             </StudyTitleWrapper>
 
-            <Button onClick={() => navigate(`/studies/${studyId}/applicants`)}>
-              <span>스터디 지원자가 있어요!</span>
-              <Right />
-            </Button>
+            {study.hasRecruitment && (
+              <Button onClick={() => navigate(`/studies/${studyId}/applicants`)}>
+                <span>스터디 지원자가 있어요!</span>
+                <Right />
+              </Button>
+            )}
           </StudyDetailTitleWrapper>
           <StudyInfoSection
             category={study?.category}
@@ -74,17 +76,6 @@ export const StudyDetailPage = () => {
           <RowDivider rowHeight={16} />
           <MemberSection memberLimit={study?.participantsLimit} members={study?.participants} />
           <StudyButtonsWrapper>
-            {user?.id === study?.owner.id && study?.participants.length === 1 && (
-              <Button
-                size="fullWidth"
-                onClick={() => {
-                  openModal();
-                  setIsDeletedBtnClicked(true);
-                }}
-              >
-                스터디 삭제하기
-              </Button>
-            )}
             {study.participants.length && (
               <Button
                 size="fullWidth"
