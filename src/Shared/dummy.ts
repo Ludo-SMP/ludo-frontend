@@ -1,6 +1,5 @@
-import { BannerProps } from '../Components/Banner';
 import { TemporarySavedCardProps } from '@/Components/TemporarySavedCard';
-export const bannerDummy: BannerProps = {
+export const bannerDummy = {
   brief: '함께 발견하는 가능성, 기회의 연결',
   title: 'Ludo Study',
 };
