@@ -3,7 +3,7 @@ import { ModalItem } from '../Modalitem/Modalitem';
 export const StackContent = () => {
   return (
     <StackContainer>
-      <ModalItem item={[]} />
+      <ModalItem />
     </StackContainer>
   );
 };

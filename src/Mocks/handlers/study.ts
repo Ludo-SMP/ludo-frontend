@@ -1,6 +1,5 @@
 import { HttpResponse, http } from 'msw';
 import { applicantsDetailMockData, studyDetailMockData, myPageInfoData } from '../data/mockStudies';
-import { HttpStatus } from '@/Constants/statusCodes';
 const baseURL = import.meta.env.VITE_MOCK_API_URL;
 
 const getStudyDetail = http.get(`${baseURL}/api/studies/:studyId`, async ({ params }) => {
@@ -11,7 +10,7 @@ const getStudyDetail = http.get(`${baseURL}/api/studies/:studyId`, async ({ para
       message: 'Success',
     }),
     {
-      status: HttpStatus.OK,
+      status: 200,
       statusText: 'OK',
     },
   );
@@ -24,7 +23,7 @@ const getMyPageInfo = http.get(`${baseURL}/api/users/mypage`, async () => {
       message: 'Success',
     }),
     {
-      status: HttpStatus.OK,
+      status: 200,
       statusText: '',
     },
   );
@@ -37,7 +36,7 @@ const applyStudy = http.post(`${baseURL}/api/recruitments/:recruitmentId/apply`,
       message: '스터디 지원을 완료했습니다.',
     }),
     {
-      status: HttpStatus.CREATED,
+      status: 201,
       statusText: 'Created',
     },
   );
@@ -49,7 +48,7 @@ const failApplyStudy = http.post(`${baseURL}/api/recruitments/:recruitmentId/app
       message: '지원이 마감된 스터디입니다.',
     }),
     {
-      status: HttpStatus.INTERNAL_SERVER_ERROR,
+      status: 500,
       statusText: 'INTERNAL_SERVER_ERROR',
     },
   );
@@ -62,7 +61,7 @@ const refuseApply = http.post(`${baseURL}/api/studies/:studyId/apply-refuse/:app
       data: null,
     }),
     {
-      status: HttpStatus.OK,
+      status: 200,
       statusText: 'OK',
     },
   );
@@ -75,7 +74,7 @@ const failRefuseApply = http.post(`${baseURL}/api/studies/:studyId/apply-refuse/
       data: null,
     }),
     {
-      status: HttpStatus.INTERNAL_SERVER_ERROR,
+      status: 500,
       statusText: 'INTERNAL_SERVER_ERROR',
     },
   );
@@ -98,7 +97,7 @@ const acceptApply = http.post(`${baseURL}/api/studies/:studyId/apply-accept/:app
       },
     }),
     {
-      status: HttpStatus.OK,
+      status: 200,
       statusText: 'OK',
     },
   );
@@ -111,7 +110,7 @@ const failAcceptApply = http.post(`${baseURL}/api/studies/:studyId/apply-accept/
       data: null,
     }),
     {
-      status: HttpStatus.INTERNAL_SERVER_ERROR,
+      status: 500,
       statusText: 'INTERNAL_SERVER_ERROR',
     },
   );
@@ -124,7 +123,7 @@ const cancelApply = http.post(`${baseURL}/api/recruitments/:recruitmentId/cancel
       data: null,
     }),
     {
-      status: HttpStatus.OK,
+      status: 200,
       statusText: 'OK',
     },
   );
@@ -137,7 +136,7 @@ const getApplicantsDetail = http.get(`${baseURL}/api/studies/:studyId/applicants
       message: 'Success',
     }),
     {
-      status: HttpStatus.OK,
+      status: 200,
       statusText: 'OK',
     },
   );
@@ -153,7 +152,7 @@ const deleteStudy = http.delete(`${baseURL}/api/studies/:studyId`, async ({ para
       },
     }),
     {
-      status: HttpStatus.OK,
+      status: 200,
       statusText: 'OK',
     },
   );
@@ -165,7 +164,7 @@ const failDeleteStudy = http.delete(`${baseURL}/api/studies/:studyId`, async () 
       message: '스터디 삭제에 실패하였습니다.',
     }),
     {
-      status: HttpStatus.INTERNAL_SERVER_ERROR,
+      status: 500,
       statusText: 'INTERNAL_SERVER_ERROR',
     },
   );
@@ -173,14 +172,14 @@ const failDeleteStudy = http.delete(`${baseURL}/api/studies/:studyId`, async () 
 
 const leaveStudy = http.delete(`${baseURL}/api/studies/:studyId/participants`, async () => {
   return new HttpResponse(JSON.stringify({ message: '스터디 탈퇴에 성공하였습니다.' }), {
-    status: HttpStatus.OK,
+    status: 200,
     statusText: 'OK',
   });
 });
 
 const failLeaveStudy = http.delete(`${baseURL}/api/studies/:studyId/participants`, async () => {
   return new HttpResponse(JSON.stringify({ message: '스터디 탈퇴에 실패하였습니다.' }), {
-    status: HttpStatus.INTERNAL_SERVER_ERROR,
+    status: 500,
     statusText: 'INTERNAL_SERVER_ERROR',
   });
 });
