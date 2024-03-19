@@ -1,22 +1,25 @@
-//header.tsx
 import styled from 'styled-components';
 import { media } from '@/Styles/theme';
-import { ROUTER_PATH } from '@/Constants/Router_Path';
+import { ROUTES } from '@/Constants/route';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
-import { Logo, Alarm, Profile } from '@/Assets';
+import { Logo, Alarm, Profile, Logout } from '@/Assets';
 import { useLoginStore } from '@/store/auth';
 import Button from '../Common/Button';
 import StudyButtonSection from './StudyButtonSection';
 import SignButtonSection from './SignButtonSection';
 import HamburgerSection from './HamburgerSection';
 import Gnb from './Gnb';
+import Dropdown from '../Dropdown';
 import { useModalStore } from '@/store/modal';
+import { useLogOutMutation } from '@/Hooks/auth/useLogOutMutation';
 
 const Header = () => {
   const { isLoggedIn } = useLoginStore();
   const { openModal } = useModalStore();
   const navigate = useNavigate();
   const currentLocation = useLocation()?.pathname;
+
+  const { mutate: logoutMutate } = useLogOutMutation();
 
   return (
     <HeaderWrapper>
@@ -27,7 +30,7 @@ const Header = () => {
         <ElementsWrapper>
           {isLoggedIn ? (
             <>
-              {currentLocation === ROUTER_PATH.main || currentLocation === ROUTER_PATH.recruitments ? (
+              {currentLocation === ROUTES.MAIN || currentLocation === ROUTES.RECRUITMENT.RECRUITMENTS ? (
                 <StudyButtonSection />
               ) : (
                 <div className="login__elements">
@@ -36,7 +39,7 @@ const Header = () => {
                     className="create__study"
                     type="button"
                     onClick={() => {
-                      navigate(ROUTER_PATH.createStudy);
+                      navigate(ROUTES.STUDY.CREATE);
                     }}
                   >
                     스터디 생성하기
@@ -45,7 +48,12 @@ const Header = () => {
               )}
               <UserInfoWrapper>
                 <Alarm width={40} height={40} />
-                <Profile width={40} height={40} />
+                <Dropdown toggleButton={<Profile width={40} height={40} />}>
+                  <div className="logout" onClick={() => logoutMutate()}>
+                    <Logout width={20} height={20} />
+                    <span>로그아웃</span>
+                  </div>
+                </Dropdown>
               </UserInfoWrapper>
             </>
           ) : (
@@ -54,7 +62,7 @@ const Header = () => {
               <Button
                 className="create__study"
                 type="button"
-                onClick={isLoggedIn ? () => navigate(ROUTER_PATH.createStudy) : () => openModal()}
+                onClick={isLoggedIn ? () => navigate(ROUTES.STUDY.CREATE) : () => openModal()}
               >
                 스터디 생성하기
               </Button>
@@ -142,6 +150,21 @@ const UserInfoWrapper = styled.div`
   justify-content: flex-end;
   align-items: center;
   gap: 12px;
+
+  svg {
+    :hover {
+      cursor: pointer;
+    }
+  }
+  .logout {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    span {
+      padding-top: 2px;
+    }
+  }
 
   ${media.mobile} {
     display: none;

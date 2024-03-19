@@ -23,11 +23,14 @@ export { default as Up } from './icons/up.svg?react';
 export { default as Views } from './icons/views.svg?react';
 export { default as Filter } from './icons/filter.svg?react';
 export { default as Create } from './icons/createstudy.svg?react';
-export { default as Ludo_Footer } from './icons/Ludo_Footer.svg?react';
+export { default as Loading } from './icons/lodaing.svg?react';
+export { default as Logout } from './icons/logout.svg?react';
 
 // logo
 export { default as BlankLogo } from './images/blank-logo.png';
 export { default as Logo } from './images/logo.png';
+export { default as FooterLogo } from './images/logo2.png';
 
 // Banner
-export { default as LudoBanner } from './images/banner.png';
+export { default as Banner1 } from './images/banner1.png';
+export { default as Banner2 } from './images/banner2.png';

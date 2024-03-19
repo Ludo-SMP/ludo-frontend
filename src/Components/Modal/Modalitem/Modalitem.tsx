@@ -1,15 +1,15 @@
 import styled from 'styled-components';
-import { StackItem } from '@/Types/studies';
+// import { StackItem } from '@/Types/studies';
 // import axios from 'axios';
-import { useStack } from '@/Apis/stack';
+import { useStack } from '@/Hooks/stack/useStack';
 import { useRef } from 'react';
 
 const VITE_BASE_URL = 'https://ludoapi.store';
-type Props = { item: StackItem[] };
+// type Props = { item: StackItem[] };
 
-export const ModalItem = ({ item }: Props) => {
+export const ModalItem = () => {
   const { data } = useStack();
-  console.log({ item });
+
   const imgRef = useRef<HTMLImageElement>(null);
   // const [isValid, setIsValid] = useState(true);
   return (

@@ -84,6 +84,7 @@ const DropdownSelectWrapper = styled.div<{ checked?: boolean }>`
   color: ${(props) => (props.checked ? props.theme.color.orange2 : props.theme.color.black3)};
   border: 1px solid ${(props) => (props.checked ? props.theme.color.orange2 : props.theme.color.black2)};
   background: ${(props) => (props.checked ? props.theme.color.white : props.theme.color.white)};
+  white-space: nowrap;
 
   &:hover {
     background: ${(props) => props.theme.color.orange2};

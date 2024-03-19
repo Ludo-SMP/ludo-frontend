@@ -24,7 +24,6 @@ export type Props = {
 export const ProgressPeriod = ({ setForm, useForm }: Props) => {
   const [startDateTime, setForms] = useState(new Date());
   const [endDateTime, setFormss] = useState(new Date());
-  console.log(setForm);
   // const StartHandler = (event: ChangeEvent<HTMLSelectElement>) => {
   //   setForm({ startDateTime: event.target.value });
   // };

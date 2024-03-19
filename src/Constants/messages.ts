@@ -34,9 +34,13 @@ export const APPLY = Object.freeze({
 });
 
 export const SEARCH = Object.freeze({
-  NOT_FONND: {
+  NOT_FONND_RESULT: {
     content: `찾는 태그에 대한 검색 결과가 없습니다.\n스터디를 직접 생성하시겠습니까?`,
   },
+});
+
+export const ERROR = Object.freeze({
+  NOT_FOUND: { content: '잘못된 접근입니다.' },
 });
 
 export const CREATE_STUDY = Object.freeze({

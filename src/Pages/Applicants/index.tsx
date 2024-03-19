@@ -1,14 +1,15 @@
 import styled from 'styled-components';
-import { StudyInfo } from '@/Assets';
+import { Loading, StudyInfo } from '@/Assets';
 import { InfoField } from '@/Components/Common/InfoField';
 import ApplicantCard from '@/Components/ApplicantCard';
 import { Applicant } from '@/Types/study';
 import Button from '@/Components/Common/Button';
 import StudyToken from '@/Components/Common/StudyToken';
 import { useUserStore } from '@/store/user';
-import { useParams } from 'react-router-dom';
-import { useApplicantsDetail } from '@/Apis/study';
-import { useCloseRecruitmentMutation } from '@/Apis/recruitment';
+import { useLocation, useParams } from 'react-router-dom';
+import { useApplicantsDetail } from '@/Hooks/study/useApplicantsDetail';
+import { useCloseRecruitmentMutation } from '@/Hooks/recruitments/useCloseRecruitmentMutation';
+import { useEffect } from 'react';
 
 const ApplicantsPage = () => {
   const studyId = Number(useParams().studyId);
@@ -19,42 +20,52 @@ const ApplicantsPage = () => {
 
   const { mutate: closeRecruitmentMutate } = useCloseRecruitmentMutation(studyId);
 
-  return isLoading ? (
-    <div>Loading...</div>
-  ) : (
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return (
     <ApplicantsWrapper>
-      <ApplicantsTitleWrapper>스터디 지원자를 확인해주세요!</ApplicantsTitleWrapper>
-      <StudyDetailWrapper>
-        <StudyTitleWrapper>
-          <StudyInfo width="48" height="48" />
-          <span className="title">{study.title}</span>
-          <div className="study__tokens">
-            {study?.status !== 'COMPLETED' && <StudyToken status={'PARTICIPATED'} />}
-            <StudyToken status={study?.status} />
-          </div>
-        </StudyTitleWrapper>
-        <StudyInfoWrapper>
-          <InfoField title="현재 인원수" content={study.participantCount} />
-          <InfoField title="목표 인원수" content={study.participantLimit} />
-        </StudyInfoWrapper>
-        <ApplicantsInfoWrapper>
-          {applicants?.map((applicant: Applicant) => (
-            <ApplicantCard
-              {...applicant}
-              title={study.title}
-              studyId={studyId}
-              key={applicant?.email}
-              isOwner={study.owner.id === user?.id}
-            />
-          ))}
-        </ApplicantsInfoWrapper>
-      </StudyDetailWrapper>
-      {study.owner.id === user?.id && (
-        <ApplicantButtonsWrapper>
-          <Button onClick={() => closeRecruitmentMutate()} scheme="secondary" size="fullWidth">
-            스터디원 모집 마감하기
-          </Button>
-        </ApplicantButtonsWrapper>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <ApplicantsTitleWrapper>스터디 지원자를 확인해주세요!</ApplicantsTitleWrapper>
+          <StudyDetailWrapper>
+            <StudyTitleWrapper>
+              <StudyInfo width="48" height="48" />
+              <span className="title">{study.title}</span>
+              <div className="study__tokens">
+                {study?.status !== 'COMPLETED' && <StudyToken status={'PARTICIPATED'} />}
+                <StudyToken status={study?.status} />
+              </div>
+            </StudyTitleWrapper>
+            <StudyInfoWrapper>
+              <InfoField title="현재 인원수" content={study.participantCount} />
+              <InfoField title="목표 인원수" content={study.participantLimit} />
+            </StudyInfoWrapper>
+            <ApplicantsInfoWrapper>
+              {applicants?.map((applicant: Applicant) => (
+                <ApplicantCard
+                  {...applicant}
+                  title={study.title}
+                  studyId={studyId}
+                  key={applicant?.email}
+                  isOwner={study.owner.id === user?.id}
+                />
+              ))}
+            </ApplicantsInfoWrapper>
+          </StudyDetailWrapper>
+          {study.owner.id === user?.id && (
+            <ApplicantButtonsWrapper>
+              <Button onClick={() => closeRecruitmentMutate()} scheme="secondary" size="fullWidth">
+                스터디원 모집 마감하기
+              </Button>
+            </ApplicantButtonsWrapper>
+          )}
+        </>
       )}
     </ApplicantsWrapper>
   );
