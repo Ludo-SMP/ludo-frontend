@@ -12,7 +12,7 @@ import { useEffect, useState } from 'react';
 import { useStack } from '@/Hooks/stack/useStack';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { One, Two, Three, Four } from '@/Assets';
+import { One, Two, Three, Four, Loading } from '@/Assets';
 import { SaveButton } from '@/Components/Button/Studies/SaveButton';
 import { Gather } from '@/Types/studies';
 import { ContactButton } from '@/Components/Selectbox/ContactButton';
@@ -82,7 +82,7 @@ const CreateRecruitment = () => {
   return (
     <StudyContainer onSubmit={handleSubmit}>
       {isLoading ? (
-        <div>Loading...</div>
+        <Loading />
       ) : (
         <>
           <StudyMain>스터디 팀원 모집하기</StudyMain>
@@ -165,7 +165,7 @@ const CreateRecruitment = () => {
               </MiddleBottomWrapper>
               <MiddleBottomWrapper>
                 <ContentText>스터디 최대 인원</ContentText>
-                <SubContentTitle>{study?.participantsLimit}</SubContentTitle>
+                <SubContentTitle>{study.participantsLimit}</SubContentTitle>
               </MiddleBottomWrapper>
             </MiddleBottomInfo>
           </StudyMidBottom>
