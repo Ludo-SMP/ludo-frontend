@@ -35,7 +35,6 @@ const RecruitmentDetailPage = () => {
   const study = recruitmentDetail?.study;
 
   const { mutate: closeRecruitmentMutate } = useCloseRecruitmentMutation(study?.id);
-  console.log(recruitmentDetail);
 
   useEffect(() => {
     closeModal();
