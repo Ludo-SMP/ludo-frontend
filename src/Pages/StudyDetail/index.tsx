@@ -3,7 +3,7 @@ import { RowDivider } from '../../Components/Common/Divider/RowDivider';
 import { Loading, Right, StudyInfo } from '@/Assets';
 import Button from '@/Components/Common/Button';
 import StudyToken from '@/Components/Common/StudyToken';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import StudyInfoSection from './StudyInfoSection';
 import MemberSection from './MemberSection';
 import { useLeaveStudyMutation } from '@/Hooks/study/useLeaveStudyMutation ';
@@ -17,11 +17,12 @@ import { STUDY } from '@/Constants/queryString';
 import { useModalStore } from '@/store/modal';
 import Modal from '@/Components/Common/Modal';
 import { DELETE, LEAVE } from '@/Constants/messages';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export const StudyDetailPage = () => {
   const studyId = Number(useParams().studyId);
   const { user } = useUserStore();
+  const { pathname } = useLocation();
   const { isModalOpen, openModal } = useModalStore();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
@@ -37,6 +38,10 @@ export const StudyDetailPage = () => {
 
   const { mutate: deleteStudyMutate } = useDeleteStudyMutation(studyId);
   const { mutate: leaveStudyMutate } = useLeaveStudyMutation(studyId);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   return (
     <StudyDetailWrapper>

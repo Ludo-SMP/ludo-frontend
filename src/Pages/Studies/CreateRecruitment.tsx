@@ -8,9 +8,9 @@ import { Mainarea } from '../../Components/Textarea/Mainarea';
 import { Titlearea } from '../../Components/Textarea/Titlearea';
 import { EndDate } from '../../Components/Calendar/EndDate';
 import { media } from '../../Styles/theme';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useStack } from '@/Hooks/stack/useStack';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { One, Two, Three, Four } from '@/Assets';
 import { SaveButton } from '@/Components/Button/Studies/SaveButton';
@@ -27,6 +27,7 @@ const CreateRecruitment = () => {
   const studyId = Number(useParams().studyId);
 
   const Navigation = useNavigate();
+  const { pathname } = useLocation();
 
   const { data: studyDetail, isLoading } = useStudyDetail(studyId);
   const study = studyDetail?.study;
@@ -73,6 +74,10 @@ const CreateRecruitment = () => {
     posts();
     // Navigation('/');
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   return (
     <StudyContainer onSubmit={handleSubmit}>

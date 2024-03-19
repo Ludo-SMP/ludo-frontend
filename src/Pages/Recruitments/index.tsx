@@ -6,7 +6,7 @@ import { media } from '@/Styles/theme';
 import { Create, Up } from '@/Assets';
 import Button from '@/Components/Common/Button';
 import UtiltiyButtons from '@/Components/UtilityButtons';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useStack } from '@/Hooks/stack/useStack';
 import { ALL, CATEGORIES, POSITIONS, PROGRESS_METHODS } from '@/Shared/study';
 import { Stack } from '@/Types/study';
@@ -15,12 +15,18 @@ import { useModalStore } from '@/store/modal';
 import { CREATE_STUDY } from '@/Constants/messages';
 import Modal from '@/Components/Common/Modal';
 import { ROUTES } from '@/Constants/route';
+import { useEffect } from 'react';
 
 const RecruitmentsPage = () => {
   const { data, isLoading } = useStack();
   const navigate = useNavigate();
   const { isLoggedIn } = useLoginStore();
   const { isModalOpen, openModal } = useModalStore();
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   const handleScroll = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });

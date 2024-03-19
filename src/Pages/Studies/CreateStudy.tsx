@@ -10,8 +10,8 @@ import { ProgressPeriod } from '../../Components/Calendar/ProgressPeriod';
 import { PositionButton } from '@/Components/Selectbox/PositionButton';
 import { media } from '../../Styles/theme';
 import { Creates } from '@/Types/studies';
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { One, Two, Three } from '@/Assets';
 import { SaveButton } from '@/Components/Button/Studies/SaveButton';
 import axios from 'axios';
@@ -19,6 +19,7 @@ axios.defaults.withCredentials = true;
 export type OptionalCreates = Partial<Creates>;
 const CreateStudy = () => {
   const Navigate = useNavigate();
+  const { pathname } = useLocation();
   const [useForm, setuseForm] = useState<Creates>({
     title: '',
     categoryId: 0,
@@ -56,6 +57,10 @@ const CreateStudy = () => {
     event.preventDefault();
     post();
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   return (
     <>

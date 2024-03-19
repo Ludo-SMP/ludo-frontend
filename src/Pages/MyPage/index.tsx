@@ -9,6 +9,8 @@ import ChipMenu from '@/Components/Common/ChipMenu';
 import { User, ParticipateStudy, ApplicantRecruitment, CompletedStudy } from '@/Types/study';
 import { useSelectedMyStudyStore } from '@/store/study';
 import { useLogOutMutation } from '@/Hooks/auth/useLogOutMutation';
+import { useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const MyPage = () => {
   const { data: myPageInfo, isLoading } = useMyPageInfo();
@@ -16,10 +18,15 @@ const MyPage = () => {
   const participateStudies: ParticipateStudy[] = myPageInfo?.participateStudies;
   const applicantRecruitments: ApplicantRecruitment[] = myPageInfo?.applicantRecruitments;
   const completedStudies: CompletedStudy[] = myPageInfo?.completedStudies;
+  const { pathname } = useLocation();
 
   const { selectedMyStudyStatus, setSelectedMyStudyStatus } = useSelectedMyStudyStore();
 
   const { mutate: logoutMutate } = useLogOutMutation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   return (
     <MyPageWrapper>

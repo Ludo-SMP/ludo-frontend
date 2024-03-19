@@ -8,13 +8,14 @@ import { Right, Create } from '@/Assets';
 import UtiltiyButtons from '@/Components/UtilityButtons';
 import { useSelectedCategoryStore } from '@/store/category';
 import RecruitmentCard from '@/Components/RecruitmentCard';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { ROUTES } from '@/Constants/route';
 import { useLoginStore } from '@/store/auth';
 import { useModalStore } from '@/store/modal';
 import Modal from '@/Components/Common/Modal';
 import { CREATE_STUDY } from '@/Constants/messages';
 import SkeletonRecruitmentCardList from '@/Components/Skeleton/SkeletonRecruitmentCardList';
+import { useEffect } from 'react';
 
 const MainPage = () => {
   const { data: popularRecruitments, isLoading } = usePopularRecruitments();
@@ -22,6 +23,11 @@ const MainPage = () => {
   const navigate = useNavigate();
   const { isLoggedIn } = useLoginStore();
   const { isModalOpen, openModal } = useModalStore();
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   const popularCodingRecruitments: Recruitment[] = popularRecruitments?.popularCodingRecruitments;
   const popularInterviewRecruitments: Recruitment[] = popularRecruitments?.popularInterviewRecruitments;

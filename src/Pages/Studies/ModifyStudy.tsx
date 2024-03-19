@@ -10,8 +10,8 @@ import { ProgressPeriod } from '../../Components/Calendar/ProgressPeriod';
 import { PositionButton } from '@/Components/Selectbox/PositionButton';
 import { media } from '../../Styles/theme';
 import { Creates } from '@/Types/studies';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { One, Two, Three } from '@/Assets';
 import { SaveButton } from '@/Components/Button/Studies/SaveButton';
 import axios from 'axios';
@@ -22,6 +22,11 @@ const ModifyStudy = () => {
   const Navigate = useNavigate();
   const studyId = Number(useParams().studyId);
   useStudyDetail(studyId);
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   const [useForm, setuseForm] = useState<Creates>({
     title: '',
@@ -43,16 +48,16 @@ const ModifyStudy = () => {
   }
 
   async function post() {
-    const { data } = await axios.put(`https://ludoapi.store/api/studies/${studyId}`, {
-      title: useForm.title,
-      categoryId: useForm.categoryId,
-      way: useForm.way,
-      participantLimit: useForm.participantLimit,
-      startDateTime: useForm.startDateTime,
-      endDateTime: useForm.endDateTime,
-      positionId: useForm.positionId,
-      platform: useForm.platform,
-    });
+    // const { data } = await axios.put(`https://ludoapi.store/api/studies/${studyId}`, {
+    //   title: useForm.title,
+    //   categoryId: useForm.categoryId,
+    //   way: useForm.way,
+    //   participantLimit: useForm.participantLimit,
+    //   startDateTime: useForm.startDateTime,
+    //   endDateTime: useForm.endDateTime,
+    //   positionId: useForm.positionId,
+    //   platform: useForm.platform,
+    // });
 
     // const studyId = data.data.study.id;
     Navigate(`/studies/${studyId}`);

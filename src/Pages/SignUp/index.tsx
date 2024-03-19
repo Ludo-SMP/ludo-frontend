@@ -1,11 +1,17 @@
 import SocialLogin from '@/Components/SocialLogin';
 import { ROUTES } from '@/Constants/route';
 import { media } from '@/Styles/theme';
-import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const SignUp = () => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
   return (
     <SignUpWrapper>
       <SignUpGuideWrapper />

@@ -10,9 +10,9 @@ import { Titlearea } from '../../Components/Textarea/Titlearea';
 import { EndDate } from '../../Components/Calendar/EndDate';
 import { media } from '../../Styles/theme';
 import { Gather } from '@/Types/studies';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useStack } from '@/Hooks/stack/useStack';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { One, Two, Three, Four } from '@/Assets';
 import { SaveButton } from '@/Components/Button/Studies/SaveButton';
@@ -27,6 +27,11 @@ const ModifyRecruitment = () => {
   const Navigation = useNavigate();
   const studyId = Number(useParams().studyId);
   useStudyDetail(studyId);
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
   const [useForm, setuseForm] = useState<Gather>({
     title: '',
     // recruitmentLimit: 0,

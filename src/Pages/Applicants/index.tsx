@@ -6,9 +6,10 @@ import { Applicant } from '@/Types/study';
 import Button from '@/Components/Common/Button';
 import StudyToken from '@/Components/Common/StudyToken';
 import { useUserStore } from '@/store/user';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { useApplicantsDetail } from '@/Hooks/study/useApplicantsDetail';
 import { useCloseRecruitmentMutation } from '@/Hooks/recruitments/useCloseRecruitmentMutation';
+import { useEffect } from 'react';
 
 const ApplicantsPage = () => {
   const studyId = Number(useParams().studyId);
@@ -18,6 +19,12 @@ const ApplicantsPage = () => {
   const applicants: Applicant[] = ApplicantsDetail?.applicants;
 
   const { mutate: closeRecruitmentMutate } = useCloseRecruitmentMutation(studyId);
+
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   return (
     <ApplicantsWrapper>

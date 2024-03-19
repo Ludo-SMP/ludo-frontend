@@ -25,6 +25,8 @@ export const RouterPath = createBrowserRouter([
         <Footer />
       </>
     ),
+
+    errorElement: <div>에러입니다.</div>,
     children: [
       {
         path: ROUTES.MAIN,

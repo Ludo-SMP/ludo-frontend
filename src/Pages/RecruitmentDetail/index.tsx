@@ -4,7 +4,7 @@ import { RowDivider } from '../../Components/Common/Divider/RowDivider';
 import { ColumnDivider } from '../../Components/Common/Divider/ColumnDivider';
 import { useRecruitmentDetail } from '@/Hooks/recruitments/useRecruitmentDetail';
 import { useCloseRecruitmentMutation } from '@/Hooks/recruitments/useCloseRecruitmentMutation';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { dateFormatter, getPeriod, isEdited } from '@/utils/date';
 import RecruitmentInfoSection from './RecruitmentInfoSection';
 import StudyProgressInfoSection from './StudyProgessInfoSection';
@@ -30,7 +30,7 @@ const RecruitmentDetailPage = () => {
 
   const navigate = useNavigate();
   const { data: recruitmentDetail, isLoading } = useRecruitmentDetail(recruitmentId);
-
+  const { pathname } = useLocation();
   const recruitment = recruitmentDetail?.recruitment;
   const study = recruitmentDetail?.study;
 
@@ -39,6 +39,10 @@ const RecruitmentDetailPage = () => {
   useEffect(() => {
     closeModal();
   }, [closeModal]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   return (
     <RecruitmentDetailWrapper>
