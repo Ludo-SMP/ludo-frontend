@@ -10,22 +10,23 @@ import { ProgressPeriod } from '../../Components/Calendar/ProgressPeriod';
 import { PositionButton } from '@/Components/Selectbox/PositionButton';
 import { media } from '../../Styles/theme';
 import { Creates } from '@/Types/studies';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { One, Two, Three } from '@/Assets';
 import { SaveButton } from '@/Components/Button/Studies/SaveButton';
 import axios from 'axios';
-import { useStudyDetail } from '@/Apis/study';
+import { useStudyDetail } from '@/Hooks/study/useStudyDetail';
 axios.defaults.withCredentials = true;
 export type OptionalCreates = Partial<Creates>;
-export const ModifyStudy = () => {
-  // {register} = useForm
-  // 폼 데이터
-
+const ModifyStudy = () => {
   const Navigate = useNavigate();
   const studyId = Number(useParams().studyId);
   useStudyDetail(studyId);
-  // console.log(studyId);
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   const [useForm, setuseForm] = useState<Creates>({
     title: '',
@@ -47,17 +48,17 @@ export const ModifyStudy = () => {
   }
 
   async function post() {
-    const { data } = await axios.put(`https://ludoapi.store/api/studies/${studyId}`, {
-      title: useForm.title,
-      categoryId: useForm.categoryId,
-      way: useForm.way,
-      participantLimit: useForm.participantLimit,
-      startDateTime: useForm.startDateTime,
-      endDateTime: useForm.endDateTime,
-      positionId: useForm.positionId,
-      platform: useForm.platform,
-    });
-    console.log(data);
+    // const { data } = await axios.put(`https://ludoapi.store/api/studies/${studyId}`, {
+    //   title: useForm.title,
+    //   categoryId: useForm.categoryId,
+    //   way: useForm.way,
+    //   participantLimit: useForm.participantLimit,
+    //   startDateTime: useForm.startDateTime,
+    //   endDateTime: useForm.endDateTime,
+    //   positionId: useForm.positionId,
+    //   platform: useForm.platform,
+    // });
+
     // const studyId = data.data.study.id;
     Navigate(`/studies/${studyId}`);
   }
@@ -143,6 +144,7 @@ export const ModifyStudy = () => {
   );
 };
 
+export default ModifyStudy;
 const AssetContainer = styled.image`
   padding-right: 12px;
 `;
@@ -154,12 +156,14 @@ const BorderBox = styled.div`
 `;
 
 const StudyMain = styled.p`
-  display: flex;
+  width: 1200px;
   font-size: ${(props) => props.theme.font.xxxlarge};
   text-align: left;
+  align-items: left;
+  margin-right: 50px;
   font-weight: 800;
   line-height: 60px;
-  padding-bottom: 60px;
+  /* padding-bottom: 60px; */
   padding-top: 40px;
   ${media.custom(800)} {
     display: none;
@@ -167,32 +171,37 @@ const StudyMain = styled.p`
 `;
 
 const StudyContainer = styled.form`
-  max-width: 1920px;
   height: 1300px;
   padding-left: 200px;
   display: flex;
   flex-direction: column;
   text-align: left;
+  align-items: center;
   ${media.custom(200)} {
     display: none;
   }
 `;
+
 const TopBox = styled.div`
   height: 250px;
   padding-top: 40px;
-  padding-bottom: 20px;
   text-align: left;
+  align-items: center;
+  margin-right: 50px;
 `;
 
 const MiddleBox = styled.div`
   height: 300px;
   align-items: center;
   padding-top: 40px;
+  text-align: left;
 `;
 
 const MiddleCenterBox = styled.div`
   height: 250px;
   align-items: center;
+  text-align: left;
+
   padding-top: 20px;
 `;
 

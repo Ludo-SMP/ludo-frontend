@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { media } from '@/Styles/theme';
 import Button from '@/Components/Common/Button';
 import { useNavigate } from 'react-router-dom';
-import { ROUTER_PATH } from '@/Constants/Router_Path';
+import { ROUTES } from '@/Constants/route';
 import { useSelectedMyStudyStore } from '@/store/study';
 
 const StudyButtonSection = () => {
@@ -14,7 +14,7 @@ const StudyButtonSection = () => {
         type="button"
         onClick={() => {
           setSelectedMyStudyStatus('PARTICIPATED');
-          navigate(ROUTER_PATH.mypage);
+          navigate(ROUTES.MYPAGE);
         }}
       >
         참여중인 스터디
@@ -23,7 +23,7 @@ const StudyButtonSection = () => {
         type="button"
         onClick={() => {
           setSelectedMyStudyStatus('APPLIED');
-          navigate(ROUTER_PATH.mypage);
+          navigate(ROUTES.MYPAGE);
         }}
       >
         내가 지원한 스터디
@@ -32,7 +32,7 @@ const StudyButtonSection = () => {
         type="button"
         onClick={() => {
           setSelectedMyStudyStatus('COMPLETED');
-          navigate(ROUTER_PATH.mypage);
+          navigate(ROUTES.MYPAGE);
         }}
       >
         진행 완료된 스터디

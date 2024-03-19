@@ -13,7 +13,7 @@ const Image = ({ src, size }: ImageProps) => {
 const SkeletonImage = styled.div<{ size: number }>`
   width: ${({ size }) => `${size}px`};
   height: ${({ size }) => `${size}px`};
-  background: ${({ theme }) => theme.color.gray2};
+  background: ${({ theme }) => theme.color.white};
 `;
 
 export default Image;

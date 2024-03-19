@@ -1,14 +1,19 @@
 import styled from 'styled-components';
 import { SaveButton } from '@/Components/Button/Studies/SaveButton';
 import { SubmitButton } from '../../Components/Button/Studies/SubmitButton';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 export const SaveStudy = () => {
   const localData = JSON.parse(localStorage.getItem('create'));
-  // console.log(localData.study);
+  const { pathname } = useLocation();
+
   const navigate = useNavigate();
   const navigateToModify = () => {
     navigate('/studies/modify');
   };
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
   return (
     <StudyContainer onSubmit={navigateToModify}>
       <StudyTitle>{JSON.stringify(localData.study.title)}</StudyTitle>

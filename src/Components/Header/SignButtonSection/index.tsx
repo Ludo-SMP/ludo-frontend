@@ -1,9 +1,9 @@
 import Button from '@/Components/Common/Button';
-import { ROUTER_PATH } from '@/Constants/Router_Path';
+import { ROUTES } from '@/Constants/route';
 import { media } from '@/Styles/theme';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { useLogOutMutation } from '@/Apis/auth';
+import { useLogOutMutation } from '@/Hooks/auth/useLogOutMutation';
 import { useLoginStore } from '@/store/auth';
 
 const SignButtonSection = () => {
@@ -23,7 +23,7 @@ const SignButtonSection = () => {
             className="login"
             type="button"
             onClick={() => {
-              navigate(ROUTER_PATH.login);
+              navigate(ROUTES.AUTH.LOGIN);
             }}
           >
             로그인
@@ -32,7 +32,7 @@ const SignButtonSection = () => {
             className="signup"
             type="button"
             onClick={() => {
-              navigate(ROUTER_PATH.signup);
+              navigate(ROUTES.AUTH.SIGNUP);
             }}
           >
             회원가입

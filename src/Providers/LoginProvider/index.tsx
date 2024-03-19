@@ -16,9 +16,8 @@ const LoginProvider = ({ children }: LoginProviderProps) => {
       try {
         const { data } = await getUser();
         setIsLoggedIn();
-        setUser(data);
+        setUser(data?.user);
       } catch (e) {
-        // console.log(e);
         setIsLoggedOut();
         resetUser();
       }

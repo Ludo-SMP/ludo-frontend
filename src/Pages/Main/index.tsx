@@ -1,19 +1,21 @@
 import styled from 'styled-components';
 import { Recruitment } from '@/Types/study';
 import Banner from '../../Components/Banner';
-import { usePopularRecruitments } from '@/Apis/recruitment';
+import { usePopularRecruitments } from '@/Hooks/recruitments/usePopularRecruitments';
 import Button from '@/Components/Common/Button';
 import ChipMenu from '@/Components/Common/ChipMenu';
-import { Right, Create, LudoBanner } from '@/Assets';
+import { Right, Create } from '@/Assets';
 import UtiltiyButtons from '@/Components/UtilityButtons';
 import { useSelectedCategoryStore } from '@/store/category';
 import RecruitmentCard from '@/Components/RecruitmentCard';
-import { useNavigate } from 'react-router-dom';
-import { ROUTER_PATH } from '@/Constants/Router_Path';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { ROUTES } from '@/Constants/route';
 import { useLoginStore } from '@/store/auth';
 import { useModalStore } from '@/store/modal';
 import Modal from '@/Components/Common/Modal';
 import { CREATE_STUDY } from '@/Constants/messages';
+import SkeletonRecruitmentCardList from '@/Components/Skeleton/SkeletonRecruitmentCardList';
+import { useEffect } from 'react';
 
 const MainPage = () => {
   const { data: popularRecruitments, isLoading } = usePopularRecruitments();
@@ -21,17 +23,20 @@ const MainPage = () => {
   const navigate = useNavigate();
   const { isLoggedIn } = useLoginStore();
   const { isModalOpen, openModal } = useModalStore();
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   const popularCodingRecruitments: Recruitment[] = popularRecruitments?.popularCodingRecruitments;
   const popularInterviewRecruitments: Recruitment[] = popularRecruitments?.popularInterviewRecruitments;
   const popularProjectRecruitments: Recruitment[] = popularRecruitments?.popularProjectRecruitments;
 
-  return isLoading ? (
-    <div>Loading...</div>
-  ) : (
+  return (
     <MainPageWrapper>
       <BannerSectionWrapper>
-        <Banner src={LudoBanner} />
+        <Banner />
       </BannerSectionWrapper>
 
       <RecruitmentsSectionWrapper>
@@ -59,7 +64,7 @@ const MainPage = () => {
           </CategoryMenusWrapper>
           <MoreSectionWrapper
             onClick={() => {
-              navigate(ROUTER_PATH.recruitments);
+              navigate(ROUTES.RECRUITMENT.RECRUITMENTS);
             }}
           >
             <span className="more__text">전체 목록 보러가기</span>
@@ -68,24 +73,25 @@ const MainPage = () => {
         </SelectCategorySectionWrapper>
 
         <RecruitmentCardsWrapper>
-          {selectedCategory.name === '코딩 테스트'
-            ? popularCodingRecruitments.map((recruitment: Recruitment) => (
-                <RecruitmentCard {...recruitment} key={recruitment.id} />
-              ))
-            : selectedCategory.name === '모의 면접'
-            ? popularInterviewRecruitments.map((recruitment: Recruitment) => (
-                <RecruitmentCard {...recruitment} key={recruitment.id} />
-              ))
-            : popularProjectRecruitments.map((recruitment: Recruitment) => (
-                <RecruitmentCard {...recruitment} key={recruitment.id} />
-              ))}
+          {isLoading ? (
+            <SkeletonRecruitmentCardList />
+          ) : selectedCategory.name === '코딩 테스트' ? (
+            popularCodingRecruitments.map((recruitment: Recruitment) => (
+              <RecruitmentCard {...recruitment} key={recruitment.id} />
+            ))
+          ) : selectedCategory.name === '모의 면접' ? (
+            popularInterviewRecruitments.map((recruitment: Recruitment) => (
+              <RecruitmentCard {...recruitment} key={recruitment.id} />
+            ))
+          ) : (
+            popularProjectRecruitments.map((recruitment: Recruitment) => (
+              <RecruitmentCard {...recruitment} key={recruitment.id} />
+            ))
+          )}
         </RecruitmentCardsWrapper>
       </RecruitmentsSectionWrapper>
       <UtiltiyButtons>
-        <Button
-          onClick={isLoggedIn ? () => navigate(ROUTER_PATH.createStudy) : () => openModal()}
-          className="create__btn"
-        >
+        <Button onClick={isLoggedIn ? () => navigate(ROUTES.STUDY.CREATE) : () => openModal()} className="create__btn">
           <Create height={40} />
           <span>스터디 생성</span>
         </Button>
@@ -93,7 +99,7 @@ const MainPage = () => {
       {!isLoggedIn && isModalOpen && (
         <Modal
           title={CREATE_STUDY.LOGIN.title}
-          handleApprove={() => navigate(ROUTER_PATH.login)}
+          handleApprove={() => navigate(ROUTES.AUTH.LOGIN)}
           approveBtnText="로그인하기"
           cancelBtnText="나중에 할래요"
           isBtnWidthEqual={false}
@@ -128,6 +134,7 @@ const RecruitmentsSectionWrapper = styled.div`
   gap: 21px;
 
   .section__title {
+    width: 100%;
     color: ${({ theme }) => theme.color.black5};
     font-family: Pretendard;
     font-size: ${({ theme }) => theme.font.xxlarge};

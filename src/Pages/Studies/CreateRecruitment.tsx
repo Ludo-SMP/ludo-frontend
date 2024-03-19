@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-// import { ContactButton } from '../../Components/Selectbox/ContactButton';
 import { ContactUrlInput } from '../../Components/Textarea/ContactUrlInput';
 import { SubmitButton } from '../../Components/Button/Studies/SubmitButton';
 import { CalendarButton } from '../../Components/Selectbox/CalendarButton';
@@ -7,43 +6,38 @@ import { PositionButton } from '../../Components/Selectbox/PositionButton';
 import { StackSelectButton } from '@/Components/Selectbox/StackSelectButton';
 import { Mainarea } from '../../Components/Textarea/Mainarea';
 import { Titlearea } from '../../Components/Textarea/Titlearea';
-// import { GatherButton } from '../../Components/Selectbox/GatherButton';
-// import { StackModal } from '../../Components/Modal/
 import { EndDate } from '../../Components/Calendar/EndDate';
 import { media } from '../../Styles/theme';
-// import { Gather } from '@/Types/studies';
-import { useState } from 'react';
-// import { stackCategory } from '@/Shared/category';
-import { useStack } from '@/Apis/stack';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useStack } from '@/Hooks/stack/useStack';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { One, Two, Three, Four } from '@/Assets';
 import { SaveButton } from '@/Components/Button/Studies/SaveButton';
-// import { STUDY } from '@/Constants/queryString';
 import { Gather } from '@/Types/studies';
 import { ContactButton } from '@/Components/Selectbox/ContactButton';
 import { ApplicantButton } from '@/Components/Selectbox/ApplicantButton';
-import { useStudyDetail } from '@/Apis/study';
+import { useStudyDetail } from '@/Hooks/study/useStudyDetail';
+import { getPeriod } from '@/utils/date';
 
 axios.defaults.withCredentials = true;
 export type OptionalCreates = Partial<Gather>;
 
-export const CreateRecruitment = () => {
-  const Navigation = useNavigate();
+const CreateRecruitment = () => {
   const studyId = Number(useParams().studyId);
-  useStudyDetail(studyId);
-  const { data: studyDetail } = useStudyDetail(studyId);
+
+  const Navigation = useNavigate();
+  const { pathname } = useLocation();
+
+  const { data: studyDetail, isLoading } = useStudyDetail(studyId);
   const study = studyDetail?.study;
 
-  // console.log(studyId);
   const [useForm, setuseForm] = useState<Gather>({
     title: '',
     // recruitmentLimit: 0,
     recruitmentEndDateTime: '',
     positionId: 0,
     stackId: 0,
-    // positionId: 0,
-    // stackId: 0,
     callUrl: '',
     content: '',
     studyId: Number(useParams().studyId),
@@ -57,7 +51,7 @@ export const CreateRecruitment = () => {
       ...fields,
     });
   }
-  // studyId:number
+
   async function posts() {
     const { data } = await axios.post(`https://ludoapi.store/api/studies/${studyId}/recruitments`, {
       title: useForm.title,
@@ -71,10 +65,8 @@ export const CreateRecruitment = () => {
       applicantCount: useForm.applicantCount,
       // studyId: useForm.studyId,
     });
-    // console.log(data);
     const recruitmentId = data?.data?.recruitment?.id;
     Navigation(`/studies/${recruitmentId}/recruitment`);
-    // localStorage.setItem('gather', JSON.stringify(data.data));
   }
 
   const handleSubmit = (event: any) => {
@@ -83,119 +75,128 @@ export const CreateRecruitment = () => {
     // Navigation('/');
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
   return (
-    <>
-      <StudyContainer onSubmit={handleSubmit}>
-        <StudyMain>스터디 팀원 모집하기</StudyMain>
-        <TopBox>
-          <StudyTitle>
-            <AssetContainer>
-              <One />
-            </AssetContainer>
-            스터디 기본 안내
-          </StudyTitle>
-          <StudyTopInfo>
-            <StudyWrapper>
-              <ContentText>모집인원</ContentText>
-              <ApplicantButton setForm={forms} useForm={useForm} />
-            </StudyWrapper>
-            <StudyWrapper>
-              <ContentText>모집마감일</ContentText>
-              <CalendarButton>
-                <EndDate setForm={forms} useForm={useForm} />
-              </CalendarButton>
-            </StudyWrapper>
-            <StudyWrapper>
-              <ContentText>포지션</ContentText>
-              <PositionButton setForm={forms} useForm={useForm} />
-            </StudyWrapper>
-            <StudyWrapper>
-              <ContentText>기술스택</ContentText>
-              <StackSelectButton setForm={forms} useForm={useForm} item={useStack as any} />
-            </StudyWrapper>
-            <StudyWrapper>
-              <ContentText>연락방법</ContentText>
-              <ContactButton setForm={forms} useForm={useForm} />
-            </StudyWrapper>
-            <StudyWrapper>
-              <ContentText>연결url</ContentText>
-              <ContactUrlInput setForm={forms} useForm={useForm} />
-            </StudyWrapper>
-          </StudyTopInfo>
-        </TopBox>
-        <BorderBox />
-        <MiddleBox>
-          <StudyTitle>
-            <AssetContainer>
-              <Two />
-            </AssetContainer>
-            스터디 진행관련
-          </StudyTitle>
-          <StudyMiddleInfo>
-            <StudyWrapper>
-              <ContentText>진행방식</ContentText>
-              <SubContentTitle>{study?.way}</SubContentTitle>
-            </StudyWrapper>
-            <StudyWrapper>
-              <ContentText>진행 플랫폼</ContentText>
-              <SubContentTitle>{study?.platform}</SubContentTitle>
-            </StudyWrapper>
-            <StudyWrapper>
-              <ContentText> 진행기간</ContentText>
-              <SubContentTitle>
-                {study?.startDateTime} ~ {study?.endDateTime}
-              </SubContentTitle>
-            </StudyWrapper>
-          </StudyMiddleInfo>
-        </MiddleBox>
-        <BorderBox />
-        <StudyMidBottom>
-          <StudyTitle>
-            <AssetContainer>
-              <Three />
-            </AssetContainer>
-            스터디 기본구성
-          </StudyTitle>
-          <MiddleBottomWrapper>
-            <ContentText>스터디 제목</ContentText>
-            <SubContentTitle>{study?.title}</SubContentTitle>
-          </MiddleBottomWrapper>
-          <MiddleBottomInfo>
+    <StudyContainer onSubmit={handleSubmit}>
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : (
+        <>
+          <StudyMain>스터디 팀원 모집하기</StudyMain>
+          <TopBox>
+            <StudyTitle>
+              <AssetContainer>
+                <One />
+              </AssetContainer>
+              스터디 기본 안내
+            </StudyTitle>
+            <StudyTopInfo>
+              <StudyWrapper>
+                <ContentText>모집인원</ContentText>
+                <ApplicantButton setForm={forms} useForm={useForm} />
+              </StudyWrapper>
+              <StudyWrapper>
+                <ContentText>모집마감일</ContentText>
+                <CalendarButton>
+                  <EndDate setForm={forms} useForm={useForm} />
+                </CalendarButton>
+              </StudyWrapper>
+              <StudyWrapper>
+                <ContentText>포지션</ContentText>
+                <PositionButton setForm={forms} useForm={useForm} />
+              </StudyWrapper>
+              <StudyWrapper>
+                <ContentText>기술스택</ContentText>
+                <StackSelectButton setForm={forms} useForm={useForm} item={useStack as any} />
+              </StudyWrapper>
+              <StudyWrapper>
+                <ContentText>연락방법</ContentText>
+                <ContactButton setForm={forms} useForm={useForm} />
+              </StudyWrapper>
+              <StudyWrapper>
+                <ContentText>연결url</ContentText>
+                <ContactUrlInput setForm={forms} useForm={useForm} />
+              </StudyWrapper>
+            </StudyTopInfo>
+          </TopBox>
+          <BorderBox />
+
+          <MiddleBox>
+            <StudyTitle>
+              <AssetContainer>
+                <Two />
+              </AssetContainer>
+              스터디 진행관련
+            </StudyTitle>
+            <StudyMiddleInfo>
+              <StudyWrapper>
+                <ContentText>진행방식</ContentText>
+                <SubContentTitle>{study?.way}</SubContentTitle>
+              </StudyWrapper>
+              <StudyWrapper>
+                <ContentText>진행 플랫폼</ContentText>
+                <SubContentTitle>{study?.platform}</SubContentTitle>
+              </StudyWrapper>
+              <StudyWrapper>
+                <ContentText> 진행기간</ContentText>
+                <SubContentTitle>{getPeriod(study.startDateTime, study.endDateTime)}</SubContentTitle>
+              </StudyWrapper>
+            </StudyMiddleInfo>
+          </MiddleBox>
+          <BorderBox />
+          <StudyMidBottom>
+            <StudyTitle>
+              <AssetContainer>
+                <Three />
+              </AssetContainer>
+              스터디 기본구성
+            </StudyTitle>
             <MiddleBottomWrapper>
-              <ContentText>카테고리</ContentText>
-              <SubContentTitle>{study?.category as any}</SubContentTitle>
+              <ContentText>스터디 제목</ContentText>
+              <SubContentTitle>{study?.title}</SubContentTitle>
             </MiddleBottomWrapper>
-            <MiddleBottomWrapper>
-              <ContentText>스터디 최대 인원</ContentText>
-              <SubContentTitle>{study?.participantsLimit}</SubContentTitle>
-            </MiddleBottomWrapper>
-          </MiddleBottomInfo>
-        </StudyMidBottom>
-        <BorderBox />
-        <BottomBox>
-          <StudyTitle>
-            <AssetContainer>
-              <Four />
-            </AssetContainer>
-            스터디 팀원 모집 공고 제목
-          </StudyTitle>
-          <BottomWrapper>
-            <ContentText>제목</ContentText>
-            <Titlearea setForm={forms} useForm={useForm} />
-          </BottomWrapper>
-          <BottomWrapper>
-            <ContentText>내용</ContentText>
-            <Mainarea setForm={forms} useForm={useForm} />
-          </BottomWrapper>
-        </BottomBox>
-        <ButtonBox>
-          <SaveButton type="submit">임시저장</SaveButton>
-          <SubmitButton type="submit">등록하기</SubmitButton>
-        </ButtonBox>
-      </StudyContainer>
-    </>
+            <MiddleBottomInfo>
+              <MiddleBottomWrapper>
+                <ContentText>카테고리</ContentText>
+                <SubContentTitle>{study?.category.name}</SubContentTitle>
+              </MiddleBottomWrapper>
+              <MiddleBottomWrapper>
+                <ContentText>스터디 최대 인원</ContentText>
+                <SubContentTitle>{study?.participantsLimit}</SubContentTitle>
+              </MiddleBottomWrapper>
+            </MiddleBottomInfo>
+          </StudyMidBottom>
+          <BorderBox />
+          <BottomBox>
+            <StudyTitle>
+              <AssetContainer>
+                <Four />
+              </AssetContainer>
+              스터디 팀원 모집 공고 제목
+            </StudyTitle>
+            <BottomWrapper>
+              <ContentText>제목</ContentText>
+              <Titlearea setForm={forms} useForm={useForm} />
+            </BottomWrapper>
+            <BottomWrapper>
+              <ContentText>내용</ContentText>
+              <Mainarea setForm={forms} useForm={useForm} />
+            </BottomWrapper>
+          </BottomBox>
+          <ButtonBox>
+            <SaveButton type="submit">임시저장</SaveButton>
+            <SubmitButton type="submit">등록하기</SubmitButton>
+          </ButtonBox>
+        </>
+      )}
+    </StudyContainer>
   );
 };
+
+export default CreateRecruitment;
 
 const BorderBox = styled.div`
   width: 1200px;
@@ -208,9 +209,12 @@ const AssetContainer = styled.image`
 `;
 
 const StudyMain = styled.p`
+  width: 1200px;
   display: flex;
   font-size: ${(props) => props.theme.font.xxxlarge};
   text-align: left;
+  align-items: left;
+  margin-right: 30px;
   font-weight: 800;
   line-height: 60px;
   padding-bottom: 40px;
@@ -240,13 +244,12 @@ const SubContentTitle = styled.p`
 
 const StudyContainer = styled.form`
   height: 2000px;
-  /* margin: auto; */
   padding-left: 200px;
-  /* padding-right: 348px; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: left;
+  align-items: center;
 `;
 const TopBox = styled.div`
   height: 310px;
@@ -275,8 +278,6 @@ const StudyMiddleInfo = styled.div`
   grid-template-columns: 392px 392px 392px;
   grid-template-rows: 50px;
 `;
-
-// 중간마지막
 
 const StudyMidBottom = styled.div`
   height: 340px;

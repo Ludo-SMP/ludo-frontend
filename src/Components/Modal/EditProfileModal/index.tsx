@@ -1,8 +1,8 @@
-import { useEditProfileNickname } from '@/Apis/user';
 import Button from '@/Components/Common/Button';
 import InputText from '@/Components/Common/InputText/iindex';
 import { PROFILE } from '@/Constants/messages';
 import { STUDY } from '@/Constants/queryString';
+import { useEditProfileNickname } from '@/Hooks/user/useEditProfileNickname';
 import { useModalStore } from '@/store/modal';
 import { useQueryClient } from '@tanstack/react-query';
 import { SetStateAction } from 'react';

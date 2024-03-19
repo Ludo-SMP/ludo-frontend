@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Hamburger } from '@/Assets';
 import GnbMenu from './GnbMenu';
 import { useNavigate } from 'react-router-dom';
-import { ROUTER_PATH } from '@/Constants/Router_Path';
+import { ROUTES } from '@/Constants/route';
 import { media } from '@/Styles/theme';
 
 export interface GnbMenuType {
@@ -11,9 +11,9 @@ export interface GnbMenuType {
 }
 
 const gnbMenus: GnbMenuType[] = [
-  { name: '메인 페이지', page: ROUTER_PATH.main },
-  { name: '스터디 모집 공고 모아보기', page: ROUTER_PATH.recruitments },
-  { name: '마이페이지', page: ROUTER_PATH.mypage },
+  { name: '메인 페이지', page: ROUTES.MAIN },
+  { name: '스터디 모집 공고 모아보기', page: ROUTES.RECRUITMENT.RECRUITMENTS },
+  { name: '마이페이지', page: ROUTES.MYPAGE },
 ];
 
 const Gnb = () => {
