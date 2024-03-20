@@ -24,4 +24,5 @@ export const getRecruitments = (
 export const getRecruitmentDetail = (recruitmentId: number): Promise<{ data: { data: RecruitmentDetail } }> =>
   httpClient.get(API_END_POINT.RECRUITMENT(recruitmentId));
 
-export const closeRecruitment = (studyId: number) => httpClient.patch(API_END_POINT.CLOSE_RECRUITMENT(studyId));
+export const closeRecruitment = (studyId: number) =>
+  httpClient.patch(API_END_POINT.CLOSE_RECRUITMENT(studyId), null, { params: { status: 'RECRUITED' } });

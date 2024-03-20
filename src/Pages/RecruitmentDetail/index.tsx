@@ -11,7 +11,7 @@ import StudyProgressInfoSection from './StudyProgessInfoSection';
 import StudyBasicInfoSection from './StudyBasicInfoSection';
 import Button from '@/Components/Common/Button';
 import Modal from '@/Components/Common/Modal';
-import { APPLY } from '@/Constants/messages';
+import { APPLY, RECRUITMENT } from '@/Constants/messages';
 import { useLoginStore } from '@/store/auth';
 import { ROUTES } from '@/Constants/route';
 import { useModalStore } from '@/store/modal';
@@ -27,6 +27,7 @@ const RecruitmentDetailPage = () => {
   const { isLoggedIn } = useLoginStore();
   const { user } = useUserStore();
   const [applyTryStatus, setApplyTryStatus] = useState<ApplyTryStatus>('NOT APPLY');
+  const [isCloseRecruitmentBtnClicked, setIsCloseRecruitmentBtnClicked] = useState<boolean>(false);
 
   const navigate = useNavigate();
   const { data: recruitmentDetail, isLoading } = useRecruitmentDetail(recruitmentId);
@@ -99,7 +100,14 @@ const RecruitmentDetailPage = () => {
           <StudyButtonsWrapper>
             {user?.id === study.owner.id ? (
               <>
-                <Button onClick={() => closeRecruitmentMutate()}>모집 마감하기</Button>
+                <Button
+                  onClick={() => {
+                    setIsCloseRecruitmentBtnClicked(true);
+                    openModal();
+                  }}
+                >
+                  모집 마감하기
+                </Button>
                 <Button
                   scheme="secondary"
                   onClick={() => {
@@ -115,7 +123,7 @@ const RecruitmentDetailPage = () => {
               </Button>
             )}
           </StudyButtonsWrapper>
-          {!isLoggedIn && isModalOpen && (
+          {!isLoggedIn && isModalOpen && !isCloseRecruitmentBtnClicked && (
             <Modal
               title={APPLY.LOGIN.title}
               handleApprove={() => navigate(ROUTES.AUTH.LOGIN)}
@@ -126,7 +134,7 @@ const RecruitmentDetailPage = () => {
               {APPLY.LOGIN.content}
             </Modal>
           )}
-          {isLoggedIn && isModalOpen && applyTryStatus === 'NOT APPLY' && (
+          {isLoggedIn && isModalOpen && !isCloseRecruitmentBtnClicked && applyTryStatus === 'NOT APPLY' && (
             <ApplyModal
               handleApplyApprove={setApplyTryStatus}
               studyId={study.id}
@@ -134,7 +142,7 @@ const RecruitmentDetailPage = () => {
               positions={recruitment.positions}
             />
           )}
-          {isLoggedIn && isModalOpen && applyTryStatus === 'SUCCESS' && (
+          {isLoggedIn && isModalOpen && !isCloseRecruitmentBtnClicked && applyTryStatus === 'SUCCESS' && (
             <Modal
               title={APPLY.SUCCESS.title}
               handleApprove={() => {
@@ -149,6 +157,7 @@ const RecruitmentDetailPage = () => {
           )}
           {isLoggedIn &&
             isModalOpen &&
+            !isCloseRecruitmentBtnClicked &&
             (applyTryStatus === 'CLOSED' ||
               applyTryStatus === 'ALREDAY_APPLY' ||
               applyTryStatus === 'ALREDY_PARTICIPATED') && (
@@ -173,6 +182,20 @@ const RecruitmentDetailPage = () => {
                   : APPLY.ALREADY_PARTICIPATED.content}
               </Modal>
             )}
+          {isModalOpen && isCloseRecruitmentBtnClicked && (
+            <Modal
+              isBtnWidthEqual={true}
+              cancelBtnText={'취소하기'}
+              approveBtnText={'네'}
+              handleApprove={() => {
+                setIsCloseRecruitmentBtnClicked(false);
+                closeRecruitmentMutate();
+              }}
+              title={RECRUITMENT.CLOSE.title}
+            >
+              {RECRUITMENT.CLOSE.content}
+            </Modal>
+          )}
         </>
       )}
     </RecruitmentDetailWrapper>
