@@ -8,7 +8,10 @@ import { useAcceptApplyMutation } from '@/Hooks/study/useAcceptApplyMutation';
 import { useRefuseApplyMutation } from '@/Hooks/study/useRefuseApplyMutation';
 import Modal from '../Common/Modal';
 import { APPLY } from '@/Constants/messages';
+import { STUDY } from '@/Constants/queryString';
 import { useModalStore } from '@/store/modal';
+import { useQueryClient } from '@tanstack/react-query';
+
 interface ApplicantCardProps extends Omit<Member, 'role'> {
   studyId: number;
   title: string;
@@ -18,6 +21,7 @@ interface ApplicantCardProps extends Omit<Member, 'role'> {
 const ApplicantCard = ({ studyId, id: applicantId, title, nickname, email, position, isOwner }: ApplicantCardProps) => {
   const [applyStatus, setApplyStatus] = useState<ApplyStatus>('UNCHECKED');
   const { isModalOpen, closeModal } = useModalStore();
+  const queryClient = useQueryClient();
 
   const { mutate: acceptMutate } = useAcceptApplyMutation(studyId, applicantId, () => {
     setApplyStatus('ACCEPTED');
@@ -40,7 +44,8 @@ const ApplicantCard = ({ studyId, id: applicantId, title, nickname, email, posit
       {isOwner && (
         <ApplicantButtonsWrapper>
           <Button
-            onClick={() => {
+            onClick={(e) => {
+              e.stopPropagation();
               refuseMutate();
             }}
           >
@@ -48,7 +53,8 @@ const ApplicantCard = ({ studyId, id: applicantId, title, nickname, email, posit
           </Button>
           <Button
             scheme="secondary"
-            onClick={() => {
+            onClick={(e) => {
+              e.stopPropagation();
               acceptMutate();
             }}
           >
@@ -57,12 +63,26 @@ const ApplicantCard = ({ studyId, id: applicantId, title, nickname, email, posit
         </ApplicantButtonsWrapper>
       )}
       {isModalOpen && applyStatus === 'ACCEPTED' && (
-        <Modal handleApprove={closeModal} title={APPLY.ACCEPT.title} approveBtnText="확인하기">
+        <Modal
+          handleApprove={() => {
+            closeModal();
+            queryClient.invalidateQueries({ queryKey: [...STUDY.APPLICNATS(studyId)] });
+          }}
+          title={APPLY.ACCEPT.title}
+          approveBtnText="확인하기"
+        >
           {APPLY.ACCEPT.content}
         </Modal>
       )}
       {isModalOpen && applyStatus === 'REFUSED' && (
-        <Modal handleApprove={closeModal} title={APPLY.REFUSE.title} approveBtnText="확인하기">
+        <Modal
+          handleApprove={() => {
+            closeModal();
+            queryClient.invalidateQueries({ queryKey: [...STUDY.APPLICNATS(studyId)] });
+          }}
+          title={APPLY.REFUSE.title}
+          approveBtnText="확인하기"
+        >
           {APPLY.REFUSE.content}
         </Modal>
       )}
