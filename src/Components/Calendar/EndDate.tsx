@@ -21,9 +21,9 @@ export type Props = {
   ref?: string;
 };
 
-export const EndDate = ({ setForm, useForm }: Props) => {
+export const EndDate = ({ useForm }: Props) => {
   const [startDateTime, setForms] = useState(new Date());
-  console.log(setForm);
+
   return (
     <DateContainer
       value={(useForm.recruitmentEndDateTime = startDateTime.toISOString().slice(0, -5))}

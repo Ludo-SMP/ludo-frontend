@@ -147,18 +147,32 @@ const RecruitmentDetailPage = () => {
               <div className="approve__image"></div>
             </Modal>
           )}
-          {isLoggedIn && isModalOpen && (applyTryStatus === 'CLOSED' || applyTryStatus === 'ALREDAY_APPLY') && (
-            <Modal
-              title={applyTryStatus === 'CLOSED' ? APPLY.CLOSED.title : APPLY.ALREADY_APPLY.title}
-              handleApprove={() => {
-                setApplyTryStatus(() => 'NOT APPLY');
-                closeModal();
-              }}
-              approveBtnText="확인"
-            >
-              {applyTryStatus === 'CLOSED' ? APPLY.CLOSED.content : APPLY.ALREADY_APPLY.content}
-            </Modal>
-          )}
+          {isLoggedIn &&
+            isModalOpen &&
+            (applyTryStatus === 'CLOSED' ||
+              applyTryStatus === 'ALREDAY_APPLY' ||
+              applyTryStatus === 'ALREDY_PARTICIPATED') && (
+              <Modal
+                title={
+                  applyTryStatus === 'CLOSED'
+                    ? APPLY.CLOSED.title
+                    : applyTryStatus === 'ALREDAY_APPLY'
+                    ? APPLY.ALREADY_APPLY.title
+                    : APPLY.ALREADY_PARTICIPATED.title
+                }
+                handleApprove={() => {
+                  setApplyTryStatus(() => 'NOT APPLY');
+                  closeModal();
+                }}
+                approveBtnText="확인"
+              >
+                {applyTryStatus === 'CLOSED'
+                  ? APPLY.CLOSED.content
+                  : applyTryStatus === 'ALREDAY_APPLY'
+                  ? APPLY.ALREADY_APPLY.content
+                  : APPLY.ALREADY_PARTICIPATED.content}
+              </Modal>
+            )}
         </>
       )}
     </RecruitmentDetailWrapper>

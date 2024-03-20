@@ -21,13 +21,12 @@ export type Props = {
   ref?: string;
 };
 
-export const ProgressPeriod = ({ setForm, useForm }: Props) => {
+export const ProgressPeriod = ({ useForm }: Props) => {
   const [startDateTime, setForms] = useState(new Date());
   const [endDateTime, setFormss] = useState(new Date());
   // const StartHandler = (event: ChangeEvent<HTMLSelectElement>) => {
   //   setForm({ startDateTime: event.target.value });
   // };
-  console.log(setForm);
 
   return (
     <>
