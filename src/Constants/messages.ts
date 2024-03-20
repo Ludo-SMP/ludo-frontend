@@ -33,6 +33,14 @@ export const APPLY = Object.freeze({
   },
 });
 
+export const RECRUITMENT = Object.freeze({
+  CLOSE: {
+    title: '스터디 모집을 마감하시겠습니까?',
+    content:
+      '스터디 모집을 마감하면\n메인페이지 상단의 ‘스터디 모아보기’ 목록에서 삭제됩니다.\n모집을 마감하시겠습니까?',
+  },
+});
+
 export const SEARCH = Object.freeze({
   NOT_FONND_RESULT: {
     content: `찾는 태그에 대한 검색 결과가 없습니다.\n스터디를 직접 생성하시겠습니까?`,

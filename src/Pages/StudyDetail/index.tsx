@@ -76,7 +76,7 @@ export const StudyDetailPage = () => {
           <RowDivider rowHeight={16} />
           <MemberSection memberLimit={study?.participantsLimit} members={study?.participants} />
           <StudyButtonsWrapper>
-            {study.participants.length && (
+            {study.participants.length && study.owner.id !== user?.id && (
               <Button
                 size="fullWidth"
                 onClick={() => {

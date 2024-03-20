@@ -19,7 +19,8 @@ export const refuseApply = (studyId: number, applicantId: number) =>
 export const acceptApply = (studyId: number, applicantId: number) =>
   httpClient.post(API_END_POINT.APPLY_ACCEPT(studyId, applicantId));
 
-export const cancelApply = (recruitmentId: number) => httpClient.post(API_END_POINT.APPLY_CANCEL(recruitmentId));
+export const cancelApply = (studyId: number, recruitmentId: number) =>
+  httpClient.post(API_END_POINT.APPLY_CANCEL(studyId, recruitmentId));
 
 export const deleteStudy = (studyId: number) => httpClient.delete(API_END_POINT.DELETE_STUDY(studyId));
 

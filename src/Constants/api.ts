@@ -33,7 +33,8 @@ export const API_END_POINT = {
   // APPLY
   APPLY: (studyId: number, recruitmentId: number) =>
     `${API_PREFIX}/studies/${studyId}/recruitments/${recruitmentId}/apply`,
-  APPLY_CANCEL: (recruitmentId: number) => `${API_PREFIX}/recruitments/${recruitmentId}/cancel`,
+  APPLY_CANCEL: (studyId: number, recruitmentId: number) =>
+    `${API_PREFIX}/studies/${studyId}/recruitments/${recruitmentId}/cancel`,
   APPLY_ACCEPT: (studyId: number, applicantId: number) =>
     `${API_PREFIX}/studies/${studyId}/apply-accept/${applicantId}`,
   APPLY_REFUSE: (studyId: number, applicantId: number) =>
