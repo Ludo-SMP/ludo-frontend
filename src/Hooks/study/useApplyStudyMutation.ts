@@ -4,6 +4,7 @@ import { useModalStore } from '@/store/modal';
 import { useMutation } from '@tanstack/react-query';
 import { applyStudy } from '@/Apis/study';
 import { STUDY } from '@/Constants/queryString';
+import { AxiosError } from 'axios';
 
 export const useApplyStudyMutation = (
   studyId: number,
@@ -18,10 +19,11 @@ export const useApplyStudyMutation = (
       handleApplyApprove('SUCCESS');
       openModal();
     },
-    onError: () => {
-      // const message = e?.response?.data?.message;
-      // if (message === '현재 모집 중인 스터디가 아닙니다.') handleApplyApprove(() => 'CLOSED');
-      // if (message === '이미 지원한 모집 공고입니다.') handleApplyApprove(() => 'ALREDAY_APPLY');
+    onError: (e: AxiosError<{ ok: boolean; message: string; data: null }>) => {
+      const errorMessage = e.response.data?.message;
+      if (errorMessage === '이미 지원한 모집 공고입니다.') handleApplyApprove(() => 'ALREDAY_APPLY');
+      if (errorMessage === '이미 수락된 모집 공고입니다.') handleApplyApprove(() => 'ALREDY_PARTICIPATED');
+      if (errorMessage === '현재 모집 중인 스터디가 아닙니다.') handleApplyApprove(() => 'CLOSED');
       openModal();
     },
   });
