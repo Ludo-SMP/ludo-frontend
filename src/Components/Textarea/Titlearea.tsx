@@ -23,8 +23,7 @@ export type Props = {
 
 export const Titlearea = ({ setForm, useForm }: Props) => {
   // const [inputValue, setForms] = useState('');
-  // console.log(inputValue);
-  // console.log(setForms);
+
   // const [inputValue, setForms] = useState('');
   const onValueHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setForm({ title: event.target.value });
