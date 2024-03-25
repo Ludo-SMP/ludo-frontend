@@ -30,6 +30,7 @@ export { default as Logout } from './icons/logout.svg?react';
 export { default as BlankLogo } from './images/blank-logo.png';
 export { default as Logo } from './images/logo.png';
 export { default as FooterLogo } from './images/logo2.png';
+export { default as UTLogo } from './images/logo3.png';
 
 // Banner
 export { default as Banner1 } from './images/banner1.png';

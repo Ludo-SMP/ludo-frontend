@@ -16,11 +16,13 @@ import ModifyStudy from '@/Pages/Studies/ModifyStudy';
 import CreateRecruitment from '@/Pages/Studies/CreateRecruitment';
 import ModifyRecruitment from '@/Pages/Studies/ModifyRecruitment';
 import ErrorBoundary from '@/Components/ErrorBoundary';
+import UTbanner from '@/Components/UTbanner';
 
 export const RouterPath = createBrowserRouter([
   {
     element: (
       <>
+        <UTbanner />
         <Header />
         <Outlet />
         <Footer />
