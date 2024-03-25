@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { media } from '@/Styles/theme';
 import { ROUTES } from '@/Constants/route';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
-import { Logo, Alarm, Profile, Logout } from '@/Assets';
+import { Logo, Alarm, Profile } from '@/Assets';
 import { useLoginStore } from '@/store/auth';
 import Button from '../Common/Button';
 import StudyButtonSection from './StudyButtonSection';
@@ -12,6 +12,7 @@ import Gnb from './Gnb';
 import Dropdown from '../Dropdown';
 import { useModalStore } from '@/store/modal';
 import { useLogOutMutation } from '@/Hooks/auth/useLogOutMutation';
+import DropdownItem from '../Common/DropdownItem';
 
 const Header = () => {
   const { isLoggedIn } = useLoginStore();
@@ -48,11 +49,21 @@ const Header = () => {
               )}
               <UserInfoWrapper>
                 <Alarm width={40} height={40} />
-                <Dropdown toggleButton={<Profile width={40} height={40} />}>
-                  <div className="logout" onClick={() => logoutMutate()}>
-                    <Logout width={20} height={20} />
-                    <span>로그아웃</span>
-                  </div>
+                <Dropdown image={<Profile width={40} height={40} />}>
+                  <DropdownItem
+                    onClick={() => {
+                      navigate(ROUTES.MYPAGE);
+                    }}
+                  >
+                    마이페이지
+                  </DropdownItem>
+                  <DropdownItem
+                    onClick={() => {
+                      logoutMutate();
+                    }}
+                  >
+                    로그아웃 하기
+                  </DropdownItem>
                 </Dropdown>
               </UserInfoWrapper>
             </>
