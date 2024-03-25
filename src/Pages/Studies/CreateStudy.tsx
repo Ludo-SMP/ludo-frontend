@@ -49,6 +49,7 @@ const CreateStudy = () => {
       positionId: useForm.positionId,
       platform: useForm.platform,
     });
+
     const studyId = data.data.study.id;
     Navigate(`/studies/${studyId}`);
   }

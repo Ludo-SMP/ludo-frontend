@@ -27,9 +27,9 @@ export const BigCategoryButton = ({ setForm, useForm }: Props) => {
   return (
     <ButtonConTainer name="categoryId" className="select" value={useForm.categoryId} onChange={submitHandler}>
       <Textwrapper>카테고리</Textwrapper>
-      <Textwrapper value={1}>코딩테스트</Textwrapper>
-      <Textwrapper value={2}>프로젝트</Textwrapper>
-      <Textwrapper value={3}>모의면접</Textwrapper>
+      <Textwrapper value={1}>프로젝트</Textwrapper>
+      <Textwrapper value={2}>코딩 테스트</Textwrapper>
+      <Textwrapper value={3}>모의 면접</Textwrapper>
     </ButtonConTainer>
   );
 };

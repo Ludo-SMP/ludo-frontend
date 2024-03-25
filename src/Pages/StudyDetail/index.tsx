@@ -18,6 +18,7 @@ import { useModalStore } from '@/store/modal';
 import Modal from '@/Components/Common/Modal';
 import { DELETE, LEAVE } from '@/Constants/messages';
 import { useEffect, useState } from 'react';
+import { useApplicantsDetail } from '@/Hooks/study/useApplicantsDetail';
 
 export const StudyDetailPage = () => {
   const studyId = Number(useParams().studyId);
@@ -30,6 +31,8 @@ export const StudyDetailPage = () => {
   const [isLeftBtnClicked, setIsLeftBtnClicked] = useState<boolean>(false);
 
   const { data: studyDetail, isLoading } = useStudyDetail(studyId);
+  const { data: applicantsDetail, isLoading: isLoaidngApplicantsDetail } = useApplicantsDetail(studyId);
+
   const study = studyDetail?.study;
 
   const { mutate: closeRecruitmentMutate } = useCloseRecruitmentMutation(studyId, () => {
@@ -61,7 +64,9 @@ export const StudyDetailPage = () => {
 
             {study.hasRecruitment && (
               <Button onClick={() => navigate(`/studies/${studyId}/applicants`)}>
-                <span>스터디 지원자가 있어요!</span>
+                <span>
+                  스터디 지원자 확인하기({isLoaidngApplicantsDetail ? 0 : applicantsDetail.applicants.length}명)
+                </span>
                 <Right />
               </Button>
             )}
@@ -155,6 +160,12 @@ const StudyDetailTitleWrapper = styled.div`
     &:hover {
       border: none;
     }
+  }
+  .title {
+    max-width: 600px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 `;
 
