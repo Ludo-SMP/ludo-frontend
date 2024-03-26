@@ -34,7 +34,9 @@ export { default as FooterLogo } from './images/logo2.png';
 export { default as UTLogo } from './images/logo3.png';
 
 // Character
-export { default as NotFound } from './images/notFound.png';
+export { default as NotFound } from './images/character1.png';
+export { default as LoginFail } from './images/character2.png';
+export { default as SignUpFail } from './images/character2.png';
 
 // Background
 export { default as SignUpBackground } from './images/background.png';

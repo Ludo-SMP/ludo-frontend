@@ -40,6 +40,7 @@ const LoginGuideWrapper = styled.div`
   display: inline-flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 28px;
   gap: 24px;
   margin: 0 auto;
   align-self: stretch;

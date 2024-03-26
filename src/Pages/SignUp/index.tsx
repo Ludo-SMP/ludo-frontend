@@ -16,7 +16,7 @@ export const SignUp = () => {
   }, [pathname]);
   return (
     <SignUpWrapper>
-      <SignUpGuideWrapper image={SignUpBackground}>
+      <SignUpGuideWrapper>
         <span className="title">{AUTH.SIGNUP.title}</span>
         <div className="content">{AUTH.SIGNUP.content}</div>
       </SignUpGuideWrapper>
