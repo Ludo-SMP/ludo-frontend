@@ -1,9 +1,11 @@
 import SocialLogin from '@/Components/SocialLogin';
+import { AUTH } from '@/Constants/messages';
 import { ROUTES } from '@/Constants/route';
 import { media } from '@/Styles/theme';
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { SignUpBackground } from '@/Assets';
 
 export const SignUp = () => {
   const navigate = useNavigate();
@@ -14,14 +16,17 @@ export const SignUp = () => {
   }, [pathname]);
   return (
     <SignUpWrapper>
-      <SignUpGuideWrapper />
+      <SignUpGuideWrapper image={SignUpBackground}>
+        <span className="title">{AUTH.SIGNUP.title}</span>
+        <div className="content">{AUTH.SIGNUP.content}</div>
+      </SignUpGuideWrapper>
       <SignUpBtnsWrapper>
         <SocialLogin socialType="naver" signType="signup" />
         <SocialLogin socialType="kakao" signType="signup" />
         <SocialLogin socialType="google" signType="signup" />
       </SignUpBtnsWrapper>
       <LoginWrapper>
-        <span>이미 ㅇㅇ 계정이 있으신가요?</span>
+        <span>이미 루도 계정이 있으신가요?</span>
         <button onClick={() => navigate(ROUTES.AUTH.LOGIN)}>로그인하기</button>
       </LoginWrapper>
     </SignUpWrapper>
@@ -38,14 +43,40 @@ const SignUpWrapper = styled.div`
 `;
 
 const SignUpGuideWrapper = styled.div`
-  height: 320px;
-  width: 600px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
   margin: 0 auto;
+  padding-top: 28px;
+  width: 600px;
   align-self: stretch;
-  background-color: ${(props) => props.theme.color.gray5};
-
+  background-image: url(${SignUpBackground});
+  background-repeat: no-repeat;
   ${media.custom(600)} {
     width: 400px;
+    background-image: none;
+  }
+
+  .title {
+    color: ${({ theme }) => theme.color.black5};
+    text-align: center;
+    font-family: Pretendard;
+    font-size: ${({ theme }) => theme.font.xxxxlarge};
+    font-style: normal;
+    font-weight: 800;
+    line-height: 48px;
+  }
+
+  .content {
+    color: ${({ theme }) => theme.color.black5};
+    text-align: center;
+    font-family: Pretendard;
+    font-size: ${({ theme }) => theme.font.medium};
+    font-style: normal;
+    font-weight: 500;
+    line-height: 40px;
+    white-space: pre-line;
   }
 `;
 
@@ -73,6 +104,7 @@ const LoginWrapper = styled.div`
   button {
     color: ${(props) => props.theme.color.black3};
     font-size: 18px;
+    margin-top: 2px;
   }
 `;
 
