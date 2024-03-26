@@ -47,6 +47,17 @@ export const SEARCH = Object.freeze({
   },
 });
 
+export const AUTH = Object.freeze({
+  LOGIN: {
+    title: '간편 로그인 후 이용이 가능합니다!',
+    content: '소셜 로그인을 통해\n스터디 지원부터 진행까지 함께 해봐요 :)',
+  },
+  SIGNUP: {
+    title: '루도에 오신것을 환영합니다!',
+    content: '소셜 로그인을 통해\n스터디 지원부터 진행까지 함께 해봐요 :)',
+  },
+});
+
 export const ERROR = Object.freeze({
   NOT_FOUND: { content: '잘못된 접근입니다.' },
 });
