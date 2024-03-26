@@ -16,17 +16,12 @@
 **누구나 쉽고 빠르게 지속 가능한 스터디에 참여할 수 있는 스터디 플랫폼입니다.**
 
 ## 🛠 사용한 기술 스택
-<img src="https://img.shields.io/badge/React-18.2.0-blue?logo=react">
-<img src="https://img.shields.io/badge/TypeSript-5.2.2-blue?logo=react"><br>
+<img src="https://img.shields.io/badge/React-18.2.0-blue?logo=react"> <img src="https://img.shields.io/badge/TypeSript-5.2.2-blue?logo=react"><br>
 <img src="https://img.shields.io/badge/ReactQuery-5.17.9-blue?logo=react-query"> <img src="https://img.shields.io/badge/Zustand-4.5.0-blue?logo=Zustand"><br>
-<img src="https://img.shields.io/badge/StyledComponents-6.1.8-blue?logo=styledcomponents">
-<img src="https://img.shields.io/badge/MSW-2.2.4-blue?logo=msw"> <br>
-<img src="https://img.shields.io/badge/Prettier-3.2.5-blue?logo=prettier"> 
-<img src="https://img.shields.io/badge/Eslint-8.55.0-blue?logo=esLint"> <br>
-<img src="https://img.shields.io/badge/Vite-5.0.8-blue?logo=vite"> 
-<img src="https://img.shields.io/badge/Nelify--blue?logo=netlify"> <br>
-<img src="https://img.shields.io/badge/ReactHookForm-7.50.1-blue?logo=react-hook-form">
-<img src="https://img.shields.io/badge/ReactRouterDom-6.22.0-blue?logo=react-router-dom"><br>
+<img src="https://img.shields.io/badge/StyledComponents-6.1.8-blue?logo=styledcomponents"> <img src="https://img.shields.io/badge/MSW-2.2.4-blue?logo=msw"> <br>
+<img src="https://img.shields.io/badge/Prettier-3.2.5-blue?logo=prettier"> <img src="https://img.shields.io/badge/Eslint-8.55.0-blue?logo=esLint"> <br>
+<img src="https://img.shields.io/badge/Vite-5.0.8-blue?logo=vite"> <img src="https://img.shields.io/badge/Nelify--blue?logo=netlify"> <br>
+<img src="https://img.shields.io/badge/ReactHookForm-7.50.1-blue?logo=react-hook-form"> <img src="https://img.shields.io/badge/ReactRouterDom-6.22.0-blue?logo=react-router-dom"><br>
 
 
 <img src="https://github.com/Ludo-SMP/ludo-frontend/assets/62270427/d347aa15-be96-4343-b41a-783ba1c4d7b8"/>
