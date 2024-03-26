@@ -2,7 +2,7 @@ import { Profile, More } from '@/Assets';
 import { Member } from '@/Types/study';
 import styled from 'styled-components';
 import Button from '../Common/Button';
-import Dropdown from '../Common/Dropdown';
+import DropdownItem from '../Common/DropdownItem';
 import { useState } from 'react';
 import { useModalStore } from '@/store/modal';
 import EditProfileModal from '../Modal/EditProfileModal';
@@ -28,7 +28,7 @@ const UserCard = ({ nickname, email }: UserCardProps) => {
         </Button>
         {isOpened && (
           <DropdownListWrapper>
-            <Dropdown
+            <DropdownItem
               onClick={() => {
                 setIsOpened(false);
                 setEditState('EDIT');
@@ -36,14 +36,14 @@ const UserCard = ({ nickname, email }: UserCardProps) => {
               }}
             >
               닉네임 변경하기
-            </Dropdown>
-            <Dropdown
+            </DropdownItem>
+            <DropdownItem
               onClick={() => {
                 setIsOpened(false);
               }}
             >
               프로필 사진 변경하기
-            </Dropdown>
+            </DropdownItem>
           </DropdownListWrapper>
         )}
         {editState === 'EDIT' && isModalOpen && <EditProfileModal userNickname={nickname} handleEdit={setEditState} />}

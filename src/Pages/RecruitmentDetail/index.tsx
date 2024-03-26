@@ -101,20 +101,21 @@ const RecruitmentDetailPage = () => {
             {user?.id === study.owner.id ? (
               <>
                 <Button
+                  scheme="secondary"
+                  onClick={() => {
+                    navigate(`/studies/${study.id}/recruitments/edit`);
+                  }}
+                  disabled
+                >
+                  스터디 모집 공고 수정하기
+                </Button>
+                <Button
                   onClick={() => {
                     setIsCloseRecruitmentBtnClicked(true);
                     openModal();
                   }}
                 >
                   모집 마감하기
-                </Button>
-                <Button
-                  scheme="secondary"
-                  onClick={() => {
-                    navigate(`/studies/${study.id}/recruitments/edit`);
-                  }}
-                >
-                  스터디 모집 공고 수정하기
                 </Button>
               </>
             ) : (

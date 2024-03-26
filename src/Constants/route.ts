@@ -4,6 +4,8 @@ export const ROUTES = {
     LOGIN: '/login',
     SIGNUP: '/signup',
     DEACTIVATE: '/deactivate',
+    LOGINFAIL: '/login/fail',
+    SIGNUPFAIL: '/signup/fail',
   },
   MYPAGE: '/mypage',
   RECRUITMENT: {

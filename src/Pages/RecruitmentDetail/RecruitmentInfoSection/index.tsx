@@ -55,13 +55,16 @@ const RecruitmentInfoSectionwrapper = styled.div`
 
   .title {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 12px;
     align-self: stretch;
     color: ${(props) => props.theme.color.black4};
     font-size: ${(props) => props.theme.font.xxlarge};
     font-weight: 800;
     line-height: 48px;
+    /* span {
+      padding-top: 6px;
+    } */
   }
 
   .recruitment__info {

@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 // import { ContactButton } from '../../Components/Selectbox/ContactButton';
 import { ContactUrlInput } from '../../Components/Textarea/ContactUrlInput';
-import { SubmitButton } from '../../Components/Button/Studies/SubmitButton';
 import { CalendarButton } from '../../Components/Selectbox/CalendarButton';
 import { PositionButton } from '../../Components/Selectbox/PositionButton';
 import { StackSelectButton } from '@/Components/Selectbox/StackSelectButton';
@@ -15,15 +14,16 @@ import { useStack } from '@/Hooks/stack/useStack';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { One, Two, Three, Four } from '@/Assets';
-import { SaveButton } from '@/Components/Button/Studies/SaveButton';
+// import { SaveButton } from '@/Components/Button/Studies/SaveButton';
 import { ContactButton } from '@/Components/Selectbox/ContactButton';
 import { ApplicantButton } from '@/Components/Selectbox/ApplicantButton';
 import { useStudyDetail } from '@/Hooks/study/useStudyDetail';
+import Button from '@/Components/Common/Button';
 
 axios.defaults.withCredentials = true;
 export type OptionalCreates = Partial<Gather>;
 
-const ModifyRecruitment = () => {
+const ModifyRecruitmentPage = () => {
   const Navigation = useNavigate();
   const studyId = Number(useParams().studyId);
   useStudyDetail(studyId);
@@ -182,15 +182,15 @@ const ModifyRecruitment = () => {
           </BottomWrapper>
         </BottomBox>
         <ButtonBox>
-          <SaveButton type="submit">임시저장</SaveButton>
-          <SubmitButton type="submit">등록하기</SubmitButton>
+          {/* <SaveButton type="submit">임시저장</SaveButton> */}
+          <Button type="submit" scheme="secondary" size="fullWidth">
+            등록하기
+          </Button>
         </ButtonBox>
       </StudyContainer>
     </>
   );
 };
-
-export default ModifyRecruitment;
 
 const BorderBox = styled.div`
   width: 1200px;
@@ -237,13 +237,13 @@ const SubContentTitle = styled.p`
 `;
 
 const StudyContainer = styled.form`
-  height: 2000px;
-  padding-left: 200px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  text-align: left;
-  align-items: center;
+  max-width: 1224px;
+  margin: 0 auto;
+  margin-top: 40px;
+  padding-bottom: 80px;
+  gap: 40px;
 `;
 const TopBox = styled.div`
   height: 310px;
@@ -320,3 +320,5 @@ const ButtonBox = styled.div`
   flex-direction: row;
   gap: 24px;
 `;
+
+export default ModifyRecruitmentPage;

@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { SaveButton } from '@/Components/Button/Studies/SaveButton';
-import { SubmitButton } from '../../Components/Button/Studies/SubmitButton';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-export const SaveStudy = () => {
+import Button from '@/Components/Common/Button';
+
+const SaveStudyPage = () => {
   const localData = JSON.parse(localStorage.getItem('create'));
   const { pathname } = useLocation();
 
@@ -37,8 +37,12 @@ export const SaveStudy = () => {
         <StudyContents>D-</StudyContents>
       </BottomWrapper>
       <ButtonBox>
-        <SaveButton type="submit">글 삭제하기</SaveButton>
-        <SubmitButton type="submit">이어서 작성하기</SubmitButton>
+        <Button type="submit" scheme="normal" size="fullWidth">
+          글 삭제하기
+        </Button>
+        <Button type="submit" scheme="secondary" size="fullWidth">
+          이어서 작성하기
+        </Button>
       </ButtonBox>
     </StudyContainer>
   );
@@ -49,12 +53,13 @@ const BorderBox = styled.div`
   border-bottom: 1px solid black;
 `;
 const StudyContainer = styled.form`
-  height: 1300px;
-  padding-top: 40px;
-  padding-left: 348px;
-  padding-right: 348px;
-  flex-direction: row;
-  text-align: left;
+  display: flex;
+  flex-direction: column;
+  max-width: 1224px;
+  margin: 0 auto;
+  margin-top: 40px;
+  padding-bottom: 80px;
+  gap: 40px;
 `;
 
 const TopWrapper = styled.div`
@@ -107,3 +112,5 @@ const ButtonBox = styled.div`
   flex-direction: row;
   gap: 24px;
 `;
+
+export default SaveStudyPage;
