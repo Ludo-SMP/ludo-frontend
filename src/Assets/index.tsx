@@ -25,12 +25,14 @@ export { default as Filter } from './icons/filter.svg?react';
 export { default as Create } from './icons/createstudy.svg?react';
 export { default as Loading } from './icons/lodaing.svg?react';
 export { default as Logout } from './icons/logout.svg?react';
+export { default as Article } from './icons/article.svg?react';
 
 // logo
 export { default as BlankLogo } from './images/blank-logo.png';
 export { default as Logo } from './images/logo.png';
 export { default as FooterLogo } from './images/logo2.png';
 export { default as UTLogo } from './images/logo3.png';
+export { default as NotFound } from './images/notFound.png';
 
 // Banner
 export { default as Banner1 } from './images/banner1.png';
