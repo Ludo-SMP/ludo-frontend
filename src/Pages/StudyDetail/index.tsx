@@ -92,18 +92,18 @@ export const StudyDetailPage = () => {
                 스터디 탈퇴하기
               </Button>
             )}
+            {user?.id === study.owner.id &&
+              study.participants.length &&
+              (study.status === 'RECRUITED' || study.status === 'PROGRESS' || study.status === 'RECRUITING') && (
+                <Button scheme="secondary" size="fullWidth" onClick={() => {}} disabled>
+                  스터디 수정하기
+                </Button>
+              )}
             {user?.id === study.owner.id && study.participants.length && study.status === 'RECRUITING' && (
               <Button scheme="secondary" size="fullWidth" onClick={() => closeRecruitmentMutate()}>
                 스터디원 모집 마감하기
               </Button>
             )}
-            {user?.id === study.owner.id &&
-              study.participants.length &&
-              (study.status === 'RECRUITED' || study.status === 'PROGRESS') && (
-                <Button scheme="secondary" size="fullWidth" onClick={() => {}}>
-                  스터디 수정하기
-                </Button>
-              )}
           </StudyButtonsWrapper>
           {isModalOpen && isDeletedBtnClicked && (
             <Modal
