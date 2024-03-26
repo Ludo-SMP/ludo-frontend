@@ -4,10 +4,10 @@ import { ROUTES } from '@/Constants/route';
 import { media } from '@/Styles/theme';
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { LoginFail } from '@/Assets';
+import { SignUpFail } from '@/Assets';
 import styled from 'styled-components';
 
-const LoginFailPage = () => {
+const SignUpFailPage = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
@@ -16,25 +16,24 @@ const LoginFailPage = () => {
   }, [pathname]);
 
   return (
-    <LoginFailWrapper>
-      <LoginFailGuideWrapper>
-        <span className="title">{AUTH.LOGIN_FAIL.title}</span>
-        <div className="content">{AUTH.LOGIN_FAIL.content}</div>
-      </LoginFailGuideWrapper>
-      <LoginFailImageWrapper>
-        <img src={LoginFail} />
-      </LoginFailImageWrapper>
-
-      <LoginFailBtnsWrapper>
-        <Button scheme="primary" size="fullWidth" onClick={() => navigate(ROUTES.AUTH.SIGNUP)}>
-          회원 가입 페이지로 이동하기
+    <SignUpFailWrapper>
+      <SignUpFailGuideWrapper>
+        <span className="title">{AUTH.SIGNUP_FAIL.title}</span>
+        <div className="content">{AUTH.SIGNUP_FAIL.content}</div>
+      </SignUpFailGuideWrapper>
+      <SignUpFailImageWrapper>
+        <img src={SignUpFail} />
+      </SignUpFailImageWrapper>
+      <SignUpFailBtnsWrapper>
+        <Button scheme="primary" size="fullWidth" onClick={() => navigate(ROUTES.AUTH.LOGIN)}>
+          로그인 페이지로 이동하기
         </Button>
-      </LoginFailBtnsWrapper>
-    </LoginFailWrapper>
+      </SignUpFailBtnsWrapper>
+    </SignUpFailWrapper>
   );
 };
 
-const LoginFailWrapper = styled.div`
+const SignUpFailWrapper = styled.div`
   display: flex;
   width: 600px;
   flex-direction: column;
@@ -44,7 +43,7 @@ const LoginFailWrapper = styled.div`
   gap: 40px;
   flex-shrink: 0;
 `;
-const LoginFailGuideWrapper = styled.div`
+const SignUpFailGuideWrapper = styled.div`
   display: inline-flex;
   flex-direction: column;
   align-items: center;
@@ -77,12 +76,13 @@ const LoginFailGuideWrapper = styled.div`
   }
 `;
 
-const LoginFailImageWrapper = styled.div`
+const SignUpFailImageWrapper = styled.div`
   display: flex;
   justify-content: center;
+  margin-bottom: 16px;
 `;
 
-const LoginFailBtnsWrapper = styled.div`
+const SignUpFailBtnsWrapper = styled.div`
   display: flex;
   width: 100%;
   justify-content: center;
@@ -92,4 +92,4 @@ const LoginFailBtnsWrapper = styled.div`
   }
 `;
 
-export default LoginFailPage;
+export default SignUpFailPage;

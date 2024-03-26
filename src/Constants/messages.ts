@@ -61,6 +61,10 @@ export const AUTH = Object.freeze({
     content:
       '현재 입력하신 소셜 계정은 가입되어있지 않습니다.\n가입을 통해 루도의 더 많은 서비스를 즐길 수 있습니다.\n회원 가입을 부탁드립니다 :)',
   },
+  SIGNUP_FAIL: {
+    title: '이미 가입된 계정입니다.',
+    content: '이미 해당 이메일로 가입된 계정이 존재합니다.\n로그인하시거나, 다른 이메일로 가입해주세요.',
+  },
 });
 
 export const ERROR = Object.freeze({

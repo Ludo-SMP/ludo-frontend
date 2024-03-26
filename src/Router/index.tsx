@@ -18,6 +18,7 @@ import ModifyRecruitment from '@/Pages/Studies/ModifyRecruitment';
 import ErrorBoundary from '@/Components/ErrorBoundary';
 import UTbanner from '@/Components/UTbanner';
 import LoginFailPage from '@/Pages/LoginFail';
+import SignUpFailPage from '@/Pages/SignUpFail';
 
 export const RouterPath = createBrowserRouter([
   {
@@ -76,6 +77,10 @@ export const RouterPath = createBrowserRouter([
       {
         path: ROUTES.AUTH.SIGNUP,
         element: <SignUp />,
+      },
+      {
+        path: ROUTES.AUTH.SIGNUPFAIL,
+        element: <SignUpFailPage />,
       },
       {
         path: ROUTES.STUDY.APPLICNATS,
