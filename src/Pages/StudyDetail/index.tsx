@@ -18,6 +18,7 @@ import { useModalStore } from '@/store/modal';
 import Modal from '@/Components/Common/Modal';
 import { DELETE, LEAVE } from '@/Constants/messages';
 import { useEffect, useState } from 'react';
+import { useApplicantsDetail } from '@/Hooks/study/useApplicantsDetail';
 
 export const StudyDetailPage = () => {
   const studyId = Number(useParams().studyId);
@@ -30,6 +31,8 @@ export const StudyDetailPage = () => {
   const [isLeftBtnClicked, setIsLeftBtnClicked] = useState<boolean>(false);
 
   const { data: studyDetail, isLoading } = useStudyDetail(studyId);
+  const { data: applicantsDetail, isLoading: isLoaidngApplicantsDetail } = useApplicantsDetail(studyId);
+
   const study = studyDetail?.study;
 
   const { mutate: closeRecruitmentMutate } = useCloseRecruitmentMutation(studyId, () => {
@@ -61,7 +64,9 @@ export const StudyDetailPage = () => {
 
             {study.hasRecruitment && (
               <Button onClick={() => navigate(`/studies/${studyId}/applicants`)}>
-                <span>스터디 지원자가 있어요!</span>
+                <span>
+                  스터디 지원자 확인하기({isLoaidngApplicantsDetail ? 0 : applicantsDetail.applicants.length}명)
+                </span>
                 <Right />
               </Button>
             )}
@@ -87,18 +92,18 @@ export const StudyDetailPage = () => {
                 스터디 탈퇴하기
               </Button>
             )}
+            {user?.id === study.owner.id &&
+              study.participants.length &&
+              (study.status === 'RECRUITED' || study.status === 'PROGRESS' || study.status === 'RECRUITING') && (
+                <Button scheme="secondary" size="fullWidth" onClick={() => {}} disabled>
+                  스터디 수정하기
+                </Button>
+              )}
             {user?.id === study.owner.id && study.participants.length && study.status === 'RECRUITING' && (
               <Button scheme="secondary" size="fullWidth" onClick={() => closeRecruitmentMutate()}>
                 스터디원 모집 마감하기
               </Button>
             )}
-            {user?.id === study.owner.id &&
-              study.participants.length &&
-              (study.status === 'RECRUITED' || study.status === 'PROGRESS') && (
-                <Button scheme="secondary" size="fullWidth" onClick={() => {}}>
-                  스터디 수정하기
-                </Button>
-              )}
           </StudyButtonsWrapper>
           {isModalOpen && isDeletedBtnClicked && (
             <Modal
@@ -155,6 +160,12 @@ const StudyDetailTitleWrapper = styled.div`
     &:hover {
       border: none;
     }
+  }
+  .title {
+    max-width: 600px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 `;
 

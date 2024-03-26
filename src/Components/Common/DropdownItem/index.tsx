@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 
-interface DropdownProps {
+interface DropdownItemProps {
   onClick: () => void;
   children: React.ReactNode;
 }
 
-const Dropdown = ({ onClick, children }: DropdownProps) => {
-  return <DropDownWrapper onClick={onClick}>{children}</DropDownWrapper>;
+const DropdownItem = ({ onClick, children }: DropdownItemProps) => {
+  return <DropDownItemWrapper onClick={onClick}>{children}</DropDownItemWrapper>;
 };
 
-const DropDownWrapper = styled.div`
+const DropDownItemWrapper = styled.div`
   display: flex;
   gap: 10px;
   width: 184px;
@@ -37,4 +37,4 @@ const DropDownWrapper = styled.div`
   }
 `;
 
-export default Dropdown;
+export default DropdownItem;

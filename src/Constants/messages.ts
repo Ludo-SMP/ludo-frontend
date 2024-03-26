@@ -47,6 +47,26 @@ export const SEARCH = Object.freeze({
   },
 });
 
+export const AUTH = Object.freeze({
+  LOGIN: {
+    title: '간편 로그인 후 이용이 가능합니다!',
+    content: '소셜 로그인을 통해\n스터디 지원부터 진행까지 함께 해봐요 :)',
+  },
+  SIGNUP: {
+    title: '루도에 오신것을 환영합니다!',
+    content: '소셜 로그인을 통해\n스터디 지원부터 진행까지 함께 해봐요 :)',
+  },
+  LOGIN_FAIL: {
+    title: '가입되지 않은 계정입니다.',
+    content:
+      '현재 입력하신 소셜 계정은 가입되어있지 않습니다.\n가입을 통해 루도의 더 많은 서비스를 즐길 수 있습니다.\n회원 가입을 부탁드립니다 :)',
+  },
+  SIGNUP_FAIL: {
+    title: '이미 가입된 계정입니다.',
+    content: '이미 해당 이메일로 가입된 계정이 존재합니다.\n로그인하시거나, 다른 이메일로 가입해주세요.',
+  },
+});
+
 export const ERROR = Object.freeze({
   NOT_FOUND: { content: '잘못된 접근입니다.' },
 });

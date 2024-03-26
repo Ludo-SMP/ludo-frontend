@@ -8,6 +8,8 @@
 //   endDateTime: string;
 // };
 
+import { Stack } from './study';
+
 export type Creates = {
   title?: string;
   categoryId?: number;
@@ -62,16 +64,11 @@ export type StackItem = {
   category?: ItemCategory;
 };
 
-// export type Gather = {
-//   gather: string;
-//   end: string;
-//   position: Position;
-//   stack: [StackItem];
-//   contact: string;
-//   contactUrl: string;
-//   title: string;
-//   detail: string;
-// };
+export type StackCategory = {
+  id: number;
+  name: string;
+  stacks: Stack;
+};
 
 export type Modify = {
   title: string;

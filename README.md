@@ -16,7 +16,9 @@
 **누구나 쉽고 빠르게 지속 가능한 스터디에 참여할 수 있는 스터디 플랫폼입니다.**
 
 ## 🛠 사용한 기술 스택
-<img src="https://github.com/Ludo-SMP/ludo-frontend/assets/62270427/6ef8f09d-d84d-4232-b5b6-e308e4d5a91a"/>
+<img src="https://img.shields.io/badge/React-18.2.0-blue?logo=react">
+<img src="https://img.shields.io/badge/TypeSript-18.2.0-blue?logo=react">
+<img src="https://github.com/Ludo-SMP/ludo-frontend/assets/62270427/d347aa15-be96-4343-b41a-783ba1c4d7b8"/>
 
 ## 🙋🏻‍♂️ FE 팀원
 <table >

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { ContactUrlInput } from '../../Components/Textarea/ContactUrlInput';
-import { SubmitButton } from '../../Components/Button/Studies/SubmitButton';
 import { CalendarButton } from '../../Components/Selectbox/CalendarButton';
 import { PositionButton } from '../../Components/Selectbox/PositionButton';
 import { StackSelectButton } from '@/Components/Selectbox/StackSelectButton';
@@ -13,17 +12,17 @@ import { useStack } from '@/Hooks/stack/useStack';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { One, Two, Three, Four, Loading } from '@/Assets';
-import { SaveButton } from '@/Components/Button/Studies/SaveButton';
 import { Gather } from '@/Types/studies';
 import { ContactButton } from '@/Components/Selectbox/ContactButton';
 import { ApplicantButton } from '@/Components/Selectbox/ApplicantButton';
 import { useStudyDetail } from '@/Hooks/study/useStudyDetail';
 import { getPeriod } from '@/utils/date';
+import Button from '@/Components/Common/Button';
 
 axios.defaults.withCredentials = true;
 export type OptionalCreates = Partial<Gather>;
 
-const CreateRecruitment = () => {
+const CreateRecruitmentPage = () => {
   const studyId = Number(useParams().studyId);
 
   const Navigation = useNavigate();
@@ -187,16 +186,15 @@ const CreateRecruitment = () => {
             </BottomWrapper>
           </BottomBox>
           <ButtonBox>
-            <SaveButton type="submit">임시저장</SaveButton>
-            <SubmitButton type="submit">등록하기</SubmitButton>
+            <Button type="submit" scheme="secondary" size="fullWidth">
+              등록하기
+            </Button>
           </ButtonBox>
         </>
       )}
     </StudyContainer>
   );
 };
-
-export default CreateRecruitment;
 
 const BorderBox = styled.div`
   width: 1200px;
@@ -224,9 +222,12 @@ const StudyMain = styled.p`
 `;
 
 const StudyTitle = styled.p`
+  display: flex;
   font-size: ${(props) => props.theme.font.xlarge};
   font-weight: bold;
   align-items: left;
+  font-weight: 800;
+  line-height: 50px;
   padding-bottom: 16px;
 `;
 
@@ -243,13 +244,13 @@ const SubContentTitle = styled.p`
 `;
 
 const StudyContainer = styled.form`
-  height: 2000px;
-  padding-left: 200px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  text-align: left;
-  align-items: center;
+  max-width: 1224px;
+  margin: 0 auto;
+  margin-top: 40px;
+  padding-bottom: 80px;
+  gap: 40px;
 `;
 const TopBox = styled.div`
   height: 310px;
@@ -309,7 +310,7 @@ const BottomBox = styled.div`
 const BottomWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding-bottom: 16px;
+
   font-size: ${(props) => props.theme.font.medium};
 `;
 
@@ -319,8 +320,11 @@ const StudyWrapper = styled.section`
 `;
 
 const ButtonBox = styled.div`
+  width: 100%;
   padding-top: 60px;
   display: flex;
   flex-direction: row;
   gap: 24px;
 `;
+
+export default CreateRecruitmentPage;

@@ -107,6 +107,12 @@ const StudyTitleWrapper = styled.div`
   color: ${(props) => props.theme.color.black4};
   font-size: ${(props) => props.theme.font.xxxxlarge};
   font-weight: 800;
+  .title {
+    max-width: 800px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
   .study__tokens {
     display: flex;

@@ -1,10 +1,11 @@
 import SocialLogin from '@/Components/SocialLogin';
+import { AUTH } from '@/Constants/messages';
 import { media } from '@/Styles/theme';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
-export const Login = () => {
+const LoginPage = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -13,7 +14,10 @@ export const Login = () => {
 
   return (
     <LoginWrapper>
-      <LoginGuideWrapper />
+      <LoginGuideWrapper>
+        <span className="title">{AUTH.LOGIN.title}</span>
+        <div className="content">{AUTH.LOGIN.content}</div>
+      </LoginGuideWrapper>
       <LoginBtnsWrapper>
         <SocialLogin socialType="naver" signType="login" />
         <SocialLogin socialType="kakao" signType="login" />
@@ -30,17 +34,39 @@ const LoginWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 72px;
+  gap: 40px;
 `;
 const LoginGuideWrapper = styled.div`
-  height: 320px;
-  width: 600px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 28px;
+  gap: 24px;
   margin: 0 auto;
   align-self: stretch;
-  background-color: ${(props) => props.theme.color.gray5};
 
   ${media.custom(600)} {
     width: 400px;
+  }
+  .title {
+    color: ${({ theme }) => theme.color.black5};
+    text-align: center;
+    font-family: Pretendard;
+    font-size: ${({ theme }) => theme.font.xxxxlarge};
+    font-style: normal;
+    font-weight: 800;
+    line-height: 48px;
+  }
+
+  .content {
+    color: ${({ theme }) => theme.color.black5};
+    text-align: center;
+    font-family: Pretendard;
+    font-size: ${({ theme }) => theme.font.medium};
+    font-style: normal;
+    font-weight: 500;
+    line-height: 40px;
+    white-space: pre-line;
   }
 `;
 
@@ -51,4 +77,4 @@ const LoginBtnsWrapper = styled.div`
   gap: 16px;
 `;
 
-export default Login;
+export default LoginPage;

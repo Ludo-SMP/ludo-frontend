@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { ROUTES } from '@/Constants/route';
 import { useModalStore } from '@/store/modal';
 import Modal from '../Common/Modal';
+import { NotFound } from '@/Assets';
 
 const NotFoundResult = () => {
   const { isLoggedIn } = useLoginStore();
@@ -20,8 +21,8 @@ const NotFoundResult = () => {
   };
   return (
     <NotFoundResultWrapper>
-      <div className="notFoundResult__image"></div>
       <div className="notFoundResult__text">{SEARCH.NOT_FONND_RESULT.content}</div>
+      <img className="notFoundResult__image" src={NotFound} />
       <Button scheme="primary" onClick={() => handleNotFoundResult()}>
         <span>스터디 직접 생성하기</span>
       </Button>
@@ -50,9 +51,8 @@ const NotFoundResultWrapper = styled.div`
 
   .notFoundResult__image {
     margin: 0 auto;
-    width: 316px;
-    height: 160px;
-    background-color: ${({ theme }) => theme.color.gray1};
+    width: 392px;
+    height: 240px;
   }
 
   .notFoundResult__text {
@@ -67,6 +67,7 @@ const NotFoundResultWrapper = styled.div`
 
   button {
     font-size: 18px;
+    width: 392px;
     padding: 4px 24px;
   }
 `;
