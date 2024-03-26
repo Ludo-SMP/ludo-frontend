@@ -7,7 +7,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { SignUpBackground } from '@/Assets';
 
-export const SignUp = () => {
+const SignUpPage = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
@@ -108,4 +108,4 @@ const LoginWrapper = styled.div`
   }
 `;
 
-export default SignUp;
+export default SignUpPage;

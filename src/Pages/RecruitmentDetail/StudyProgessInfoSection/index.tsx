@@ -35,7 +35,7 @@ const StudyProgressInfoSectionWrapper = styled.div`
 
   .title {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 12px;
     align-self: stretch;
     color: ${(props) => props.theme.color.black4};

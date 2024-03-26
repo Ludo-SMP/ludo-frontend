@@ -11,7 +11,7 @@ const UTbanner = () => {
       <ContentWrapper>
         <img src={UTLogo} alt="로고" />
         <div className="ut__guide">{UT_GUIDE}</div>
-        <div className="ut__period">기간 : 03.26~03.31</div>
+        <div className="ut__period">기간 : 03.26~03.30</div>
       </ContentWrapper>
     </UTbannerWrapper>
   );

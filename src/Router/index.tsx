@@ -1,24 +1,24 @@
 import { Outlet, createBrowserRouter } from 'react-router-dom';
 import { ROUTES } from '@/Constants/route';
 import MyPage from '../Pages/MyPage';
-import { Login } from '../Pages/Login';
+import LoginPage from '@/Pages/Login';
 import MainPage from '@/Pages/Main';
 import RecruitmentDetailPage from '@/Pages/RecruitmentDetail';
-import Recruitments from '../Pages/Recruitments';
-import SignUp from '@/Pages/SignUp';
-import Header from '@/Components/Header';
+import RecruitmentsPage from '@/Pages/Recruitments';
+import SignUpPage from '@/Pages/SignUp';
 import ApplicantsPage from '@/Pages/Applicants';
 import StudyDetailPage from '@/Pages/StudyDetail';
-import Footer from '@/Components/Footer';
-import { SaveStudy } from '@/Pages/Studies/SaveStudy';
-import CreateStudy from '@/Pages/Studies/CreateStudy';
-import ModifyStudy from '@/Pages/Studies/ModifyStudy';
-import CreateRecruitment from '@/Pages/Studies/CreateRecruitment';
-import ModifyRecruitment from '@/Pages/Studies/ModifyRecruitment';
-import ErrorBoundary from '@/Components/ErrorBoundary';
-import UTbanner from '@/Components/UTbanner';
+import SaveStudyPage from '@/Pages/Studies/SaveStudy';
+import CreateStudyPage from '@/Pages/Studies/CreateStudy';
+import ModifyStudyPage from '@/Pages/Studies/ModifyStudy';
+import CreateRecruitmentPage from '@/Pages/Studies/CreateRecruitment';
+import ModifyRecruitmentPage from '@/Pages/Studies/ModifyRecruitment';
 import LoginFailPage from '@/Pages/LoginFail';
 import SignUpFailPage from '@/Pages/SignUpFail';
+import Header from '@/Components/Header';
+import Footer from '@/Components/Footer';
+import UTbanner from '@/Components/UTbanner';
+import ErrorBoundary from '@/Components/ErrorBoundary';
 
 export const RouterPath = createBrowserRouter([
   {
@@ -39,7 +39,7 @@ export const RouterPath = createBrowserRouter([
       },
       {
         path: ROUTES.AUTH.LOGIN,
-        element: <Login />,
+        element: <LoginPage />,
       },
       {
         path: ROUTES.AUTH.LOGINFAIL,
@@ -51,15 +51,15 @@ export const RouterPath = createBrowserRouter([
       },
       {
         path: ROUTES.STUDY.CREATE,
-        element: <CreateStudy />,
+        element: <CreateStudyPage />,
       },
       {
         path: ROUTES.STUDY.MODIFY,
-        element: <ModifyStudy />,
+        element: <ModifyStudyPage />,
       },
       {
         path: ROUTES.RECRUITMENT.CREATE,
-        element: <CreateRecruitment />,
+        element: <CreateRecruitmentPage />,
       },
 
       {
@@ -72,11 +72,11 @@ export const RouterPath = createBrowserRouter([
       },
       {
         path: ROUTES.RECRUITMENT.RECRUITMENTS,
-        element: <Recruitments />,
+        element: <RecruitmentsPage />,
       },
       {
         path: ROUTES.AUTH.SIGNUP,
-        element: <SignUp />,
+        element: <SignUpPage />,
       },
       {
         path: ROUTES.AUTH.SIGNUPFAIL,
@@ -88,11 +88,11 @@ export const RouterPath = createBrowserRouter([
       },
       {
         path: ROUTES.STUDY.SAVE,
-        element: <SaveStudy />,
+        element: <SaveStudyPage />,
       },
       {
         path: ROUTES.RECRUITMENT.MODIFY,
-        element: <ModifyRecruitment />,
+        element: <ModifyRecruitmentPage />,
       },
     ],
   },

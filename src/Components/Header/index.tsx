@@ -70,13 +70,15 @@ const Header = () => {
           ) : (
             <div className="signout__elements">
               <SignButtonSection />
-              <Button
-                className="create__study"
-                type="button"
-                onClick={isLoggedIn ? () => navigate(ROUTES.STUDY.CREATE) : () => openModal()}
-              >
-                스터디 생성하기
-              </Button>
+              {(currentLocation === ROUTES.MAIN || currentLocation === ROUTES.RECRUITMENT.RECRUITMENTS) && (
+                <Button
+                  className="create__study"
+                  type="button"
+                  onClick={isLoggedIn ? () => navigate(ROUTES.STUDY.CREATE) : () => openModal()}
+                >
+                  스터디 생성하기
+                </Button>
+              )}
             </div>
           )}
           <HamburgerSection />

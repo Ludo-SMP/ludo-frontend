@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { ProgressButton } from '../../Components/Selectbox/ProgressButton';
 import { PlatformButton } from '../../Components/Selectbox/PlatformButton';
 import { Titlearea } from '../../Components/Textarea/Titlearea';
-import { SubmitButton } from '../../Components/Button/Studies/SubmitButton';
 import { CalendarButton } from '../../Components/Selectbox/CalendarButton';
 import { BigCategoryButton } from '../../Components/Selectbox/BigCategoryButton';
 import { MaxPeopleButton } from '../../Components/Selectbox/MaxPeopleButton';
@@ -13,12 +12,14 @@ import { Creates } from '@/Types/studies';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { One, Two, Three } from '@/Assets';
-import { SaveButton } from '@/Components/Button/Studies/SaveButton';
+// import { SaveButton } from '@/Components/Button/Studies/SaveButton';
 import axios from 'axios';
 import { useStudyDetail } from '@/Hooks/study/useStudyDetail';
+import Button from '@/Components/Common/Button';
 axios.defaults.withCredentials = true;
 export type OptionalCreates = Partial<Creates>;
-const ModifyStudy = () => {
+
+const ModifyStudyPage = () => {
   const Navigate = useNavigate();
   const studyId = Number(useParams().studyId);
   useStudyDetail(studyId);
@@ -63,7 +64,7 @@ const ModifyStudy = () => {
     Navigate(`/studies/${studyId}`);
   }
 
-  const onSave = async () => {};
+  // const onSave = async () => {};
   const handleSubmit = (event: any) => {
     event.preventDefault();
     post();
@@ -136,15 +137,16 @@ const ModifyStudy = () => {
           </StudyMiddleInfo>
         </MiddleCenterBox>
         <ButtonBox>
-          <SaveButton onClick={onSave}>임시저장</SaveButton>
-          <SubmitButton type="submit">등록하기</SubmitButton>
+          {/* <SaveButton onClick={onSave}>임시저장</SaveButton> */}
+          <Button type="submit" scheme="secondary" size="fullWidth">
+            등록하기
+          </Button>
         </ButtonBox>
       </StudyContainer>
     </>
   );
 };
 
-export default ModifyStudy;
 const AssetContainer = styled.image`
   padding-right: 12px;
 `;
@@ -171,12 +173,13 @@ const StudyMain = styled.p`
 `;
 
 const StudyContainer = styled.form`
-  height: 1300px;
-  padding-left: 200px;
   display: flex;
   flex-direction: column;
-  text-align: left;
-  align-items: center;
+  max-width: 1224px;
+  margin: 0 auto;
+  margin-top: 40px;
+  padding-bottom: 80px;
+  gap: 40px;
   ${media.custom(200)} {
     display: none;
   }
@@ -268,3 +271,4 @@ const StudyTitle = styled.p`
 const ContentText = styled.p`
   padding-bottom: 10px;
 `;
+export default ModifyStudyPage;

@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
-export const Login = () => {
+const LoginPage = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -77,4 +77,4 @@ const LoginBtnsWrapper = styled.div`
   gap: 16px;
 `;
 
-export default Login;
+export default LoginPage;
