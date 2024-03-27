@@ -1,16 +1,15 @@
-import { CREATE_STUDY, SEARCH } from '@/Constants/messages';
+import { SEARCH } from '@/Constants/messages';
 import { useLoginStore } from '@/store/auth';
 import { useNavigate } from 'react-router-dom';
 import Button from '../Common/Button';
 import styled from 'styled-components';
 import { ROUTES } from '@/Constants/route';
 import { useModalStore } from '@/store/modal';
-import Modal from '../Common/Modal';
 import { NotFound } from '@/Assets';
 
 const NotFoundResult = () => {
   const { isLoggedIn } = useLoginStore();
-  const { isModalOpen, openModal } = useModalStore();
+  const { openModal } = useModalStore();
   const navigate = useNavigate();
   const handleNotFoundResult = () => {
     if (isLoggedIn) {
