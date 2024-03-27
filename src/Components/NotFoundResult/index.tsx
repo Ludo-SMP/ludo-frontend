@@ -1,23 +1,20 @@
-import { CREATE_STUDY, SEARCH } from '@/Constants/messages';
+import { SEARCH } from '@/Constants/messages';
 import { useLoginStore } from '@/store/auth';
 import { useNavigate } from 'react-router-dom';
 import Button from '../Common/Button';
 import styled from 'styled-components';
 import { ROUTES } from '@/Constants/route';
-import { useModalStore } from '@/store/modal';
-import Modal from '../Common/Modal';
+
 import { NotFound } from '@/Assets';
 
 const NotFoundResult = () => {
   const { isLoggedIn } = useLoginStore();
-  const { isModalOpen, openModal } = useModalStore();
   const navigate = useNavigate();
   const handleNotFoundResult = () => {
     if (isLoggedIn) {
       navigate(ROUTES.STUDY.CREATE);
       return;
     }
-    openModal();
   };
   return (
     <NotFoundResultWrapper>
@@ -26,17 +23,6 @@ const NotFoundResult = () => {
       <Button scheme="primary" onClick={() => handleNotFoundResult()}>
         <span>스터디 직접 생성하기</span>
       </Button>
-      {!isLoggedIn && isModalOpen && (
-        <Modal
-          title={CREATE_STUDY.LOGIN.title}
-          handleApprove={() => navigate(ROUTES.AUTH.LOGIN)}
-          approveBtnText="로그인하기"
-          cancelBtnText="나중에 할래요"
-          isBtnWidthEqual={false}
-        >
-          {CREATE_STUDY.LOGIN.content}
-        </Modal>
-      )}
     </NotFoundResultWrapper>
   );
 };
