@@ -43,8 +43,89 @@
 <img src="https://img.shields.io/badge/Vite-5.0.8-blue?logo=vite"> <img src="https://img.shields.io/badge/Nelify--blue?logo=netlify"> <br>
 <img src="https://img.shields.io/badge/ReactHookForm-7.50.1-blue?logo=react-hook-form"> <img src="https://img.shields.io/badge/ReactRouterDom-6.22.0-blue?logo=react-router-dom"><br>
 
-
 <img src="https://github.com/Ludo-SMP/ludo-frontend/assets/62270427/d347aa15-be96-4343-b41a-783ba1c4d7b8"/>
+
+## 🛠 주요 기능
+
+### ✔︎ 스터디 모집공고 조회
+메인페이지에서 원하는 카테고리의 스터디 모집공고를 확인할 수 있어요.
+<details markdown="1">
+<summary>메인페이지에서 스터디 조회</summary>
+  <img width="600" src="src/Assets/images/search1.gif">
+</details>
+<br>
+
+모집공고 모아보기 페이지에서는 필터를 통해 원하는 스터디 모집공고를 확인할 수 있어요.
+
+<details markdown="1">
+<summary>모집공고 모아보기 페이지에서 필터링을 통한 스터디 모집공고 조회</summary>
+  <img width="600" src="src/Assets/images/search2.gif">
+</details>
+<br>
+
+### ✔︎ 스터디 지원
+스터디 모집공고 상세 페이지에서 원하는 스터디 모집공고에 지원할 수 있어요.
+<details markdown="1">
+<summary>스터디 지원</summary>
+  <img width="600" src="src/Assets/images/apply.gif">
+</details>
+<br>
+
+### ✔︎ 스터디 생성
+로그인한 사용자는 스터디 생성페이지에서 스터디를 생성할 수 있어요.
+<details markdown="1">
+<summary>스터디 생성</summary>
+  <img width="600" src="src/Assets/images/study.gif">
+</details>
+<br>
+
+### ✔︎ 스터디 모집공고 생성
+생성된 스터디에 대한 모집공고를 생성할 수 있어요.
+<details markdown="1">
+<summary>스터디 모집공고 생성</summary>
+  <img width="600" src="src/Assets/images/recruitment.gif">
+</details>
+<br>
+
+### ✔︎ 마이페이지
+마이페이지에서 참여중인 스터디, 지원한 스터디, 진행 완료된 스터디를 확인할 수 있어요.
+<details markdown="1">
+<summary>마이페이지</summary>
+  <img width="600" src="src/Assets/images/mypage.gif">
+</details>
+<br>
+
+## 🔨 .env
+```
+VITE_MOCK_API_URL = Mock API Endpoint
+VITE_BASE_API_URL = Base API Endpoint
+```
+
+
+## 📁 Directory Structure
+```
+ludo-frontend
+├── .github                         # Feature, PR, Bug template
+├── .husky                          # pre-commit hook
+├── public                          # public
+└── src
+    ├── Apis                        # api 호출 Function
+    ├── Assets                      # resoucres
+    ├── Components                  # 페이지를 구성하는 components           
+    ├── Constants                   # api, message, queryStirng, route 및 공통적으로 사용되는 constants                      
+    ├── Hooks                       # Custom Hooks                        
+    ├── Layout                      # 프로젝트 뼈대를 구성하는 Layout                         
+    ├─- Mocks                       # MSW를 활용한 Mock data, handler                         
+    ├── Pages                       # Pages     
+    ├── Router                      # Routes config
+    ├── Providers                   # Login, Query Provider                          
+    ├── Shared                      # 공통으로 사용되는 값 및 Dummy data                          
+    ├── Store                       # Zustand를 사용한 전역 Store                         
+    ├── Styles                      # Global Style                         
+    ├── Types                       # 프로젝트 전반에 걸쳐 사용되는 Type 정의                         
+    ├── Utils                       # date, axios 관련 util 함수                       
+```
+
 
 ## 🙋🏻‍♂️ FE 팀원
 <table >
@@ -59,10 +140,5 @@
 <h3><b>김성현</b></h3></a></td>
   </tbody>
 </table>
-
-
-
-## 📋 개발 기록
-
 
 
