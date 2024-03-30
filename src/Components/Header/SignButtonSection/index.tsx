@@ -1,6 +1,5 @@
 import Button from '@/Components/Common/Button';
 import { ROUTES } from '@/Constants/route';
-import { media } from '@/Styles/theme';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useLogOutMutation } from '@/Hooks/auth/useLogOutMutation';
@@ -46,9 +45,6 @@ const SignButtonSection = () => {
 const SignButtonSectionWrapper = styled.div<{ isLoggedIn: boolean }>`
   display: flex;
   gap: ${({ isLoggedIn }) => (isLoggedIn ? '8px' : '12px')};
-  ${media.tablet} {
-    display: none;
-  }
 
   .logout {
     padding: 0 12px 0 16px;
