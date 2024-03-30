@@ -17,6 +17,7 @@ const DropdownItem = ({ item, filterOption, handleClick }: DropdownItemProps) =>
 
 const DropdownItemWrapper = styled.li`
   padding: 12px;
+  white-space: nowrap;
   &:hover {
     cursor: pointer;
     color: ${(props) => props.theme.color.white};

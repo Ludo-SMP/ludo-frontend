@@ -1,4 +1,5 @@
 import { UTLogo } from '@/Assets';
+import { media } from '@/Styles/theme';
 import styled from 'styled-components';
 
 const GOOGLEFORM_URL =
@@ -31,6 +32,10 @@ const UTbannerWrapper = styled.a`
 
   &:hover {
     cursor: pointer;
+  }
+
+  ${media.custom(800)} {
+    display: none;
   }
 `;
 

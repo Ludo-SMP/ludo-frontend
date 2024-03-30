@@ -35,7 +35,7 @@ const Footer = () => {
           </DescriptionContentWrapper>
           <ServiceRuleContentWrapper>
             <div className="navigate" onClick={() => {}}>
-              서비스소개
+              소개
             </div>
             <div className="navigate" onClick={() => {}}>
               이용약관
@@ -53,11 +53,16 @@ const Footer = () => {
 const FooterWrapper = styled.footer`
   display: flex;
   flex-direction: column;
-  height: 216px;
+
   max-width: 1920px;
   padding: 24px 40px;
   margin: 80px auto 0 auto;
   background-color: ${({ theme }) => theme.color.gray1};
+
+  ${media.custom(800)} {
+    width: 400px;
+    margin: 20px auto 0 auto;
+  }
 `;
 
 const FooterContentWrapper = styled.div`
@@ -115,6 +120,10 @@ const ServiceMainContentWrapper = styled.div`
   align-content: center;
   gap: 4px;
 
+  ${media.custom(1000)} {
+    display: none;
+  }
+
   .slogan {
     color: ${({ theme }) => theme.color.black5};
     font-family: Pretendard;
@@ -141,6 +150,10 @@ const ServiceRuleContentWrapper = styled.div`
   align-items: flex-start;
   gap: 12px;
   margin-left: 15rem;
+
+  ${media.custom(800)} {
+    display: none;
+  }
 `;
 
 export default Footer;

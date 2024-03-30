@@ -5,6 +5,7 @@ import DropdownItem from './DropdownItem';
 import { useOutSideClick } from '@/Hooks/useOutsideClick';
 import { Up, Down } from '@/Assets';
 import { useFilterOptionsStore } from '@/store/filter';
+import { media } from '@/Styles/theme';
 
 export interface DropdownFilterProps {
   filterName: string;
@@ -66,10 +67,15 @@ const DropdownFilterWrapper = styled.ul`
     font-weight: 500;
     line-height: 30px;
     white-space: nowrap;
+    overflow: hidden;
   }
 
   &:hover {
     cursor: pointer;
+  }
+
+  ${media.custom(800)} {
+    width: 90px;
   }
 `;
 
@@ -96,6 +102,12 @@ const DropdownSelectWrapper = styled.div<{ checked?: boolean }>`
   }
   svg > path {
     fill: ${({ theme, checked }) => (checked ? theme.color.orange2 : theme.color.black3)};
+  }
+
+  ${media.custom(800)} {
+    svg {
+      display: none;
+    }
   }
 `;
 

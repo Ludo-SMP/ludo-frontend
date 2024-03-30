@@ -104,7 +104,6 @@ const RecruitmentsPage = () => {
 const RecruitmentsPageWrapper = styled.div`
   display: flex;
   flex-direction: column;
-
   margin: 0 auto;
   margin-top: 40px;
   gap: 40px;
@@ -129,6 +128,10 @@ const RecruitmentsSectionWrapper = styled.div`
     font-style: normal;
     font-weight: 800;
     line-height: 40px;
+
+    ${media.custom(1024)} {
+      display: none;
+    }
   }
 `;
 
