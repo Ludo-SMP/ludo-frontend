@@ -16,6 +16,7 @@ import Modal from '@/Components/Common/Modal';
 import { CREATE_STUDY } from '@/Constants/messages';
 import SkeletonRecruitmentCardList from '@/Components/Skeleton/SkeletonRecruitmentCardList';
 import { useEffect } from 'react';
+import { media } from '@/Styles/theme';
 
 const MainPage = () => {
   const { data: popularRecruitments, isLoading } = usePopularRecruitments();
@@ -141,6 +142,11 @@ const RecruitmentsSectionWrapper = styled.div`
     font-style: normal;
     font-weight: 800;
     line-height: 40px;
+    white-space: nowrap;
+  }
+
+  ${media.custom(800)} {
+    width: 400px;
   }
 `;
 
@@ -162,6 +168,7 @@ const RecruitmentCardsWrapper = styled.div`
   align-items: flex-start;
   align-content: flex-start;
   gap: 21px;
+  min-height: 757px;
   flex-wrap: wrap;
 `;
 
@@ -176,6 +183,10 @@ const MoreSectionWrapper = styled.div`
 
   &:hover {
     cursor: pointer;
+  }
+
+  ${media.custom(800)} {
+    display: none;
   }
 
   .more__text {

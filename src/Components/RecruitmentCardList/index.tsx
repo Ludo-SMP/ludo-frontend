@@ -55,8 +55,13 @@ const RecruitmentCardsWrapper = styled.li`
   align-items: flex-start;
   align-content: flex-start;
   gap: 21px;
+  min-height: 757px;
   ${media.custom(1224)} {
     width: 100%;
+  }
+
+  ${media.custom(800)} {
+    width: 400px;
   }
 `;
 

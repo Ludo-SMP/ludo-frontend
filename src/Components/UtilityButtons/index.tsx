@@ -1,3 +1,4 @@
+import { media } from '@/Styles/theme';
 import styled from 'styled-components';
 
 export interface UtilityButtonsProps {
@@ -16,6 +17,10 @@ const UtiltiyButtonsWrapper = styled.div`
   position: fixed;
   right: 24px;
   bottom: 24px;
+
+  ${media.custom(800)} {
+    display: none;
+  }
 
   button {
     position: relative;

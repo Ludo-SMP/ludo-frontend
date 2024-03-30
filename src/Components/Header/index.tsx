@@ -7,7 +7,6 @@ import { useLoginStore } from '@/store/auth';
 import Button from '../Common/Button';
 import StudyButtonSection from './StudyButtonSection';
 import SignButtonSection from './SignButtonSection';
-import HamburgerSection from './HamburgerSection';
 import Gnb from './Gnb';
 import Dropdown from '../Dropdown';
 import { useModalStore } from '@/store/modal';
@@ -81,7 +80,6 @@ const Header = () => {
               )}
             </div>
           )}
-          <HamburgerSection />
         </ElementsWrapper>
       </TopBarWrapper>
 
@@ -96,6 +94,9 @@ const HeaderWrapper = styled.section`
   height: 216px;
   max-width: 1224px;
   margin: 0 auto;
+  ${media.custom(800)} {
+    width: 400px;
+  }
 `;
 
 const TopBarWrapper = styled.div`
@@ -149,13 +150,6 @@ const ElementsWrapper = styled.div`
   justify-content: flex-end;
   align-items: center;
   gap: 32px;
-
-  & > div:last-child {
-    display: none;
-    ${media.mobile} {
-      display: flex;
-    }
-  }
 `;
 
 const UserInfoWrapper = styled.div`
@@ -177,10 +171,6 @@ const UserInfoWrapper = styled.div`
     span {
       padding-top: 2px;
     }
-  }
-
-  ${media.mobile} {
-    display: none;
   }
 `;
 
