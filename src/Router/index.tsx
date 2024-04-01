@@ -17,14 +17,12 @@ import LoginFailPage from '@/Pages/LoginFail';
 import SignUpFailPage from '@/Pages/SignUpFail';
 import Header from '@/Components/Header';
 import Footer from '@/Components/Footer';
-import UTbanner from '@/Components/UTbanner';
 import ErrorBoundary from '@/Components/ErrorBoundary';
 
 export const RouterPath = createBrowserRouter([
   {
     element: (
       <>
-        <UTbanner />
         <Header />
         <Outlet />
         <Footer />
