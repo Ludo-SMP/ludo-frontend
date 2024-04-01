@@ -36,7 +36,7 @@
 
 
 ## 🛠 사용한 기술 스택
-<img src="https://img.shields.io/badge/React-18.2.0-blue?logo=react"> <img src="https://img.shields.io/badge/TypeSript-5.2.2-blue?logo=react"><br>
+<img src="https://img.shields.io/badge/React-18.2.0-blue?logo=react"> <img src="https://img.shields.io/badge/TypeSript-5.2.2-blue?logo=typescript"><br>
 <img src="https://img.shields.io/badge/ReactQuery-5.17.9-blue?logo=react-query"> <img src="https://img.shields.io/badge/Zustand-4.5.0-blue?logo=Zustand"><br>
 <img src="https://img.shields.io/badge/StyledComponents-6.1.8-blue?logo=styledcomponents"> <img src="https://img.shields.io/badge/MSW-2.2.4-blue?logo=msw"> <br>
 <img src="https://img.shields.io/badge/Prettier-3.2.5-blue?logo=prettier"> <img src="https://img.shields.io/badge/Eslint-8.55.0-blue?logo=esLint"> <br>
@@ -89,11 +89,57 @@
   <img width="600" src="src/Assets/images/mypage.gif">
 </details>
 
-## 🔨 .env
+## ⚙️ 개발환경 설정 
+
+### 1. 의존성 모듈 설치
+```bash
+yarn install
+``` 
+
+### 2. Local 개발환경에서의 https 설정
+#### 🔨 인증서를 생성하는 도구인 mkcert 설치
+- Mac OS
+  ```
+    brew install mkcert
+  ```
+- Windows
+  ```
+    choco install mkcert
+  ```
+#### 🔨 인증서 생성
+- 로컬을 인증된 발급 기관으로 추가
+  
+  ```
+    mkcert --install
+  ```
+- 인증서 생성
+  ```
+    mkcert local.ludoapi.store
+  ``` 
+- 생성된 local.ludoapi.store.pem, local.ludoapi.store-key.pem 키를 루트의 cert 폴더로 이동
+    ```
+    ludo-frontend
+    └── cert                         # 인증서 key를 보관하는 폴더
+        └── local.ludoapi.store.pem
+        └── local.ludoapi.store-key.pem
+   ```
+  
+
+### 3. .env 설정
 ```
 VITE_MOCK_API_URL = Mock API Endpoint
 VITE_BASE_API_URL = Base API Endpoint
 ```
+
+### 4. 개발환경 실행
+- Mac OS
+  ```
+    yarn start:mac 
+  ```
+- Windows
+  ```
+    yarn start:windows
+  ```
 
 
 ## 📁 Directory Structure
