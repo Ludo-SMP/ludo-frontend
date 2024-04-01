@@ -36,7 +36,7 @@
 
 
 ## 🛠 사용한 기술 스택
-<img src="https://img.shields.io/badge/React-18.2.0-blue?logo=react"> <img src="https://img.shields.io/badge/TypeSript-5.2.2-blue?logo=react"><br>
+<img src="https://img.shields.io/badge/React-18.2.0-blue?logo=react"> <img src="https://img.shields.io/badge/TypeSript-5.2.2-blue?logo=typescript"><br>
 <img src="https://img.shields.io/badge/ReactQuery-5.17.9-blue?logo=react-query"> <img src="https://img.shields.io/badge/Zustand-4.5.0-blue?logo=Zustand"><br>
 <img src="https://img.shields.io/badge/StyledComponents-6.1.8-blue?logo=styledcomponents"> <img src="https://img.shields.io/badge/MSW-2.2.4-blue?logo=msw"> <br>
 <img src="https://img.shields.io/badge/Prettier-3.2.5-blue?logo=prettier"> <img src="https://img.shields.io/badge/Eslint-8.55.0-blue?logo=esLint"> <br>
