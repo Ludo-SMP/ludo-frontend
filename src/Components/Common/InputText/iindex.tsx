@@ -23,7 +23,7 @@ const InputWrapper = styled.input`
 
   ::placeholder {
     color: ${({ theme }) => theme.color.black2};
-    font-family: Pretendard;
+    font-family: 'Pretendard400';
     font-size: ${({ theme }) => theme.font.medium};
     font-style: normal;
     font-weight: 400;

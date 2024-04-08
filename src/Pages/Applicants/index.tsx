@@ -86,7 +86,7 @@ const ApplicantsTitleWrapper = styled.div`
   flex-shrink: 0;
   align-self: stretch;
   color: ${({ theme }) => theme.color.black4};
-  font-family: Pretendard;
+  font-family: 'Pretendard800';
   font-size: ${({ theme }) => theme.font.xxxxlarge};
   font-style: normal;
   font-weight: 800;

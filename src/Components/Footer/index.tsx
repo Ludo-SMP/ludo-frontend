@@ -84,7 +84,7 @@ const FooterContentWrapper = styled.div`
     }
     color: ${({ theme }) => theme.color.black4};
     text-align: center;
-    font-family: Pretendard;
+    font-family: 'Pretendard600';
     font-size: ${({ theme }) => theme.font.xsmall};
     font-style: normal;
     font-weight: 600;
@@ -126,7 +126,7 @@ const ServiceMainContentWrapper = styled.div`
 
   .slogan {
     color: ${({ theme }) => theme.color.black5};
-    font-family: Pretendard;
+    font-family: 'Pretendard600';
     font-size: ${({ theme }) => theme.font.medium};
     font-style: normal;
     font-weight: 600;
@@ -137,7 +137,7 @@ const ServiceMainContentWrapper = styled.div`
   .member {
     color: ${({ theme }) => theme.color.black2};
     text-align: center;
-    font-family: Pretendard;
+    font-family: 'Pretendard500';
     font-size: ${({ theme }) => theme.font.xsmall};
     font-style: normal;
     font-weight: 500;

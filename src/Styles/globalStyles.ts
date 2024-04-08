@@ -14,6 +14,10 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
 
+  body {
+    font-family: "Pretendard500";
+  }
+
   button,
   input,
   select,

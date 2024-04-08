@@ -129,7 +129,7 @@ const MyPageWrapper = styled.div`
     gap: 12px;
     align-self: stretch;
     color: ${({ theme }) => theme.color.black5};
-    font-family: Pretendard;
+    font-family: 'Pretendard800';
     font-size: ${({ theme }) => theme.font.xxlarge};
     font-style: normal;
     font-weight: 800;

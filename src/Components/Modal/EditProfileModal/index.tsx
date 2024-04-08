@@ -129,7 +129,7 @@ const ModalTitleWrapper = styled.div`
     align-self: stretch;
     color: ${({ theme }) => theme.color.black5};
     text-align: center;
-    font-family: Pretendard;
+    font-family: 'Pretendard700';
     font-size: ${({ theme }) => theme.font.large};
     font-style: normal;
     font-weight: 700;
@@ -141,7 +141,7 @@ const FormWrapper = styled.div`
   width: 520px;
   .input__description {
     color: ${({ theme }) => theme.color.black3};
-    font-family: Pretendard;
+    font-family: 'Pretendard700';
     font-size: ${({ theme }) => theme.font.small};
     font-style: normal;
     font-weight: 500;

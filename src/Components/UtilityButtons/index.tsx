@@ -50,7 +50,7 @@ const UtiltiyButtonsWrapper = styled.div`
 
   span {
     text-align: center;
-    font-family: Pretendard;
+    font-family: 'Pretendard600';
     font-size: 18px;
     font-style: normal;
     font-weight: 600;
