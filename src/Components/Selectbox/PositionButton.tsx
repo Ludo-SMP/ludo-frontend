@@ -1,51 +1,31 @@
-import styled from 'styled-components';
-import { OptionalCreates } from '@/Pages/Studies/CreateStudy';
+import React from 'react';
+
+// import { OptionalCreates } from '@/Pages/Studies/CreateStudy';
 import { Creates } from '@/Types/studies';
 import { ChangeEvent } from 'react';
+import { UseFormRegister } from 'react-hook-form';
+import { SelectArrow } from '@/Assets/SelectArrow';
+import { IconWrap, Container, Select, TextWrap } from './index.style';
 
-export type Props = {
-  onClick?: () => void;
-  children?: React.ReactNode;
-  // onChange?: (event: string) => void;
-  setForm: (any: OptionalCreates) => void;
-  useForm: Creates;
-  value?: string;
-  type?: string;
-  name?: string;
-  maxlength?: number;
-  id?: string;
-  formData?: number | string;
-  ref?: string;
-};
+interface IFormValues {
+  positionId: number;
+}
 
-export const PositionButton = ({ setForm, useForm }: Props) => {
-  const PositionHandler = (event: ChangeEvent<HTMLSelectElement>) => {
-    setForm({ positionId: event.target.selectedIndex });
-  };
-  return (
-    <ButtonConTainer name="positionId" className="select" value={useForm.positionId} onChange={PositionHandler}>
-      <Textwrapper>포지션</Textwrapper>
-      <Textwrapper value={1}>백엔드</Textwrapper>
-      <Textwrapper value={2}>프론트엔드</Textwrapper>
-      <Textwrapper value={3}>디자이너</Textwrapper>
-      <Textwrapper value={4}>데브옵스</Textwrapper>
-    </ButtonConTainer>
-  );
-};
-
-const ButtonConTainer = styled.select`
-  width: 392px;
-  height: 44px;
-  background-color: ${(props) => props.theme.color.gray3};
-  border-radius: 8px;
-  border: 1px solid #cbcdd1;
-  background: ${(props) => props.theme.color.gray1};
-  color: ${(props) => props.theme.color.gray3};
-  padding-left: 16px;
-`;
-
-const Textwrapper = styled.option`
-  background: ${(props) => props.theme.color.gray1};
-  color: ${(props) => props.theme.color.gray3};
-  padding-left: 16px;
-`;
+export const PositionButton = React.forwardRef<HTMLSelectElement, ReturnType<UseFormRegister<IFormValues>>>(
+  ({ onChange, name }, ref) => {
+    return (
+      <Container>
+        <Select name={name} className="select" onChange={onChange} ref={ref}>
+          <TextWrap value="">포지션</TextWrap>
+          <TextWrap value={1}>백엔드</TextWrap>
+          <TextWrap value={2}>프론트엔드</TextWrap>
+          <TextWrap value={3}>디자이너</TextWrap>
+          <TextWrap value={4}>데브옵스</TextWrap>
+        </Select>
+        <IconWrap className="icon__right">
+          <SelectArrow />
+        </IconWrap>
+      </Container>
+    );
+  },
+);
