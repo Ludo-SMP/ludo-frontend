@@ -30,6 +30,7 @@ export const color = {
   naver: '#03CF5D',
   kakao: '#FEE500',
   kakaoFontColor: '#521010',
+  negative: '#FD3D51',
 };
 
 export const font = {
