@@ -114,7 +114,7 @@ const ApplicantInfoWrapper = styled.div`
 
   .title {
     color: ${({ theme }) => theme.color.black3};
-    font-family: Pretendard;
+    font-family: 'Pretendard500';
     font-size: ${({ theme }) => theme.font.small};
     font-style: normal;
     font-weight: 500;
@@ -130,7 +130,7 @@ const ApplicantInfoWrapper = styled.div`
 
     .nickname {
       color: ${({ theme }) => theme.color.black5};
-      font-family: Pretendard;
+      font-family: 'Pretendard700';
       font-size: ${({ theme }) => theme.font.xxlarge};
       font-style: normal;
       font-weight: 700;

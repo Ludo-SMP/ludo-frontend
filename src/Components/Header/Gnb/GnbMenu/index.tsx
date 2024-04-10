@@ -22,7 +22,7 @@ const GnbMenuWrapper = styled.button`
   color: ${(props) => props.theme.color.black3};
   background-color: ${(props) => props.theme.color.white};
   color: var(--Font-text-default, rgba(0, 0, 0, 0.65));
-  font-family: Pretendard;
+  font-family: 'Pretendard600';
   font-size: calc((${(props) => props.theme.font.small} + ${(props) => props.theme.font.medium}) / 2);
   font-style: normal;
   font-weight: 600;

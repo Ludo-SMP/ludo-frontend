@@ -57,7 +57,7 @@ const SignUpFailGuideWrapper = styled.div`
   .title {
     color: ${({ theme }) => theme.color.black5};
     text-align: center;
-    font-family: Pretendard;
+    font-family: 'Pretendard800';
     font-size: ${({ theme }) => theme.font.xxlarge};
     font-style: normal;
     font-weight: 800;
@@ -67,7 +67,7 @@ const SignUpFailGuideWrapper = styled.div`
   .content {
     color: ${({ theme }) => theme.color.black5};
     text-align: center;
-    font-family: Pretendard;
+    font-family: 'Pretendard500';
     font-size: ${({ theme }) => theme.font.medium};
     font-style: normal;
     font-weight: 500;

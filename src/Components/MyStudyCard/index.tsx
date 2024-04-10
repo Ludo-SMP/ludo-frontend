@@ -128,7 +128,7 @@ const StudyInfoWrapper = styled.div<{ status: StudyStatus | ApplyStatus }>`
 
     .title {
       color: ${({ theme }) => theme.color.black5};
-      font-family: Pretendard;
+      font-family: 'Pretendard700';
       font-size: ${({ theme }) => theme.font.xxlarge};
       font-style: normal;
       font-weight: 700;

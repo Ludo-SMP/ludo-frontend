@@ -61,7 +61,7 @@ const SignUpGuideWrapper = styled.div`
   .title {
     color: ${({ theme }) => theme.color.black5};
     text-align: center;
-    font-family: Pretendard;
+    font-family: 'Pretendard800';
     font-size: ${({ theme }) => theme.font.xxxxlarge};
     font-style: normal;
     font-weight: 800;
@@ -71,7 +71,7 @@ const SignUpGuideWrapper = styled.div`
   .content {
     color: ${({ theme }) => theme.color.black5};
     text-align: center;
-    font-family: Pretendard;
+    font-family: 'Pretendard500';
     font-size: ${({ theme }) => theme.font.medium};
     font-style: normal;
     font-weight: 500;
@@ -95,7 +95,7 @@ const LoginWrapper = styled.div`
   align-self: stretch;
   color: ${(props) => props.theme.color.black3};
   text-align: center;
-  font-family: Pretendard;
+  font-family: 'Pretendard500';
   font-size: ${(props) => props.theme.font.medium};
   font-style: normal;
   font-weight: 600;

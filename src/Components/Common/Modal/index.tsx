@@ -88,7 +88,7 @@ const ModalInfoWrapper = styled.div<{ alignTitle: 'flex-start' | 'center' }>`
     align-self: stretch;
     color: ${({ theme }) => theme.color.black5};
     text-align: center;
-    font-family: Pretendard;
+    font-family: 'Pretendard700';
     font-size: ${({ theme }) => theme.font.large};
     font-style: normal;
     font-weight: 700;
@@ -103,7 +103,7 @@ const ModalContentWrapper = styled.div`
   align-items: center;
   flex-shrink: 0;
   color: ${({ theme }) => theme.color.black4};
-  font-family: Pretendard;
+  font-family: 'Pretendard500';
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
@@ -135,7 +135,7 @@ const ModalBtnsWrapper = styled.div<{ isBtnWidthEqual: boolean; cancelBtnText: s
     gap: 8px;
     border-radius: ${({ theme }) => theme.borderRadius.small};
     text-align: center;
-    font-family: Pretendard;
+    font-family: 'Pretendard600';
     font-size: 18px;
     font-style: normal;
     font-weight: 600;

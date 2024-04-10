@@ -24,7 +24,7 @@ const ChipMenuContainer = styled.div<{ checked: boolean }>`
   background: ${({ theme }) => theme.color.white};
   color: ${({ checked, theme }) => (checked ? theme.color.orange3 : theme.color.black3)};
   text-align: center;
-  font-family: Pretendard;
+  font-family: 'Pretendard600';
   font-size: ${({ theme }) => theme.font.small};
   font-style: normal;
   font-weight: 600;

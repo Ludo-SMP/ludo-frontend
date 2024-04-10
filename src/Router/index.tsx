@@ -8,11 +8,11 @@ import RecruitmentsPage from '@/Pages/Recruitments';
 import SignUpPage from '@/Pages/SignUp';
 import ApplicantsPage from '@/Pages/Applicants';
 import StudyDetailPage from '@/Pages/StudyDetail';
-import SaveStudyPage from '@/Pages/Studies/SaveStudy';
-import CreateStudyPage from '@/Pages/Studies/CreateStudy';
-import ModifyStudyPage from '@/Pages/Studies/ModifyStudy';
-import CreateRecruitmentPage from '@/Pages/Studies/CreateRecruitment';
-import ModifyRecruitmentPage from '@/Pages/Studies/ModifyRecruitment';
+// import SaveStudyPage from '@/Pages/Studies/SaveStudy';
+// import CreateStudyPage from '@/Pages/Studies/CreateStudy';
+// import ModifyStudyPage from '@/Pages/Studies/ModifyStudy';
+// import CreateRecruitmentPage from '@/Pages/Studies/CreateRecruitment';
+// import ModifyRecruitmentPage from '@/Pages/Studies/ModifyRecruitment';
 import LoginFailPage from '@/Pages/LoginFail';
 import SignUpFailPage from '@/Pages/SignUpFail';
 import Header from '@/Components/Header';
@@ -47,18 +47,18 @@ export const RouterPath = createBrowserRouter([
         path: ROUTES.MYPAGE,
         element: <MyPage />,
       },
-      {
-        path: ROUTES.STUDY.CREATE,
-        element: <CreateStudyPage />,
-      },
-      {
-        path: ROUTES.STUDY.MODIFY,
-        element: <ModifyStudyPage />,
-      },
-      {
-        path: ROUTES.RECRUITMENT.CREATE,
-        element: <CreateRecruitmentPage />,
-      },
+      // {
+      //   path: ROUTES.STUDY.CREATE,
+      //   element: <CreateStudyPage />,
+      // },
+      // {
+      //   path: ROUTES.STUDY.MODIFY,
+      //   element: <ModifyStudyPage />,
+      // },
+      // {
+      //   path: ROUTES.RECRUITMENT.CREATE,
+      //   element: <CreateRecruitmentPage />,
+      // },
 
       {
         path: ROUTES.STUDY.DETAIL,
@@ -84,14 +84,14 @@ export const RouterPath = createBrowserRouter([
         path: ROUTES.STUDY.APPLICNATS,
         element: <ApplicantsPage />,
       },
-      {
-        path: ROUTES.STUDY.SAVE,
-        element: <SaveStudyPage />,
-      },
-      {
-        path: ROUTES.RECRUITMENT.MODIFY,
-        element: <ModifyRecruitmentPage />,
-      },
+      // {
+      //   path: ROUTES.STUDY.SAVE,
+      //   element: <SaveStudyPage />,
+      // },
+      // {
+      //   path: ROUTES.RECRUITMENT.MODIFY,
+      //   element: <ModifyRecruitmentPage />,
+      // },
     ],
   },
 ]);

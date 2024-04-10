@@ -69,7 +69,7 @@ const SocialLoginWrapper = styled.a<{ socialType: SocialType; signType: SignType
         ? props.theme.color.kakaoFontColor
         : props.theme.color.black};
     text-align: center;
-    font-family: Pretendard;
+    font-family: 'Pretendard600';
     font-size: ${(props) => props.theme.font.medium};
     font-style: normal;
     font-weight: 600;

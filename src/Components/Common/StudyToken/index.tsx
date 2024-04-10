@@ -41,7 +41,7 @@ const StudyTokenWrapper = styled.span<{ status: ApplyStatus | MemberStatus | Stu
   border-radius: ${({ theme }) => theme.borderRadius.large};
   text-align: center;
   font-size: ${({ theme }) => theme.font.small};
-  font-family: Pretendard;
+  font-family: 'Pretendard500';
   font-style: normal;
   font-weight: 500;
   line-height: 30px;

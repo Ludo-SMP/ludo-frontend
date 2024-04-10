@@ -113,7 +113,7 @@ const TopBarWrapper = styled.div`
     align-items: center;
     gap: 8px;
     font-size: calc((${(props) => props.theme.font.small} + ${(props) => props.theme.font.medium}) / 2);
-    font-family: Pretendard;
+    font-family: 'Pretendard600';
     font-style: normal;
     text-align: center;
     font-weight: 600;
