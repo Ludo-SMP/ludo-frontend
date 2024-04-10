@@ -1,57 +1,36 @@
-import styled from 'styled-components';
-import { ChangeEvent } from 'react';
-import { OptionalCreates } from '@/Pages/Studies/CreateRecruitment';
-import { Creates } from '@/Types/studies';
+import React from 'react';
+import { UseFormRegister } from 'react-hook-form';
+import { SelectArrow } from '@/Assets/SelectArrow';
+import { IconWrap, Container, Select, TextWrap } from './index.style';
+export type Props = any;
 
-export type Props = {
-  onClick?: () => void;
-  children?: React.ReactNode;
-  // onChange?: (event: string) => void;
-  setForm: (any: OptionalCreates) => void;
-  useForm: Creates;
-  value?: string;
-  type?: string;
-  name?: string;
-  maxlength?: number;
-  id?: string;
-  formData?: number | string;
-  ref?: string;
-};
+interface IFormValues {
+  applicantCount: number;
+}
 
-export const ApplicantButton = ({ setForm, useForm }: Props) => {
-  const ApplyHandler = (event: ChangeEvent<HTMLSelectElement>) => {
-    setForm({ applicantCount: event.target.selectedIndex });
-  };
-  return (
-    <ButtonConTainer name="recruitmentLimit" className="select" value={useForm.applicantCount} onChange={ApplyHandler}>
-      <Textwrapper>모집 인원</Textwrapper>
-      <Textwrapper value={1}>1명</Textwrapper>
-      <Textwrapper value={2}>2명</Textwrapper>
-      <Textwrapper value={3}>3명</Textwrapper>
-      <Textwrapper value={4}>4명</Textwrapper>
-      <Textwrapper value={5}>5명</Textwrapper>
-      <Textwrapper value={6}>6명</Textwrapper>
-      <Textwrapper value={7}>7명</Textwrapper>
-      <Textwrapper value={8}>8명</Textwrapper>
-      <Textwrapper value={9}>9명</Textwrapper>
-      <Textwrapper value={10}>10명</Textwrapper>
-    </ButtonConTainer>
-  );
-};
-
-const ButtonConTainer = styled.select`
-  width: 392px;
-  height: 44px;
-  background-color: ${(props) => props.theme.color.gray3};
-  border-radius: 8px;
-  border: 1px solid #cbcdd1;
-  background: ${(props) => props.theme.color.gray1};
-  color: ${(props) => props.theme.color.gray3};
-  padding-left: 16px;
-`;
-
-const Textwrapper = styled.option`
-  background: ${(props) => props.theme.color.gray1};
-  color: ${(props) => props.theme.color.gray3};
-  padding-left: 16px;
-`;
+export const ApplicantButton = React.forwardRef<HTMLSelectElement, ReturnType<UseFormRegister<IFormValues>>>(
+  ({ onChange, onBlur, name }: Props, ref) => {
+    return (
+      <Container>
+        <Select name={name} className="select" onChange={onChange} onBlur={onBlur} ref={ref} required>
+          <TextWrap value="" selected disabled>
+            ex) 5명
+          </TextWrap>
+          <TextWrap value={1}>1명</TextWrap>
+          <TextWrap value={2}>2명</TextWrap>
+          <TextWrap value={3}>3명</TextWrap>
+          <TextWrap value={4}>4명</TextWrap>
+          <TextWrap value={5}>5명</TextWrap>
+          <TextWrap value={6}>6명</TextWrap>
+          <TextWrap value={7}>7명</TextWrap>
+          <TextWrap value={8}>8명</TextWrap>
+          <TextWrap value={9}>9명</TextWrap>
+          <TextWrap value={10}>10명</TextWrap>
+        </Select>
+        <IconWrap className="icon__right">
+          <SelectArrow />
+        </IconWrap>
+      </Container>
+    );
+  },
+);
