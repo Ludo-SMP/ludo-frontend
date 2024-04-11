@@ -11,16 +11,27 @@ export const SelectBox = forwardRef<
   }
 >(({ onChange, onBlur, name, label, values }, ref) => {
   return (
-    <label>
+    <Label>
       {label}
       <Select ref={ref} onChange={onChange} onBlur={onBlur} name={name}>
         {Object.entries(values ?? {}).map(([k, v]) => (
           <Option value={k}>{v}</Option>
         ))}
       </Select>
-    </label>
+    </Label>
   );
 });
+
+const Label = styled.label`
+  font-family: Pretendard;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 20px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`;
 
 const Select = styled.select`
   height: 44px;
