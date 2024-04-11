@@ -25,13 +25,13 @@ export default () => {
         </Labeled>
       </FormSection>
       <FormSection icon={<Two />} header="스터디 기본 구성">
-        <SelectBox label="카테고리" values={{}} {...register('title')} />
-        <SelectBox label="스터디 최대 인원" values={{}} {...register('memberLimit')} />
+        <SelectBox label="카테고리" values={{}} defaultValue="ex) 코딩테스트 스터디" {...register('title')} />
+        <SelectBox label="스터디 최대 인원" values={{}} defaultValue="ex) 5명" {...register('memberLimit')} />
       </FormSection>
       <FormSection icon={<Three />} header="스터디 진행 관련">
-        <SelectBox label="카테고리" values={{}} {...register('category')} />
-        <SelectBox label="진행 플랫폼" values={{}} {...register('platform')} />
-        <SelectBox label="진행 플랫폼" values={{}} {...register('platform')} />
+        <SelectBox label="카테고리" values={{}} defaultValue="ex) 코딩테스트 스터디" {...register('category')} />
+        <SelectBox label="진행 플랫폼" values={{}} defaultValue="ex) gather" {...register('platform')} />
+        <SelectBox label="진행 플랫폼" values={{}} defaultValue="ex) 24.01.23 - 21.03.23" {...register('platform')} />
       </FormSection>
       <Buttons>
         {/* 임시저장 */}
