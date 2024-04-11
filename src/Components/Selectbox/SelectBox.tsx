@@ -8,12 +8,16 @@ export const SelectBox = forwardRef<
     label?: string;
     // 선택지로 등장할 값을 키: 표시값 형태의 객체로 전달
     values?: Record<string, string>;
+    defaultValue?: string;
   }
->(({ onChange, onBlur, name, label, values }, ref) => {
+>(({ onChange, onBlur, name, label, values, defaultValue }, ref) => {
   return (
     <Label>
       {label}
       <Select ref={ref} onChange={onChange} onBlur={onBlur} name={name}>
+        <Option value="" disabled selected hidden>
+          {defaultValue}
+        </Option>
         {Object.entries(values ?? {}).map(([k, v]) => (
           <Option value={k}>{v}</Option>
         ))}
