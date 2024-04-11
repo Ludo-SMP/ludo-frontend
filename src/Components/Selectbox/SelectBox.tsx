@@ -1,4 +1,5 @@
 import { ComponentProps, forwardRef } from 'react';
+import styled from 'styled-components';
 
 // RHF와 호환되는 범용 SelectBox 컴포넌트
 export const SelectBox = forwardRef<
@@ -12,11 +13,26 @@ export const SelectBox = forwardRef<
   return (
     <label>
       {label}
-      <select ref={ref} onChange={onChange} onBlur={onBlur} name={name}>
+      <Select ref={ref} onChange={onChange} onBlur={onBlur} name={name}>
         {Object.entries(values ?? {}).map(([k, v]) => (
-          <option value={k}>{v}</option>
+          <Option value={k}>{v}</Option>
         ))}
-      </select>
+      </Select>
     </label>
   );
 });
+
+const Select = styled.select`
+  height: 44px;
+  padding: 10px 16px 10px 16px;
+  border-radius: 8px;
+  border: 1px solid #cbcdd1;
+  background-color: ${(props) => props.theme.color.white};
+  color: ${(props) => props.theme.color.gray3};
+`;
+
+const Option = styled.option`
+  background: ${(props) => props.theme.color.gray1};
+  color: ${(props) => props.theme.color.gray3};
+  padding-left: 16px;
+`;
