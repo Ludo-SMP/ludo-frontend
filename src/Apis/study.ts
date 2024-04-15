@@ -10,6 +10,9 @@ export const getMyPageInfo = (): Promise<{ data: { data: MyPageInfo } }> => http
 export const getApplicantsDetail = (studyId: number): Promise<{ data: { data: ApplicantsDetail } }> =>
   httpClient.get(API_END_POINT.APPLICANTS(studyId));
 
+// TODO: 타입 정의 필요
+export const createStudy = async (data: {}) => httpClient.post(API_END_POINT.CREATE_STUDY, { ...data });
+
 export const applyStudy = async (studyId: number, recruitmentId: number, data: { positionId: number }) =>
   httpClient.post(API_END_POINT.APPLY(studyId, recruitmentId), { ...data });
 
