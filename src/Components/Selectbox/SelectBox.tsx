@@ -47,7 +47,9 @@ const Select = styled.select`
 `;
 
 const Option = styled.option`
-  background: ${(props) => props.theme.color.gray1};
-  color: ${(props) => props.theme.color.gray3};
-  padding-left: 16px;
+  font-family: Pretendard600;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #00000073;
 `;
