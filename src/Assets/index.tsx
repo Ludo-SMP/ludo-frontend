@@ -26,6 +26,7 @@ export { default as Create } from './icons/createstudy.svg?react';
 export { default as Loading } from './icons/lodaing.svg?react';
 export { default as Logout } from './icons/logout.svg?react';
 export { default as Article } from './icons/article.svg?react';
+export { default as Study } from './icons/study.svg?react';
 
 // Logo
 export { default as BlankLogo } from './images/blank-logo.png';

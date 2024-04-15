@@ -1,13 +1,15 @@
-import { Loading, MemberImage, StudyInfo } from '@/Assets';
+import { Loading, MemberImage, Study, StudyInfo } from '@/Assets';
 import UserCard from '@/Components/UserCard';
 import MyStudyCard from '@/Components/MyStudyCard';
 import styled from 'styled-components';
+import TemporarySavedCard, { TemporarySavedCardProps } from '@/Components/TemporarySavedCard';
 import Button from '@/Components/Common/Button';
 import { useMyPageInfo } from '@/Hooks/study/useMyPageInfo';
 import { getPeriod } from '@/utils/date';
 import ChipMenu from '@/Components/Common/ChipMenu';
 import { User, ParticipateStudy, ApplicantRecruitment, CompletedStudy } from '@/Types/study';
-import { useSelectedMyStudyStore } from '@/store/study';
+import { useSelectedCardStore, useSelectedMyStudyStore } from '@/store/study';
+import { temporarySavedCardMockData } from '@/Shared/dummy';
 import { useLogOutMutation } from '@/Hooks/auth/useLogOutMutation';
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -21,6 +23,7 @@ const MyPage = () => {
   const { pathname } = useLocation();
 
   const { selectedMyStudyStatus, setSelectedMyStudyStatus } = useSelectedMyStudyStore();
+  const { selectedCard, setSelectedCard } = useSelectedCardStore();
 
   const { mutate: logoutMutate } = useLogOutMutation();
 
@@ -81,28 +84,52 @@ const MyPage = () => {
                   />
                 ))
               : selectedMyStudyStatus === 'APPLIED'
-              ? applicantRecruitments.map((applicantRecruitment: ApplicantRecruitment) => (
-                  <MyStudyCard
-                    id={applicantRecruitment?.recruitmentId}
-                    title={applicantRecruitment?.title}
-                    status={applicantRecruitment?.applicantStatus}
-                    position={applicantRecruitment?.position}
-                    key={applicantRecruitment?.recruitmentId}
-                  />
-                ))
-              : completedStudies.map((completedStudy: CompletedStudy) => (
-                  <MyStudyCard
-                    id={completedStudy?.studyId}
-                    title={completedStudy?.title}
-                    status={completedStudy?.status}
-                    position={completedStudy?.position}
-                    period={getPeriod(completedStudy?.startDateTime, completedStudy?.endDateTime)}
-                    participantCount={completedStudy?.participantCount}
-                    isOwner={completedStudy?.isOwner}
-                    hasRecruitment={completedStudy?.hasRecruitment}
-                    key={completedStudy?.studyId}
-                  />
-                ))}
+                ? applicantRecruitments.map((applicantRecruitment: ApplicantRecruitment) => (
+                    <MyStudyCard
+                      id={applicantRecruitment?.recruitmentId}
+                      title={applicantRecruitment?.title}
+                      status={applicantRecruitment?.applicantStatus}
+                      position={applicantRecruitment?.position}
+                      key={applicantRecruitment?.recruitmentId}
+                    />
+                  ))
+                : completedStudies.map((completedStudy: CompletedStudy) => (
+                    <MyStudyCard
+                      id={completedStudy?.studyId}
+                      title={completedStudy?.title}
+                      status={completedStudy?.status}
+                      position={completedStudy?.position}
+                      period={getPeriod(completedStudy?.startDateTime, completedStudy?.endDateTime)}
+                      participantCount={completedStudy?.participantCount}
+                      isOwner={completedStudy?.isOwner}
+                      hasRecruitment={completedStudy?.hasRecruitment}
+                      key={completedStudy?.studyId}
+                    />
+                  ))}
+          </CardsWrapper>
+
+          <CardsWrapper>
+            <div className="title">
+              <Study width="40" height="40" />
+              <span>임시 저장된 글</span>
+            </div>
+            <ChipMenusWrapper>
+              <ChipMenu checked={selectedCard === 'STUDY'} onClick={() => setSelectedCard('STUDY')}>
+                스터디 생성
+              </ChipMenu>
+              <ChipMenu checked={selectedCard === 'RECRUITMENT'} onClick={() => setSelectedCard('RECRUITMENT')}>
+                스터디 모집공고
+              </ChipMenu>
+            </ChipMenusWrapper>
+            {selectedCard === 'STUDY'
+              ? temporarySavedCardMockData
+                  .filter((temporarySavedCard: TemporarySavedCardProps) => temporarySavedCard.card === 'STUDY')
+                  .map((studySavedCard: TemporarySavedCardProps) => <TemporarySavedCard {...studySavedCard} />)
+              : temporarySavedCardMockData
+                  .filter((temporarySavedCard: TemporarySavedCardProps) => temporarySavedCard.card === 'RECRUITMENT')
+                  .map((recruitmentSavedCard: TemporarySavedCardProps) => (
+                    <TemporarySavedCard {...recruitmentSavedCard} />
+                  ))}
           </CardsWrapper>
 
           <MypageButtonsWrapper>
