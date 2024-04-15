@@ -12,7 +12,8 @@ import { useSelectedCardStore, useSelectedMyStudyStore } from '@/store/study';
 import { temporarySavedCardMockData } from '@/Shared/dummy';
 import { useLogOutMutation } from '@/Hooks/auth/useLogOutMutation';
 import { useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import StackModal from '@/Components/Modal/StackModal';
 
 const MyPage = () => {
   const { data: myPageInfo, isLoading } = useMyPageInfo();
@@ -26,6 +27,7 @@ const MyPage = () => {
   const { selectedCard, setSelectedCard } = useSelectedCardStore();
 
   const { mutate: logoutMutate } = useLogOutMutation();
+  const [isStackModalOpen, setIsStackModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -131,6 +133,8 @@ const MyPage = () => {
                     <TemporarySavedCard {...recruitmentSavedCard} />
                   ))}
           </CardsWrapper>
+          <Button onClick={() => setIsStackModalOpen((prev: boolean) => !prev)}>스택 모달 열기</Button>
+          {isStackModalOpen && <StackModal handleModal={setIsStackModalOpen} />}
 
           <MypageButtonsWrapper>
             <Button onClick={() => logoutMutate()} size="fullWidth">
