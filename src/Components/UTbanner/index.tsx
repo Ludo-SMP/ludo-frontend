@@ -48,7 +48,7 @@ const ContentWrapper = styled.div`
 
   .ut__guide {
     color: ${({ theme }) => theme.color.white};
-    font-family: Pretendard;
+    font-family: 'Pretendard600';
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
@@ -57,7 +57,7 @@ const ContentWrapper = styled.div`
 
   .ut__period {
     color: var(--Font-Page-body-white-2, rgba(255, 255, 255, 0.5));
-    font-family: Pretendard;
+    font-family: 'Pretendard600';
     font-size: 14px;
     font-style: normal;
     font-weight: 600;

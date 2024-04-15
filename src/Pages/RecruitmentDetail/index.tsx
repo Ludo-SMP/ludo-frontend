@@ -219,7 +219,7 @@ const RecruitmentTitleWrapper = styled.div`
   gap: 24px;
   align-self: stretch;
   color: ${(props) => props.theme.color.black5};
-  font-family: Pretendard;
+  font-family: 'Pretendard800';
   font-size: ${(props) => props.theme.font.xxxxlarge};
   font-style: normal;
   font-weight: 800;

@@ -37,9 +37,9 @@ export default () => {
       </FormSection>
       <Buttons>
         {/* 임시저장 */}
-        <button onClick={() => console.log(data)}>임시저장</button>
+        <Button onClick={() => console.log(data)}>임시저장</Button>
         {/* 생성 */}
-        <input type="submit" />
+        <Button type="submit"></Button>
       </Buttons>
     </Form>
   );
@@ -99,6 +99,23 @@ const FormSectionInnerBody = styled.div`
 
 const Buttons = styled.div`
   display: flex;
+  gap: 8px;
+  & > * {
+    flex: 1;
+  }
+`;
+
+const Button = styled.button`
+  height: 40px;
+  padding: 0 16px 0 16px;
+  gap: 8px;
+  border-radius: 8px;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 40px;
+  text-align: center;
+  border: 1px solid #0000001a;
 `;
 
 const Divier = styled.div`

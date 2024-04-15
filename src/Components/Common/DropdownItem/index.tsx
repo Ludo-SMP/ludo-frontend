@@ -19,7 +19,7 @@ const DropDownItemWrapper = styled.div`
   align-items: center;
   background: ${({ theme }) => theme.color.white};
   color: ${({ theme }) => theme.color.black3};
-  font-family: Pretendard;
+  font-family: 'Pretendard500';
   font-size: ${({ theme }) => theme.font.small};
   font-style: normal;
   font-weight: 500;

@@ -42,7 +42,7 @@ const MemberProfileWrapper = styled.div`
     .nickname {
       color: ${(props) => props.theme.color.black4};
       text-align: center;
-      font-family: Pretendard;
+      font-family: 'Pretendard700';
       font-size: ${(props) => props.theme.font.xlarge};
       font-style: normal;
       font-weight: 700;

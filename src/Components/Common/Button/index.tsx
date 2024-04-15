@@ -39,7 +39,7 @@ const ButtonContainer = styled.button<{
   opacity: 1;
   width: ${({ size, theme }) => (size === 'fullWidth' ? theme.buttonSize.fullWidth : theme.buttonSize.normal)};
   font-size: ${({ theme }) => theme.font.small};
-  font-family: Pretendard;
+  font-family: 'Pretendard600';
   font-style: normal;
   font-weight: 600;
   line-height: 40px;
