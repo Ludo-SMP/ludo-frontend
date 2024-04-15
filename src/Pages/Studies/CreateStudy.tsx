@@ -2,7 +2,7 @@ import { One, Three, Two } from '@/Assets';
 import Button from '@/Components/Common/Button';
 import InputText from '@/Components/Common/InputText/iindex';
 import { SelectBox } from '@/Components/Selectbox/SelectBox';
-import { CATEGORY, PLATFORM } from '@/Shared/study';
+import { CATEGORY, PLATFORM, PROGRESS_METHOD } from '@/Shared/study';
 import { ReactNode } from 'react';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
@@ -35,9 +35,9 @@ export default () => {
         <Divider />
         <FormSection icon={<Three />} header="스터디 진행 관련">
           <SelectBox
-            label="카테고리"
-            values={CATEGORY}
-            defaultValue="ex) 코딩테스트 스터디"
+            label="진행 방식"
+            values={PROGRESS_METHOD}
+            defaultValue="ex) 온/오프라인"
             {...register('category')}
           />
           <SelectBox label="진행 플랫폼" values={PLATFORM} defaultValue="ex) gather" {...register('platform')} />
