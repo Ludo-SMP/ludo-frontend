@@ -19,35 +19,44 @@ export default () => {
   const data = watch();
 
   return (
-    <Form onSubmit={handleSubmit((a) => {})}>
-      <FormSection icon={<One />} header="스터디 제목">
-        <Labeled label="제목">
-          <InputText />
-        </Labeled>
-      </FormSection>
-      <Divider />
-      <FormSection icon={<Two />} header="스터디 기본 구성">
-        <SelectBox label="카테고리" values={{}} defaultValue="ex) 코딩테스트 스터디" {...register('title')} />
-        <SelectBox label="스터디 최대 인원" values={{}} defaultValue="ex) 5명" {...register('memberLimit')} />
-      </FormSection>
-      <Divider />
-      <FormSection icon={<Three />} header="스터디 진행 관련">
-        <SelectBox label="카테고리" values={{}} defaultValue="ex) 코딩테스트 스터디" {...register('category')} />
-        <SelectBox label="진행 플랫폼" values={{}} defaultValue="ex) gather" {...register('platform')} />
-        <SelectBox label="진행 플랫폼" values={{}} defaultValue="ex) 24.01.23 - 21.03.23" {...register('platform')} />
-      </FormSection>
-      <Buttons>
-        <Button>임시저장</Button>
-        <Button scheme="secondary">생성</Button>
-      </Buttons>
-    </Form>
+    <PageWrapper>
+      <Form onSubmit={handleSubmit((a) => {})}>
+        <FormSection icon={<One />} header="스터디 제목">
+          <Labeled label="제목">
+            <InputText />
+          </Labeled>
+        </FormSection>
+        <Divider />
+        <FormSection icon={<Two />} header="스터디 기본 구성">
+          <SelectBox label="카테고리" values={{}} defaultValue="ex) 코딩테스트 스터디" {...register('title')} />
+          <SelectBox label="스터디 최대 인원" values={{}} defaultValue="ex) 5명" {...register('memberLimit')} />
+        </FormSection>
+        <Divider />
+        <FormSection icon={<Three />} header="스터디 진행 관련">
+          <SelectBox label="카테고리" values={{}} defaultValue="ex) 코딩테스트 스터디" {...register('category')} />
+          <SelectBox label="진행 플랫폼" values={{}} defaultValue="ex) gather" {...register('platform')} />
+          <SelectBox label="진행 플랫폼" values={{}} defaultValue="ex) 24.01.23 - 21.03.23" {...register('platform')} />
+        </FormSection>
+        <Buttons>
+          <Button>임시저장</Button>
+          <Button scheme="secondary">생성</Button>
+        </Buttons>
+      </Form>
+    </PageWrapper>
   );
 };
+
+const PageWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  max-width: 1224px;
+  margin: 40px auto 80px auto;
+  gap: 32px;
+`;
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  padding: 40px 24px 40px 24px;
   gap: 24px;
 `;
 
@@ -103,19 +112,6 @@ const Buttons = styled.div`
     flex: 1;
   }
 `;
-
-// const Button = styled.button`
-//   height: 40px;
-//   padding: 0 16px 0 16px;
-//   gap: 8px;
-//   border-radius: 8px;
-//   font-family: Pretendard;
-//   font-size: 16px;
-//   font-weight: 600;
-//   line-height: 40px;
-//   text-align: center;
-//   border: 1px solid #0000001a;
-// `;
 
 const Divider = styled.div`
   height: 12px;
