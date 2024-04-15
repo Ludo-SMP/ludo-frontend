@@ -24,12 +24,12 @@ export default () => {
           <InputText />
         </Labeled>
       </FormSection>
-      <Divier />
+      <Divider />
       <FormSection icon={<Two />} header="스터디 기본 구성">
         <SelectBox label="카테고리" values={{}} defaultValue="ex) 코딩테스트 스터디" {...register('title')} />
         <SelectBox label="스터디 최대 인원" values={{}} defaultValue="ex) 5명" {...register('memberLimit')} />
       </FormSection>
-      <Divier />
+      <Divider />
       <FormSection icon={<Three />} header="스터디 진행 관련">
         <SelectBox label="카테고리" values={{}} defaultValue="ex) 코딩테스트 스터디" {...register('category')} />
         <SelectBox label="진행 플랫폼" values={{}} defaultValue="ex) gather" {...register('platform')} />
@@ -118,7 +118,7 @@ const Button = styled.button`
   border: 1px solid #0000001a;
 `;
 
-const Divier = styled.div`
+const Divider = styled.div`
   height: 12px;
   background: #f2f3f3;
 `;
