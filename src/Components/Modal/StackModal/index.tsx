@@ -1,5 +1,7 @@
 import { Close, Search } from '@/Assets';
 import Button from '@/Components/Common/Button';
+import ChipMenu from '@/Components/Common/ChipMenu';
+import { TechStack } from '@/Components/Common/TechStack';
 import { SetStateAction, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
@@ -39,6 +41,38 @@ const StackModal = ({ handleModal }: StackModalProps) => {
             <Search />
           </div>
         </SearchInputWrapper>
+        <CategoryChipsWrapper>
+          <ChipMenu checked={true} onClick={() => {}}>
+            전체
+          </ChipMenu>
+          <ChipMenu checked={false} onClick={() => {}}>
+            프론트엔드
+          </ChipMenu>
+          <ChipMenu checked={false} onClick={() => {}}>
+            백엔드
+          </ChipMenu>
+          <ChipMenu checked={false} onClick={() => {}}>
+            디자인
+          </ChipMenu>
+          <ChipMenu checked={false} onClick={() => {}}>
+            데이터베이스
+          </ChipMenu>
+          <ChipMenu checked={false} onClick={() => {}}>
+            데브옵스
+          </ChipMenu>
+          <ChipMenu checked={false} onClick={() => {}}>
+            언어
+          </ChipMenu>
+        </CategoryChipsWrapper>
+        <TechStackListWrapper>
+          <TechStack name={'기술 스택'} id={0} onClick={() => {}} />
+          <TechStack name={'기술 스택'} id={0} onClick={() => {}} />
+          <TechStack name={'기술 스택'} id={0} onClick={() => {}} selected />
+          <TechStack name={'기술 스택'} id={0} onClick={() => {}} />
+          <TechStack name={'기술 스택'} id={0} onClick={() => {}} selected />
+          <TechStack name={'기술 스택'} id={0} onClick={() => {}} />
+          <TechStack name={'기술 스택'} id={0} onClick={() => {}} selected />
+        </TechStackListWrapper>
       </ModalContentWrapper>
       <BtnsWrapper>
         <Button size="fullWidth" onClick={() => {}}>
@@ -128,9 +162,22 @@ const SearchInputWrapper = styled.div`
     font-style: normal;
     line-height: 24px;
   }
+`;
 
-  svg {
-  }
+const CategoryChipsWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+  gap: 8px;
+`;
+
+const TechStackListWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+  align-content: flex-start;
+  gap: 12px;
+  flex-wrap: wrap;
 `;
 
 const BtnsWrapper = styled.div`
