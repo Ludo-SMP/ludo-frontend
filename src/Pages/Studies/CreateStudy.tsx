@@ -1,4 +1,5 @@
 import { One, Three, Two } from '@/Assets';
+import Button from '@/Components/Common/Button';
 import InputText from '@/Components/Common/InputText/iindex';
 import { SelectBox } from '@/Components/Selectbox/SelectBox';
 import { ReactNode } from 'react';
@@ -36,10 +37,8 @@ export default () => {
         <SelectBox label="진행 플랫폼" values={{}} defaultValue="ex) 24.01.23 - 21.03.23" {...register('platform')} />
       </FormSection>
       <Buttons>
-        {/* 임시저장 */}
-        <Button onClick={() => console.log(data)}>임시저장</Button>
-        {/* 생성 */}
-        <Button type="submit"></Button>
+        <Button>임시저장</Button>
+        <Button scheme="secondary">생성</Button>
       </Buttons>
     </Form>
   );
@@ -105,18 +104,18 @@ const Buttons = styled.div`
   }
 `;
 
-const Button = styled.button`
-  height: 40px;
-  padding: 0 16px 0 16px;
-  gap: 8px;
-  border-radius: 8px;
-  font-family: Pretendard;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 40px;
-  text-align: center;
-  border: 1px solid #0000001a;
-`;
+// const Button = styled.button`
+//   height: 40px;
+//   padding: 0 16px 0 16px;
+//   gap: 8px;
+//   border-radius: 8px;
+//   font-family: Pretendard;
+//   font-size: 16px;
+//   font-weight: 600;
+//   line-height: 40px;
+//   text-align: center;
+//   border: 1px solid #0000001a;
+// `;
 
 const Divider = styled.div`
   height: 12px;
