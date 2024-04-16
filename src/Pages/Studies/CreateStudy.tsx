@@ -79,13 +79,13 @@ const Form = styled.form`
   gap: 40px;
 `;
 
-const Labeled = ({ label, children }: { label: string; children?: ReactNode }) => {
+const Labeled = ({ label, children, error }: { label: string; error?: string; children?: ReactNode }) => {
   return (
     <LabeledInner>
       <Label>{label}</Label>
       <LabeledInnerBox>
         {children}
-        <ErrorText>error</ErrorText>
+        <ErrorText>{error}</ErrorText>
       </LabeledInnerBox>
     </LabeledInner>
   );
