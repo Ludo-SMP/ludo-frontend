@@ -1,15 +1,13 @@
-import { MouseEventHandler } from 'react';
+import { ComponentProps } from 'react';
 import styled from 'styled-components';
 
-export type ButtonProps = {
-  onClick?: MouseEventHandler<HTMLButtonElement>;
-  type?: 'button' | 'submit';
+type ButtonProps = ComponentProps<'button'> & {
   scheme?: 'primary' | 'secondary' | 'third' | 'normal';
-  disabled?: boolean;
-  children: React.ReactNode;
-  className?: string;
   size?: 'normal' | 'fullWidth';
+  className?: string;
 };
+
+type Props = Partial<ButtonProps>;
 
 const Button = ({
   onClick,
@@ -19,16 +17,15 @@ const Button = ({
   children,
   className,
   size = 'normal',
-}: ButtonProps) => (
-  <ButtonContainer {...{ onClick, type, scheme, disabled, className, size }}>
-    <>{children}</>
-  </ButtonContainer>
-);
+}: Props) => {
+  return (
+    <ButtonContainer {...{ onClick, type, scheme, disabled, className, size }}>
+      <>{children}</>
+    </ButtonContainer>
+  );
+};
 
-const ButtonContainer = styled.button<{
-  scheme: 'primary' | 'secondary' | 'third' | 'normal';
-  size: 'normal' | 'fullWidth';
-}>`
+const ButtonContainer = styled.button<Props>`
   display: inline-flex;
   justify-content: center;
   align-items: center;
