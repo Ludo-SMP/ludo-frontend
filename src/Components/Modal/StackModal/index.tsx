@@ -107,7 +107,13 @@ const StackModal = ({ handleModal }: StackModalProps) => {
         </TechStackListWrapper>
       </ModalContentWrapper>
       <BtnsWrapper>
-        <Button size="fullWidth" onClick={() => {}}>
+        <Button
+          size="fullWidth"
+          onClick={() => {
+            setSelectedCategory(null);
+            setSelectedStackIds([]);
+          }}
+        >
           선택 초기화
         </Button>
         <Button scheme="primary" size="fullWidth" onClick={() => handleModal(false)}>
@@ -200,7 +206,8 @@ const CategoryChipsWrapper = styled.div`
 const TechStackListWrapper = styled.div`
   display: flex;
   width: 100%;
-  min-height: 240px;
+  height: 240px;
+  overflow-y: scroll;
   align-items: flex-start;
   align-content: flex-start;
   gap: 12px;
