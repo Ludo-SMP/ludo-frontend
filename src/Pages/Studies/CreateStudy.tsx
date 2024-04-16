@@ -23,7 +23,7 @@ export default () => {
   return (
     <PageWrapper>
       <Form onSubmit={handleSubmit((a) => {})}>
-        <Stack divider={<Divider />}>
+        <Stack divider={<Divider />} gap={24}>
           <FormSection icon={<One />} header="스터디 제목">
             <Labeled label="제목">
               <InputText />
@@ -69,7 +69,7 @@ const PageWrapper = styled.div`
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 40px;
 `;
 
 const Labeled = ({ label, children }: { label: string; children: ReactNode }) => {
