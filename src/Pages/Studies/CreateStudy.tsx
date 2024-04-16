@@ -109,6 +109,7 @@ const ErrorText = styled.span`
   display: flex;
   align-items: center;
   padding: 4px 0px;
+  color: #fd3d51;
 `;
 
 const FormSection = ({ icon, header, children }: { icon?: ReactNode; header?: ReactNode; children?: ReactNode }) => {
