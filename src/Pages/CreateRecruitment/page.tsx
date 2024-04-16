@@ -116,10 +116,13 @@ const CreateRecruitmentPage = () => {
                 <Controller
                   control={control}
                   name="recruitmentEndDateTime"
+                  rules={{ required: ERROR_MSG.recruitmentEndDateTime }}
                   render={({ field }) => <EndDate {...field} />}
                 />
-                {errors?.recruitmentEndDateTime?.message && <ErrorMsg>ss</ErrorMsg>}
               </CalendarButton>
+              {errors?.recruitmentEndDateTime?.message && (
+                <ErrorMsg>{errors?.recruitmentEndDateTime?.message}</ErrorMsg>
+              )}
             </GridItem>
             <GridItem>
               <Spacing size={12} />
