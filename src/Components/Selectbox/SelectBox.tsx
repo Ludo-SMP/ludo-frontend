@@ -44,12 +44,12 @@ const Label = styled.label`
 
 const Select = styled.select`
   height: 44px;
-  padding: 10px 16px 10px 16px;
+  padding: 10px 16px;
   border-radius: 8px;
   border: 1px solid #cbcdd1;
   background-color: ${(props) => props.theme.color.white};
-  color: ${(props) => props.theme.color.gray3};
   flex: 1;
+  color: #00000073;
 `;
 
 const Option = styled.option`
@@ -57,7 +57,7 @@ const Option = styled.option`
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
-  color: #00000073;
+  color: ${(props) => props.theme.color.gray3};
 `;
 
 const Box = styled.div`
