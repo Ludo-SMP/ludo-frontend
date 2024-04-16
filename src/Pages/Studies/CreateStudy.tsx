@@ -42,8 +42,8 @@ export default () => {
       >
         <Stack divider={<Divider />} gap={24}>
           <FormSection icon={<One />} header="스터디 제목">
-            <Labeled label="제목">
-              <InputText />
+            <Labeled label="제목" error={errors.title?.type === 'required' && '제목을 기입해주세요.'}>
+              <InputText placeholder="제목을 기입해주세요." />
             </Labeled>
           </FormSection>
           <FormSection icon={<Two />} header="스터디 기본 구성">
