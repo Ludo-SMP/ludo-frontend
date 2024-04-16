@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 
@@ -16,7 +15,7 @@ import { EndDate } from '@/Components/Calendar/EndDate';
 import { SelectBox } from '@/Components/Selectbox/SelectBox';
 
 import { useStack } from '@/Hooks/stack/useStack';
-import { Mainarea } from '@/Components/Textarea/Mainarea';
+import { TextArea } from '@/Components/Textarea';
 import { PositionId, RecruitmentForm } from '@/Types/study';
 
 const CreateRecruitmentPage = () => {
@@ -68,6 +67,16 @@ const CreateRecruitmentPage = () => {
 
   console.log(data);
 
+  const ERROR_MSG: Omit<Record<keyof RecruitmentForm, string>, 'content'> = {
+    applicantCount: '모집 인원을 정해주세요.',
+    recruitmentEndDateTime: '모집 마감일을 정해주세요.',
+    positionIds: '포지션을 정해주세요.',
+    stackIds: '기술 스택을 정해주세요.',
+    title: '제목을 기입해주세요.',
+    contact: '연락 방법을 정해주세요.',
+    callUrl: '연결 url을 작성해주세요.',
+  };
+
   return (
     <RecruitmentContainer>
       <form
@@ -94,9 +103,9 @@ const CreateRecruitmentPage = () => {
                 label="모집 인원"
                 values={APPLICATION_CNT}
                 defaultValue="ex) 5명"
-                {...register('applicantCount')}
+                {...register('applicantCount', { required: ERROR_MSG.applicantCount })}
               />
-              {errors?.applicantCount?.message && <ErrorMsg>ss</ErrorMsg>}
+              {errors?.applicantCount?.message && <ErrorMsg>{errors?.applicantCount?.message}</ErrorMsg>}
             </GridItem>
             <GridItem>
               <Heading type={'Title'} component={'Input'}>
@@ -114,21 +123,44 @@ const CreateRecruitmentPage = () => {
             </GridItem>
             <GridItem>
               <Spacing size={12} />
-              <SelectBox label="포지션" values={POSITION} defaultValue="포지션" {...register('positionIds')} />
+              <SelectBox
+                label="포지션"
+                values={POSITION}
+                defaultValue="포지션"
+                {...register('positionIds', { required: ERROR_MSG.positionIds })}
+              />
+
+              {errors?.positionIds?.message && <ErrorMsg>{errors?.positionIds?.message}</ErrorMsg>}
             </GridItem>
             <GridItem>
               {/* TODO: 기술 스택 모달 적용 */}
-              <SelectBox label="기술 스택" values={STACK} defaultValue="기술 스택" {...register('stackIds')} />
+              <SelectBox
+                label="기술 스택"
+                values={STACK}
+                defaultValue="기술 스택"
+                {...register('stackIds', { required: ERROR_MSG.stackIds })}
+              />
+              {errors?.stackIds?.message && <ErrorMsg>{errors?.stackIds?.message}</ErrorMsg>}
             </GridItem>
             <GridItem>
-              <SelectBox label="연락 방법" values={CONTACT} defaultValue="연락방법" {...register('contact')} />
+              <SelectBox
+                label="연락 방법"
+                values={CONTACT}
+                defaultValue="연락방법"
+                {...register('contact', { required: ERROR_MSG.contact })}
+              />
+              {errors?.contact?.message && <ErrorMsg>{errors?.contact?.message}</ErrorMsg>}
             </GridItem>
             <GridItem>
               <Heading type={'Title'} component={'Input'}>
                 연결 url
               </Heading>
               <Spacing size={12} />
-              <InputText placeholder="ex) 오픈 카카오톡 링크" {...register('callUrl', { required: true })} />
+              <InputText
+                placeholder="ex) 오픈 카카오톡 링크"
+                {...register('callUrl', { required: ERROR_MSG.contact })}
+              />
+              {errors?.callUrl?.message && <ErrorMsg>{errors?.callUrl?.message}</ErrorMsg>}
             </GridItem>
           </Grid>
         </Box>
@@ -199,19 +231,24 @@ const CreateRecruitmentPage = () => {
                 placeholder="제목을 기입해주세요."
                 maxLength={50}
                 currentLength={data.title?.length ?? 0}
-                {...register('title', { required: true, maxLength: 50 })}
+                {...register('title', { required: ERROR_MSG.title, maxLength: 50 })}
               />
-
-              {/* <Titlearea {...register('title', { required: 'select one option' })} /> */}
+              {errors?.title?.message && <ErrorMsg>{errors?.title?.message}</ErrorMsg>}
             </div>
           </BoxItem>
         </Box>
         <Box display={'column'}>
           <BoxItem>
             <div className="box__title">상세 내용</div>
-            <div className="box__content">{/* <Mainarea {...register('content')} /> */}</div>
+            <div className="box__content">
+              <TextArea
+                {...register('content')}
+                placeholder={'상세 내용을 기입해주세요.'}
+                maxLength={2000}
+                currentLength={data.content?.length ?? 0}
+              />
+            </div>
           </BoxItem>
-          ㄴ
         </Box>
         <Spacing size={40} />
         <ButtonBox>
