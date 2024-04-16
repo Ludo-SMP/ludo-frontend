@@ -3,7 +3,7 @@ import { FilterOption } from '@/Types/study';
 
 export interface FilterOptions {
   categoryId: number;
-  stackId: number;
+  stackIds: number[];
   positionId: number;
   progressMethodId: number;
   sortId: number;
@@ -11,7 +11,7 @@ export interface FilterOptions {
 
 const defaultFilterOptions: FilterOptions = {
   categoryId: 0,
-  stackId: 0,
+  stackIds: [],
   positionId: 0,
   progressMethodId: 0,
   sortId: 0,
@@ -19,12 +19,13 @@ const defaultFilterOptions: FilterOptions = {
 
 export interface SetFilterOptionsAction {
   setFilterOptions: (filterOption: FilterOption, value: number) => void;
+  setStackFilterOption: (value: number[]) => void;
   resetFilterOptions: () => void;
 }
 
 export const useFilterOptionsStore = create<FilterOptions & SetFilterOptionsAction>((set) => ({
   categoryId: defaultFilterOptions.categoryId,
-  stackId: defaultFilterOptions.stackId,
+  stackIds: defaultFilterOptions.stackIds,
   positionId: defaultFilterOptions.positionId,
   progressMethodId: defaultFilterOptions.progressMethodId,
   sortId: defaultFilterOptions.sortId,
@@ -32,9 +33,6 @@ export const useFilterOptionsStore = create<FilterOptions & SetFilterOptionsActi
     switch (filterOption) {
       case 'CATEGORY':
         set({ categoryId: value });
-        break;
-      case 'STACK':
-        set({ stackId: value });
         break;
       case 'POSITION':
         set({ positionId: value });
@@ -49,10 +47,14 @@ export const useFilterOptionsStore = create<FilterOptions & SetFilterOptionsActi
         break;
     }
   },
+
+  setStackFilterOption: (value: number[]) => {
+    set({ stackIds: [...value] });
+  },
   resetFilterOptions: () =>
     set({
       categoryId: defaultFilterOptions.categoryId,
-      stackId: defaultFilterOptions.stackId,
+      stackIds: defaultFilterOptions.stackIds,
       positionId: defaultFilterOptions.positionId,
       progressMethodId: defaultFilterOptions.progressMethodId,
       sortId: defaultFilterOptions.sortId,

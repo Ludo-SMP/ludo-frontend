@@ -7,7 +7,7 @@ export const getPopularRecruitments = (count: number = 6): Promise<{ data: { dat
   httpClient.get(API_END_POINT.POPULAR_RECRUITMENTS, { params: { count } });
 
 export const getRecruitments = (
-  filterOptions: Pick<FilterOptionParams, 'categoryId' | 'positionId' | 'progressMethod' | 'stackId'>,
+  filterOptions: Pick<FilterOptionParams, 'categoryId' | 'positionId' | 'progressMethod' | 'stackIds'>,
   count?: number,
   last?: number,
 ): Promise<{ data: { data: Recruitments } }> => {

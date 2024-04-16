@@ -31,7 +31,6 @@ const StackModal = ({ handleModal, initialSelectedStacks, handleSelectedStacks }
   const [selectedCategory, setSelectedCategory] = useState<StackCategory | null>(null);
   const [selectedStacks, setSelectedStacks] = useState<Stack[]>(initialSelectedStacks);
   const stacksSortedByCategory = data?.data;
-  console.log(selectedStacks);
 
   useEffect(() => {
     const handleOutSideClick = (event: MouseEvent) => {
@@ -176,7 +175,8 @@ const TitleWrapper = styled.div`
     font-family: 'Pretendard800';
     font-size: 24px;
     font-style: normal;
-    line-height: 32px; /* 133.333% */
+    line-height: 32px;
+    font-weight: 800;
   }
 
   .close__icon {

@@ -16,7 +16,7 @@ export interface DropdownFilterProps {
 }
 
 const DropdownFilter = ({ filterName, items, filterOption }: DropdownFilterProps) => {
-  const { setFilterOptions } = useFilterOptionsStore();
+  const { setFilterOptions, setStackFilterOption } = useFilterOptionsStore();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [content, setContent] = useState(filterName);
   const dropDownItemsRef = useRef(null);
@@ -36,7 +36,6 @@ const DropdownFilter = ({ filterName, items, filterOption }: DropdownFilterProps
   const handleSelectedStacks = (stacks: Stack[]) => {
     const selectedStacksLength = stacks.length;
     setSelectedStacks([...stacks]);
-
     setContent(
       selectedStacksLength === 0
         ? '전체'
@@ -44,8 +43,8 @@ const DropdownFilter = ({ filterName, items, filterOption }: DropdownFilterProps
           ? stacks[0].name
           : `${stacks[0].name} 등 ${selectedStacksLength}개`,
     );
+    setStackFilterOption([...stacks.map((stack: Stack) => stack.id)]);
   };
-  console.log(selectedStacks);
 
   useOutSideClick(dropDownItemsRef, toggleDropdonwItems);
 
