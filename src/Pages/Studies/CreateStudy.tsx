@@ -75,12 +75,41 @@ const Form = styled.form`
 
 const Labeled = ({ label, children }: { label: string; children: ReactNode }) => {
   return (
-    <label>
-      {label}
-      {children}
-    </label>
+    <LabeledInner>
+      <Label>{label}</Label>
+      <LabeledInnerBox>
+        {children}
+        <ErrorText>error</ErrorText>
+      </LabeledInnerBox>
+    </LabeledInner>
   );
 };
+
+const LabeledInner = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`;
+
+const Label = styled.label`
+  color: #000000f2;
+  font-family: Pretendard700;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 20px;
+`;
+
+const LabeledInnerBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
+const ErrorText = styled.span`
+  display: flex;
+  align-items: center;
+  padding: 4px 0px;
+`;
 
 const FormSection = ({ icon, header, children }: { icon?: ReactNode; header?: ReactNode; children?: ReactNode }) => {
   return (
