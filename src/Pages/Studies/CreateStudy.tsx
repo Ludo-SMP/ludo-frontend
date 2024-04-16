@@ -43,7 +43,7 @@ export default () => {
         <Stack divider={<Divider />} gap={24}>
           <FormSection icon={<One />} header="스터디 제목">
             <Labeled label="제목" error={errors.title?.type === 'required' && '제목을 기입해주세요.'}>
-              <InputText placeholder="제목을 기입해주세요." />
+              <InputText placeholder="제목을 기입해주세요." {...register('title', { required: true })} />
             </Labeled>
           </FormSection>
           <FormSection icon={<Two />} header="스터디 기본 구성">
@@ -51,7 +51,7 @@ export default () => {
               <SelectBox
                 values={CATEGORY}
                 defaultValue="ex) 코딩테스트 스터디"
-                {...register('title', { required: true })}
+                {...register('category', { required: true })}
               />
             </Labeled>
             <Labeled
