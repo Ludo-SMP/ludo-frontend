@@ -2,21 +2,26 @@ import styled from 'styled-components';
 
 export interface TechStackProps {
   name: string;
-  imgUrl?: string;
+  imageUrl?: string;
   id: number;
   selected?: boolean;
+  onClick: () => void;
 }
 
-export const TechStack = ({ name, imgUrl, id, selected = false }: TechStackProps) => {
+export const TechStack = ({ name, imageUrl, id, selected = false, onClick }: TechStackProps) => {
   return (
-    <TechStackWrapper selected={selected} imgUrl={imgUrl} onClick={() => !selected}>
-      {imgUrl ? <img className="stack__iamge" src={imgUrl} /> : <div className="blank__image" />}
+    <TechStackWrapper selected={selected} imageUrl={imageUrl} onClick={() => !selected}>
+      {imageUrl ? (
+        <img className="stack__image" src={`${import.meta.env.VITE_BASE_API_URL}${imageUrl}`} />
+      ) : (
+        <div className="blank__image" />
+      )}
       <p className="stack__name">{name}</p>
     </TechStackWrapper>
   );
 };
 
-const TechStackWrapper = styled.div<{ selected: boolean; imgUrl?: string }>`
+const TechStackWrapper = styled.div<{ selected: boolean; imageUrl?: string }>`
   display: inline-flex;
   padding: 8px 12px 8px 8px;
   justify-content: center;
@@ -39,13 +44,14 @@ const TechStackWrapper = styled.div<{ selected: boolean; imgUrl?: string }>`
   }
 
   .stack__name {
-    min-width: 108px;
+    width: 108px;
     color: ${({ theme, selected }) => (selected ? theme.color.purple1 : theme.color.black3)};
     font-family: Pretendard600;
     font-size: ${({ theme }) => theme.font.xsmall};
     font-style: normal;
     font-weight: 600;
     line-height: 32px;
+    white-space: nowrap;
   }
 
   &:hover {

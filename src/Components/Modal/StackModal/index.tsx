@@ -2,8 +2,21 @@ import { Close, Search } from '@/Assets';
 import Button from '@/Components/Common/Button';
 import ChipMenu from '@/Components/Common/ChipMenu';
 import { TechStack } from '@/Components/Common/TechStack';
-import { SetStateAction, useEffect, useRef } from 'react';
+import { useStack } from '@/Hooks/stack/useStack';
+import { Stack } from '@/Types/study';
+import { SetStateAction, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
+
+const STACK_CATEGORY = {
+  프론트엔드: 4,
+  데브옵스: 5,
+  백엔드: 6,
+  데이터베이스: 8,
+  언어: 9,
+  디자인: 10,
+};
+
+type StackCategory = keyof typeof STACK_CATEGORY;
 
 interface StackModalProps {
   handleModal: React.Dispatch<SetStateAction<boolean>>;
@@ -11,6 +24,10 @@ interface StackModalProps {
 
 const StackModal = ({ handleModal }: StackModalProps) => {
   const stackModalRef = useRef<HTMLDivElement>(null);
+  const { data } = useStack();
+
+  const { setSelectedCategoryId, selectedCategoryId } = useState<number | null>(null);
+  const stacksSortedByCategory = data?.data;
 
   useEffect(() => {
     const handleOutSideClick = (event: MouseEvent) => {
@@ -65,26 +82,19 @@ const StackModal = ({ handleModal }: StackModalProps) => {
           </ChipMenu>
         </CategoryChipsWrapper>
         <TechStackListWrapper>
-          <TechStack name={'기술 스택'} id={0} onClick={() => {}} />
-          <TechStack name={'기술 스택'} id={0} onClick={() => {}} />
-          <TechStack name={'기술 스택'} id={0} onClick={() => {}} selected />
-          <TechStack name={'기술 스택'} id={0} onClick={() => {}} />
-          <TechStack name={'기술 스택'} id={0} onClick={() => {}} selected />
-          <TechStack name={'기술 스택'} id={0} onClick={() => {}} />
-          <TechStack name={'기술 스택'} id={0} onClick={() => {}} selected />
+          {stacksSortedByCategory &&
+            stacksSortedByCategory.map((stacksByCategory: { id: number; name: StackCategory; stacks: Stack[] }) => {
+              if (!selectedCategoryId) {
+                return stacksByCategory.stacks.map((stack: Stack) => <TechStack {...stack} onClick={() => {}} />);
+              }
+            })}
         </TechStackListWrapper>
       </ModalContentWrapper>
       <BtnsWrapper>
         <Button size="fullWidth" onClick={() => {}}>
           선택 초기화
         </Button>
-        <Button
-          scheme="primary"
-          size="fullWidth"
-          onClick={() => {
-            handleModal(false);
-          }}
-        >
+        <Button scheme="primary" size="fullWidth" onClick={() => handleModal(false)}>
           선택 완료
         </Button>
       </BtnsWrapper>
