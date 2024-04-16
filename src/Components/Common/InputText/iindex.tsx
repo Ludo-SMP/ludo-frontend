@@ -5,11 +5,12 @@ interface InputTextProps extends React.InputHTMLAttributes<HTMLInputElement> {
   placeholder?: string;
   inputType?: 'text' | 'email' | 'password' | 'member';
   currentLength?: number;
+  maxLength?: number;
 }
 
 const InputText = forwardRef<HTMLInputElement, ComponentProps<'input'> & InputTextProps>(
   (
-    { name, placeholder, inputType, onChange, currentLength, ...props }: InputTextProps,
+    { name, placeholder, inputType, onChange, maxLength, currentLength, ...props }: InputTextProps,
     ref: ForwardedRef<HTMLInputElement>,
   ) => {
     return (
@@ -22,10 +23,11 @@ const InputText = forwardRef<HTMLInputElement, ComponentProps<'input'> & InputTe
           onChange={onChange}
           {...props}
         />
-        {
-          // NOTE: &&를 쓰면 currentLength가 0일 때 렌더링 실패. 추후 가독성 좋은 코드로 수정 필요
-          currentLength !== undefined ? <LengthIndicator>{currentLength} / MAX</LengthIndicator> : undefined
-        }
+        {maxLength && (
+          <LengthIndicator>
+            {currentLength} / {maxLength}
+          </LengthIndicator>
+        )}
       </Box>
     );
   },
