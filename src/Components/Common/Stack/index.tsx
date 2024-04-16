@@ -1,7 +1,7 @@
 import { Children, ReactNode } from 'react';
 
 export interface StackProps {
-  children: ReactNode;
+  children?: ReactNode;
   divider?: ReactNode;
 }
 
