@@ -33,8 +33,6 @@ export default () => {
       .map((_, i) => [i + 1, `${i + 1}`]),
   );
 
-  console.log(errors);
-
   return (
     <PageWrapper>
       <Form
@@ -58,20 +56,20 @@ export default () => {
             </Labeled>
             <Labeled
               label="스터디 최대 인원"
-              error={errors.category?.type === 'required' && '스터디 최대 인원을 정해주세요.'}
+              error={errors.memberLimit?.type === 'required' && '스터디 최대 인원을 정해주세요.'}
             >
               <SelectBox values={memberLimit} defaultValue="ex) 5명" {...register('memberLimit', { required: true })} />
             </Labeled>
           </FormSection>
           <FormSection icon={<Three />} header="스터디 진행 관련">
-            <Labeled label="진행 방식" error={errors.category?.type === 'required' && '진행방식을 정해주세요.'}>
+            <Labeled label="진행 방식" error={errors.progressMethod?.type === 'required' && '진행방식을 정해주세요.'}>
               <SelectBox
                 values={PROGRESS_METHOD}
                 defaultValue="ex) 온/오프라인"
                 {...register('category', { required: true })}
               />
             </Labeled>
-            <Labeled label="진행 플랫폼" error={errors.category?.type === 'required' && '카테고리를 정해주세요.'}>
+            <Labeled label="진행 플랫폼" error={errors.platform?.type === 'required' && '카테고리를 정해주세요.'}>
               <SelectBox values={PLATFORM} defaultValue="ex) gather" {...register('platform', { required: true })} />
             </Labeled>
             <Labeled label="진행 기간" error={errors.category?.type === 'required' && '진행 기간을 정해주세요.'}>
