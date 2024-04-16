@@ -13,11 +13,17 @@ interface StudyCreateForm {
   title: string;
   category: string;
   memberLimit: number;
+  progressMethod: string;
   platform: string;
 }
 
 export default () => {
-  const { register, handleSubmit, watch } = useForm<StudyCreateForm>();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<StudyCreateForm>();
 
   const data = watch();
 
@@ -27,9 +33,15 @@ export default () => {
       .map((_, i) => [i + 1, `${i + 1}`]),
   );
 
+  console.log(errors);
+
   return (
     <PageWrapper>
-      <Form onSubmit={handleSubmit((a) => {})}>
+      <Form
+        onSubmit={handleSubmit((a) => {
+          console.log(a);
+        })}
+      >
         <Stack divider={<Divider />} gap={24}>
           <FormSection icon={<One />} header="스터디 제목">
             <Labeled label="제목">
@@ -37,22 +49,34 @@ export default () => {
             </Labeled>
           </FormSection>
           <FormSection icon={<Two />} header="스터디 기본 구성">
-            <Labeled label="카테고리">
-              <SelectBox values={CATEGORY} defaultValue="ex) 코딩테스트 스터디" {...register('title')} />
+            <Labeled label="카테고리" error={errors.category?.type === 'required' && '카테고리를 정해주세요'}>
+              <SelectBox
+                values={CATEGORY}
+                defaultValue="ex) 코딩테스트 스터디"
+                {...register('title', { required: true })}
+              />
             </Labeled>
-            <Labeled label="스터디 최대 인원">
-              <SelectBox values={memberLimit} defaultValue="ex) 5명" {...register('memberLimit')} />
+            <Labeled label="스터디 최대 인원" error={errors.category?.type === 'required' && '카테고리를 정해주세요'}>
+              <SelectBox values={memberLimit} defaultValue="ex) 5명" {...register('memberLimit', { required: true })} />
             </Labeled>
           </FormSection>
           <FormSection icon={<Three />} header="스터디 진행 관련">
-            <Labeled label="진행 방식">
-              <SelectBox values={PROGRESS_METHOD} defaultValue="ex) 온/오프라인" {...register('category')} />
+            <Labeled label="진행 방식" error={errors.category?.type === 'required' && '카테고리를 정해주세요'}>
+              <SelectBox
+                values={PROGRESS_METHOD}
+                defaultValue="ex) 온/오프라인"
+                {...register('category', { required: true })}
+              />
             </Labeled>
-            <Labeled label="진행 플랫폼">
-              <SelectBox values={PLATFORM} defaultValue="ex) gather" {...register('platform')} />
+            <Labeled label="진행 플랫폼" error={errors.category?.type === 'required' && '카테고리를 정해주세요'}>
+              <SelectBox values={PLATFORM} defaultValue="ex) gather" {...register('platform', { required: true })} />
             </Labeled>
-            <Labeled label="진행 플랫폼">
-              <SelectBox values={PLATFORM} defaultValue="ex) 24.01.23 - 21.03.23" {...register('platform')} />
+            <Labeled label="진행 플랫폼" error={errors.category?.type === 'required' && '카테고리를 정해주세요'}>
+              <SelectBox
+                values={PLATFORM}
+                defaultValue="ex) 24.01.23 - 21.03.23"
+                {...register('platform', { required: true })}
+              />
             </Labeled>
           </FormSection>
         </Stack>
