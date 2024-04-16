@@ -23,7 +23,6 @@ const TemporarySavedCard = ({ id, title, card, content }: TemporarySavedCardProp
       {content && <div>{content}</div>}
       <ButtonsWrapper>
         <Button scheme="normal">글 삭제하기</Button>
-        <Button scheme="secondary">이어서 작성하기</Button>
       </ButtonsWrapper>
     </TemporarySavedCardWrapper>
   );
