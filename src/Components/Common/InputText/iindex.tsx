@@ -13,14 +13,20 @@ const InputText = forwardRef<HTMLInputElement, ComponentProps<'input'> & InputTe
     ref: ForwardedRef<HTMLInputElement>,
   ) => {
     return (
-      <InputWrapper
-        placeholder={placeholder}
-        name={name}
-        ref={ref}
-        type={inputType ?? 'text'}
-        onChange={onChange}
-        {...props}
-      />
+      <Box>
+        <InputWrapper
+          placeholder={placeholder}
+          name={name}
+          ref={ref}
+          type={inputType ?? 'text'}
+          onChange={onChange}
+          {...props}
+        />
+        {
+          // NOTE: &&를 쓰면 currentLength가 0일 때 렌더링 실패. 추후 가독성 좋은 코드로 수정 필요
+          currentLength !== undefined ? <LengthIndicator>{currentLength} / MAX</LengthIndicator> : undefined
+        }
+      </Box>
     );
   },
 );
@@ -42,6 +48,22 @@ const InputWrapper = styled.input`
     font-weight: 400;
     line-height: 28px;
   }
+`;
+
+const Box = styled.div`
+  position: relative;
+  display: flex;
+`;
+
+const LengthIndicator = styled.div`
+  position: absolute;
+  top: 10px;
+  right: 16px;
+  color: #00000073;
+  font-family: Pretendard400;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
 `;
 
 export default InputText;
