@@ -14,7 +14,7 @@ export const SelectBox = forwardRef<
 >(({ onChange, onBlur, name, values, defaultValue, icon }, ref) => {
   return (
     <Box>
-      <Select ref={ref} onChange={onChange} onBlur={onBlur} name={name}>
+      <Select ref={ref} onChange={onChange} onBlur={onBlur} name={name} required>
         <Option value="" disabled selected hidden>
           {defaultValue}
         </Option>
@@ -34,7 +34,10 @@ const Select = styled.select`
   border: 1px solid #cbcdd1;
   background-color: ${(props) => props.theme.color.white};
   flex: 1;
-  color: #00000073;
+
+  &:invalid {
+    color: #00000073;
+  }
 `;
 
 const Option = styled.option`
