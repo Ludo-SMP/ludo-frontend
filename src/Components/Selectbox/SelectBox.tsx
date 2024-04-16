@@ -14,7 +14,7 @@ export const SelectBox = forwardRef<
 >(({ onChange, onBlur, name, values, defaultValue, icon }, ref) => {
   return (
     <Box>
-      <Select ref={ref} onChange={onChange} onBlur={onBlur} name={name} required>
+      <Select ref={ref} onChange={onChange} onBlur={onBlur} name={name}>
         <Option value="" disabled selected hidden>
           {defaultValue}
         </Option>
