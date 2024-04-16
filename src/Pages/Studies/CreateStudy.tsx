@@ -21,6 +21,12 @@ export default () => {
 
   const data = watch();
 
+  const memberLimit = Object.fromEntries(
+    Array(10)
+      .fill(void 0)
+      .map((_, i) => [i + 1, `${i + 1}`]),
+  );
+
   return (
     <PageWrapper>
       <Form onSubmit={handleSubmit((a) => {})}>
@@ -35,7 +41,7 @@ export default () => {
               <SelectBox values={CATEGORY} defaultValue="ex) 코딩테스트 스터디" {...register('title')} />
             </Labeled>
             <Labeled label="스터디 최대 인원">
-              <SelectBox values={{}} defaultValue="ex) 5명" {...register('memberLimit')} />
+              <SelectBox values={memberLimit} defaultValue="ex) 5명" {...register('memberLimit')} />
             </Labeled>
           </FormSection>
           <FormSection icon={<Three />} header="스터디 진행 관련">
