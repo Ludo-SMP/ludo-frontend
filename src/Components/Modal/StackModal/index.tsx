@@ -164,6 +164,7 @@ const ModalContentWrapper = styled.div`
 const TitleWrapper = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   height: 40px;
   gap: 24px;
   align-self: stretch;
@@ -180,9 +181,14 @@ const TitleWrapper = styled.div`
   }
 
   .close__icon {
+    display: flex;
+    flex-direction: row-reverse;
     width: 50%;
     &:hover {
       cursor: pointer;
+    }
+    & > svg {
+      padding-top: 2.5px;
     }
   }
 `;
