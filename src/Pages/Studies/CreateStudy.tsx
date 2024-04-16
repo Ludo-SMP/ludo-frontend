@@ -2,6 +2,7 @@ import { One, Three, Two } from '@/Assets';
 import Button from '@/Components/Common/Button';
 import InputText from '@/Components/Common/InputText/iindex';
 import { Stack } from '@/Components/Common/Stack';
+import Heading from '@/Components/Heading';
 import { SelectBox } from '@/Components/Selectbox/SelectBox';
 import { CATEGORY, PLATFORM, PROGRESS_METHOD } from '@/Shared/study';
 import { ReactNode } from 'react';
@@ -85,7 +86,10 @@ const FormSection = ({ icon, header, children }: { icon?: ReactNode; header?: Re
   return (
     <FormSectionInner>
       <FormSectionInnerHeader>
-        {icon} {header}
+        {icon}
+        <Heading component="Input" type="Title">
+          {header}
+        </Heading>
       </FormSectionInnerHeader>
       <FormSectionInnerBody>{children}</FormSectionInnerBody>
     </FormSectionInner>
@@ -95,14 +99,10 @@ const FormSection = ({ icon, header, children }: { icon?: ReactNode; header?: Re
 const FormSectionInner = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 24px;
 `;
 
 const FormSectionInnerHeader = styled.h3`
-  font-family: Pretendard;
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 32px;
-  text-align: left;
   color: #000000f2;
   display: flex;
   align-items: center;
