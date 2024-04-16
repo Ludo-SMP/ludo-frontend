@@ -2,15 +2,15 @@ import styled from 'styled-components';
 
 export interface TechStackProps {
   name: string;
-  imageUrl?: string;
+  imageUrl: string;
   id: number;
-  selected?: boolean;
+  selected: boolean;
   onClick: () => void;
 }
 
-export const TechStack = ({ name, imageUrl, id, selected = false, onClick }: TechStackProps) => {
+export const TechStack = ({ name, imageUrl, selected = false, onClick }: TechStackProps) => {
   return (
-    <TechStackWrapper selected={selected} imageUrl={imageUrl} onClick={() => !selected}>
+    <TechStackWrapper selected={selected} imageUrl={imageUrl} onClick={onClick}>
       {imageUrl ? (
         <img className="stack__image" src={`${import.meta.env.VITE_BASE_API_URL}${imageUrl}`} />
       ) : (

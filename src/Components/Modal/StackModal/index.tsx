@@ -26,8 +26,10 @@ const StackModal = ({ handleModal }: StackModalProps) => {
   const stackModalRef = useRef<HTMLDivElement>(null);
   const { data } = useStack();
 
-  const { setSelectedCategoryId, selectedCategoryId } = useState<number | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<StackCategory | null>(null);
+  const [selectedStackIds, setSelectedStackIds] = useState<number[]>([]);
   const stacksSortedByCategory = data?.data;
+  console.log(selectedStackIds);
 
   useEffect(() => {
     const handleOutSideClick = (event: MouseEvent) => {
@@ -59,34 +61,48 @@ const StackModal = ({ handleModal }: StackModalProps) => {
           </div>
         </SearchInputWrapper>
         <CategoryChipsWrapper>
-          <ChipMenu checked={true} onClick={() => {}}>
+          <ChipMenu checked={selectedCategory === null} onClick={() => setSelectedCategory(null)}>
             전체
           </ChipMenu>
-          <ChipMenu checked={false} onClick={() => {}}>
+          <ChipMenu checked={selectedCategory === '프론트엔드'} onClick={() => setSelectedCategory('프론트엔드')}>
             프론트엔드
           </ChipMenu>
-          <ChipMenu checked={false} onClick={() => {}}>
+          <ChipMenu checked={selectedCategory === '백엔드'} onClick={() => setSelectedCategory('백엔드')}>
             백엔드
           </ChipMenu>
-          <ChipMenu checked={false} onClick={() => {}}>
+          <ChipMenu checked={selectedCategory === '디자인'} onClick={() => setSelectedCategory('디자인')}>
             디자인
           </ChipMenu>
-          <ChipMenu checked={false} onClick={() => {}}>
+          <ChipMenu checked={selectedCategory === '데이터베이스'} onClick={() => setSelectedCategory('데이터베이스')}>
             데이터베이스
           </ChipMenu>
-          <ChipMenu checked={false} onClick={() => {}}>
+          <ChipMenu checked={selectedCategory === '데브옵스'} onClick={() => setSelectedCategory('데브옵스')}>
             데브옵스
           </ChipMenu>
-          <ChipMenu checked={false} onClick={() => {}}>
+          <ChipMenu checked={selectedCategory === '언어'} onClick={() => setSelectedCategory('언어')}>
             언어
           </ChipMenu>
         </CategoryChipsWrapper>
         <TechStackListWrapper>
           {stacksSortedByCategory &&
             stacksSortedByCategory.map((stacksByCategory: { id: number; name: StackCategory; stacks: Stack[] }) => {
-              if (!selectedCategoryId) {
-                return stacksByCategory.stacks.map((stack: Stack) => <TechStack {...stack} onClick={() => {}} />);
-              }
+              return (
+                (selectedCategory === null || STACK_CATEGORY[selectedCategory] === stacksByCategory.id) &&
+                stacksByCategory.stacks.map((stack: Stack) => (
+                  <TechStack
+                    key={stack.id}
+                    {...stack}
+                    onClick={() => {
+                      if (selectedStackIds.includes(stack.id))
+                        setSelectedStackIds(selectedStackIds.filter((selectedStackId) => selectedStackId != stack.id));
+                      else {
+                        setSelectedStackIds([...selectedStackIds, stack.id]);
+                      }
+                    }}
+                    selected={selectedStackIds.includes(stack.id)}
+                  />
+                ))
+              );
             })}
         </TechStackListWrapper>
       </ModalContentWrapper>
@@ -184,6 +200,7 @@ const CategoryChipsWrapper = styled.div`
 const TechStackListWrapper = styled.div`
   display: flex;
   width: 100%;
+  min-height: 240px;
   align-items: flex-start;
   align-content: flex-start;
   gap: 12px;
