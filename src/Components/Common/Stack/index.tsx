@@ -4,7 +4,7 @@ import styled from 'styled-components';
 export interface StackProps {
   children?: ReactNode;
   divider?: ReactNode;
-  gap?: number;
+  gap?: number | string;
 }
 
 export const Stack = ({ divider, gap, children }: StackProps) => {
@@ -13,8 +13,8 @@ export const Stack = ({ divider, gap, children }: StackProps) => {
   return <Box gap={gap}>{[].concat(...childrenArr.map((n) => [n, divider])).slice(0, -1)}</Box>;
 };
 
-const Box = styled.div<{ gap?: number }>`
+const Box = styled.div<{ gap?: number | string }>`
   display: flex;
   flex-direction: column;
-  gap: ${({ gap }) => gap ?? '16px'};
+  gap: ${({ gap }) => (gap ? (typeof gap === 'number' ? `${gap}px` : gap) : '16px')};
 `;
