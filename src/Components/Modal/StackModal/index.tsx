@@ -20,16 +20,18 @@ type StackCategory = keyof typeof STACK_CATEGORY;
 
 interface StackModalProps {
   handleModal: React.Dispatch<SetStateAction<boolean>>;
+  initialSelectedStacks?: Stack[];
+  handleSelectedStacks?: (stacks: Stack[]) => void;
 }
 
-const StackModal = ({ handleModal }: StackModalProps) => {
+const StackModal = ({ handleModal, initialSelectedStacks, handleSelectedStacks }: StackModalProps) => {
   const stackModalRef = useRef<HTMLDivElement>(null);
   const { data } = useStack();
 
   const [selectedCategory, setSelectedCategory] = useState<StackCategory | null>(null);
-  const [selectedStackIds, setSelectedStackIds] = useState<number[]>([]);
+  const [selectedStacks, setSelectedStacks] = useState<Stack[]>(initialSelectedStacks);
   const stacksSortedByCategory = data?.data;
-  console.log(selectedStackIds);
+  console.log(selectedStacks);
 
   useEffect(() => {
     const handleOutSideClick = (event: MouseEvent) => {
@@ -93,13 +95,17 @@ const StackModal = ({ handleModal }: StackModalProps) => {
                     key={stack.id}
                     {...stack}
                     onClick={() => {
-                      if (selectedStackIds.includes(stack.id))
-                        setSelectedStackIds(selectedStackIds.filter((selectedStackId) => selectedStackId != stack.id));
+                      if (selectedStacks.filter((selectedStack: Stack) => selectedStack.id === stack.id).length === 0)
+                        setSelectedStacks([...selectedStacks, { ...stack }]);
                       else {
-                        setSelectedStackIds([...selectedStackIds, stack.id]);
+                        setSelectedStacks(
+                          selectedStacks.filter((selectedStack: Stack) => selectedStack.id !== stack.id),
+                        );
                       }
                     }}
-                    selected={selectedStackIds.includes(stack.id)}
+                    selected={
+                      selectedStacks.filter((selectedStack: Stack) => selectedStack.id === stack.id).length !== 0
+                    }
                   />
                 ))
               );
@@ -111,12 +117,19 @@ const StackModal = ({ handleModal }: StackModalProps) => {
           size="fullWidth"
           onClick={() => {
             setSelectedCategory(null);
-            setSelectedStackIds([]);
+            setSelectedStacks([]);
           }}
         >
           선택 초기화
         </Button>
-        <Button scheme="primary" size="fullWidth" onClick={() => handleModal(false)}>
+        <Button
+          scheme="primary"
+          size="fullWidth"
+          onClick={() => {
+            handleSelectedStacks([...selectedStacks]);
+            handleModal(false);
+          }}
+        >
           선택 완료
         </Button>
       </BtnsWrapper>
@@ -138,6 +151,7 @@ const StackModalWrapper = styled.div`
   background: ${({ theme }) => theme.color.white2};
   border-radius: ${({ theme }) => theme.borderRadius.large};
   transform: translate(-50%, -50%);
+  z-index: 100;
 `;
 
 const ModalContentWrapper = styled.div`
