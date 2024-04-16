@@ -14,9 +14,11 @@ import { CalendarButton } from '@/Components/Selectbox/CalendarButton';
 import { EndDate } from '@/Components/Calendar/EndDate';
 import { SelectBox } from '@/Components/Selectbox/SelectBox';
 
+import { CREATE_RECRUITMENT } from '@/Constants/messages';
 import { useStack } from '@/Hooks/stack/useStack';
 import { TextArea } from '@/Components/Textarea';
 import { PositionId, RecruitmentForm } from '@/Types/study';
+import { APPLICATION_CNT, CONTACT, POSITION } from '@/Shared/study';
 
 const CreateRecruitmentPage = () => {
   const studyId = Number(useParams().studyId);
@@ -33,31 +35,6 @@ const CreateRecruitmentPage = () => {
     console.log('data', data);
   });
 
-  const APPLICATION_CNT = {
-    1: '1명',
-    2: '2명',
-    3: '3명',
-    4: '4명',
-    5: '5명',
-    6: '6명',
-    7: '7명',
-    8: '8명',
-    9: '9명',
-    10: '10명',
-  };
-
-  const POSITION = {
-    1: '백엔드',
-    2: '프론트엔드',
-    3: '디자이너',
-    4: '데브옵스',
-  };
-
-  const CONTACT = {
-    EMAIL: '이메일',
-    KAKAO: '카카오톡',
-  };
-
   const STACK = {
     1: 'JAVA',
     2: 'JavaScript',
@@ -66,16 +43,6 @@ const CreateRecruitmentPage = () => {
   const data = watch();
 
   console.log(data);
-
-  const ERROR_MSG: Omit<Record<keyof RecruitmentForm, string>, 'content'> = {
-    applicantCount: '모집 인원을 정해주세요.',
-    recruitmentEndDateTime: '모집 마감일을 정해주세요.',
-    positionIds: '포지션을 정해주세요.',
-    stackIds: '기술 스택을 정해주세요.',
-    title: '제목을 기입해주세요.',
-    contact: '연락 방법을 정해주세요.',
-    callUrl: '연결 url을 작성해주세요.',
-  };
 
   return (
     <RecruitmentContainer>
@@ -103,7 +70,7 @@ const CreateRecruitmentPage = () => {
                 label="모집 인원"
                 values={APPLICATION_CNT}
                 defaultValue="ex) 5명"
-                {...register('applicantCount', { required: ERROR_MSG.applicantCount })}
+                {...register('applicantCount', { required: CREATE_RECRUITMENT.applicantCount })}
               />
               {errors?.applicantCount?.message && <ErrorMsg>{errors?.applicantCount?.message}</ErrorMsg>}
             </GridItem>
@@ -116,7 +83,7 @@ const CreateRecruitmentPage = () => {
                 <Controller
                   control={control}
                   name="recruitmentEndDateTime"
-                  rules={{ required: ERROR_MSG.recruitmentEndDateTime }}
+                  rules={{ required: CREATE_RECRUITMENT.recruitmentEndDateTime }}
                   render={({ field }) => <EndDate {...field} />}
                 />
               </CalendarButton>
@@ -130,7 +97,7 @@ const CreateRecruitmentPage = () => {
                 label="포지션"
                 values={POSITION}
                 defaultValue="포지션"
-                {...register('positionIds', { required: ERROR_MSG.positionIds })}
+                {...register('positionIds', { required: CREATE_RECRUITMENT.positionIds })}
               />
 
               {errors?.positionIds?.message && <ErrorMsg>{errors?.positionIds?.message}</ErrorMsg>}
@@ -141,7 +108,7 @@ const CreateRecruitmentPage = () => {
                 label="기술 스택"
                 values={STACK}
                 defaultValue="기술 스택"
-                {...register('stackIds', { required: ERROR_MSG.stackIds })}
+                {...register('stackIds', { required: CREATE_RECRUITMENT.stackIds })}
               />
               {errors?.stackIds?.message && <ErrorMsg>{errors?.stackIds?.message}</ErrorMsg>}
             </GridItem>
@@ -150,7 +117,7 @@ const CreateRecruitmentPage = () => {
                 label="연락 방법"
                 values={CONTACT}
                 defaultValue="연락방법"
-                {...register('contact', { required: ERROR_MSG.contact })}
+                {...register('contact', { required: CREATE_RECRUITMENT.contact })}
               />
               {errors?.contact?.message && <ErrorMsg>{errors?.contact?.message}</ErrorMsg>}
             </GridItem>
@@ -161,7 +128,7 @@ const CreateRecruitmentPage = () => {
               <Spacing size={12} />
               <InputText
                 placeholder="ex) 오픈 카카오톡 링크"
-                {...register('callUrl', { required: ERROR_MSG.contact })}
+                {...register('callUrl', { required: CREATE_RECRUITMENT.contact })}
               />
               {errors?.callUrl?.message && <ErrorMsg>{errors?.callUrl?.message}</ErrorMsg>}
             </GridItem>
@@ -234,7 +201,7 @@ const CreateRecruitmentPage = () => {
                 placeholder="제목을 기입해주세요."
                 maxLength={50}
                 currentLength={data.title?.length ?? 0}
-                {...register('title', { required: ERROR_MSG.title, maxLength: 50 })}
+                {...register('title', { required: CREATE_RECRUITMENT.title, maxLength: 50 })}
               />
               {errors?.title?.message && <ErrorMsg>{errors?.title?.message}</ErrorMsg>}
             </div>

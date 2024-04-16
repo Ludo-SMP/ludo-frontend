@@ -1,4 +1,5 @@
 import { MessageType } from '@/Types/message';
+import { RecruitmentForm } from '@/Types/study';
 
 export const APPLY = Object.freeze({
   LOGIN: {
@@ -76,6 +77,16 @@ export const CREATE_STUDY = Object.freeze({
     title: '로그인이 필요한 서비스입니다.',
     content: `스터디를 생성하기 위해서 로그인이 필요합니다.\n가입을 통해 루도의 더 많은 서비스를 즐길 수 있습니다.\n  로그인을 진행하시겠습니까?`,
   } as MessageType,
+});
+
+export const CREATE_RECRUITMENT: Omit<Record<keyof RecruitmentForm, string>, 'content'> = Object.freeze({
+  applicantCount: '모집 인원을 정해주세요.',
+  recruitmentEndDateTime: '모집 마감일을 정해주세요.',
+  positionIds: '포지션을 정해주세요.',
+  stackIds: '기술 스택을 정해주세요.',
+  title: '제목을 기입해주세요.',
+  contact: '연락 방법을 정해주세요.',
+  callUrl: '연결 url을 작성해주세요.',
 });
 
 export const DELETE = Object.freeze({
