@@ -1,4 +1,4 @@
-import { Position } from '@/Types/study';
+import { Position, Option } from '@/Types/study';
 
 export const STUDY_STATUS = {
   PROGRESS: '진행 중',
@@ -17,30 +17,31 @@ export const MEMBER_STATUS = {
   PARTICIPATED: '참여 중',
 };
 
-export const POSITION = {
-  1: '백엔드',
-  2: '프론트엔드',
-  3: '디자이너',
-  4: '데브옵스',
-};
+// TODO: API 연결 시 타입 지정.
+export const POSITION: Array<Option<string, string>> = [
+  { value: '1', label: '백엔드' },
+  { value: '2', label: '프론트엔드' },
+  { value: '3', label: '디자이너' },
+  { value: '4', label: '데브옵스' },
+];
 
-export const CONTACT = {
-  EMAIL: '이메일',
-  KAKAO: '카카오톡',
-};
+export const CONTACT: Array<Option<string, string>> = [
+  { value: 'EMAIL', label: '이메일' },
+  { value: 'KAKAO', label: '카카오톡' },
+];
 
-export const APPLICATION_CNT = {
-  1: '1명',
-  2: '2명',
-  3: '3명',
-  4: '4명',
-  5: '5명',
-  6: '6명',
-  7: '7명',
-  8: '8명',
-  9: '9명',
-  10: '10명',
-};
+export const APPLICATION_CNT: Array<Option<string, string>> = [
+  { value: '1', label: '1명' },
+  { value: '2', label: '2명' },
+  { value: '3', label: '3명' },
+  { value: '4', label: '4명' },
+  { value: '5', label: '5명' },
+  { value: '6', label: '6명' },
+  { value: '7', label: '7명' },
+  { value: '8', label: '8명' },
+  { value: '9', label: '9명' },
+  { value: '10', label: '10명' },
+];
 
 export const PROGRESS_METHOD = {
   ONLINE: '온라인',

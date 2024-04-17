@@ -188,6 +188,11 @@ export interface ApplicantRecruitment {
   applicantStatus: ApplyStatus;
 }
 
+export interface Option<T, K> {
+  value: T;
+  label: K;
+}
+
 export interface CompletedStudy {
   studyId: number;
   title: string;
