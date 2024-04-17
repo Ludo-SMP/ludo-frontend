@@ -2,7 +2,7 @@ import type { Preview } from '@storybook/react';
 import ReactQueryProvider from '@/Providers/QueryProvider';
 import { ThemeProvider } from 'styled-components';
 import { theme } from '@/Styles/theme';
-import { GlobalStyle } from './Styles/globalStyles';
+import { GlobalStyle } from '@/Styles/globalStyles';
 
 const preview: Preview = {
   parameters: {
