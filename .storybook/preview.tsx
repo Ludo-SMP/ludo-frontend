@@ -1,6 +1,8 @@
 import type { Preview } from '@storybook/react';
-import { QueryClientProvider } from '@tanstack/react-query';
 import ReactQueryProvider from '@/Providers/QueryProvider';
+import { ThemeProvider } from 'styled-components';
+import { theme } from '@/Styles/theme';
+import { GlobalStyle } from './Styles/globalStyles';
 
 const preview: Preview = {
   parameters: {
@@ -14,7 +16,10 @@ const preview: Preview = {
   decorators: [
     (Story) => (
       <ReactQueryProvider>
-        <Story />
+        <ThemeProvider theme={theme}>
+          <GlobalStyle />
+          <Story />
+        </ThemeProvider>
       </ReactQueryProvider>
     ),
   ],
