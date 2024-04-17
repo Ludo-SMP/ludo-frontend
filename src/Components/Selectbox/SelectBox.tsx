@@ -34,10 +34,7 @@ const Select = styled.select`
   border: 1px solid #cbcdd1;
   background-color: ${(props) => props.theme.color.white};
   flex: 1;
-
-  &:invalid {
-    color: #00000073;
-  }
+  color: #00000073;
 `;
 
 const Option = styled.option`
