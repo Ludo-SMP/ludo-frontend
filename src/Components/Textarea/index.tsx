@@ -10,7 +10,6 @@ type Props = ComponentProps<'textarea'> & TextAreaProps;
 
 export const TextArea = forwardRef<HTMLTextAreaElement, Props>(
   ({ onChange, onBlur, placeholder, maxLength, currentLength, ...props }: Props, ref) => {
-    console.log('currentLength', currentLength);
     return (
       <Box>
         <TextAreaWrapper ref={ref} onChange={onChange} onBlur={onBlur} placeholder={placeholder} {...props} />
