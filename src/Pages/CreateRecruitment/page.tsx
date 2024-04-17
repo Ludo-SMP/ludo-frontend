@@ -1,7 +1,6 @@
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 
-import Recruitment from '@/Mocks/handlers/recruitment';
 import styled, { css } from 'styled-components';
 import { One, Two, Three, Four, Loading } from '@/Assets';
 
@@ -9,20 +8,17 @@ import { One, Two, Three, Four, Loading } from '@/Assets';
 import Heading from '@/Components/Heading';
 import Spacing from '@/Components/Spacing';
 import Button from '@/Components/Common/Button';
+import { TextArea } from '@/Components/Textarea';
 import InputText from '@/Components/Common/InputText/iindex';
 import { CalendarButton } from '@/Components/Selectbox/CalendarButton';
 import { EndDate } from '@/Components/Calendar/EndDate';
-import { SelectBox } from '@/Components/Selectbox/SelectBox';
+import CustomSelect from '@/Components/Selectbox/CustomSelect';
 
 import { CREATE_RECRUITMENT } from '@/Constants/messages';
-import { useStack } from '@/Hooks/stack/useStack';
-import { TextArea } from '@/Components/Textarea';
 import { PositionId, RecruitmentForm } from '@/Types/study';
 import { APPLICATION_CNT, CONTACT, POSITION } from '@/Shared/study';
 
 const CreateRecruitmentPage = () => {
-  const studyId = Number(useParams().studyId);
-
   const {
     register,
     handleSubmit,
@@ -35,14 +31,7 @@ const CreateRecruitmentPage = () => {
     console.log('data', data);
   });
 
-  const STACK = {
-    1: 'JAVA',
-    2: 'JavaScript',
-  };
-
   const data = watch();
-
-  console.log(data);
 
   return (
     <RecruitmentContainer>
@@ -66,11 +55,13 @@ const CreateRecruitmentPage = () => {
           <Grid>
             <GridItem>
               <Spacing size={12} />
-              <SelectBox
-                label="모집 인원"
-                values={APPLICATION_CNT}
-                defaultValue="ex) 5명"
-                {...register('applicantCount', { required: CREATE_RECRUITMENT.applicantCount })}
+              <Controller
+                control={control}
+                name="applicantCount"
+                rules={{ required: CREATE_RECRUITMENT.applicantCount }}
+                render={({ field }) => (
+                  <CustomSelect label="모집 인원" placeholder="ex) 5명" values={APPLICATION_CNT} {...field} />
+                )}
               />
               {errors?.applicantCount?.message && <ErrorMsg>{errors?.applicantCount?.message}</ErrorMsg>}
             </GridItem>
@@ -93,31 +84,34 @@ const CreateRecruitmentPage = () => {
             </GridItem>
             <GridItem>
               <Spacing size={12} />
-              <SelectBox
-                label="포지션"
-                values={POSITION}
-                defaultValue="포지션"
-                {...register('positionIds', { required: CREATE_RECRUITMENT.positionIds })}
+              <Controller
+                control={control}
+                name="positionIds"
+                rules={{ required: CREATE_RECRUITMENT.positionIds }}
+                render={({ field }) => (
+                  <CustomSelect label="포지션" placeholder="포지션" values={POSITION} {...field} />
+                )}
               />
-
               {errors?.positionIds?.message && <ErrorMsg>{errors?.positionIds?.message}</ErrorMsg>}
             </GridItem>
             <GridItem>
               {/* TODO: 기술 스택 모달 적용 */}
-              <SelectBox
+              {/* <SelectBox
                 label="기술 스택"
                 values={STACK}
                 defaultValue="기술 스택"
                 {...register('stackIds', { required: CREATE_RECRUITMENT.stackIds })}
-              />
+              /> */}
               {errors?.stackIds?.message && <ErrorMsg>{errors?.stackIds?.message}</ErrorMsg>}
             </GridItem>
             <GridItem>
-              <SelectBox
-                label="연락 방법"
-                values={CONTACT}
-                defaultValue="연락방법"
-                {...register('contact', { required: CREATE_RECRUITMENT.contact })}
+              <Controller
+                control={control}
+                name="contact"
+                rules={{ required: CREATE_RECRUITMENT.contact }}
+                render={({ field }) => (
+                  <CustomSelect label="연락방법" placeholder="연락방법" values={CONTACT} {...field} />
+                )}
               />
               {errors?.contact?.message && <ErrorMsg>{errors?.contact?.message}</ErrorMsg>}
             </GridItem>
