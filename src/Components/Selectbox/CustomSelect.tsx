@@ -15,11 +15,11 @@ export type SelectProps = Props & {
 
 const CustomSelect = forwardRef<SelectInstance<Option<unknown, unknown>>, SelectProps>(
   ({ onChange, values, label, placeholder }, ref) => {
-    const customStyles: StylesConfig<any> = useMemo(
+    const customStyles: StylesConfig<Option<unknown, unknown>> = useMemo(
       () => ({
-        control: (provided: any, state: any) => ({
+        control: () => ({
           width: '100%',
-          padding: '10px 16px',
+          padding: '7px 16px',
           border: '1px solid rgba(0, 0, 0, 0.10)',
           borderRadius: '8px',
           background: 'white',
@@ -27,12 +27,11 @@ const CustomSelect = forwardRef<SelectInstance<Option<unknown, unknown>>, Select
           fontSize: '16px',
           cursor: 'pointer',
         }),
-        option: (provided: any, state: any) => {
+        option: (provided, state) => {
           const { data, isSelected } = state;
-
           return {
             ...provided,
-            color: data.color,
+            color: isSelected ? '#000000D9' : '#000000A6',
             fontFamily: 'Pretendard400',
             fontSize: '16px',
             padding: '8px 8px 8px 16px',
@@ -48,32 +47,23 @@ const CustomSelect = forwardRef<SelectInstance<Option<unknown, unknown>>, Select
             },
           };
         },
-        menu: (provided: any) => ({
+        menu: (provided) => ({
           ...provided,
           marginTop: '10px',
           boxShadow: '0px 4px 10px 0px #0000001A',
           borderRadius: '8px',
         }),
-
-        placeholder: (provided: any) => ({
+        placeholder: (provided) => ({
           ...provided,
           color: '#00000073',
         }),
-        indicatorsContainer: (provided: any) => ({
-          ...provided,
-          display: 'none',
-        }),
-        valueContainer: (provided: any) => ({
+        valueContainer: (provided) => ({
           ...provided,
           padding: 0,
         }),
-        indicatorSeparator: (provided: any) => ({
+        indicatorSeparator: (provided) => ({
           ...provided,
           width: 0,
-        }),
-        singleValue: (provided: any, state: any) => ({
-          ...provided,
-          color: state.data.color,
         }),
       }),
       [],
@@ -90,6 +80,9 @@ const CustomSelect = forwardRef<SelectInstance<Option<unknown, unknown>>, Select
             onChange(newValue['value'], actionMeta)
           }
           styles={customStyles}
+          components={{
+            IndicatorsContainer: () => null,
+          }}
         />
       </Label>
     );
