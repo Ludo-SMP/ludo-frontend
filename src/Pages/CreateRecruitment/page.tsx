@@ -17,9 +17,12 @@ import { Stack } from '@/Components/Common/Stack';
 
 import { CREATE_RECRUITMENT } from '@/Constants/messages';
 import { PositionId, RecruitmentForm } from '@/Types/study';
-import { APPLICATION_CNT, CONTACT, POSITION } from '@/Shared/study';
+import { APPLICATION_CNT, CONTACT, POSITIONS, POSITION } from '@/Shared/study';
+import { useCreateRecruitmentMutation } from '@/Hooks/recruitments/useCreateRecruitment';
 
 const CreateRecruitmentPage = () => {
+  const studyId = Number(useParams().studyId);
+
   const {
     register,
     handleSubmit,
@@ -28,19 +31,19 @@ const CreateRecruitmentPage = () => {
     formState: { errors },
   } = useForm<RecruitmentForm>();
 
-  const onSubmit = handleSubmit((data) => {
-    console.log('data', data);
-  });
+  const { mutate } = useCreateRecruitmentMutation(studyId);
+
+  const onSubmit = (data: RecruitmentForm) => {
+    const test: RecruitmentForm = { ...data, positionIds: [0], stackIds: [0] };
+    console.log('test', test);
+    //mutate(test);
+  };
 
   const data = watch();
 
   return (
     <RecruitmentContainer>
-      <form
-        onSubmit={handleSubmit((data: Partial<RecruitmentForm>) => {
-          console.log(data);
-        })}
-      >
+      <form onSubmit={handleSubmit(onSubmit)}>
         <Heading type={'Head'} component={'Page'}>
           스터디 팀원 모집하기
         </Heading>

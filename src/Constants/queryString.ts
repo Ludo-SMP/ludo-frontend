@@ -9,6 +9,7 @@ export const RECRUITMENT = {
   POPULAR: [BASE_KEY.RECRUITMENT, 'POPULAR'],
   RECRUITMENTS: (filterOptions: object) => [BASE_KEY.RECRUITMENT, filterOptions],
   RECRUITMENT: (recruitmentId: number) => [BASE_KEY.RECRUITMENT, recruitmentId],
+  CREATE_RECRUITMENT: (studyId: number) => [BASE_KEY.RECRUITMENT, studyId, 'CREATE'],
   CLOSE_RECRUITMENT: (studyId: number) => [BASE_KEY.RECRUITMENT, studyId, 'CLOSE'],
 };
 

@@ -107,7 +107,7 @@ export interface Recruitments {
 export interface RecruitmentForm {
   title: string;
   stackIds: number[];
-  positionIds: PositionId;
+  positionIds: PositionId[];
   applicantCount: number;
   recruitmentEndDateTime: string;
   contact: 'KAKAO' | 'EMAIL';
