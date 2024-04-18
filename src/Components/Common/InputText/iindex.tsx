@@ -21,6 +21,7 @@ const InputText = forwardRef<HTMLInputElement, ComponentProps<'input'> & InputTe
           ref={ref}
           type={inputType ?? 'text'}
           onChange={onChange}
+          autoComplete="off"
           {...props}
         />
         {maxLength && (
