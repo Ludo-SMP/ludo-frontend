@@ -11,6 +11,8 @@ const meta = {
       id: 1,
       name: '백엔드',
     },
+    period: '2021-01-01 ~ 2021-12-31',
+    participantCount: 3,
   },
 } satisfies Meta<typeof MyStudyCard>;
 
@@ -18,3 +20,22 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {};
+
+export const WithoutRecruitment: Story = {
+  args: {
+    hasRecruitment: false,
+    isOwner: true,
+  },
+};
+
+export const CancelApply: Story = {
+  args: {
+    status: 'UNCHECKED',
+  },
+};
+
+export const DeleteApply: Story = {
+  args: {
+    status: 'ACCEPTED',
+  },
+};
