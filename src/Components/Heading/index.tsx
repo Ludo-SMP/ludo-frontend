@@ -32,8 +32,8 @@ const Property = {
   },
   Input: {
     Title: {
-      fontSize: '20px',
-      lineHeight: '28px',
+      fontSize: '18px',
+      lineHeight: '20px',
       fontFamily: 'Pretendard700',
     },
     Head: {},
