@@ -38,14 +38,14 @@ const InputWrapper = styled.input`
   padding: 10px 16px;
   border: 1px solid ${({ theme }) => theme.color.black1};
   border-radius: ${({ theme }) => theme.borderRadius.small};
-  font-size: ${({ theme }) => theme.font.medium};
+  font-size: ${({ theme }) => theme.font.small};
   line-height: 1.5;
   color: ${({ theme }) => theme.color.black};
 
   ::placeholder {
     color: ${({ theme }) => theme.color.black2};
     font-family: 'Pretendard400';
-    font-size: ${({ theme }) => theme.font.medium};
+    font-size: ${({ theme }) => theme.font.small};
     font-style: normal;
     font-weight: 400;
     line-height: 28px;
