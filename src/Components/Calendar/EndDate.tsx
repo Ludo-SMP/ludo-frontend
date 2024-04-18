@@ -37,7 +37,7 @@ export const EndDate = ({ useForm }: Props) => {
 };
 
 const DateContainer = styled(DatePicker)`
-  width: 100%;
+  width: 328px;
   height: 24px;
   background-color: ${(props) => props.theme.color.gray3};
   align-items: center;
