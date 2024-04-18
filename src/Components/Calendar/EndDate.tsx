@@ -17,7 +17,8 @@ interface IFormValues {
 }
 export const EndDate = React.forwardRef<ReactDatePicker<string, boolean>, ControllerRenderProps<IFormValues>>(
   ({ onChange, name }, ref) => {
-    const [startDate] = useState<any>(new Date(Date.now()));
+    const today = new Date(Date.now());
+    const [startDate, setStartDate] = useState<any>(new Date(Date.now()));
 
     return (
       <DateContainer
@@ -25,7 +26,11 @@ export const EndDate = React.forwardRef<ReactDatePicker<string, boolean>, Contro
         locale="ko"
         selected={new Date(startDate)}
         dateFormat="yy.MM.dd"
-        onChange={(date) => onChange(parseISOString(date))}
+        minDate={today}
+        onChange={(date) => {
+          onChange(parseISOString(date));
+          setStartDate(date);
+        }}
         placeholderText="ex)24.01.07"
         isClearable={false}
         ref={ref}
