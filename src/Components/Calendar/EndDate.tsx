@@ -18,23 +18,25 @@ interface IFormValues {
 export const EndDate = React.forwardRef<ReactDatePicker<string, boolean>, ControllerRenderProps<IFormValues>>(
   ({ onChange, name }, ref) => {
     const today = new Date(Date.now());
-    const [startDate, setStartDate] = useState<any>(new Date(Date.now()));
+    const [startDate, setStartDate] = useState<Date>();
 
     return (
       <DateContainer
         name={name}
         locale="ko"
-        selected={new Date(startDate)}
+        selected={startDate}
         dateFormat="yy.MM.dd"
         minDate={today}
         onChange={(date) => {
           onChange(parseISOString(date));
-          setStartDate(date);
+          if (date instanceof Array) setStartDate(date[1]);
+          else setStartDate(date);
         }}
         placeholderText="ex)24.01.07"
         isClearable={false}
         ref={ref}
         shouldCloseOnSelect // 날짜를 선택하면 자동으로 닫힌다
+        autoComplete="off"
       />
     );
   },
