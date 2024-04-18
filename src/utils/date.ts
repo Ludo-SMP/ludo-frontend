@@ -21,3 +21,12 @@ export const isEdited = (createdDate: string, updatedDate: string) => {
 
   return updatedDateTime - createdDateTime > 0;
 };
+
+/**
+ * @description Date | [Date Date] => ISOString으로 변환한다.
+ */
+export const parseISOString = (date: Date | [Date, Date]) => {
+  if (date instanceof Date) return date.toISOString();
+  // 시작, 끝 range가 있는 경우, 끝 날짜를 선택한다.
+  return date[1].toISOString();
+};
