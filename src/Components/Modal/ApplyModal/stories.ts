@@ -31,3 +31,9 @@ export const Primary: Story = {
     ],
   },
 };
+
+export const Empty: Story = {
+  args: {
+    positions: [],
+  },
+};
