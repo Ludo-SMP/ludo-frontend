@@ -17,3 +17,9 @@ export const Primary: Story = {
     card: 'STUDY',
   },
 };
+
+export const Recruitment: Story = {
+  args: {
+    card: 'RECRUITMENT',
+  },
+};
