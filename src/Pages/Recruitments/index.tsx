@@ -45,26 +45,9 @@ const RecruitmentsPage = () => {
       <RecruitmentsSectionWrapper>
         <SelectFilterSectionWrapper>
           <div className="section__title">나에게 필요한 스터디를 찾아보아요</div>
-
           <DropdownFiltersWrapper>
             <DropdownFilter filterName={'카테고리'} items={[{ ...ALL }, ...CATEGORIES]} filterOption="CATEGORY" />
-            {isLoading ? (
-              <DropdownFilter filterName={'기술 스택'} items={[]} filterOption="STACK" />
-            ) : (
-              data?.stacks && (
-                <DropdownFilter
-                  filterName={'기술 스택'}
-                  items={[
-                    { ...ALL },
-                    ...stacks.map((stack: Stack) => {
-                      return { id: stack.id, name: stack.name };
-                    }),
-                  ]}
-                  filterOption="STACK"
-                />
-              )
-            )}
-
+            <DropdownFilter filterName={'기술 스택'} filterOption="STACK" />
             <DropdownFilter filterName={'포지션'} items={[{ ...ALL }, ...POSITIONS]} filterOption="POSITION" />
             <DropdownFilter
               filterName={'진행방식'}

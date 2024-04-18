@@ -9,7 +9,7 @@ export const useRecruitments = ({
 }: {
   last?: number;
   count: number;
-  filterOptions: Pick<FilterOptionParams, 'categoryId' | 'positionId' | 'progressMethod' | 'stackId'>;
+  filterOptions: Pick<FilterOptionParams, 'categoryId' | 'positionId' | 'progressMethod' | 'stackIds'>;
 }) => {
   const { data, hasNextPage, fetchNextPage, isLoading } = useInfiniteQuery({
     queryKey: [...RECRUITMENT.RECRUITMENTS(filterOptions)],
