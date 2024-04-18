@@ -17,3 +17,13 @@ export const Primary: Story = {
     },
   },
 };
+
+export const Secondary: Story = {
+  args: {
+    chipType: 'Secondary',
+    position: {
+      id: 1,
+      name: '백엔드',
+    },
+  },
+};
