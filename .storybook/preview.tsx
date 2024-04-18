@@ -3,6 +3,7 @@ import ReactQueryProvider from '@/Providers/QueryProvider';
 import { ThemeProvider } from 'styled-components';
 import { theme } from '@/Styles/theme';
 import { GlobalStyle } from '@/Styles/globalStyles';
+import { withRouter } from 'storybook-addon-react-router-v6';
 
 const preview: Preview = {
   parameters: {
@@ -28,6 +29,7 @@ const preview: Preview = {
         </ThemeProvider>
       </ReactQueryProvider>
     ),
+    withRouter,
   ],
 };
 
