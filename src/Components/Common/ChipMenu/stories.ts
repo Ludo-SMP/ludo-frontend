@@ -5,6 +5,7 @@ const meta = {
   component: Chip,
   args: {
     onClick: () => void 0,
+    checked: false,
     children: '모의 면접',
   },
 } satisfies Meta<typeof Chip>;
@@ -12,8 +13,16 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
+export const Primary: Story = {};
+
+export const Checked: Story = {
   args: {
-    checked: false,
+    checked: true,
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    disabled: true,
   },
 };
