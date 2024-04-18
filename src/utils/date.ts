@@ -23,10 +23,16 @@ export const isEdited = (createdDate: string, updatedDate: string) => {
 };
 
 /**
- * @description Date | [Date Date] => ISOString으로 변환한다.
+ * @description Date | [Date Date] => locale ko 기준 ISOString으로 변환한다.
  */
 export const parseISOString = (date: Date | [Date, Date]) => {
-  if (date instanceof Date) return date.toISOString();
-  // 시작, 끝 range가 있는 경우, 끝 날짜를 선택한다.
-  return date[1].toISOString();
+  let pick;
+  if (date instanceof Date) pick = date;
+  // 시작과 끝 날짜가 있는 경우, 끝 날짜를 선택한다.
+  else pick = date[1];
+
+  // 한국의 offset을 추가한다.
+  let offset = pick.getTimezoneOffset() * 60000;
+  let dateOffset = new Date(pick.getTime() - offset);
+  return dateOffset.toISOString();
 };
