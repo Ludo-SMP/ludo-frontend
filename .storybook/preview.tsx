@@ -3,7 +3,7 @@ import ReactQueryProvider from '@/Providers/QueryProvider';
 import { ThemeProvider } from 'styled-components';
 import { theme } from '@/Styles/theme';
 import { GlobalStyle } from '@/Styles/globalStyles';
-import { withRouter } from 'storybook-addon-react-router-v6';
+import { withRouter } from 'storybook-addon-remix-react-router';
 
 const preview: Preview = {
   parameters: {
