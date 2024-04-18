@@ -2,6 +2,7 @@ import { forwardRef, useMemo } from 'react';
 import Select, { ActionMeta, Props, SelectInstance, StylesConfig } from 'react-select';
 import styled from 'styled-components';
 import { Option } from '@/Types/study';
+import { theme } from '@/Styles/theme';
 /**
  * @description { value: string, label: string } 으로 들어와야 합니다.
  * - ex) { value: "1", label: "백엔드" }
@@ -20,42 +21,38 @@ const CustomSelect = forwardRef<SelectInstance<Option<unknown, unknown>>, Select
         control: () => ({
           width: '100%',
           padding: '7px 16px',
-          border: '1px solid rgba(0, 0, 0, 0.10)',
-          borderRadius: '8px',
-          background: 'white',
+          border: `1px solid ${theme.color.black1}`,
+          borderRadius: theme.borderRadius.small,
+          background: theme.color.white,
           fontFamily: 'Pretendard400',
-          fontSize: '16px',
+          fontSize: theme.font.small,
           cursor: 'pointer',
         }),
-        option: (provided, state) => {
-          const { data, isSelected } = state;
-          return {
-            ...provided,
-            color: isSelected ? '#000000D9' : '#000000A6',
-            fontFamily: 'Pretendard400',
-            fontSize: '16px',
-            padding: '8px 8px 8px 16px',
-            backgroundColor: isSelected ? '#EFECFF' : 'white',
-            cursor: 'pointer',
-            ':active': {
-              ...provided[':active'],
-              backgroundColor: isSelected ? 'red' : 'pink',
-            },
-            ':hover': {
-              ...provided[':hover'],
-              backgroundColor: '#EFECFF',
-            },
-          };
-        },
+        option: (provided, { isSelected }) => ({
+          ...provided,
+          color: isSelected ? theme.color.black3 : theme.color.black4,
+          fontFamily: 'Pretendard400',
+          fontSize: theme.font.small,
+          padding: '8px 8px 8px 16px',
+          backgroundColor: isSelected ? theme.color.purple2 : theme.color.white,
+          cursor: 'pointer',
+          ':active': {
+            ...provided[':active'],
+          },
+          ':hover': {
+            ...provided[':hover'],
+            backgroundColor: theme.color.purple2,
+          },
+        }),
         menu: (provided) => ({
           ...provided,
           marginTop: '10px',
-          boxShadow: '0px 4px 10px 0px #0000001A',
-          borderRadius: '8px',
+          boxShadow: `0px 4px 10px 0px ${theme.color.black1}`,
+          borderRadius: theme.borderRadius.small,
         }),
         placeholder: (provided) => ({
           ...provided,
-          color: '#00000073',
+          color: theme.color.black2,
         }),
         valueContainer: (provided) => ({
           ...provided,
