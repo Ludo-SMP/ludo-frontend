@@ -18,12 +18,12 @@ export const CalendarButton = ({ children, onClick }: FilterProps) => {
 };
 
 const InputContainer = styled.section`
-  width: 392px;
+  width: 100%;
   height: 44px;
   display: flex;
   background-color: ${(props) => props.theme.color.white};
   border-radius: 8px;
-  border: 1px solid #cbcdd1;
+  border: 1px solid ${({ theme }) => theme.color.black1};
   align-items: center;
   align-self: stretch;
   padding: 10px 16px;
