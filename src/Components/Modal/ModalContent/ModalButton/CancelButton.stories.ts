@@ -12,3 +12,9 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {};
+
+export const Checked: Story = {
+  args: {
+    checked: true,
+  },
+};
