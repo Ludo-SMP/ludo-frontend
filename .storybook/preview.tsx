@@ -12,6 +12,12 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
+    layout: 'centered',
+    docs: {
+      canvas: {
+        sourceState: 'shown',
+      },
+    },
   },
   decorators: [
     (Story) => (
