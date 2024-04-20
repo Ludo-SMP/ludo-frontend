@@ -36,9 +36,7 @@ const TextAreaWrapper = styled.textarea`
   border-radius: ${({ theme }) => theme.borderRadius.small};
   font-family: 'Pretendard400';
   color: ${({ theme }) => theme.color.black};
-
-  /* TODO: textInput 기본 font-size 사이즈 확인 */
-  font-size: ${({ theme }) => theme.font.medium};
+  font-size: ${({ theme }) => theme.font.small};
   background-color: ${(props) => props.theme.color.white};
   line-height: 24px;
 
