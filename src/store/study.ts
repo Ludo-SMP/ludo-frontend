@@ -23,7 +23,19 @@ export interface SetSelectedCardAction {
   setSelectedCard: (newSelectedCard: Card) => void;
 }
 
+// 임시저장된 글 카드
 export const useSelectedCardStore = create<SelectedCard & SetSelectedCardAction>((set) => ({
   selectedCard: 'STUDY',
   setSelectedCard: (newSelectedCard: Card) => set({ selectedCard: newSelectedCard }),
+}));
+
+export interface SavedKeyState {
+  savedKey: string;
+  setSavedKey: (newKey: string) => void;
+}
+
+// 선택된 카드 키
+export const useSavedKeyStore = create<SavedKeyState>((set) => ({
+  savedKey: '',
+  setSavedKey: (newKey: string) => set(() => ({ savedKey: newKey })),
 }));
