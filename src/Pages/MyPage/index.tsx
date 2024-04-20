@@ -2,14 +2,14 @@ import { Loading, MemberImage, Study, StudyInfo } from '@/Assets';
 import UserCard from '@/Components/UserCard';
 import MyStudyCard from '@/Components/MyStudyCard';
 import styled from 'styled-components';
-import TemporarySavedCard, { TemporarySavedCardProps } from '@/Components/TemporarySavedCard';
+import TemporarySavedCard from '@/Components/TemporarySavedCard';
 import Button from '@/Components/Common/Button';
 import { useMyPageInfo } from '@/Hooks/study/useMyPageInfo';
 import { getPeriod } from '@/utils/date';
 import ChipMenu from '@/Components/Common/ChipMenu';
-import { User, ParticipateStudy, ApplicantRecruitment, CompletedStudy } from '@/Types/study';
+import { User, ParticipateStudy, ApplicantRecruitment, CompletedStudy, RecruitmentForm } from '@/Types/study';
 import { useSelectedCardStore, useSelectedMyStudyStore } from '@/store/study';
-import { temporarySavedCardMockData } from '@/Shared/dummy';
+
 import { useLogOutMutation } from '@/Hooks/auth/useLogOutMutation';
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -26,9 +26,22 @@ const MyPage = () => {
   const { selectedCard, setSelectedCard } = useSelectedCardStore();
 
   const { mutate: logoutMutate } = useLogOutMutation();
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
+
+  const getTempList = (selectedCard: 'STUDY' | 'RECRUITMENT') => {
+    // TODO: 스터디 타입도 추가
+    const savedList: Array<Partial<RecruitmentForm> & { savedKey: string }> = [];
+    for (const key in window.localStorage) {
+      // hasOwnProperty로 빌트인 속성 제거
+      if (window.localStorage.hasOwnProperty(key) && key.toUpperCase().includes(selectedCard)) {
+        savedList.push({ ...JSON.parse(localStorage.getItem(key)), savedKey: key });
+      }
+    }
+    return savedList;
+  };
 
   return (
     <MyPageWrapper>
@@ -119,15 +132,9 @@ const MyPage = () => {
                 스터디 모집공고
               </ChipMenu>
             </ChipMenusWrapper>
-            {selectedCard === 'STUDY'
-              ? temporarySavedCardMockData
-                  .filter((temporarySavedCard: TemporarySavedCardProps) => temporarySavedCard.card === 'STUDY')
-                  .map((studySavedCard: TemporarySavedCardProps) => <TemporarySavedCard {...studySavedCard} />)
-              : temporarySavedCardMockData
-                  .filter((temporarySavedCard: TemporarySavedCardProps) => temporarySavedCard.card === 'RECRUITMENT')
-                  .map((recruitmentSavedCard: TemporarySavedCardProps) => (
-                    <TemporarySavedCard {...recruitmentSavedCard} />
-                  ))}
+            {getTempList(selectedCard)?.map((form: Partial<RecruitmentForm> & { savedKey: string }) => (
+              <TemporarySavedCard {...form} />
+            ))}
           </CardsWrapper>
 
           <MypageButtonsWrapper>
