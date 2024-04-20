@@ -12,10 +12,11 @@ export type SelectProps = Props & {
   values?: Option<unknown, unknown>[];
   label?: string;
   placeholder?: string;
+  defaultValue?: any;
 };
 
 const CustomSelect = forwardRef<SelectInstance<Option<unknown, unknown>>, SelectProps>(
-  ({ onChange, values, label, placeholder }, ref) => {
+  ({ onChange, values, label, placeholder, defaultValue }, ref) => {
     const customStyles: StylesConfig<Option<unknown, unknown>> = useMemo(
       () => ({
         control: () => ({
@@ -73,6 +74,7 @@ const CustomSelect = forwardRef<SelectInstance<Option<unknown, unknown>>, Select
           ref={ref}
           placeholder={placeholder ?? ''}
           options={values}
+          defaultValue={defaultValue || 'Select'}
           onChange={(newValue: Option<unknown, unknown>, actionMeta: ActionMeta<Option<unknown, unknown>>) =>
             onChange(newValue['value'], actionMeta)
           }

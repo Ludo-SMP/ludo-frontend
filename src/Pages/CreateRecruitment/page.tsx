@@ -1,5 +1,7 @@
+import { useEffect } from 'react';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 
 import styled, { css } from 'styled-components';
 import { One, Two, Three, Four, Loading } from '@/Assets';
@@ -19,9 +21,48 @@ import { CREATE_RECRUITMENT } from '@/Constants/messages';
 import { PositionId, RecruitmentForm } from '@/Types/study';
 import { APPLICATION_CNT, CONTACT, POSITIONS, POSITION } from '@/Shared/study';
 import { useCreateRecruitmentMutation } from '@/Hooks/recruitments/useCreateRecruitment';
+import { useSavedKeyStore } from '@/store/study';
 
 const CreateRecruitmentPage = () => {
   const studyId = Number(useParams().studyId);
+  const { pathname } = useLocation();
+
+  // 임시저장된 키가 있는지 확인
+  const savedKey = useSavedKeyStore((state) => state.savedKey);
+  const setSavedKey = useSavedKeyStore((state) => state.setSavedKey);
+  const tempSaved: RecruitmentForm | null = JSON.parse(localStorage.getItem(savedKey)) ?? null;
+
+  const getDefVal = (formKey: keyof RecruitmentForm) => {
+    if (!tempSaved) return;
+    const val = tempSaved[formKey];
+
+    switch (formKey) {
+      case 'applicantCount': {
+        return APPLICATION_CNT.find((el) => el.value === val) ?? null;
+      }
+      // 포지션 id
+      case 'positionIds': {
+        return POSITION.find((el) => el.value === val) ?? null;
+      }
+      case 'stackIds': {
+        return STACK.find((el) => el.value === val) ?? null;
+      }
+      case 'contact': {
+        return CONTACT.find((el) => el.value === val) ?? null;
+      }
+      default: {
+        return val;
+      }
+    }
+  };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    return () => {
+      // 언마운트될 때, 임시저장 선택된 키 초기화
+      if (tempSaved) setSavedKey('');
+    };
+  }, [pathname]);
 
   const {
     register,
@@ -29,17 +70,35 @@ const CreateRecruitmentPage = () => {
     control,
     watch,
     formState: { errors },
-  } = useForm<RecruitmentForm>();
+  } = useForm<RecruitmentForm>({
+    defaultValues: tempSaved,
+  });
 
   const { mutate } = useCreateRecruitmentMutation(studyId);
 
   const onSubmit = (data: RecruitmentForm) => {
     const test: RecruitmentForm = { ...data, positionIds: [0], stackIds: [0] };
-    console.log('test', test);
+    // console.log('test', test, uuidv4());
     //mutate(test);
   };
 
   const data = watch();
+
+  const STACK = [
+    { value: 1, label: 'React' },
+    { value: 2, label: 'Next.js' },
+    { value: 3, label: 'Javascript' },
+    { value: 4, label: 'Java' },
+    { value: 5, label: 'Spring' },
+  ];
+
+  const saveTemporary = () => {
+    // 저장된 키가 있는 경우 덮어쓰기
+    const newSavedKey = savedKey.length > 0 ? savedKey : `RECRUITMENT-${studyId}-${uuidv4()}`;
+    localStorage.setItem(newSavedKey, JSON.stringify(data));
+    // TODO: 모달로 교체
+    alert('임시저장되었습니다.');
+  };
 
   return (
     <RecruitmentContainer>
@@ -63,7 +122,13 @@ const CreateRecruitmentPage = () => {
                   name="applicantCount"
                   rules={{ required: CREATE_RECRUITMENT.applicantCount }}
                   render={({ field }) => (
-                    <CustomSelect label="모집 인원" placeholder="ex) 5명" values={APPLICATION_CNT} {...field} />
+                    <CustomSelect
+                      label="모집 인원"
+                      placeholder="ex) 5명"
+                      defaultValue={getDefVal('applicantCount')}
+                      values={APPLICATION_CNT}
+                      {...field}
+                    />
                   )}
                 />
                 {errors?.applicantCount?.message && <ErrorMsg>{errors?.applicantCount?.message}</ErrorMsg>}
@@ -78,7 +143,9 @@ const CreateRecruitmentPage = () => {
                     control={control}
                     name="recruitmentEndDateTime"
                     rules={{ required: CREATE_RECRUITMENT.recruitmentEndDateTime }}
-                    render={({ field }) => <EndDate {...field} />}
+                    render={({ field }) => (
+                      <EndDate {...field} defaultValue={getDefVal('recruitmentEndDateTime') as string} />
+                    )}
                   />
                 </CalendarButton>
                 {errors?.recruitmentEndDateTime?.message && (
@@ -91,19 +158,32 @@ const CreateRecruitmentPage = () => {
                   name="positionIds"
                   rules={{ required: CREATE_RECRUITMENT.positionIds }}
                   render={({ field }) => (
-                    <CustomSelect label="포지션" placeholder="포지션" values={POSITION} {...field} />
+                    <CustomSelect
+                      label="포지션"
+                      placeholder="포지션"
+                      defaultValue={getDefVal('positionIds')}
+                      values={POSITION}
+                      {...field}
+                    />
                   )}
                 />
                 {errors?.positionIds?.message && <ErrorMsg>{errors?.positionIds?.message}</ErrorMsg>}
               </GridItem>
               <GridItem>
-                {/* TODO: 기술 스택 모달 적용 */}
-                {/* <SelectBox
-                label="기술 스택"
-                values={STACK}
-                defaultValue="기술 스택"
-                {...register('stackIds', { required: CREATE_RECRUITMENT.stackIds })}
-              /> */}
+                <Controller
+                  control={control}
+                  name="stackIds"
+                  rules={{ required: CREATE_RECRUITMENT.stackIds }}
+                  render={({ field }) => (
+                    <CustomSelect
+                      label="기술 스택"
+                      defaultValue={getDefVal('stackIds')}
+                      placeholder="기술 스택"
+                      values={STACK}
+                      {...field}
+                    />
+                  )}
+                />
                 {errors?.stackIds?.message && <ErrorMsg>{errors?.stackIds?.message}</ErrorMsg>}
               </GridItem>
               <GridItem>
@@ -112,7 +192,13 @@ const CreateRecruitmentPage = () => {
                   name="contact"
                   rules={{ required: CREATE_RECRUITMENT.contact }}
                   render={({ field }) => (
-                    <CustomSelect label="연락방법" placeholder="연락방법" values={CONTACT} {...field} />
+                    <CustomSelect
+                      label="연락방법"
+                      placeholder="연락방법"
+                      defaultValue={getDefVal('contact')}
+                      values={CONTACT}
+                      {...field}
+                    />
                   )}
                 />
                 {errors?.contact?.message && <ErrorMsg>{errors?.contact?.message}</ErrorMsg>}
@@ -124,6 +210,7 @@ const CreateRecruitmentPage = () => {
                 <Spacing size={12} />
                 <InputText
                   placeholder="ex) 오픈 카카오톡 링크"
+                  defaultValue={getDefVal('callUrl') as string}
                   {...register('callUrl', { required: CREATE_RECRUITMENT.contact })}
                 />
                 {errors?.callUrl?.message && <ErrorMsg>{errors?.callUrl?.message}</ErrorMsg>}
@@ -214,9 +301,16 @@ const CreateRecruitmentPage = () => {
           </FormSection>
         </Stack>
         <ButtonBox>
-          <Button scheme="secondary" size="fullWidth">
-            등록하기
-          </Button>
+          <div className="button__wrap">
+            <Button type="button" onClick={saveTemporary} scheme="normal" size="fullWidth">
+              임시저장
+            </Button>
+          </div>
+          <div className="button__wrap">
+            <Button scheme="secondary" size="fullWidth">
+              등록하기
+            </Button>
+          </div>
         </ButtonBox>
       </form>
     </RecruitmentContainer>
@@ -296,6 +390,11 @@ const ButtonBox = styled.div`
   display: flex;
   flex-direction: row;
   gap: 24px;
+
+  .button__wrap {
+    display: flex;
+    width: 100%;
+  }
 `;
 
 const FormSection = styled.section`
