@@ -4,19 +4,21 @@ import styled from 'styled-components';
 interface InputTextProps extends React.InputHTMLAttributes<HTMLInputElement> {
   placeholder?: string;
   inputType?: 'text' | 'email' | 'password' | 'member';
+  defaultValue?: string;
   currentLength?: number;
   maxLength?: number;
 }
 
 const InputText = forwardRef<HTMLInputElement, ComponentProps<'input'> & InputTextProps>(
   (
-    { name, placeholder, inputType, onChange, maxLength, currentLength, ...props }: InputTextProps,
+    { name, placeholder, defaultValue, inputType, onChange, maxLength, currentLength, ...props }: InputTextProps,
     ref: ForwardedRef<HTMLInputElement>,
   ) => {
     return (
       <Box>
         <InputWrapper
           placeholder={placeholder}
+          defaultValue={defaultValue}
           name={name}
           ref={ref}
           type={inputType ?? 'text'}
