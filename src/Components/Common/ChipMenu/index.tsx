@@ -32,6 +32,9 @@ const ChipMenuContainer = styled.div<{ checked: boolean }>`
 
   &:hover {
     cursor: pointer;
+    border: 1px solid ${({ theme }) => theme.color.black1};
+    background: ${({ theme }) => theme.color.orange4};
+    color: ${({ theme }) => theme.color.white};
   }
 `;
 
