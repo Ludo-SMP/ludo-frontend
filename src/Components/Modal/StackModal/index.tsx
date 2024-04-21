@@ -184,7 +184,7 @@ const TitleWrapper = styled.div`
     display: flex;
     flex-direction: row-reverse;
     width: 50%;
-    &:hover {
+    & > svg:hover {
       cursor: pointer;
     }
     & > svg {

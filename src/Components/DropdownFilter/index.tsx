@@ -94,10 +94,6 @@ const DropdownFilterWrapper = styled.ul`
     text-overflow: ellipsis;
   }
 
-  &:hover {
-    cursor: pointer;
-  }
-
   ${media.custom(800)} {
     width: 90px;
   }
@@ -123,6 +119,7 @@ const DropdownSelectWrapper = styled.div<{ checked?: boolean }>`
     svg > path {
       fill: ${(props) => props.theme.color.white};
     }
+    cursor: pointer;
   }
   svg > path {
     fill: ${({ theme, checked }) => (checked ? theme.color.orange2 : theme.color.black3)};
