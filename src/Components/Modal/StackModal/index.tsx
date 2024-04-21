@@ -1,6 +1,7 @@
 import { Close, Search } from '@/Assets';
 import Button from '@/Components/Common/Button';
 import ChipMenu from '@/Components/Common/ChipMenu';
+import InputText from '@/Components/Common/InputText/iindex';
 import { TechStack } from '@/Components/Common/TechStack';
 import { useStack } from '@/Hooks/stack/useStack';
 import { Stack } from '@/Types/study';
@@ -56,10 +57,7 @@ const StackModal = ({ handleModal, initialSelectedStacks, handleSelectedStacks }
           </div>
         </TitleWrapper>
         <SearchInputWrapper>
-          <input type="text" placeholder="기술스택" />
-          <div className="search__icon">
-            <Search />
-          </div>
+          <InputText placeholder="기술 스택" icon={<Search />} />
         </SearchInputWrapper>
         <CategoryChipsWrapper>
           <ChipMenu checked={selectedCategory === null} onClick={() => setSelectedCategory(null)}>
@@ -194,26 +192,7 @@ const TitleWrapper = styled.div`
 `;
 
 const SearchInputWrapper = styled.div`
-  display: flex;
-  padding: 10px 16px;
-  align-items: center;
-  gap: 8px;
-  align-self: stretch;
-  border-radius: ${({ theme }) => theme.borderRadius.small};
-  border: 1px solid ${({ theme }) => theme.color.black1};
-  background: ${({ theme }) => theme.color.white};
-
-  input {
-    width: 100%;
-  }
-
-  & > input::placeholder {
-    color: ${({ theme }) => theme.color.black2};
-    font-family: Pretendard400;
-    font-size: ${({ theme }) => theme.font.small};
-    font-style: normal;
-    line-height: 24px;
-  }
+  width: 100%;
 `;
 
 const CategoryChipsWrapper = styled.div`
