@@ -5,6 +5,7 @@ import InputText from '@/Components/Common/InputText/iindex';
 import { TechStack } from '@/Components/Common/TechStack';
 import { useStack } from '@/Hooks/stack/useStack';
 import useDebounce from '@/Hooks/useDebounce';
+import { media } from '@/Styles/theme';
 import { Stack } from '@/Types/study';
 import { SetStateAction, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
@@ -57,7 +58,7 @@ const StackModal = ({ handleModal, initialSelectedStacks, handleSelectedStacks }
         <TitleWrapper>
           <div className="title">기술 스택</div>
           <div className="close__icon" onClick={() => handleModal(false)}>
-            <Close width={32} height={32} />
+            <Close width={24} height={24} />
           </div>
         </TitleWrapper>
         <SearchInputWrapper>
@@ -146,19 +147,37 @@ const StackModal = ({ handleModal, initialSelectedStacks, handleSelectedStacks }
 
 const StackModalWrapper = styled.div`
   display: flex;
+  padding: 32px;
+  flex-direction: column;
   align-items: flex-start;
+  align-self: stretch;
   position: fixed;
   top: 50%;
   left: 50%;
-  width: 1200px;
-  display: flex;
-  flex-direction: column;
-  padding: 32px 52px;
-  gap: 40px;
-  background: ${({ theme }) => theme.color.white2};
-  border-radius: ${({ theme }) => theme.borderRadius.large};
   transform: translate(-50%, -50%);
+  width: 990px;
+  gap: 32px;
+  border-radius: 16px;
+  border: 1px solid ${({ theme }) => theme.color.black1};
+  background: ${({ theme }) => theme.color.white};
   z-index: 100;
+
+  ${media.custom(990)} {
+    width: 834px;
+  }
+
+  ${media.custom(834)} {
+    width: 678px;
+  }
+
+  ${media.custom(678)} {
+    width: 522px;
+  }
+
+  ${media.custom(522)} {
+    width: 350px;
+    padding: 32px 24px;
+  }
 `;
 
 const ModalContentWrapper = styled.div`
@@ -173,30 +192,24 @@ const TitleWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 40px;
   gap: 24px;
   align-self: stretch;
 
   .title {
     display: flex;
-    width: 50%;
+    flex: 1 0 0;
     color: ${({ theme }) => theme.color.black5};
     font-family: 'Pretendard800';
-    font-size: 24px;
+    font-size: ${({ theme }) => theme.font.large};
     font-style: normal;
-    line-height: 32px;
     font-weight: 800;
+    line-height: 32px;
   }
 
   .close__icon {
     display: flex;
-    flex-direction: row-reverse;
-    width: 50%;
-    & > svg:hover {
+    &:hover {
       cursor: pointer;
-    }
-    & > svg {
-      padding-top: 2.5px;
     }
   }
 `;
@@ -210,6 +223,7 @@ const CategoryChipsWrapper = styled.div`
   width: 100%;
   align-items: flex-start;
   gap: 8px;
+  overflow-x: hidden;
 `;
 
 const TechStackListWrapper = styled.div`
@@ -229,6 +243,10 @@ const BtnsWrapper = styled.div`
   width: 100%;
   gap: 24px;
   align-self: stretch;
+
+  ${media.custom(522)} {
+    gap: 12px;
+  }
 `;
 
 export default StackModal;

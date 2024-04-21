@@ -29,6 +29,7 @@ const ChipMenuContainer = styled.div<{ checked: boolean }>`
   font-style: normal;
   font-weight: 600;
   line-height: 40px;
+  white-space: nowrap;
 
   &:hover {
     cursor: pointer;
