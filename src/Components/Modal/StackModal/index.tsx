@@ -21,6 +21,29 @@ const STACK_CATEGORY = {
 
 type StackCategory = keyof typeof STACK_CATEGORY;
 
+const getFilteredStacks = (
+  stacksByCategory: { id: number; name: StackCategory; stacks: Stack[] }[],
+  selectedCategory: StackCategory,
+  deBouncedKeyword: string,
+) => {
+  let filteredStacks: Stack[] = [];
+  stacksByCategory
+    ?.filter(
+      (stacksByCategory: { id: number; name: StackCategory; stacks: Stack[] }) =>
+        selectedCategory === null || STACK_CATEGORY[selectedCategory] === stacksByCategory.id,
+    )
+    .map((stacksByCategory: { id: number; name: StackCategory; stacks: Stack[] }) => {
+      filteredStacks = [
+        ...filteredStacks,
+        ...stacksByCategory.stacks.filter(
+          (stack: Stack) =>
+            deBouncedKeyword.length === 0 || stack.name.toLowerCase().includes(deBouncedKeyword.toLowerCase()),
+        ),
+      ];
+    });
+  return filteredStacks;
+};
+
 interface StackModalProps {
   handleModal: React.Dispatch<SetStateAction<boolean>>;
   initialSelectedStacks?: Stack[];
@@ -51,6 +74,8 @@ const StackModal = ({ handleModal, initialSelectedStacks, handleSelectedStacks }
       document.removeEventListener('mousedown', handleOutSideClick);
     };
   }, [stackModalRef, handleModal]);
+
+  const filteredStacks = getFilteredStacks(stacksSortedByCategory, selectedCategory, deBouncedKeyword);
 
   return (
     <StackModalWrapper ref={stackModalRef}>
@@ -88,36 +113,21 @@ const StackModal = ({ handleModal, initialSelectedStacks, handleSelectedStacks }
           </ChipMenu>
         </CategoryChipsWrapper>
         <TechStackListWrapper>
-          {stacksSortedByCategory &&
-            stacksSortedByCategory.map((stacksByCategory: { id: number; name: StackCategory; stacks: Stack[] }) => {
-              return (
-                (selectedCategory === null || STACK_CATEGORY[selectedCategory] === stacksByCategory.id) &&
-                stacksByCategory.stacks
-                  .filter(
-                    (stack: Stack) =>
-                      deBouncedKeyword.length === 0 ||
-                      stack.name.toLowerCase().includes(deBouncedKeyword.toLowerCase()),
-                  )
-                  .map((stack: Stack) => (
-                    <TechStack
-                      key={stack.id}
-                      {...stack}
-                      onClick={() => {
-                        if (selectedStacks.filter((selectedStack: Stack) => selectedStack.id === stack.id).length === 0)
-                          setSelectedStacks([...selectedStacks, { ...stack }]);
-                        else {
-                          setSelectedStacks(
-                            selectedStacks.filter((selectedStack: Stack) => selectedStack.id !== stack.id),
-                          );
-                        }
-                      }}
-                      selected={
-                        selectedStacks.filter((selectedStack: Stack) => selectedStack.id === stack.id).length !== 0
-                      }
-                    />
-                  ))
-              );
-            })}
+          {filteredStacks &&
+            filteredStacks.map((stack: Stack) => (
+              <TechStack
+                key={stack.id}
+                {...stack}
+                onClick={() => {
+                  if (selectedStacks.filter((selectedStack: Stack) => selectedStack.id === stack.id).length === 0)
+                    setSelectedStacks([...selectedStacks, { ...stack }]);
+                  else {
+                    setSelectedStacks(selectedStacks.filter((selectedStack: Stack) => selectedStack.id !== stack.id));
+                  }
+                }}
+                selected={selectedStacks.filter((selectedStack: Stack) => selectedStack.id === stack.id).length !== 0}
+              />
+            ))}
         </TechStackListWrapper>
       </ModalContentWrapper>
       <BtnsWrapper>
