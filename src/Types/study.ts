@@ -142,8 +142,8 @@ export interface StudyDetail {
     title: string;
     platform: Platform;
     way: ProgressMethod;
-    participantsCount: number;
-    participantsLimit: number;
+    participantCount: number;
+    participantLimit: number;
     startDateTime: string;
     endDateTime: string;
     category: Category;
