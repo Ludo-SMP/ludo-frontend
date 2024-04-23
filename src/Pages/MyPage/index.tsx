@@ -12,7 +12,7 @@ import { useSelectedCardStore, useSelectedMyStudyStore } from '@/store/study';
 
 import { useLogOutMutation } from '@/Hooks/auth/useLogOutMutation';
 import { useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 const MyPage = () => {
   const { data: myPageInfo, isLoading } = useMyPageInfo();
@@ -27,27 +27,44 @@ const MyPage = () => {
 
   const { mutate: logoutMutate } = useLogOutMutation();
 
+  const [savedList, setSavedList] = useState<Array<Partial<RecruitmentForm> & { savedKey: string }>>([]);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
 
+  useEffect(() => {
+    getTempList(selectedCard);
+  }, [selectedCard]);
+
+  console.log('savedList', savedList);
+
+  // FIXME: timestamp 추출 로직 수정, time-uuid 설치
   const parseTimestampFromUUID = (uuid: string) => {
     // uuid의 3번째 부분이 timestamp, 시간 보정을 위해 값을 빼줌
-    return new Date(parseInt(uuid.split('-')[2], 16) - 12219292800000).getTime();
+    const time = new Date(parseInt(uuid.split('-')[2], 16));
+    console.log(time);
+    const timestamp = new Date(parseInt(uuid.split('-')[2], 16) - 12219292800000).getTime();
+    // console.log(uuid, timestamp);
+    return timestamp;
   };
 
   const getTempList = (selectedCard: 'STUDY' | 'RECRUITMENT') => {
     // TODO: 스터디 타입도 추가
-    const savedList: Array<Partial<RecruitmentForm> & { savedKey: string }> = [];
+    const storageList: Array<Partial<RecruitmentForm> & { savedKey: string }> = [];
     for (const key in window.localStorage) {
       // hasOwnProperty로 빌트인 속성 제거
       if (window.localStorage.hasOwnProperty(key) && key.toUpperCase().includes(selectedCard)) {
-        savedList.push({ ...JSON.parse(localStorage.getItem(key)), savedKey: key });
+        storageList.push({ ...JSON.parse(localStorage.getItem(key)), savedKey: key });
       }
     }
-    savedList.sort((a, b) => parseTimestampFromUUID(b.savedKey) - parseTimestampFromUUID(a.savedKey));
-    return savedList;
+    // storageList.sort((a, b) => parseTimestampFromUUID(b.savedKey) - parseTimestampFromUUID(a.savedKey));
+    setSavedList(storageList);
   };
+
+  const onRemove = useCallback((savedKey: string) => {
+    setSavedList((prev) => prev.filter((item) => item.savedKey !== savedKey));
+  }, []);
 
   return (
     <MyPageWrapper>
@@ -138,8 +155,8 @@ const MyPage = () => {
                 스터디 모집공고
               </ChipMenu>
             </ChipMenusWrapper>
-            {getTempList(selectedCard)?.map((form: Partial<RecruitmentForm> & { savedKey: string }) => (
-              <TemporarySavedCard key={form.savedKey} {...form} />
+            {savedList?.map((form: Partial<RecruitmentForm> & { savedKey: string }) => (
+              <TemporarySavedCard key={form.savedKey} onRemove={onRemove} {...form} />
             ))}
           </CardsWrapper>
 
