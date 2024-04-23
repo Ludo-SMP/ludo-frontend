@@ -20,7 +20,7 @@ const TemporarySavedCard = ({ savedKey, title }: Partial<RecruitmentForm> & { sa
         setSavedKey(savedKey);
       }}
     >
-      <span className="title">{title}</span>
+      <span className="title">{title || '제목 없음'}</span>
       <Button scheme="normal">글 삭제하기</Button>
     </TemporarySavedCardWrapper>
   );
