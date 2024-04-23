@@ -50,7 +50,7 @@ const MyPage = () => {
         <>
           <UserInfoWrapper>
             <div className="title">
-              <MemberImage />
+              <MemberImage width={32} height={32} />
               <span>회원정보</span>
             </div>
             <UserCard nickname={user?.nickname || '닉네임'} email={user?.email || '이메일'} />
@@ -152,19 +152,22 @@ const MyPageWrapper = styled.div`
   flex-direction: column;
   max-width: 1224px;
   margin: 40px auto 80px auto;
-  gap: 32px;
+  gap: 40px;
 
   .title {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
     align-self: stretch;
-    color: ${({ theme }) => theme.color.black5};
-    font-family: 'Pretendard800';
-    font-size: ${({ theme }) => theme.font.xxlarge};
-    font-style: normal;
-    font-weight: 800;
-    line-height: 48px;
+
+    span {
+      color: ${({ theme }) => theme.color.black5};
+      font-family: 'Pretendard700';
+      font-size: ${({ theme }) => theme.font.medium};
+      font-style: normal;
+      font-weight: 700;
+      line-height: 32px;
+    }
   }
 `;
 

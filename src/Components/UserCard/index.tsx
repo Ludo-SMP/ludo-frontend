@@ -44,6 +44,13 @@ const UserCard = ({ nickname, email }: UserCardProps) => {
             >
               프로필 사진 변경하기
             </DropdownItem>
+            <DropdownItem
+              onClick={() => {
+                setIsOpened(false);
+              }}
+            >
+              설정
+            </DropdownItem>
           </DropdownListWrapper>
         )}
         {editState === 'EDIT' && isModalOpen && <EditProfileModal userNickname={nickname} handleEdit={setEditState} />}
@@ -65,33 +72,40 @@ const UserCard = ({ nickname, email }: UserCardProps) => {
 const UserCardWrapper = styled.div`
   position: relative;
   display: flex;
-  width: 100%;
-  padding: 28px 0px;
   align-items: flex-start;
+  width: 100%;
   gap: 24px;
 `;
 
 const UserProfileWrapper = styled.div`
   display: flex;
-  padding: 20px 20px 18px 32px;
+  padding: 16px 32px;
   flex-direction: column;
   align-items: flex-start;
-  gap: 4px;
+  gap: 12px;
+  flex: 1 0 0;
+  align-self: stretch;
 
   .nickname {
-    font-size: ${({ theme }) => theme.font.xxlarge};
     color: ${({ theme }) => theme.color.black5};
-    font-weight: 700;
+    font-family: 'Pretendard800';
+    font-size: ${({ theme }) => theme.font.large};
+    font-style: normal;
+    font-weight: 800;
+    line-height: 32px;
   }
   .email {
-    font-size: ${({ theme }) => theme.font.medium};
     color: rgba(0, 0, 0, 0.4);
-    font-weight: 400;
+    font-family: 'Pretendard500';
+    font-size: ${({ theme }) => theme.font.small};
+    font-style: normal;
+    font-weight: 500;
+    line-height: 32px;
   }
 `;
 const UserProfileEditSectionWrapper = styled.div`
   position: absolute;
-  top: 28px;
+  top: 0px;
   right: 0px;
   display: flex;
   flex-direction: column;
@@ -108,11 +122,13 @@ const UserProfileEditSectionWrapper = styled.div`
 `;
 
 const DropdownListWrapper = styled.div`
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
+  align-items: flex-start;
   padding: 8px 0;
-  border: 1px solid ${({ theme }) => theme.color.gray1};
   border-radius: ${({ theme }) => theme.borderRadius.small};
+  border: 1px solid ${({ theme }) => theme.color.black1};
+  box-shadow: 0px 4px 10px 0px ${({ theme }) => theme.color.black1};
 `;
 
 export default UserCard;
