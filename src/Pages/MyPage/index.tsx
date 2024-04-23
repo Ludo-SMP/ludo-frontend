@@ -80,43 +80,45 @@ const MyPage = () => {
                 진행 완료된 스터디
               </ChipMenu>
             </ChipMenusWrapper>
-            {selectedMyStudyStatus === 'PARTICIPATED'
-              ? participateStudies?.map((participateStudy: ParticipateStudy) => (
-                  <MyStudyCard
-                    id={participateStudy?.studyId}
-                    title={participateStudy?.title}
-                    status={participateStudy.status}
-                    position={participateStudy?.position}
-                    period={getPeriod(participateStudy?.startDateTime, participateStudy?.endDateTime)}
-                    participantCount={participateStudy?.participantCount}
-                    isOwner={participateStudy?.isOwner}
-                    hasRecruitment={participateStudy?.hasRecruitment}
-                    key={participateStudy?.studyId}
-                  />
-                ))
-              : selectedMyStudyStatus === 'APPLIED'
-                ? applicantRecruitments.map((applicantRecruitment: ApplicantRecruitment) => (
+            <CardListWrapper>
+              {selectedMyStudyStatus === 'PARTICIPATED'
+                ? participateStudies?.map((participateStudy: ParticipateStudy) => (
                     <MyStudyCard
-                      id={applicantRecruitment?.recruitmentId}
-                      title={applicantRecruitment?.title}
-                      status={applicantRecruitment?.applicantStatus}
-                      position={applicantRecruitment?.position}
-                      key={applicantRecruitment?.recruitmentId}
+                      id={participateStudy?.studyId}
+                      title={participateStudy?.title}
+                      status={participateStudy.status}
+                      position={participateStudy?.position}
+                      period={getPeriod(participateStudy?.startDateTime, participateStudy?.endDateTime)}
+                      participantCount={participateStudy?.participantCount}
+                      isOwner={participateStudy?.isOwner}
+                      hasRecruitment={participateStudy?.hasRecruitment}
+                      key={participateStudy?.studyId}
                     />
                   ))
-                : completedStudies.map((completedStudy: CompletedStudy) => (
-                    <MyStudyCard
-                      id={completedStudy?.studyId}
-                      title={completedStudy?.title}
-                      status={completedStudy?.status}
-                      position={completedStudy?.position}
-                      period={getPeriod(completedStudy?.startDateTime, completedStudy?.endDateTime)}
-                      participantCount={completedStudy?.participantCount}
-                      isOwner={completedStudy?.isOwner}
-                      hasRecruitment={completedStudy?.hasRecruitment}
-                      key={completedStudy?.studyId}
-                    />
-                  ))}
+                : selectedMyStudyStatus === 'APPLIED'
+                  ? applicantRecruitments.map((applicantRecruitment: ApplicantRecruitment) => (
+                      <MyStudyCard
+                        id={applicantRecruitment?.recruitmentId}
+                        title={applicantRecruitment?.title}
+                        status={applicantRecruitment?.applicantStatus}
+                        position={applicantRecruitment?.position}
+                        key={applicantRecruitment?.recruitmentId}
+                      />
+                    ))
+                  : completedStudies.map((completedStudy: CompletedStudy) => (
+                      <MyStudyCard
+                        id={completedStudy?.studyId}
+                        title={completedStudy?.title}
+                        status={completedStudy?.status}
+                        position={completedStudy?.position}
+                        period={getPeriod(completedStudy?.startDateTime, completedStudy?.endDateTime)}
+                        participantCount={completedStudy?.participantCount}
+                        isOwner={completedStudy?.isOwner}
+                        hasRecruitment={completedStudy?.hasRecruitment}
+                        key={completedStudy?.studyId}
+                      />
+                    ))}
+            </CardListWrapper>
           </CardsWrapper>
           <CardsWrapper>
             <div className="title">
@@ -131,9 +133,11 @@ const MyPage = () => {
                 스터디 모집공고
               </ChipMenu>
             </ChipMenusWrapper>
-            {getTempList(selectedCard)?.map((form: Partial<RecruitmentForm> & { savedKey: string }) => (
-              <TemporarySavedCard {...form} />
-            ))}
+            <CardListWrapper>
+              {getTempList(selectedCard)?.map((form: Partial<RecruitmentForm> & { savedKey: string }) => (
+                <TemporarySavedCard {...form} />
+              ))}
+            </CardListWrapper>
           </CardsWrapper>
 
           <MypageButtonsWrapper>
@@ -183,6 +187,7 @@ const CardsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  min-height: 368px;
   gap: 24px;
   align-self: stretch;
 `;
@@ -201,6 +206,15 @@ const MyStudyTitleWrapper = styled.div`
     font-weight: 700;
     line-height: 32px;
   }
+`;
+
+const CardListWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  align-self: stretch;
 `;
 
 const ChipMenusWrapper = styled.div`

@@ -31,7 +31,7 @@ const TemporarySavedCard = ({ savedKey, title }: Partial<RecruitmentForm> & { sa
           setSelectedCard(studyOrRecruitment === 'STUDY' ? 'STUDY' : 'RECRUITMENT');
         }}
       >
-        글 삭제하기
+        삭제하기
       </Button>
     </TemporarySavedCardWrapper>
   );
@@ -40,24 +40,32 @@ const TemporarySavedCard = ({ savedKey, title }: Partial<RecruitmentForm> & { sa
 const TemporarySavedCardWrapper = styled.div`
   display: flex;
   width: 100%;
+  padding: 24px 32px;
   justify-content: space-between;
-  padding: 32px 40px;
-  align-items: center;
-  gap: 40px;
-  border-radius: ${({ theme }) => theme.borderRadius.large};
+  align-items: flex-start;
+  gap: 32px;
+  align-self: stretch;
+  border-radius: ${({ theme }) => theme.borderRadius.medium};
   border: 1px solid ${({ theme }) => theme.color.black1};
   background: ${({ theme }) => theme.color.white};
+  box-shadow: 0px 0px 20px 0px ${({ theme }) => theme.color.black0};
 
   .title {
-    font-size: 24px;
+    color: ${({ theme }) => theme.color.black5};
+    font-family: 'Pretendard800';
+    font-size: ${({ theme }) => theme.font.large};
+    font-style: normal;
+    font-weight: 800;
+    line-height: 32px;
   }
 
   &:hover {
     cursor: pointer;
   }
 
-  /* Card */
-  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.05);
+  button {
+    padding: 0 32px;
+  }
 `;
 
 export default TemporarySavedCard;
