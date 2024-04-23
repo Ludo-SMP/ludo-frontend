@@ -45,7 +45,7 @@ const InputWrapper = styled.input`
   line-height: 1.5;
   color: ${({ theme }) => theme.color.black};
 
-  ::placeholder {
+  &::placeholder {
     color: ${({ theme }) => theme.color.black2};
     font-family: 'Pretendard400';
     font-size: ${({ theme }) => theme.font.small};

@@ -54,4 +54,8 @@ const DateContainer = styled(DatePicker)`
   align-self: stretch;
   resize: none;
   flex: 1 0 0;
+
+  &::placeholder {
+    color: ${(props) => props.theme.color.black2};
+  }
 `;

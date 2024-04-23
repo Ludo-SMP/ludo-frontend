@@ -40,7 +40,7 @@ const TextAreaWrapper = styled.textarea`
   background-color: ${(props) => props.theme.color.white};
   line-height: 24px;
 
-  ::placeholder {
+  &::placeholder {
     color: ${({ theme }) => theme.color.black2};
   }
 `;
