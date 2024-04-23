@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import TemporarySavedCard from '@/Components/TemporarySavedCard';
 import Button from '@/Components/Common/Button';
 import { useMyPageInfo } from '@/Hooks/study/useMyPageInfo';
-import { getPeriod } from '@/utils/date';
+import { getMillisec, getPeriod } from '@/utils/date';
 import ChipMenu from '@/Components/Common/ChipMenu';
 import { User, ParticipateStudy, ApplicantRecruitment, CompletedStudy, RecruitmentForm } from '@/Types/study';
 import { useSelectedCardStore, useSelectedMyStudyStore } from '@/store/study';
@@ -37,18 +37,6 @@ const MyPage = () => {
     getTempList(selectedCard);
   }, [selectedCard]);
 
-  console.log('savedList', savedList);
-
-  // FIXME: timestamp 추출 로직 수정, time-uuid 설치
-  const parseTimestampFromUUID = (uuid: string) => {
-    // uuid의 3번째 부분이 timestamp, 시간 보정을 위해 값을 빼줌
-    const time = new Date(parseInt(uuid.split('-')[2], 16));
-    console.log(time);
-    const timestamp = new Date(parseInt(uuid.split('-')[2], 16) - 12219292800000).getTime();
-    // console.log(uuid, timestamp);
-    return timestamp;
-  };
-
   const getTempList = (selectedCard: 'STUDY' | 'RECRUITMENT') => {
     // TODO: 스터디 타입도 추가
     const storageList: Array<Partial<RecruitmentForm> & { savedKey: string }> = [];
@@ -58,7 +46,8 @@ const MyPage = () => {
         storageList.push({ ...JSON.parse(localStorage.getItem(key)), savedKey: key });
       }
     }
-    // storageList.sort((a, b) => parseTimestampFromUUID(b.savedKey) - parseTimestampFromUUID(a.savedKey));
+
+    storageList.sort((a, b) => getMillisec(b.savedKey) - getMillisec(a.savedKey));
     setSavedList(storageList);
   };
 

@@ -36,3 +36,16 @@ export const parseISOString = (date: Date | [Date, Date]) => {
   let dateOffset = new Date(pick.getTime() - offset);
   return dateOffset.toISOString();
 };
+
+export const getTimeInt = (uuidStr: string) => {
+  var uuidArr = uuidStr.split('-');
+  const offset = 2;
+  let timeArr = [uuidArr[2 + offset].substring(1), uuidArr[1 + offset], uuidArr[0 + offset]].join('');
+  return parseInt(timeArr, 16);
+};
+
+export const getMillisec = (uuidStr: string) => {
+  let intTime = getTimeInt(uuidStr) - 122192928000000000;
+  let intMillisec = Math.floor(intTime / 10000);
+  return intMillisec;
+};
