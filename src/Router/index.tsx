@@ -11,8 +11,8 @@ import StudyDetailPage from '@/Pages/StudyDetail';
 // import SaveStudyPage from '@/Pages/Studies/SaveStudy';
 // import CreateStudyPage from '@/Pages/Studies/CreateStudy';
 // import ModifyStudyPage from '@/Pages/Studies/ModifyStudy';
-// import CreateRecruitmentPage from '@/Pages/Studies/CreateRecruitment';
-// import ModifyRecruitmentPage from '@/Pages/Studies/ModifyRecruitment';
+import CreateRecruitmentPage from '@/Pages/CreateRecruitment/page';
+import ModifyRecruitmentPage from '@/Pages/ModifyRecruitment';
 import LoginFailPage from '@/Pages/LoginFail';
 import SignUpFailPage from '@/Pages/SignUpFail';
 import Header from '@/Components/Header';
@@ -55,10 +55,10 @@ export const RouterPath = createBrowserRouter([
       //   path: ROUTES.STUDY.MODIFY,
       //   element: <ModifyStudyPage />,
       // },
-      // {
-      //   path: ROUTES.RECRUITMENT.CREATE,
-      //   element: <CreateRecruitmentPage />,
-      // },
+      {
+        path: ROUTES.RECRUITMENT.CREATE,
+        element: <CreateRecruitmentPage />,
+      },
 
       {
         path: ROUTES.STUDY.DETAIL,
@@ -88,10 +88,10 @@ export const RouterPath = createBrowserRouter([
       //   path: ROUTES.STUDY.SAVE,
       //   element: <SaveStudyPage />,
       // },
-      // {
-      //   path: ROUTES.RECRUITMENT.MODIFY,
-      //   element: <ModifyRecruitmentPage />,
-      // },
+      {
+        path: ROUTES.RECRUITMENT.MODIFY,
+        element: <ModifyRecruitmentPage />,
+      },
     ],
   },
 ]);
