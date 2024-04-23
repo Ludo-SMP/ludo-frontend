@@ -1,12 +1,14 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '@/Constants/route';
-import { Card, RecruitmentForm } from '@/Types/study';
+import { RecruitmentForm } from '@/Types/study';
 import Button from '../Common/Button';
-import { useSavedKeyStore } from '@/store/study';
+import { useSavedKeyStore, useSelectedCardStore } from '@/store/study';
 
 const TemporarySavedCard = ({ savedKey, title }: Partial<RecruitmentForm> & { savedKey: string }) => {
   const navigate = useNavigate();
+
+  const { setSelectedCard } = useSelectedCardStore();
 
   const [studyOrRecruitment, id] = savedKey?.split('-') ?? [];
 
@@ -21,7 +23,16 @@ const TemporarySavedCard = ({ savedKey, title }: Partial<RecruitmentForm> & { sa
       }}
     >
       <span className="title">{title}</span>
-      <Button scheme="normal">글 삭제하기</Button>
+      <Button
+        scheme="normal"
+        onClick={(e) => {
+          e.stopPropagation();
+          localStorage.removeItem(savedKey);
+          setSelectedCard(studyOrRecruitment === 'STUDY' ? 'STUDY' : 'RECRUITMENT');
+        }}
+      >
+        글 삭제하기
+      </Button>
     </TemporarySavedCardWrapper>
   );
 };

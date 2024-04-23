@@ -9,7 +9,6 @@ import { getPeriod } from '@/utils/date';
 import ChipMenu from '@/Components/Common/ChipMenu';
 import { User, ParticipateStudy, ApplicantRecruitment, CompletedStudy, RecruitmentForm } from '@/Types/study';
 import { useSelectedCardStore, useSelectedMyStudyStore } from '@/store/study';
-
 import { useLogOutMutation } from '@/Hooks/auth/useLogOutMutation';
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -24,7 +23,6 @@ const MyPage = () => {
 
   const { selectedMyStudyStatus, setSelectedMyStudyStatus } = useSelectedMyStudyStore();
   const { selectedCard, setSelectedCard } = useSelectedCardStore();
-
   const { mutate: logoutMutate } = useLogOutMutation();
 
   useEffect(() => {
@@ -33,6 +31,7 @@ const MyPage = () => {
 
   const getTempList = (selectedCard: 'STUDY' | 'RECRUITMENT') => {
     // TODO: 스터디 타입도 추가
+
     const savedList: Array<Partial<RecruitmentForm> & { savedKey: string }> = [];
     for (const key in window.localStorage) {
       // hasOwnProperty로 빌트인 속성 제거
