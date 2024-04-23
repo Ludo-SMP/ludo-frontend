@@ -5,9 +5,10 @@ import InputText from '@/Components/Common/InputText/iindex';
 import { TechStack } from '@/Components/Common/TechStack';
 import { useStack } from '@/Hooks/stack/useStack';
 import useDebounce from '@/Hooks/useDebounce';
+import { useOutSideClick } from '@/Hooks/useOutsideClick';
 import { media } from '@/Styles/theme';
 import { Stack } from '@/Types/study';
-import { SetStateAction, useEffect, useRef, useState } from 'react';
+import { SetStateAction, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 const STACK_CATEGORY = {
@@ -62,19 +63,7 @@ const StackModal = ({ handleModal, initialSelectedStacks, handleSelectedStacks }
 
   const stacksSortedByCategory = data?.data;
 
-  useEffect(() => {
-    const handleOutSideClick = (event: MouseEvent) => {
-      if (stackModalRef.current && !stackModalRef.current.contains(event.target as Node)) {
-        handleModal(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleOutSideClick);
-
-    return () => {
-      document.removeEventListener('mousedown', handleOutSideClick);
-    };
-  }, [stackModalRef, handleModal]);
+  useOutSideClick(stackModalRef, () => handleModal(false));
 
   const filteredStacks = getFilteredStacks(stacksSortedByCategory, selectedCategory, deBouncedKeyword);
 
