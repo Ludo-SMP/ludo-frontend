@@ -17,7 +17,7 @@ import Spacing from '@/Components/Spacing';
 import { TextArea } from '@/Components/Textarea';
 
 import { useCreateRecruitmentMutation } from '@/Hooks/recruitments/useCreateRecruitment';
-import { useStudyShortDetail } from '@/Hooks/recruitments/useStudyShortDetail';
+import { useStudyDetail } from '@/Hooks/study/useStudyDetail';
 
 import { PositionId, RecruitmentForm } from '@/Types/study';
 

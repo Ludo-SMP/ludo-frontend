@@ -22,7 +22,7 @@ import { PositionId, RecruitmentForm } from '@/Types/study';
 import { APPLICATION_CNT, CONTACT, POSITIONS, POSITION } from '@/Shared/study';
 import { useCreateRecruitmentMutation } from '@/Hooks/recruitments/useCreateRecruitment';
 import { useSavedKeyStore } from '@/store/study';
-import { useStudyShortDetail } from '@/Hooks/recruitments/useStudyShortDetail';
+import { useStudyDetail } from '@/Hooks/study/useStudyDetail';
 import { getPeriod } from '@/utils/date';
 import study from '@/Mocks/handlers/study';
 import { useModalStore } from '@/store/modal';
@@ -83,7 +83,7 @@ const CreateRecruitmentPage = () => {
 
   const { mutate } = useCreateRecruitmentMutation(studyId);
 
-  const { data: shortStudy, isLoading } = useStudyShortDetail(studyId);
+  const { data: shortStudy, isLoading } = useStudyDetail(studyId);
   const studyDetail = shortStudy?.study;
 
   const onSubmit = (data: RecruitmentForm) => {
