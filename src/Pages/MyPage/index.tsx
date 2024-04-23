@@ -57,7 +57,7 @@ const MyPage = () => {
           </UserInfoWrapper>
           <CardsWrapper>
             <MyStudyTitleWrapper>
-              <StudyInfo width={40} height={40} />
+              <StudyInfo width={32} height={32} />
               <span className="title">스따-디</span>
             </MyStudyTitleWrapper>
             <ChipMenusWrapper>
@@ -190,8 +190,17 @@ const CardsWrapper = styled.div`
 const MyStudyTitleWrapper = styled.div`
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   align-self: stretch;
+
+  span {
+    color: ${({ theme }) => theme.color.black5};
+    font-family: 'Pretendard700';
+    font-size: ${({ theme }) => theme.font.medium};
+    font-style: normal;
+    font-weight: 700;
+    line-height: 32px;
+  }
 `;
 
 const ChipMenusWrapper = styled.div`

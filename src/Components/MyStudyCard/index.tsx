@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { BlankSquare } from '../Common/BlankSquare';
+import { StudyThumbnail } from '@/Assets';
 import StudyToken from '../Common/StudyToken';
 import { InfoField } from '../Common/InfoField';
 import Button from '../Common/Button';
@@ -47,7 +47,7 @@ const MyStudyCard = ({
         );
       }}
     >
-      <BlankSquare width="180px" height="180px" />
+      <StudyThumbnail width="244px" height="244px" />
       <StudyInfoWrapper status={status}>
         <div className="study__status">
           <span className="title">{title}</span>
@@ -95,12 +95,9 @@ const MyStudyCardWrapper = styled.div`
   position: relative;
   display: flex;
   width: 100%;
-  padding: 32px 40px;
   align-items: flex-start;
-  gap: 40px;
-  border-radius: ${({ theme }) => theme.borderRadius.small};
+  border-radius: 16px;
   border: 1px solid ${({ theme }) => theme.color.black1};
-  background: ${({ theme }) => theme.color.white};
   box-shadow: 0px 0px 20px 0px ${({ theme }) => theme.color.black0};
 
   & > div:first-child {
@@ -115,10 +112,11 @@ const MyStudyCardWrapper = styled.div`
 
 const StudyInfoWrapper = styled.div<{ status: StudyStatus | ApplyStatus }>`
   display: flex;
-  width: (100%-180px);
   flex-direction: column;
+  padding: 24px 32px;
   align-items: flex-start;
-  gap: 8px;
+  gap: 12px;
+  align-self: stretch;
 
   .study__status {
     display: flex;
@@ -128,11 +126,11 @@ const StudyInfoWrapper = styled.div<{ status: StudyStatus | ApplyStatus }>`
 
     .title {
       color: ${({ theme }) => theme.color.black5};
-      font-family: 'Pretendard700';
-      font-size: ${({ theme }) => theme.font.xxlarge};
+      font-family: 'Pretendard800';
+      font-size: ${({ theme }) => theme.font.large};
       font-style: normal;
-      font-weight: 700;
-      line-height: 40px;
+      font-weight: 800;
+      line-height: 32px;
     }
 
     .studyTokens {
@@ -147,6 +145,10 @@ const MyStudyCardButtonsWrapper = styled.div`
   position: absolute;
   bottom: 32px;
   right: 40px;
+
+  button {
+    padding: 8px 24px;
+  }
 `;
 
 export default MyStudyCard;
