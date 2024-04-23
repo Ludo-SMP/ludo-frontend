@@ -133,7 +133,7 @@ const MyPage = () => {
               </ChipMenu>
             </ChipMenusWrapper>
             {getTempList(selectedCard)?.map((form: Partial<RecruitmentForm> & { savedKey: string }) => (
-              <TemporarySavedCard {...form} />
+              <TemporarySavedCard key={form.savedKey} {...form} />
             ))}
           </CardsWrapper>
 
