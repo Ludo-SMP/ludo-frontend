@@ -31,6 +31,11 @@ const MyPage = () => {
     window.scrollTo(0, 0);
   }, [pathname]);
 
+  const parseTimestampFromUUID = (uuid: string) => {
+    // uuid의 3번째 부분이 timestamp, 시간 보정을 위해 값을 빼줌
+    return new Date(parseInt(uuid.split('-')[2], 16) - 12219292800000).getTime();
+  };
+
   const getTempList = (selectedCard: 'STUDY' | 'RECRUITMENT') => {
     // TODO: 스터디 타입도 추가
     const savedList: Array<Partial<RecruitmentForm> & { savedKey: string }> = [];
@@ -40,6 +45,7 @@ const MyPage = () => {
         savedList.push({ ...JSON.parse(localStorage.getItem(key)), savedKey: key });
       }
     }
+    savedList.sort((a, b) => parseTimestampFromUUID(b.savedKey) - parseTimestampFromUUID(a.savedKey));
     return savedList;
   };
 
