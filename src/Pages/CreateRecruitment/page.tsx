@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { useLocation, useParams } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid';
+import { v1 as uuidv1 } from 'uuid';
 
 import styled, { css } from 'styled-components';
 import { One, Two, Three, Four, Loading } from '@/Assets';
@@ -88,7 +88,7 @@ const CreateRecruitmentPage = () => {
 
   const onSubmit = (data: RecruitmentForm) => {
     const test: RecruitmentForm = { ...data, positionIds: [0], stackIds: [0] };
-    console.log('test', test, uuidv4());
+    console.log('test', test, uuidv1());
     mutate(test);
   };
 
@@ -103,8 +103,10 @@ const CreateRecruitmentPage = () => {
   ];
 
   const saveTemporary = () => {
-    // 저장된 키가 있는 경우 덮어쓰기
-    const newSavedKey = savedKey.length > 0 ? savedKey : `RECRUITMENT-${studyId}-${uuidv4()}`;
+    // 저장된 키가 있는 경우 이전 키를 삭제한다.
+    if (savedKey.length > 0) localStorage.removeItem(savedKey);
+
+    const newSavedKey = `RECRUITMENT-${studyId}-${uuidv1()}`;
     localStorage.setItem(newSavedKey, JSON.stringify(data));
   };
 
