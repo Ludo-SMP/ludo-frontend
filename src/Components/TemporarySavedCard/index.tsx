@@ -23,16 +23,13 @@ const TemporarySavedCard = ({ savedKey, title, onRemove }: Partial<RecruitmentFo
 
   // 클릭된 savedKey는 스토어에 저장한다.
   const setSavedKey = useSavedKeyStore((state) => state.setSavedKey);
+  const storedSavedKey = useSavedKeyStore((state) => state.savedKey);
 
-  console.log('title', title);
-
-  const deleteCb = () => {
-    console.log(savedKey, title);
-  };
-
+  console.log('storedSavedKey', storedSavedKey);
   return (
     <>
-      {isModalOpen && (
+      {/* 현재 열린 모달의 savedKey가 저장된 key와 같은 경우 모달을 띄운다.
+      {isModalOpen && savedKey === storedSavedKey && (
         <Modal
           handleApprove={() => {
             console.log('삭제', savedKey, title);
@@ -44,10 +41,9 @@ const TemporarySavedCard = ({ savedKey, title, onRemove }: Partial<RecruitmentFo
           title={DELETE.TEMP_SAVED.title}
           approveBtnText="삭제하기"
         >
-          {savedKey} {title}
           {DELETE.TEMP_SAVED.content}
         </Modal>
-      )}
+      )} */}
       <TemporarySavedCardWrapper>
         <span className="title">{title || '제목 없음'}</span>
         <div className="button__wrap">
@@ -56,6 +52,7 @@ const TemporarySavedCard = ({ savedKey, title, onRemove }: Partial<RecruitmentFo
             onClick={() => {
               openModal();
               console.log('삭제', savedKey, title);
+              setSavedKey(savedKey);
             }}
           >
             글 삭제하기

@@ -8,18 +8,23 @@ import { useMyPageInfo } from '@/Hooks/study/useMyPageInfo';
 import { getMillisec, getPeriod } from '@/utils/date';
 import ChipMenu from '@/Components/Common/ChipMenu';
 import { User, ParticipateStudy, ApplicantRecruitment, CompletedStudy, RecruitmentForm } from '@/Types/study';
-import { useSelectedCardStore, useSelectedMyStudyStore } from '@/store/study';
+import { useSavedKeyStore, useSelectedCardStore, useSelectedMyStudyStore } from '@/store/study';
 
 import { useLogOutMutation } from '@/Hooks/auth/useLogOutMutation';
 import { useLocation } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
+import Modal from '@/Components/Common/Modal';
+import { DELETE } from '@/Constants/messages';
+import { useModalStore } from '@/store/modal';
 
 const MyPage = () => {
   const { data: myPageInfo, isLoading } = useMyPageInfo();
+
   const user: User = myPageInfo?.user;
   const participateStudies: ParticipateStudy[] = myPageInfo?.participateStudies;
   const applicantRecruitments: ApplicantRecruitment[] = myPageInfo?.applicantRecruitments;
   const completedStudies: CompletedStudy[] = myPageInfo?.completedStudies;
+
   const { pathname } = useLocation();
 
   const { selectedMyStudyStatus, setSelectedMyStudyStatus } = useSelectedMyStudyStore();
@@ -51,12 +56,32 @@ const MyPage = () => {
     setSavedList(storageList);
   };
 
-  const onRemove = useCallback((savedKey: string) => {
-    setSavedList((prev) => prev.filter((item) => item.savedKey !== savedKey));
-  }, []);
+  const { isModalOpen, closeModal } = useModalStore();
+  const storedSavedKey = useSavedKeyStore((state) => state.savedKey);
+
+  const onRemove = useCallback(
+    (savedKey: string) => {
+      setSavedList((prev) => prev.filter((item) => item.savedKey !== savedKey));
+    },
+    [storedSavedKey],
+  );
 
   return (
     <MyPageWrapper>
+      {isModalOpen && (
+        <Modal
+          handleApprove={() => {
+            localStorage.removeItem(storedSavedKey);
+            onRemove(storedSavedKey);
+            closeModal();
+          }}
+          cancelBtnText="취소하기"
+          title={DELETE.TEMP_SAVED.title}
+          approveBtnText="삭제하기"
+        >
+          {DELETE.TEMP_SAVED.content}
+        </Modal>
+      )}
       {isLoading ? (
         <Loading />
       ) : (
