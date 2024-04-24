@@ -13,6 +13,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {};
 
+/** 필터가 선택되었을 때 */
 export const Checked: Story = {
   args: {
     checked: true,

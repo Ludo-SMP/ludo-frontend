@@ -16,12 +16,14 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {};
 
+/** Checked 상태 */
 export const Checked: Story = {
   args: {
     checked: true,
   },
 };
 
+/** 비활성화된 상태 */
 export const Disabled: Story = {
   args: {
     disabled: true,
