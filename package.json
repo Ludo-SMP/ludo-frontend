@@ -53,7 +53,8 @@
   },
   "msw": {
     "workerDirectory": [
-      "src/Mocks"
+      "src/Mocks",
+      "public"
     ]
   }
 }
