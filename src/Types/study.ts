@@ -106,7 +106,7 @@ export interface FilterOptionParams {
   pageParam?: number;
   last?: number;
   count: number;
-  stackId?: number;
+  stackIds?: number[];
   progressMethod?: string;
   positionId?: number;
   categoryId?: number;
