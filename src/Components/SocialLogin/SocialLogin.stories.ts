@@ -8,6 +8,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+/** 구글 회원가입 */
 export const Google: Story = {
   args: {
     socialType: 'google',
@@ -15,6 +16,7 @@ export const Google: Story = {
   },
 };
 
+/** 카카오 회원가입 */
 export const Kakao: Story = {
   args: {
     socialType: 'kakao',
@@ -22,6 +24,7 @@ export const Kakao: Story = {
   },
 };
 
+/** 네이버 회원가입 */
 export const Naver: Story = {
   args: {
     socialType: 'naver',
@@ -29,6 +32,7 @@ export const Naver: Story = {
   },
 };
 
+/** 구글 로그인 */
 export const GoogleLogin: Story = {
   args: {
     socialType: 'google',
@@ -36,6 +40,7 @@ export const GoogleLogin: Story = {
   },
 };
 
+/** 카카오 로그인 */
 export const KakaoLogin: Story = {
   args: {
     socialType: 'kakao',
@@ -43,6 +48,7 @@ export const KakaoLogin: Story = {
   },
 };
 
+/** 네이버 로그인 */
 export const NaverLogin: Story = {
   args: {
     socialType: 'naver',

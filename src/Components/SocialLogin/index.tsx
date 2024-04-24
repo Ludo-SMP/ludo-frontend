@@ -6,7 +6,10 @@ import { API_END_POINT } from '@/Constants/api';
 import { SocialType, SignType } from '@/Types/auth';
 
 export interface SocialLoginType extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+  /** OAuth 제공업체 */
   socialType: SocialType;
+
+  /** 로그인 또는 회원가입 */
   signType: SignType;
 }
 
@@ -21,6 +24,7 @@ const sign = Object.freeze({
   signup: '회원가입',
 });
 
+/** 소셜 로그인 버튼 */
 const SocialLogin = ({ socialType, signType }: SocialLoginType) => {
   const { isLoggedIn, setIsLoggedIn } = useLoginStore();
   return (
@@ -58,16 +62,16 @@ const SocialLoginWrapper = styled.a<{ socialType: SocialType; signType: SignType
     props.socialType === 'naver'
       ? props.theme.color.naver
       : props.socialType === 'kakao'
-      ? props.theme.color.kakao
-      : props.theme.color.white};
+        ? props.theme.color.kakao
+        : props.theme.color.white};
 
   span {
     color: ${(props) =>
       props.socialType === 'naver'
         ? props.theme.color.white
         : props.socialType === 'kakao'
-        ? props.theme.color.kakaoFontColor
-        : props.theme.color.black};
+          ? props.theme.color.kakaoFontColor
+          : props.theme.color.black};
     text-align: center;
     font-family: 'Pretendard600';
     font-size: ${(props) => props.theme.font.medium};
