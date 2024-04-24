@@ -226,10 +226,10 @@ const ChipMenusWrapper = styled.div`
 
 const MypageButtonsWrapper = styled.div`
   display: flex;
-  justify-content: center;
+  padding-top: 24px;
+  flex-direction: column;
   align-items: center;
-  gap: 12px;
-  align-self: stretch;
+  gap: 24px;
 `;
 
 export default MyPage;
