@@ -103,10 +103,9 @@ export interface Recruitments {
   recruitments: Recruitment[];
 }
 
-// TODO: recruitment 타입 중복 속성 개선, stackId 객체 만들기
 export interface RecruitmentForm {
   title: string;
-  stackIds: number[];
+  stackIds: Stack[];
   positionIds: PositionId[];
   applicantCount: number;
   recruitmentEndDateTime: string;
