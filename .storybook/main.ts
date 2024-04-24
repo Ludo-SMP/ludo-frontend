@@ -10,6 +10,7 @@ const config: StorybookConfig = {
     '@storybook/addon-interactions',
     'storybook-addon-remix-react-router',
     '@storybook/addon-a11y',
+    '@storybook/addon-mdx-gfm'
   ],
   framework: {
     name: '@storybook/react-vite',
