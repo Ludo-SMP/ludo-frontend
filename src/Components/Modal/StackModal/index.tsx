@@ -114,6 +114,7 @@ const StackModal = ({ handleModal, initialSelectedStacks, handleSelectedStacks }
       <BtnsWrapper>
         <Button
           size="fullWidth"
+          type="button"
           onClick={() => {
             setSelectedCategory(null);
             setSelectedStacks([]);
