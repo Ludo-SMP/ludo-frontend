@@ -6,11 +6,17 @@ import Button from '../Common/Button';
 
 export interface TemporarySavedCardProps {
   id?: number;
+
+  /** 카드 제목 */
   title: string;
+
   card: Card;
+
+  /** 카드 내용 */
   content?: string;
 }
 
+/** 임시저장 카드 */
 const TemporarySavedCard = ({ id, title, card, content }: TemporarySavedCardProps) => {
   const navigate = useNavigate();
   return (

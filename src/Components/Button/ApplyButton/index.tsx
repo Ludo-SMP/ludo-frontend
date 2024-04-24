@@ -5,6 +5,7 @@ export type ButtonProps = {
   children?: React.ReactNode;
 };
 
+/** 지원하기 버튼 */
 const ApplyButton = ({ children, onClick }: ButtonProps) => {
   return <ButtonWrapper onClick={onClick}>{children}</ButtonWrapper>;
 };

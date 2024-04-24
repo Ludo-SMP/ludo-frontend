@@ -6,6 +6,7 @@ export type FilterProps = {
   children?: React.ReactNode;
 };
 
+/** 필터 버튼 */
 export const FilterButton = ({ children, onClick }: FilterProps) => {
   return (
     <>
