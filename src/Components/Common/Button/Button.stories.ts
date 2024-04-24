@@ -1,9 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Button from '.';
 
-/**
- * `Radio`는 공용 라디오 컴포넌트입니다. 크기가 작기 때문에 단독으로 쓰이기보다는 다른 요소들과 같이 쓰입니다.
- */
 const meta = {
   component: Button,
 } satisfies Meta<typeof Button>;
@@ -17,6 +14,7 @@ export const Default: Story = {
   },
 };
 
+/** `type` 속성을 `submit`으로 설정하면 해당 버튼이 폼을 제출하는 역할을 합니다. */
 export const Submit: Story = {
   args: {
     children: '제출',
@@ -24,6 +22,7 @@ export const Submit: Story = {
   },
 };
 
+/** 중요한 의미를 가지는 버튼에 사용합니다. */
 export const Primary: Story = {
   args: {
     children: 'Primary',
@@ -31,6 +30,7 @@ export const Primary: Story = {
   },
 };
 
+/** Primary에 비해 덜 중요한 의미를 가지는 버튼에 사용합니다. */
 export const Secondary: Story = {
   args: {
     children: 'Secondary',
@@ -45,6 +45,7 @@ export const Third: Story = {
   },
 };
 
+/** 일반적인 형태의 버튼입니다. */
 export const Normal: Story = {
   args: {
     children: 'Normal',
@@ -52,6 +53,7 @@ export const Normal: Story = {
   },
 };
 
+/** 비활성화된 상태의 버튼입니다. */
 export const Disabled: Story = {
   args: {
     children: 'Disabled',
@@ -59,12 +61,13 @@ export const Disabled: Story = {
   },
 };
 
-/**
- * `Checkbox`와 달리, `Radio`의 경우 해당 컴포넌트가 이미 선택되어 있을 경우 클릭하더라도 `onChange` 이벤트가 트리거되지 않습니다. 따라서 이 경우 클릭해도 함수가 호출되지 않습니다.
- */
+/** 버튼의 크기를 부모 요소의 전체 너비로 설정합니다. */
 export const FullWidth: Story = {
+  parameters: {
+    layout: 'padded',
+  },
   args: {
-    children: 'Disabled',
+    children: 'Full Width',
     size: 'fullWidth',
   },
 };
