@@ -13,6 +13,11 @@ export default {
         date: /Date$/i,
       },
     },
+    options: {
+      storySort: {
+        order: ['Intro', 'Colors', 'Typography', 'Iconography'],
+      },
+    },
     layout: 'centered',
     docs: {
       toc: true,
