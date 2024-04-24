@@ -13,3 +13,6 @@ export const Primary: Story = {
     name: '백엔드',
   },
 };
+
+/** `name`이 주어지지 않았을 때, 흰 글씨로 "포지션" 이 표시되어야 합니다. */
+export const IsEmpty: Story = {};
