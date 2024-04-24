@@ -10,6 +10,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    children: <div>More</div>,
+    children: <div>더보기</div>,
   },
 };

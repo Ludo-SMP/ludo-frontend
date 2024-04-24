@@ -5,6 +5,7 @@ export type StudyProps = {
   children?: React.ReactNode;
 };
 
+/** 스터디 버튼 */
 export const StudyButton = ({ children, onClick }: StudyProps) => {
   return (
     <StudyContainer onClick={onClick}>

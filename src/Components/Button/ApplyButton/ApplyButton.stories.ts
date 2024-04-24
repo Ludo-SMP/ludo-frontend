@@ -10,6 +10,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    children: 'Apply',
+    children: '지원',
   },
 };
