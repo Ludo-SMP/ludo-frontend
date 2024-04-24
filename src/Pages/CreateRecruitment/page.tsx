@@ -31,6 +31,7 @@ import Modal from '@/Components/Common/Modal';
 import StackModal from '@/Components/Modal/StackModal';
 import { Label } from '@/Components/Selectbox/SelectBox';
 import { useSelectDefaultValue } from '@/Hooks/recruitments/useSelectDefaultValue';
+import { saveTemporary } from '@/utils/temporarySavedUtils';
 
 const DEF_VAL = 'ex. Typescript';
 
@@ -89,12 +90,6 @@ const CreateRecruitmentPage = () => {
 
   const data = watch();
 
-  const saveTemporary = (savedKey: string) => {
-    if (savedKey.length > 0) localStorage.removeItem(savedKey);
-    const newSavedKey = `RECRUITMENT-${studyId}-${uuidv1()}`;
-    localStorage.setItem(newSavedKey, JSON.stringify({ ...data, stackIds: selectedStacks }));
-  };
-
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedStacks, setSelectedStacks] = useState<StackType[] | null>(null);
   const [content, setContent] = useState(DEF_VAL);
@@ -113,7 +108,7 @@ const CreateRecruitmentPage = () => {
         <Modal
           handleApprove={() => {
             closeModal();
-            saveTemporary(savedKey);
+            saveTemporary(savedKey, 'RECRUITMENT', { ...data, stackIds: selectedStacks });
           }}
           cancelBtnText="취소하기"
           title="작성 중인 스터디 생성 글을 임시 저장 하시겠습니까?"
