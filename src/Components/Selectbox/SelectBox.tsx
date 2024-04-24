@@ -26,7 +26,7 @@ export const SelectBox = forwardRef<
   );
 });
 
-const Label = styled.label`
+export const Label = styled.label`
   font-family: Pretendard;
   font-size: 18px;
   font-weight: 700;
