@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { StudyButton } from './StudyButton';
+import { fn } from '@storybook/test';
 
 const meta = {
   component: StudyButton,
@@ -11,6 +12,6 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     children: '스터디',
-    onClick: () => void 0,
+    onClick: fn(),
   },
 };

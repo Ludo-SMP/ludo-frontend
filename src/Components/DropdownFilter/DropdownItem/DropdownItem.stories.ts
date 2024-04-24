@@ -10,7 +10,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    handleClick: () => void 0,
+    handleClick: fn(),
     filterOption: 'CATEGORY',
     item: { id: 1, name: '프로젝트' },
   },

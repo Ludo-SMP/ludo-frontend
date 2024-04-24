@@ -1,10 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import ApplyModal from '.';
+import { fn } from '@storybook/test';
 
 const meta = {
   component: ApplyModal,
   args: {
-    handleApplyApprove: () => void 0,
+    handleApplyApprove: fn(),
     studyId: 1,
     recruitmentId: 1,
   },

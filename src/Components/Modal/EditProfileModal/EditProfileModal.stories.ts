@@ -1,11 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import EditProfileModal from '.';
+import { fn } from '@storybook/test';
 
 const meta = {
   component: EditProfileModal,
   args: {
     userNickname: '팀원',
-    handleEdit: () => void 0,
+    handleEdit: fn(),
   },
 } satisfies Meta<typeof EditProfileModal>;
 

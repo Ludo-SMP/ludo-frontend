@@ -1,10 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Chip from '.';
+import { fn } from '@storybook/test';
 
 const meta = {
   component: Chip,
   args: {
-    onClick: () => void 0,
+    onClick: fn(),
     checked: false,
     children: '모의 면접',
   },

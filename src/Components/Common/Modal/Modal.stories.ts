@@ -1,10 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Modal from '.';
+import { fn } from '@storybook/test';
 
 const meta = {
   component: Modal,
   args: {
-    handleApprove: () => void 0,
+    handleApprove: fn(),
     children: '내용',
     approveBtnText: '승인',
   },

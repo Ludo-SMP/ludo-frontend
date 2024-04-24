@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { FilterButton } from './FilterButton';
+import { fn } from '@storybook/test';
 
 const meta = {
   component: FilterButton,
@@ -11,6 +12,6 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     children: '필터',
-    onClick: () => void 0,
+    onClick: fn(),
   },
 };

@@ -1,10 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Titlearea } from './Titlearea';
+import { fn } from '@storybook/test';
 
 const meta = {
   component: Titlearea,
   args: {
-    setForm: () => void 0,
+    setForm: fn(),
     useForm: {},
   },
 } satisfies Meta<typeof Titlearea>;

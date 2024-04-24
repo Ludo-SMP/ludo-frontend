@@ -1,10 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { ContactUrlInput } from './ContactUrlInput';
+import { fn } from '@storybook/test';
 
 const meta = {
   component: ContactUrlInput,
   args: {
-    setForm: () => void 0,
+    setForm: fn(),
     useForm: {},
   },
 } satisfies Meta<typeof ContactUrlInput>;

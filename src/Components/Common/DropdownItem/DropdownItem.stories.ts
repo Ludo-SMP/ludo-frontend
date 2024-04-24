@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import DropdownItem from '.';
+import { fn } from '@storybook/test';
 
 const meta = {
   component: DropdownItem,
@@ -10,7 +11,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    onClick: () => void 0,
+    onClick: fn(),
     children: '선택 아이템',
   },
 };
