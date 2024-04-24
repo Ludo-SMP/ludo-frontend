@@ -42,3 +42,17 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {};
+
+/** 모집 공고에 스택이 하나도 없을 때입니다. */
+export const WithoutStack: Story = {
+  args: {
+    stacks: [],
+  },
+};
+
+/** 모집 공고에 포지션이 하나도 없을 때입니다. */
+export const WithoutPosition: Story = {
+  args: {
+    positions: [],
+  },
+};
