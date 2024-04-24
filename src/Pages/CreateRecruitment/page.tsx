@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { useLocation, useParams } from 'react-router-dom';
 import { v1 as uuidv1 } from 'uuid';
@@ -17,16 +17,22 @@ import { EndDate } from '@/Components/Calendar/EndDate';
 import CustomSelect from '@/Components/Selectbox/CustomSelect';
 import { Stack } from '@/Components/Common/Stack';
 
+import { Stack as StackType } from '@/Types/study';
+
 import { CREATE_RECRUITMENT } from '@/Constants/messages';
-import { PositionId, RecruitmentForm } from '@/Types/study';
+import { RecruitmentForm } from '@/Types/study';
 import { APPLICATION_CNT, CONTACT, POSITIONS, POSITION } from '@/Shared/study';
 import { useCreateRecruitmentMutation } from '@/Hooks/recruitments/useCreateRecruitment';
 import { useSavedKeyStore } from '@/store/study';
 import { useStudyDetail } from '@/Hooks/study/useStudyDetail';
 import { getPeriod } from '@/utils/date';
-import study from '@/Mocks/handlers/study';
 import { useModalStore } from '@/store/modal';
 import Modal from '@/Components/Common/Modal';
+import StackModal from '@/Components/Modal/StackModal';
+import { Label } from '@/Components/Selectbox/SelectBox';
+import { useSelectDefaultValue } from '@/Hooks/recruitments/useSelectDefaultValue';
+
+const DEF_VAL = 'ex. Typescript';
 
 const CreateRecruitmentPage = () => {
   const studyId = Number(useParams().studyId);
@@ -39,29 +45,11 @@ const CreateRecruitmentPage = () => {
   const setSavedKey = useSavedKeyStore((state) => state.setSavedKey);
   const tempSaved: RecruitmentForm | null = JSON.parse(localStorage.getItem(savedKey)) ?? null;
 
-  const getDefVal = (formKey: keyof RecruitmentForm) => {
-    if (!tempSaved) return;
-    const val = tempSaved[formKey];
+  const getDefVal = useSelectDefaultValue();
 
-    switch (formKey) {
-      case 'applicantCount': {
-        return APPLICATION_CNT.find((el) => el.value === val) ?? null;
-      }
-      // 포지션 id
-      case 'positionIds': {
-        return POSITION.find((el) => el.value === val) ?? null;
-      }
-      case 'stackIds': {
-        return STACK.find((el) => el.value === val) ?? null;
-      }
-      case 'contact': {
-        return CONTACT.find((el) => el.value === val) ?? null;
-      }
-      default: {
-        return val;
-      }
-    }
-  };
+  useEffect(() => {
+    getDefVal('stackIds');
+  }, []);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -87,28 +75,37 @@ const CreateRecruitmentPage = () => {
   const studyDetail = shortStudy?.study;
 
   const onSubmit = (data: RecruitmentForm) => {
-    const test: RecruitmentForm = { ...data, positionIds: [0], stackIds: [0] };
+    // TODO: 선택 안하고, 등록하기 누른 경우 확인
+    if (!selectedStacks || selectedStacks?.length === 0) {
+      setSelectedStacks([]); // 초기값 세팅
+      return;
+    }
+
+    // TODO: stackIds 추가
+    const test: RecruitmentForm = { ...data, positionIds: [0] };
     console.log('test', test, uuidv1());
     mutate(test);
   };
 
   const data = watch();
 
-  const STACK = [
-    { value: 1, label: 'React' },
-    { value: 2, label: 'Next.js' },
-    { value: 3, label: 'Javascript' },
-    { value: 4, label: 'Java' },
-    { value: 5, label: 'Spring' },
-  ];
-
-  const saveTemporary = () => {
-    // 저장된 키가 있는 경우 이전 키를 삭제한다.
+  const saveTemporary = (savedKey: string) => {
     if (savedKey.length > 0) localStorage.removeItem(savedKey);
-
     const newSavedKey = `RECRUITMENT-${studyId}-${uuidv1()}`;
-    localStorage.setItem(newSavedKey, JSON.stringify(data));
+    localStorage.setItem(newSavedKey, JSON.stringify({ ...data, stackIds: selectedStacks }));
   };
+
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [selectedStacks, setSelectedStacks] = useState<StackType[] | null>(null);
+  const [content, setContent] = useState(DEF_VAL);
+
+  const handleSelectedStacks = (stacks: StackType[]) => {
+    setSelectedStacks([...stacks]);
+    let content = stacks.map((stack) => stack.name).join(', ');
+    setContent(content);
+  };
+
+  const toggleDropdonwItems = () => setIsOpen(!isOpen);
 
   return (
     <RecruitmentContainer>
@@ -116,7 +113,7 @@ const CreateRecruitmentPage = () => {
         <Modal
           handleApprove={() => {
             closeModal();
-            saveTemporary();
+            saveTemporary(savedKey);
           }}
           cancelBtnText="취소하기"
           title="작성 중인 스터디 생성 글을 임시 저장 하시겠습니까?"
@@ -125,7 +122,6 @@ const CreateRecruitmentPage = () => {
           임시 저장한 글은 ‘마이 페이지 {'>'} 임시 저장된 글’ 에서 확인하실 수 있습니다.
         </Modal>
       )}
-
       {isLoading ? (
         <Loading />
       ) : (
@@ -197,21 +193,20 @@ const CreateRecruitmentPage = () => {
                   {errors?.positionIds?.message && <ErrorMsg>{errors?.positionIds?.message}</ErrorMsg>}
                 </GridItem>
                 <GridItem>
-                  <Controller
-                    control={control}
-                    name="stackIds"
-                    rules={{ required: CREATE_RECRUITMENT.stackIds }}
-                    render={({ field }) => (
-                      <CustomSelect
-                        label="기술 스택"
-                        defaultValue={getDefVal('stackIds')}
-                        placeholder="기술 스택"
-                        values={STACK}
-                        {...field}
-                      />
-                    )}
-                  />
-                  {errors?.stackIds?.message && <ErrorMsg>{errors?.stackIds?.message}</ErrorMsg>}
+                  <Label>
+                    기술 스택
+                    <Select onClick={toggleDropdonwItems}>
+                      <TechInput value={content === DEF_VAL ? null : content} placeholder={DEF_VAL} />
+                    </Select>
+                  </Label>
+                  {isOpen && (
+                    <StackModal
+                      handleModal={setIsOpen}
+                      initialSelectedStacks={selectedStacks ?? []}
+                      handleSelectedStacks={handleSelectedStacks}
+                    />
+                  )}
+                  {selectedStacks?.length === 0 && <ErrorMsg>{'스택을 선택해주세요'}</ErrorMsg>}
                 </GridItem>
                 <GridItem>
                   <Controller
@@ -371,11 +366,6 @@ const RecruitmentContainer = styled.section`
   margin: 0 auto;
 `;
 
-const ErrorMsg = styled.p`
-  margin-top: 12px;
-  color: ${({ theme }) => theme.color.negative};
-`;
-
 const BoxItem = styled.div`
   display: flex;
   flex-direction: column;
@@ -433,4 +423,36 @@ const FormSection = styled.section`
   & ~ & {
     margin-top: 20px;
   }
+`;
+
+export const Select = styled.div`
+  position: relative;
+  height: 44px;
+  width: 100%;
+  padding: 10px 16px 10px 16px;
+  border-radius: 8px;
+  border: 1px solid ${(props) => props.theme.color.black1};
+
+  background-color: ${(props) => props.theme.color.white};
+  color: ${(props) => props.theme.color.gray3};
+`;
+
+export const TechInput = styled.input`
+  position: absolute;
+  color: ${(props) => props.theme.color.gray3};
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 80%;
+  font-family: 'Pretendard400';
+  text-overflow: ellipsis;
+
+  &::placeholder {
+    color: ${(props) => props.theme.color.black2};
+  }
+`;
+
+export const ErrorMsg = styled.p`
+  margin-top: 12px;
+  color: ${({ theme }) => theme.color.negative};
 `;
