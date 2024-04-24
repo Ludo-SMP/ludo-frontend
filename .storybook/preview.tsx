@@ -5,7 +5,7 @@ import { theme } from '@/Styles/theme';
 import { GlobalStyle } from '@/Styles/globalStyles';
 import { withRouter } from 'storybook-addon-remix-react-router';
 
-const preview: Preview = {
+export default {
   parameters: {
     controls: {
       matchers: {
@@ -15,6 +15,7 @@ const preview: Preview = {
     },
     layout: 'centered',
     docs: {
+      toc: true,
       canvas: {
         sourceState: 'shown',
       },
@@ -31,6 +32,4 @@ const preview: Preview = {
     ),
     withRouter,
   ],
-};
-
-export default preview;
+} satisfies Preview;
