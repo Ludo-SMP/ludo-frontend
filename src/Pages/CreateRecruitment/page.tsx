@@ -11,7 +11,7 @@ import Heading from '@/Components/Heading';
 import Spacing from '@/Components/Spacing';
 import Button from '@/Components/Common/Button';
 import { TextArea } from '@/Components/Textarea';
-import InputText from '@/Components/Common/InputText/iindex';
+import InputText from '@/Components/Common/InputText/index';
 import { CalendarButton } from '@/Components/Selectbox/CalendarButton';
 import { EndDate } from '@/Components/Calendar/EndDate';
 import CustomSelect from '@/Components/Selectbox/CustomSelect';
