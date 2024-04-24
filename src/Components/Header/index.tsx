@@ -13,6 +13,7 @@ import { useModalStore } from '@/store/modal';
 import { useLogOutMutation } from '@/Hooks/auth/useLogOutMutation';
 import DropdownItem from '../Common/DropdownItem';
 
+/** 사이트 메인 헤더 */
 const Header = () => {
   const { isLoggedIn } = useLoginStore();
   const { openModal } = useModalStore();

@@ -1,0 +1,10 @@
+import { Meta, Typeset } from '@storybook/blocks';
+import { font } from '@/Styles/theme';
+
+<Meta title="Typography" />
+
+# Typography
+
+**Font:** Pretendard
+
+<Typeset fontFamily="Pretendard" fontSizes={Object.entries(font).map(([key, value]) => parseInt(value.substring(0, value.length - 2)))} />

@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { EndDate } from '@/Components/Calendar/EndDate';
 import Button from '@/Components/Common/Button';
-import InputText from '@/Components/Common/InputText/iindex';
+import InputText from '@/Components/Common/InputText/index';
 import { Stack } from '@/Components/Common/Stack';
 // components
 import Heading from '@/Components/Heading';
@@ -81,7 +81,7 @@ const ModifyRecruitmentPage = () => {
   const { mutate } = useCreateRecruitmentMutation(studyId);
 
   const onSubmit = (data: RecruitmentForm) => {
-    const test: RecruitmentForm = { ...data, positionIds: [0], stackIds: [0] };
+    const test: RecruitmentForm = { ...data, positionIds: [0], stackIds: [] };
     // console.log('test', test, uuidv4());
     //mutate(test);
   };

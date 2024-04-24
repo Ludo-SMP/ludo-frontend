@@ -4,6 +4,7 @@ interface RowDividerProps {
   rowHeight?: number;
 }
 
+/** 가로 구분선 */
 export const RowDivider = ({ rowHeight = 1 }: RowDividerProps) => {
   return <RowDividerWrapper rowHeight={rowHeight}></RowDividerWrapper>;
 };

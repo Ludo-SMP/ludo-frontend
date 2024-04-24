@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+/** 스터디 모집 공고 로딩시 보여줄 스켈레톤 */
 const SkeletonRecruitmentCard = () => {
   return (
     <RecruitmentCardWrapper>

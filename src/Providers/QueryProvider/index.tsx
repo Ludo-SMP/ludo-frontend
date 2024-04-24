@@ -4,9 +4,10 @@ import React, { useState } from 'react';
 
 interface ReactQueryProviderProps {
   children: React.ReactNode;
+  showDevTools?: boolean;
 }
 
-const ReactQueryProvider = ({ children }: ReactQueryProviderProps) => {
+const ReactQueryProvider = ({ showDevTools, children }: ReactQueryProviderProps) => {
   const [client] = useState(
     new QueryClient({
       defaultOptions: {
@@ -21,7 +22,7 @@ const ReactQueryProvider = ({ children }: ReactQueryProviderProps) => {
   );
   return (
     <QueryClientProvider client={client}>
-      <ReactQueryDevtools buttonPosition="bottom-left" />
+      {showDevTools && <ReactQueryDevtools buttonPosition="bottom-left" />}
       {children}
     </QueryClientProvider>
   );
