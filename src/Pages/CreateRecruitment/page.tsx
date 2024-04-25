@@ -1,7 +1,6 @@
-import { useCallback, useEffect, useState } from 'react';
-import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+import {  useEffect, useState } from 'react';
+import { useForm, Controller } from 'react-hook-form';
 import { useLocation, useParams } from 'react-router-dom';
-import { v1 as uuidv1 } from 'uuid';
 
 import styled, { css } from 'styled-components';
 import { One, Two, Three, Four, Loading } from '@/Assets';
@@ -21,7 +20,7 @@ import { Stack as StackType } from '@/Types/study';
 
 import { CREATE_RECRUITMENT } from '@/Constants/messages';
 import { RecruitmentForm } from '@/Types/study';
-import { APPLICATION_CNT, CONTACT, POSITIONS, POSITION } from '@/Shared/study';
+import { APPLICATION_CNT, CONTACT, POSITION } from '@/Shared/study';
 import { useCreateRecruitmentMutation } from '@/Hooks/recruitments/useCreateRecruitment';
 import { useSavedKeyStore } from '@/store/study';
 import { useStudyDetail } from '@/Hooks/study/useStudyDetail';
@@ -35,6 +34,10 @@ import { saveTemporary } from '@/utils/temporarySavedUtils';
 
 const DEF_VAL = 'ex. Typescript';
 
+interface TempSaved extends Omit<RecruitmentForm, 'stackIds'>{
+  stackIds: StackType[];
+}
+
 const CreateRecruitmentPage = () => {
   const studyId = Number(useParams().studyId);
   const { pathname } = useLocation();
@@ -44,7 +47,13 @@ const CreateRecruitmentPage = () => {
   // 임시저장된 키가 있는지 확인
   const savedKey = useSavedKeyStore((state) => state.savedKey);
   const setSavedKey = useSavedKeyStore((state) => state.setSavedKey);
-  const tempSaved: RecruitmentForm | null = JSON.parse(localStorage.getItem(savedKey)) ?? null;
+  const tempSaved: TempSaved | null = JSON.parse(localStorage.getItem(savedKey)) ?? null;
+
+  // 스택 모달 상태
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [selectedStacks, setSelectedStacks] = useState<StackType[] | null>(null);
+  const [content, setContent] = useState(DEF_VAL);
+
 
   const getDefVal = useSelectDefaultValue();
 
@@ -71,41 +80,29 @@ const CreateRecruitmentPage = () => {
     control,
     watch,
     formState: { errors },
-  } = useForm<RecruitmentForm>({
+  } = useForm<TempSaved>({
     defaultValues: tempSaved,
   });
+  const data = watch();
 
   const { mutate } = useCreateRecruitmentMutation(studyId);
 
   const { data: shortStudy, isLoading } = useStudyDetail(studyId);
   const studyDetail = shortStudy?.study;
 
-  const onSubmit = (data: RecruitmentForm) => {
-    // TODO: 선택 안하고, 등록하기 누른 경우 확인
+  const onSubmit = (data: TempSaved) => {
     if (!selectedStacks || selectedStacks?.length === 0) {
-      setSelectedStacks([]); // 초기값 세팅
+      setSelectedStacks([]);
       return;
     }
-
-    // TODO: stackIds 추가
-    const test: RecruitmentForm = { ...data, positionIds: [0] };
-    console.log('test', test, uuidv1());
-    mutate(test);
+    mutate({ ...data, positionIds: [0], stackIds: selectedStacks.map((stack) => stack.id)});
   };
-
-  const data = watch();
-
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [selectedStacks, setSelectedStacks] = useState<StackType[] | null>(null);
-  const [content, setContent] = useState(DEF_VAL);
 
   const handleSelectedStacks = (stacks: StackType[]) => {
     setSelectedStacks([...stacks]);
-    let content = stacks.map((stack) => stack.name).join(', ');
-    setContent(content);
+    setContent(stacks.map((stack) => stack.name).join(', '));
   };
 
-  const toggleDropdonwItems = () => setIsOpen(!isOpen);
 
   return (
     <RecruitmentContainer>
@@ -195,7 +192,7 @@ const CreateRecruitmentPage = () => {
                 <GridItem>
                   <Label>
                     기술 스택
-                    <Select onClick={toggleDropdonwItems}>
+                    <Select onClick={ () => setIsOpen(!isOpen)}>
                       <TechInput value={content === DEF_VAL ? null : content} placeholder={DEF_VAL} />
                     </Select>
                   </Label>
