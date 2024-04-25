@@ -25,6 +25,7 @@ const useInterval: { (callback: () => void, interval: number): void } = (callbac
   }, [interval]);
 };
 
+/** 메인 페이지 배너 */
 const Banner = () => {
   const outRef = useRef<HTMLDivElement>(null);
   const slideRef = useRef<HTMLDivElement>(null);

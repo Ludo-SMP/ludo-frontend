@@ -8,6 +8,7 @@ import { PROGRESS_METHOD } from '@/Shared/study';
 import Image from '../Common/Image';
 import { Views } from '@/Assets';
 
+/** 스터디 모집 공고 */
 const RecruitmentCard = (recruitment: Recruitment) => {
   return (
     <Link to={`/studies/${recruitment.id}/recruitment`}>
