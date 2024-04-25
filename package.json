@@ -75,5 +75,6 @@
     "workerDirectory": [
       "src/Mocks"
     ]
-  }
+  },
+  "packageManager": "yarn@1.22.19"
 }
