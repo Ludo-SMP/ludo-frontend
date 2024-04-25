@@ -105,7 +105,7 @@ export interface Recruitments {
 
 export interface RecruitmentForm {
   title: string;
-  stackIds: Stack[];
+  stackIds: number[]
   positionIds: PositionId[];
   applicantCount: number;
   recruitmentEndDateTime: string;
