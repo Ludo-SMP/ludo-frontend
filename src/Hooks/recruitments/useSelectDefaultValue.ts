@@ -20,14 +20,6 @@ export const useSelectDefaultValue = () => {
         case 'positionIds': {
           return POSITION.find((el) => el.value === val) ?? null;
         }
-        case 'stackIds': {
-          // TODO: 스택 id 초기값 설정
-          // if (typeof val === 'object' && val.length > 0) {
-          //   if(val[0] !== undefined) {
-          // // handleSelectedStacks(val);
-          // }
-          return;
-        }
         case 'contact': {
           return CONTACT.find((el) => el.value === val) ?? null;
         }

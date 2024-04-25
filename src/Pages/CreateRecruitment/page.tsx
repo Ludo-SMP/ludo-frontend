@@ -48,8 +48,13 @@ const CreateRecruitmentPage = () => {
 
   const getDefVal = useSelectDefaultValue();
 
+  const getDefStackVal = (formKey: 'stackIds') => {
+    if (!tempSaved) return;
+    handleSelectedStacks(tempSaved[formKey]);
+  }
+
   useEffect(() => {
-    getDefVal('stackIds');
+    getDefStackVal('stackIds');
   }, []);
 
   useEffect(() => {
@@ -108,7 +113,7 @@ const CreateRecruitmentPage = () => {
         <Modal
           handleApprove={() => {
             closeModal();
-            saveTemporary(savedKey, 'RECRUITMENT', { ...data, stackIds: selectedStacks });
+            saveTemporary(savedKey, studyId, 'RECRUITMENT', { ...data, stackIds: selectedStacks });
           }}
           cancelBtnText="취소하기"
           title="작성 중인 스터디 생성 글을 임시 저장 하시겠습니까?"
