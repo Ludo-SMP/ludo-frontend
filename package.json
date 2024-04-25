@@ -56,5 +56,6 @@
       "src/Mocks",
       "public"
     ]
-  }
+  },
+  "packageManager": "yarn@1.22.19"
 }
