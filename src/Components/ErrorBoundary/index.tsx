@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '@/Constants/route';
 import Button from '../Common/Button';
 import { ERROR } from '@/Constants/messages';
+
+/** 예외가 발생했을 때, 존재하지 않는 라우트에 접근했을 때 보여지는 페이지 */
 const ErrorBoundary = () => {
   const navigate = useNavigate();
 

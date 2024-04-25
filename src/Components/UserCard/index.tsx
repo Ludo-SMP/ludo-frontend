@@ -11,6 +11,7 @@ import { PROFILE } from '@/Constants/messages';
 
 type UserCardProps = Pick<Member, 'nickname' | 'email'>;
 
+/** 유저 카드 */
 const UserCard = ({ nickname, email }: UserCardProps) => {
   const [isOpened, setIsOpened] = useState<boolean>(false);
   const [editState, setEditState] = useState<'NOT START' | 'EDIT' | 'END'>('NOT START');

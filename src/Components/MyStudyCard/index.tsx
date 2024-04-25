@@ -11,15 +11,30 @@ import { STUDY } from '@/Constants/queryString';
 
 interface MyStudyCardProps {
   id: number;
+
+  /** 스터디 제목 */
   title: string;
+
+  /** 현재 상태 */
   status: StudyStatus | ApplyStatus;
+
+  /** 자신의 포지션 */
   position: Position;
+
+  /** 진행 기간 */
   period?: string;
+
+  /** 자신이 스터디장인지 여부 */
   isOwner?: boolean;
+
+  /** 모집 공고 여부 */
   hasRecruitment?: boolean;
+
+  /** 팀원 수 */
   participantCount?: number;
 }
 
+/** 자신이 현재 참여하고 있는/참여 신청을 넣은 스터디를 나타냅니다. */
 const MyStudyCard = ({
   id,
   title,

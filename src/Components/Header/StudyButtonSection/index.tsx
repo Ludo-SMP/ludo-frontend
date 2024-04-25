@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '@/Constants/route';
 import { useSelectedMyStudyStore } from '@/store/study';
 
+/** 참여중인, 지원한, 완료된 스터디 버튼 */
 const StudyButtonSection = () => {
   const navigate = useNavigate();
   const { setSelectedMyStudyStatus } = useSelectedMyStudyStore();

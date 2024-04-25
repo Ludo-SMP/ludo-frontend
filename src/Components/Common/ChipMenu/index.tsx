@@ -8,6 +8,7 @@ export type ChipMenuProps = {
   className?: string;
 };
 
+/** 칩의 wrapper로 사용됩니다. */
 const ChipMenu = ({ onClick, checked, children, disabled, className }: ChipMenuProps) => (
   <ChipMenuContainer {...{ checked, onClick, disabled, className }}>
     <>{children}</>

@@ -3,6 +3,7 @@ import { ApplyStatus, MemberStatus, StudyStatus } from '@/Types/study';
 import styled from 'styled-components';
 
 export interface StudyTokenProps {
+  /** 스터디 상태 */
   status: StudyStatus | ApplyStatus | MemberStatus;
 }
 

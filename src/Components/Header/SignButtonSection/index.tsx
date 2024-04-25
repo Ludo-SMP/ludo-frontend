@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { useLogOutMutation } from '@/Hooks/auth/useLogOutMutation';
 import { useLoginStore } from '@/store/auth';
 
+/** 로그인, 회원가입 버튼 */
 const SignButtonSection = () => {
   const navigate = useNavigate();
   const { isLoggedIn } = useLoginStore();
