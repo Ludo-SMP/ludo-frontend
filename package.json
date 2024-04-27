@@ -69,7 +69,9 @@
   },
   "msw": {
     "workerDirectory": [
-      "src/Mocks"
+      "src/Mocks",
+      "public"
     ]
-  }
+  },
+  "packageManager": "yarn@1.22.19"
 }
