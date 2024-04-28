@@ -33,7 +33,7 @@ const RecruitmentCardList = () => {
     <RecruitmentCardsWrapper>
       {isLoading ? (
         <SkeletonRecruitmentCardList count={21} />
-      ) : recruitmentsPages.length && recruitmentsPages[0].recruitments.length ? (
+      ) : recruitmentsPages?.length && recruitmentsPages[0]?.recruitments?.length ? (
         recruitmentsPages.map((recruitmentsPage) =>
           recruitmentsPage?.recruitments.map((recruitment: Recruitment) => (
             <RecruitmentCard key={recruitment.id} {...recruitment} />

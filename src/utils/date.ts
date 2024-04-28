@@ -10,6 +10,7 @@ export const getDday = (endDate: string) => {
 };
 
 export const getPeriod = (startDate: string, endDate: string) => {
+  if (!startDate || !endDate) return '';
   const start = dateFormatter(startDate);
   const end = dateFormatter(endDate);
   return start + '~' + end;
