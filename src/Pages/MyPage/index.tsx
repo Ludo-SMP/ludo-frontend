@@ -133,7 +133,7 @@ const MyPage = () => {
                   />
                 ))
               : selectedMyStudyStatus === 'APPLIED'
-                ? applicantRecruitments.map((applicantRecruitment: ApplicantRecruitment) => (
+                ? applicantRecruitments?.map((applicantRecruitment: ApplicantRecruitment) => (
                     <MyStudyCard
                       id={applicantRecruitment?.recruitmentId}
                       title={applicantRecruitment?.title}
@@ -142,7 +142,7 @@ const MyPage = () => {
                       key={applicantRecruitment?.recruitmentId}
                     />
                   ))
-                : completedStudies.map((completedStudy: CompletedStudy) => (
+                : completedStudies?.map((completedStudy: CompletedStudy) => (
                     <MyStudyCard
                       id={completedStudy?.studyId}
                       title={completedStudy?.title}

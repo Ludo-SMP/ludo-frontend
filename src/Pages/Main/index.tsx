@@ -77,15 +77,15 @@ const MainPage = () => {
           {isLoading ? (
             <SkeletonRecruitmentCardList />
           ) : selectedCategory.name === '코딩 테스트' ? (
-            popularCodingRecruitments.map((recruitment: Recruitment) => (
+            popularCodingRecruitments?.map((recruitment: Recruitment) => (
               <RecruitmentCard {...recruitment} key={recruitment.id} />
             ))
           ) : selectedCategory.name === '모의 면접' ? (
-            popularInterviewRecruitments.map((recruitment: Recruitment) => (
+            popularInterviewRecruitments?.map((recruitment: Recruitment) => (
               <RecruitmentCard {...recruitment} key={recruitment.id} />
             ))
           ) : (
-            popularProjectRecruitments.map((recruitment: Recruitment) => (
+            popularProjectRecruitments?.map((recruitment: Recruitment) => (
               <RecruitmentCard {...recruitment} key={recruitment.id} />
             ))
           )}
