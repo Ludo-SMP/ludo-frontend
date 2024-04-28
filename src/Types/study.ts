@@ -7,7 +7,7 @@ export type ApplyStatus = keyof typeof APPLY_STATUS;
 export type ProgressMethod = keyof typeof PROGRESS_METHOD;
 export type Role = keyof typeof ROLE;
 export type Platform = keyof typeof PLATFORM;
-export type PositionId = keyof typeof POSITION;
+export type PositionId = typeof POSITION;
 export type Card = 'STUDY' | 'RECRUITMENT';
 export type Sort = '최신순' | '조회순';
 export type ApplyTryStatus = 'NOT APPLY' | 'SUCCESS' | 'CLOSED' | 'ALREDAY_APPLY' | 'ALREDY_PARTICIPATED';
@@ -51,6 +51,7 @@ export interface Stack {
   imageUrl: string;
 }
 
+// TODO: 타입 구조 개선
 export interface RecruitmentDetail {
   recruitment: {
     id: number;
@@ -58,7 +59,7 @@ export interface RecruitmentDetail {
     stacks: Stack[];
     positions: Position[];
     applicantCount: number;
-    contact: string;
+    contact: 'KAKAO' | 'EMAIL';
     callUrl: string;
     content: string;
     createdDateTime: string;
@@ -105,8 +106,8 @@ export interface Recruitments {
 
 export interface RecruitmentForm {
   title: string;
-  stackIds: number[]
-  positionIds: PositionId[];
+  stackIds: number[];
+  positionIds: Option<number, string>[];
   applicantCount: number;
   recruitmentEndDateTime: string;
   contact: 'KAKAO' | 'EMAIL';
