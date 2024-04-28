@@ -12,12 +12,12 @@ import StudyDetailPage from '@/Pages/StudyDetail';
 // import CreateStudyPage from '@/Pages/Studies/CreateStudy';
 // import ModifyStudyPage from '@/Pages/Studies/ModifyStudy';
 import CreateRecruitmentPage from '@/Pages/CreateRecruitment/page';
-import ModifyRecruitmentPage from '@/Pages/ModifyRecruitment';
 import LoginFailPage from '@/Pages/LoginFail';
 import SignUpFailPage from '@/Pages/SignUpFail';
 import Header from '@/Components/Header';
 import Footer from '@/Components/Footer';
 import ErrorBoundary from '@/Components/ErrorBoundary';
+import { EditRecruitmentFetcher } from '@/Pages/EditRecruitment/EditRecruitmentFetcher';
 
 export const RouterPath = createBrowserRouter([
   {
@@ -89,8 +89,8 @@ export const RouterPath = createBrowserRouter([
       //   element: <SaveStudyPage />,
       // },
       {
-        path: ROUTES.RECRUITMENT.MODIFY,
-        element: <ModifyRecruitmentPage />,
+        path: ROUTES.RECRUITMENT.EDIT,
+        element: <EditRecruitmentFetcher />,
       },
     ],
   },
