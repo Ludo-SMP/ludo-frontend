@@ -1,17 +1,20 @@
 import { ComponentProps, forwardRef } from 'react';
 import styled from 'styled-components';
+import { Label } from '../Common/InputText';
 
 interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   maxlength?: number;
   currentLength?: number;
+  label?: string;
 }
 
 type Props = ComponentProps<'textarea'> & TextAreaProps;
 
 export const TextArea = forwardRef<HTMLTextAreaElement, Props>(
-  ({ onChange, onBlur, placeholder, maxLength, currentLength, ...props }: Props, ref) => {
+  ({ onChange, onBlur, placeholder, maxLength, currentLength, label, ...props }: Props, ref) => {
     return (
       <Box>
+        {label && <Label>{label}</Label>}
         <TextAreaWrapper ref={ref} onChange={onChange} onBlur={onBlur} placeholder={placeholder} {...props} />
         {maxLength && (
           <LengthIndicator>
@@ -26,6 +29,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, Props>(
 const Box = styled.div`
   position: relative;
   display: flex;
+  flex-direction: column;
 `;
 
 const TextAreaWrapper = styled.textarea`
