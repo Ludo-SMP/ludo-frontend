@@ -6,15 +6,17 @@ interface InputTextProps extends React.InputHTMLAttributes<HTMLInputElement> {
   inputType?: 'text' | 'email' | 'password' | 'member';
   currentLength?: number;
   maxLength?: number;
+  label?: string;
 }
 
 const InputText = forwardRef<HTMLInputElement, ComponentProps<'input'> & InputTextProps>(
   (
-    { name, placeholder, inputType, onChange, maxLength, currentLength, ...props }: InputTextProps,
+    { name, placeholder, defaultValue, inputType, onChange, maxLength, currentLength, label, ...props }: InputTextProps,
     ref: ForwardedRef<HTMLInputElement>,
   ) => {
     return (
       <Box>
+        {label && <Label>{label}</Label>}
         <InputWrapper
           placeholder={placeholder}
           name={name}
@@ -33,6 +35,13 @@ const InputText = forwardRef<HTMLInputElement, ComponentProps<'input'> & InputTe
   },
 );
 
+export const Label = styled.div`
+  font-size: 18px;
+  line-height: 24px;
+  color: #000000f2;
+  margin-bottom: 12px;
+`;
+
 const InputWrapper = styled.input`
   width: 100%;
   padding: 10px 16px;
@@ -41,6 +50,11 @@ const InputWrapper = styled.input`
   font-size: ${({ theme }) => theme.font.medium};
   line-height: 1.5;
   color: ${({ theme }) => theme.color.black};
+  text-overflow: ellipsis;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 80%;
 
   ::placeholder {
     color: ${({ theme }) => theme.color.black2};
@@ -55,11 +69,12 @@ const InputWrapper = styled.input`
 const Box = styled.div`
   position: relative;
   display: flex;
+  flex-direction: column;
 `;
 
 const LengthIndicator = styled.div`
   position: absolute;
-  top: 10px;
+  bottom: 13px;
   right: 16px;
   color: #00000073;
   font-family: Pretendard400;
