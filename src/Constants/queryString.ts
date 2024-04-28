@@ -10,6 +10,7 @@ export const RECRUITMENT = {
   RECRUITMENTS: (filterOptions: object) => [BASE_KEY.RECRUITMENT, filterOptions],
   RECRUITMENT: (recruitmentId: number) => [BASE_KEY.RECRUITMENT, recruitmentId],
   CREATE_RECRUITMENT: (studyId: number) => [BASE_KEY.RECRUITMENT, studyId, 'CREATE'],
+  EDIT_RECRUITMENT: (studyId: number) => [BASE_KEY.RECRUITMENT, studyId, 'MODIFY'],
   CLOSE_RECRUITMENT: (studyId: number) => [BASE_KEY.RECRUITMENT, studyId, 'CLOSE'],
 };
 
