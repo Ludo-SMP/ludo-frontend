@@ -36,6 +36,7 @@ const InputText = forwardRef<HTMLInputElement, ComponentProps<'input'> & InputTe
     );
   },
 );
+
 const InputWrapper = styled.input`
   width: 100%;
   padding: 10px 16px;
@@ -53,6 +54,7 @@ const InputWrapper = styled.input`
     line-height: 28px;
   }
 `;
+
 const Box = styled.div`
   position: relative;
   display: flex;
@@ -77,4 +79,5 @@ const LengthIndicator = styled.div`
   font-size: 14px;
   line-height: 20px;
 `;
+
 export default InputText;
