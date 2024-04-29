@@ -1,5 +1,5 @@
 import { logOut } from '@/Apis/auth';
-import { HttpStatus } from '@/Constants/StatusCodes';
+import { HttpStatus } from '@/Constants/statusCodes';
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 
 export const createClient = (config?: AxiosRequestConfig) => {

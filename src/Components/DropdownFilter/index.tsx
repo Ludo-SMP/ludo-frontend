@@ -6,7 +6,7 @@ import { useOutSideClick } from '@/Hooks/useOutsideClick';
 import { Up, Down } from '@/Assets';
 import { useFilterOptionsStore } from '@/store/filter';
 import { media } from '@/Styles/theme';
-import StackModal from '../Modal/StackModal';
+import { StackModal } from '../Modal/StackModal';
 
 export interface DropdownFilterProps {
   filterName: string;

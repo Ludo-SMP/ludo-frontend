@@ -1,7 +1,7 @@
 import { Close, Search } from '@/Assets';
 import Button from '@/Components/Common/Button';
 import ChipMenu from '@/Components/Common/ChipMenu';
-import InputText from '@/Components/Common/InputText/iindex';
+import InputText from '@/Components/Common/InputText/index';
 import { TechStack } from '@/Components/Common/TechStack';
 import { useStack } from '@/Hooks/stack/useStack';
 import useDebounce from '@/Hooks/useDebounce';
@@ -52,7 +52,7 @@ interface StackModalProps {
   handleSelectedStacks?: (stacks: Stack[]) => void;
 }
 
-const StackModal = ({ handleModal, initialSelectedStacks, handleSelectedStacks }: StackModalProps) => {
+export const StackModal = ({ handleModal, initialSelectedStacks, handleSelectedStacks }: StackModalProps) => {
   const stackModalRef = useRef<HTMLDivElement>(null);
   const { data } = useStack();
 
@@ -248,5 +248,3 @@ const BtnsWrapper = styled.div`
     gap: 12px;
   }
 `;
-
-export default StackModal;
