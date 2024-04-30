@@ -84,6 +84,11 @@ export const PROGRESS_METHODS = [
   { id: 2, name: 'OFFLINE' },
 ];
 
+export const PROGRESS_METHODS_OPTIONS = [
+  { value: 1, label: '온라인' },
+  { value: 2, label: '오프라인' },
+];
+
 export const SORTS = [
   { id: 1, name: '최신순' },
   { id: 2, name: '조회순' },
