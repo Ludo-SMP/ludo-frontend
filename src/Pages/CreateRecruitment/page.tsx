@@ -28,7 +28,7 @@ import Modal from '@/Components/Common/Modal';
 import StackModal from '@/Components/Modal/StackModal';
 import { useSelectDefaultValue } from '@/Hooks/recruitments/useSelectDefaultValue';
 import { saveTemporary } from '@/utils/temporarySavedUtils';
-import { LabelForm } from '@/Components/Common/LabelForm';
+import { ErrorMsg, LabelForm } from '@/Components/Common/LabelForm';
 import { FormSection } from '@/Components/Common/FormSection';
 import { LabelText } from '@/Components/Common/LabelText';
 import { useTempSaved } from '@/Hooks/useTempSaved';
@@ -298,8 +298,4 @@ const ButtonBox = styled.div`
     display: flex;
     width: 100%;
   }
-`;
-
-export const ErrorMsg = styled.p`
-  color: ${({ theme }) => theme.color.negative};
 `;
