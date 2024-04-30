@@ -36,7 +36,7 @@ interface MyStudyCardProps {
 }
 
 /** 자신이 현재 참여하고 있는/참여 신청을 넣은 스터디를 나타냅니다. */
-const MyStudyCard = ({
+export const MyStudyCard = ({
   id,
   title,
   status,
@@ -52,19 +52,18 @@ const MyStudyCard = ({
     queryClient.invalidateQueries({ queryKey: [...STUDY.MYPAGE_INFO()] });
   };
   const { mutate: cancelMutate } = useCancelAppyMutation(1, id, cancelApplySuccessHandler);
+  const isApplyStatus = status === 'UNCHECKED' || status === 'REFUSED' || status === 'ACCEPTED';
 
   return (
     <MyStudyCardWrapper
       onClick={() => {
-        navigate(
-          `/studies/${id}${
-            status === 'UNCHECKED' || status === 'REFUSED' || status === 'ACCEPTED' ? '/recruitment' : ''
-          }`,
-        );
+        navigate(`/studies/${id}${isApplyStatus ? '/recruitment' : ''}`);
       }}
+      isApplyStatus={isApplyStatus}
     >
-      <StudyThumbnail width="244px" height="100%" />
-      <StudyInfoWrapper status={status} hasRecruitment={hasRecruitment} isOwner={isOwner}>
+      {!isApplyStatus && <StudyThumbnail width="244px" height="100%" />}
+
+      <StudyInfoWrapper status={status} hasRecruitment={hasRecruitment} isOwner={isOwner} isApplyStatus={isApplyStatus}>
         <StudyDetailWrapper status={status}>
           <div className="study__status">
             <span className="title">{title}</span>
@@ -100,7 +99,7 @@ const MyStudyCard = ({
             )}
           </div>
         </StudyDetailWrapper>
-        <MyStudyCardButtonsWrapper>
+        <MyStudyCardButtonsWrapper isApplyStatus={isApplyStatus}>
           {(status === 'PROGRESS' || status === 'RECRUITING') && !hasRecruitment && isOwner && (
             <Button
               scheme="primary"
@@ -129,10 +128,12 @@ const MyStudyCard = ({
   );
 };
 
-const MyStudyCardWrapper = styled.div`
+const MyStudyCardWrapper = styled.div<{
+  isApplyStatus: boolean;
+}>`
   display: flex;
   width: 100%;
-  height: 246px;
+  height: ${(props) => (props.isApplyStatus ? '158px' : '246px')};
   align-items: flex-start;
   align-content: flex-start;
   align-self: stretch;
@@ -164,7 +165,12 @@ const MyStudyCardWrapper = styled.div`
   }
 `;
 
-const StudyInfoWrapper = styled.div<{ status: StudyStatus | ApplyStatus; hasRecruitment: boolean; isOwner: boolean }>`
+const StudyInfoWrapper = styled.div<{
+  status: StudyStatus | ApplyStatus;
+  hasRecruitment: boolean;
+  isOwner: boolean;
+  isApplyStatus: boolean;
+}>`
   display: flex;
   height: 100%;
   padding: 24px 32px;
@@ -180,9 +186,7 @@ const StudyInfoWrapper = styled.div<{ status: StudyStatus | ApplyStatus; hasRecr
     align-items: center;
     gap: ${(props) =>
       ((props.status === 'PROGRESS' || props.status === 'RECRUITING') && !props.hasRecruitment && props.isOwner) ||
-      props.status === 'REFUSED' ||
-      props.status === 'ACCEPTED' ||
-      props.status === 'UNCHECKED'
+      props.isApplyStatus
         ? '24px'
         : 0};
     align-self: stretch;
@@ -248,18 +252,16 @@ const StudyDetailWrapper = styled.div<{ status: StudyStatus | ApplyStatus }>`
   }
 `;
 
-const MyStudyCardButtonsWrapper = styled.div`
+const MyStudyCardButtonsWrapper = styled.div<{ isApplyStatus: boolean }>`
   display: flex;
   width: 100%;
   justify-content: flex-end;
 
   button {
-    padding: 8px 24px;
+    padding: ${(props) => (props.isApplyStatus ? `0 16px` : `8px 24px`)};
   }
 
   ${media.mobile} {
     justify-content: center;
   }
 `;
-
-export default MyStudyCard;

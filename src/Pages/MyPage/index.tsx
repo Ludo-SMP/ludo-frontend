@@ -1,6 +1,6 @@
 import { Loading, MemberImage, Study, StudyInfo } from '@/Assets';
 import UserCard from '@/Components/UserCard';
-import MyStudyCard from '@/Components/MyStudyCard';
+import { MyStudyCard } from '@/Components/MyStudyCard';
 import styled from 'styled-components';
 import TemporarySavedCard from '@/Components/TemporarySavedCard';
 import Button from '@/Components/Common/Button';
