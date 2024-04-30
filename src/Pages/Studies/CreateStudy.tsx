@@ -14,6 +14,7 @@ import {
   CATEGORY,
   PLATFORM,
   PLATFORM_OPTIONS,
+  POSITIONS_OPTIONS,
   PROGRESS_METHOD,
   PROGRESS_METHODS_OPTIONS,
 } from '@/Shared/study';
@@ -90,6 +91,21 @@ export default () => {
                   rules={{ required: '스터디 최대 인원을 정해주세요.' }}
                   render={({ field }) => (
                     <CustomSelect label="스터디 최대 인원" placeholder="ex) 5명" values={memberLimit} {...field} />
+                  )}
+                />
+              </LabelForm>
+              <LabelForm<StudyCreateForm> name="position" errors={errors}>
+                <Controller
+                  control={control}
+                  name="position"
+                  rules={{ required: '포지션을 정해주세요' }}
+                  render={({ field }) => (
+                    <CustomSelect
+                      label="나의 포지션"
+                      placeholder="ex) 프론트엔드"
+                      values={POSITIONS_OPTIONS}
+                      {...field}
+                    />
                   )}
                 />
               </LabelForm>
