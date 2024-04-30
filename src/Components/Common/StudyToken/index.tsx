@@ -24,6 +24,7 @@ const StudyTokenWrapper = styled.span<{ status: ApplyStatus | MemberStatus | Stu
   padding: 0px 12px;
   justify-content: center;
   align-items: center;
+  white-space: nowrap;
 
   color: ${({ status, theme }) =>
     status === 'PARTICIPATED'
