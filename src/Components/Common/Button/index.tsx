@@ -3,14 +3,24 @@ import styled from 'styled-components';
 
 export type ButtonProps = {
   onClick?: MouseEventHandler<HTMLButtonElement>;
+
+  /** 버튼이 form 내부에서 사용될 경우, `type`을 `submit`으로 설정합니다. */
   type?: 'button' | 'submit';
+
+  /** 버튼의 의미를 결정합니다. */
   scheme?: 'primary' | 'secondary' | 'third' | 'normal';
+
+  /** 버튼을 비활성화합니다. */
   disabled?: boolean;
+
   children: React.ReactNode;
   className?: string;
+
+  /** `fullWidth`의 경우, 크기가 100%로 설정됩니다. */
   size?: 'normal' | 'fullWidth';
 };
 
+/** 재사용 가능한 버튼 컴포넌트입니다. */
 const Button = ({
   onClick,
   type,

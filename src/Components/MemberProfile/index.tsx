@@ -5,9 +5,11 @@ import { Member } from '@/Types/study';
 import { ROLE } from '@/Shared/study';
 
 export interface MemberProfileProps extends Member {
+  /** 스터디원의 프로필 이미지 URL */
   imgUrl?: string;
 }
 
+/** 스터디원의 프로필을 보여줍니다. */
 const MemberProfile = ({ nickname, email, role, position }: MemberProfileProps) => {
   return (
     <MemberProfileWrapper>

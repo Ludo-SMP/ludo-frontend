@@ -3,17 +3,34 @@ import Button from '../Button';
 import { useModalStore } from '@/store/modal';
 
 export interface ModalProps {
+  /** 모달 안쪽 컴포넌트 */
   children: React.ReactNode;
+
+  /** 제목 정렬 방식 */
   alignTitle?: 'flex-start' | 'center';
+
+  /** 제목 */
   title?: string;
+
+  /** 확인 버튼 클릭 시 실행 함수 */
   handleApprove: () => void;
+
+  /** 취소 버튼 클릭 시 실행 함수 */
   handleCancel?: () => void;
+
   data?: object;
+
+  /** 확인 버튼 텍스트 */
   approveBtnText: string;
+
+  /** 취소 버튼 텍스트 */
   cancelBtnText?: string;
+
+  /** 버튼 너비 동일 여부 */
   isBtnWidthEqual?: boolean;
 }
 
+/** 모달 컴포넌트 */
 const Modal = ({
   children,
   alignTitle = 'flex-start',

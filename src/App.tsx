@@ -9,7 +9,7 @@ import ReactQueryProvider from './Providers/QueryProvider/index.tsx';
 
 const App = () => {
   return (
-    <ReactQueryProvider>
+    <ReactQueryProvider showDevTools>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <LoginProvider>

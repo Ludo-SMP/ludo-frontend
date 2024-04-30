@@ -6,6 +6,7 @@ const GOOGLEFORM_URL =
   'https://docs.google.com/forms/d/1TEohqnq2Nl2HcCXdd1Sd_mroMnLKxAV2dd7ufPyRK1M/viewform?edit_requested=true';
 const UT_GUIDE = '서비스를 이용해보시고, 소중한 의견을 공유해주세요! 추첨을 통해 소정의 상품을 드립니다 :)';
 
+/** 유저테스트 배너 */
 const UTbanner = () => {
   return (
     <UTbannerWrapper href={GOOGLEFORM_URL} target="_blank">
