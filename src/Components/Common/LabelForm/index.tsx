@@ -1,5 +1,6 @@
 import Heading from '@/Components/Heading';
-import { ErrorMsg, TempSaved } from '@/Pages/CreateRecruitment/page';
+import { ErrorMsg } from '@/Pages/CreateRecruitment/page';
+import { RecruitFormWithSelect } from '@/Types/study';
 import { FieldErrors } from 'react-hook-form';
 import styled from 'styled-components';
 
@@ -17,7 +18,7 @@ export interface LabelFormProps<T> {
   name?: keyof T;
 }
 
-export const LabelForm = ({ label, children, name, errors }: LabelFormProps<TempSaved>) => {
+export const LabelForm = ({ label, children, name, errors }: LabelFormProps<RecruitFormWithSelect>) => {
   return (
     <GridItem>
       {label && (
