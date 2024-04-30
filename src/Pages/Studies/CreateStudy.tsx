@@ -159,7 +159,7 @@ export default () => {
         </Stack>
         <Buttons>
           <Button>임시저장</Button>
-          <Button scheme="secondary">생성</Button>
+          <Button scheme="secondary">등록하기</Button>
         </Buttons>
       </Form>
     </PageWrapper>
