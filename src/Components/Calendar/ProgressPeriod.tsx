@@ -1,78 +1,73 @@
 // react-datepicker를 사용해서 진행기간 구현 328px, 24px, ex) 24.01.23 - 24.03.23
 import DatePicker from 'react-datepicker';
-import { useState } from 'react';
-import 'react-datepicker/dist/react-datepicker.css';
+import { forwardRef, useState } from 'react';
 import styled from 'styled-components';
-import { OptionalCreates } from '@/Pages/Studies/CreateStudy';
-import { Creates } from '@/Types/studies';
+import { DateRange } from '@/Types/atoms';
+import { ControllerRenderProps } from 'react-hook-form';
+import 'react-datepicker/dist/react-datepicker.css';
 
-export type Props = {
-  onClick?: () => void;
-  children?: React.ReactNode;
-  // onChange?: (event: string) => void;
-  setForm: (any: OptionalCreates) => void;
-  useForm: Creates;
-  value?: string;
-  type?: string;
+export interface ProgressPeriodProps {
+  /** input 요소가 가질 폼 필드 이름 속성 */
   name?: string;
-  maxlength?: number;
-  id?: string;
-  formData?: number | string;
-  ref?: string;
-};
+}
 
-export const ProgressPeriod = ({ useForm }: Props) => {
-  const [startDateTime, setForms] = useState(new Date());
-  const [endDateTime, setFormss] = useState(new Date());
-  // const StartHandler = (event: ChangeEvent<HTMLSelectElement>) => {
-  //   setForm({ startDateTime: event.target.value });
-  // };
+interface IProgressPeriodForm {
+  dateRange: DateRange;
+}
 
-  return (
-    <>
+/**
+ * 특정한 범위의 기간을 입력받는 데 사용되는 컴포넌트입니다.
+ *
+ * 사용처는 다음과 같습니다:
+ * - 스터디 기간 설정
+ * - 기간으로 스터디 조회 등
+ */
+export const ProgressPeriod = forwardRef<DatePicker, ProgressPeriodProps & ControllerRenderProps<IProgressPeriodForm>>(
+  ({ name, onChange, onBlur }, ref) => {
+    const now = new Date();
+
+    const [startDate, setStartDate] = useState(now);
+    const [endDate, setEndDate] = useState(null);
+
+    return (
       <DateContainer
-        selected={startDateTime}
-        value={(useForm.startDateTime = startDateTime.toISOString().slice(0, -5))}
-        name="startDateTime"
-        onChange={(date: Date) => setForms(date)}
-        // onChange={StartHandler}
-        selectsStart
-        startDate={startDateTime}
-        // endDate={endDateTime}
-        dateFormat="yyyy-MM-dd'T'HH:mm:ss"
+        ref={ref}
+        name={name}
+        locale="ko"
+        // 기본값은 오늘부터 시작하는 것으로 가정
+        selected={startDate}
+        onBlur={onBlur}
+        onChange={([start, end]: [Date, Date]) => {
+          setStartDate(start);
+          setEndDate(end);
+          onChange([start, end]);
+        }}
+        // 시작일은 오늘 이후로 선택할 수 없다
+        minDate={now}
+        startDate={startDate}
+        endDate={endDate}
+        placeholderText="ex) 24.01.23 - 24.03.23"
+        // 범위 선택
+        selectsRange
+        shouldCloseOnSelect
+        showDisabledMonthNavigation
+        // 한국인에게 익숙한 날짜 순서
+        dateFormat="yy.MM.dd"
       />
-      <Slash>-</Slash>
-      <DateContainer
-        selected={endDateTime}
-        value={(useForm.endDateTime = endDateTime.toISOString().slice(0, -5))}
-        name="endDateTime"
-        onChange={(date: any) => setFormss(date)}
-        selectsEnd
-        endDate={endDateTime}
-        minDate={startDateTime}
-        dateFormat="yyyy-MM-dd'T'HH:mm:ss"
-      />
-    </>
-  );
-};
+    );
+  },
+);
 
+// TODO: ./EndDate.tsx 랑 똑같은 Styled Component인데 한쪽으로 빼서 공용 컴포넌트로 사용하기
 const DateContainer = styled(DatePicker)`
-  width: 145px;
+  width: 328px;
   height: 24px;
-  background-color: ${(props) => props.theme.color.gray3};
   align-items: center;
   align-self: stretch;
-  border: 1px solid #cbcdd1;
-  border-width: 0;
-  background: ${(props) => props.theme.color.gray1};
   resize: none;
   flex: 1 0 0;
-  margin-top: 10px;
-  padding-bottom: 10px;
-  padding-right: 16px;
-  padding-left: 16px;
-`;
 
-const Slash = styled.p`
-  padding-right: 20px;
+  &::placeholder {
+    color: ${(props) => props.theme.color.black2};
+  }
 `;
