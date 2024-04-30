@@ -15,8 +15,6 @@ export const useSelectDefaultValue = (type: 'api' | 'storage', data?: any) => {
     if (type === 'storage' && !tempSaved) return;
     if (type === 'storage') return tempSaved[formKey];
 
-    console.log(APPLICATION_CNT, data, formKey, 'data, formKey');
-
     switch (formKey) {
       case 'contact':
         return CONTACT?.find((contact) => contact.value === data[formKey]) ?? defValue;
