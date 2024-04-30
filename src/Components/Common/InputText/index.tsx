@@ -57,7 +57,6 @@ const InputWrapper = styled.input`
   display: block;
   white-space: nowrap;
   overflow: hidden;
-  width: 80%;
 
   &::placeholder {
     color: ${({ theme }) => theme.color.black2};
