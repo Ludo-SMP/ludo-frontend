@@ -1,16 +1,16 @@
 import { useRecruitmentDetail } from '@/Hooks/recruitments/useRecruitmentDetail';
 import { useParams } from 'react-router-dom';
-import ModifyRecruitmentPage from '.';
+
+import EditRecruitmentPage from '.';
 import { Loading } from '@/Assets';
 import { useEditRecruitmentMutation } from '@/Hooks/recruitments/useEditRecruitment';
-import { RecruitmentDetail } from '@/Types/study';
-import { TempSaved } from '../CreateRecruitment/page';
+import { RecruitFormWithSelect, RecruitmentDetail } from '@/Types/study';
+import { useSelectDefaultValue } from '@/Hooks/recruitments/useSelectDefaultValue';
 
 export interface RecruitmentProps {
-  recruitment: TempSaved;
+  recruitment: RecruitFormWithSelect;
   study: RecruitmentDetail['study'];
 }
-
 export const EditRecruitmentFetcher = () => {
   const recruitmentId = Number(useParams().recruitmentId);
   const studyId = Number(useParams().studyId);
@@ -23,17 +23,21 @@ export const EditRecruitmentFetcher = () => {
   const { createdDateTime, endDateTime, updatedDateTime, positions, stacks, ...recruitmentForm } =
     recruitmentData ?? {};
 
-  const recruitmentProps = {
+  const parseSelectValue = useSelectDefaultValue('api', recruitmentDetail?.recruitment ?? {});
+
+  const recruitmentProps: RecruitmentProps = {
     recruitment: {
-      ...recruitmentForm,
+      title: recruitmentData?.title,
+      applicantCount: parseSelectValue('applicantCount'),
+      contact: parseSelectValue('contact'),
+      callUrl: recruitmentData?.callUrl,
+      content: recruitmentData?.content,
       recruitmentEndDateTime: recruitmentData?.endDateTime,
-      positionIds: recruitmentData?.positions,
+      positionIds: parseSelectValue('positionIds'),
       stackIds: recruitmentData?.stacks,
     },
     study: recruitmentDetail?.study,
   };
 
-  return (
-    <>{isLoading ? <Loading /> : <ModifyRecruitmentPage recruitmentDetail={recruitmentProps} mutate={mutate} />}</>
-  );
+  return <>{isLoading ? <Loading /> : <EditRecruitmentPage recruitmentDetail={recruitmentProps} mutate={mutate} />}</>;
 };
