@@ -138,12 +138,33 @@ const MyStudyCardWrapper = styled.div<{
   align-content: flex-start;
   align-self: stretch;
   flex-wrap: wrap;
+  align-content: flex-start;
+  align-self: stretch;
+  flex-wrap: wrap;
   border-radius: 16px;
   border: 1px solid ${({ theme }) => theme.color.black1};
   box-shadow: 0px 0px 20px 0px ${({ theme }) => theme.color.black0};
 
   &:hover {
     cursor: pointer;
+  }
+
+  svg {
+    border-radius: 16px 0 0 16px;
+  }
+
+  ${media.mobile} {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
+    width: 302px;
+    height: auto;
+
+    svg {
+      width: 100%;
+      border-radius: 16px 16px 0 0;
+    }
   }
 
   svg {
@@ -199,6 +220,7 @@ const StudyDetailWrapper = styled.div<{ status: StudyStatus | ApplyStatus }>`
   align-items: flex-start;
   gap: 12px;
   flex: 1 0 0;
+  flex: 1 0 0;
 
   .study__status {
     display: flex;
@@ -210,7 +232,10 @@ const StudyDetailWrapper = styled.div<{ status: StudyStatus | ApplyStatus }>`
       color: ${({ theme }) => theme.color.black5};
       font-family: 'Pretendard700';
       font-size: ${({ theme }) => theme.font.medium};
+      font-family: 'Pretendard700';
+      font-size: ${({ theme }) => theme.font.medium};
       font-style: normal;
+      font-weight: 700;
       font-weight: 700;
       line-height: 32px;
     }
@@ -218,6 +243,36 @@ const StudyDetailWrapper = styled.div<{ status: StudyStatus | ApplyStatus }>`
     .studyTokens {
       display: flex;
       align-items: center;
+      gap: 4px;
+    }
+  }
+
+  .detail__info {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  ${media.mobile} {
+    .study__status {
+      display: flex;
+      align-items: center;
+      align-content: center;
+      gap: 16px;
+      align-self: stretch;
+      flex-wrap: wrap;
+    }
+
+    .detail__info {
+      display: flex;
+      gap: 12px;
+
+      & > div {
+        width: 252px;
+        gap: 0;
+      }
       gap: 4px;
     }
   }
