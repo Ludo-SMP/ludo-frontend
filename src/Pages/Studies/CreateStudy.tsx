@@ -112,7 +112,7 @@ export default () => {
               <Controller
                 control={control}
                 name="platform"
-                rules={{ required: '카테고리를 정해주세요.' }}
+                rules={{ required: '진행할 플랫폼을 정해 주세요.' }}
                 render={({ field }) => (
                   <CustomSelect label="진행 플랫폼" placeholder="ex) gather" values={PLATFORM_OPTIONS} {...field} />
                 )}
@@ -123,7 +123,7 @@ export default () => {
                 <Controller
                   control={control}
                   name="progressPeriod"
-                  rules={{ required: '스터디 진행 기간을 정해 주세요' }}
+                  rules={{ required: '스터디 진행 기간을 정해 주세요.' }}
                   render={({ field }) => <ProgressPeriod {...field} />}
                 />
               </CalendarButton>
