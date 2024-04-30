@@ -1,6 +1,7 @@
 import { One, Three, Two } from '@/Assets';
 import { ProgressPeriod } from '@/Components/Calendar/ProgressPeriod';
 import Button from '@/Components/Common/Button';
+import { Grid } from '@/Components/Common/Grid';
 import InputText from '@/Components/Common/InputText';
 import { LabelForm } from '@/Components/Common/LabelForm';
 import { Stack } from '@/Components/Common/Stack';
@@ -66,74 +67,78 @@ export default () => {
             </Labeled>
           </FormSection>
           <FormSection icon={<Two />} header="스터디 기본 구성">
-            <LabelForm<StudyCreateForm> name="category" errors={errors}>
-              <Controller
-                control={control}
-                name="category"
-                rules={{ required: '카테고리를 정해주세요.' }}
-                render={({ field }) => (
-                  <CustomSelect
-                    label="카테고리"
-                    placeholder="ex) 코딩테스트 스터디"
-                    values={CATEGORIES_OPTION}
-                    {...field}
-                  />
-                )}
-              />
-            </LabelForm>
-            <LabelForm<StudyCreateForm> name="memberLimit" errors={errors}>
-              <Controller
-                control={control}
-                name="memberLimit"
-                rules={{ required: '스터디 최대 인원을 정해주세요.' }}
-                render={({ field }) => (
-                  <CustomSelect label="스터디 최대 인원" placeholder="ex) 5명" values={memberLimit} {...field} />
-                )}
-              />
-            </LabelForm>
-          </FormSection>
-          <FormSection icon={<Three />} header="스터디 진행 관련">
-            <LabelForm<StudyCreateForm> name="progressMethod" errors={errors}>
-              <Controller
-                control={control}
-                name="progressMethod"
-                rules={{ required: '진행방식을 정해주세요.' }}
-                render={({ field }) => (
-                  <CustomSelect
-                    label="진행 방식"
-                    placeholder="ex) 온/오프라인"
-                    values={PROGRESS_METHODS_OPTIONS}
-                    {...field}
-                  />
-                )}
-              />
-            </LabelForm>
-            <LabelForm<StudyCreateForm> name="platform" errors={errors}>
-              <Controller
-                control={control}
-                name="platform"
-                rules={{ required: '진행할 플랫폼을 정해 주세요.' }}
-                render={({ field }) => (
-                  <CustomSelect label="진행 플랫폼" placeholder="ex) gather" values={PLATFORM_OPTIONS} {...field} />
-                )}
-              />
-            </LabelForm>
-            <LabelForm<StudyCreateForm> name="platformUrl" label="진행 플랫폼 URL" errors={errors}>
-              <InputText
-                placeholder="ex) gather 주소"
-                {...register('platformUrl', { required: '진행 플랫폼 URL을 입력해주세요' })}
-              />
-            </LabelForm>
-            <LabelForm<StudyCreateForm> label="진행 기간" name="progressPeriod" errors={errors}>
-              <CalendarButton>
+            <Grid>
+              <LabelForm<StudyCreateForm> name="category" errors={errors}>
                 <Controller
                   control={control}
-                  name="progressPeriod"
-                  rules={{ required: '스터디 진행 기간을 정해 주세요.' }}
-                  render={({ field }) => <ProgressPeriod {...field} />}
+                  name="category"
+                  rules={{ required: '카테고리를 정해주세요.' }}
+                  render={({ field }) => (
+                    <CustomSelect
+                      label="카테고리"
+                      placeholder="ex) 코딩테스트 스터디"
+                      values={CATEGORIES_OPTION}
+                      {...field}
+                    />
+                  )}
                 />
-              </CalendarButton>
-            </LabelForm>
+              </LabelForm>
+              <LabelForm<StudyCreateForm> name="memberLimit" errors={errors}>
+                <Controller
+                  control={control}
+                  name="memberLimit"
+                  rules={{ required: '스터디 최대 인원을 정해주세요.' }}
+                  render={({ field }) => (
+                    <CustomSelect label="스터디 최대 인원" placeholder="ex) 5명" values={memberLimit} {...field} />
+                  )}
+                />
+              </LabelForm>
+            </Grid>
+          </FormSection>
+          <FormSection icon={<Three />} header="스터디 진행 관련">
+            <Grid>
+              <LabelForm<StudyCreateForm> name="progressMethod" errors={errors}>
+                <Controller
+                  control={control}
+                  name="progressMethod"
+                  rules={{ required: '진행방식을 정해주세요.' }}
+                  render={({ field }) => (
+                    <CustomSelect
+                      label="진행 방식"
+                      placeholder="ex) 온/오프라인"
+                      values={PROGRESS_METHODS_OPTIONS}
+                      {...field}
+                    />
+                  )}
+                />
+              </LabelForm>
+              <LabelForm<StudyCreateForm> name="platform" errors={errors}>
+                <Controller
+                  control={control}
+                  name="platform"
+                  rules={{ required: '진행할 플랫폼을 정해 주세요.' }}
+                  render={({ field }) => (
+                    <CustomSelect label="진행 플랫폼" placeholder="ex) gather" values={PLATFORM_OPTIONS} {...field} />
+                  )}
+                />
+              </LabelForm>
+              <LabelForm<StudyCreateForm> name="platformUrl" label="진행 플랫폼 URL" errors={errors}>
+                <InputText
+                  placeholder="ex) gather 주소"
+                  {...register('platformUrl', { required: '진행 플랫폼 URL을 입력해주세요' })}
+                />
+              </LabelForm>
+              <LabelForm<StudyCreateForm> label="진행 기간" name="progressPeriod" errors={errors}>
+                <CalendarButton>
+                  <Controller
+                    control={control}
+                    name="progressPeriod"
+                    rules={{ required: '스터디 진행 기간을 정해 주세요.' }}
+                    render={({ field }) => <ProgressPeriod {...field} />}
+                  />
+                </CalendarButton>
+              </LabelForm>
+            </Grid>
           </FormSection>
         </Stack>
         <Buttons>
