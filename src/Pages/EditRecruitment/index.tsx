@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import styled, { css } from 'styled-components';
 import { One, Two, Three, Four } from '@/Assets';
@@ -16,10 +16,9 @@ import { EndDate } from '@/Components/Calendar/EndDate';
 import CustomSelect from '@/Components/Selectbox/CustomSelect';
 import { Stack } from '@/Components/Common/Stack';
 
-import { Stack as StackType } from '@/Types/study';
+import { RecruitmentDetail, RecruitFormWithSelect } from '@/Types/study';
 
 import { CREATE_RECRUITMENT } from '@/Constants/messages';
-import { RecruitmentForm } from '@/Types/study';
 import { APPLICATION_CNT, CONTACT, POSITION } from '@/Shared/study';
 
 import { getPeriod } from '@/utils/date';
@@ -32,21 +31,17 @@ import { useStack } from '@/Hooks/useStack';
 
 const DEF_STACK_PLACEHOLDER = 'ex. Typescript';
 
-export interface TempSaved extends Omit<RecruitmentForm, 'stackIds'> {
-  stackIds: StackType[];
-}
-
 export interface ModifyRecruitmentPageProps {
-  recruitmentDetail: any; // { recruitment: TempSaved; study: RecruitmentDetail['study'] };
+  recruitmentDetail: { recruitment: RecruitFormWithSelect; study: RecruitmentDetail['study'] };
   mutate: any;
 }
 
-const ModifyRecruitmentPage = ({ recruitmentDetail, mutate }: ModifyRecruitmentPageProps) => {
+const EditRecruitmentPage = ({ recruitmentDetail, mutate }: ModifyRecruitmentPageProps) => {
   // 스택 모달 상태
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { handleSelectedStacks, content, selectedStacks, setSelectedStacks } = useStack(DEF_STACK_PLACEHOLDER);
 
-  const getDefVal = useSelectDefaultValue('api', recruitmentDetail?.recruitment);
+  const parseSelectValue = useSelectDefaultValue('api', recruitmentDetail?.recruitment);
 
   const getDefStackVal = (formKey: 'stackIds') => {
     if (!recruitmentDetail || !recruitmentDetail?.recruitment[formKey]) return;
@@ -66,21 +61,22 @@ const ModifyRecruitmentPage = ({ recruitmentDetail, mutate }: ModifyRecruitmentP
     control,
     watch,
     formState: { errors },
-  } = useForm<TempSaved>({
+  } = useForm<RecruitFormWithSelect>({
     defaultValues: recruitmentDetail.recruitment,
   });
   const data = watch();
 
   const studyDetail = recruitmentDetail?.study;
 
-  const onSubmit = (data: TempSaved) => {
+  const onSubmit = (data: RecruitFormWithSelect) => {
     if (!selectedStacks || selectedStacks?.length === 0) {
       setSelectedStacks([]);
       return;
     }
     console.log(data);
     mutate({
-      ...data,
+      applicationCount: data.applicantCount.value,
+      contact: data.contact.value,
       positionIds: data?.positionIds.map(({ value }) => Number(value)),
       stackIds: selectedStacks.map((stack) => stack.id),
     });
@@ -105,7 +101,7 @@ const ModifyRecruitmentPage = ({ recruitmentDetail, mutate }: ModifyRecruitmentP
                     <CustomSelect
                       label="모집 인원"
                       placeholder="ex) 5명"
-                      defaultValue={getDefVal('applicantCount')}
+                      defaultValue={parseSelectValue('applicantCount')}
                       values={APPLICATION_CNT}
                       {...field}
                     />
@@ -119,7 +115,7 @@ const ModifyRecruitmentPage = ({ recruitmentDetail, mutate }: ModifyRecruitmentP
                     name="recruitmentEndDateTime"
                     rules={{ required: CREATE_RECRUITMENT.recruitmentEndDateTime }}
                     render={({ field }) => (
-                      <EndDate {...field} defaultValue={getDefVal('recruitmentEndDateTime') as string} />
+                      <EndDate {...field} defaultValue={parseSelectValue('recruitmentEndDateTime') as string} />
                     )}
                   />
                 </CalendarButton>
@@ -133,7 +129,7 @@ const ModifyRecruitmentPage = ({ recruitmentDetail, mutate }: ModifyRecruitmentP
                     <CustomSelect
                       label="포지션"
                       placeholder="포지션"
-                      defaultValue={getDefVal('positionIds')}
+                      defaultValue={parseSelectValue('positionIds')}
                       values={POSITION}
                       isMulti
                       {...field}
@@ -165,7 +161,7 @@ const ModifyRecruitmentPage = ({ recruitmentDetail, mutate }: ModifyRecruitmentP
                     <CustomSelect
                       label="연락방법"
                       placeholder="연락방법"
-                      defaultValue={getDefVal('contact')}
+                      defaultValue={parseSelectValue('contact')}
                       values={CONTACT}
                       {...field}
                     />
@@ -175,7 +171,7 @@ const ModifyRecruitmentPage = ({ recruitmentDetail, mutate }: ModifyRecruitmentP
               <LabelForm label="연결 url" errors={errors}>
                 <InputText
                   placeholder="ex) 오픈 카카오톡 링크"
-                  defaultValue={getDefVal('callUrl') as string}
+                  defaultValue={parseSelectValue('callUrl') as string}
                   {...register('callUrl', { required: CREATE_RECRUITMENT.contact })}
                 />
               </LabelForm>
@@ -183,6 +179,7 @@ const ModifyRecruitmentPage = ({ recruitmentDetail, mutate }: ModifyRecruitmentP
           </FormSection>
           <FormSection icon={<Two />} title="스터디 진행 관련">
             <Box display="row" gap="24px">
+              {/* TODO: InfoField 재사용 검토 */}
               <LabelText label="진행 방식" text={studyDetail?.way} />
               <LabelText label="진행 플랫폼" text={studyDetail?.platform} />
               <LabelText label="진행 기간" text={getPeriod(studyDetail?.startDateTime, studyDetail?.endDateTime)} />
@@ -232,7 +229,7 @@ const ModifyRecruitmentPage = ({ recruitmentDetail, mutate }: ModifyRecruitmentP
   );
 };
 
-export default ModifyRecruitmentPage;
+export default EditRecruitmentPage;
 
 const Grid = styled.div`
   display: grid;
