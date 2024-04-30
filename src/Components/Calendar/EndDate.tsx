@@ -22,7 +22,7 @@ interface Props {
 
 export const EndDate = React.forwardRef<ReactDatePicker<string, boolean>, ControllerRenderProps<IFormValues> & Props>(
   ({ onChange, name, defaultValue }, ref) => {
-    const today = new Date(Date.now());
+    const today = new Date();
     const [startDate, setStartDate] = useState<Date>(defaultValue && new Date(defaultValue));
 
     return (
