@@ -55,6 +55,11 @@ export const PLATFORM = {
   GOOGLE_MEET: 'Google Meet',
 };
 
+export const PLATFORM_OPTIONS = [
+  { label: 'Gather', value: 'GATHER' },
+  { label: 'Google Meet', value: 'GOOGLE_MEET' },
+];
+
 export const ALL = {
   id: 0,
   name: '전체',
