@@ -1,6 +1,6 @@
-import {  useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import styled, { css } from 'styled-components';
 import { One, Two, Three, Four, Loading } from '@/Assets';
@@ -16,63 +16,49 @@ import { EndDate } from '@/Components/Calendar/EndDate';
 import CustomSelect from '@/Components/Selectbox/CustomSelect';
 import { Stack } from '@/Components/Common/Stack';
 
-import { Stack as StackType } from '@/Types/study';
+import { RecruitFormWithSelect } from '@/Types/study';
 
 import { CREATE_RECRUITMENT } from '@/Constants/messages';
-import { RecruitmentForm } from '@/Types/study';
 import { APPLICATION_CNT, CONTACT, POSITION } from '@/Shared/study';
 import { useCreateRecruitmentMutation } from '@/Hooks/recruitments/useCreateRecruitment';
-import { useSavedKeyStore } from '@/store/study';
 import { useStudyDetail } from '@/Hooks/study/useStudyDetail';
 import { getPeriod } from '@/utils/date';
 import { useModalStore } from '@/store/modal';
 import Modal from '@/Components/Common/Modal';
 import StackModal from '@/Components/Modal/StackModal';
-import { Label } from '@/Components/Selectbox/SelectBox';
 import { useSelectDefaultValue } from '@/Hooks/recruitments/useSelectDefaultValue';
 import { saveTemporary } from '@/utils/temporarySavedUtils';
+import { LabelForm } from '@/Components/Common/LabelForm';
+import { FormSection } from '@/Components/Common/FormSection';
+import { LabelText } from '@/Components/Common/LabelText';
+import { useTempSaved } from '@/Hooks/useTempSaved';
+import { useStack } from '@/Hooks/useStack';
 
-const DEF_VAL = 'ex. Typescript';
-
-interface TempSaved extends Omit<RecruitmentForm, 'stackIds'>{
-  stackIds: StackType[];
-}
+const DEF_STACK_PLACEHOLDER = 'ex. Typescript';
 
 const CreateRecruitmentPage = () => {
   const studyId = Number(useParams().studyId);
-  const { pathname } = useLocation();
-
   const { isModalOpen, openModal, closeModal } = useModalStore();
 
-  // 임시저장된 키가 있는지 확인
-  const savedKey = useSavedKeyStore((state) => state.savedKey);
-  const setSavedKey = useSavedKeyStore((state) => state.setSavedKey);
-  const tempSaved: TempSaved | null = JSON.parse(localStorage.getItem(savedKey)) ?? null;
+  const { savedKey, tempSaved } = useTempSaved();
 
   // 스택 모달 상태
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [selectedStacks, setSelectedStacks] = useState<StackType[] | null>(null);
-  const [content, setContent] = useState(DEF_VAL);
+  const { handleSelectedStacks, content, selectedStacks, setSelectedStacks } = useStack(DEF_STACK_PLACEHOLDER);
 
+  const parseSelectValue = useSelectDefaultValue('storage');
 
-  const getDefVal = useSelectDefaultValue();
-
+  // stackId 초기값 채우기
   const getDefStackVal = (formKey: 'stackIds') => {
-    if (!tempSaved) return;
-    handleSelectedStacks(tempSaved[formKey]);
-  }
+    if (!tempSaved || !tempSaved[formKey]) return;
 
-  useEffect(() => {
-    getDefStackVal('stackIds');
-  }, []);
+    handleSelectedStacks(tempSaved[formKey]);
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    return () => {
-      // 언마운트될 때, 임시저장 선택된 키 초기화
-      if (tempSaved) setSavedKey('');
-    };
-  }, [pathname]);
+    getDefStackVal('stackIds');
+  }, []);
 
   const {
     register,
@@ -80,7 +66,7 @@ const CreateRecruitmentPage = () => {
     control,
     watch,
     formState: { errors },
-  } = useForm<TempSaved>({
+  } = useForm<RecruitFormWithSelect>({
     defaultValues: tempSaved,
   });
   const data = watch();
@@ -90,19 +76,20 @@ const CreateRecruitmentPage = () => {
   const { data: shortStudy, isLoading } = useStudyDetail(studyId);
   const studyDetail = shortStudy?.study;
 
-  const onSubmit = (data: TempSaved) => {
+  const onSubmit = () => {
     if (!selectedStacks || selectedStacks?.length === 0) {
       setSelectedStacks([]);
       return;
     }
-    mutate({ ...data, positionIds: [0], stackIds: selectedStacks.map((stack) => stack.id)});
-  };
 
-  const handleSelectedStacks = (stacks: StackType[]) => {
-    setSelectedStacks([...stacks]);
-    setContent(stacks.map((stack) => stack.name).join(', '));
+    mutate({
+      ...data,
+      applicationCount: data.applicantCount.value,
+      contact: data.contact.value,
+      positionIds: data.positionIds.map(({ value }) => Number(value)),
+      stackIds: selectedStacks.map((stack) => stack.id),
+    });
   };
-
 
   return (
     <RecruitmentContainer>
@@ -128,15 +115,9 @@ const CreateRecruitmentPage = () => {
           </Heading>
           <Spacing size={40} />
           <Stack divider={<Divider />}>
-            <FormSection>
-              <Heading type={'Title'} component={'Page'}>
-                <AssetContainer>
-                  <One />
-                </AssetContainer>
-                스터디 모집 안내
-              </Heading>
+            <FormSection icon={<One />} title="스터디 모집 공고">
               <Grid>
-                <GridItem>
+                <LabelForm name="applicantCount" errors={errors}>
                   <Controller
                     control={control}
                     name="applicantCount"
@@ -145,34 +126,26 @@ const CreateRecruitmentPage = () => {
                       <CustomSelect
                         label="모집 인원"
                         placeholder="ex) 5명"
-                        defaultValue={getDefVal('applicantCount')}
+                        defaultValue={parseSelectValue('applicantCount')}
                         values={APPLICATION_CNT}
                         {...field}
                       />
                     )}
                   />
-                  {errors?.applicantCount?.message && <ErrorMsg>{errors?.applicantCount?.message}</ErrorMsg>}
-                </GridItem>
-                <GridItem>
-                  <Heading type={'Title'} component={'Input'}>
-                    모집 마감일
-                  </Heading>
-                  <Spacing size={12} />
+                </LabelForm>
+                <LabelForm name="applicantCount" label="모집 마감일" errors={errors}>
                   <CalendarButton>
                     <Controller
                       control={control}
                       name="recruitmentEndDateTime"
                       rules={{ required: CREATE_RECRUITMENT.recruitmentEndDateTime }}
                       render={({ field }) => (
-                        <EndDate {...field} defaultValue={getDefVal('recruitmentEndDateTime') as string} />
+                        <EndDate {...field} defaultValue={parseSelectValue('recruitmentEndDateTime') as string} />
                       )}
                     />
                   </CalendarButton>
-                  {errors?.recruitmentEndDateTime?.message && (
-                    <ErrorMsg>{errors?.recruitmentEndDateTime?.message}</ErrorMsg>
-                  )}
-                </GridItem>
-                <GridItem>
+                </LabelForm>
+                <LabelForm name="positionIds" errors={errors}>
                   <Controller
                     control={control}
                     name="positionIds"
@@ -181,21 +154,20 @@ const CreateRecruitmentPage = () => {
                       <CustomSelect
                         label="포지션"
                         placeholder="포지션"
-                        defaultValue={getDefVal('positionIds')}
+                        defaultValue={parseSelectValue('positionIds')}
                         values={POSITION}
+                        isMulti
                         {...field}
                       />
                     )}
                   />
-                  {errors?.positionIds?.message && <ErrorMsg>{errors?.positionIds?.message}</ErrorMsg>}
-                </GridItem>
-                <GridItem>
-                  <Label>
-                    기술 스택
-                    <Select onClick={ () => setIsOpen(!isOpen)}>
-                      <TechInput value={content === DEF_VAL ? null : content} placeholder={DEF_VAL} />
-                    </Select>
-                  </Label>
+                </LabelForm>
+                <LabelForm label="기술 스택">
+                  <InputText
+                    onClick={() => setIsOpen(!isOpen)}
+                    placeholder={DEF_STACK_PLACEHOLDER}
+                    value={content === DEF_STACK_PLACEHOLDER ? null : content}
+                  />
                   {isOpen && (
                     <StackModal
                       handleModal={setIsOpen}
@@ -204,8 +176,8 @@ const CreateRecruitmentPage = () => {
                     />
                   )}
                   {selectedStacks?.length === 0 && <ErrorMsg>{'스택을 선택해주세요'}</ErrorMsg>}
-                </GridItem>
-                <GridItem>
+                </LabelForm>
+                <LabelForm errors={errors} name="contact">
                   <Controller
                     control={control}
                     name="contact"
@@ -214,109 +186,54 @@ const CreateRecruitmentPage = () => {
                       <CustomSelect
                         label="연락방법"
                         placeholder="연락방법"
-                        defaultValue={getDefVal('contact')}
+                        defaultValue={parseSelectValue('contact')}
                         values={CONTACT}
                         {...field}
                       />
                     )}
                   />
-                  {errors?.contact?.message && <ErrorMsg>{errors?.contact?.message}</ErrorMsg>}
-                </GridItem>
-                <GridItem>
-                  <Heading type={'Title'} component={'Input'}>
-                    연결 url
-                  </Heading>
-                  <Spacing size={12} />
+                </LabelForm>
+                <LabelForm label="연결 url" errors={errors}>
                   <InputText
                     placeholder="ex) 오픈 카카오톡 링크"
-                    defaultValue={getDefVal('callUrl') as string}
+                    defaultValue={parseSelectValue('callUrl') as string}
                     {...register('callUrl', { required: CREATE_RECRUITMENT.contact })}
                   />
-                  {errors?.callUrl?.message && <ErrorMsg>{errors?.callUrl?.message}</ErrorMsg>}
-                </GridItem>
+                </LabelForm>
               </Grid>
             </FormSection>
-            <FormSection>
-              <Heading type={'Title'} component={'Page'}>
-                <AssetContainer>
-                  <Two />
-                </AssetContainer>
-                스터디 진행 관련
-              </Heading>
-
+            <FormSection icon={<Two />} title="스터디 진행 관련">
               <Box display="row" gap="24px">
-                <BoxItem>
-                  <div className="box__title">진행 방식</div>
-                  <div className="box__content">{studyDetail.way}</div>
-                </BoxItem>
-                <BoxItem>
-                  <div className="box__title">진행 플랫폼</div>
-                  <div className="box__content">{studyDetail.platform}</div>
-                </BoxItem>
-                <BoxItem>
-                  <div className="box__title">진행 기간</div>
-                  <div className="box__content">{getPeriod(studyDetail.startDateTime, studyDetail.endDateTime)}</div>
-                </BoxItem>
+                <LabelText label="진행 방식" text={studyDetail?.way} />
+                <LabelText label="진행 플랫폼" text={studyDetail?.platform} />
+                <LabelText label="진행 기간" text={getPeriod(studyDetail?.startDateTime, studyDetail?.endDateTime)} />
               </Box>
-              <Spacing size={32} />
             </FormSection>
-            <FormSection>
-              <Heading type={'Title'} component={'Page'}>
-                <AssetContainer>
-                  <Three />
-                </AssetContainer>
-                스터디 기본 구성
-              </Heading>
+            <FormSection icon={<Three />} title="스터디 기본 구성">
               <Box display="row" gap="24px">
-                <BoxItem>
-                  <div className="box__title">스터디 제목</div>
-                  <div className="box__content">{studyDetail.title || '스터디 제목'}</div>
-                </BoxItem>
-
-                <BoxItem>
-                  <div className="box__title">카테고리</div>
-                  <div className="box__content">{studyDetail.category.name || '카테고리'}</div>
-                </BoxItem>
-                <BoxItem>
-                  <div className="box__title">스터디 최대 인원</div>
-                  <div className="box__content">{studyDetail.participantLimit}</div>
-                </BoxItem>
+                <LabelText label="스터디 제목" text={studyDetail?.title} />
+                <LabelText label="카테고리" text={studyDetail?.category?.name} />
+                <LabelText label="스터디 최대 인원" text={studyDetail?.participantLimit} />
               </Box>
-              <Spacing size={32} />
             </FormSection>
-            <FormSection>
-              <Heading type={'Title'} component={'Page'}>
-                <AssetContainer>
-                  <Four />
-                </AssetContainer>
-                스터디 팀원 모집 공고 제목
-              </Heading>
-              <Box display={'column'} gap="24px">
-                <BoxItem>
-                  <div className="box__title">제목</div>
-                  <div className="box__content">
-                    <InputText
-                      placeholder="제목을 기입해주세요."
-                      maxLength={50}
-                      currentLength={data.title?.length ?? 0}
-                      {...register('title', { required: CREATE_RECRUITMENT.title, maxLength: 50 })}
-                    />
-                    {errors?.title?.message && <ErrorMsg>{errors?.title?.message}</ErrorMsg>}
-                  </div>
-                </BoxItem>
-                <BoxItem>
-                  <div className="box__title">상세 내용</div>
-                  <div className="box__content">
-                    <TextArea
-                      {...register('content')}
-                      placeholder={'상세 내용을 기입해주세요.'}
-                      maxLength={2000}
-                      currentLength={data.content?.length ?? 0}
-                    />
-                  </div>
-                </BoxItem>
+            <FormSection icon={<Four />} title="스터디 팀원 모집 공고 제목">
+              <Box display="column" gap="24px">
+                <InputText
+                  label="제목"
+                  placeholder="제목을 기입해주세요."
+                  maxLength={50}
+                  currentLength={data.title?.length ?? 0}
+                  {...register('title', { required: CREATE_RECRUITMENT.title, maxLength: 50 })}
+                />
+                {errors?.title?.message && <ErrorMsg>{errors?.title?.message}</ErrorMsg>}
+                <TextArea
+                  label="상세 내용"
+                  placeholder={'상세 내용을 기입해주세요.'}
+                  maxLength={2000}
+                  currentLength={data.content?.length ?? 0}
+                  {...register('content')}
+                />
               </Box>
-              <Spacing size={40} />
             </FormSection>
           </Stack>
           <ButtonBox>
@@ -346,40 +263,11 @@ const Grid = styled.div`
   margin-top: 24px;
 `;
 
-const AssetContainer = styled.image`
-  padding-right: 12px;
-`;
-
-const GridItem = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 132px;
-`;
-
 const RecruitmentContainer = styled.section`
   display: flex;
   flex-direction: column;
   max-width: 1224px;
   margin: 0 auto;
-`;
-
-const BoxItem = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-
-  .box__title {
-    font-size: 18px;
-    line-height: 24px;
-    color: #000000f2;
-  }
-
-  .box__content {
-    font-size: 18px;
-    line-height: 24px;
-    color: #00000073;
-    margin-top: 12px;
-  }
 `;
 
 const Box = styled.div<{ display: 'row' | 'column'; gap?: string }>`
@@ -412,44 +300,6 @@ const ButtonBox = styled.div`
   }
 `;
 
-const FormSection = styled.section`
-  display: flex;
-  flex-direction: column;
-
-  /* 형제 요소일 경우 margin-top 적용 */
-  & ~ & {
-    margin-top: 20px;
-  }
-`;
-
-export const Select = styled.div`
-  position: relative;
-  height: 44px;
-  width: 100%;
-  padding: 10px 16px 10px 16px;
-  border-radius: 8px;
-  border: 1px solid ${(props) => props.theme.color.black1};
-
-  background-color: ${(props) => props.theme.color.white};
-  color: ${(props) => props.theme.color.gray3};
-`;
-
-export const TechInput = styled.input`
-  position: absolute;
-  color: ${(props) => props.theme.color.gray3};
-  display: block;
-  white-space: nowrap;
-  overflow: hidden;
-  width: 80%;
-  font-family: 'Pretendard400';
-  text-overflow: ellipsis;
-
-  &::placeholder {
-    color: ${(props) => props.theme.color.black2};
-  }
-`;
-
 export const ErrorMsg = styled.p`
-  margin-top: 12px;
   color: ${({ theme }) => theme.color.negative};
 `;
