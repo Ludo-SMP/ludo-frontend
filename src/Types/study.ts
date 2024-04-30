@@ -107,12 +107,28 @@ export interface Recruitments {
 export interface RecruitmentForm {
   title: string;
   stackIds: number[];
-  positionIds: Option<number, string>[];
+  positionIds: Position[];
   applicantCount: number;
   recruitmentEndDateTime: string;
   contact: 'KAKAO' | 'EMAIL';
   callUrl: string;
   content: string;
+}
+
+// 셀렉트로 관리해야 하는 타입
+export type SingleSelectValue = Pick<RecruitmentForm, 'applicantCount' | 'contact'>;
+export type SelectOptionType = Record<keyof SingleSelectValue, Option<number, string>>;
+export type MultiSelectType = Record<'positionIds', Option<number, string>[]>;
+
+export type SelectType = SelectOptionType & MultiSelectType;
+
+// 셀렉트가 포함된 모집공고 폼 관리 타입
+export interface RecruitFormWithSelect extends SelectType {
+  title: RecruitmentForm['title'];
+  recruitmentEndDateTime: RecruitmentForm['recruitmentEndDateTime'];
+  callUrl: RecruitmentForm['callUrl'];
+  content: RecruitmentForm['content'];
+  stackIds?: Stack[];
 }
 
 export interface FilterOptionParams {
