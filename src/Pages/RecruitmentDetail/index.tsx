@@ -122,9 +122,15 @@ const RecruitmentDetailPage = () => {
                 </Button>
               </>
             ) : (
-              <Button scheme="secondary" onClick={openModal}>
-                스터디 지원하기
-              </Button>
+              <>
+                {applyTryStatus === 'ALREDAY_APPLY' ? (
+                  <div className="text__alert">이미 지원한 스터디입니다.</div>
+                ) : (
+                  <Button scheme="secondary" onClick={openModal}>
+                    스터디 지원하기
+                  </Button>
+                )}
+              </>
             )}
           </StudyButtonsWrapper>
           {!isLoggedIn && isModalOpen && !isCloseRecruitmentBtnClicked && (
@@ -174,7 +180,7 @@ const RecruitmentDetailPage = () => {
                       : APPLY.ALREADY_PARTICIPATED.title
                 }
                 handleApprove={() => {
-                  setApplyTryStatus(() => 'NOT APPLY');
+                  setApplyTryStatus(() => 'ALREDAY_APPLY');
                   closeModal();
                 }}
                 approveBtnText="확인"
@@ -275,7 +281,7 @@ const RecruitmentInfoWrapper = styled.div`
 `;
 const StudyButtonsWrapper = styled.div`
   display: flex;
-  align-items: flex-start;
+  justify-content: center;
   gap: 24px;
   align-self: stretch;
 
@@ -285,6 +291,14 @@ const StudyButtonsWrapper = styled.div`
     align-items: center;
     gap: 8px;
     flex: 1 0 0;
+  }
+
+  .text__alert {
+    font-family: 'Pretendard600';
+    font-size: 16px;
+    font-style: normal;
+    line-height: 40px; /* 250% */
+    color: ${({ theme }) => theme.color.black2};
   }
 `;
 
