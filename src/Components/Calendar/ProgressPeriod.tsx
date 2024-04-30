@@ -12,7 +12,7 @@ export interface ProgressPeriodProps {
 }
 
 interface IProgressPeriodForm {
-  dateRange: DateRange;
+  progressPeriod: DateRange;
 }
 
 /**
@@ -24,7 +24,7 @@ interface IProgressPeriodForm {
  */
 export const ProgressPeriod = forwardRef<
   DatePicker,
-  ProgressPeriodProps & Partial<ControllerRenderProps<IProgressPeriodForm, 'dateRange'>>
+  ProgressPeriodProps & Partial<ControllerRenderProps<IProgressPeriodForm, 'progressPeriod'>>
 >(({ name, onChange, onBlur }, ref) => {
   const now = new Date();
 
