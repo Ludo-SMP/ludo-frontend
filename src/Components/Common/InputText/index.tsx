@@ -4,6 +4,7 @@ import styled from 'styled-components';
 interface InputTextProps extends React.InputHTMLAttributes<HTMLInputElement> {
   placeholder?: string;
   inputType?: 'text' | 'email' | 'password' | 'member';
+  defaultValue?: string;
   currentLength?: number;
   maxLength?: number;
   label?: string;
@@ -19,10 +20,12 @@ const InputText = forwardRef<HTMLInputElement, ComponentProps<'input'> & InputTe
         {label && <Label>{label}</Label>}
         <InputWrapper
           placeholder={placeholder}
+          defaultValue={defaultValue}
           name={name}
           ref={ref}
           type={inputType ?? 'text'}
           onChange={onChange}
+          autoComplete="off"
           {...props}
         />
         {maxLength && (
@@ -47,7 +50,7 @@ const InputWrapper = styled.input`
   padding: 10px 16px;
   border: 1px solid ${({ theme }) => theme.color.black1};
   border-radius: ${({ theme }) => theme.borderRadius.small};
-  font-size: ${({ theme }) => theme.font.medium};
+  font-size: ${({ theme }) => theme.font.small};
   line-height: 1.5;
   color: ${({ theme }) => theme.color.black};
   text-overflow: ellipsis;
@@ -56,10 +59,10 @@ const InputWrapper = styled.input`
   overflow: hidden;
   width: 80%;
 
-  ::placeholder {
+  &::placeholder {
     color: ${({ theme }) => theme.color.black2};
     font-family: 'Pretendard400';
-    font-size: ${({ theme }) => theme.font.medium};
+    font-size: ${({ theme }) => theme.font.small};
     font-style: normal;
     font-weight: 400;
     line-height: 28px;
