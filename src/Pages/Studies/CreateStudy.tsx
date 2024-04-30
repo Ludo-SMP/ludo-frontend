@@ -118,6 +118,12 @@ export default () => {
                 )}
               />
             </LabelForm>
+            <LabelForm<StudyCreateForm> name="platformUrl" label="진행 플랫폼 URL" errors={errors}>
+              <InputText
+                placeholder="ex) gather 주소"
+                {...register('platformUrl', { required: '진행 플랫폼 URL을 입력해주세요' })}
+              />
+            </LabelForm>
             <LabelForm<StudyCreateForm> label="진행 기간" name="progressPeriod" errors={errors}>
               <CalendarButton>
                 <Controller
