@@ -1,11 +1,11 @@
-import { Profile, More } from '@/Assets';
+import { Profile, Setting } from '@/Assets';
 import { Member } from '@/Types/study';
 import styled from 'styled-components';
 import Button from '../Common/Button';
 import DropdownItem from '../Common/DropdownItem';
 import { useState } from 'react';
 import { useModalStore } from '@/store/modal';
-import EditProfileModal from '../Modal/EditProfileModal';
+import { EditProfileModal } from '../Modal/EditProfileModal';
 import Modal from '../Common/Modal';
 import { PROFILE } from '@/Constants/messages';
 
@@ -25,7 +25,7 @@ const UserCard = ({ nickname, email }: UserCardProps) => {
       </UserProfileWrapper>
       <UserProfileEditSectionWrapper>
         <Button onClick={() => setIsOpened((prev) => !prev)}>
-          <More width={32} height={32} />
+          <Setting width={32} height={32} />
         </Button>
         {isOpened && (
           <DropdownListWrapper>
@@ -118,6 +118,12 @@ const UserProfileEditSectionWrapper = styled.div`
     border: none;
     &:hover {
       border: none;
+
+      svg {
+        path {
+          fill-opacity: 0.85;
+        }
+      }
     }
   }
 `;
