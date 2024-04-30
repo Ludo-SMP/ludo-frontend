@@ -96,7 +96,7 @@ export default () => {
             <LabelForm<StudyCreateForm> name="progressMethod" errors={errors}>
               <Controller
                 control={control}
-                name="memberLimit"
+                name="progressMethod"
                 rules={{ required: '진행방식을 정해주세요.' }}
                 render={({ field }) => (
                   <CustomSelect
@@ -118,7 +118,7 @@ export default () => {
                 )}
               />
             </LabelForm>
-            <LabelForm<StudyCreateForm> label="진행 기간" errors={errors}>
+            <LabelForm<StudyCreateForm> label="진행 기간" name="progressPeriod" errors={errors}>
               <CalendarButton>
                 <Controller
                   control={control}
