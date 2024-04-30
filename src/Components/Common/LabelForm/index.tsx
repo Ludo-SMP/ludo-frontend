@@ -18,7 +18,7 @@ export interface LabelFormProps<T> {
   name?: keyof T;
 }
 
-export const LabelForm = ({ label, children, name, errors }: LabelFormProps<RecruitFormWithSelect>) => {
+export const LabelForm = <T extends FieldValues = FieldValues>({ label, children, name, errors }: LabelFormProps<T>) => {
   return (
     <GridItem>
       {label && (
