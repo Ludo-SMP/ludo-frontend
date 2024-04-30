@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm, Controller, FieldError } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 
 import styled, { css } from 'styled-components';
@@ -76,11 +76,16 @@ const CreateRecruitmentPage = () => {
   const { data: shortStudy, isLoading } = useStudyDetail(studyId);
   const studyDetail = shortStudy?.study;
 
-  const onSubmit = () => {
+  const isValidStack = (): boolean => {
     if (!selectedStacks || selectedStacks?.length === 0) {
       setSelectedStacks([]);
-      return;
+      return false;
     }
+    return true;
+  };
+
+  const onSubmit = () => {
+    if (!isValidStack()) return;
 
     mutate({
       ...data,
@@ -89,6 +94,10 @@ const CreateRecruitmentPage = () => {
       positionIds: data.positionIds.map(({ value }) => Number(value)),
       stackIds: selectedStacks.map((stack) => stack.id),
     });
+  };
+
+  const onInvalid = () => {
+    isValidStack();
   };
 
   return (
@@ -109,7 +118,7 @@ const CreateRecruitmentPage = () => {
       {isLoading ? (
         <Loading />
       ) : (
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit, onInvalid)}>
           <Heading type={'Head'} component={'Page'}>
             스터디 팀원 모집하기
           </Heading>
@@ -193,7 +202,7 @@ const CreateRecruitmentPage = () => {
                     )}
                   />
                 </LabelForm>
-                <LabelForm label="연결 url" errors={errors}>
+                <LabelForm label="연결 url" name="callUrl" errors={errors}>
                   <InputText
                     placeholder="ex) 오픈 카카오톡 링크"
                     defaultValue={parseSelectValue('callUrl') as string}

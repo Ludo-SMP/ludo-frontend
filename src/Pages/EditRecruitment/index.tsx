@@ -68,12 +68,17 @@ const EditRecruitmentPage = ({ recruitmentDetail, mutate }: ModifyRecruitmentPag
 
   const studyDetail = recruitmentDetail?.study;
 
-  const onSubmit = (data: RecruitFormWithSelect) => {
+  const isValidStack = (): boolean => {
     if (!selectedStacks || selectedStacks?.length === 0) {
       setSelectedStacks([]);
-      return;
+      return false;
     }
-    console.log(data);
+    return true;
+  };
+
+  const onSubmit = (data: RecruitFormWithSelect) => {
+    if (!isValidStack()) return;
+
     mutate({
       applicationCount: data.applicantCount.value,
       contact: data.contact.value,
@@ -82,9 +87,13 @@ const EditRecruitmentPage = ({ recruitmentDetail, mutate }: ModifyRecruitmentPag
     });
   };
 
+  const onInvalid = () => {
+    isValidStack();
+  };
+
   return (
     <RecruitmentContainer>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit, onInvalid)}>
         <Heading type={'Head'} component={'Page'}>
           스터디 팀원 모집하기
         </Heading>
@@ -168,7 +177,7 @@ const EditRecruitmentPage = ({ recruitmentDetail, mutate }: ModifyRecruitmentPag
                   )}
                 />
               </LabelForm>
-              <LabelForm label="연결 url" errors={errors}>
+              <LabelForm label="연결 url" name="callUrl" errors={errors}>
                 <InputText
                   placeholder="ex) 오픈 카카오톡 링크"
                   defaultValue={parseSelectValue('callUrl') as string}
