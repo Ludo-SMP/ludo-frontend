@@ -49,7 +49,7 @@ export default () => {
       >
         <Stack divider={<Divider />} gap={24}>
           <FormSection icon={<One />} header="스터디 제목">
-            <Labeled label="제목" error={errors.title.message}>
+            <Labeled label="제목" error={errors.title?.message}>
               <InputText
                 placeholder="제목을 기입해주세요."
                 maxLength={50}
@@ -59,14 +59,14 @@ export default () => {
             </Labeled>
           </FormSection>
           <FormSection icon={<Two />} header="스터디 기본 구성">
-            <Labeled label="카테고리" error={errors.category.message}>
+            <Labeled label="카테고리" error={errors.category?.message}>
               <SelectBox
                 values={CATEGORY}
                 defaultValue="ex) 코딩테스트 스터디"
                 {...register('category', { required: '카테고리를 정해주세요.' })}
               />
             </Labeled>
-            <Labeled label="스터디 최대 인원" error={errors.memberLimit.message}>
+            <Labeled label="스터디 최대 인원" error={errors.memberLimit?.message}>
               <SelectBox
                 values={memberLimit}
                 defaultValue="ex) 5명"
@@ -75,21 +75,21 @@ export default () => {
             </Labeled>
           </FormSection>
           <FormSection icon={<Three />} header="스터디 진행 관련">
-            <Labeled label="진행 방식" error={errors.progressMethod.message}>
+            <Labeled label="진행 방식" error={errors.progressMethod?.message}>
               <SelectBox
                 values={PROGRESS_METHOD}
                 defaultValue="ex) 온/오프라인"
                 {...register('category', { required: '진행방식을 정해주세요.' })}
               />
             </Labeled>
-            <Labeled label="진행 플랫폼" error={errors.platform.message}>
+            <Labeled label="진행 플랫폼" error={errors.platform?.message}>
               <SelectBox
                 values={PLATFORM}
                 defaultValue="ex) gather"
                 {...register('platform', { required: '카테고리를 정해주세요.' })}
               />
             </Labeled>
-            <Labeled label="진행 기간" error={errors.progressPeriod.message}>
+            <Labeled label="진행 기간" error={errors.progressPeriod?.message}>
               <CalendarButton>
                 <Controller
                   control={control}
