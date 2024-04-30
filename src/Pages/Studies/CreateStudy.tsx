@@ -17,6 +17,12 @@ interface StudyCreateForm {
   platform: string;
 }
 
+const memberLimit = Object.fromEntries(
+  Array(10)
+    .fill(void 0)
+    .map((_, i) => [i + 1, `${i + 1}`]),
+);
+
 export default () => {
   const {
     register,
@@ -26,12 +32,6 @@ export default () => {
   } = useForm<StudyCreateForm>();
 
   const data = watch();
-
-  const memberLimit = Object.fromEntries(
-    Array(10)
-      .fill(void 0)
-      .map((_, i) => [i + 1, `${i + 1}`]),
-  );
 
   return (
     <PageWrapper>
