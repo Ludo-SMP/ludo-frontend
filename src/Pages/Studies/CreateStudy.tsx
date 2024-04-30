@@ -118,7 +118,7 @@ export default () => {
                 )}
               />
             </LabelForm>
-            <Labeled label="진행 기간" error={errors.progressPeriod?.message}>
+            <LabelForm<StudyCreateForm> label="진행 기간" errors={errors}>
               <CalendarButton>
                 <Controller
                   control={control}
@@ -127,7 +127,7 @@ export default () => {
                   render={({ field }) => <ProgressPeriod {...field} />}
                 />
               </CalendarButton>
-            </Labeled>
+            </LabelForm>
           </FormSection>
         </Stack>
         <Buttons>
