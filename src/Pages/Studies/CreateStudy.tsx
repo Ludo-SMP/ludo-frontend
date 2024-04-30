@@ -8,7 +8,7 @@ import Heading from '@/Components/Heading';
 import { CalendarButton } from '@/Components/Selectbox/CalendarButton';
 import CustomSelect from '@/Components/Selectbox/CustomSelect';
 import { SelectBox } from '@/Components/Selectbox/SelectBox';
-import { CATEGORIES_OPTION, CATEGORY, PLATFORM, PROGRESS_METHOD } from '@/Shared/study';
+import { CATEGORIES_OPTION, CATEGORY, PLATFORM, PROGRESS_METHOD, PROGRESS_METHODS_OPTIONS } from '@/Shared/study';
 import { DateRange } from '@/Types/atoms';
 import { ReactNode } from 'react';
 import { Controller, useForm } from 'react-hook-form';
@@ -86,13 +86,21 @@ export default () => {
             </LabelForm>
           </FormSection>
           <FormSection icon={<Three />} header="스터디 진행 관련">
-            <Labeled label="진행 방식" error={errors.progressMethod?.message}>
-              <SelectBox
-                values={PROGRESS_METHOD}
-                defaultValue="ex) 온/오프라인"
-                {...register('category', { required: '진행방식을 정해주세요.' })}
+            <LabelForm<StudyCreateForm> name="progressMethod" errors={errors}>
+              <Controller
+                control={control}
+                name="memberLimit"
+                rules={{ required: '진행방식을 정해주세요.' }}
+                render={({ field }) => (
+                  <CustomSelect
+                    label="진행 방식"
+                    placeholder="ex) 온/오프라인"
+                    values={PROGRESS_METHODS_OPTIONS}
+                    {...field}
+                  />
+                )}
               />
-            </Labeled>
+            </LabelForm>
             <Labeled label="진행 플랫폼" error={errors.platform?.message}>
               <SelectBox
                 values={PLATFORM}
