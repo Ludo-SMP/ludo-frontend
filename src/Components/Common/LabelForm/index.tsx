@@ -1,7 +1,7 @@
 import Heading from '@/Components/Heading';
 import { ErrorMsg } from '@/Pages/CreateRecruitment/page';
 import { RecruitFormWithSelect } from '@/Types/study';
-import { FieldErrors } from 'react-hook-form';
+import { FieldErrors, FieldValues } from 'react-hook-form';
 import styled from 'styled-components';
 
 export interface LabelFormProps<T> {
