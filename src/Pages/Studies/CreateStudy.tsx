@@ -8,7 +8,14 @@ import Heading from '@/Components/Heading';
 import { CalendarButton } from '@/Components/Selectbox/CalendarButton';
 import CustomSelect from '@/Components/Selectbox/CustomSelect';
 import { SelectBox } from '@/Components/Selectbox/SelectBox';
-import { CATEGORIES_OPTION, CATEGORY, PLATFORM, PROGRESS_METHOD, PROGRESS_METHODS_OPTIONS } from '@/Shared/study';
+import {
+  CATEGORIES_OPTION,
+  CATEGORY,
+  PLATFORM,
+  PLATFORM_OPTIONS,
+  PROGRESS_METHOD,
+  PROGRESS_METHODS_OPTIONS,
+} from '@/Shared/study';
 import { DateRange } from '@/Types/atoms';
 import { ReactNode } from 'react';
 import { Controller, useForm } from 'react-hook-form';
@@ -101,13 +108,16 @@ export default () => {
                 )}
               />
             </LabelForm>
-            <Labeled label="진행 플랫폼" error={errors.platform?.message}>
-              <SelectBox
-                values={PLATFORM}
-                defaultValue="ex) gather"
-                {...register('platform', { required: '카테고리를 정해주세요.' })}
+            <LabelForm<StudyCreateForm> name="platform" errors={errors}>
+              <Controller
+                control={control}
+                name="platform"
+                rules={{ required: '카테고리를 정해주세요.' }}
+                render={({ field }) => (
+                  <CustomSelect label="진행 플랫폼" placeholder="ex) gather" values={PLATFORM_OPTIONS} {...field} />
+                )}
               />
-            </Labeled>
+            </LabelForm>
             <Labeled label="진행 기간" error={errors.progressPeriod?.message}>
               <CalendarButton>
                 <Controller
