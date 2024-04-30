@@ -193,7 +193,7 @@ const CreateRecruitmentPage = () => {
                     )}
                   />
                 </LabelForm>
-                <LabelForm label="연결 url" errors={errors}>
+                <LabelForm label="연결 url" name="callUrl" errors={errors}>
                   <InputText
                     placeholder="ex) 오픈 카카오톡 링크"
                     defaultValue={parseSelectValue('callUrl') as string}
