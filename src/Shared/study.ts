@@ -84,6 +84,13 @@ export const POSITIONS: Position[] = [
   { id: 4, name: '데브옵스' },
 ];
 
+export const POSITIONS_OPTIONS = [
+  { value: 1, label: '백엔드' },
+  { value: 2, label: '프론트엔드' },
+  { value: 3, label: '디자이너' },
+  { value: 4, label: '데브옵스' },
+];
+
 export const PROGRESS_METHODS = [
   { id: 1, name: 'ONLINE' },
   { id: 2, name: 'OFFLINE' },
