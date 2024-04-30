@@ -25,11 +25,9 @@ interface StudyCreateForm {
   progressPeriod: DateRange;
 }
 
-const memberLimit = Object.fromEntries(
-  Array(10)
-    .fill(void 0)
-    .map((_, i) => [i + 1, `${i + 1}`]),
-);
+const memberLimit = Array(10)
+  .fill(void 0)
+  .map((_, i) => ({ value: i + 1, label: `${i + 1}` }));
 
 export default () => {
   const {
@@ -69,21 +67,23 @@ export default () => {
                 render={({ field }) => (
                   <CustomSelect
                     label="카테고리"
-                    placeholder="ex) 5명"
-                    defaultValue={'ex) 코딩테스트 스터디'}
+                    placeholder="ex) 코딩테스트 스터디"
                     values={CATEGORIES_OPTION}
                     {...field}
                   />
                 )}
               />
             </LabelForm>
-            <Labeled label="스터디 최대 인원" error={errors.memberLimit?.message}>
-              <SelectBox
-                values={memberLimit}
-                defaultValue="ex) 5명"
-                {...register('memberLimit', { required: '스터디 최대 인원을 정해주세요.' })}
+            <LabelForm<StudyCreateForm> name="memberLimit" errors={errors}>
+              <Controller
+                control={control}
+                name="memberLimit"
+                rules={{ required: '스터디 최대 인원을 정해주세요.' }}
+                render={({ field }) => (
+                  <CustomSelect label="스터디 최대 인원" placeholder="ex) 5명" values={memberLimit} {...field} />
+                )}
               />
-            </Labeled>
+            </LabelForm>
           </FormSection>
           <FormSection icon={<Three />} header="스터디 진행 관련">
             <Labeled label="진행 방식" error={errors.progressMethod?.message}>
