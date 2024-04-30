@@ -5,6 +5,7 @@ import { Stack } from '@/Components/Common/Stack';
 import Heading from '@/Components/Heading';
 import { SelectBox } from '@/Components/Selectbox/SelectBox';
 import { CATEGORY, PLATFORM, PROGRESS_METHOD } from '@/Shared/study';
+import { DateRange } from '@/Types/atoms';
 import { ReactNode } from 'react';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
@@ -13,8 +14,11 @@ interface StudyCreateForm {
   title: string;
   category: string;
   memberLimit: number;
+  position: string;
   progressMethod: string;
   platform: string;
+  platformUrl: string;
+  progressPeriod: DateRange;
 }
 
 const memberLimit = Object.fromEntries(
