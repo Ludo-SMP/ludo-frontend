@@ -1,6 +1,6 @@
 import { One, Three, Two } from '@/Assets';
 import Button from '@/Components/Common/Button';
-import InputText from '@/Components/Common/InputText/iindex';
+import InputText from '@/Components/Common/InputText';
 import { Stack } from '@/Components/Common/Stack';
 import Heading from '@/Components/Heading';
 import { SelectBox } from '@/Components/Selectbox/SelectBox';
