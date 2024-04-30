@@ -2,11 +2,13 @@ import { One, Three, Two } from '@/Assets';
 import { ProgressPeriod } from '@/Components/Calendar/ProgressPeriod';
 import Button from '@/Components/Common/Button';
 import InputText from '@/Components/Common/InputText';
+import { LabelForm } from '@/Components/Common/LabelForm';
 import { Stack } from '@/Components/Common/Stack';
 import Heading from '@/Components/Heading';
 import { CalendarButton } from '@/Components/Selectbox/CalendarButton';
+import CustomSelect from '@/Components/Selectbox/CustomSelect';
 import { SelectBox } from '@/Components/Selectbox/SelectBox';
-import { CATEGORY, PLATFORM, PROGRESS_METHOD } from '@/Shared/study';
+import { CATEGORIES_OPTION, CATEGORY, PLATFORM, PROGRESS_METHOD } from '@/Shared/study';
 import { DateRange } from '@/Types/atoms';
 import { ReactNode } from 'react';
 import { Controller, useForm } from 'react-hook-form';
@@ -59,13 +61,22 @@ export default () => {
             </Labeled>
           </FormSection>
           <FormSection icon={<Two />} header="스터디 기본 구성">
-            <Labeled label="카테고리" error={errors.category?.message}>
-              <SelectBox
-                values={CATEGORY}
-                defaultValue="ex) 코딩테스트 스터디"
-                {...register('category', { required: '카테고리를 정해주세요.' })}
+            <LabelForm<StudyCreateForm> name="category" errors={errors}>
+              <Controller
+                control={control}
+                name="category"
+                rules={{ required: '카테고리를 정해주세요.' }}
+                render={({ field }) => (
+                  <CustomSelect
+                    label="카테고리"
+                    placeholder="ex) 5명"
+                    defaultValue={'ex) 코딩테스트 스터디'}
+                    values={CATEGORIES_OPTION}
+                    {...field}
+                  />
+                )}
               />
-            </Labeled>
+            </LabelForm>
             <Labeled label="스터디 최대 인원" error={errors.memberLimit?.message}>
               <SelectBox
                 values={memberLimit}
@@ -124,7 +135,7 @@ const Form = styled.form`
   gap: 40px;
 `;
 
-const Labeled = ({ label, children, error }: { label: string; error?: string; children?: ReactNode }) => {
+const Labeled = ({ label, children, error }: { label?: string; error?: string; children?: ReactNode }) => {
   return (
     <LabeledInner>
       <Label>{label}</Label>
