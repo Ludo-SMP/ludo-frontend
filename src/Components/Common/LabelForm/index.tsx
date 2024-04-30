@@ -1,9 +1,8 @@
 import Heading from '@/Components/Heading';
-import { ErrorMsg } from '@/Pages/CreateRecruitment/page';
 import { FieldErrors, FieldValues } from 'react-hook-form';
 import styled from 'styled-components';
 
-export interface LabelFormProps<T> {
+export interface LabelFormProps<T extends FieldValues = FieldValues> {
   /** 라벨 */
   label?: string;
 
@@ -17,7 +16,12 @@ export interface LabelFormProps<T> {
   name?: keyof T;
 }
 
-export const LabelForm = <T extends FieldValues = FieldValues>({ label, children, name, errors }: LabelFormProps<T>) => {
+export const LabelForm = <T extends FieldValues = FieldValues>({
+  label,
+  children,
+  name,
+  errors,
+}: LabelFormProps<T>) => {
   return (
     <GridItem>
       {label && (
@@ -26,7 +30,7 @@ export const LabelForm = <T extends FieldValues = FieldValues>({ label, children
         </Heading>
       )}
       {children}
-      {errors?.[name]?.message && <ErrorMsg>{errors?.[name]?.message}</ErrorMsg>}
+      {errors?.[name]?.message && <ErrorMsg>{(errors?.[name] as FieldErrors)?.message?.toString()}</ErrorMsg>}
     </GridItem>
   );
 };
@@ -36,4 +40,8 @@ const GridItem = styled.div`
   flex-direction: column;
   height: 132px;
   gap: 12px;
+`;
+
+export const ErrorMsg = styled.p`
+  color: ${({ theme }) => theme.color.negative};
 `;
