@@ -1,13 +1,15 @@
 import { One, Three, Two } from '@/Assets';
+import { ProgressPeriod } from '@/Components/Calendar/ProgressPeriod';
 import Button from '@/Components/Common/Button';
 import InputText from '@/Components/Common/InputText';
 import { Stack } from '@/Components/Common/Stack';
 import Heading from '@/Components/Heading';
+import { CalendarButton } from '@/Components/Selectbox/CalendarButton';
 import { SelectBox } from '@/Components/Selectbox/SelectBox';
 import { CATEGORY, PLATFORM, PROGRESS_METHOD } from '@/Shared/study';
 import { DateRange } from '@/Types/atoms';
 import { ReactNode } from 'react';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import styled from 'styled-components';
 
 interface StudyCreateForm {
@@ -33,6 +35,7 @@ export default () => {
     handleSubmit,
     watch,
     formState: { errors },
+    control,
   } = useForm<StudyCreateForm>();
 
   const data = watch();
@@ -82,11 +85,14 @@ export default () => {
               <SelectBox values={PLATFORM} defaultValue="ex) gather" {...register('platform', { required: true })} />
             </Labeled>
             <Labeled label="진행 기간" error={errors.category?.type === 'required' && '진행 기간을 정해주세요.'}>
-              <SelectBox
-                values={PLATFORM}
-                defaultValue="ex) 24.01.23 - 21.03.23"
-                {...register('platform', { required: true })}
-              />
+              <CalendarButton>
+                <Controller
+                  control={control}
+                  name="progressPeriod"
+                  rules={{ required: '스터디 진행 기간을 정해 주세요' }}
+                  render={({ field }) => <ProgressPeriod {...field} />}
+                />
+              </CalendarButton>
             </Labeled>
           </FormSection>
         </Stack>
