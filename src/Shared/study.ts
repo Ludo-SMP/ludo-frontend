@@ -66,6 +66,12 @@ export const CATEGORIES = [
   { id: 3, name: '모의 면접' },
 ];
 
+export const CATEGORIES_OPTION = [
+  { value: 1, label: '프로젝트' },
+  { value: 2, label: '코딩 테스트' },
+  { value: 3, label: '모의 면접' },
+];
+
 export const POSITIONS: Position[] = [
   { id: 1, name: '백엔드' },
   { id: 2, name: '프론트엔드' },
