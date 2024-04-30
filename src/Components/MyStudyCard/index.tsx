@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { useCancelAppyMutation } from '@/Hooks/study/useCancelAppyMutation';
 import { useQueryClient } from '@tanstack/react-query';
 import { STUDY } from '@/Constants/queryString';
+import { media } from '@/Styles/theme';
 
 interface MyStudyCardProps {
   id: number;
@@ -62,76 +63,138 @@ const MyStudyCard = ({
         );
       }}
     >
-      <StudyThumbnail width="244px" height="244px" />
-      <StudyInfoWrapper status={status}>
-        <div className="study__status">
-          <span className="title">{title}</span>
-          <div className="studyTokens">
-            <StudyToken status={status} />
+      <StudyThumbnail width="244px" height="100%" />
+      <StudyInfoWrapper status={status} hasRecruitment={hasRecruitment} isOwner={isOwner}>
+        <StudyDetailWrapper status={status}>
+          <div className="study__status">
+            <span className="title">{title}</span>
+            <div className="studyTokens">
+              <StudyToken status={status} />
+            </div>
           </div>
-        </div>
-        <div className="detail__info">
-          <InfoField title="나의 포지션" content={position?.name || '나의 포지션'} disabled={status === 'COMPLETED'} />
-          {period && <InfoField title="진행 기간" content={period || '진행 기간'} disabled={status === 'COMPLETED'} />}
-          {participantCount && (
-            <InfoField title="팀원 수" content={participantCount || '팀원 수'} disabled={status === 'COMPLETED'} />
+          <div className="detail__info">
+            <InfoField
+              title="나의 포지션"
+              content={position?.name || '나의 포지션'}
+              disabled={status === 'COMPLETED'}
+              fontSize={18}
+              titleWidth={120}
+            />
+            {period && (
+              <InfoField
+                title="진행 기간"
+                content={period || '진행 기간'}
+                disabled={status === 'COMPLETED'}
+                fontSize={18}
+                titleWidth={120}
+              />
+            )}
+            {participantCount && (
+              <InfoField
+                title="팀원 수"
+                content={participantCount || '팀원 수'}
+                disabled={status === 'COMPLETED'}
+                fontSize={18}
+                titleWidth={120}
+              />
+            )}
+          </div>
+        </StudyDetailWrapper>
+        <MyStudyCardButtonsWrapper>
+          {(status === 'PROGRESS' || status === 'RECRUITING') && !hasRecruitment && isOwner && (
+            <Button
+              scheme="primary"
+              onClick={(e) => {
+                e.stopPropagation();
+                navigate(`/studies/${id}/recruitments/create`);
+              }}
+            >
+              스터디원 모집 공고 작성하기
+            </Button>
           )}
-        </div>
+          {status === 'UNCHECKED' && (
+            <Button
+              onClick={(e) => {
+                e.stopPropagation();
+                cancelMutate();
+              }}
+            >
+              지원 취소하기
+            </Button>
+          )}
+          {(status === 'REFUSED' || status === 'ACCEPTED') && <Button onClick={() => {}}>지원 기록 삭제하기</Button>}
+        </MyStudyCardButtonsWrapper>
       </StudyInfoWrapper>
-      <MyStudyCardButtonsWrapper>
-        {(status === 'PROGRESS' || status === 'RECRUITING') && !hasRecruitment && isOwner && (
-          <Button
-            scheme="primary"
-            onClick={(e) => {
-              e.stopPropagation();
-              navigate(`/studies/${id}/recruitments/create`);
-            }}
-          >
-            스터디원 모집 공고 작성하기
-          </Button>
-        )}
-        {status === 'UNCHECKED' && (
-          <Button
-            onClick={(e) => {
-              e.stopPropagation();
-              cancelMutate();
-            }}
-          >
-            지원 취소하기
-          </Button>
-        )}
-        {(status === 'REFUSED' || status === 'ACCEPTED') && <Button onClick={() => {}}>지원 기록 삭제하기</Button>}
-      </MyStudyCardButtonsWrapper>
     </MyStudyCardWrapper>
   );
 };
 
 const MyStudyCardWrapper = styled.div`
-  position: relative;
   display: flex;
   width: 100%;
+  height: 246px;
   align-items: flex-start;
+  align-content: flex-start;
+  align-self: stretch;
+  flex-wrap: wrap;
   border-radius: 16px;
   border: 1px solid ${({ theme }) => theme.color.black1};
   box-shadow: 0px 0px 20px 0px ${({ theme }) => theme.color.black0};
 
-  & > div:first-child {
-    border-radius: ${({ theme }) => theme.borderRadius.small};
-    background: ${({ theme }) => theme.color.gray5};
-  }
-
   &:hover {
     cursor: pointer;
   }
+
+  svg {
+    border-radius: 16px 0 0 16px;
+  }
+
+  ${media.mobile} {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
+    width: 302px;
+    height: auto;
+
+    svg {
+      width: 100%;
+      border-radius: 16px 16px 0 0;
+    }
+  }
 `;
 
-const StudyInfoWrapper = styled.div<{ status: StudyStatus | ApplyStatus }>`
+const StudyInfoWrapper = styled.div<{ status: StudyStatus | ApplyStatus; hasRecruitment: boolean; isOwner: boolean }>`
+  display: flex;
+  height: 100%;
+  padding: 24px 32px;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1 0 0;
+
+  ${media.mobile} {
+    display: flex;
+    width: 100%;
+    padding: 16px 24px;
+    flex-direction: column;
+    align-items: center;
+    gap: ${(props) =>
+      ((props.status === 'PROGRESS' || props.status === 'RECRUITING') && !props.hasRecruitment && props.isOwner) ||
+      props.status === 'REFUSED' ||
+      props.status === 'ACCEPTED' ||
+      props.status === 'UNCHECKED'
+        ? '24px'
+        : 0};
+    align-self: stretch;
+  }
+`;
+
+const StudyDetailWrapper = styled.div<{ status: StudyStatus | ApplyStatus }>`
   display: flex;
   flex-direction: column;
-  padding: 24px 32px;
   align-items: flex-start;
   gap: 12px;
-  align-self: stretch;
+  flex: 1 0 0;
 
   .study__status {
     display: flex;
@@ -141,28 +204,61 @@ const StudyInfoWrapper = styled.div<{ status: StudyStatus | ApplyStatus }>`
 
     .title {
       color: ${({ theme }) => theme.color.black5};
-      font-family: 'Pretendard800';
-      font-size: ${({ theme }) => theme.font.large};
+      font-family: 'Pretendard700';
+      font-size: ${({ theme }) => theme.font.medium};
       font-style: normal;
-      font-weight: 800;
+      font-weight: 700;
       line-height: 32px;
     }
 
     .studyTokens {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 4px;
+    }
+  }
+
+  .detail__info {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  ${media.mobile} {
+    .study__status {
+      display: flex;
+      align-items: center;
+      align-content: center;
+      gap: 16px;
+      align-self: stretch;
+      flex-wrap: wrap;
+    }
+
+    .detail__info {
+      display: flex;
+      gap: 12px;
+
+      & > div {
+        width: 252px;
+        gap: 0;
+      }
     }
   }
 `;
 
 const MyStudyCardButtonsWrapper = styled.div`
-  position: absolute;
-  bottom: 32px;
-  right: 40px;
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
 
   button {
     padding: 8px 24px;
+  }
+
+  ${media.mobile} {
+    justify-content: center;
   }
 `;
 

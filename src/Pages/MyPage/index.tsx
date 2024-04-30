@@ -212,7 +212,9 @@ const CardListWrapper = styled.div`
   display: flex;
   width: 100%;
   flex-direction: column;
+  flex-wrap: wrap;
   align-items: center;
+  align-content: center;
   gap: 12px;
   align-self: stretch;
 `;
@@ -222,6 +224,7 @@ const ChipMenusWrapper = styled.div`
   align-items: flex-start;
   gap: 12px;
   align-self: stretch;
+  overflow-x: hidden;
 `;
 
 const MypageButtonsWrapper = styled.div`
