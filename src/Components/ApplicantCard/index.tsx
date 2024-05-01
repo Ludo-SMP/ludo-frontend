@@ -13,11 +13,17 @@ import { useModalStore } from '@/store/modal';
 import { useQueryClient } from '@tanstack/react-query';
 
 interface ApplicantCardProps extends Omit<Member, 'role'> {
+  /** 스터디 ID */
   studyId: number;
+
+  /** 스터디명 */
   title: string;
+
+  /** 스터디장 여부 */
   isOwner: boolean;
 }
 
+/** 지원자 카드 */
 const ApplicantCard = ({ studyId, id: applicantId, title, nickname, email, position, isOwner }: ApplicantCardProps) => {
   const [applyStatus, setApplyStatus] = useState<ApplyStatus>('UNCHECKED');
   const { isModalOpen, closeModal } = useModalStore();

@@ -1,0 +1,77 @@
+import { Meta, ColorPalette, ColorItem } from '@storybook/blocks';
+
+import { color } from '@/Styles/theme';
+
+<Meta title="Colors" />
+
+# Colors
+
+<ColorPalette>
+  <ColorItem
+    title="Purple"
+	subtitle="theme.color.purple*"
+    colors={{
+      'purple1': color.purple1,
+      'purple2': color.purple2,
+      'purple3': color.purple3,
+      'purple4': color.purple4,
+      'purple5': color.purple5,
+      'purple6': color.purple6,
+    }}
+  />
+  <ColorItem
+    title="Orange"
+	subtitle="theme.color.orange*"
+    colors={{
+      'orange1': color.orange1,
+      'orange2': color.orange2,
+      'orange3': color.orange3,
+      'orange4': color.orange4,
+    }}
+  />
+  <ColorItem
+    title="White"
+	subtitle="theme.color.white*"
+    colors={{
+      'white': color.white,
+      'white1': color.white1,
+    }}
+  />
+  <ColorItem
+    title="Black"
+	subtitle="theme.color.black*"
+    colors={{
+      'black': color.black,
+      'black0': color.black0,
+      'black1': color.black1,
+      'black2': color.black2,
+      'black3': color.black3,
+      'black4': color.black4,
+      'black5': color.black5,
+    }}
+  />
+  <ColorItem
+    title="Gray"
+	subtitle="theme.color.gray*"
+    colors={{
+      'gray1': color.gray1,
+      'gray2': color.gray2,
+      'gray3': color.gray3,
+      'gray4': color.gray4,
+      'gray5': color.gray5,
+    }}
+  />
+  <ColorItem
+    title="Naver"
+	subtitle="theme.color.naver"
+    colors={[color.naver]}
+  />
+  <ColorItem
+    title="Kakao"
+	subtitle="theme.color.kakao*"
+    colors={{
+      'kakao': color.kakao,
+      'kakaoFontColor': color.kakaoFontColor,
+    }}
+  />
+</ColorPalette>

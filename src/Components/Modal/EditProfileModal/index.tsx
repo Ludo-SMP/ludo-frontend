@@ -1,5 +1,5 @@
 import Button from '@/Components/Common/Button';
-import InputText from '@/Components/Common/InputText/iindex';
+import InputText from '@/Components/Common/InputText';
 import { PROFILE } from '@/Constants/messages';
 import { STUDY } from '@/Constants/queryString';
 import { useEditProfileNickname } from '@/Hooks/user/useEditProfileNickname';
@@ -66,10 +66,10 @@ const EditProfileModal = ({ userNickname, handleEdit }: EdiptProfileModalProps) 
                   {errors?.nickname?.type && errors?.nickname?.type === 'required'
                     ? PROFILE.NICNAME_ERROR.REQUIRED
                     : errors?.nickname?.type === 'pattern'
-                    ? PROFILE.NICNAME_ERROR.WHITE_SPACE
-                    : errors?.nickname?.type === 'validate'
-                    ? PROFILE.NICNAME_ERROR.SAME
-                    : PROFILE.NICNAME_ERROR.LEGNTH}
+                      ? PROFILE.NICNAME_ERROR.WHITE_SPACE
+                      : errors?.nickname?.type === 'validate'
+                        ? PROFILE.NICNAME_ERROR.SAME
+                        : PROFILE.NICNAME_ERROR.LEGNTH}
                 </p>
               </ErrorWrapper>
             </fieldset>
