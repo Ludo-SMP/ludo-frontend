@@ -5,11 +5,12 @@ export interface InfoFieldProps {
   title: string;
   content: string | number;
   width?: string;
-  titleWidth?: string;
+  titleWidth?: number;
   contentWidth?: string;
   flexDirection?: string;
-  gap?: string;
+  gap?: number;
   disabled?: boolean;
+  fontSize?: number;
 }
 
 export const InfoField = ({
@@ -18,6 +19,7 @@ export const InfoField = ({
   contentWidth,
   title,
   content,
+  fontSize,
   flexDirection,
   gap,
   disabled = false,
@@ -30,6 +32,7 @@ export const InfoField = ({
       flexDirection={flexDirection}
       gap={gap}
       disabled={disabled}
+      fontSize={fontSize}
     >
       <div className="field__title">{title}</div>
       <div className="field__content">{content}</div>
@@ -39,20 +42,21 @@ export const InfoField = ({
 
 const InfoFieldWrapper = styled.div<{
   width?: string;
-  titleWidth?: string;
+  titleWidth?: number;
   contentWidth?: string;
   flexDirection?: string;
-  gap?: string;
+  gap?: number;
   disabled?: boolean;
+  fontSize?: number;
 }>`
   display: flex;
   flex-direction: ${(props) => props.flexDirection || 'row'};
   width: ${(props) => props.width};
   text-align: start;
   gap: ${(props) => (props.flexDirection ? '4px' : '24px')};
-  font-size: ${(props) => props.theme.font.medium};
+  font-size: ${(props) => (props.fontSize ? props.fontSize : props.theme.font.medium)};
   font-weight: 500;
-  line-height: 40px;
+  line-height: 24px;
 
   .field {
     &__title {
@@ -62,10 +66,15 @@ const InfoFieldWrapper = styled.div<{
       ${media.tablet} {
         width: auto;
       }
+
+      ${media.mobile} {
+        width: ${({ titleWidth }) => `${titleWidth}px` || 'auto'};
+      }
     }
 
     &__content {
       color: ${({ theme, disabled }) => (disabled ? 'rgba(0, 0, 0, 0.25)' : theme.color.black2)};
+      overflow-x: hidden;
     }
   }
 `;

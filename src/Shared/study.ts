@@ -1,4 +1,4 @@
-import { Position } from '@/Types/study';
+import { Position, Option } from '@/Types/study';
 
 export const STUDY_STATUS = {
   PROGRESS: '진행 중',
@@ -17,12 +17,12 @@ export const MEMBER_STATUS = {
   PARTICIPATED: '참여 중',
 };
 
-export const POSITION = {
-  1: '백엔드',
-  2: '프론트엔드',
-  3: '디자이너',
-  4: '데브옵스',
-};
+export const POSITION: Array<Option<number, string>> = [
+  { value: 1, label: '백엔드' },
+  { value: 2, label: '프론트엔드' },
+  { value: 3, label: '디자이너' },
+  { value: 4, label: '데브옵스' },
+];
 
 export const PROGRESS_METHOD = {
   ONLINE: '온라인',

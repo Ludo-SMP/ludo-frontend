@@ -30,9 +30,13 @@ const ChipMenuContainer = styled.div<{ checked: boolean }>`
   font-style: normal;
   font-weight: 600;
   line-height: 40px;
+  white-space: nowrap;
 
   &:hover {
     cursor: pointer;
+    border: 1px solid ${({ theme }) => theme.color.black1};
+    background: ${({ theme }) => theme.color.orange4};
+    color: ${({ theme }) => theme.color.white};
   }
 `;
 

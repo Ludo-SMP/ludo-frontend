@@ -1,5 +1,4 @@
 import { logOut } from '@/Apis/auth';
-import { HttpStatus } from '@/Constants/StatusCodes';
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 
 export const createClient = (config?: AxiosRequestConfig) => {
@@ -21,7 +20,7 @@ export const createClient = (config?: AxiosRequestConfig) => {
       return response;
     },
     async (error: AxiosError) => {
-      if (error.response?.status === HttpStatus.UNAUTHORIZED) {
+      if (error.response?.status === 401) {
         try {
           const data = await logOut(); // 로그아웃 통해 쿠키 제거
           if (data) window.location.href = '/';

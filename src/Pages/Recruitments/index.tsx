@@ -7,9 +7,7 @@ import { Create, Up } from '@/Assets';
 import Button from '@/Components/Common/Button';
 import UtiltiyButtons from '@/Components/UtilityButtons';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useStack } from '@/Hooks/stack/useStack';
 import { ALL, CATEGORIES, POSITIONS, PROGRESS_METHODS } from '@/Shared/study';
-import { Stack } from '@/Types/study';
 import { useLoginStore } from '@/store/auth';
 import { useModalStore } from '@/store/modal';
 import { CREATE_STUDY } from '@/Constants/messages';
@@ -18,7 +16,6 @@ import { ROUTES } from '@/Constants/route';
 import { useEffect } from 'react';
 
 const RecruitmentsPage = () => {
-  const { data, isLoading } = useStack();
   const navigate = useNavigate();
   const { isLoggedIn } = useLoginStore();
   const { isModalOpen, openModal } = useModalStore();
@@ -31,10 +28,6 @@ const RecruitmentsPage = () => {
   const handleScroll = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
-
-  const stacks = data?.stacks?.map((stack: Stack) => {
-    return { id: stack.id, name: stack.name };
-  });
 
   return (
     <RecruitmentsPageWrapper>

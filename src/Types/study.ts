@@ -1,4 +1,4 @@
-import { APPLY_STATUS, MEMBER_STATUS, PLATFORM, PROGRESS_METHOD, ROLE, STUDY_STATUS } from '@/Shared/study';
+import { APPLY_STATUS, POSITION, MEMBER_STATUS, PLATFORM, PROGRESS_METHOD, ROLE, STUDY_STATUS } from '@/Shared/study';
 
 export type CategoryPropertyType = 'category' | 'stacks' | 'positions' | 'way' | 'sort';
 export type StudyStatus = keyof typeof STUDY_STATUS;
@@ -7,6 +7,7 @@ export type ApplyStatus = keyof typeof APPLY_STATUS;
 export type ProgressMethod = keyof typeof PROGRESS_METHOD;
 export type Role = keyof typeof ROLE;
 export type Platform = keyof typeof PLATFORM;
+export type PositionId = keyof typeof POSITION;
 export type Card = 'STUDY' | 'RECRUITMENT';
 export type Sort = '최신순' | '조회순';
 export type ApplyTryStatus = 'NOT APPLY' | 'SUCCESS' | 'CLOSED' | 'ALREDAY_APPLY' | 'ALREDY_PARTICIPATED';
@@ -102,6 +103,18 @@ export interface Recruitments {
   recruitments: Recruitment[];
 }
 
+// TODO: recruitment 타입 중복 속성 개선, stackId 객체 만들기
+export interface RecruitmentForm {
+  title: string;
+  stackIds: number[];
+  positionIds: PositionId[];
+  applicantCount: number;
+  recruitmentEndDateTime: string;
+  contact: 'KAKAO' | 'EMAIL';
+  callUrl: string;
+  content: string;
+}
+
 export interface FilterOptionParams {
   pageParam?: number;
   last?: number;
@@ -173,6 +186,11 @@ export interface ApplicantRecruitment {
   title: string;
   position: Position;
   applicantStatus: ApplyStatus;
+}
+
+export interface Option<T, K> {
+  value: T;
+  label: K;
 }
 
 export interface CompletedStudy {

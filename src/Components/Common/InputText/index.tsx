@@ -1,14 +1,39 @@
-import React, { ForwardedRef } from 'react';
+import { ComponentProps, ForwardedRef, ReactNode, forwardRef } from 'react';
 import styled from 'styled-components';
-
 interface InputTextProps extends React.InputHTMLAttributes<HTMLInputElement> {
   placeholder?: string;
   inputType?: 'text' | 'email' | 'password' | 'member';
+  defaultValue?: string;
+  currentLength?: number;
+  maxLength?: number;
+  icon?: ReactNode;
 }
 
-const InputText = React.forwardRef(
-  ({ placeholder, inputType, onChange, ...props }: InputTextProps, ref: ForwardedRef<HTMLInputElement>) => {
-    return <InputWrapper placeholder={placeholder} ref={ref} type={inputType} onChange={onChange} {...props} />;
+const InputText = forwardRef<HTMLInputElement, ComponentProps<'input'> & InputTextProps>(
+  (
+    { name, placeholder, defaultValue, inputType, onChange, maxLength, currentLength, icon, ...props }: InputTextProps,
+    ref: ForwardedRef<HTMLInputElement>,
+  ) => {
+    return (
+      <Box>
+        <InputWrapper
+          placeholder={placeholder}
+          defaultValue={defaultValue}
+          name={name}
+          ref={ref}
+          type={inputType ?? 'text'}
+          onChange={onChange}
+          autoComplete="off"
+          {...props}
+        />
+        {maxLength && (
+          <LengthIndicator>
+            {currentLength} / {maxLength}
+          </LengthIndicator>
+        )}
+        {icon && <IconWrapper>{icon}</IconWrapper>}
+      </Box>
+    );
   },
 );
 
@@ -17,18 +42,42 @@ const InputWrapper = styled.input`
   padding: 10px 16px;
   border: 1px solid ${({ theme }) => theme.color.black1};
   border-radius: ${({ theme }) => theme.borderRadius.small};
-  font-size: ${({ theme }) => theme.font.medium};
+  font-size: ${({ theme }) => theme.font.small};
   line-height: 1.5;
   color: ${({ theme }) => theme.color.black};
-
   ::placeholder {
     color: ${({ theme }) => theme.color.black2};
     font-family: 'Pretendard400';
-    font-size: ${({ theme }) => theme.font.medium};
+    font-size: ${({ theme }) => theme.font.small};
     font-style: normal;
     font-weight: 400;
     line-height: 28px;
   }
+`;
+
+const Box = styled.div`
+  position: relative;
+  display: flex;
+`;
+
+const IconWrapper = styled.div`
+  display: flex;
+  position: absolute;
+  top: 10px;
+  right: 16px;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+const LengthIndicator = styled.div`
+  position: absolute;
+  top: 10px;
+  right: 16px;
+  color: #00000073;
+  font-family: Pretendard400;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
 `;
 
 export default InputText;

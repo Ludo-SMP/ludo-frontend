@@ -60,7 +60,7 @@ const FooterWrapper = styled.footer`
   background-color: ${({ theme }) => theme.color.gray1};
 
   ${media.custom(800)} {
-    width: 400px;
+    width: 100%;
     margin: 20px auto 0 auto;
   }
 `;
