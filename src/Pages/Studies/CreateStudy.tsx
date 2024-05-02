@@ -6,6 +6,7 @@ import { Grid } from '@/Components/Common/Grid';
 import InputText from '@/Components/Common/InputText';
 import { LabelForm } from '@/Components/Common/LabelForm';
 import { Stack } from '@/Components/Common/Stack';
+import ErrorBoundary from '@/Components/ErrorBoundary';
 import Heading from '@/Components/Heading';
 import { CalendarButton } from '@/Components/Selectbox/CalendarButton';
 import CustomSelect from '@/Components/Selectbox/CustomSelect';
@@ -13,7 +14,7 @@ import { useCreateStudyMutation } from '@/Hooks/study/useCreateStudy';
 import { useTempSaved } from '@/Hooks/useTempSaved';
 import { CATEGORIES_OPTION, PLATFORM_OPTIONS, POSITIONS_OPTIONS, PROGRESS_METHODS_OPTIONS } from '@/Shared/study';
 import { DateRange } from '@/Types/atoms';
-import { Platform, ProgressMethod } from '@/Types/study';
+import { Category, Platform, Position, ProgressMethod } from '@/Types/study';
 import { saveTemporary } from '@/utils/temporarySavedUtils';
 import { ReactNode } from 'react';
 import { Controller, useForm } from 'react-hook-form';
@@ -22,9 +23,9 @@ import styled from 'styled-components';
 
 interface StudyCreateForm {
   title: string;
-  category: string;
+  category: Category;
   memberLimit: number;
-  position: string;
+  position: Position;
   progressMethod: ProgressMethod;
   platform: Platform;
   platformUrl: string;
@@ -44,11 +45,13 @@ export default () => {
     control,
   } = useForm<StudyCreateForm>();
 
-  const { mutate } = useCreateStudyMutation();
+  const { mutate, isError } = useCreateStudyMutation();
   const { savedKey, tempSaved } = useTempSaved<StudyCreateForm>();
   const navigate = useNavigate();
 
   const data = watch();
+
+  if (isError) return <ErrorBoundary />;
 
   return (
     <PageWrapper>
@@ -56,8 +59,8 @@ export default () => {
         onSubmit={handleSubmit(({ title, category, memberLimit, position, progressMethod, platform, progressPeriod }) =>
           mutate({
             title,
-            categoryId: category as unknown as number,
-            positionId: position as unknown as number,
+            categoryId: category.id,
+            positionId: position.id,
             way: progressMethod,
             platform,
             participantLimit: memberLimit,
