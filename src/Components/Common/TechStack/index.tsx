@@ -23,7 +23,7 @@ export const TechStack = ({ name, imageUrl, selected = false, onClick }: TechSta
 
 const TechStackWrapper = styled.div<{ selected: boolean; imageUrl?: string }>`
   display: inline-flex;
-  padding: 8px 12px 8px 8px;
+  padding: 8px;
   justify-content: center;
   align-items: center;
   gap: 12px;
@@ -44,14 +44,13 @@ const TechStackWrapper = styled.div<{ selected: boolean; imageUrl?: string }>`
   }
 
   .stack__name {
-    width: 108px;
+    width: 84px;
     color: ${({ theme, selected }) => (selected ? theme.color.purple1 : theme.color.black3)};
-    font-family: Pretendard600;
+    font-family: 'Pretendard600';
     font-size: ${({ theme }) => theme.font.xsmall};
     font-style: normal;
     font-weight: 600;
-    line-height: 32px;
-    white-space: nowrap;
+    line-height: 16px;
   }
 
   &:hover {

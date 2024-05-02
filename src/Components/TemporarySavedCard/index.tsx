@@ -53,6 +53,7 @@ const TemporarySavedCard = ({ savedKey, title }: Partial<RecruitmentForm> & Prop
 const TemporarySavedCardWrapper = styled.div`
   display: flex;
   width: 100%;
+  padding: 24px 32px;
   justify-content: space-between;
   padding: 32px 40px;
   align-items: center;
@@ -60,6 +61,16 @@ const TemporarySavedCardWrapper = styled.div`
   border-radius: ${({ theme }) => theme.borderRadius.large};
   border: 1px solid ${({ theme }) => theme.color.black1};
   background: ${({ theme }) => theme.color.white};
+  box-shadow: 0px 0px 20px 0px ${({ theme }) => theme.color.black0};
+
+  .title {
+    color: ${({ theme }) => theme.color.black5};
+    font-family: 'Pretendard800';
+    font-size: ${({ theme }) => theme.font.large};
+    font-style: normal;
+    font-weight: 800;
+    line-height: 32px;
+  }
 
   .title {
     font-size: 24px;

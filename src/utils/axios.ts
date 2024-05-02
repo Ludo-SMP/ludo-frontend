@@ -1,4 +1,5 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import { logOut } from '@/Apis/auth';
+import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 
 export const createClient = (config?: AxiosRequestConfig) => {
   const axiosInstance = axios.create({
@@ -18,7 +19,14 @@ export const createClient = (config?: AxiosRequestConfig) => {
     (response) => {
       return response;
     },
-    (error) => {
+    async (error: AxiosError) => {
+      if (error.response?.status === 401) {
+        try {
+          const data = await logOut(); // 로그아웃 통해 쿠키 제거
+          if (data) window.location.href = '/';
+        } catch {}
+      }
+      // Login Provider에서 에러 핸들링하도록 reject
       return Promise.reject(error);
     },
   );

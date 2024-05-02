@@ -1,6 +1,6 @@
 import { Loading, MemberImage, Study, StudyInfo } from '@/Assets';
 import UserCard from '@/Components/UserCard';
-import MyStudyCard from '@/Components/MyStudyCard';
+import { MyStudyCard } from '@/Components/MyStudyCard';
 import styled from 'styled-components';
 import TemporarySavedCard from '@/Components/TemporarySavedCard';
 import Button from '@/Components/Common/Button';
@@ -9,7 +9,6 @@ import { getMillisec, getPeriod } from '@/utils/date';
 import ChipMenu from '@/Components/Common/ChipMenu';
 import { User, ParticipateStudy, ApplicantRecruitment, CompletedStudy, RecruitmentForm } from '@/Types/study';
 import { useSavedKeyStore, useSelectedCardStore, useSelectedMyStudyStore } from '@/store/study';
-
 import { useLogOutMutation } from '@/Hooks/auth/useLogOutMutation';
 import { useLocation } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
@@ -29,7 +28,6 @@ const MyPage = () => {
 
   const { selectedMyStudyStatus, setSelectedMyStudyStatus } = useSelectedMyStudyStore();
   const { selectedCard, setSelectedCard } = useSelectedCardStore();
-
   const { mutate: logoutMutate } = useLogOutMutation();
 
   const [savedList, setSavedList] = useState<Array<Partial<RecruitmentForm> & { savedKey: string }>>([]);
@@ -88,14 +86,14 @@ const MyPage = () => {
         <>
           <UserInfoWrapper>
             <div className="title">
-              <MemberImage />
+              <MemberImage width={32} height={32} />
               <span>회원정보</span>
             </div>
             <UserCard nickname={user?.nickname || '닉네임'} email={user?.email || '이메일'} />
           </UserInfoWrapper>
           <CardsWrapper>
             <MyStudyTitleWrapper>
-              <StudyInfo width={40} height={40} />
+              <StudyInfo width={32} height={32} />
               <span className="title">스따-디</span>
             </MyStudyTitleWrapper>
             <ChipMenusWrapper>
@@ -118,43 +116,45 @@ const MyPage = () => {
                 진행 완료된 스터디
               </ChipMenu>
             </ChipMenusWrapper>
-            {selectedMyStudyStatus === 'PARTICIPATED'
-              ? participateStudies?.map((participateStudy: ParticipateStudy) => (
-                  <MyStudyCard
-                    id={participateStudy?.studyId}
-                    title={participateStudy?.title}
-                    status={participateStudy.status}
-                    position={participateStudy?.position}
-                    period={getPeriod(participateStudy?.startDateTime, participateStudy?.endDateTime)}
-                    participantCount={participateStudy?.participantCount}
-                    isOwner={participateStudy?.isOwner}
-                    hasRecruitment={participateStudy?.hasRecruitment}
-                    key={participateStudy?.studyId}
-                  />
-                ))
-              : selectedMyStudyStatus === 'APPLIED'
-                ? applicantRecruitments?.map((applicantRecruitment: ApplicantRecruitment) => (
+            <CardListWrapper>
+              {selectedMyStudyStatus === 'PARTICIPATED'
+                ? participateStudies?.map((participateStudy: ParticipateStudy) => (
                     <MyStudyCard
-                      id={applicantRecruitment?.recruitmentId}
-                      title={applicantRecruitment?.title}
-                      status={applicantRecruitment?.applicantStatus}
-                      position={applicantRecruitment?.position}
-                      key={applicantRecruitment?.recruitmentId}
+                      id={participateStudy?.studyId}
+                      title={participateStudy?.title}
+                      status={participateStudy.status}
+                      position={participateStudy?.position}
+                      period={getPeriod(participateStudy?.startDateTime, participateStudy?.endDateTime)}
+                      participantCount={participateStudy?.participantCount}
+                      isOwner={participateStudy?.isOwner}
+                      hasRecruitment={participateStudy?.hasRecruitment}
+                      key={participateStudy?.studyId}
                     />
                   ))
-                : completedStudies?.map((completedStudy: CompletedStudy) => (
-                    <MyStudyCard
-                      id={completedStudy?.studyId}
-                      title={completedStudy?.title}
-                      status={completedStudy?.status}
-                      position={completedStudy?.position}
-                      period={getPeriod(completedStudy?.startDateTime, completedStudy?.endDateTime)}
-                      participantCount={completedStudy?.participantCount}
-                      isOwner={completedStudy?.isOwner}
-                      hasRecruitment={completedStudy?.hasRecruitment}
-                      key={completedStudy?.studyId}
-                    />
-                  ))}
+                : selectedMyStudyStatus === 'APPLIED'
+                  ? applicantRecruitments.map((applicantRecruitment: ApplicantRecruitment) => (
+                      <MyStudyCard
+                        id={applicantRecruitment?.recruitmentId}
+                        title={applicantRecruitment?.title}
+                        status={applicantRecruitment?.applicantStatus}
+                        position={applicantRecruitment?.position}
+                        key={applicantRecruitment?.recruitmentId}
+                      />
+                    ))
+                  : completedStudies.map((completedStudy: CompletedStudy) => (
+                      <MyStudyCard
+                        id={completedStudy?.studyId}
+                        title={completedStudy?.title}
+                        status={completedStudy?.status}
+                        position={completedStudy?.position}
+                        period={getPeriod(completedStudy?.startDateTime, completedStudy?.endDateTime)}
+                        participantCount={completedStudy?.participantCount}
+                        isOwner={completedStudy?.isOwner}
+                        hasRecruitment={completedStudy?.hasRecruitment}
+                        key={completedStudy?.studyId}
+                      />
+                    ))}
+            </CardListWrapper>
           </CardsWrapper>
           <CardsWrapper>
             <div className="title">
@@ -169,9 +169,11 @@ const MyPage = () => {
                 스터디 모집공고
               </ChipMenu>
             </ChipMenusWrapper>
-            {savedList?.map((form: Partial<RecruitmentForm> & { savedKey: string }) => (
-              <TemporarySavedCard key={form.savedKey} onRemove={onRemove} {...form} />
-            ))}
+            <CardListWrapper>
+              {savedList?.map((form: Partial<RecruitmentForm> & { savedKey: string }) => (
+                <TemporarySavedCard key={form.savedKey} onRemove={onRemove} {...form} />
+              ))}
+            </CardListWrapper>
           </CardsWrapper>
 
           <MypageButtonsWrapper>
@@ -190,19 +192,22 @@ const MyPageWrapper = styled.div`
   flex-direction: column;
   max-width: 1224px;
   margin: 40px auto 80px auto;
-  gap: 32px;
+  gap: 40px;
 
   .title {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
     align-self: stretch;
-    color: ${({ theme }) => theme.color.black5};
-    font-family: 'Pretendard800';
-    font-size: ${({ theme }) => theme.font.xxlarge};
-    font-style: normal;
-    font-weight: 800;
-    line-height: 48px;
+
+    span {
+      color: ${({ theme }) => theme.color.black5};
+      font-family: 'Pretendard700';
+      font-size: ${({ theme }) => theme.font.medium};
+      font-style: normal;
+      font-weight: 700;
+      line-height: 32px;
+    }
   }
 `;
 
@@ -218,6 +223,7 @@ const CardsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  min-height: 368px;
   gap: 24px;
   align-self: stretch;
 `;
@@ -225,6 +231,26 @@ const CardsWrapper = styled.div`
 const MyStudyTitleWrapper = styled.div`
   display: flex;
   align-items: center;
+  gap: 8px;
+  align-self: stretch;
+
+  span {
+    color: ${({ theme }) => theme.color.black5};
+    font-family: 'Pretendard700';
+    font-size: ${({ theme }) => theme.font.medium};
+    font-style: normal;
+    font-weight: 700;
+    line-height: 32px;
+  }
+`;
+
+const CardListWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: center;
   gap: 12px;
   align-self: stretch;
 `;
@@ -234,14 +260,15 @@ const ChipMenusWrapper = styled.div`
   align-items: flex-start;
   gap: 12px;
   align-self: stretch;
+  overflow-x: hidden;
 `;
 
 const MypageButtonsWrapper = styled.div`
   display: flex;
-  justify-content: center;
+  padding-top: 24px;
+  flex-direction: column;
   align-items: center;
-  gap: 12px;
-  align-self: stretch;
+  gap: 24px;
 `;
 
 export default MyPage;

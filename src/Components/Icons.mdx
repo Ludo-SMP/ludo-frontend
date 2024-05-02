@@ -27,7 +27,9 @@ import {
   Two,
   Up,
   Views,
-} from '@/Assets'
+  StudyThumbnail,
+  Setting,
+} from '@/Assets';
 
 <Meta title="Iconography" />
 
@@ -60,11 +62,7 @@ import {
 </IconGallery>
 
 <IconGallery>
-  {[
-    One,
-    Two,
-    Three,
-  ].map((Icon, i) => (
+  {[One, Two, Three].map((Icon, i) => (
     <IconItem key={i} name={Icon.name}>
       <Icon />
     </IconItem>
@@ -72,12 +70,7 @@ import {
 </IconGallery>
 
 <IconGallery>
-  {[
-	Up,
-	Down,
-	Left,
-	Right,
-  ].map((Icon, i) => (
+  {[Up, Down, Left, Right].map((Icon, i) => (
     <IconItem key={i} name={Icon.name}>
       <Icon />
     </IconItem>
@@ -85,11 +78,7 @@ import {
 </IconGallery>
 
 <IconGallery>
-  {[
-	Google,
-	Naver,
-	Kakao
-  ].map((Icon, i) => (
+  {[Google, Naver, Kakao].map((Icon, i) => (
     <IconItem key={i} name={Icon.name}>
       <Icon />
     </IconItem>

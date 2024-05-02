@@ -22,7 +22,7 @@ import { CREATE_RECRUITMENT } from '@/Constants/messages';
 import { APPLICATION_CNT, CONTACT, POSITION } from '@/Shared/study';
 
 import { getPeriod } from '@/utils/date';
-import StackModal from '@/Components/Modal/StackModal';
+import { StackModal } from '@/Components/Modal/StackModal';
 import { useSelectDefaultValue } from '@/Hooks/recruitments/useSelectDefaultValue';
 import { LabelForm } from '@/Components/Common/LabelForm';
 import { FormSection } from '@/Components/Common/FormSection';

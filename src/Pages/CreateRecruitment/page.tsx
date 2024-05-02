@@ -25,7 +25,7 @@ import { useStudyDetail } from '@/Hooks/study/useStudyDetail';
 import { getPeriod } from '@/utils/date';
 import { useModalStore } from '@/store/modal';
 import Modal from '@/Components/Common/Modal';
-import StackModal from '@/Components/Modal/StackModal';
+import { StackModal } from '@/Components/Modal/StackModal';
 import { useSelectDefaultValue } from '@/Hooks/recruitments/useSelectDefaultValue';
 import { saveTemporary } from '@/utils/temporarySavedUtils';
 import { ErrorMsg, LabelForm } from '@/Components/Common/LabelForm';
