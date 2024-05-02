@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useForm, Controller, FieldError } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 
 import styled, { css } from 'styled-components';
@@ -13,7 +13,7 @@ import { TextArea } from '@/Components/Textarea';
 import InputText from '@/Components/Common/InputText/index';
 import { CalendarButton } from '@/Components/Selectbox/CalendarButton';
 import { EndDate } from '@/Components/Calendar/EndDate';
-import CustomSelect from '@/Components/Selectbox/CustomSelect';
+import CustomSelect from '@/Components/CustomSelect/CustomSelect';
 import { Stack } from '@/Components/Common/Stack';
 
 import { RecruitFormWithSelect } from '@/Types/study';
@@ -33,6 +33,7 @@ import { FormSection } from '@/Components/Common/FormSection';
 import { LabelText } from '@/Components/Common/LabelText';
 import { useTempSaved } from '@/Hooks/useTempSaved';
 import { useStack } from '@/Hooks/useStack';
+import { media } from '@/Styles/theme';
 
 const DEF_STACK_PLACEHOLDER = 'ex. Typescript';
 
@@ -118,7 +119,7 @@ const CreateRecruitmentPage = () => {
       {isLoading ? (
         <Loading />
       ) : (
-        <form onSubmit={handleSubmit(onSubmit, onInvalid)}>
+        <Form onSubmit={handleSubmit(onSubmit, onInvalid)}>
           <Heading type={'Head'} component={'Page'}>
             스터디 팀원 모집하기
           </Heading>
@@ -257,7 +258,7 @@ const CreateRecruitmentPage = () => {
               </Button>
             </div>
           </ButtonBox>
-        </form>
+        </Form>
       )}
     </RecruitmentContainer>
   );
@@ -265,11 +266,23 @@ const CreateRecruitmentPage = () => {
 
 export default CreateRecruitmentPage;
 
+const Form = styled.form`
+  ${media.tablet} {
+    margin: 24px;
+  }
+`;
+
 const Grid = styled.div`
+  ${media.tablet} {
+    display: flex;
+    flex-direction: column;
+  }
+
   display: grid;
-  grid-template-columns: repeat(3, minmax(392px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(3, minmax(auto, 1fr));
   margin-top: 24px;
+
+  gap: 24px;
 `;
 
 const RecruitmentContainer = styled.section`
@@ -284,6 +297,10 @@ const Box = styled.div<{ display: 'row' | 'column'; gap?: string }>`
   flex-direction: ${(props) => props.display};
   width: 100%;
   margin-top: 24px;
+
+  ${media.tablet} {
+    flex-direction: column;
+  }
 
   ${(props) =>
     props.gap &&
