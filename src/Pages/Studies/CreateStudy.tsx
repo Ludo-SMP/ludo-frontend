@@ -1,3 +1,4 @@
+import { createStudy } from '@/Apis/study';
 import { One, Three, Two } from '@/Assets';
 import { ProgressPeriod } from '@/Components/Calendar/ProgressPeriod';
 import Button from '@/Components/Common/Button';
@@ -8,13 +9,15 @@ import { Stack } from '@/Components/Common/Stack';
 import Heading from '@/Components/Heading';
 import { CalendarButton } from '@/Components/Selectbox/CalendarButton';
 import CustomSelect from '@/Components/Selectbox/CustomSelect';
+import { useCreateStudyMutation } from '@/Hooks/study/useCreateStudy';
 import { useTempSaved } from '@/Hooks/useTempSaved';
 import { CATEGORIES_OPTION, PLATFORM_OPTIONS, POSITIONS_OPTIONS, PROGRESS_METHODS_OPTIONS } from '@/Shared/study';
 import { DateRange } from '@/Types/atoms';
+import { Platform, ProgressMethod } from '@/Types/study';
 import { saveTemporary } from '@/utils/temporarySavedUtils';
 import { ReactNode } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { redirect, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 interface StudyCreateForm {
@@ -22,8 +25,8 @@ interface StudyCreateForm {
   category: string;
   memberLimit: number;
   position: string;
-  progressMethod: string;
-  platform: string;
+  progressMethod: ProgressMethod;
+  platform: Platform;
   platformUrl: string;
   progressPeriod: DateRange;
 }
@@ -41,6 +44,7 @@ export default () => {
     control,
   } = useForm<StudyCreateForm>();
 
+  const { mutate } = useCreateStudyMutation();
   const { savedKey, tempSaved } = useTempSaved<StudyCreateForm>();
   const navigate = useNavigate();
 
@@ -48,7 +52,20 @@ export default () => {
 
   return (
     <PageWrapper>
-      <Form onSubmit={handleSubmit(console.log)}>
+      <Form
+        onSubmit={handleSubmit(({ title, category, memberLimit, position, progressMethod, platform, progressPeriod }) =>
+          mutate({
+            title,
+            categoryId: category as unknown as number,
+            positionId: position as unknown as number,
+            way: progressMethod,
+            platform,
+            participantLimit: memberLimit,
+            startDateTime: progressPeriod[0].toISOString(),
+            endDateTime: progressPeriod[1].toISOString(),
+          }),
+        )}
+      >
         <Stack divider={<Divider />} gap={24}>
           <FormSection icon={<One />} header="스터디 제목">
             <Labeled label="제목" error={errors.title?.message}>
