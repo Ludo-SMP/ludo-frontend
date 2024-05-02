@@ -1,4 +1,4 @@
-import { ComponentProps, MouseEventHandler } from 'react';
+import { MouseEventHandler } from 'react';
 import styled from 'styled-components';
 
 export type ButtonProps = {
