@@ -12,9 +12,9 @@ import CustomSelect from '@/Components/Selectbox/CustomSelect';
 import { useTempSaved } from '@/Hooks/useTempSaved';
 import { CATEGORIES_OPTION, PLATFORM_OPTIONS, POSITIONS_OPTIONS, PROGRESS_METHODS_OPTIONS } from '@/Shared/study';
 import { DateRange } from '@/Types/atoms';
-import { Category, Platform, Position, ProgressMethod, StudyCreate } from '@/Types/study';
+import { Category, Platform, Position, ProgressMethod, StudyCreate, StudyDetail } from '@/Types/study';
 import { saveTemporary } from '@/utils/temporarySavedUtils';
-import { UseMutateFunction, UseMutationResult } from '@tanstack/react-query';
+import { UseMutationResult, UseQueryResult } from '@tanstack/react-query';
 import { AxiosResponse } from 'axios';
 import { ReactNode } from 'react';
 import { Controller, useForm } from 'react-hook-form';
@@ -37,11 +37,11 @@ const memberLimit = Array(10)
   .map((_, i) => ({ value: i + 1, label: `${i + 1}` }));
 
 interface StudyFormLayoutProps {
-  mutate: UseMutateFunction<AxiosResponse, Error, StudyCreate>;
-  isError: boolean;
+  query?: UseQueryResult<StudyDetail, Error>;
+  mutation: UseMutationResult<AxiosResponse, Error, StudyCreate>;
 }
 
-export default ({ mutate, isError }: StudyFormLayoutProps) => {
+export default ({ query, mutation }: StudyFormLayoutProps) => {
   const {
     register,
     handleSubmit,
@@ -53,7 +53,10 @@ export default ({ mutate, isError }: StudyFormLayoutProps) => {
   const { savedKey, tempSaved } = useTempSaved<StudyCreateForm>();
   const navigate = useNavigate();
 
-  const data = watch();
+  const { data, isSuccess } = query;
+  const { mutate, isError } = mutation;
+
+  const formData = watch();
 
   if (isError) return <ErrorBoundary />;
 
@@ -79,7 +82,7 @@ export default ({ mutate, isError }: StudyFormLayoutProps) => {
               <InputText
                 placeholder="제목을 기입해주세요."
                 maxLength={50}
-                currentLength={data.title?.length ?? 0}
+                currentLength={formData.title?.length ?? 0}
                 {...register('title', { required: '제목을 기입해주세요.', maxLength: 50 })}
               />
             </Labeled>
@@ -178,7 +181,7 @@ export default ({ mutate, isError }: StudyFormLayoutProps) => {
           <Button
             type="button"
             onClick={() => {
-              saveTemporary(savedKey, 'STUDY', data);
+              saveTemporary(savedKey, 'STUDY', formData);
               navigate('/mypage');
             }}
           >
