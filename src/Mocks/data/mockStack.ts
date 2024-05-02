@@ -311,5 +311,11 @@ export const mockStackData = {
         },
       ],
     },
-  ],
+  ].map((category) => ({
+    ...category,
+    stacks: category.stacks.map((stack) => ({
+      ...stack,
+      imageUrl: `/api${stack.imageUrl}`,
+    })),
+  })),
 };
