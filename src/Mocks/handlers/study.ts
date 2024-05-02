@@ -2,6 +2,19 @@ import { HttpResponse, http } from 'msw';
 import { applicantsDetailMockData, studyDetailMockData, myPageInfoData } from '../data/mockStudies';
 const baseURL = import.meta.env.VITE_MOCK_API_URL;
 
+const createStudy = http.post(`${baseURL}/api/studies`, async ({ params }) => {
+  return new HttpResponse(
+    JSON.stringify({
+      data: studyDetailMockData[0],
+      message: 'Success',
+    }),
+    {
+      status: 200,
+      statusText: 'OK',
+    },
+  );
+});
+
 const getStudyDetail = http.get(`${baseURL}/api/studies/:studyId`, async ({ params }) => {
   const studyId: number = Number(params?.studyId);
   return new HttpResponse(
@@ -184,6 +197,7 @@ const failLeaveStudy = http.delete(`${baseURL}/api/studies/:studyId/participants
   });
 });
 export default [
+  createStudy,
   getStudyDetail,
   getApplicantsDetail,
   getMyPageInfo,
