@@ -53,7 +53,6 @@ export default ({ query, mutation }: StudyFormLayoutProps) => {
   const { savedKey, tempSaved } = useTempSaved<StudyCreateForm>();
   const navigate = useNavigate();
 
-  const { data, isSuccess } = query;
   const { mutate, isError } = mutation;
 
   const formData = watch();
@@ -81,6 +80,7 @@ export default ({ query, mutation }: StudyFormLayoutProps) => {
             <Labeled label="제목" error={errors.title?.message}>
               <InputText
                 placeholder="제목을 기입해주세요."
+                defaultValue={query?.data?.study?.title}
                 maxLength={50}
                 currentLength={formData.title?.length ?? 0}
                 {...register('title', { required: '제목을 기입해주세요.', maxLength: 50 })}
@@ -98,6 +98,7 @@ export default ({ query, mutation }: StudyFormLayoutProps) => {
                     <CustomSelect
                       label="카테고리"
                       placeholder="ex) 코딩테스트 스터디"
+                      defaultValue={query?.data?.study?.category}
                       values={CATEGORIES_OPTION}
                       {...field}
                     />
@@ -110,7 +111,13 @@ export default ({ query, mutation }: StudyFormLayoutProps) => {
                   name="memberLimit"
                   rules={{ required: '스터디 최대 인원을 정해주세요.' }}
                   render={({ field }) => (
-                    <CustomSelect label="스터디 최대 인원" placeholder="ex) 5명" values={memberLimit} {...field} />
+                    <CustomSelect
+                      label="스터디 최대 인원"
+                      placeholder="ex) 5명"
+                      defaultValue={query?.data?.study?.participantsLimit}
+                      values={memberLimit}
+                      {...field}
+                    />
                   )}
                 />
               </LabelForm>
@@ -142,6 +149,7 @@ export default ({ query, mutation }: StudyFormLayoutProps) => {
                     <CustomSelect
                       label="진행 방식"
                       placeholder="ex) 온/오프라인"
+                      defaultValue={query?.data?.study?.way}
                       values={PROGRESS_METHODS_OPTIONS}
                       {...field}
                     />
@@ -154,7 +162,13 @@ export default ({ query, mutation }: StudyFormLayoutProps) => {
                   name="platform"
                   rules={{ required: '진행할 플랫폼을 정해 주세요.' }}
                   render={({ field }) => (
-                    <CustomSelect label="진행 플랫폼" placeholder="ex) gather" values={PLATFORM_OPTIONS} {...field} />
+                    <CustomSelect
+                      label="진행 플랫폼"
+                      placeholder="ex) gather"
+                      defaultValue={query?.data?.study?.platform}
+                      values={PLATFORM_OPTIONS}
+                      {...field}
+                    />
                   )}
                 />
               </LabelForm>
