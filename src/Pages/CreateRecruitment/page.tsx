@@ -266,13 +266,13 @@ const CreateRecruitmentPage = () => {
 
 export default CreateRecruitmentPage;
 
-const Form = styled.form`
+export const Form = styled.form`
   ${media.tablet} {
     margin: 24px;
   }
 `;
 
-const Grid = styled.div`
+export const Grid = styled.div`
   ${media.tablet} {
     display: flex;
     flex-direction: column;
@@ -285,14 +285,14 @@ const Grid = styled.div`
   gap: 24px;
 `;
 
-const RecruitmentContainer = styled.section`
+export const RecruitmentContainer = styled.section`
   display: flex;
   flex-direction: column;
   max-width: 1224px;
   margin: 0 auto;
 `;
 
-const Box = styled.div<{ display: 'row' | 'column'; gap?: string }>`
+export const Box = styled.div<{ display: 'row' | 'column'; gap?: string }>`
   display: flex;
   flex-direction: ${(props) => props.display};
   width: 100%;
@@ -309,12 +309,12 @@ const Box = styled.div<{ display: 'row' | 'column'; gap?: string }>`
     `}
 `;
 
-const Divider = styled.div`
+export const Divider = styled.div`
   height: 12px;
   background: #f2f3f3;
 `;
 
-const ButtonBox = styled.div`
+export const ButtonBox = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;

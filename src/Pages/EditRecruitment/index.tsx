@@ -13,7 +13,7 @@ import { TextArea } from '@/Components/Textarea';
 import InputText from '@/Components/Common/InputText/index';
 import { CalendarButton } from '@/Components/Selectbox/CalendarButton';
 import { EndDate } from '@/Components/Calendar/EndDate';
-import CustomSelect from '@/Components/Selectbox/CustomSelect';
+import CustomSelect from '@/Components/CustomSelect/CustomSelect';
 import { Stack } from '@/Components/Common/Stack';
 
 import { RecruitmentDetail, RecruitFormWithSelect } from '@/Types/study';
@@ -28,6 +28,7 @@ import { LabelForm } from '@/Components/Common/LabelForm';
 import { FormSection } from '@/Components/Common/FormSection';
 import { LabelText } from '@/Components/Common/LabelText';
 import { useStack } from '@/Hooks/useStack';
+import { Box, ButtonBox, Divider, Form, Grid, RecruitmentContainer } from '../CreateRecruitment/page';
 
 const DEF_STACK_PLACEHOLDER = 'ex. Typescript';
 
@@ -93,7 +94,7 @@ const EditRecruitmentPage = ({ recruitmentDetail, mutate }: ModifyRecruitmentPag
 
   return (
     <RecruitmentContainer>
-      <form onSubmit={handleSubmit(onSubmit, onInvalid)}>
+      <Form onSubmit={handleSubmit(onSubmit, onInvalid)}>
         <Heading type={'Head'} component={'Page'}>
           스터디 팀원 모집하기
         </Heading>
@@ -233,56 +234,12 @@ const EditRecruitmentPage = ({ recruitmentDetail, mutate }: ModifyRecruitmentPag
             </Button>
           </div>
         </ButtonBox>
-      </form>
+      </Form>
     </RecruitmentContainer>
   );
 };
 
 export default EditRecruitmentPage;
-
-const Grid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, minmax(392px, 1fr));
-  gap: 24px;
-  margin-top: 24px;
-`;
-
-const RecruitmentContainer = styled.section`
-  display: flex;
-  flex-direction: column;
-  max-width: 1224px;
-  margin: 0 auto;
-`;
-
-const Box = styled.div<{ display: 'row' | 'column'; gap?: string }>`
-  display: flex;
-  flex-direction: ${(props) => props.display};
-  width: 100%;
-  margin-top: 24px;
-
-  ${(props) =>
-    props.gap &&
-    css`
-      gap: ${props.gap};
-    `}
-`;
-
-const Divider = styled.div`
-  height: 12px;
-  background: #f2f3f3;
-`;
-
-const ButtonBox = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  gap: 24px;
-
-  .button__wrap {
-    display: flex;
-    width: 100%;
-  }
-`;
 
 export const ErrorMsg = styled.p`
   color: ${({ theme }) => theme.color.negative};
