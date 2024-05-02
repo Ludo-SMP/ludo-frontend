@@ -48,7 +48,7 @@ export const EndDate = React.forwardRef<ReactDatePicker<string, boolean>, Contro
 );
 
 const DateContainer = styled(DatePicker)`
-  width: 328px;
+  width: 100%;
   height: 24px;
   align-items: center;
   align-self: stretch;
