@@ -1,18 +1,36 @@
 import { forwardRef, useMemo } from 'react';
-import Select, { ActionMeta, GroupBase, MultiValue, Props, SelectInstance, StylesConfig } from 'react-select';
+import Select, {
+  ActionMeta,
+  GroupBase,
+  MultiValue,
+  Props,
+  PropsValue,
+  SelectInstance,
+  StylesConfig,
+} from 'react-select';
 import styled from 'styled-components';
 import { Option } from '@/Types/study';
 import { theme } from '@/Styles/theme';
+import { SelectArrow } from '@/Assets/SelectArrow';
 /**
  * @description { value: string, label: string } 으로 들어와야 합니다.
  * - ex) { value: "1", label: "백엔드" }
  */
 
 export type SelectProps = Props & {
+  /** 옵션 리스트에 들어갈 배열 */
   values?: Option<unknown, unknown>[];
+
+  /** 셀렉트 위에 라벨이 필요한 경우 지정 */
   label?: string;
+
+  /** 미리보기에 임시로 들어갈 텍스트 */
   placeholder?: string;
-  defaultValue?: any;
+
+  /** 초기값 */
+  defaultValue?: PropsValue<Option<unknown, unknown>>;
+
+  /** 여러 개 선택 가능 여부 */
   isMulti?: boolean;
 };
 
@@ -22,15 +40,28 @@ const CustomSelect = forwardRef<
 >(({ onChange, values, label, placeholder, defaultValue, isMulti = false }, ref) => {
   const customStyles: StylesConfig<Option<unknown, unknown>> = useMemo(
     () => ({
-      control: () => ({
+      control: (provided) => ({
+        ...provided,
+        display: 'flex',
+        alignItems: 'center',
         width: '100%',
         padding: '7px 16px',
         border: `1px solid ${theme.color.black1}`,
+        boxShadow: '0',
         borderRadius: theme.borderRadius.small,
         background: theme.color.white,
         fontFamily: 'Pretendard400',
         fontSize: theme.font.small,
         cursor: 'pointer',
+        '&:active': {
+          border: `1px solid ${theme.color.black1}`,
+        },
+        '&:focus': {
+          border: `1px solid ${theme.color.black1}`,
+        },
+        '&:hover': {
+          border: `1px solid ${theme.color.black1}`,
+        },
       }),
       option: (provided, { isSelected }) => ({
         ...provided,
@@ -81,6 +112,12 @@ const CustomSelect = forwardRef<
       valueContainer: (provided) => ({
         ...provided,
         padding: 0,
+        display: 'flex',
+        //height: '24px',
+        width: 'auto',
+        // maxWidth: '100%',
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
       }),
       indicatorSeparator: (provided) => ({
         ...provided,
@@ -98,14 +135,14 @@ const CustomSelect = forwardRef<
         isMulti={isMulti}
         placeholder={placeholder ?? ''}
         options={values}
-        defaultValue={defaultValue || 'Select'}
+        defaultValue={defaultValue}
         onChange={(
           newValue: Option<unknown, unknown> | MultiValue<Option<unknown, unknown>>,
           actionMeta: ActionMeta<Option<unknown, unknown>>,
         ) => onChange(newValue, actionMeta)}
         styles={customStyles}
         components={{
-          IndicatorsContainer: () => null,
+          IndicatorsContainer: () => <SelectArrow />,
         }}
       />
     </Label>
@@ -115,7 +152,7 @@ const CustomSelect = forwardRef<
 export default CustomSelect;
 
 const Label = styled.label`
-  font-family: Pretendard700;
+  font-family: 'Pretendard700';
   font-size: 18px;
   font-weight: 700;
   line-height: 20px;
