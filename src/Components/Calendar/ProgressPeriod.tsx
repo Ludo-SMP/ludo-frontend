@@ -1,10 +1,13 @@
 // react-datepicker를 사용해서 진행기간 구현 328px, 24px, ex) 24.01.23 - 24.03.23
-import DatePicker from 'react-datepicker';
+import DatePicker, { registerLocale } from 'react-datepicker';
 import { forwardRef, useState } from 'react';
 import styled from 'styled-components';
 import { DateRange } from '@/Types/atoms';
 import { ControllerRenderProps } from 'react-hook-form';
+import { ko } from 'date-fns/locale';
 import 'react-datepicker/dist/react-datepicker.css';
+
+registerLocale('ko', ko);
 
 export interface ProgressPeriodProps {
   /** input 요소가 가질 폼 필드 이름 속성 */
