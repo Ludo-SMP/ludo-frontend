@@ -8,19 +8,13 @@ import { Stack } from '@/Components/Common/Stack';
 import Heading from '@/Components/Heading';
 import { CalendarButton } from '@/Components/Selectbox/CalendarButton';
 import CustomSelect from '@/Components/Selectbox/CustomSelect';
-import { SelectBox } from '@/Components/Selectbox/SelectBox';
-import {
-  CATEGORIES_OPTION,
-  CATEGORY,
-  PLATFORM,
-  PLATFORM_OPTIONS,
-  POSITIONS_OPTIONS,
-  PROGRESS_METHOD,
-  PROGRESS_METHODS_OPTIONS,
-} from '@/Shared/study';
+import { useTempSaved } from '@/Hooks/useTempSaved';
+import { CATEGORIES_OPTION, PLATFORM_OPTIONS, POSITIONS_OPTIONS, PROGRESS_METHODS_OPTIONS } from '@/Shared/study';
 import { DateRange } from '@/Types/atoms';
+import { saveTemporary } from '@/utils/temporarySavedUtils';
 import { ReactNode } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { redirect, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 interface StudyCreateForm {
@@ -47,15 +41,14 @@ export default () => {
     control,
   } = useForm<StudyCreateForm>();
 
+  const { savedKey, tempSaved } = useTempSaved<StudyCreateForm>();
+  const navigate = useNavigate();
+
   const data = watch();
 
   return (
     <PageWrapper>
-      <Form
-        onSubmit={handleSubmit((a) => {
-          console.log(a);
-        })}
-      >
+      <Form onSubmit={handleSubmit(console.log)}>
         <Stack divider={<Divider />} gap={24}>
           <FormSection icon={<One />} header="스터디 제목">
             <Labeled label="제목" error={errors.title?.message}>
@@ -158,7 +151,15 @@ export default () => {
           </FormSection>
         </Stack>
         <Buttons>
-          <Button>임시저장</Button>
+          <Button
+            type="button"
+            onClick={() => {
+              saveTemporary(savedKey, 'STUDY', data);
+              navigate('/mypage');
+            }}
+          >
+            임시저장
+          </Button>
           <Button scheme="secondary">등록하기</Button>
         </Buttons>
       </Form>
