@@ -63,7 +63,12 @@ export const MyStudyCard = ({
     >
       {!isApplyStatus && <StudyThumbnail width="244px" height="100%" />}
 
-      <StudyInfoWrapper status={status} hasRecruitment={hasRecruitment} isOwner={isOwner} isApplyStatus={isApplyStatus}>
+      <StudyInfoWrapper
+        status={status}
+        hasRecruitment={hasRecruitment}
+        $isOwner={isOwner}
+        isApplyStatus={isApplyStatus}
+      >
         <StudyDetailWrapper status={status}>
           <div className="study__status">
             <span className="title">{title}</span>
@@ -189,7 +194,7 @@ const MyStudyCardWrapper = styled.div<{
 const StudyInfoWrapper = styled.div<{
   status: StudyStatus | ApplyStatus;
   hasRecruitment: boolean;
-  isOwner: boolean;
+  $isOwner: boolean;
   isApplyStatus: boolean;
 }>`
   display: flex;
@@ -206,7 +211,7 @@ const StudyInfoWrapper = styled.div<{
     flex-direction: column;
     align-items: center;
     gap: ${(props) =>
-      ((props.status === 'PROGRESS' || props.status === 'RECRUITING') && !props.hasRecruitment && props.isOwner) ||
+      ((props.status === 'PROGRESS' || props.status === 'RECRUITING') && !props.hasRecruitment && props.$isOwner) ||
       props.isApplyStatus
         ? '24px'
         : 0};
