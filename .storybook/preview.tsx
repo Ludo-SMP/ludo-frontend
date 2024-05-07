@@ -6,6 +6,7 @@ import { GlobalStyle } from '@/Styles/globalStyles';
 import { withRouter } from 'storybook-addon-remix-react-router';
 import { handlers } from '../src/Mocks/handlers';
 import { initialize, mswLoader } from 'msw-storybook-addon';
+import '../src/App.css';
 
 initialize(
   {
