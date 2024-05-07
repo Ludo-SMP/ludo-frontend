@@ -15,6 +15,7 @@ const meta = {
   },
   args: {
     percentage: 70,
+    label: '전문성',
   },
 } satisfies Meta<typeof CircularRate>;
 
