@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { CircularRate } from '.';
+import { theme } from '@/Styles/theme';
 
 const meta = {
   component: CircularRate,
@@ -12,13 +13,18 @@ const meta = {
       },
     },
   },
+  args: {
+    percentage: 70,
+  },
 } satisfies Meta<typeof CircularRate>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Default: Story = {};
+
+export const CirculatingGradient: Story = {
   args: {
-    percentage: 70,
+    gradientColors: [theme.color.purple1, theme.color.orange1, theme.color.purple1],
   },
 };
