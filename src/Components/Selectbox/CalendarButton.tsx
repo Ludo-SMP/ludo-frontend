@@ -27,6 +27,10 @@ const InputContainer = styled.section`
   align-items: center;
   align-self: stretch;
   padding: 10px 16px;
+
+  .react-datepicker-wrapper {
+    width: calc(100% - 30px);
+  }
 `;
 
 const IconWrap = styled.p`

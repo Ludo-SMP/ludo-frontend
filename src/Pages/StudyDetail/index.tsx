@@ -79,7 +79,7 @@ export const StudyDetailPage = () => {
             dDay={getDday(study?.endDateTime)}
           />
           <RowDivider rowHeight={16} />
-          <MemberSection memberLimit={study?.participantsLimit} members={study?.participants} />
+          <MemberSection memberLimit={study?.participantLimit} members={study?.participants} />
           <StudyButtonsWrapper>
             {study.participants.length && study.owner.id !== user?.id && (
               <Button

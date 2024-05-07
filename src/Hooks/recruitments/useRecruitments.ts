@@ -16,7 +16,7 @@ export const useRecruitments = ({
     queryFn: ({ pageParam }) => getRecruitments(filterOptions, count, pageParam),
     getNextPageParam: (lastPage) => {
       const recruitments = lastPage?.data?.data?.recruitments;
-      if (recruitments.length !== count) return undefined;
+      if (recruitments?.length !== count) return undefined;
       return recruitments[recruitments.length - 1].id;
     },
     initialPageParam: undefined,

@@ -1,4 +1,5 @@
 import { MessageType } from '@/Types/message';
+import { RecruitmentForm } from '@/Types/study';
 
 export const APPLY = Object.freeze({
   LOGIN: {
@@ -78,10 +79,24 @@ export const CREATE_STUDY = Object.freeze({
   } as MessageType,
 });
 
+export const CREATE_RECRUITMENT: Omit<Record<keyof RecruitmentForm, string>, 'content'> = Object.freeze({
+  applicantCount: '모집 인원을 정해주세요.',
+  recruitmentEndDateTime: '모집 마감일을 정해주세요.',
+  positionIds: '포지션을 정해주세요.',
+  stackIds: '기술 스택을 정해주세요.',
+  title: '제목을 기입해주세요.',
+  contact: '연락 방법을 정해주세요.',
+  callUrl: '연결 url을 작성해주세요.',
+});
+
 export const DELETE = Object.freeze({
   STUDY: {
     title: '스터디를 삭제하시겠습니까?',
     content: '스터디를 삭제하면 관련한 정보는 모두 삭제되며 복구는 뷸가합니다.\n정말로 삭제하시겠습니까?',
+  },
+  TEMP_SAVED: {
+    title: '작성 중인 스터디 생성 글을 삭제 하시겠습니까?',
+    content: '삭제 된 글은 복구가 불가능합니다.\n그래도 삭제하시겠습니까?',
   },
 });
 

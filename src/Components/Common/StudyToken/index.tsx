@@ -21,9 +21,10 @@ const StudyToken = ({ status }: StudyTokenProps) => {
 
 const StudyTokenWrapper = styled.span<{ status: ApplyStatus | MemberStatus | StudyStatus }>`
   display: flex;
-  padding: 4px 12px;
+  padding: 0px 12px;
   justify-content: center;
   align-items: center;
+  white-space: nowrap;
 
   color: ${({ status, theme }) =>
     status === 'PARTICIPATED'
@@ -45,7 +46,7 @@ const StudyTokenWrapper = styled.span<{ status: ApplyStatus | MemberStatus | Stu
   font-family: 'Pretendard500';
   font-style: normal;
   font-weight: 500;
-  line-height: 30px;
+  line-height: 32px;
 `;
 
 export default StudyToken;

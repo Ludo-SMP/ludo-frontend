@@ -1,6 +1,5 @@
 import { useState, ChangeEvent } from 'react';
 import styled from 'styled-components';
-import { OptionalCreates } from '@/Pages/Studies/CreateRecruitment';
 import { Creates } from '@/Types/studies';
 
 export type Props = {
@@ -80,4 +79,8 @@ const Input = styled.textarea`
   resize: none;
   flex: 1 0 0;
   margin-top: 16px;
+
+  &::placeholder {
+    color: ${(props) => props.theme.color.black2};
+  }
 `;

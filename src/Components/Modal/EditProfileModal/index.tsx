@@ -14,7 +14,7 @@ interface EdiptProfileModalProps {
   handleEdit: React.Dispatch<SetStateAction<'NOT START' | 'EDIT' | 'END'>>;
 }
 
-const EditProfileModal = ({ userNickname, handleEdit }: EdiptProfileModalProps) => {
+export const EditProfileModal = ({ userNickname, handleEdit }: EdiptProfileModalProps) => {
   const { closeModal } = useModalStore();
   const queryClient = useQueryClient();
   const submitSuccessHandler = () => {
@@ -157,6 +157,10 @@ const FormWrapper = styled.div`
   .input__section {
     display: flex;
     gap: 8px;
+
+    & > div {
+      width: 100%;
+    }
   }
 
   .error__message {
@@ -183,5 +187,3 @@ const ModalBtnsWrapper = styled.div`
     width: 100%;
   }
 `;
-
-export default EditProfileModal;

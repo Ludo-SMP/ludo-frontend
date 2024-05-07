@@ -1,4 +1,4 @@
-import { Position } from '@/Types/study';
+import { Position, Option } from '@/Types/study';
 
 export const STUDY_STATUS = {
   PROGRESS: '진행 중',
@@ -17,12 +17,30 @@ export const MEMBER_STATUS = {
   PARTICIPATED: '참여 중',
 };
 
-export const POSITION = {
-  1: '백엔드',
-  2: '프론트엔드',
-  3: '디자이너',
-  4: '데브옵스',
-};
+export const POSITION: Array<Option<number, string>> = [
+  { value: 1, label: '백엔드' },
+  { value: 2, label: '프론트엔드' },
+  { value: 3, label: '디자이너' },
+  { value: 4, label: '데브옵스' },
+];
+
+export const CONTACT: Array<Option<string, string>> = [
+  { value: 'EMAIL', label: '이메일' },
+  { value: 'KAKAO', label: '카카오톡' },
+];
+
+export const APPLICATION_CNT: Array<Option<number, string>> = [
+  { value: 1, label: '1명' },
+  { value: 2, label: '2명' },
+  { value: 3, label: '3명' },
+  { value: 4, label: '4명' },
+  { value: 5, label: '5명' },
+  { value: 6, label: '6명' },
+  { value: 7, label: '7명' },
+  { value: 8, label: '8명' },
+  { value: 9, label: '9명' },
+  { value: 10, label: '10명' },
+];
 
 export const PROGRESS_METHOD = {
   ONLINE: '온라인',

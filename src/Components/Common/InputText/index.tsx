@@ -1,6 +1,5 @@
-import { ComponentProps, ForwardedRef, forwardRef, useState } from 'react';
+import { ComponentProps, ForwardedRef, ReactNode, forwardRef } from 'react';
 import styled from 'styled-components';
-
 interface InputTextProps extends React.InputHTMLAttributes<HTMLInputElement> {
   placeholder?: string;
   inputType?: 'text' | 'email' | 'password' | 'member';
@@ -8,11 +7,23 @@ interface InputTextProps extends React.InputHTMLAttributes<HTMLInputElement> {
   currentLength?: number;
   maxLength?: number;
   label?: string;
+  icon?: ReactNode;
 }
 
 const InputText = forwardRef<HTMLInputElement, ComponentProps<'input'> & InputTextProps>(
   (
-    { name, placeholder, defaultValue, inputType, onChange, maxLength, currentLength, label, ...props }: InputTextProps,
+    {
+      name,
+      placeholder,
+      defaultValue,
+      inputType,
+      onChange,
+      maxLength,
+      currentLength,
+      label,
+      icon,
+      ...props
+    }: InputTextProps,
     ref: ForwardedRef<HTMLInputElement>,
   ) => {
     return (
@@ -33,6 +44,7 @@ const InputText = forwardRef<HTMLInputElement, ComponentProps<'input'> & InputTe
             {currentLength} / {maxLength}
           </LengthIndicator>
         )}
+        {icon && <IconWrapper>{icon}</IconWrapper>}
       </Box>
     );
   },
@@ -72,6 +84,16 @@ const Box = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
+`;
+
+const IconWrapper = styled.div`
+  display: flex;
+  position: absolute;
+  top: 10px;
+  right: 16px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const LengthIndicator = styled.div`

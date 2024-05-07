@@ -2,7 +2,7 @@ import Heading from '@/Components/Heading';
 import { FieldErrors, FieldValues } from 'react-hook-form';
 import styled from 'styled-components';
 
-export interface LabelFormProps<T> {
+export interface LabelFormProps<T extends FieldValues = FieldValues> {
   /** 라벨 */
   label?: string;
 
@@ -30,7 +30,7 @@ export const LabelForm = <T extends FieldValues = FieldValues>({
         </Heading>
       )}
       {children}
-      {errors?.[name]?.message && <ErrorMsg>{errors?.[name]?.message}</ErrorMsg>}
+      {errors?.[name]?.message && <ErrorMsg>{(errors?.[name] as FieldErrors)?.message?.toString()}</ErrorMsg>}
     </GridItem>
   );
 };
