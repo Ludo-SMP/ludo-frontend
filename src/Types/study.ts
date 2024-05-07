@@ -7,7 +7,7 @@ export type ApplyStatus = keyof typeof APPLY_STATUS;
 export type ProgressMethod = keyof typeof PROGRESS_METHOD;
 export type Role = keyof typeof ROLE;
 export type Platform = keyof typeof PLATFORM;
-export type PositionId = keyof typeof POSITION;
+export type PositionId = typeof POSITION;
 export type Card = 'STUDY' | 'RECRUITMENT';
 export type Sort = '최신순' | '조회순';
 export type ApplyTryStatus = 'NOT APPLY' | 'SUCCESS' | 'CLOSED' | 'ALREDAY_APPLY' | 'ALREDY_PARTICIPATED';
@@ -51,6 +51,7 @@ export interface Stack {
   imageUrl: string;
 }
 
+// TODO: 타입 구조 개선
 export interface RecruitmentDetail {
   recruitment: {
     id: number;
@@ -58,7 +59,7 @@ export interface RecruitmentDetail {
     stacks: Stack[];
     positions: Position[];
     applicantCount: number;
-    contact: string;
+    contact: 'KAKAO' | 'EMAIL';
     callUrl: string;
     content: string;
     createdDateTime: string;
@@ -103,16 +104,31 @@ export interface Recruitments {
   recruitments: Recruitment[];
 }
 
-// TODO: recruitment 타입 중복 속성 개선, stackId 객체 만들기
 export interface RecruitmentForm {
   title: string;
   stackIds: number[];
-  positionIds: PositionId[];
+  positionIds: Position[];
   applicantCount: number;
   recruitmentEndDateTime: string;
   contact: 'KAKAO' | 'EMAIL';
   callUrl: string;
   content: string;
+}
+
+// 셀렉트로 관리해야 하는 타입
+export type SingleSelectValue = Pick<RecruitmentForm, 'applicantCount' | 'contact'>;
+export type SelectOptionType = Record<keyof SingleSelectValue, Option<number, string>>;
+export type MultiSelectType = Record<'positionIds', Option<number, string>[]>;
+
+export type SelectType = SelectOptionType & MultiSelectType;
+
+// 셀렉트가 포함된 모집공고 폼 관리 타입
+export interface RecruitFormWithSelect extends SelectType {
+  title: RecruitmentForm['title'];
+  recruitmentEndDateTime: RecruitmentForm['recruitmentEndDateTime'];
+  callUrl: RecruitmentForm['callUrl'];
+  content: RecruitmentForm['content'];
+  stackIds?: Stack[];
 }
 
 export interface FilterOptionParams {
@@ -142,8 +158,8 @@ export interface StudyDetail {
     title: string;
     platform: Platform;
     way: ProgressMethod;
-    participantsCount: number;
-    participantsLimit: number;
+    participantCount: number;
+    participantLimit: number;
     startDateTime: string;
     endDateTime: string;
     category: Category;

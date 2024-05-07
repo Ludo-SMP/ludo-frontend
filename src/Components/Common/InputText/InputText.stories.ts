@@ -36,3 +36,10 @@ export const Member: Story = {
     placeholder: '멤버를 입력하세요',
   },
 };
+
+export const Label: Story = {
+  args: {
+    label: '포지션',
+    placeholder: '포지션을 입력하세요',
+  },
+};

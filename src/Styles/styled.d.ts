@@ -31,6 +31,7 @@ declare module 'styled-components' {
       naver: string;
       kakao: string;
       kakaoFontColor: string;
+      negative: string;
     };
 
     font: {
