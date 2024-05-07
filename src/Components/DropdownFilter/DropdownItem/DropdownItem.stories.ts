@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import DropdownItem from '.';
+import { fn } from '@storybook/test';
 
 const meta = {
   component: DropdownItem,
