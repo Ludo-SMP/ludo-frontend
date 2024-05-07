@@ -77,7 +77,7 @@ export default ({ query, mutation }: StudyFormLayoutProps) => {
       >
         <Stack divider={<Divider />} gap={24}>
           <FormSection icon={<One />} header="스터디 제목">
-            <Labeled label="제목" error={errors.title?.message}>
+            <LabelForm<StudyCreateForm> label="제목" name="title" errors={errors}>
               <InputText
                 placeholder="제목을 기입해주세요."
                 defaultValue={query?.data?.study?.title}
@@ -85,7 +85,7 @@ export default ({ query, mutation }: StudyFormLayoutProps) => {
                 currentLength={formData.title?.length ?? 0}
                 {...register('title', { required: '제목을 기입해주세요.', maxLength: 50 })}
               />
-            </Labeled>
+            </LabelForm>
           </FormSection>
           <FormSection icon={<Two />} header="스터디 기본 구성">
             <Grid>
@@ -220,45 +220,6 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 40px;
-`;
-
-const Labeled = ({ label, children, error }: { label?: string; error?: string; children?: ReactNode }) => {
-  return (
-    <LabeledInner>
-      <Label>{label}</Label>
-      <LabeledInnerBox>
-        {children}
-        <ErrorText>{error}</ErrorText>
-      </LabeledInnerBox>
-    </LabeledInner>
-  );
-};
-
-const LabeledInner = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-`;
-
-const Label = styled.label`
-  color: #000000f2;
-  font-family: Pretendard700;
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 20px;
-`;
-
-const LabeledInnerBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-`;
-
-const ErrorText = styled.span`
-  display: flex;
-  align-items: center;
-  padding: 4px 0px;
-  color: #fd3d51;
 `;
 
 const FormSection = ({ icon, header, children }: { icon?: ReactNode; header?: ReactNode; children?: ReactNode }) => {
