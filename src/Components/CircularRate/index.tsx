@@ -33,6 +33,7 @@ export const CircularRate = ({
       }}
     >
       <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size}>
+        <circle cx="50%" cy="50%" r={(size - barWeight) / 2} fill="none" stroke="#F2F3F3" strokeWidth={barWeight} />
         <mask id="cpg">
           <circle
             cx="50%"
