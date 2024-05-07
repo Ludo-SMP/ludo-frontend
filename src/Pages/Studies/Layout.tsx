@@ -195,7 +195,7 @@ export default ({ query, mutation }: StudyFormLayoutProps) => {
           <Button
             type="button"
             onClick={() => {
-              saveTemporary(savedKey, 'STUDY', formData);
+              saveTemporary(savedKey, 1, 'STUDY', formData);
               navigate('/mypage');
             }}
           >
