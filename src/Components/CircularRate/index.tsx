@@ -34,7 +34,7 @@ export const CircularRate = ({
     >
       <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size}>
         <circle cx="50%" cy="50%" r={(size - barWeight) / 2} fill="none" stroke="#F2F3F3" strokeWidth={barWeight} />
-        <mask id="cpg">
+        <mask id={`ring-${percentage}`}>
           <circle
             cx="50%"
             cy="50%"
@@ -51,7 +51,7 @@ export const CircularRate = ({
             }}
           />
         </mask>
-        <foreignObject width={size} height={size} mask="url(#cpg)">
+        <foreignObject width={size} height={size} mask={`url(#ring-${percentage})`}>
           <div
             style={{
               width: '100%',
