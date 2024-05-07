@@ -29,3 +29,27 @@ export const CirculatingGradient: Story = {
     gradientColors: [theme.color.purple1, theme.color.orange1, theme.color.purple1],
   },
 };
+
+export const Monotone: Story = {
+  args: {
+    gradientColors: [theme.color.purple1, theme.color.purple1],
+  },
+};
+
+export const Proactiveness: Story = {
+  args: {
+    percentage: 70,
+  },
+};
+
+export const ZeroPercent: Story = {
+  args: {
+    percentage: 0,
+  },
+};
+
+export const FullPercent: Story = {
+  args: {
+    percentage: 100,
+  },
+};
