@@ -5,45 +5,81 @@ import styled from 'styled-components';
 import TemporarySavedCard from '@/Components/TemporarySavedCard';
 import Button from '@/Components/Common/Button';
 import { useMyPageInfo } from '@/Hooks/study/useMyPageInfo';
-import { getPeriod } from '@/utils/date';
+import { getMillisec, getPeriod } from '@/utils/date';
 import ChipMenu from '@/Components/Common/ChipMenu';
 import { User, ParticipateStudy, ApplicantRecruitment, CompletedStudy, RecruitmentForm } from '@/Types/study';
-import { useSelectedCardStore, useSelectedMyStudyStore } from '@/store/study';
+import { useSavedKeyStore, useSelectedCardStore, useSelectedMyStudyStore } from '@/store/study';
 import { useLogOutMutation } from '@/Hooks/auth/useLogOutMutation';
 import { useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import Modal from '@/Components/Common/Modal';
+import { DELETE } from '@/Constants/messages';
+import { useModalStore } from '@/store/modal';
 
 const MyPage = () => {
   const { data: myPageInfo, isLoading } = useMyPageInfo();
+
   const user: User = myPageInfo?.user;
   const participateStudies: ParticipateStudy[] = myPageInfo?.participateStudies;
   const applicantRecruitments: ApplicantRecruitment[] = myPageInfo?.applicantRecruitments;
   const completedStudies: CompletedStudy[] = myPageInfo?.completedStudies;
+
   const { pathname } = useLocation();
 
   const { selectedMyStudyStatus, setSelectedMyStudyStatus } = useSelectedMyStudyStore();
   const { selectedCard, setSelectedCard } = useSelectedCardStore();
   const { mutate: logoutMutate } = useLogOutMutation();
 
+  const [savedList, setSavedList] = useState<Array<Partial<RecruitmentForm> & { savedKey: string }>>([]);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
 
+  useEffect(() => {
+    getTempList(selectedCard);
+  }, [selectedCard]);
+
   const getTempList = (selectedCard: 'STUDY' | 'RECRUITMENT') => {
     // TODO: 스터디 타입도 추가
-
-    const savedList: Array<Partial<RecruitmentForm> & { savedKey: string }> = [];
+    const storageList: Array<Partial<RecruitmentForm> & { savedKey: string }> = [];
     for (const key in window.localStorage) {
       // hasOwnProperty로 빌트인 속성 제거
       if (window.localStorage.hasOwnProperty(key) && key.toUpperCase().includes(selectedCard)) {
-        savedList.push({ ...JSON.parse(localStorage.getItem(key)), savedKey: key });
+        storageList.push({ ...JSON.parse(localStorage.getItem(key)), savedKey: key });
       }
     }
-    return savedList;
+
+    storageList.sort((a, b) => getMillisec(b.savedKey) - getMillisec(a.savedKey));
+    setSavedList(storageList);
   };
+
+  const { isModalOpen, closeModal } = useModalStore();
+  const storedSavedKey = useSavedKeyStore((state) => state.savedKey);
+
+  const onRemove = useCallback(
+    (savedKey: string) => {
+      setSavedList((prev) => prev.filter((item) => item.savedKey !== savedKey));
+    },
+    [storedSavedKey],
+  );
 
   return (
     <MyPageWrapper>
+      {isModalOpen && (
+        <Modal
+          handleApprove={() => {
+            localStorage.removeItem(storedSavedKey);
+            onRemove(storedSavedKey);
+            closeModal();
+          }}
+          cancelBtnText="취소하기"
+          title={DELETE.TEMP_SAVED.title}
+          approveBtnText="삭제하기"
+        >
+          {DELETE.TEMP_SAVED.content}
+        </Modal>
+      )}
       {isLoading ? (
         <Loading />
       ) : (
@@ -134,8 +170,8 @@ const MyPage = () => {
               </ChipMenu>
             </ChipMenusWrapper>
             <CardListWrapper>
-              {getTempList(selectedCard)?.map((form: Partial<RecruitmentForm> & { savedKey: string }) => (
-                <TemporarySavedCard {...form} />
+              {savedList?.map((form: Partial<RecruitmentForm> & { savedKey: string }) => (
+                <TemporarySavedCard key={form.savedKey} onRemove={onRemove} {...form} />
               ))}
             </CardListWrapper>
           </CardsWrapper>

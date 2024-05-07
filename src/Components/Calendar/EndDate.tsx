@@ -1,54 +1,61 @@
 // react-datepicker를 사용해서 마감날짜 구현 328px, 44px, ex) 24.01.23
-import DatePicker from 'react-datepicker';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { ControllerRenderProps } from 'react-hook-form';
+
+// date-picker
+import DatePicker, { ReactDatePicker } from 'react-datepicker';
+import { registerLocale } from 'react-datepicker';
+import ko from 'date-fns/locale/ko';
 import 'react-datepicker/dist/react-datepicker.css';
+import { parseISOString } from '@/utils/date';
 import styled from 'styled-components';
-import { OptionalCreates } from '@/Pages/Studies/CreateRecruitment';
-import { Creates } from '@/Types/studies';
 
-export type Props = {
-  onClick?: () => void;
-  children?: React.ReactNode;
-  // onChange?: (event: string) => void;
-  setForm: (any: OptionalCreates) => void;
-  useForm: Creates;
-  value?: string;
-  type?: string;
-  name?: string;
-  maxlength?: number;
-  id?: string;
-  formData?: number | string;
-  ref?: string;
-};
+registerLocale('ko', ko);
 
-export const EndDate = ({ useForm }: Props) => {
-  const [startDateTime, setForms] = useState(new Date());
+interface IFormValues {
+  recruitmentEndDateTime: string;
+}
 
-  return (
-    <DateContainer
-      value={(useForm.recruitmentEndDateTime = startDateTime.toISOString().slice(0, -5))}
-      selected={startDateTime}
-      dateFormat="yy.MM.dd"
-      onChange={(date: Date) => setForms(date)}
-      placeholderText="ex)24.01.07"
-      isClearable={true}
-    />
-  );
-};
+interface Props {
+  defaultValue?: string;
+}
+
+export const EndDate = React.forwardRef<ReactDatePicker<string, boolean>, ControllerRenderProps<IFormValues> & Props>(
+  ({ onChange, name, defaultValue }, ref) => {
+    const today = new Date();
+    const [startDate, setStartDate] = useState<Date>(defaultValue && new Date(defaultValue));
+
+    return (
+      <DateContainer
+        name={name}
+        locale="ko"
+        selected={startDate}
+        dateFormat="yy.MM.dd"
+        minDate={today}
+        onChange={(date) => {
+          onChange(parseISOString(date));
+          if (date instanceof Array) setStartDate(date[1]);
+          else setStartDate(date);
+        }}
+        placeholderText="ex)24.01.07"
+        isClearable={false}
+        ref={ref}
+        shouldCloseOnSelect // 날짜를 선택하면 자동으로 닫힌다
+        autoComplete="off"
+      />
+    );
+  },
+);
 
 const DateContainer = styled(DatePicker)`
-  width: 328px;
+  width: 100%;
   height: 24px;
-  background-color: ${(props) => props.theme.color.gray3};
   align-items: center;
   align-self: stretch;
-  border: 1px solid #cbcdd1;
-  border-width: 0;
-  background: ${(props) => props.theme.color.gray1};
   resize: none;
   flex: 1 0 0;
-  margin-top: 10px;
-  padding-bottom: 10px;
-  padding-right: 16px;
-  padding-left: 16px;
+
+  &::placeholder {
+    color: ${(props) => props.theme.color.black2};
+  }
 `;

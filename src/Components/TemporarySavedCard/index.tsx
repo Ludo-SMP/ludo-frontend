@@ -1,14 +1,22 @@
-import styled from 'styled-components';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import styled from 'styled-components';
 import { ROUTES } from '@/Constants/route';
 import { RecruitmentForm } from '@/Types/study';
 import Button from '../Common/Button';
-import { useSavedKeyStore, useSelectedCardStore } from '@/store/study';
+import { useSavedKeyStore } from '@/store/study';
+import { useModalStore } from '@/store/modal';
 
-const TemporarySavedCard = ({ savedKey, title }: Partial<RecruitmentForm> & { savedKey: string }) => {
+interface Props {
+  savedKey: string;
+  onRemove: (savedKey: string) => void;
+}
+
+const TemporarySavedCard = ({ savedKey, title }: Partial<RecruitmentForm> & Props) => {
   const navigate = useNavigate();
 
-  const { setSelectedCard } = useSelectedCardStore();
+  const { openModal } = useModalStore();
 
   const [studyOrRecruitment, id] = savedKey?.split('-') ?? [];
 
@@ -16,23 +24,28 @@ const TemporarySavedCard = ({ savedKey, title }: Partial<RecruitmentForm> & { sa
   const setSavedKey = useSavedKeyStore((state) => state.setSavedKey);
 
   return (
-    <TemporarySavedCardWrapper
-      onClick={() => {
-        navigate(studyOrRecruitment === 'STUDY' ? ROUTES.STUDY.CREATE : `/studies/${id}/recruitments/create`);
-        setSavedKey(savedKey);
-      }}
-    >
-      <span className="title">{title}</span>
-      <Button
-        scheme="normal"
-        onClick={(e) => {
-          e.stopPropagation();
-          localStorage.removeItem(savedKey);
-          setSelectedCard(studyOrRecruitment === 'STUDY' ? 'STUDY' : 'RECRUITMENT');
-        }}
-      >
-        삭제하기
-      </Button>
+    <TemporarySavedCardWrapper>
+      <span className="title">{title || '제목 없음'}</span>
+      <div className="button__wrap">
+        <Button
+          scheme="normal"
+          onClick={() => {
+            openModal();
+            setSavedKey(savedKey);
+          }}
+        >
+          글 삭제하기
+        </Button>
+        <Button
+          scheme="secondary"
+          onClick={() => {
+            navigate(studyOrRecruitment === 'STUDY' ? ROUTES.STUDY.CREATE : `/studies/${id}/recruitments/create`);
+            setSavedKey(savedKey);
+          }}
+        >
+          이어 작성하기
+        </Button>
+      </div>
     </TemporarySavedCardWrapper>
   );
 };
@@ -42,10 +55,10 @@ const TemporarySavedCardWrapper = styled.div`
   width: 100%;
   padding: 24px 32px;
   justify-content: space-between;
-  align-items: flex-start;
-  gap: 32px;
-  align-self: stretch;
-  border-radius: ${({ theme }) => theme.borderRadius.medium};
+  padding: 32px 40px;
+  align-items: center;
+  gap: 40px;
+  border-radius: ${({ theme }) => theme.borderRadius.large};
   border: 1px solid ${({ theme }) => theme.color.black1};
   background: ${({ theme }) => theme.color.white};
   box-shadow: 0px 0px 20px 0px ${({ theme }) => theme.color.black0};
@@ -59,13 +72,21 @@ const TemporarySavedCardWrapper = styled.div`
     line-height: 32px;
   }
 
+  .title {
+    font-size: 24px;
+  }
+
   &:hover {
     cursor: pointer;
   }
 
-  button {
-    padding: 0 32px;
+  .button__wrap {
+    display: flex;
+    gap: 12px;
   }
+
+  /* Card */
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.05);
 `;
 
-export default TemporarySavedCard;
+export default React.memo(TemporarySavedCard);

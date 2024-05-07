@@ -123,6 +123,7 @@ export const StackModal = ({ handleModal, initialSelectedStacks, handleSelectedS
       <BtnsWrapper>
         <Button
           size="fullWidth"
+          type="button"
           onClick={() => {
             setSelectedCategory(null);
             setSelectedStacks([]);

@@ -141,6 +141,11 @@ VITE_BASE_API_URL = Base API Endpoint
     yarn start:windows
   ```
 
+### 5. Storybook 실행
+
+```sh
+yarn storybook
+````
 
 ## 📁 Directory Structure
 ```

@@ -29,16 +29,15 @@ const Button = ({
   children,
   className,
   size = 'normal',
-}: ButtonProps) => (
-  <ButtonContainer {...{ onClick, type, scheme, disabled, className, size }}>
-    <>{children}</>
-  </ButtonContainer>
-);
+}: ButtonProps) => {
+  return (
+    <ButtonContainer {...{ onClick, type, scheme, disabled, className, size }}>
+      <>{children}</>
+    </ButtonContainer>
+  );
+};
 
-const ButtonContainer = styled.button<{
-  scheme: 'primary' | 'secondary' | 'third' | 'normal';
-  size: 'normal' | 'fullWidth';
-}>`
+const ButtonContainer = styled.button<ButtonProps>`
   display: inline-flex;
   justify-content: center;
   align-items: center;

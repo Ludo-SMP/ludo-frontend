@@ -12,7 +12,7 @@ export const ROUTES = {
     CREATE: '/studies/:studyId/recruitments/create',
     RECRUITMENTS: '/studies',
     DETAIL: '/studies/:recruitmentId/recruitment',
-    MODIFY: '/studies/:studyId/recruitments/edit',
+    EDIT: '/studies/:studyId/recruitments/:recruitmentId/edit',
   },
   STUDY: {
     CREATE: '/studies/create',

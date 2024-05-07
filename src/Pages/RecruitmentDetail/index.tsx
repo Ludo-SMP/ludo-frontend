@@ -23,6 +23,7 @@ import { Loading } from '@/Assets';
 
 const RecruitmentDetailPage = () => {
   const recruitmentId = Number(useParams().recruitmentId);
+
   const { isModalOpen, openModal, closeModal } = useModalStore();
   const { isLoggedIn } = useLoginStore();
   const { user } = useUserStore();
@@ -36,6 +37,8 @@ const RecruitmentDetailPage = () => {
   const study = recruitmentDetail?.study;
 
   const { mutate: closeRecruitmentMutate } = useCloseRecruitmentMutation(study?.id);
+
+  const isMine = user?.id === study?.owner?.id;
 
   useEffect(() => {
     closeModal();
@@ -56,7 +59,7 @@ const RecruitmentDetailPage = () => {
           </RecruitmentTitleWrapper>
           <RecruitmentInfoWrapper>
             <div className="recruitment__status">
-              <div className="creator">{study.owner.nickname}</div>
+              <div className="creator">{study?.owner?.nickname}</div>
               <ColumnDivider />
               <div className="edit__info">
                 <div className="createdAt">{dateFormatter(recruitment.createdDateTime)}</div>
@@ -98,18 +101,10 @@ const RecruitmentDetailPage = () => {
             </div>
           </RecruitmentInfoWrapper>
           <StudyButtonsWrapper>
-            {user?.id === study.owner.id ? (
+            {isMine ? (
               <>
                 <Button
-                  scheme="secondary"
-                  onClick={() => {
-                    navigate(`/studies/${study.id}/recruitments/edit`);
-                  }}
-                  disabled
-                >
-                  스터디 모집 공고 수정하기
-                </Button>
-                <Button
+                  scheme="normal"
                   onClick={() => {
                     setIsCloseRecruitmentBtnClicked(true);
                     openModal();
@@ -117,11 +112,25 @@ const RecruitmentDetailPage = () => {
                 >
                   모집 마감하기
                 </Button>
+                <Button
+                  scheme="secondary"
+                  onClick={() => {
+                    navigate(`/studies/${study.id}/recruitments/${recruitment.id}/edit`);
+                  }}
+                >
+                  스터디 모집 공고 수정하기
+                </Button>
               </>
             ) : (
-              <Button scheme="secondary" onClick={openModal}>
-                스터디 지원하기
-              </Button>
+              <>
+                {applyTryStatus === 'ALREDAY_APPLY' ? (
+                  <div className="text__alert">이미 지원한 스터디입니다.</div>
+                ) : (
+                  <Button scheme="secondary" onClick={openModal}>
+                    스터디 지원하기
+                  </Button>
+                )}
+              </>
             )}
           </StudyButtonsWrapper>
           {!isLoggedIn && isModalOpen && !isCloseRecruitmentBtnClicked && (
@@ -167,11 +176,11 @@ const RecruitmentDetailPage = () => {
                   applyTryStatus === 'CLOSED'
                     ? APPLY.CLOSED.title
                     : applyTryStatus === 'ALREDAY_APPLY'
-                    ? APPLY.ALREADY_APPLY.title
-                    : APPLY.ALREADY_PARTICIPATED.title
+                      ? APPLY.ALREADY_APPLY.title
+                      : APPLY.ALREADY_PARTICIPATED.title
                 }
                 handleApprove={() => {
-                  setApplyTryStatus(() => 'NOT APPLY');
+                  setApplyTryStatus(() => 'ALREDAY_APPLY');
                   closeModal();
                 }}
                 approveBtnText="확인"
@@ -179,8 +188,8 @@ const RecruitmentDetailPage = () => {
                 {applyTryStatus === 'CLOSED'
                   ? APPLY.CLOSED.content
                   : applyTryStatus === 'ALREDAY_APPLY'
-                  ? APPLY.ALREADY_APPLY.content
-                  : APPLY.ALREADY_PARTICIPATED.content}
+                    ? APPLY.ALREADY_APPLY.content
+                    : APPLY.ALREADY_PARTICIPATED.content}
               </Modal>
             )}
           {isModalOpen && isCloseRecruitmentBtnClicked && (
@@ -272,7 +281,7 @@ const RecruitmentInfoWrapper = styled.div`
 `;
 const StudyButtonsWrapper = styled.div`
   display: flex;
-  align-items: flex-start;
+  justify-content: center;
   gap: 24px;
   align-self: stretch;
 
@@ -282,6 +291,14 @@ const StudyButtonsWrapper = styled.div`
     align-items: center;
     gap: 8px;
     flex: 1 0 0;
+  }
+
+  .text__alert {
+    font-family: 'Pretendard600';
+    font-size: 16px;
+    font-style: normal;
+    line-height: 40px; /* 250% */
+    color: ${({ theme }) => theme.color.black2};
   }
 `;
 

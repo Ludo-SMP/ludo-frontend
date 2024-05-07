@@ -1,46 +1,22 @@
-import { ChangeEvent } from 'react';
+import React from 'react';
+import { UseFormRegister } from 'react-hook-form';
 import styled from 'styled-components';
-import { OptionalCreates } from '@/Pages/Studies/CreateRecruitment';
-import { Creates } from '@/Types/studies';
 
-export type Props = {
-  onClick?: () => void;
-  children?: React.ReactNode;
-  // onChange?: (event: string) => void;
-  setForm: (any: OptionalCreates) => void;
-  useForm: Creates;
-  value?: string;
-  type?: string;
-  name?: string;
-  maxlength?: number;
-  id?: string;
-  formData?: number | string;
-  ref?: string;
-};
+interface IFormValues {
+  callUrl: string;
+}
+export const ContactUrlInput = React.forwardRef<HTMLInputElement, ReturnType<UseFormRegister<IFormValues>>>(
+  ({ onChange, name }, ref) => {
+    return <InputContainer id={name} name={name} onChange={onChange} placeholder="ex)오픈 카카오톡 링크" ref={ref} />;
+  },
+);
 
-export const ContactUrlInput = ({ setForm, useForm }: Props) => {
-  // const [UrlValue, setForms] = useState('');
-  const onUrlHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setForm({ callUrl: event.target.value });
-  };
-  return (
-    <InputContainer
-      id="callUrl"
-      name="callUrl"
-      value={useForm.contactUrl}
-      onChange={(event) => onUrlHandler(event)}
-      placeholder="ex)오픈 카카오톡 링크"
-    />
-  );
-};
-
-const InputContainer = styled.textarea`
+const InputContainer = styled.input`
   width: 392px;
   height: 44px;
-  background-color: ${(props) => props.theme.color.gray3};
+  background-color: ${(props) => props.theme.color.white};
   border-radius: 8px;
   border: 1px solid #cbcdd1;
-  background: ${(props) => props.theme.color.gray1};
   color: ${(props) => props.theme.color.gray3};
   padding-left: 16px;
 `;
