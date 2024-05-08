@@ -1,5 +1,6 @@
 // theme.ts
 import { DefaultTheme } from 'styled-components';
+import { typo } from './typography';
 
 export const color = {
   white: '#ffffff',
@@ -73,4 +74,5 @@ export const theme: DefaultTheme = {
   media,
   borderRadius,
   buttonSize,
+  typo,
 };
