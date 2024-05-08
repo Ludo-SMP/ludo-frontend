@@ -1,4 +1,3 @@
-import Heading from '@/Components/Heading';
 import { FieldErrors, FieldValues } from 'react-hook-form';
 import styled from 'styled-components';
 
@@ -24,16 +23,16 @@ export const LabelForm = <T extends FieldValues = FieldValues>({
 }: LabelFormProps<T>) => {
   return (
     <GridItem>
-      {label && (
-        <Heading type={'Title'} component={'Input'}>
-          {label}
-        </Heading>
-      )}
+      {label && <Heading>{label}</Heading>}
       {children}
       {errors?.[name]?.message && <ErrorMsg>{(errors?.[name] as FieldErrors)?.message?.toString()}</ErrorMsg>}
     </GridItem>
   );
 };
+
+const Heading = styled.h3`
+  ${({ theme }) => theme.typo.InputTitle};
+`;
 
 const GridItem = styled.div`
   display: flex;
