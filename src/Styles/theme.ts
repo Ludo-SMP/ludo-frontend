@@ -1,5 +1,5 @@
 // theme.ts
-import { DefaultTheme } from 'styled-components';
+import { DefaultTheme, css } from 'styled-components';
 
 export const color = {
   white: '#ffffff',
@@ -74,3 +74,9 @@ export const theme: DefaultTheme = {
   borderRadius,
   buttonSize,
 };
+
+export const textEllipsis = css`
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+`;
