@@ -151,6 +151,17 @@ export interface Participant {
 }
 export interface Applicant extends Omit<Member, 'role'> {}
 
+export interface StudyCreate {
+  title: string;
+  categoryId: number;
+  positionId: number;
+  way: ProgressMethod;
+  platform: Platform;
+  participantLimit: number;
+  startDateTime: string;
+  endDateTime: string;
+}
+
 export interface StudyDetail {
   study: {
     id: number;

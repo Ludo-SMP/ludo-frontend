@@ -76,6 +76,10 @@ const TemporarySavedCardWrapper = styled.div`
     font-size: 24px;
   }
 
+  .title {
+    font-size: 24px;
+  }
+
   &:hover {
     cursor: pointer;
   }

@@ -73,6 +73,11 @@ export const PLATFORM = {
   GOOGLE_MEET: 'Google Meet',
 };
 
+export const PLATFORM_OPTIONS = [
+  { label: 'Gather', value: 'GATHER' },
+  { label: 'Google Meet', value: 'GOOGLE_MEET' },
+];
+
 export const ALL = {
   id: 0,
   name: '전체',
@@ -84,6 +89,12 @@ export const CATEGORIES = [
   { id: 3, name: '모의 면접' },
 ];
 
+export const CATEGORIES_OPTION = [
+  { value: 1, label: '프로젝트' },
+  { value: 2, label: '코딩 테스트' },
+  { value: 3, label: '모의 면접' },
+];
+
 export const POSITIONS: Position[] = [
   { id: 1, name: '백엔드' },
   { id: 2, name: '프론트엔드' },
@@ -91,9 +102,21 @@ export const POSITIONS: Position[] = [
   { id: 4, name: '데브옵스' },
 ];
 
+export const POSITIONS_OPTIONS = [
+  { value: 1, label: '백엔드' },
+  { value: 2, label: '프론트엔드' },
+  { value: 3, label: '디자이너' },
+  { value: 4, label: '데브옵스' },
+];
+
 export const PROGRESS_METHODS = [
   { id: 1, name: 'ONLINE' },
   { id: 2, name: 'OFFLINE' },
+];
+
+export const PROGRESS_METHODS_OPTIONS = [
+  { value: 1, label: '온라인' },
+  { value: 2, label: '오프라인' },
 ];
 
 export const SORTS = [

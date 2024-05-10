@@ -95,6 +95,7 @@ const IconWrapper = styled.div`
     cursor: pointer;
   }
 `;
+
 const LengthIndicator = styled.div`
   position: absolute;
   bottom: 13px;

@@ -9,8 +9,8 @@ import SignUpPage from '@/Pages/SignUp';
 import ApplicantsPage from '@/Pages/Applicants';
 import StudyDetailPage from '@/Pages/StudyDetail';
 // import SaveStudyPage from '@/Pages/Studies/SaveStudy';
-// import CreateStudyPage from '@/Pages/Studies/CreateStudy';
-// import ModifyStudyPage from '@/Pages/Studies/ModifyStudy';
+import CreateStudyPage from '@/Pages/Studies/CreateStudy';
+import ModifyStudyPage from '@/Pages/Studies/EditStudy';
 import CreateRecruitmentPage from '@/Pages/CreateRecruitment/page';
 import LoginFailPage from '@/Pages/LoginFail';
 import SignUpFailPage from '@/Pages/SignUpFail';
@@ -47,19 +47,18 @@ export const RouterPath = createBrowserRouter([
         path: ROUTES.MYPAGE,
         element: <MyPage />,
       },
-      // {
-      //   path: ROUTES.STUDY.CREATE,
-      //   element: <CreateStudyPage />,
-      // },
-      // {
-      //   path: ROUTES.STUDY.MODIFY,
-      //   element: <ModifyStudyPage />,
-      // },
+      {
+        path: ROUTES.STUDY.CREATE,
+        element: <CreateStudyPage />,
+      },
+      {
+        path: ROUTES.STUDY.MODIFY,
+        element: <ModifyStudyPage />,
+      },
       {
         path: ROUTES.RECRUITMENT.CREATE,
         element: <CreateRecruitmentPage />,
       },
-
       {
         path: ROUTES.STUDY.DETAIL,
         element: <StudyDetailPage />,
