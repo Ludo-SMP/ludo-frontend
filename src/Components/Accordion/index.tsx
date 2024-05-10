@@ -18,7 +18,7 @@ export interface AccordionProps {
 const Accordion = (props: AccordionProps) => {
   const { title, description, children } = props;
 
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean | null>(null);
 
   const [contentHeight, setContentHeight] = useState<number>(0);
 
@@ -26,7 +26,8 @@ const Accordion = (props: AccordionProps) => {
 
   useEffect(() => {
     setContentHeight(contentRef?.current?.clientHeight ?? 0);
-  });
+    setIsOpen(null);
+  }, []);
 
   return (
     <Container>
@@ -95,7 +96,7 @@ export const Description = styled.div`
   ${textEllipsis}
 `;
 
-const AccordionDetail = styled.p<{ isOpen?: boolean; contentHeight: number }>`
+const AccordionDetail = styled.p<{ isOpen?: null | boolean; contentHeight: number }>`
   min-width: 300px;
   padding: 8px 64px 8px 0px;
   gap: 16px;
@@ -115,7 +116,8 @@ const AccordionDetail = styled.p<{ isOpen?: boolean; contentHeight: number }>`
             opacity 0.7s ease-in-out,
             visibility 0.4s ease-in-out;
         `
-      : css`
+      : typeof isOpen === 'boolean' &&
+        css`
           transition:
             margin-top 0.2s ease-in-out,
             opacity 0.3s ease-in-out;
