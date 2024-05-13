@@ -11,6 +11,9 @@ export const SelectArrow = ({ isOpen }: SelectArrowProps) => {
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      style={{
+        transition: 'transform 0.3s ease',
+      }}
     >
       <path
         id="Vector"
