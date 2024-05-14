@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { CustomRadio } from '../CustomRadio/CustomRadio';
-import Heading from '../Heading';
 import { useState } from 'react';
 
 interface ReviewQuestionProps {
@@ -21,9 +20,7 @@ export const ReviewQuestion = ({ title, contents, optionCnt = 5 }: ReviewQuestio
 
   return (
     <ReviewQuestionWrapper>
-      <Heading component="Page" type="SubTitle">
-        {title}
-      </Heading>
+      <QuestionTitle>{title}</QuestionTitle>
       <SelectSection>
         <QuestionContent alignEnd>{contents[0]}</QuestionContent>
         <RadioButtonsSection>
@@ -52,10 +49,15 @@ const ReviewQuestionWrapper = styled.div`
   align-items: center;
   gap: 12px;
   align-self: stretch;
+`;
 
-  h3 {
-    width: 100%;
-  }
+const QuestionTitle = styled.h3`
+  font-family: 'Pretendard500';
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 32px;
+  width: 100%;
 `;
 
 const SelectSection = styled.div`
