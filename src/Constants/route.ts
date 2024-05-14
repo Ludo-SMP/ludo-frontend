@@ -11,6 +11,7 @@ export const ROUTES = {
     HOME: '/mypage',
     REVIEWS: '/mypage/reviews',
     SAVED: '/mypage/saved',
+    SETTINGS: '/mypage/settings',
     PROFILE_SETTINGS: '/mypage/settings/profile',
     NOTIFICATIONS_SETTINGS: '/mypage/settings/notifications',
     NOTIFICATIONS: '/mypage/notifications',
