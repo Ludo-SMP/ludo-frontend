@@ -9,8 +9,9 @@ import { useRefuseApplyMutation } from '@/Hooks/study/useRefuseApplyMutation';
 import Modal from '../Common/Modal';
 import { APPLY } from '@/Constants/messages';
 import { STUDY } from '@/Constants/queryString';
-import { useModalStore } from '@/store/modal';
+// import { useModalStore } from '@/store/modal';
 import { useQueryClient } from '@tanstack/react-query';
+import { useModal } from '@/Hooks/useModal';
 
 interface ApplicantCardProps extends Omit<Member, 'role'> {
   /** 스터디 ID */
@@ -26,7 +27,9 @@ interface ApplicantCardProps extends Omit<Member, 'role'> {
 /** 지원자 카드 */
 const ApplicantCard = ({ studyId, id: applicantId, title, nickname, email, position, isOwner }: ApplicantCardProps) => {
   const [applyStatus, setApplyStatus] = useState<ApplyStatus>('UNCHECKED');
-  const { isModalOpen, closeModal } = useModalStore();
+
+  const { isModalOpen, closeModal } = useModal();
+
   const queryClient = useQueryClient();
 
   const { mutate: acceptMutate } = useAcceptApplyMutation(studyId, applicantId, () => {
