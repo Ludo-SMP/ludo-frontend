@@ -14,13 +14,13 @@ const Box = styled.div<{
   $active: boolean;
 }>`
   color: ${({ theme, $active }) => ($active ? theme.color.purple1 : theme.color.black3)};
-  fontsize: 16;
-  fontfamily: Pretendard600;
-  fontweight: 600;
-  lineheight: 16;
-  wordwrap: break-word;
+  font-size: 16px;
+  font-family: Pretendard600;
+  font-weight: 600;
+  line-height: 16px;
   padding: 16px;
   background: ${({ theme, $active }) => $active && theme.color.purple2};
-  borderradius: 8;
-  justifycontent: center;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
 `;
