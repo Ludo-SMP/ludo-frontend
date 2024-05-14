@@ -38,7 +38,7 @@ export const ReviewQuestion = ({ title, contents, optionCnt = 5 }: ReviewQuestio
         </RadioButtonsSection>
         <QuestionContent>{contents[1]}</QuestionContent>
       </SelectSection>
-      <ErrorMessageWrapper>{errorMessageContent}</ErrorMessageWrapper>
+      <ErrorMessageWrapper>{!selectedValue && errorMessageContent}</ErrorMessageWrapper>
     </ReviewQuestionWrapper>
   );
 };
