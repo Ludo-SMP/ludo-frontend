@@ -1,11 +1,11 @@
 import { styled } from 'styled-components';
 
-interface AccordionListProps {
+export interface AccordionListProps {
   /** 아코디언 리스트 제목 */
   title?: string;
 
   /** 제목 아래 들어갈 노드 (ex. 아코디언) */
-  children?: React.ReactNode;
+  children: React.ReactNode;
 }
 
 /** 아코디언 목록 */
