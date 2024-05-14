@@ -9,14 +9,17 @@ import StudyButtonSection from './StudyButtonSection';
 import SignButtonSection from './SignButtonSection';
 import Gnb from './Gnb';
 import Dropdown from '../Dropdown';
-import { useModalStore } from '@/store/modal';
+
 import { useLogOutMutation } from '@/Hooks/auth/useLogOutMutation';
 import DropdownItem from '../Common/DropdownItem';
+import { useModal } from '@/Hooks/useModal';
+import Modal from '../Common/Modal';
+import { APPLY } from '@/Constants/messages';
 
 /** 사이트 메인 헤더 */
 const Header = () => {
   const { isLoggedIn } = useLoginStore();
-  const { openModal } = useModalStore();
+  const { isModalOpen, openModal } = useModal();
   const navigate = useNavigate();
   const currentLocation = useLocation()?.pathname;
 
@@ -85,6 +88,18 @@ const Header = () => {
       </TopBarWrapper>
 
       {isLoggedIn && <Gnb />}
+
+      {isModalOpen && (
+        <Modal
+          title={APPLY.LOGIN.title}
+          handleApprove={() => navigate(ROUTES.AUTH.LOGIN)}
+          approveBtnText="로그인하기"
+          cancelBtnText="나중에 하기"
+          isBtnWidthEqual={false}
+        >
+          {APPLY.LOGIN.content}
+        </Modal>
+      )}
     </HeaderWrapper>
   );
 };
