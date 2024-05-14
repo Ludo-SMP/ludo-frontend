@@ -36,7 +36,7 @@ const TopbarWrapper = styled.div<{ gap?: number }>`
   gap: ${({ gap }) => `${gap}px`};
 `;
 
-const MoveBack = styled.div`
+const MoveBack = styled.button`
   display: flex;
   padding: 8px;
   align-items: flex-end;
