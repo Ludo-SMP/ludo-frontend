@@ -52,7 +52,7 @@ const Header = () => {
                 <Dropdown image={<Profile width={40} height={40} />}>
                   <DropdownItem
                     onClick={() => {
-                      navigate(ROUTES.MYPAGE);
+                      navigate(ROUTES.MYPAGE.HOME);
                     }}
                   >
                     마이페이지
