@@ -1,16 +1,24 @@
 import styled from 'styled-components';
 import { CustomRadio } from '../CustomRadio/CustomRadio';
 import Heading from '../Heading';
+import { useState } from 'react';
 
 interface ReviewQuestionProps {
+  /** 설문 문항 */
   title: string;
+
+  /** 선택지 내용 */
   contents: [string, string];
+
+  /** 숫자 선택지 개수 */
   optionCnt?: number;
 }
 
 const errorMessageContent = '해당 항목이 체크되지 않았습니다.';
 
 export const ReviewQuestion = ({ title, contents, optionCnt = 5 }: ReviewQuestionProps) => {
+  const [selectedValue, setSelectedValue] = useState(null);
+
   return (
     <ReviewQuestionWrapper>
       <Heading component="Page" type="SubTitle">
@@ -20,7 +28,12 @@ export const ReviewQuestion = ({ title, contents, optionCnt = 5 }: ReviewQuestio
         <QuestionContent alignEnd>{contents[0]}</QuestionContent>
         <RadioButtonsSection>
           {Array.from({ length: optionCnt }, (_, i) => i + 1).map((value: number) => (
-            <CustomRadio value={value} key={value} />
+            <CustomRadio
+              value={value}
+              key={value}
+              setSelectedValue={setSelectedValue}
+              checked={value === selectedValue}
+            />
           ))}
         </RadioButtonsSection>
         <QuestionContent>{contents[1]}</QuestionContent>

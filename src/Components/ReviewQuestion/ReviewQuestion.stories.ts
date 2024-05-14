@@ -10,7 +10,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    title: '평가 문항',
-    contents: ['매우 만족', '매우 불만족'],
+    title: '이 스터디원은 스터디에 적극적이었나요?',
+    contents: ['아쉬워요.', '적극적이에요.'],
   },
 };

@@ -1,20 +1,26 @@
 import styled from 'styled-components';
-
+import { SetStateAction } from 'react';
 export interface CustomRadioProps {
+  /* 값 */
   value: number;
+
+  /** 체크 여부 */
   checked?: boolean;
+
+  /** */
   size?: number;
+  setSelectedValue: React.Dispatch<SetStateAction<number | null>>;
 }
 
 const RADIO_COLOR = { 1: '#F7A477', 2: '#E1A193', 3: '#CB9FAE', 4: '#B59CCA', 5: '#7170BF' };
 
-export const CustomRadio = ({ value, checked = true }: CustomRadioProps) => {
+export const CustomRadio = ({ value, checked, setSelectedValue }: CustomRadioProps) => {
   return (
     <Label>
       <span>{value}</span>
       <Radio value={value} checked={checked}>
-        <div className="inner"></div>
-        <input type="radio" />
+        <div className="inner" />
+        <input type="radio" value={value} checked={checked} onChange={() => setSelectedValue(value)} />
       </Radio>
     </Label>
   );
