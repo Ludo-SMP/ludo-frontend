@@ -1,10 +1,14 @@
 import styled from 'styled-components';
 
 export interface StudyProgressProps {
+  /** 진행한 총 스터디 수 */
   totalStudy: number;
+
+  /** 완료한 스터디 수 */
   completedStudy: number;
 }
 
+/** 사용자의 스터디 진행률을 나타내는 컴포넌트 */
 export const StudyProgress = ({ totalStudy, completedStudy }: StudyProgressProps) => {
   const p = (completedStudy / totalStudy) * 100;
 
