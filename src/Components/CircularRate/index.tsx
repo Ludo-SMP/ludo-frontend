@@ -1,4 +1,5 @@
 import { color, theme } from '@/Styles/theme';
+import { useRef } from 'react';
 
 export interface CircularRateProps {
   /** 0부터 100 사이의 평가 지수 */
@@ -17,6 +18,10 @@ export interface CircularRateProps {
   label: string;
 }
 
+let x = 0;
+
+const useMaskId = () => useRef((x += 1)).current;
+
 export const CircularRate = ({
   percentage,
   barWeight = 4,
@@ -24,7 +29,7 @@ export const CircularRate = ({
   gradientColors = [theme.color.purple1, theme.color.orange1],
   label,
 }: CircularRateProps) => {
-  console.log(gradientColors);
+  const maskId = useMaskId();
 
   return (
     <div
@@ -34,7 +39,7 @@ export const CircularRate = ({
     >
       <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size}>
         <circle cx="50%" cy="50%" r={(size - barWeight) / 2} fill="none" stroke="#F2F3F3" strokeWidth={barWeight} />
-        <mask id={`ring-${percentage}`}>
+        <mask id={`ring-${maskId}`}>
           <circle
             cx="50%"
             cy="50%"
@@ -51,7 +56,7 @@ export const CircularRate = ({
             }}
           />
         </mask>
-        <foreignObject width={size} height={size} mask={`url(#ring-${percentage})`}>
+        <foreignObject width={size} height={size} mask={`url(#ring-${maskId})`}>
           <div
             style={{
               width: '100%',
