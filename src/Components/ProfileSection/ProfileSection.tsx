@@ -1,6 +1,7 @@
 import { Profile } from '@/Assets';
 import styled from 'styled-components';
 
+/** 프로필 섹션 컴포넌트 */
 export const ProfileSection = () => {
   return (
     <Box>
