@@ -6,7 +6,7 @@ const meta = {
   component: Tab,
   args: {
     title: '프로필 설정',
-    to: '/profile',
+    to: '/mypage/settings/profile',
   },
 } satisfies Meta<typeof Tab>;
 
@@ -21,7 +21,7 @@ export const Active: Story = {
     reactRouter: reactRouterParameters({
       routing: [
         {
-          path: '/profile',
+          path: '/mypage/settings/profile',
           useStoryElement: true,
         },
       ],

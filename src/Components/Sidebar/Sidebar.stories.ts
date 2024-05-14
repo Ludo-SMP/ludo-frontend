@@ -17,7 +17,7 @@ export const ActiveProfile: Story = {
     reactRouter: reactRouterParameters({
       routing: [
         {
-          path: '/profile',
+          path: '/mypage',
           useStoryElement: true,
         },
       ],
