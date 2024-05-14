@@ -1,4 +1,4 @@
-import { color, theme } from '@/Styles/theme';
+import { theme } from '@/Styles/theme';
 import { useRef } from 'react';
 
 export interface CircularRateProps {
