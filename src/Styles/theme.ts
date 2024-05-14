@@ -31,6 +31,7 @@ export const color = {
   kakao: '#FEE500',
   kakaoFontColor: '#521010',
   negative: '#FD3D51',
+  strokeDividerThick: '#F2F3F3',
 };
 
 export const font = {
