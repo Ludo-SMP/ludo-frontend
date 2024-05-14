@@ -22,7 +22,7 @@ export const TopBar = ({ gap = 12, children }: TopBarProps) => {
           />
         </svg>
       </MoveBack>
-      <TopBarTitle>{children}</TopBarTitle>
+      <TopBarContent>{children}</TopBarContent>
     </TopbarWrapper>
   );
 };
@@ -39,6 +39,8 @@ const TopbarWrapper = styled.div<{ gap?: number }>`
 const MoveBack = styled.div`
   display: flex;
   padding: 8px;
+  align-items: flex-end;
+  gap: 10px;
 
   &:hover {
     cursor: pointer;
@@ -48,7 +50,7 @@ const MoveBack = styled.div`
   }
 `;
 
-const TopBarTitle = styled.p`
+const TopBarContent = styled.p`
   color: ${({ theme }) => theme.color.black5};
   font-family: 'Pretendard600';
   font-size: 18px;
