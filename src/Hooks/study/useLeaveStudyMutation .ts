@@ -10,7 +10,7 @@ export const useLeaveStudyMutation = (studyId: number) => {
     mutationKey: [...STUDY.LEAVE(studyId)],
     mutationFn: () => leaveStudy(studyId),
     onSuccess: () => {
-      navigate(ROUTES.MYPAGE);
+      navigate(ROUTES.MYPAGE.HOME);
     },
     onError: () => {},
   });
