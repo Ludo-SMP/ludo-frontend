@@ -1,6 +1,5 @@
 import { Outlet, createBrowserRouter } from 'react-router-dom';
 import { ROUTES } from '@/Constants/route';
-import MyPage from '../Pages/MyPage';
 import LoginPage from '@/Pages/Login';
 import MainPage from '@/Pages/Main';
 import RecruitmentDetailPage from '@/Pages/RecruitmentDetail';
@@ -44,8 +43,57 @@ export const RouterPath = createBrowserRouter([
         element: <LoginFailPage />,
       },
       {
-        path: ROUTES.MYPAGE,
-        element: <MyPage />,
+        // 마이페이지
+        path: ROUTES.MYPAGE.HOME,
+        // 마이페이지 공통 사이드바
+        element: (
+          <>
+            TODO: <Outlet />
+          </>
+        ),
+        children: [
+          {
+            // 회원 정보
+            index: true,
+            element: <>TODO</>,
+          },
+          {
+            // 스터디원이 남긴 나의 리뷰
+            path: ROUTES.MYPAGE.REVIEWS,
+            element: <>TODO</>,
+          },
+          {
+            // 임시 저장된 글
+            path: ROUTES.MYPAGE.SAVED,
+            element: <>TODO</>,
+          },
+          {
+            path: ROUTES.MYPAGE.SETTINGS,
+            // 설정 페이지 공통 레이아웃
+            element: (
+              <>
+                TODO <Outlet />
+              </>
+            ),
+            children: [
+              {
+                // 프로필 설정
+                path: ROUTES.MYPAGE.PROFILE_SETTINGS,
+                element: <>TODO</>,
+              },
+              {
+                // 알림 권한 설정
+                path: ROUTES.MYPAGE.NOTIFICATIONS_SETTINGS,
+                element: <>TODO</>,
+              },
+            ],
+          },
+          {
+            // 루도가 알려요
+            path: ROUTES.MYPAGE.NOTIFICATIONS,
+            element: <>TODO</>,
+          },
+        ],
       },
       // {
       //   path: ROUTES.STUDY.CREATE,
@@ -84,10 +132,11 @@ export const RouterPath = createBrowserRouter([
         path: ROUTES.STUDY.APPLICNATS,
         element: <ApplicantsPage />,
       },
-      // {
-      //   path: ROUTES.STUDY.SAVE,
-      //   element: <SaveStudyPage />,
-      // },
+      {
+        // 스터디원 평가 페이지
+        path: ROUTES.STUDY.REVIEW,
+        element: <>TODO</>,
+      },
       {
         path: ROUTES.RECRUITMENT.EDIT,
         element: <EditRecruitmentFetcher />,
