@@ -84,6 +84,7 @@ const Title = styled.div<{ alarmLength: number }>`
   background: ${({ theme }) => theme.color.white};
   border-bottom-left-radius: ${({ theme, alarmLength }) => alarmLength === 0 && theme.borderRadius.small};
   border-bottom-right-radius: ${({ theme, alarmLength }) => alarmLength === 0 && theme.borderRadius.small};
+  border-bottom: ${({ theme, alarmLength }) => alarmLength !== 0 && `1px solid ${theme.color.black1}`};
   color: ${({ theme }) => theme.color.black5};
   font-family: 'Pretendard600';
   font-size: 18px;
@@ -102,11 +103,12 @@ const PreviewListWrapper = styled.div`
   flex-direction: column;
 
   & > div {
-    border: 1px solid ${({ theme }) => theme.color.negative};
+    border-bottom: 1px solid ${({ theme }) => theme.color.black1};
   }
 
   & > div:last-child {
     border-bottom-left-radius: ${({ theme }) => theme.borderRadius.small};
     border-bottom-right-radius: ${({ theme }) => theme.borderRadius.small};
+    border-bottom: none;
   }
 `;
