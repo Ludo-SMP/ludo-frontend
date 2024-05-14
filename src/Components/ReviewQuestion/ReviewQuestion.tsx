@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 import { CustomRadio } from '../CustomRadio/CustomRadio';
+import Heading from '../Heading';
 
 interface ReviewQuestionProps {
   title: string;
-  contents: string[];
+  contents: [string, string];
   optionCnt?: number;
 }
 
@@ -12,7 +13,9 @@ const errorMessageContent = '해당 항목이 체크되지 않았습니다.';
 export const ReviewQuestion = ({ title, contents, optionCnt = 5 }: ReviewQuestionProps) => {
   return (
     <ReviewQuestionWrapper>
-      <QuestionTitle>{title}</QuestionTitle>
+      <Heading component="Page" type="SubTitle">
+        {title}
+      </Heading>
       <SelectSection>
         <QuestionContent alignEnd>{contents[0]}</QuestionContent>
         <RadioButtonsSection>
@@ -29,21 +32,17 @@ export const ReviewQuestion = ({ title, contents, optionCnt = 5 }: ReviewQuestio
 
 const ReviewQuestionWrapper = styled.div`
   display: flex;
+  width: 100%;
   min-width: 300px;
   max-width: 808px;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
   align-self: stretch;
-`;
 
-const QuestionTitle = styled.div`
-  font-family: 'Pretendard500';
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 32px;
-  width: 100%;
+  h3 {
+    width: 100%;
+  }
 `;
 
 const SelectSection = styled.div`
