@@ -68,6 +68,13 @@ export const ZeroPercent: Story = {
   },
 };
 
+/** 1% */
+export const OnePercent: Story = {
+  args: {
+    percentage: 1,
+  },
+};
+
 /** 100% */
 export const FullPercent: Story = {
   args: {

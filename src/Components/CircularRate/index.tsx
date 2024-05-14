@@ -49,7 +49,7 @@ export const CircularRate = ({
             r={r}
             fill="none"
             stroke="white"
-            strokeLinecap="round"
+            strokeLinecap={percentage === 0 ? 'butt' : 'round'}
             strokeWidth={barWeight}
             // 원에 외접하는 정사각형의 길이를 원주로 변환
             strokeDasharray={`${(percentage / 100) * diameter * Math.PI}px 1000%`}
