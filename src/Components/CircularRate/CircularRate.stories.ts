@@ -27,6 +27,7 @@ export const Default: Story = {};
 export const CirculatingGradient: Story = {
   args: {
     gradientColors: [theme.color.purple1, theme.color.orange1, theme.color.purple1],
+    percentage: 100,
   },
 };
 
@@ -39,6 +40,19 @@ export const Monotone: Story = {
 export const Proactiveness: Story = {
   args: {
     percentage: 70,
+    label: '적극성',
+  },
+};
+
+export const Bigger: Story = {
+  args: {
+    size: 100,
+  },
+};
+
+export const Bold: Story = {
+  args: {
+    barWeight: 8,
   },
 };
 
