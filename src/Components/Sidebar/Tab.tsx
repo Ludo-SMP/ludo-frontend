@@ -1,6 +1,16 @@
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
-export const Tab = styled.div<{
+export interface TabProps {
+  title: string;
+  to?: string;
+}
+
+export const Tab = ({ title, to }: TabProps) => {
+  return <NavLink to={to}>{({ isActive }) => <Box $active={isActive}>{title}</Box>}</NavLink>;
+};
+
+const Box = styled.div<{
   $active: boolean;
 }>`
   color: ${({ theme, $active }) => ($active ? theme.color.purple1 : theme.color.black3)};
