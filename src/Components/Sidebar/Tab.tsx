@@ -27,4 +27,9 @@ const Box = styled.div<{
   border-radius: 8px;
   display: flex;
   align-items: center;
+
+  &:hover {
+    color: ${({ theme }) => theme.color.white};
+    background: ${({ theme }) => theme.color.purple1};
+  }
 `;

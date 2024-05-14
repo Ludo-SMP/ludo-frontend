@@ -6,7 +6,7 @@ export const Sidebar = () => {
   return (
     <Navigation>
       <TabGroup name="개인 정보">
-        <Tab title="프로필 설정" to="/settings" />
+        <Tab title="프로필 설정" to="/profile" />
         <Tab title="스터디원이 남긴 나의 리뷰" to="/review" />
       </TabGroup>
       <TabGroup name="알림 설정">
