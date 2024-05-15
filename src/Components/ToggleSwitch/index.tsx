@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 export interface ToggleSwitchProps {
+  /** 비활성 여부 */
   disabled?: boolean;
 }
 
+/** 토글 스위치 */
 const ToggleSwitch = React.forwardRef<boolean, ToggleSwitchProps>(({ disabled = false }, ref) => {
   const [clicked, setClicked] = useState(false);
 
