@@ -20,16 +20,6 @@ const AccordionList = ({ title, children }: AccordionListProps) => {
 
 export { AccordionList };
 
-/** 사용법 */
-//   <AccordionList title="루도가 알려요">
-//     <Stack gap="0px" divider={<Divider width={912} height={3} />}>
-//       {dummy.map((item) => (
-//         <Accordion title={item.title} key={item.id}>
-//           {item.content}
-//         </Accordion>
-//       ))}
-//     </Stack>
-//   </AccordionList>
 
 const Container = styled.div`
   display: flex;
