@@ -4,10 +4,14 @@ import { ToggleSwitch } from '../ToggleSwitch';
 import { textEllipsis } from '@/Styles/theme';
 
 export interface ToggleSwitchListProps {
+  /** 제목 */
   label: string;
+
+  /** 설명 */
   description?: string;
 }
 
+/** 토글 스위치 리스트 */
 const ToggleSwitchList = ({ label, description }: ToggleSwitchListProps) => {
   /** 토글 스위치 목록이 리렌더링하지 않도록 ref로 값을 관리합니다. */
   const toggleSwitchRef = useRef<boolean>(false);
@@ -25,7 +29,6 @@ const ToggleSwitchList = ({ label, description }: ToggleSwitchListProps) => {
 
 export { ToggleSwitchList };
 
-/* TODO: 아코디언 Container, Title, Description 재사용 검토 */
 const Container = styled.div`
   display: flex;
   max-width: 912px;
@@ -38,6 +41,7 @@ const ContainerText = styled.div`
   flex-direction: column;
   flex: 1;
   width: calc(100% - 52px);
+  min-width: 300px;
 `;
 
 export const Label = styled.label`
