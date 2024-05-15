@@ -65,6 +65,7 @@ const borderRadius = {
   medium: '20px',
   large: '24px',
   xlarge: '999px',
+  cornerRadius12: '12px',
 };
 
 export const theme: DefaultTheme = {

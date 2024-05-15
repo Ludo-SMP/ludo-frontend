@@ -56,6 +56,7 @@ declare module 'styled-components' {
       medium: string;
       large: string;
       xlarge: string;
+      cornerRadius12: string;
     };
   }
 
