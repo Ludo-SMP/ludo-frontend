@@ -19,7 +19,6 @@ type Story = StoryObj<typeof meta>;
 /** 아코디언 목록 제목 있는 경우 */
 export const Primary: Story = {
   args: {
-    ...meta.args,
     title: '루도가 알려요',
   },
 };
