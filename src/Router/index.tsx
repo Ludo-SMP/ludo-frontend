@@ -17,6 +17,8 @@ import Header from '@/Components/Header';
 import Footer from '@/Components/Footer';
 import ErrorBoundary from '@/Components/ErrorBoundary';
 import { EditRecruitmentFetcher } from '@/Pages/EditRecruitment/EditRecruitmentFetcher';
+import { MyPageLayout } from '@/Layout/MyPageLayout';
+import { SettingLayout } from '@/Layout/SettingLayout';
 
 export const RouterPath = createBrowserRouter([
   {
@@ -47,9 +49,9 @@ export const RouterPath = createBrowserRouter([
         path: ROUTES.MYPAGE.HOME,
         // 마이페이지 공통 사이드바
         element: (
-          <>
-            TODO: <Outlet />
-          </>
+          <MyPageLayout>
+            <Outlet />
+          </MyPageLayout>
         ),
         children: [
           {
@@ -71,9 +73,9 @@ export const RouterPath = createBrowserRouter([
             path: ROUTES.MYPAGE.SETTINGS,
             // 설정 페이지 공통 레이아웃
             element: (
-              <>
-                TODO <Outlet />
-              </>
+              <SettingLayout>
+                <Outlet />
+              </SettingLayout>
             ),
             children: [
               {
