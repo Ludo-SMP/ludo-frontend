@@ -21,6 +21,7 @@ export const CustomRadio = ({ value, checked, setSelectedValue, size = 32 }: Cus
     <Label>
       <span>{value}</span>
       <Radio value={value} checked={checked} size={size}>
+        <div className="outer" />
         <div className="inner" />
         <input type="radio" value={value} checked={checked} onChange={() => setSelectedValue(value)} />
       </Radio>
@@ -32,7 +33,6 @@ const Label = styled.label`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
 
   & > span {
     color: ${({ theme }) => theme.color.black2};
@@ -50,19 +50,24 @@ const Radio = styled.div<{ value: number; checked: boolean; size: number }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: ${({ size }) => `${size}px`};
-  height: ${({ size }) => `${size}px`};
-  flex-shrink: 0;
-  border: 1px solid ${({ theme }) => theme.color.black1};
+  width: ${({ size }) => `${size * 1.5}px`};
+  height: ${({ size }) => `${size * 1.5}px`};
   border-radius: ${({ theme }) => theme.borderRadius.xlarge};
 
-  &:hover {
-    cursor: pointer;
+  .outer {
+    position: absolute;
+    width: ${({ size }) => `${size}px`};
+    height: ${({ size }) => `${size}px`};
+    flex-shrink: 0;
+    border: 1px solid
+      ${({ theme, checked, value }) =>
+        checked ? (value in RADIO_COLOR ? RADIO_COLOR[value] : theme.color.gray5) : theme.color.black1};
+    border-radius: ${({ theme }) => theme.borderRadius.xlarge};
   }
 
   .inner {
-    width: ${({ size }) => `${size * 0.8}px`};
-    height: ${({ size }) => `${size * 0.8}px`};
+    width: ${({ size }) => `${size * 0.65}px`};
+    height: ${({ size }) => `${size * 0.65}px`};
     position: absolute;
     border-radius: ${({ theme }) => theme.borderRadius.xlarge};
     background-color: ${({ value, checked, theme }) =>
@@ -71,5 +76,20 @@ const Radio = styled.div<{ value: number; checked: boolean; size: number }>`
 
   input {
     visibility: hidden;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: ${({ value, theme }) =>
+      value in RADIO_COLOR ? `${RADIO_COLOR[value]}80` : `${theme.color.gray5}80`};
+
+    .outer {
+      border: 1px solid ${({ theme, value }) => (value in RADIO_COLOR ? RADIO_COLOR[value] : theme.color.gray5)};
+      background-color: ${({ theme }) => theme.color.white};
+    }
+
+    .inner {
+      background-color: ${({ value, theme }) => (value in RADIO_COLOR ? RADIO_COLOR[value] : theme.color.gray5)};
+    }
   }
 `;

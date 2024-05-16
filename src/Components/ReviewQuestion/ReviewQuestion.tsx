@@ -73,6 +73,8 @@ const QuestionContent = styled.p<{ alignEnd?: boolean }>`
   display: flex;
   justify-content: ${({ alignEnd }) => alignEnd && 'flex-end'};
   color: ${({ theme }) => theme.color.black5};
+  height: 48px;
+  align-items: center;
   text-align: right;
   white-space: nowrap;
   font-family: 'Pretendard500';
