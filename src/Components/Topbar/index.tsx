@@ -12,7 +12,7 @@ export interface TopBarProps {
 export const TopBar = ({ gap = 12, children }: TopBarProps) => {
   const navigate = useNavigate();
   return (
-    <TopbarWrapper gap={gap}>
+    <TopbarWrapper $gap={gap}>
       <MoveBack onClick={() => navigate(-1)}>
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
           <path
@@ -27,13 +27,13 @@ export const TopBar = ({ gap = 12, children }: TopBarProps) => {
   );
 };
 
-const TopbarWrapper = styled.div<{ gap?: number }>`
+const TopbarWrapper = styled.div<{ $gap?: number }>`
   display: flex;
   flex: 1 0 0;
   max-width: 1224px;
   width: 100%;
   align-items: center;
-  gap: ${({ gap }) => `${gap}px`};
+  gap: ${({ $gap }) => `${$gap}px`};
 `;
 
 const MoveBack = styled.button`
