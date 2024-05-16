@@ -31,7 +31,7 @@ const ButtonConTainer = styled.button`
 `;
 
 const StudyText = styled.option`
-  background: #f2f3f3;
+  background: ${({ theme }) => theme.color.strokeDividerThick};
   color: gray;
   text-align: left;
   /* padding-left: 150px; */
