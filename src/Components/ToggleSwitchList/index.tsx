@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { ToggleSwitch } from '../ToggleSwitch';
 import { textEllipsis } from '@/Styles/theme';
@@ -12,20 +12,17 @@ export interface ToggleSwitchListProps {
 }
 
 /** 토글 스위치 리스트 */
-const ToggleSwitchList = ({ label, description }: ToggleSwitchListProps) => {
-  /** 토글 스위치 목록이 리렌더링하지 않도록 ref로 값을 관리합니다. */
-  const toggleSwitchRef = useRef<boolean>(false);
-
+const ToggleSwitchList = React.forwardRef<boolean, ToggleSwitchListProps>(({ label, description }, ref) => {
   return (
     <Container>
       <ContainerText>
         <Label>{label}</Label>
         <Description>{description}</Description>
       </ContainerText>
-      <ToggleSwitch ref={toggleSwitchRef} />
+      <ToggleSwitch ref={ref} />
     </Container>
   );
-};
+});
 
 export { ToggleSwitchList };
 
