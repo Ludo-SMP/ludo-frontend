@@ -20,7 +20,7 @@ const Layout = styled.div`
   max-width: 1224px;
   gap: 24px;
   margin: 0 auto;
-  padding: 20px 0;
+  padding: 40px 0;
 
   nav {
     width: 288px;
