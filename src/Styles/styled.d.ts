@@ -33,6 +33,7 @@ declare module 'styled-components' {
       kakaoFontColor: string;
       negative: string;
       strokeDividerThick: string;
+      buttonHoverSecondary: string;
     };
 
     font: {
