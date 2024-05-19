@@ -12,6 +12,7 @@ import Dropdown from '../Dropdown';
 import { useModalStore } from '@/store/modal';
 import { useLogOutMutation } from '@/Hooks/auth/useLogOutMutation';
 import DropdownItem from '../Common/DropdownItem';
+import { AlarmBell } from './Alarm';
 
 /** 사이트 메인 헤더 */
 const Header = () => {
@@ -48,7 +49,7 @@ const Header = () => {
                 </div>
               )}
               <UserInfoWrapper>
-                <Alarm width={40} height={40} />
+                <AlarmBell />
                 <Dropdown image={<Profile width={40} height={40} />}>
                   <DropdownItem
                     onClick={() => {
