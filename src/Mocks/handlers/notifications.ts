@@ -2,7 +2,7 @@ import { HttpResponse, http } from 'msw';
 
 const baseURL = import.meta.env.VITE_MOCK_API_URL;
 
-export const changeNotificationSetting = http.post(`${baseURL}/api/notifications/settings`, async () => {
+export const onOffNotifications = http.post(`${baseURL}/api/notifications/settings`, async () => {
   return new HttpResponse(
     JSON.stringify({
       data: null,
@@ -15,4 +15,4 @@ export const changeNotificationSetting = http.post(`${baseURL}/api/notifications
   );
 });
 
-export default [changeNotificationSetting];
+export default [onOffNotifications];
