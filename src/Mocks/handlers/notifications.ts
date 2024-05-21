@@ -15,7 +15,7 @@ export const onOffNotifications = http.post(`${baseURL}/api/notifications/settin
   );
 });
 
-export const editNotificationsKeyword = http.put(`${baseURL}/api/notifications/settings/keyword`, async () => {
+export const editNotificationsKeywords = http.put(`${baseURL}/api/notifications/settings/keywords`, async () => {
   return new HttpResponse(
     JSON.stringify({
       data: null,
@@ -28,4 +28,4 @@ export const editNotificationsKeyword = http.put(`${baseURL}/api/notifications/s
   );
 });
 
-export default [onOffNotifications, editNotificationsKeyword];
+export default [onOffNotifications, editNotificationsKeywords];
