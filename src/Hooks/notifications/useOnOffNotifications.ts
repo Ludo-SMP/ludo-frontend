@@ -3,7 +3,7 @@ import { onOffNotifications } from '@/Apis/notification';
 import { NOTIFICATIONS } from '@/Constants/queryString';
 import { NotificationsType } from '@/Types/notifications';
 
-export const useOnOFFNotifications = (type: NotificationsType, on: boolean) => {
+export const useOnOFFNotifications = ({ type, on }: { type: NotificationsType; on: boolean }) => {
   return useQuery({
     queryKey: [...NOTIFICATIONS.NOTIFICATIONS_ON_OFF],
     queryFn: () => onOffNotifications({ type, on }),

@@ -1,6 +1,6 @@
 import { HttpResponse, http } from 'msw';
 
-const baseURL = import.meta.env.VITE_MOCK_API_URL;
+const baseURL = import.meta.env.VITE_BASE_API_URL;
 
 export const onOffNotifications = http.post(`${baseURL}/api/notifications/settings`, async () => {
   return new HttpResponse(
