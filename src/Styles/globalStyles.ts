@@ -60,4 +60,7 @@ export const GlobalStyle = createGlobalStyle`
     appearance: none; /* 화살표 없애기 */
   }
 
+  input[type="checkbox"] {
+    appearance: none;
+  }
 `;
