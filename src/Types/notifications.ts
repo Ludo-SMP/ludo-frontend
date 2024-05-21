@@ -16,3 +16,8 @@ export const NOTIFICATIONS = {
 } as const;
 
 export type NotificationsType = keyof typeof NOTIFICATIONS;
+
+export interface NotificationSetting {
+  notificationType: NotificationsType;
+  on: boolean;
+}
