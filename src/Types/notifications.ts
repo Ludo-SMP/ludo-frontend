@@ -20,26 +20,23 @@ export type NotificationsType = keyof typeof NOTIFICATIONS;
 export interface NotificationsSetting {
   settings: {
     all: boolean;
-    settings: {
-      all: boolean;
-      study: {
-        applicantNotification: boolean;
-        applicantNotificationType: Extract<NotificationsType, 'STUDY_APPLICANT'>;
-        applicantResultNotification: boolean;
-        applicantResultNotificationType: Extract<NotificationsType, 'STUDY_APPLICANT_RESULT'>;
-        endDateNotification: boolean;
-        endDateNotificationType: Extract<NotificationsType, 'STUDY_END_DATE'>;
-        participantLeaveNotification: boolean;
-        participantLeaveNotificationType: Extract<NotificationsType, 'STUDY_PARTICIPANT_LEAVE'>;
-      };
-      recruitment: {
-        notification: boolean;
-        notificationType: Extract<NotificationsType, 'RECRUITMENT'>;
-      };
-      review: {
-        notification: boolean;
-        notificationType: Extract<NotificationsType, 'REVIEW'>;
-      };
+    study: {
+      applicantNotification: boolean;
+      applicantNotificationType: Extract<NotificationsType, 'STUDY_APPLICANT'>;
+      applicantResultNotification: boolean;
+      applicantResultNotificationType: Extract<NotificationsType, 'STUDY_APPLICANT_RESULT'>;
+      endDateNotification: boolean;
+      endDateNotificationType: Extract<NotificationsType, 'STUDY_END_DATE'>;
+      participantLeaveNotification: boolean;
+      participantLeaveNotificationType: Extract<NotificationsType, 'STUDY_PARTICIPANT_LEAVE'>;
+    };
+    recruitment: {
+      notification: boolean;
+      notificationType: Extract<NotificationsType, 'RECRUITMENT'>;
+    };
+    review: {
+      notification: boolean;
+      notificationType: Extract<NotificationsType, 'REVIEW'>;
     };
   };
 
