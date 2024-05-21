@@ -10,7 +10,7 @@ export interface StudyProgressProps {
 
 /** 사용자의 스터디 진행률을 나타내는 컴포넌트 */
 export const StudyProgress = ({ totalStudy, completedStudy }: StudyProgressProps) => {
-  const p = (completedStudy / totalStudy) * 100;
+  const p = totalStudy && (completedStudy / totalStudy) * 100;
 
   return (
     <Bar $ratio={p}>
