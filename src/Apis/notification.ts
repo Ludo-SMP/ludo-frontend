@@ -13,8 +13,8 @@ export const readNotifications = (notificationId: number) =>
 export const getNotificationsSetting = () => httpClient.get(API_END_POINT.NOTIFICATIONS_SETTING);
 
 /** 모집공고 알림 설정 API */
-export const editNotificationsKeyword = (data: NotificationKeywords) =>
-  httpClient.put(API_END_POINT.EDIT_NOTIFICATIONS_KEYWORD, data);
+export const editNotificationsKeywords = (data: NotificationKeywords) =>
+  httpClient.put(API_END_POINT.EDIT_NOTIFICATIONS_KEYWORDS, data);
 
 /** 알림 on/off 설정 API */
 export const onOffNotifications = (data: { type: NotificationsType; on: boolean }) =>
