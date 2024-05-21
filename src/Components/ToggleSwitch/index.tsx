@@ -48,13 +48,13 @@ const Switch = styled.input<{ $isChecked: boolean }>`
     height: 16px;
     border-radius: 50%;
     background-color: ${({ theme }) => theme.color.black3};
-    transition: left 0.3s linear;
+    transition: left 0.15s ease;
   }
 
   /** 체크된 상태 */
   &:checked {
     background-color: ${({ theme }) => theme.color.purple1};
-    transition: background-color: 0.3s linear;
+    transition: background-color: 0.15s ease;
     border: none;
 
     /** 체크됐을 때 좌우로 움직이는 thumb 스타일 */
