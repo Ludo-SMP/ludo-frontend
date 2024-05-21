@@ -42,7 +42,9 @@ export const GlobalStyle = createGlobalStyle`
   
   a {
     text-decoration: none;
+    color: inherit;
   }
+  
   button:hover {
     cursor: pointer;
   }
@@ -57,4 +59,5 @@ export const GlobalStyle = createGlobalStyle`
     -moz-appearance: none; /* 파이어폭스 화살표 없애기 */
     appearance: none; /* 화살표 없애기 */
   }
+
 `;
