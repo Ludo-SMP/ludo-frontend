@@ -15,7 +15,7 @@ export const Primary: Story = {
   },
 };
 
-export const MoreTahnFiveOptions: Story = {
+export const MoreThanFiveOptions: Story = {
   args: {
     title: '2. 이 스터디원은 본인의 업무에 전문적이있나요?',
     contents: ['아쉬워요.', '적극적이에요.'],
