@@ -15,4 +15,17 @@ export const onOffNotifications = http.post(`${baseURL}/api/notifications/settin
   );
 });
 
-export default [onOffNotifications];
+export const editNotificationsKeyword = http.put(`${baseURL}/api/notifications/settings/keyword`, async () => {
+  return new HttpResponse(
+    JSON.stringify({
+      data: null,
+      message: 'Success',
+    }),
+    {
+      status: 200,
+      statusText: 'OK',
+    },
+  );
+});
+
+export default [onOffNotifications, editNotificationsKeyword];

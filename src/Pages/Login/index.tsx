@@ -1,5 +1,6 @@
 import SocialLogin from '@/Components/SocialLogin';
 import { AUTH } from '@/Constants/messages';
+import { useOnOFFNotifications } from '@/Hooks/notifications/useOnOffNotifications';
 import { media } from '@/Styles/theme';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -7,6 +8,7 @@ import styled from 'styled-components';
 
 const LoginPage = () => {
   const { pathname } = useLocation();
+  useOnOFFNotifications({ type: 'STUDY_APPLICANT', on: true });
 
   useEffect(() => {
     window.scrollTo(0, 0);
