@@ -1,4 +1,5 @@
 import { HttpResponse, http } from 'msw';
+import { mockNotificationsSetting } from '../data/mockNotifications';
 
 const baseURL = import.meta.env.VITE_BASE_API_URL;
 
@@ -28,4 +29,17 @@ export const editNotificationsKeywords = http.put(`${baseURL}/api/notifications/
   );
 });
 
-export default [onOffNotifications, editNotificationsKeywords];
+export const getNotificationsSetting = http.get(`${baseURL}/api/notifications/settings`, async () => {
+  return new HttpResponse(
+    JSON.stringify({
+      data: mockNotificationsSetting,
+      message: 'Success',
+    }),
+    {
+      status: 200,
+      statusText: 'OK',
+    },
+  );
+});
+
+export default [onOffNotifications, editNotificationsKeywords, getNotificationsSetting];
