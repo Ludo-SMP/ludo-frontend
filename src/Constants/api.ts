@@ -40,12 +40,15 @@ export const API_END_POINT = {
   APPLY_REFUSE: (studyId: number, applicantId: number) =>
     `${API_PREFIX}/studies/${studyId}/apply-refuse/${applicantId}`,
 
-  // MyPage
+  // MYPAGE
   MYPAGE: `${API_PREFIX}/users/mypage`,
 
-  // Stack
+  // STACK
   STACK: `${API_PREFIX}/stacks`,
 
-  // Notification
-  NOTIFICATION_SETTING: `${API_PREFIX}/notifications/settings`,
+  // NOTIFICATIONS
+  NOTIFICATIONS: `${API_PREFIX}/notifications`,
+  READ_NOTIFICATIONS: (notificationId: number) => `${API_PREFIX}/notifications/${notificationId}`,
+  NOTIFICATIONS_SETTING: `${API_PREFIX}/notifications/settings`,
+  EDIT_NOTIFICATIONS_KEYWORD: `${API_PREFIX}/notifications/settings/keyword`,
 };
