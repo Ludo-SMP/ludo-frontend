@@ -34,6 +34,7 @@ const Bar = styled.div<{ $ratio: number }>`
 `;
 
 const ClippedText = styled.div<{ $ratio: number }>`
+  flex: 1;
   padding: 0 7px;
   font-size: 18px;
   font-family: Pretendard500;
