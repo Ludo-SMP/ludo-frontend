@@ -267,5 +267,5 @@ const Buttons = styled.div`
 
 const Divider = styled.div`
   height: 12px;
-  background: #f2f3f3;
+  background: ${({ theme }) => theme.color.strokeDividerThick};
 `;

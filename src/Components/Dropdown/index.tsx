@@ -26,7 +26,7 @@ const Dropdown = ({ children, image, isOpened = false }: DropdownProps) => {
   }, [dropdownRef]);
 
   return (
-    <DropdownWrapper isOpen={isOpen} ref={dropdownRef}>
+    <DropdownWrapper ref={dropdownRef}>
       <div className="toggle" onClick={() => setIsOpen(!isOpen)}>
         {image}
       </div>
@@ -39,7 +39,7 @@ const Dropdown = ({ children, image, isOpened = false }: DropdownProps) => {
   );
 };
 
-const DropdownWrapper = styled.div<{ isOpen: boolean }>`
+const DropdownWrapper = styled.div`
   border: none;
   box-shadow: none;
   position: relative;
