@@ -32,7 +32,7 @@ export const color = {
   kakaoFontColor: '#521010',
   negative: '#FD3D51',
   strokeDividerThick: '#F2F3F3',
-  buttonHoverSecondary: `rgba(222, 114, 58, 1)`,
+  buttonHoverSecondary: `rgba(222, 114, 58)`,
 };
 
 export const font = {
