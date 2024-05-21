@@ -1,8 +1,9 @@
-import { API_END_POINT } from '@/Constants/api';
 import { HttpResponse, http } from 'msw';
 
+const baseURL = import.meta.env.VITE_BASE_API_URL;
+
 const submitReview = http.post(
-  API_END_POINT.REVIEW,
+  `${baseURL}/api/users/me/review`,
   async () =>
     new HttpResponse(
       JSON.stringify({
