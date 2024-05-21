@@ -15,7 +15,7 @@ const ReactQueryProvider = ({ showDevTools, children }: ReactQueryProviderProps)
           refetchOnWindowFocus: true,
           retryOnMount: true,
           refetchOnReconnect: true,
-          retry: true,
+          retry: 2,
         },
       },
     }),

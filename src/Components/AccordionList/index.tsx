@@ -11,19 +11,19 @@ export interface AccordionListProps {
 /** 아코디언 목록 */
 const AccordionList = ({ title, children }: AccordionListProps) => {
   return (
-    <Container>
+    <Box>
       <Title>{title ?? '루도가 알려요'}</Title>
-      {children}
-    </Container>
+      <ul>{children}</ul>
+    </Box>
   );
 };
 
 export { AccordionList };
 
-
-const Container = styled.div`
+const Box = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
   max-width: 912px;
   padding: 24px 32px;
 
