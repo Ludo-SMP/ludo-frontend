@@ -3,7 +3,7 @@ import { AccordionList } from '@/Components/AccordionList';
 import { Stack } from '@/Components/Common/Stack';
 import { Divider } from '../CreateRecruitment/page';
 import Button from '@/Components/Common/Button';
-import { Loading } from '@/Assets';
+import { Link } from 'react-router-dom';
 
 type NotiType = 'accordion' | 'text' | 'button';
 
@@ -102,8 +102,8 @@ const AlarmTextWithBtn = ({ type, title, description }: AlarmTextProps) => {
           <Title>{title}</Title>
           {description && <Description>{description}</Description>}
         </Item>
-        <Button type="button" scheme="secondary" onClick={() => {}}>
-          페이지로 이동
+        <Button type="button" scheme="secondary">
+          <Link to="">페이지로 이동</Link>
         </Button>
       </Box>
     </List>
