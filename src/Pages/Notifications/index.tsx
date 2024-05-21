@@ -3,7 +3,6 @@ import { AccordionList } from '@/Components/AccordionList';
 import { Stack } from '@/Components/Common/Stack';
 import { Divider } from '../CreateRecruitment/page';
 import Button from '@/Components/Common/Button';
-import { useNotifications } from '@/Hooks/notifications/useNotifications';
 import { Loading } from '@/Assets';
 
 type NotiType = 'accordion' | 'text' | 'button';
@@ -61,39 +60,29 @@ const dummy: Array<AccordionNotiType | NotiListType<'text'> | NotiListType<'butt
 
 //TODO: 명세와 타입 일치시키기
 const Notifications = () => {
-  const { data, isLoading } = useNotifications();
-
-  const notifications = data?.notification ?? {};
-
   return (
-    <>
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <AccordionList title="제목">
-          <Stack divider={<Divider height={3} />} gap={'0px'}>
-            {dummy.map((props, idx) => {
-              const { title } = props;
-              const key = `${title}-${idx}`;
-              switch (props.type) {
-                case 'accordion':
-                  return (
-                    <Accordion key={key} {...props}>
-                      {props.content}
-                    </Accordion>
-                  );
-                case 'text':
-                  return <AlarmText key={key} {...props} />;
-                case 'button':
-                  return <AlarmTextWithBtn key={key} {...props} />;
-                default:
-                  return null;
-              }
-            })}
-          </Stack>
-        </AccordionList>
-      )}
-    </>
+    <AccordionList title="제목">
+      <Stack divider={<Divider height={3} />} gap={'0px'}>
+        {dummy.map((props, idx) => {
+          const { title } = props;
+          const key = `${title}-${idx}`;
+          switch (props.type) {
+            case 'accordion':
+              return (
+                <Accordion key={key} {...props}>
+                  {props.content}
+                </Accordion>
+              );
+            case 'text':
+              return <AlarmText key={key} {...props} />;
+            case 'button':
+              return <AlarmTextWithBtn key={key} {...props} />;
+            default:
+              return null;
+          }
+        })}
+      </Stack>
+    </AccordionList>
   );
 };
 
