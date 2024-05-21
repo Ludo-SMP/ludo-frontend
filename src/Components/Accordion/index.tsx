@@ -56,9 +56,8 @@ const SummaryWrap = styled.div`
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 808px;
+  max-width: 912px;
   padding: 16px 0px;
-  gap: 10px;
 `;
 
 const AccordionSummary = styled.div`

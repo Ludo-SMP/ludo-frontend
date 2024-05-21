@@ -23,7 +23,7 @@ const ButtonConTainer = styled.select`
   background-color: ${(props) => props.theme.color.gray1};
   border-radius: 8px;
   border: 1px solid #cbcdd1;
-  background: #f2f3f3;
+  background: ${(props) => props.theme.color.strokeDividerThick};
   color: ${(props) => props.theme.color.gray3};
   padding-left: 16px;
 `;
