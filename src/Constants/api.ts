@@ -45,4 +45,7 @@ export const API_END_POINT = {
 
   // Stack
   STACK: `${API_PREFIX}/stacks`,
+
+  // Notification
+  NOTIFICATION_SETTING: `${API_PREFIX}/notifications/settings`,
 };
