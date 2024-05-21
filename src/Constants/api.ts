@@ -29,6 +29,7 @@ export const API_END_POINT = {
   DELETE_STUDY: (studyId: number) => `${API_PREFIX}/studies/${studyId}`,
   LEAVE_STUDY: (studyId: number) => `${API_PREFIX}/studies/${studyId}/participants`,
   APPLICANTS: (studyId: number) => `${API_PREFIX}/studies/${studyId}/applicants`,
+  ATTEND_STUDY: (studyId: number) => `${API_PREFIX}/studies/${studyId}/attendance`,
 
   // APPLY
   APPLY: (studyId: number, recruitmentId: number) =>
