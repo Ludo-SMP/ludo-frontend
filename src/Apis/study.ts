@@ -30,3 +30,6 @@ export const cancelApply = (studyId: number, recruitmentId: number) =>
 export const deleteStudy = (studyId: number) => httpClient.delete(API_END_POINT.DELETE_STUDY(studyId));
 
 export const leaveStudy = (studyId: number) => httpClient.delete(API_END_POINT.LEAVE_STUDY(studyId));
+
+// 스터디 출석 체크 API
+export const attendStudy = (studyId: number) => httpClient.post(API_END_POINT.ATTEND_STUDY(studyId));

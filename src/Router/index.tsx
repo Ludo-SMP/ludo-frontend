@@ -7,7 +7,6 @@ import RecruitmentsPage from '@/Pages/Recruitments';
 import SignUpPage from '@/Pages/SignUp';
 import ApplicantsPage from '@/Pages/Applicants';
 import StudyDetailPage from '@/Pages/StudyDetail';
-// import SaveStudyPage from '@/Pages/Studies/SaveStudy';
 import CreateStudyPage from '@/Pages/Studies/CreateStudy';
 import ModifyStudyPage from '@/Pages/Studies/EditStudy';
 import CreateRecruitmentPage from '@/Pages/CreateRecruitment/page';
@@ -17,6 +16,9 @@ import Header from '@/Components/Header';
 import Footer from '@/Components/Footer';
 import ErrorBoundary from '@/Components/ErrorBoundary';
 import { EditRecruitmentFetcher } from '@/Pages/EditRecruitment/EditRecruitmentFetcher';
+import { MyPageLayout } from '@/Layout/MyPageLayout';
+import { SettingLayout } from '@/Layout/SettingLayout';
+import { Notifications } from '@/Pages/Notifications';
 
 export const RouterPath = createBrowserRouter([
   {
@@ -47,9 +49,9 @@ export const RouterPath = createBrowserRouter([
         path: ROUTES.MYPAGE.HOME,
         // 마이페이지 공통 사이드바
         element: (
-          <>
-            TODO: <Outlet />
-          </>
+          <MyPageLayout>
+            <Outlet />
+          </MyPageLayout>
         ),
         children: [
           {
@@ -71,9 +73,9 @@ export const RouterPath = createBrowserRouter([
             path: ROUTES.MYPAGE.SETTINGS,
             // 설정 페이지 공통 레이아웃
             element: (
-              <>
-                TODO <Outlet />
-              </>
+              <SettingLayout>
+                <Outlet />
+              </SettingLayout>
             ),
             children: [
               {
@@ -91,7 +93,7 @@ export const RouterPath = createBrowserRouter([
           {
             // 루도가 알려요
             path: ROUTES.MYPAGE.NOTIFICATIONS,
-            element: <>TODO</>,
+            element: <Notifications />,
           },
         ],
       },

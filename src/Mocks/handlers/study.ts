@@ -196,6 +196,20 @@ const failLeaveStudy = http.delete(`${baseURL}/api/studies/:studyId/participants
     statusText: 'INTERNAL_SERVER_ERROR',
   });
 });
+
+const attendStudy = http.post(`${baseURL}/api/studies/:studyId/attendance`, async () => {
+  return new HttpResponse(
+    JSON.stringify({
+      message: 'success',
+      data: null,
+    }),
+    {
+      status: 200,
+      statusText: 'OK',
+    },
+  );
+});
+
 export default [
   createStudy,
   getStudyDetail,
@@ -212,4 +226,5 @@ export default [
   failDeleteStudy,
   failLeaveStudy,
   leaveStudy,
+  attendStudy,
 ];
