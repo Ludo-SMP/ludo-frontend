@@ -11,6 +11,7 @@ export const API_END_POINT = {
   // USER
   USER: `${API_PREFIX}/users/me`,
   EDIT_NICKNAME: `${API_PREFIX}/users/me/nickname`,
+  REVIEW: `${API_PREFIX}/users/me/review`,
   DEACTIVATE: `${API_PREFIX}/users/deactivate`,
 
   // RECRUITMENTS
