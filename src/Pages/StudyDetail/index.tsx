@@ -3,7 +3,7 @@ import { RowDivider } from '../../Components/Common/Divider/RowDivider';
 import { Left, Loading, Right, StudyInfo } from '@/Assets';
 import Button from '@/Components/Common/Button';
 import StudyToken from '@/Components/Common/StudyToken';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import StudyInfoSection from './StudyInfoSection';
 import MemberSection from './MemberSection';
 import { useLeaveStudyMutation } from '@/Hooks/study/useLeaveStudyMutation ';
@@ -62,7 +62,7 @@ export const StudyDetailPage = () => {
               <SidebarMenuItem title="진행 방식">{study.way}</SidebarMenuItem>
             </SidebarMenu>
             <Button scheme="secondary" size="fullWidth">
-              스터디 수정하기
+              <Link to={`/studies/${studyId}/edit`}>스터디 수정하기</Link>
             </Button>
           </Sidebar>
           <MainSection></MainSection>
