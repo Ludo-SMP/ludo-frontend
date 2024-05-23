@@ -17,7 +17,7 @@ import { STUDY } from '@/Constants/queryString';
 import { useModalStore } from '@/store/modal';
 import Modal from '@/Components/Common/Modal';
 import { DELETE, LEAVE } from '@/Constants/messages';
-import { useEffect, useState } from 'react';
+import { PropsWithChildren, useEffect, useState } from 'react';
 import { useApplicantsDetail } from '@/Hooks/study/useApplicantsDetail';
 import Chip from '@/Components/Common/Chip';
 
@@ -66,22 +66,10 @@ export const StudyDetailPage = () => {
           <Sidebar>
             <SidebarMenu>
               <SideBarMenuInner>
-                <SidebarMenuItem>
-                  <SidebarMenuItemTitle>카테고리</SidebarMenuItemTitle>
-                  <SidebarMenuItemText>카테고리</SidebarMenuItemText>
-                </SidebarMenuItem>
-                <SidebarMenuItem>
-                  <SidebarMenuItemTitle>진행 기간</SidebarMenuItemTitle>
-                  <SidebarMenuItemText>진행 기간</SidebarMenuItemText>
-                </SidebarMenuItem>
-                <SidebarMenuItem>
-                  <SidebarMenuItemTitle>남은 진행 기간</SidebarMenuItemTitle>
-                  <SidebarMenuItemText>D-</SidebarMenuItemText>
-                </SidebarMenuItem>
-                <SidebarMenuItem>
-                  <SidebarMenuItemTitle>진행 방식</SidebarMenuItemTitle>
-                  <SidebarMenuItemText>진행 방식</SidebarMenuItemText>
-                </SidebarMenuItem>
+                <SidebarMenuItem title="카테고리">카테고리</SidebarMenuItem>
+                <SidebarMenuItem title="진행 기간">진행 기간</SidebarMenuItem>
+                <SidebarMenuItem title="남은 진행 기간">D-</SidebarMenuItem>
+                <SidebarMenuItem title="진행 방식">진행 방식</SidebarMenuItem>
               </SideBarMenuInner>
             </SidebarMenu>
             <StudyEditButton>
@@ -184,7 +172,14 @@ const SideBarMenuInner = styled.div`
   flex-wrap: wrap;
 `;
 
-const SidebarMenuItem = styled.div`
+const SidebarMenuItem = ({ title, children }: PropsWithChildren<{ title: string }>) => (
+  <SidebarMenuItemBox>
+    <SidebarMenuItemTitle>{title}</SidebarMenuItemTitle>
+    <SidebarMenuItemText>{children}</SidebarMenuItemText>
+  </SidebarMenuItemBox>
+);
+
+const SidebarMenuItemBox = styled.div`
   display: flex;
   min-width: 268px;
   max-width: 600px;
