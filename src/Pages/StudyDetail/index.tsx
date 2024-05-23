@@ -56,10 +56,10 @@ export const StudyDetailPage = () => {
         <Main>
           <Sidebar>
             <SidebarMenu>
-              <SidebarMenuItem title="카테고리">카테고리</SidebarMenuItem>
+              <SidebarMenuItem title="카테고리">{study.category.name}</SidebarMenuItem>
               <SidebarMenuItem title="진행 기간">진행 기간</SidebarMenuItem>
               <SidebarMenuItem title="남은 진행 기간">D-</SidebarMenuItem>
-              <SidebarMenuItem title="진행 방식">진행 방식</SidebarMenuItem>
+              <SidebarMenuItem title="진행 방식">{study.way}</SidebarMenuItem>
             </SidebarMenu>
             <Button scheme="secondary" size="fullWidth">
               스터디 수정하기
