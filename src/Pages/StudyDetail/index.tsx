@@ -22,6 +22,7 @@ import { useApplicantsDetail } from '@/Hooks/study/useApplicantsDetail';
 import Chip from '@/Components/Common/Chip';
 import { Divider } from '../CreateRecruitment/page';
 import { MemberImage } from '@/Assets';
+import { ApplicationButton } from '@/Components/Common/Button/ApplicationButton/ApplicationButton';
 
 export const StudyDetailPage = () => {
   const studyId = Number(useParams().studyId);
@@ -95,6 +96,9 @@ export const StudyDetailPage = () => {
             <Members>
               <MembersCountBar>
                 <MemberCounts count={study.participants.length} />
+                <ApplicationButton>
+                  <Link to={'#'}>스터디원 모집</Link>
+                </ApplicationButton>
               </MembersCountBar>
               <MemberList></MemberList>
             </Members>
