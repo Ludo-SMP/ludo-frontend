@@ -1,11 +1,20 @@
 import { Right } from '@/Assets';
+import { ReactNode } from 'react';
 import styled from 'styled-components';
 
+export interface ApplicationButtonProps {
+  /** 버튼 텍스트 */
+  children?: ReactNode;
+
+  /** 버튼 클릭 시 실행할 함수 */
+  onClick?: () => void;
+}
+
 /** 응용 버튼 */
-export const ApplicationButton = () => {
+export const ApplicationButton = ({ children, onClick }: ApplicationButtonProps) => {
   return (
-    <ButtonBox>
-      <ButtonText>더보기</ButtonText>
+    <ButtonBox onClick={onClick}>
+      <ButtonText>{children}</ButtonText>
       <Right />
     </ButtonBox>
   );
