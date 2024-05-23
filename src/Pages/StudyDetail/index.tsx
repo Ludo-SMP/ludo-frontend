@@ -77,7 +77,6 @@ export const StudyDetailPage = () => {
           <MainSection></MainSection>
         </Main>
       </StudyDetailLayout>
-      <StudyTitleText>스터디 제목</StudyTitleText>
     </Grid>
   );
 };
