@@ -52,16 +52,7 @@ export const StudyDetailPage = () => {
   return (
     <Grid>
       <StudyDetailLayout>
-        <ParentNav>
-          <StudyTitleBox>
-            <Left />
-            <StudyTitle>
-              <StudyInfo />
-              <StudyTitleText>스터디 제목</StudyTitleText>
-              <StudyToken status="PARTICIPATED" />
-            </StudyTitle>
-          </StudyTitleBox>
-        </ParentNav>
+        <ParentNav studyTitle={study.title} />
         <Main>
           <Sidebar>
             <SidebarMenu>
@@ -99,7 +90,20 @@ const StudyDetailLayout = styled.div`
   flex: 1 0 0;
 `;
 
-const ParentNav = styled.div`
+const ParentNav = ({ studyTitle }: { studyTitle: string }) => (
+  <ParentNavBox>
+    <StudyTitleBox>
+      <Left />
+      <StudyTitle>
+        <StudyInfo />
+        <StudyTitleText>{studyTitle}</StudyTitleText>
+        <StudyToken status="PARTICIPATED" />
+      </StudyTitle>
+    </StudyTitleBox>
+  </ParentNavBox>
+);
+
+const ParentNavBox = styled.div`
   display: flex;
   min-width: 300px;
   max-width: 1224px;
