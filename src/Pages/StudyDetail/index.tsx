@@ -22,6 +22,8 @@ import { useApplicantsDetail } from '@/Hooks/study/useApplicantsDetail';
 import { MemberImage } from '@/Assets';
 import { ApplicationButton } from '@/Components/Common/Button/ApplicationButton/ApplicationButton';
 import { PROGRESS_METHOD } from '@/Shared/study';
+import { StudyStatus } from '@/Types/study';
+import { match, P } from 'ts-pattern';
 
 export const StudyDetailPage = () => {
   const studyId = Number(useParams().studyId);
@@ -54,7 +56,7 @@ export const StudyDetailPage = () => {
   return (
     <Grid>
       <StudyDetailLayout>
-        <ParentNav studyTitle={study.title} />
+        <ParentNav studyTitle={study.title} status={study.status} />
         <Main>
           <Sidebar>
             <SidebarMenu>
@@ -129,14 +131,17 @@ const StudyDetailLayout = styled.div`
   background: ${({ theme }) => theme.color.white2};
 `;
 
-const ParentNav = ({ studyTitle }: { studyTitle: string }) => (
+const ParentNav = ({ studyTitle, status }: { studyTitle: string; status: StudyStatus }) => (
   <ParentNavBox>
     <StudyTitleBox>
       <Left />
       <StudyTitle>
         <StudyInfo />
         <StudyTitleText>{studyTitle}</StudyTitleText>
-        <StudyToken status="PARTICIPATED" />
+        {match(status)
+          .with('COMPLETED', () => <StudyToken status="COMPLETED" />)
+          .with(P._, () => <StudyToken status="PARTICIPATED" />)
+          .exhaustive()}
       </StudyTitle>
     </StudyTitleBox>
   </ParentNavBox>
