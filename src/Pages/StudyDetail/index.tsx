@@ -68,7 +68,19 @@ export const StudyDetailPage = () => {
             </Button>
           </Sidebar>
           <MainSection>
-            <AttendanceTopBar></AttendanceTopBar>
+            <AttendanceTopBar>
+              <PlatformSection>
+                <PlatformTitle>
+                  <TopBarSectionTitle>진행 플랫폼</TopBarSectionTitle>
+                  <Button scheme="secondary">출석 체크</Button>
+                </PlatformTitle>
+                <TopBarSectionText>진행 플랫폼</TopBarSectionText>
+              </PlatformSection>
+              <WeekdaySection>
+                <TopBarSectionTitle>출석일</TopBarSectionTitle>
+                <TopBarSectionText>출석일</TopBarSectionText>
+              </WeekdaySection>
+            </AttendanceTopBar>
             <RowDivider />
             <Members>
               <MembersCountBar></MembersCountBar>
@@ -222,6 +234,52 @@ const AttendanceTopBar = styled.div`
   gap: 24px 24px;
   align-self: stretch;
   flex-wrap: wrap;
+`;
+
+const PlatformSection = styled.div`
+  display: flex;
+  min-width: 300px;
+  max-width: 392px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  flex: 1 0 0;
+  align-self: stretch;
+`;
+
+const PlatformTitle = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  align-self: stretch;
+`;
+
+const WeekdaySection = styled.div`
+  display: flex;
+  min-width: 288px;
+  max-width: 600px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  flex: 1 0 0;
+`;
+
+const TopBarSectionTitle = styled.span`
+  color: ${({ theme }) => theme.color.black5};
+  font-family: Pretendard500;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+`;
+
+const TopBarSectionText = styled.span`
+  color: ${({ theme }) => theme.color.black2};
+  font-family: Pretendard500;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
 `;
 
 const Members = styled.div`
