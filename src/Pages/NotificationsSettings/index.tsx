@@ -85,12 +85,12 @@ export const NotificationsSettings = () => {
             </Button>
           </div>
         </RecruitmentKeywordsBox>
+        <ApplicantSettingsBox>
+          {NotificationSettingsDummy.APPLICANT.map((applicantNotification: ToggleSwitchListProps) => (
+            <ToggleSwitchList key={applicantNotification.label} {...applicantNotification} />
+          ))}
+        </ApplicantSettingsBox>
       </RecruitmentSettingsSection>
-      <ApplicantSettingsSection>
-        {NotificationSettingsDummy.APPLICANT.map((applicantNotification: ToggleSwitchListProps) => (
-          <ToggleSwitchList key={applicantNotification.label} {...applicantNotification} />
-        ))}
-      </ApplicantSettingsSection>
     </NotificationsSettingsLayout>
   );
 };
@@ -144,7 +144,7 @@ const KeywordTitleBox = styled.p`
 
 const RecruitmentKeywordsBox = styled.div`
   display: flex;
-  padding: 0 0 8px 0;
+  padding: 0 0 20px 0;
   flex-direction: column;
   align-items: flex-start;
   gap: 32px;
@@ -173,7 +173,7 @@ const ChipsBox = styled.div`
   gap: 8px;
 `;
 
-const ApplicantSettingsSection = styled.div`
+const ApplicantSettingsBox = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
