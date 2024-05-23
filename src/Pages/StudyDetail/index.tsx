@@ -20,6 +20,7 @@ import { DELETE, LEAVE } from '@/Constants/messages';
 import { PropsWithChildren, useEffect, useState } from 'react';
 import { useApplicantsDetail } from '@/Hooks/study/useApplicantsDetail';
 import Chip from '@/Components/Common/Chip';
+import { Divider } from '../CreateRecruitment/page';
 
 export const StudyDetailPage = () => {
   const studyId = Number(useParams().studyId);
@@ -57,6 +58,7 @@ export const StudyDetailPage = () => {
           <Sidebar>
             <SidebarMenu>
               <SidebarMenuItem title="카테고리">{study.category.name}</SidebarMenuItem>
+              <RowDivider />
               <SidebarMenuItem title="진행 기간">진행 기간</SidebarMenuItem>
               <SidebarMenuItem title="남은 진행 기간">D-</SidebarMenuItem>
               <SidebarMenuItem title="진행 방식">{study.way}</SidebarMenuItem>
@@ -65,7 +67,14 @@ export const StudyDetailPage = () => {
               <Link to={`/studies/${studyId}/edit`}>스터디 수정하기</Link>
             </Button>
           </Sidebar>
-          <MainSection></MainSection>
+          <MainSection>
+            <AttendanceTopBar></AttendanceTopBar>
+            <RowDivider />
+            <Members>
+              <MembersCountBar></MembersCountBar>
+              <MemberList></MemberList>
+            </Members>
+          </MainSection>
         </Main>
       </StudyDetailLayout>
     </Grid>
@@ -88,6 +97,7 @@ const StudyDetailLayout = styled.div`
   align-items: flex-end;
   gap: 24px;
   flex: 1 0 0;
+  background: ${({ theme }) => theme.color.white2};
 `;
 
 const ParentNav = ({ studyTitle }: { studyTitle: string }) => (
@@ -203,6 +213,41 @@ const MainSection = styled.div`
   align-items: center;
   gap: 24px;
   flex: 1 0 0;
+`;
+
+const AttendanceTopBar = styled.div`
+  display: flex;
+  align-items: flex-start;
+  align-content: flex-start;
+  gap: 24px 24px;
+  align-self: stretch;
+  flex-wrap: wrap;
+`;
+
+const Members = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  align-self: stretch;
+  border-radius: 999px;
+`;
+
+const MembersCountBar = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 632px;
+  align-self: stretch;
+`;
+
+const MemberList = styled.div`
+  display: flex;
+  min-width: 300px;
+  max-width: 1224px;
+  align-items: flex-start;
+  gap: 12px;
+  align-self: stretch;
 `;
 
 export default StudyDetailPage;
