@@ -86,6 +86,11 @@ export const NotificationsSettings = () => {
           </div>
         </RecruitmentKeywordsBox>
       </RecruitmentSettingsSection>
+      <ApplicantSettingsSection>
+        {NotificationSettingsDummy.APPLICANT.map((applicantNotification: ToggleSwitchListProps) => (
+          <ToggleSwitchList key={applicantNotification.label} {...applicantNotification} />
+        ))}
+      </ApplicantSettingsSection>
     </NotificationsSettingsLayout>
   );
 };
@@ -166,4 +171,10 @@ const ChipsBox = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
+`;
+
+const ApplicantSettingsSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 `;
