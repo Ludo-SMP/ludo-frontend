@@ -39,8 +39,8 @@ const NotificationSettingsDummy: {
     description: '내가 속한 스터디에서 탈퇴자가 발생했을 시, 알림을 제공합니다.',
   },
   REVIEW: {
-    label: '스터디 종료 기간 알림',
-    description: '스터디 종료 5일 전에 알림이 가며, 필요시 스터디 기간을 늘릴 것을 안내해줍니다.',
+    label: '스터디 리뷰 평가 알림',
+    description: '제목',
   },
 };
 
@@ -60,7 +60,6 @@ export const NotificationsSettings = () => {
       <RecruitmentSettingsSection>
         <SettingTitleBox>모집 공고</SettingTitleBox>
         <ToggleSwitchList {...NotificationSettingsDummy.RECRUITMENT} />
-
         <RecruitmentKeywordsBox>
           <div className="select__keywords">
             {RecruitmentKeywordsDummy.map((recruitmentKeyword: { name: string; value: string[] }) => (
@@ -91,6 +90,14 @@ export const NotificationsSettings = () => {
           ))}
         </ApplicantSettingsBox>
       </RecruitmentSettingsSection>
+      <StudySettingSection>
+        <SettingTitleBox>스터디</SettingTitleBox>
+        <>
+          <ToggleSwitchList {...NotificationSettingsDummy.END_DATE} />
+          <ToggleSwitchList {...NotificationSettingsDummy.PARTICIPANT_LEAVE} />
+          <ToggleSwitchList {...NotificationSettingsDummy.REVIEW} />
+        </>
+      </StudySettingSection>
     </NotificationsSettingsLayout>
   );
 };
@@ -174,6 +181,12 @@ const ChipsBox = styled.div`
 `;
 
 const ApplicantSettingsBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+
+const StudySettingSection = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
