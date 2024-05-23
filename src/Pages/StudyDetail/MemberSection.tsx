@@ -6,7 +6,7 @@ export interface MemberSectionProps {
   members: Member[];
 }
 
-const MemberSection = ({ members }: MemberSectionProps) => (
+export const MemberSection = ({ members }: MemberSectionProps) => (
   <MemberSectionBox>
     {members?.map((member) => (
       <li key={member.id}>
@@ -15,10 +15,9 @@ const MemberSection = ({ members }: MemberSectionProps) => (
     ))}
   </MemberSectionBox>
 );
+
 const MemberSectionBox = styled.ul`
   display: flex;
   gap: 24px;
   flex-wrap: wrap;
 `;
-
-export default MemberSection;
