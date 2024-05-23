@@ -5,7 +5,7 @@ import Button from '@/Components/Common/Button';
 import StudyToken from '@/Components/Common/StudyToken';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import StudyInfoSection from './StudyInfoSection';
-import MemberSection from './MemberSection';
+import { MemberSection } from './MemberSection';
 import { useLeaveStudyMutation } from '@/Hooks/study/useLeaveStudyMutation ';
 import { useDeleteStudyMutation } from '@/Hooks/study/useDeleteStudyMutation';
 import { useStudyDetail } from '@/Hooks/study/useStudyDetail';
@@ -19,8 +19,6 @@ import Modal from '@/Components/Common/Modal';
 import { DELETE, LEAVE } from '@/Constants/messages';
 import { PropsWithChildren, useEffect, useState } from 'react';
 import { useApplicantsDetail } from '@/Hooks/study/useApplicantsDetail';
-import Chip from '@/Components/Common/Chip';
-import { Divider } from '../CreateRecruitment/page';
 import { MemberImage } from '@/Assets';
 import { ApplicationButton } from '@/Components/Common/Button/ApplicationButton/ApplicationButton';
 
@@ -61,8 +59,8 @@ export const StudyDetailPage = () => {
             <SidebarMenu>
               <SidebarMenuItem title="카테고리">{study.category.name}</SidebarMenuItem>
               <RowDivider />
-              <SidebarMenuItem title="진행 기간">진행 기간</SidebarMenuItem>
-              <SidebarMenuItem title="남은 진행 기간">D-</SidebarMenuItem>
+              <SidebarMenuItem title="진행 기간">{getPeriod(study.startDateTime, study.endDateTime)}</SidebarMenuItem>
+              <SidebarMenuItem title="남은 진행 기간">D-{getDday(study.endDateTime)}</SidebarMenuItem>
               <SidebarMenuItem title="진행 방식">{study.way}</SidebarMenuItem>
             </SidebarMenu>
             <Button scheme="secondary" size="fullWidth">
@@ -100,7 +98,9 @@ export const StudyDetailPage = () => {
                   <Link to={'#'}>스터디원 모집</Link>
                 </ApplicationButton>
               </MembersCountBar>
-              <MemberList></MemberList>
+              <MemberList>
+                <MemberSection members={study.participants} />
+              </MemberList>
             </Members>
           </MainSection>
         </Main>
