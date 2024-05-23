@@ -12,7 +12,6 @@ import { useUserStore } from '@/store/user';
 import { useCloseRecruitmentMutation } from '@/Hooks/recruitments/useCloseRecruitmentMutation';
 import { useQueryClient } from '@tanstack/react-query';
 import { STUDY } from '@/Constants/queryString';
-import { useModalStore } from '@/store/modal';
 import Modal from '@/Components/Common/Modal';
 import { DELETE, LEAVE } from '@/Constants/messages';
 import { useEffect, useState } from 'react';
@@ -27,16 +26,13 @@ export const StudyDetailPage = () => {
   const studyId = Number(useParams().studyId);
   const { user } = useUserStore();
   const { pathname } = useLocation();
-  const { isModalOpen, openModal } = useModalStore();
   const queryClient = useQueryClient();
-  const navigate = useNavigate();
-  const [isDeletedBtnClicked, setIsDeletedBtnClicked] = useState<boolean>(false);
-  const [isLeftBtnClicked, setIsLeftBtnClicked] = useState<boolean>(false);
 
   const { data: studyDetail, isLoading } = useStudyDetail(studyId);
   const { data: applicantsDetail, isLoading: isLoaidngApplicantsDetail } = useApplicantsDetail(studyId);
 
   const study = studyDetail?.study;
+  const isOwner = user?.id === study?.owner.id;
 
   const { mutate: closeRecruitmentMutate } = useCloseRecruitmentMutation(studyId, () => {
     queryClient.invalidateQueries({ queryKey: [...STUDY.STUDY(studyId)] });
@@ -62,6 +58,7 @@ export const StudyDetailPage = () => {
             startDateTime={study.startDateTime}
             endDateTime={study.endDateTime}
             way={study.way}
+            isOwner={isOwner}
           />
           <MainSection>
             <AttendanceTopBar>
@@ -90,9 +87,11 @@ export const StudyDetailPage = () => {
             <Members>
               <MembersCountBar>
                 <MemberCounts count={study.participants.length} />
-                <ApplicationButton>
-                  <Link to={'#'}>스터디원 모집</Link>
-                </ApplicationButton>
+                {isOwner && (
+                  <ApplicationButton>
+                    <Link to={'#'}>스터디원 모집</Link>
+                  </ApplicationButton>
+                )}
               </MembersCountBar>
               <MemberList>
                 <MemberSection members={study.participants} />
@@ -254,7 +253,6 @@ const Members = styled.div`
 
 const MembersCountBar = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
   gap: 632px;
   align-self: stretch;

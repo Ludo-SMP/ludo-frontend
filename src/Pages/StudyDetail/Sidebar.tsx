@@ -13,9 +13,10 @@ export interface SidebarProps {
   startDateTime: string;
   endDateTime: string;
   way: ProgressMethod;
+  isOwner: boolean;
 }
 
-export const Sidebar = ({ id, category, startDateTime, endDateTime, way }: SidebarProps) => (
+export const Sidebar = ({ id, category, startDateTime, endDateTime, way, isOwner }: SidebarProps) => (
   <SidebarBox>
     <SidebarMenu>
       <SidebarMenuItem title="카테고리">{category}</SidebarMenuItem>
@@ -24,9 +25,11 @@ export const Sidebar = ({ id, category, startDateTime, endDateTime, way }: Sideb
       <SidebarMenuItem title="남은 진행 기간">D-{getDday(endDateTime)}</SidebarMenuItem>
       <SidebarMenuItem title="진행 방식">{PROGRESS_METHOD[way]}</SidebarMenuItem>
     </SidebarMenu>
-    <Button scheme="secondary" size="fullWidth">
-      <Link to={`/studies/${id}/edit`}>스터디 수정하기</Link>
-    </Button>
+    {isOwner && (
+      <Button scheme="secondary" size="fullWidth">
+        <Link to={`/studies/${id}/edit`}>스터디 수정하기</Link>
+      </Button>
+    )}
   </SidebarBox>
 );
 
