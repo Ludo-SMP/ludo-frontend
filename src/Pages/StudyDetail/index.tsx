@@ -14,8 +14,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { STUDY } from '@/Constants/queryString';
 import Modal from '@/Components/Common/Modal';
 import { DELETE, LEAVE } from '@/Constants/messages';
-import { useEffect, useState } from 'react';
-import { useApplicantsDetail } from '@/Hooks/study/useApplicantsDetail';
+import { useEffect } from 'react';
 import { MemberImage } from '@/Assets';
 import { ApplicationButton } from '@/Components/Common/Button/ApplicationButton/ApplicationButton';
 import { StudyStatus } from '@/Types/study';
@@ -29,7 +28,6 @@ export const StudyDetailPage = () => {
   const queryClient = useQueryClient();
 
   const { data: studyDetail, isLoading } = useStudyDetail(studyId);
-  const { data: applicantsDetail, isLoading: isLoaidngApplicantsDetail } = useApplicantsDetail(studyId);
 
   const study = studyDetail?.study;
   const isOwner = user?.id === study?.owner.id;
