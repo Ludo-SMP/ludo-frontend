@@ -1,6 +1,7 @@
 import { Right } from '@/Assets';
 import styled from 'styled-components';
 
+/** 응용 버튼 */
 export const ApplicationButton = () => {
   return (
     <ButtonBox>
