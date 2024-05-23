@@ -21,6 +21,7 @@ import { PropsWithChildren, useEffect, useState } from 'react';
 import { useApplicantsDetail } from '@/Hooks/study/useApplicantsDetail';
 import Chip from '@/Components/Common/Chip';
 import { Divider } from '../CreateRecruitment/page';
+import { MemberImage } from '@/Assets';
 
 export const StudyDetailPage = () => {
   const studyId = Number(useParams().studyId);
@@ -74,7 +75,16 @@ export const StudyDetailPage = () => {
                   <TopBarSectionTitle>진행 플랫폼</TopBarSectionTitle>
                   <Button scheme="secondary">출석 체크</Button>
                 </PlatformTitle>
-                <TopBarSectionText>진행 플랫폼</TopBarSectionText>
+                <TopBarSectionText>
+                  <a
+                    href="#"
+                    style={{
+                      textDecoration: 'underline',
+                    }}
+                  >
+                    진행 플랫폼
+                  </a>
+                </TopBarSectionText>
               </PlatformSection>
               <WeekdaySection>
                 <TopBarSectionTitle>출석일</TopBarSectionTitle>
@@ -83,7 +93,9 @@ export const StudyDetailPage = () => {
             </AttendanceTopBar>
             <RowDivider />
             <Members>
-              <MembersCountBar></MembersCountBar>
+              <MembersCountBar>
+                <MemberCounts count={study.participants.length} />
+              </MembersCountBar>
               <MemberList></MemberList>
             </Members>
           </MainSection>
@@ -297,6 +309,39 @@ const MembersCountBar = styled.div`
   align-items: center;
   gap: 632px;
   align-self: stretch;
+`;
+
+const MemberCounts = ({ count }: { count: number }) => (
+  <MemberCountsBox>
+    <MemberImage />
+    <MemberCountsText>
+      구성원 <MemberCountsTextCaption>({count})</MemberCountsTextCaption>
+    </MemberCountsText>
+  </MemberCountsBox>
+);
+
+const MemberCountsBox = styled.div`
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+`;
+
+const MemberCountsText = styled.span`
+  color: ${({ theme }) => theme.color.black5};
+  font-family: Pretendard600;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 32px;
+`;
+
+const MemberCountsTextCaption = styled.span`
+  color: #00000080;
+  font-family: Pretendard600;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 32px;
 `;
 
 const MemberList = styled.div`
