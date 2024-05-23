@@ -4,12 +4,10 @@ import { Left, Loading, Right, StudyInfo } from '@/Assets';
 import Button from '@/Components/Common/Button';
 import StudyToken from '@/Components/Common/StudyToken';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
-import StudyInfoSection from './StudyInfoSection';
 import { MemberSection } from './MemberSection';
 import { useLeaveStudyMutation } from '@/Hooks/study/useLeaveStudyMutation ';
 import { useDeleteStudyMutation } from '@/Hooks/study/useDeleteStudyMutation';
 import { useStudyDetail } from '@/Hooks/study/useStudyDetail';
-import { getDday, getPeriod } from '@/utils/date';
 import { useUserStore } from '@/store/user';
 import { useCloseRecruitmentMutation } from '@/Hooks/recruitments/useCloseRecruitmentMutation';
 import { useQueryClient } from '@tanstack/react-query';
@@ -17,13 +15,13 @@ import { STUDY } from '@/Constants/queryString';
 import { useModalStore } from '@/store/modal';
 import Modal from '@/Components/Common/Modal';
 import { DELETE, LEAVE } from '@/Constants/messages';
-import { PropsWithChildren, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useApplicantsDetail } from '@/Hooks/study/useApplicantsDetail';
 import { MemberImage } from '@/Assets';
 import { ApplicationButton } from '@/Components/Common/Button/ApplicationButton/ApplicationButton';
-import { PROGRESS_METHOD } from '@/Shared/study';
 import { StudyStatus } from '@/Types/study';
 import { match, P } from 'ts-pattern';
+import { Sidebar } from './Sidebar';
 
 export const StudyDetailPage = () => {
   const studyId = Number(useParams().studyId);
@@ -58,18 +56,13 @@ export const StudyDetailPage = () => {
       <StudyDetailLayout>
         <ParentNav studyTitle={study.title} status={study.status} />
         <Main>
-          <Sidebar>
-            <SidebarMenu>
-              <SidebarMenuItem title="카테고리">{study.category.name}</SidebarMenuItem>
-              <RowDivider />
-              <SidebarMenuItem title="진행 기간">{getPeriod(study.startDateTime, study.endDateTime)}</SidebarMenuItem>
-              <SidebarMenuItem title="남은 진행 기간">D-{getDday(study.endDateTime)}</SidebarMenuItem>
-              <SidebarMenuItem title="진행 방식">{PROGRESS_METHOD[study.way]}</SidebarMenuItem>
-            </SidebarMenu>
-            <Button scheme="secondary" size="fullWidth">
-              <Link to={`/studies/${studyId}/edit`}>스터디 수정하기</Link>
-            </Button>
-          </Sidebar>
+          <Sidebar
+            id={study.id}
+            category={study.category.name}
+            startDateTime={study.startDateTime}
+            endDateTime={study.endDateTime}
+            way={study.way}
+          />
           <MainSection>
             <AttendanceTopBar>
               <PlatformSection>
@@ -184,60 +177,6 @@ const Main = styled.div`
   align-items: flex-start;
   gap: 24px;
   align-self: stretch;
-`;
-
-const Sidebar = styled.div`
-  display: flex;
-  width: 288px;
-  max-width: 912px;
-  padding: 16px;
-  flex-direction: column;
-  align-items: center;
-  gap: 32px;
-  border-radius: 16px;
-  border: 1px solid #0000001a;
-`;
-
-const SidebarMenu = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  align-self: stretch;
-`;
-
-const SidebarMenuItem = ({ title, children }: PropsWithChildren<{ title: string }>) => (
-  <SidebarMenuItemBox>
-    <SidebarMenuItemTitle>{title}</SidebarMenuItemTitle>
-    <SidebarMenuItemText>{children}</SidebarMenuItemText>
-  </SidebarMenuItemBox>
-);
-
-const SidebarMenuItemBox = styled.div`
-  display: flex;
-  min-width: 268px;
-  max-width: 600px;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
-  flex: 1 0 0;
-`;
-
-const SidebarMenuItemTitle = styled.span`
-  color: ${({ theme }) => theme.color.black5};
-  font-family: Pretendard500;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 24px;
-`;
-
-const SidebarMenuItemText = styled.span`
-  color: ${({ theme }) => theme.color.black2};
-  font-family: Pretendard500;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 24px;
 `;
 
 const MainSection = styled.div`
