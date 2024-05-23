@@ -65,12 +65,10 @@ export const StudyDetailPage = () => {
         <Main>
           <Sidebar>
             <SidebarMenu>
-              <SideBarMenuInner>
-                <SidebarMenuItem title="카테고리">카테고리</SidebarMenuItem>
-                <SidebarMenuItem title="진행 기간">진행 기간</SidebarMenuItem>
-                <SidebarMenuItem title="남은 진행 기간">D-</SidebarMenuItem>
-                <SidebarMenuItem title="진행 방식">진행 방식</SidebarMenuItem>
-              </SideBarMenuInner>
+              <SidebarMenuItem title="카테고리">카테고리</SidebarMenuItem>
+              <SidebarMenuItem title="진행 기간">진행 기간</SidebarMenuItem>
+              <SidebarMenuItem title="남은 진행 기간">D-</SidebarMenuItem>
+              <SidebarMenuItem title="진행 방식">진행 방식</SidebarMenuItem>
             </SidebarMenu>
             <StudyEditButton>
               <Button scheme="secondary" size="fullWidth">
@@ -158,18 +156,8 @@ const Sidebar = styled.div`
 const SidebarMenu = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 16px;
   align-self: stretch;
-`;
-
-const SideBarMenuInner = styled.div`
-  display: flex;
-  align-items: flex-start;
-  align-content: flex-start;
-  gap: 16px 16px;
-  align-self: stretch;
-  flex-wrap: wrap;
 `;
 
 const SidebarMenuItem = ({ title, children }: PropsWithChildren<{ title: string }>) => (
