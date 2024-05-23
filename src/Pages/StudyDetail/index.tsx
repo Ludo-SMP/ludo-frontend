@@ -70,11 +70,9 @@ export const StudyDetailPage = () => {
               <SidebarMenuItem title="남은 진행 기간">D-</SidebarMenuItem>
               <SidebarMenuItem title="진행 방식">진행 방식</SidebarMenuItem>
             </SidebarMenu>
-            <StudyEditButton>
-              <Button scheme="secondary" size="fullWidth">
-                스터디 수정하기
-              </Button>
-            </StudyEditButton>
+            <Button scheme="secondary" size="fullWidth">
+              스터디 수정하기
+            </Button>
           </Sidebar>
           <MainSection></MainSection>
         </Main>
@@ -193,14 +191,6 @@ const SidebarMenuItemText = styled.span`
   font-style: normal;
   font-weight: 500;
   line-height: 24px;
-`;
-
-const StudyEditButton = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 8px;
-  align-self: stretch;
 `;
 
 const MainSection = styled.div`
