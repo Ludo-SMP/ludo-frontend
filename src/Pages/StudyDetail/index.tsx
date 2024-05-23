@@ -21,6 +21,7 @@ import { PropsWithChildren, useEffect, useState } from 'react';
 import { useApplicantsDetail } from '@/Hooks/study/useApplicantsDetail';
 import { MemberImage } from '@/Assets';
 import { ApplicationButton } from '@/Components/Common/Button/ApplicationButton/ApplicationButton';
+import { PROGRESS_METHOD } from '@/Shared/study';
 
 export const StudyDetailPage = () => {
   const studyId = Number(useParams().studyId);
@@ -61,7 +62,7 @@ export const StudyDetailPage = () => {
               <RowDivider />
               <SidebarMenuItem title="진행 기간">{getPeriod(study.startDateTime, study.endDateTime)}</SidebarMenuItem>
               <SidebarMenuItem title="남은 진행 기간">D-{getDday(study.endDateTime)}</SidebarMenuItem>
-              <SidebarMenuItem title="진행 방식">{study.way}</SidebarMenuItem>
+              <SidebarMenuItem title="진행 방식">{PROGRESS_METHOD[study.way]}</SidebarMenuItem>
             </SidebarMenu>
             <Button scheme="secondary" size="fullWidth">
               <Link to={`/studies/${studyId}/edit`}>스터디 수정하기</Link>
@@ -81,7 +82,7 @@ export const StudyDetailPage = () => {
                       textDecoration: 'underline',
                     }}
                   >
-                    진행 플랫폼
+                    {study.platform}
                   </a>
                 </TopBarSectionText>
               </PlatformSection>
