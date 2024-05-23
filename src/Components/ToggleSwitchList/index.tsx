@@ -28,6 +28,7 @@ export { ToggleSwitchList };
 
 const Container = styled.div`
   display: flex;
+  width: 100%;
   max-width: 912px;
   padding: 24px 0px;
   gap: 24px;
