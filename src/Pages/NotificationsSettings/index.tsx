@@ -1,48 +1,8 @@
-import { ToggleSwitchList, ToggleSwitchListProps } from '@/Components/ToggleSwitchList';
+import { ToggleSwitchList } from '@/Components/ToggleSwitchList';
 import styled from 'styled-components';
 import { BoldDivider } from '@/Components/Common/Divider/BoldDivider';
 import ChipMenu from '@/Components/Common/ChipMenu';
 import Button from '@/Components/Common/Button';
-
-const NotificationSettingsDummy: {
-  ALL: ToggleSwitchListProps;
-  RECRUITMENT: ToggleSwitchListProps;
-  APPLICANT: ToggleSwitchListProps[];
-  END_DATE: ToggleSwitchListProps;
-  PARTICIPANT_LEAVE: ToggleSwitchListProps;
-  REVIEW: ToggleSwitchListProps;
-} = {
-  ALL: {
-    label: '전체 알림',
-    description: '제목',
-  },
-  RECRUITMENT: {
-    label: '모집 공고 알림',
-    description: '권한 허용 후, 선호하는 항목을 고르면, 해당 모집 공고가 업로드 됐을 시 알림이 갑니다.',
-  },
-  APPLICANT: [
-    {
-      label: '스터디 지원 여부 알림',
-      description: '내가 속한 스터디에 지원자가 생겼을 시, 알림을 제공합니다.',
-    },
-    {
-      label: '스터디 지원 결과 알림',
-      description: '지원한 스터디에서 합류 승인 혹은 거절되었을 시, 결과를 알려줍니다.',
-    },
-  ],
-  END_DATE: {
-    label: '스터디 종료 기간 알림',
-    description: '스터디 종료 5일 전에 알림이 가며, 필요시 스터디 기간을 늘릴 것을 안내해줍니다.',
-  },
-  PARTICIPANT_LEAVE: {
-    label: '스터디 탈퇴자 알림',
-    description: '내가 속한 스터디에서 탈퇴자가 발생했을 시, 알림을 제공합니다.',
-  },
-  REVIEW: {
-    label: '스터디 리뷰 평가 알림',
-    description: '제목',
-  },
-};
 
 const RecruitmentKeywordsDummy: { name: string; value: string[] }[] = [
   { name: '기술 스택', value: ['기술 스택'] },
@@ -54,12 +14,15 @@ export const NotificationsSettings = () => {
   return (
     <NotificationsSettingsLayout>
       <AllOnOffSettingSection>
-        <ToggleSwitchList {...NotificationSettingsDummy.ALL} />
+        <ToggleSwitchList label="전체 알림" description="제목" />
       </AllOnOffSettingSection>
       <BoldDivider $rowHeight={2} />
       <RecruitmentSettingsSection>
         <SettingTitleBox>모집 공고</SettingTitleBox>
-        <ToggleSwitchList {...NotificationSettingsDummy.RECRUITMENT} />
+        <ToggleSwitchList
+          label="모집 공고 알림"
+          description="권한 허용 후, 선호하는 항목을 고르면, 해당 모집 공고가 업로드 됐을 시 알림이 갑니다."
+        />
         <RecruitmentKeywordsBox>
           <div className="select__keywords">
             {RecruitmentKeywordsDummy.map((recruitmentKeyword: { name: string; value: string[] }) => (
@@ -85,17 +48,16 @@ export const NotificationsSettings = () => {
           </div>
         </RecruitmentKeywordsBox>
         <ApplicantSettingsBox>
-          {NotificationSettingsDummy.APPLICANT.map((applicantNotification: ToggleSwitchListProps) => (
-            <ToggleSwitchList key={applicantNotification.label} {...applicantNotification} />
-          ))}
+          <ToggleSwitchList label="스터디 지원 여부 알림" description="제목" />
+          <ToggleSwitchList label="스터디 지원 결과 알림" description="제목" />
         </ApplicantSettingsBox>
       </RecruitmentSettingsSection>
       <StudySettingSection>
         <SettingTitleBox>스터디</SettingTitleBox>
         <>
-          <ToggleSwitchList {...NotificationSettingsDummy.END_DATE} />
-          <ToggleSwitchList {...NotificationSettingsDummy.PARTICIPANT_LEAVE} />
-          <ToggleSwitchList {...NotificationSettingsDummy.REVIEW} />
+          <ToggleSwitchList label="스터디 종료 기간 알림" description="제목" />
+          <ToggleSwitchList label="스터디 탈퇴자 알림" description="제목" />
+          <ToggleSwitchList label="스터디 리뷰 평가 알림" description="제목" />
         </>
       </StudySettingSection>
     </NotificationsSettingsLayout>
