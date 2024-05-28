@@ -9,7 +9,6 @@ export interface ToggleSwitchProps {
 /** 토글 스위치 */
 const ToggleSwitch = React.forwardRef<boolean, ToggleSwitchProps>(({ disabled = false }, ref) => {
   const [clicked, setClicked] = useState(false);
-
   const handleChange = () => {
     setClicked((prev) => !prev);
     if (ref && typeof ref !== 'function') {
@@ -19,7 +18,7 @@ const ToggleSwitch = React.forwardRef<boolean, ToggleSwitchProps>(({ disabled = 
 
   return (
     <Container>
-      <Switch type="checkbox" role="switch" $isChecked={clicked} onChange={handleChange} disabled={disabled} />
+      <Switch type="checkbox" role="switch" checked={clicked} onChange={handleChange} disabled={disabled} />
     </Container>
   );
 });
@@ -28,7 +27,7 @@ export { ToggleSwitch };
 
 const Container = styled.div``;
 
-const Switch = styled.input<{ $isChecked: boolean }>`
+const Switch = styled.input`
   /** 체크되지 않은 상태 */
   appearance: none;
   position: relative;
@@ -72,7 +71,7 @@ const Switch = styled.input<{ $isChecked: boolean }>`
   &:enabled:hover {
     &::before {
         // x-offset, y-offset, blur-radius, spread-radius, color
-        box-shadow: 0 0 0 8px ${({ $isChecked }) => ($isChecked ? 'rgba(103, 80, 164, 0.08)' : 'rgba(28, 27, 31, 0.08)')};
+        box-shadow: 0 0 0 8px ${({ checked }) => (checked ? 'rgba(103, 80, 164, 0.08)' : 'rgba(28, 27, 31, 0.08)')};
     }
   }
 
