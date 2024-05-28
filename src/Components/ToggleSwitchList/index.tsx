@@ -9,20 +9,25 @@ export interface ToggleSwitchListProps {
 
   /** 설명 */
   description?: string;
+
+  /* 초기 checked 상태 */
+  defaultChecked?: boolean;
 }
 
 /** 토글 스위치 리스트 */
-const ToggleSwitchList = React.forwardRef<boolean, ToggleSwitchListProps>(({ label, description }, ref) => {
-  return (
-    <Container>
-      <ContainerText>
-        <Label>{label}</Label>
-        <Description>{description}</Description>
-      </ContainerText>
-      <ToggleSwitch ref={ref} />
-    </Container>
-  );
-});
+const ToggleSwitchList = React.forwardRef<boolean, ToggleSwitchListProps>(
+  ({ label, description, defaultChecked }, ref) => {
+    return (
+      <Container>
+        <ContainerText>
+          <Label>{label}</Label>
+          <Description>{description}</Description>
+        </ContainerText>
+        <ToggleSwitch ref={ref} defaultChecked />
+      </Container>
+    );
+  },
+);
 
 export { ToggleSwitchList };
 

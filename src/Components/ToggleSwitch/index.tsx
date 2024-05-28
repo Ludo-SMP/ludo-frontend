@@ -2,26 +2,31 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 export interface ToggleSwitchProps {
+  /* 초기 checked 상태 */
+  defaultChecked?: boolean;
+
   /** 비활성 여부 */
   disabled?: boolean;
 }
 
 /** 토글 스위치 */
-const ToggleSwitch = React.forwardRef<boolean, ToggleSwitchProps>(({ disabled = false }, ref) => {
-  const [clicked, setClicked] = useState(false);
-  const handleChange = () => {
-    setClicked((prev) => !prev);
-    if (ref && typeof ref !== 'function') {
-      ref.current = !clicked;
-    }
-  };
+const ToggleSwitch = React.forwardRef<boolean, ToggleSwitchProps>(
+  ({ defaultChecked = false, disabled = false }, ref) => {
+    const [clicked, setClicked] = useState(defaultChecked);
+    const handleChange = () => {
+      setClicked((prev) => !prev);
+      if (ref && typeof ref !== 'function') {
+        ref.current = !clicked;
+      }
+    };
 
-  return (
-    <Container>
-      <Switch type="checkbox" role="switch" checked={clicked} onChange={handleChange} disabled={disabled} />
-    </Container>
-  );
-});
+    return (
+      <Container>
+        <Switch type="checkbox" role="switch" checked={clicked} onChange={handleChange} disabled={disabled} />
+      </Container>
+    );
+  },
+);
 
 export { ToggleSwitch };
 
