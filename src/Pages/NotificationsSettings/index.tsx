@@ -56,7 +56,7 @@ export const NotificationsSettings = () => {
       <AllOnOffSettingSection>
         <ToggleSwitchList {...NotificationSettingsDummy.ALL} />
       </AllOnOffSettingSection>
-      <BoldDivider rowHeight={2} />
+      <BoldDivider $rowHeight={2} />
       <RecruitmentSettingsSection>
         <SettingTitleBox>모집 공고</SettingTitleBox>
         <ToggleSwitchList {...NotificationSettingsDummy.RECRUITMENT} />
