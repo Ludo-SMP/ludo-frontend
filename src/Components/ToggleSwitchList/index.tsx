@@ -16,14 +16,14 @@ export interface ToggleSwitchListProps {
 
 /** 토글 스위치 리스트 */
 const ToggleSwitchList = React.forwardRef<boolean, ToggleSwitchListProps>(
-  ({ label, description, defaultChecked }, ref) => {
+  ({ label, description, defaultChecked = false }, ref) => {
     return (
       <Container>
         <ContainerText>
           <Label>{label}</Label>
           <Description>{description}</Description>
         </ContainerText>
-        <ToggleSwitch ref={ref} defaultChecked />
+        <ToggleSwitch ref={ref} defaultChecked={defaultChecked} />
       </Container>
     );
   },
