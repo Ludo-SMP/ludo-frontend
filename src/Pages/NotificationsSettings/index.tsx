@@ -183,7 +183,7 @@ const ApplicantSettingsBox = styled.div`
   width: 100%;
 `;
 
-const StudySettingSection = styled.div`
+const StudySettingSection = styled.section`
   display: flex;
   flex-direction: column;
   width: 100%;
