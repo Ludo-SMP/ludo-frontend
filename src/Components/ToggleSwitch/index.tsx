@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { UseMutateFunction } from '@tanstack/react-query';
 
 export interface ToggleSwitchProps {
+  toggleMutate: UseMutateFunction<unknown, Error, { on: boolean }>;
+
   /* 초기 checked 상태 */
   defaultChecked?: boolean;
 
@@ -11,13 +14,14 @@ export interface ToggleSwitchProps {
 
 /** 토글 스위치 */
 const ToggleSwitch = React.forwardRef<boolean, ToggleSwitchProps>(
-  ({ defaultChecked = false, disabled = false }, ref) => {
-    const [clicked, setClicked] = useState(defaultChecked);
+  ({ defaultChecked = false, disabled = false, toggleMutate }, ref) => {
+    const [clicked, setClicked] = useState<boolean>(defaultChecked);
     const handleChange = () => {
       setClicked((prev) => !prev);
       if (ref && typeof ref !== 'function') {
         ref.current = !clicked;
       }
+      toggleMutate({ on: !clicked });
     };
 
     return (
