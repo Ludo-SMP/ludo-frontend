@@ -3,9 +3,9 @@ import { onOffNotifications } from '@/Apis/notification';
 import { NOTIFICATIONS } from '@/Constants/queryString';
 import { NotificationsType } from '@/Types/notifications';
 
-export const useOnOffNotifications = () => {
+export const useOnOffNotifications = ({ type }: { type: NotificationsType }) => {
   return useMutation({
     mutationKey: [...NOTIFICATIONS.NOTIFICATIONS_ON_OFF],
-    mutationFn: (data: { type: NotificationsType; on: boolean }) => onOffNotifications(data),
+    mutationFn: (on: boolean) => onOffNotifications({ type, on }),
   });
 };
