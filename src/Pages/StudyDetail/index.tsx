@@ -14,7 +14,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { STUDY } from '@/Constants/queryString';
 import Modal from '@/Components/Common/Modal';
 import { DELETE, LEAVE } from '@/Constants/messages';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { MemberImage } from '@/Assets';
 import { ApplicationButton } from '@/Components/Common/Button/ApplicationButton/ApplicationButton';
 import { StudyStatus } from '@/Types/study';
@@ -38,6 +38,8 @@ export const StudyDetailPage = () => {
 
   const { mutate: deleteStudyMutate } = useDeleteStudyMutation(studyId);
   const { mutate: leaveStudyMutate } = useLeaveStudyMutation(studyId);
+
+  const [isAttendanceModalOpen, setIsAttendanceModalOpen] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -63,7 +65,24 @@ export const StudyDetailPage = () => {
               <PlatformSection>
                 <PlatformTitle>
                   <TopBarSectionTitle>진행 플랫폼</TopBarSectionTitle>
-                  <Button scheme="secondary">출석 체크</Button>
+                  <Button scheme="secondary" onClick={() => setIsAttendanceModalOpen(true)}>
+                    출석 체크
+                  </Button>
+                  {isAttendanceModalOpen && (
+                    <Modal
+                      title="해당 스터디 출석이 체크되었습니다!"
+                      approveBtnText="확인하기"
+                      handleApprove={() => setIsAttendanceModalOpen(false)}
+                    >
+                      <p>
+                        해당 스터디 출석이 완료되었습니다.
+                        <br />
+                        출석은 하루에 한번 가능합니다.
+                        <br />
+                        오늘도 열심히 스터디를 하는 회원님의 앞날을 응원합니다!
+                      </p>
+                    </Modal>
+                  )}
                 </PlatformTitle>
                 <TopBarSectionText>
                   <a
