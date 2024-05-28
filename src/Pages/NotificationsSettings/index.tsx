@@ -4,6 +4,7 @@ import { BoldDivider } from '@/Components/Common/Divider/BoldDivider';
 import ChipMenu from '@/Components/Common/ChipMenu';
 import Button from '@/Components/Common/Button';
 import { useNotificationsSetting } from '@/Hooks/notifications/useNotificationsSetting';
+import { Loading } from '@/Assets';
 
 const RecruitmentKeywordsDummy: { name: string; value: string[] }[] = [
   { name: '기술 스택', value: ['기술 스택'] },
@@ -12,78 +13,88 @@ const RecruitmentKeywordsDummy: { name: string; value: string[] }[] = [
 ];
 
 export const NotificationsSettings = () => {
-  const { data: notificationsSetting } = useNotificationsSetting();
+  const { data: notificationsSetting, isLoading } = useNotificationsSetting();
 
   return (
     <NotificationsSettingsLayout>
-      <AllOnOffSettingSection>
-        <ToggleSwitchList label="전체 알림" description="제목" defaultChecked={notificationsSetting?.settings.all} />
-      </AllOnOffSettingSection>
-      <BoldDivider $rowHeight={2} />
-      <RecruitmentSettingsSection>
-        <SettingTitleBox>모집 공고</SettingTitleBox>
-        <ToggleSwitchList
-          label="모집 공고 알림"
-          description="권한 허용 후, 선호하는 항목을 고르면, 해당 모집 공고가 업로드 됐을 시 알림이 갑니다."
-          defaultChecked={notificationsSetting?.settings.recruitment.notification}
-        />
-        <RecruitmentKeywordsBox>
-          <div className="select__keywords">
-            {RecruitmentKeywordsDummy.map((recruitmentKeyword: { name: string; value: string[] }) => (
-              <KeywordBox key={recruitmentKeyword.name}>
-                <KeywordTitleBox>{recruitmentKeyword.name}</KeywordTitleBox>
-                <ChipsBox>
-                  {recruitmentKeyword.value.map((chipValue: string) => (
-                    <ChipMenu key={chipValue} checked={false} onClick={() => {}}>
-                      {chipValue}
-                    </ChipMenu>
-                  ))}
-                </ChipsBox>
-              </KeywordBox>
-            ))}
-          </div>
-          <div className="btns">
-            <Button size="fullWidth" onClick={() => {}}>
-              취소
-            </Button>
-            <Button size="fullWidth" scheme="secondary" onClick={() => {}}>
-              저장
-            </Button>
-          </div>
-        </RecruitmentKeywordsBox>
-        <ApplicantSettingsBox>
-          <ToggleSwitchList
-            label="스터디 지원 여부 알림"
-            description="제목"
-            defaultChecked={notificationsSetting?.settings.study.applicantNotification}
-          />
-          <ToggleSwitchList
-            label="스터디 지원 결과 알림"
-            description="제목"
-            defaultChecked={notificationsSetting?.settings.study.applicantResultNotification}
-          />
-        </ApplicantSettingsBox>
-      </RecruitmentSettingsSection>
-      <StudySettingSection>
-        <SettingTitleBox>스터디</SettingTitleBox>
+      {isLoading ? (
+        <Loading />
+      ) : (
         <>
-          <ToggleSwitchList
-            label="스터디 종료 기간 알림"
-            description="제목"
-            defaultChecked={notificationsSetting?.settings.study.endDateNotification}
-          />
-          <ToggleSwitchList
-            label="스터디 탈퇴자 알림"
-            description="제목"
-            defaultChecked={notificationsSetting?.settings.study.participantLeaveNotification}
-          />
-          <ToggleSwitchList
-            label="스터디 리뷰 평가 알림"
-            description="제목"
-            defaultChecked={notificationsSetting.settings.review.notification}
-          />
+          <AllOnOffSettingSection>
+            <ToggleSwitchList
+              label="전체 알림"
+              description="제목"
+              defaultChecked={notificationsSetting?.settings.all}
+            />
+          </AllOnOffSettingSection>
+          <BoldDivider $rowHeight={2} />
+          <RecruitmentSettingsSection>
+            <SettingTitleBox>모집 공고</SettingTitleBox>
+            <ToggleSwitchList
+              label="모집 공고 알림"
+              description="권한 허용 후, 선호하는 항목을 고르면, 해당 모집 공고가 업로드 됐을 시 알림이 갑니다."
+              defaultChecked={notificationsSetting?.settings.recruitment.notification}
+            />
+            <RecruitmentKeywordsBox>
+              <div className="select__keywords">
+                {RecruitmentKeywordsDummy.map((recruitmentKeyword: { name: string; value: string[] }) => (
+                  <KeywordBox key={recruitmentKeyword.name}>
+                    <KeywordTitleBox>{recruitmentKeyword.name}</KeywordTitleBox>
+                    <ChipsBox>
+                      {recruitmentKeyword.value.map((chipValue: string) => (
+                        <ChipMenu key={chipValue} checked={false} onClick={() => {}}>
+                          {chipValue}
+                        </ChipMenu>
+                      ))}
+                    </ChipsBox>
+                  </KeywordBox>
+                ))}
+              </div>
+              <div className="btns">
+                <Button size="fullWidth" onClick={() => {}}>
+                  취소
+                </Button>
+                <Button size="fullWidth" scheme="secondary" onClick={() => {}}>
+                  저장
+                </Button>
+              </div>
+            </RecruitmentKeywordsBox>
+            <ApplicantSettingsBox>
+              <ToggleSwitchList
+                label="스터디 지원 여부 알림"
+                description="제목"
+                defaultChecked={notificationsSetting?.settings.study.applicantNotification}
+              />
+              <ToggleSwitchList
+                label="스터디 지원 결과 알림"
+                description="제목"
+                defaultChecked={notificationsSetting?.settings.study.applicantResultNotification}
+              />
+            </ApplicantSettingsBox>
+          </RecruitmentSettingsSection>
+          <StudySettingSection>
+            <SettingTitleBox>스터디</SettingTitleBox>
+            <>
+              <ToggleSwitchList
+                label="스터디 종료 기간 알림"
+                description="제목"
+                defaultChecked={notificationsSetting?.settings.study.endDateNotification}
+              />
+              <ToggleSwitchList
+                label="스터디 탈퇴자 알림"
+                description="제목"
+                defaultChecked={notificationsSetting?.settings.study.participantLeaveNotification}
+              />
+              <ToggleSwitchList
+                label="스터디 리뷰 평가 알림"
+                description="제목"
+                defaultChecked={notificationsSetting.settings.review.notification}
+              />
+            </>
+          </StudySettingSection>
         </>
-      </StudySettingSection>
+      )}
     </NotificationsSettingsLayout>
   );
 };
