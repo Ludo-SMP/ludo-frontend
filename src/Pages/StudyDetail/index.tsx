@@ -20,6 +20,7 @@ import { ApplicationButton } from '@/Components/Common/Button/ApplicationButton/
 import { StudyStatus } from '@/Types/study';
 import { match, P } from 'ts-pattern';
 import { Sidebar } from './Sidebar';
+import { attendStudy } from '@/Apis/study';
 
 export const StudyDetailPage = () => {
   const studyId = Number(useParams().studyId);
@@ -65,7 +66,14 @@ export const StudyDetailPage = () => {
               <PlatformSection>
                 <PlatformTitle>
                   <TopBarSectionTitle>진행 플랫폼</TopBarSectionTitle>
-                  <Button scheme="secondary" onClick={() => setIsAttendanceModalOpen(true)}>
+                  <Button
+                    scheme="secondary"
+                    onClick={async () => {
+                      await attendStudy(studyId);
+
+                      setIsAttendanceModalOpen(true);
+                    }}
+                  >
                     출석 체크
                   </Button>
                   {isAttendanceModalOpen && (
