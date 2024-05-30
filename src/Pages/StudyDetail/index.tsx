@@ -21,6 +21,7 @@ import { StudyStatus } from '@/Types/study';
 import { match, P } from 'ts-pattern';
 import { Sidebar } from './Sidebar';
 import { attendStudy } from '@/Apis/study';
+import { useAttendStudyMutation } from '@/Hooks/study/useAttendStudyMutation';
 
 export const StudyDetailPage = () => {
   const studyId = Number(useParams().studyId);
@@ -39,8 +40,9 @@ export const StudyDetailPage = () => {
 
   const { mutate: deleteStudyMutate } = useDeleteStudyMutation(studyId);
   const { mutate: leaveStudyMutate } = useLeaveStudyMutation(studyId);
+  const { mutate: attendStudyMutate, isSuccess: isAttendStudyMutationSuccess } = useAttendStudyMutation(studyId);
 
-  const [isAttendanceModalOpen, setIsAttendanceModalOpen] = useState(false);
+  const [isAttendanceModalOpen, setIsAttendanceModalOpen] = useState(isAttendanceModalOpen);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -69,9 +71,7 @@ export const StudyDetailPage = () => {
                   <Button
                     scheme="secondary"
                     onClick={async () => {
-                      await attendStudy(studyId);
-
-                      setIsAttendanceModalOpen(true);
+                      attendStudyMutate();
                     }}
                   >
                     출석 체크
