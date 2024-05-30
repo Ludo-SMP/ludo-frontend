@@ -21,6 +21,7 @@ export interface ToggleSwitchListProps {
 /** 토글 스위치 리스트 */
 const ToggleSwitchList = React.forwardRef<boolean, ToggleSwitchListProps>(
   ({ label, description, defaultChecked = false, type }, ref) => {
+    // if (type === 'ALL') console.log(defaultChecked);
     const { mutate } = useOnOffNotifications({ type });
     return (
       <Container>

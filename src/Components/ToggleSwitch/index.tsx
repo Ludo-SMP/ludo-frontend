@@ -16,16 +16,19 @@ export interface ToggleSwitchProps {
 const ToggleSwitch = React.forwardRef<boolean, ToggleSwitchProps>(
   ({ defaultChecked = false, disabled = false, toggleMutate }, ref) => {
     const [clicked, setClicked] = useState<boolean>(defaultChecked);
+    // console.log(defaultChecked);
     const handleChange = () => {
       setClicked((prev) => !prev);
       if (ref && typeof ref !== 'function') {
         ref.current = !clicked;
       }
+      console.log(clicked);
       toggleMutate({ on: !clicked });
     };
 
     return (
       <Container>
+        {/* {String(defaultChecked)} 1212 */}
         <Switch type="checkbox" role="switch" checked={clicked} onChange={handleChange} disabled={disabled} />
       </Container>
     );
