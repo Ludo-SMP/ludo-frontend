@@ -2,14 +2,9 @@ import { HttpResponse, http } from 'msw';
 import { mockNotifications } from '../data/mockNotifications';
 const baseURL = import.meta.env.VITE_BASE_API_URL;
 
-const url =
-  process.env.NODE_ENV === 'development'
-    ? 'http://localhost:8080/sse/streaming/start'
-    : `${import.meta.env.VITE_BASE_API_URL}/api/notifications/subscribe`;
-
 const encoder = new TextEncoder();
 
-const subscribeSSE = http.get(url, async () => {
+const subscribeSSE = http.get('http://localhost:8080/sse/streaming/start', async () => {
   const data = {
     notificationId: 1,
     title: 'STUDY_APPLICANT',
@@ -48,4 +43,17 @@ const getNotifications = http.get(`${baseURL}/api/notifications`, async () => {
   );
 });
 
-export default [subscribeSSE, getNotifications];
+const readNotifications = http.post(`${baseURL}/api/notifications/:notificationId`, async () => {
+  return new HttpResponse(
+    JSON.stringify({
+      data: null,
+      message: 'Success',
+    }),
+    {
+      status: 200,
+      statusText: 'OK',
+    },
+  );
+});
+
+export default [subscribeSSE, getNotifications, readNotifications];
