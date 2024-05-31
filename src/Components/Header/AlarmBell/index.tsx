@@ -25,22 +25,26 @@ const AlarmBell = () => {
   const handleOpen = useCallback((isOpen: boolean) => setIsOpen(isOpen), []);
 
   return (
-    <Box onClick={() => setIsOpen((prev) => !prev)}>
-      <Alarm width={40} height={40} />
-      <AlarmCnt>
-        <Inner>{data?.notification?.length ?? 0}</Inner>
-      </AlarmCnt>
+    <AlarmBox>
+      <AlarmSection onClick={() => setIsOpen((prev) => !prev)}>
+        <Alarm width={40} height={40} />
+        <AlarmCnt>
+          <Inner>{data?.notification?.length ?? 0}</Inner>
+        </AlarmCnt>
+      </AlarmSection>
       {isOpen && <AlarmInbox alarmPreviews={data} isOpen={isOpen} handleOpen={handleOpen} />}
-    </Box>
+    </AlarmBox>
   );
 };
 
 export { AlarmBell };
 
-const Box = styled.div`
+const AlarmBox = styled.div`
   display: flex;
   position: relative;
 `;
+
+const AlarmSection = styled.section``;
 
 const AlarmCnt = styled.div`
   ${flexCenter};
