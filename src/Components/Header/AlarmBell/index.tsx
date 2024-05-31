@@ -24,30 +24,14 @@ const AlarmBell = () => {
 
   const handleOpen = useCallback((isOpen: boolean) => setIsOpen(isOpen), []);
 
-  // const handleStop = async () => {
-  //   console.log('stop');
-  //   eventSource.current?.close();
-  //   await fetch('http://localhost:8080/sse/streaming/stop');
-  // };
-
-  // const handleStart = async () => {
-  //   console.log('start');
-  //   // 새로운 이벤트 소스 객체 생성 후 연결
-  //   fetchSSE();
-  // };
-
   return (
-    <>
-      {/* <div onClick={handleStop}>stop</div>
-      <div onClick={handleStart}>start</div> */}
-      <Box onClick={() => setIsOpen((prev) => !prev)}>
-        <Alarm width={40} height={40} />
-        <AlarmCnt>
-          <Inner>{data?.notification?.length ?? 0}</Inner>
-        </AlarmCnt>
-        {isOpen && <AlarmInbox alarmPreviews={data} isOpen={isOpen} handleOpen={handleOpen} />}
-      </Box>
-    </>
+    <Box onClick={() => setIsOpen((prev) => !prev)}>
+      <Alarm width={40} height={40} />
+      <AlarmCnt>
+        <Inner>{data?.notification?.length ?? 0}</Inner>
+      </AlarmCnt>
+      {isOpen && <AlarmInbox alarmPreviews={data} isOpen={isOpen} handleOpen={handleOpen} />}
+    </Box>
   );
 };
 
