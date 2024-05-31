@@ -29,7 +29,7 @@ const AlarmBell = () => {
       <AlarmSection onClick={() => setIsOpen((prev) => !prev)}>
         <Alarm width={40} height={40} />
         <AlarmCnt>
-          <Inner>{data?.notification?.length ?? 0}</Inner>
+          <Inner>{data?.notification?.filter((alarm) => !alarm.read).length ?? 0}</Inner>
         </AlarmCnt>
       </AlarmSection>
       {isOpen && <AlarmInbox alarmPreviews={data} isOpen={isOpen} handleOpen={handleOpen} />}
