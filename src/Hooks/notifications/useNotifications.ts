@@ -1,12 +1,18 @@
 import { useQuery } from '@tanstack/react-query';
 import { getNotifications } from '@/Apis/notification';
 import { NOTIFICATIONS } from '@/Constants/queryString';
+import { NotificationSSEType } from '@/Types/notifications';
 
-// TODO: 명세보고 any 타입 수정 필요
+export interface NotificationResponse {
+  notification: NotificationSSEType[];
+}
+
 export const useNotifications = () => {
   return useQuery({
     queryKey: [...NOTIFICATIONS.NOTIFICATIONS],
     queryFn: () => getNotifications(),
-    select: (data: { data: { data: any } }) => data?.data?.data,
+    select: (data: { data: { data: NotificationResponse } }) => data?.data?.data,
+    staleTime: 60 * 60 * 1000,
+    gcTime: 60 * 60 * 1000,
   });
 };
