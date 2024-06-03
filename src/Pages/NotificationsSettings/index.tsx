@@ -13,11 +13,11 @@ const RecruitmentKeywordsDummy: { name: string; value: string[] }[] = [
 ];
 
 export const NotificationsSettings = () => {
-  const { data: notificationsSetting, isLoading } = useNotificationsSetting();
+  const { data: notificationsSetting } = useNotificationsSetting();
 
   return (
     <NotificationsSettingsLayout>
-      {isLoading ? (
+      {!notificationsSetting ? (
         <Loading />
       ) : (
         <>
