@@ -62,7 +62,10 @@ export const NotificationsSettings = () => {
                 </Button>
               </div>
             </RecruitmentKeywordsBox>
-            <ApplicantSettingsBox>
+          </RecruitmentSettingsSection>
+          <StudySettingSection>
+            <SettingTitleBox>스터디</SettingTitleBox>
+            <ToggleSwitches>
               <ToggleSwitchList
                 label="스터디 지원 여부 알림"
                 description="제목"
@@ -75,29 +78,25 @@ export const NotificationsSettings = () => {
                 defaultChecked={notificationsSetting?.settings.study.applicantResultNotification}
                 type="STUDY_APPLICANT_RESULT"
               />
-            </ApplicantSettingsBox>
-          </RecruitmentSettingsSection>
-          <StudySettingSection>
-            <SettingTitleBox>스터디</SettingTitleBox>
-
-            <ToggleSwitchList
-              label="스터디 종료 기간 알림"
-              description="제목"
-              defaultChecked={notificationsSetting?.settings.study.endDateNotification}
-              type="STUDY_END_DATE"
-            />
-            <ToggleSwitchList
-              label="스터디 탈퇴자 알림"
-              description="제목"
-              defaultChecked={notificationsSetting?.settings.study.participantLeaveNotification}
-              type="STUDY_PARTICIPANT_LEAVE"
-            />
-            <ToggleSwitchList
-              label="스터디 리뷰 평가 알림"
-              description="제목"
-              defaultChecked={notificationsSetting?.settings.review.notification}
-              type="REVIEW"
-            />
+              <ToggleSwitchList
+                label="스터디 종료 기간 알림"
+                description="제목"
+                defaultChecked={notificationsSetting?.settings.study.endDateNotification}
+                type="STUDY_END_DATE"
+              />
+              <ToggleSwitchList
+                label="스터디 탈퇴자 알림"
+                description="제목"
+                defaultChecked={notificationsSetting?.settings.study.participantLeaveNotification}
+                type="STUDY_PARTICIPANT_LEAVE"
+              />
+              <ToggleSwitchList
+                label="스터디 리뷰 평가 알림"
+                description="제목"
+                defaultChecked={notificationsSetting?.settings.review.notification}
+                type="REVIEW"
+              />
+            </ToggleSwitches>
           </StudySettingSection>
         </>
       )}
@@ -141,6 +140,7 @@ const SettingTitleBox = styled.p`
   font-style: normal;
   font-weight: 600;
   line-height: 32px;
+  align-self: stretch;
 `;
 
 const KeywordTitleBox = styled.p`
@@ -154,7 +154,7 @@ const KeywordTitleBox = styled.p`
 
 const RecruitmentKeywordsBox = styled.div`
   display: flex;
-  padding: 0 0 20px 0;
+  padding: 0 0 32px 0;
   flex-direction: column;
   align-items: flex-start;
   gap: 32px;
@@ -183,14 +183,17 @@ const ChipsBox = styled.div`
   gap: 8px;
 `;
 
-const ApplicantSettingsBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-`;
-
 const StudySettingSection = styled.section`
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 100%;
+  gap: 12px;
+  align-self: stretch;
+`;
+
+const ToggleSwitches = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: column;
 `;
