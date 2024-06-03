@@ -37,6 +37,7 @@ export const NotificationsSettings = () => {
               description="권한 허용 후, 선호하는 항목을 고르면, 해당 모집 공고가 업로드 됐을 시 알림이 갑니다."
               defaultChecked={notificationsSetting?.settings.recruitment.notification}
               type="RECRUITMENT"
+              disabled={!notificationsSetting?.settings.all}
             />
             <RecruitmentKeywordsBox>
               <div className="select__keywords">
@@ -71,30 +72,35 @@ export const NotificationsSettings = () => {
                 description="제목"
                 defaultChecked={notificationsSetting?.settings.study.applicantNotification}
                 type="STUDY_APPLICANT"
+                disabled={!notificationsSetting?.settings.all}
               />
               <ToggleSwitchList
                 label="스터디 지원 결과 알림"
                 description="제목"
                 defaultChecked={notificationsSetting?.settings.study.applicantResultNotification}
                 type="STUDY_APPLICANT_RESULT"
+                disabled={!notificationsSetting?.settings.all}
               />
               <ToggleSwitchList
                 label="스터디 종료 기간 알림"
                 description="제목"
                 defaultChecked={notificationsSetting?.settings.study.endDateNotification}
                 type="STUDY_END_DATE"
+                disabled={!notificationsSetting?.settings.all}
               />
               <ToggleSwitchList
                 label="스터디 탈퇴자 알림"
                 description="제목"
                 defaultChecked={notificationsSetting?.settings.study.participantLeaveNotification}
                 type="STUDY_PARTICIPANT_LEAVE"
+                disabled={!notificationsSetting?.settings.all}
               />
               <ToggleSwitchList
                 label="스터디 리뷰 평가 알림"
                 description="제목"
                 defaultChecked={notificationsSetting?.settings.review.notification}
                 type="REVIEW"
+                disabled={!notificationsSetting?.settings.all}
               />
             </ToggleSwitches>
           </StudySettingSection>
