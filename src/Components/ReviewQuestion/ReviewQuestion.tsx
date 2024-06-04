@@ -19,7 +19,7 @@ interface ReviewQuestionProps {
   onChange?: (value: number) => void;
 
   /** 항목이 미완성 상태인지 여부 */
-  error: boolean;
+  error?: boolean;
 }
 
 const errorMessageContent = '해당 항목이 체크되지 않았습니다.';
