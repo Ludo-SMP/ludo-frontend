@@ -5,6 +5,7 @@ import ChipMenu from '@/Components/Common/ChipMenu';
 import Button from '@/Components/Common/Button';
 import { useNotificationsSetting } from '@/Hooks/notifications/useNotificationsSetting';
 import { Loading } from '@/Assets';
+import { KeywordForm } from '@/Components/Common/KeywordForm';
 
 const RecruitmentKeywordsDummy: { name: string; value: string[] }[] = [
   { name: '기술 스택', value: ['기술 스택'] },
@@ -39,20 +40,29 @@ export const NotificationsSettings = () => {
               type="RECRUITMENT"
               disabled={!notificationsSetting?.settings.all}
             />
-            <RecruitmentKeywordsBox>
+            <SelectKeywordsForm>
               <div className="select__keywords">
-                {RecruitmentKeywordsDummy.map((recruitmentKeyword: { name: string; value: string[] }) => (
-                  <KeywordBox key={recruitmentKeyword.name}>
-                    <KeywordTitleBox>{recruitmentKeyword.name}</KeywordTitleBox>
-                    <ChipsBox>
-                      {recruitmentKeyword.value.map((chipValue: string) => (
-                        <ChipMenu key={chipValue} checked={false} onClick={() => {}}>
-                          {chipValue}
-                        </ChipMenu>
-                      ))}
-                    </ChipsBox>
-                  </KeywordBox>
-                ))}
+                <KeywordForm label={'기술 스택'} type="STACK">
+                  {RecruitmentKeywordsDummy[0].value.map((chipValue: string) => (
+                    <ChipMenu key={chipValue} checked={false} onClick={() => {}}>
+                      {chipValue}
+                    </ChipMenu>
+                  ))}
+                </KeywordForm>
+                <KeywordForm label={'포지션'} type="POSITION">
+                  {RecruitmentKeywordsDummy[1].value.map((chipValue: string) => (
+                    <ChipMenu key={chipValue} checked={false} onClick={() => {}}>
+                      {chipValue}
+                    </ChipMenu>
+                  ))}
+                </KeywordForm>
+                <KeywordForm label={'카테고리'} type="CATEGORY">
+                  {RecruitmentKeywordsDummy[2].value.map((chipValue: string) => (
+                    <ChipMenu key={chipValue} checked={false} onClick={() => {}}>
+                      {chipValue}
+                    </ChipMenu>
+                  ))}
+                </KeywordForm>
               </div>
               <div className="btns">
                 <Button size="fullWidth" onClick={() => {}}>
@@ -62,7 +72,7 @@ export const NotificationsSettings = () => {
                   저장
                 </Button>
               </div>
-            </RecruitmentKeywordsBox>
+            </SelectKeywordsForm>
           </RecruitmentSettingsSection>
           <StudySettingSection>
             <SettingTitleBox>스터디</SettingTitleBox>
@@ -149,16 +159,7 @@ const SettingTitleBox = styled.p`
   align-self: stretch;
 `;
 
-const KeywordTitleBox = styled.p`
-  color: ${({ theme }) => theme.color.black};
-  font-family: 'Pretendard400';
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 30px;
-`;
-
-const RecruitmentKeywordsBox = styled.div`
+const SelectKeywordsForm = styled.form`
   display: flex;
   padding: 0 0 32px 0;
   flex-direction: column;
@@ -172,21 +173,6 @@ const RecruitmentKeywordsBox = styled.div`
     gap: 24px;
     align-self: stretch;
   }
-`;
-
-const KeywordBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 8px;
-  align-self: stretch;
-`;
-
-const ChipsBox = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
 `;
 
 const StudySettingSection = styled.section`
