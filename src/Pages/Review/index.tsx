@@ -4,6 +4,41 @@ import { RowDivider } from '@/Components/Common/Divider/RowDivider';
 import styled from 'styled-components';
 import { MemberImage } from '@/Assets';
 import { ColumnDivider } from '@/Components/Common/Divider/ColumnDivider';
+import { ReviewQuestion } from '@/Components/ReviewQuestion/ReviewQuestion';
+
+interface ReviewData {
+  title: string;
+  yes: string;
+  no: string;
+}
+
+const reviewDataList = [
+  {
+    title: '이 스터디원은 스터디에 적극적이었나요?',
+    yes: '적극적이예요.',
+    no: '아쉬워요.',
+  },
+  {
+    title: '이 스터디원은 본인의 업무에 전문적이있나요?',
+    yes: '전문적이예요.',
+    no: '아쉬워요.',
+  },
+  {
+    title: '이 스터디원은 다른 팀원들과 의사 소통을 잘했나요?',
+    yes: '잘했어요.',
+    no: '아쉬워요.',
+  },
+  {
+    title: '이 스터디원과 스터디를 다시 함께 할 의향이 있나요?',
+    yes: '함께하고 싶어요.',
+    no: '그렇지는 않아요.',
+  },
+  {
+    title: '이 스터디원을 주변 사람에게 추천하나요?',
+    yes: '추천하고 싶어요.',
+    no: '그렇지는 않아요.',
+  },
+] satisfies Array<ReviewData>;
 
 export const ReviewPage = () => {
   return (
@@ -34,6 +69,13 @@ export const ReviewPage = () => {
               </MemberProfileBox>
             </MemberProfile>
           </Member>
+          <ReviewList>
+            {reviewDataList.map(({ title, yes, no }) => (
+              <li>
+                <ReviewQuestion contents={[no, yes]} title={title} />
+              </li>
+            ))}
+          </ReviewList>
         </MainInner>
       </Main>
       <Footer>
@@ -152,6 +194,18 @@ const MemberStudyInfoText = styled.span`
   font-style: normal;
   font-weight: 400;
   line-height: 24px;
+`;
+
+const ReviewList = styled.ul`
+  min-width: 348px;
+  max-width: 808px;
+  padding: 40px 32px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  border-radius: ${({ theme }) => theme.borderRadius.cornerRadius12};
+  background: ${({ theme }) => theme.color.white2};
 `;
 
 // 실제로는 의미적 푸터가 아닌 레이아웃상 하단을 의미
