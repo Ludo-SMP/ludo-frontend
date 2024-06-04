@@ -1,5 +1,5 @@
 import { API_END_POINT } from '@/Constants/api';
-import { NotificationKeywords, NotificationsSetting, NotificationsType } from '@/Types/notifications';
+import { NotificationKeywords, NotificationsSetting, NotificationsSettingConfigType } from '@/Types/notifications';
 import { httpClient } from '@/utils/axios';
 
 /** 알림 목록 API */
@@ -18,5 +18,5 @@ export const editNotificationsKeywords = (data: NotificationKeywords) =>
   httpClient.put(API_END_POINT.EDIT_NOTIFICATIONS_KEYWORDS, data);
 
 /** 알림 on/off 설정 API */
-export const onOffNotifications = (data: { type: NotificationsType | 'ALL'; on: boolean }) =>
+export const onOffNotifications = (data: { type: NotificationsSettingConfigType; on: boolean }) =>
   httpClient.post(API_END_POINT.NOTIFICATIONS_SETTING, data);
