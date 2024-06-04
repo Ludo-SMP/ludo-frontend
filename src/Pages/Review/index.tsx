@@ -52,59 +52,63 @@ export const ReviewPage = () => {
 
   return (
     <ReviewPageLayout>
-      <Header>
-        <HeaderInner>
-          <img width="112" src={Logo} alt="Ludo" />
-          <HeaderText>함께했던 스터디원 평가하기</HeaderText>
-        </HeaderInner>
-      </Header>
-      <RowDivider />
-      <Main>
-        <Form onSubmit={handleSubmit(console.log)}>
-          <Member>
-            <MemberTitle>
-              <MemberImage width={32} height={32} />
-              <MemberTitleText>함께한 스터디원</MemberTitleText>
-            </MemberTitle>
-            <MemberProfile>
-              <Profile width={80} height={80} />
-              <MemberProfileBox>
-                <MemberName>닉네임</MemberName>
-                <MemberStudyInfo>
-                  <MemberStudyInfoText>스터디 이름</MemberStudyInfoText>
-                  <ColumnDivider />
-                  <MemberStudyInfoText>포지션</MemberStudyInfoText>
-                </MemberStudyInfo>
-              </MemberProfileBox>
-            </MemberProfile>
-          </Member>
-          <ReviewList>
-            {Object.entries(reviewDataList).map(([key, { title, yes, no }]) => (
-              <li key={key}>
-                <Controller
-                  name={key as keyof typeof reviewDataList}
-                  control={control}
-                  rules={{ required: true }}
-                  render={({ field }) => (
-                    <ReviewQuestion
-                      contents={[no, yes]}
-                      title={title}
-                      error={errors[key as keyof typeof reviewDataList].type === 'required'}
-                      {...field}
-                    />
-                  )}
-                />
-              </li>
-            ))}
-          </ReviewList>
-        </Form>
-      </Main>
-      <Footer>
-        <FooterInner>
-          <Button>나중에 새로 작성하기</Button>
-          <Button scheme="secondary">평가 작성 완료</Button>
-        </FooterInner>
-      </Footer>
+      <form onSubmit={handleSubmit(console.log)}>
+        <Header>
+          <HeaderInner>
+            <img width="112" src={Logo} alt="Ludo" />
+            <HeaderText>함께했던 스터디원 평가하기</HeaderText>
+          </HeaderInner>
+        </Header>
+        <RowDivider />
+        <Main>
+          <MainInner>
+            <Member>
+              <MemberTitle>
+                <MemberImage width={32} height={32} />
+                <MemberTitleText>함께한 스터디원</MemberTitleText>
+              </MemberTitle>
+              <MemberProfile>
+                <Profile width={80} height={80} />
+                <MemberProfileBox>
+                  <MemberName>닉네임</MemberName>
+                  <MemberStudyInfo>
+                    <MemberStudyInfoText>스터디 이름</MemberStudyInfoText>
+                    <ColumnDivider />
+                    <MemberStudyInfoText>포지션</MemberStudyInfoText>
+                  </MemberStudyInfo>
+                </MemberProfileBox>
+              </MemberProfile>
+            </Member>
+            <ReviewList>
+              {Object.entries(reviewDataList).map(([key, { title, yes, no }]) => (
+                <li key={key}>
+                  <Controller
+                    name={key as keyof typeof reviewDataList}
+                    control={control}
+                    rules={{ required: true }}
+                    render={({ field }) => (
+                      <ReviewQuestion
+                        contents={[no, yes]}
+                        title={title}
+                        error={errors[key as keyof typeof reviewDataList]?.type === 'required'}
+                        {...field}
+                      />
+                    )}
+                  />
+                </li>
+              ))}
+            </ReviewList>
+          </MainInner>
+        </Main>
+        <Footer>
+          <FooterInner>
+            <Button>나중에 새로 작성하기</Button>
+            <Button type="submit" scheme="secondary">
+              평가 작성 완료
+            </Button>
+          </FooterInner>
+        </Footer>
+      </form>
     </ReviewPageLayout>
   );
 };
@@ -148,7 +152,7 @@ const Main = styled.main`
   background: ${({ theme }) => theme.color.gray1};
 `;
 
-const Form = styled.form`
+const MainInner = styled.form`
   flex: 1;
   padding: 40px 0px;
   max-width: 808px;
