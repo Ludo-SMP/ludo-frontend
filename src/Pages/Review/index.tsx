@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { MemberImage } from '@/Assets';
 import { ColumnDivider } from '@/Components/Common/Divider/ColumnDivider';
 import { ReviewQuestion } from '@/Components/ReviewQuestion/ReviewQuestion';
+import { useForm } from 'react-hook-form';
 
 interface ReviewData {
   title: string;
@@ -12,35 +13,39 @@ interface ReviewData {
   no: string;
 }
 
-const reviewDataList = [
-  {
+const reviewDataList = {
+  activenessScore: {
     title: '이 스터디원은 스터디에 적극적이었나요?',
     yes: '적극적이예요.',
     no: '아쉬워요.',
   },
-  {
+  professionalismScore: {
     title: '이 스터디원은 본인의 업무에 전문적이있나요?',
     yes: '전문적이예요.',
     no: '아쉬워요.',
   },
-  {
+  communicationScore: {
     title: '이 스터디원은 다른 팀원들과 의사 소통을 잘했나요?',
     yes: '잘했어요.',
     no: '아쉬워요.',
   },
-  {
+  togetherScore: {
     title: '이 스터디원과 스터디를 다시 함께 할 의향이 있나요?',
     yes: '함께하고 싶어요.',
     no: '그렇지는 않아요.',
   },
-  {
+  recommendScore: {
     title: '이 스터디원을 주변 사람에게 추천하나요?',
     yes: '추천하고 싶어요.',
     no: '그렇지는 않아요.',
   },
-] satisfies Array<ReviewData>;
+};
+
+type ReviewResult = Record<keyof typeof reviewDataList, number>;
 
 export const ReviewPage = () => {
+  const { register } = useForm<ReviewResult>();
+
   return (
     <ReviewPageLayout>
       <Header>
@@ -51,7 +56,7 @@ export const ReviewPage = () => {
       </Header>
       <RowDivider />
       <Main>
-        <MainInner>
+        <Form onSubmit={console.log}>
           <Member>
             <MemberTitle>
               <MemberImage width={32} height={32} />
@@ -70,13 +75,13 @@ export const ReviewPage = () => {
             </MemberProfile>
           </Member>
           <ReviewList>
-            {reviewDataList.map(({ title, yes, no }) => (
-              <li>
-                <ReviewQuestion contents={[no, yes]} title={title} />
+            {Object.entries(reviewDataList).map(([key, { title, yes, no }]) => (
+              <li key={key}>
+                <ReviewQuestion contents={[no, yes]} title={title} {...register(key)} />
               </li>
             ))}
           </ReviewList>
-        </MainInner>
+        </Form>
       </Main>
       <Footer>
         <FooterInner>
@@ -127,7 +132,7 @@ const Main = styled.main`
   background: ${({ theme }) => theme.color.gray1};
 `;
 
-const MainInner = styled.div`
+const Form = styled.form`
   flex: 1;
   padding: 40px 0px;
   max-width: 808px;
