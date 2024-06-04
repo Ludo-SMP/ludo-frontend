@@ -6,16 +6,25 @@ import Button from '@/Components/Common/Button';
 import { useNotificationsSetting } from '@/Hooks/notifications/useNotificationsSetting';
 import { Loading } from '@/Assets';
 import { KeywordForm } from '@/Components/Common/KeywordForm';
+import { useForm } from 'react-hook-form';
 import { RecruitmentKeywordsForm } from '@/Types/notifications';
+import { CATEGORIES_OPTION, POSITIONS_OPTIONS } from '@/Shared/study';
 
-const RecruitmentKeywordsDummy: { name: string; value: string[] }[] = [
-  { name: '기술 스택', value: ['기술 스택'] },
-  { name: '포지션', value: ['프론트엔드', '백엔드', '디자인', '데브옵스'] },
-  { name: '카테고리', value: ['모의 면접', '개발 프로젝트', '코딩 테스트'] },
-];
+const RecruitmentKeywordOptions = {
+  POSITION: [...POSITIONS_OPTIONS],
+  CATEGORY: [...CATEGORIES_OPTION],
+};
 
 export const NotificationsSettings = () => {
   const { data: notificationsSetting } = useNotificationsSetting();
+
+  const { setValue, watch, handleSubmit } = useForm<RecruitmentKeywordsForm>({
+    defaultValues: {
+      stackIds: notificationsSetting?.stackKeyword.map(({ stackId }: { stackId: number }) => stackId),
+      positionIds: notificationsSetting?.positionKeyword.map(({ positionId }: { positionId: number }) => positionId),
+      categoryIds: notificationsSetting?.categoryKeyword.map(({ categoryId }: { categoryId: number }) => categoryId),
+    },
+  });
 
   return (
     <NotificationsSettingsLayout>
@@ -43,24 +52,22 @@ export const NotificationsSettings = () => {
             />
             <KeywordsSettingForm>
               <KeywordsSettingBox>
-                <KeywordForm label={'기술 스택'} type="stackIds">
-                  {RecruitmentKeywordsDummy[0].value.map((chipValue: string) => (
-                    <ChipMenu key={chipValue} checked={false} onClick={() => {}}>
-                      {chipValue}
+                <KeywordForm label="기술 스택" type="stackIds">
+                  <ChipMenu key={'기술 스택'} checked={watch('stackIds').length !== 0} onClick={() => {}}>
+                    {'기술 스택'}
+                  </ChipMenu>
+                </KeywordForm>
+                <KeywordForm label="포지션" type="positionIds">
+                  {RecruitmentKeywordOptions['POSITION'].map(({ value: id, label }) => (
+                    <ChipMenu key={label} checked={false} onClick={() => {}} id={id}>
+                      {label}
                     </ChipMenu>
                   ))}
                 </KeywordForm>
-                <KeywordForm label={'포지션'} type="positionIds">
-                  {RecruitmentKeywordsDummy[1].value.map((chipValue: string) => (
-                    <ChipMenu key={chipValue} checked={false} onClick={() => {}}>
-                      {chipValue}
-                    </ChipMenu>
-                  ))}
-                </KeywordForm>
-                <KeywordForm label={'카테고리'} type="categoryIds">
-                  {RecruitmentKeywordsDummy[2].value.map((chipValue: string) => (
-                    <ChipMenu key={chipValue} checked={false} onClick={() => {}}>
-                      {chipValue}
+                <KeywordForm label="카테고리" type="categoryIds">
+                  {RecruitmentKeywordOptions['CATEGORY'].map(({ value: id, label }) => (
+                    <ChipMenu key={label} checked={false} onClick={() => {}} id={id}>
+                      {label}
                     </ChipMenu>
                   ))}
                 </KeywordForm>
