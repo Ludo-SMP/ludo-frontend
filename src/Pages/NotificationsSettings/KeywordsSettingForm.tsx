@@ -5,6 +5,7 @@ import Button from '@/Components/Common/Button';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { RecruitmentKeywordsForm } from '@/Types/notifications';
+import { useEditNotificationsKeywords } from '@/Hooks/notifications/useEditNotificationsKeywords';
 
 const handleValues = (type: keyof RecruitmentKeywordsForm, selectedValues: number[], id: number) => {
   return selectedValues.includes(id)
@@ -17,6 +18,8 @@ export interface KeywordsSettingFormProps {
 }
 
 export const KeywordsSettingForm = ({ values }: KeywordsSettingFormProps) => {
+  const { mutate: editKeywordsMutate } = useEditNotificationsKeywords();
+
   const { setValue, watch, handleSubmit } = useForm<RecruitmentKeywordsForm>({
     defaultValues: {
       stackIds: [],
@@ -26,7 +29,11 @@ export const KeywordsSettingForm = ({ values }: KeywordsSettingFormProps) => {
     values,
   });
   return (
-    <Form>
+    <Form
+      onSubmit={handleSubmit(({ stackIds, positionIds, categoryIds }) => {
+        editKeywordsMutate({ stackIds, positionIds, categoryIds });
+      })}
+    >
       <KeywordsSettingBox>
         <KeywordForm label="기술 스택" type="stackIds">
           <ChipMenu key={'기술 스택'} checked={watch('stackIds').length !== 0} onClick={() => {}}>
