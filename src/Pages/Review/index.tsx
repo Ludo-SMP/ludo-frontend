@@ -1,4 +1,5 @@
 import { Logo } from '@/Assets';
+import Button from '@/Components/Common/Button';
 import { RowDivider } from '@/Components/Common/Divider/RowDivider';
 import styled from 'styled-components';
 
@@ -12,6 +13,12 @@ export const ReviewPage = () => {
         </HeaderInner>
       </Header>
       <RowDivider />
+      <Footer>
+        <FooterInner>
+          <Button>나중에 새로 작성하기</Button>
+          <Button>평가 작성 완료</Button>
+        </FooterInner>
+      </Footer>
     </ReviewPageLayout>
   );
 };
@@ -46,4 +53,21 @@ const HeaderText = styled.div`
   font-style: normal;
   font-weight: 800;
   line-height: 48px;
+`;
+
+// 실제로는 의미적 푸터가 아닌 레이아웃상 하단을 의미
+const Footer = styled.div`
+  display: flex;
+  padding: 0px 24px;
+  justify-content: center;
+  background: ${({ theme }) => theme.color.gray1};
+`;
+
+const FooterInner = styled.div`
+  display: flex;
+  max-width: 808px;
+  padding: 24px 0px 40px 0px;
+  justify-content: center;
+  gap: 24px;
+  background: ${({ theme }) => theme.color.gray1};
 `;
