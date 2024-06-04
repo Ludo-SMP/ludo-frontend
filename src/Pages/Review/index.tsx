@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { MemberImage } from '@/Assets';
 import { ColumnDivider } from '@/Components/Common/Divider/ColumnDivider';
 import { ReviewQuestion } from '@/Components/ReviewQuestion/ReviewQuestion';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 
 interface ReviewData {
   title: string;
@@ -44,7 +44,11 @@ const reviewDataList = {
 type ReviewResult = Record<keyof typeof reviewDataList, number>;
 
 export const ReviewPage = () => {
-  const { register } = useForm<ReviewResult>();
+  const {
+    handleSubmit,
+    formState: { errors },
+    control,
+  } = useForm<ReviewResult>();
 
   return (
     <ReviewPageLayout>
@@ -56,7 +60,7 @@ export const ReviewPage = () => {
       </Header>
       <RowDivider />
       <Main>
-        <Form onSubmit={console.log}>
+        <Form onSubmit={handleSubmit(console.log)}>
           <Member>
             <MemberTitle>
               <MemberImage width={32} height={32} />
@@ -77,7 +81,19 @@ export const ReviewPage = () => {
           <ReviewList>
             {Object.entries(reviewDataList).map(([key, { title, yes, no }]) => (
               <li key={key}>
-                <ReviewQuestion contents={[no, yes]} title={title} {...register(key)} />
+                <Controller
+                  name={key as keyof typeof reviewDataList}
+                  control={control}
+                  rules={{ required: true }}
+                  render={({ field }) => (
+                    <ReviewQuestion
+                      contents={[no, yes]}
+                      title={title}
+                      error={errors[key as keyof typeof reviewDataList].type === 'required'}
+                      {...field}
+                    />
+                  )}
+                />
               </li>
             ))}
           </ReviewList>
