@@ -15,28 +15,40 @@ export const NOTIFICATIONS = {
   REVIEW: '리뷰 평가 알림',
 } as const;
 
+// 알림 설정 ENUM 타입
+export const NOTIFICATION_SETTINGS_CONFIG = {
+  ALL_CONFIG: '전체 알림 설정',
+  RECRUITMENT_CONFIG: '모집공고 알림 설정',
+  STUDY_APPLICANT_CONFIG: '스터디 지원 여부 알림 설정',
+  STUDY_APPLICANT_RESULT_CONFIG: '스터디 지원 결과 알림 설정',
+  STUDY_END_DATE_CONFIG: '스터디 종료 기간 알림 설정',
+  STUDY_PARTICIPANT_LEAVE_CONFIG: '스터디 탈퇴자 알림 설정',
+  REVIEW_CONFIG: '스터디원 리뷰 평가 알림 설정',
+} as const;
+
 export type NotificationsType = keyof typeof NOTIFICATIONS;
+export type NotificationsSettingConfigType = keyof typeof NOTIFICATION_SETTINGS_CONFIG;
 
 export interface NotificationsSetting {
   settings: {
     all: boolean;
     study: {
       applicantNotification: boolean;
-      applicantNotificationType: Extract<NotificationsType, 'STUDY_APPLICANT'>;
+      applicantNotificationType: Extract<NotificationsSettingConfigType, 'STUDY_APPLICANT_CONFIG'>;
       applicantResultNotification: boolean;
-      applicantResultNotificationType: Extract<NotificationsType, 'STUDY_APPLICANT_RESULT'>;
+      applicantResultNotificationType: Extract<NotificationsSettingConfigType, 'STUDY_APPLICANT_RESULT_CONFIG'>;
       endDateNotification: boolean;
-      endDateNotificationType: Extract<NotificationsType, 'STUDY_END_DATE'>;
+      endDateNotificationType: Extract<NotificationsSettingConfigType, 'STUDY_END_DATE_CONFIG'>;
       participantLeaveNotification: boolean;
-      participantLeaveNotificationType: Extract<NotificationsType, 'STUDY_PARTICIPANT_LEAVE'>;
+      participantLeaveNotificationType: Extract<NotificationsSettingConfigType, 'STUDY_PARTICIPANT_LEAVE_CONFIG'>;
     };
     recruitment: {
       notification: boolean;
-      notificationType: Extract<NotificationsType, 'RECRUITMENT'>;
+      notificationType: Extract<NotificationsSettingConfigType, 'RECRUITMENT_CONFIG'>;
     };
     review: {
       notification: boolean;
-      notificationType: Extract<NotificationsType, 'REVIEW'>;
+      notificationType: Extract<NotificationsSettingConfigType, 'REVIEW_CONFIG'>;
     };
   };
 
