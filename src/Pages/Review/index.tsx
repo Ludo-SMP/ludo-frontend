@@ -13,6 +13,11 @@ export const ReviewPage = () => {
         </HeaderInner>
       </Header>
       <RowDivider />
+      <Main>
+        <MainInner>
+          <Member></Member>
+        </MainInner>
+      </Main>
       <Footer>
         <FooterInner>
           <Button>나중에 새로 작성하기</Button>
@@ -53,6 +58,27 @@ const HeaderText = styled.div`
   font-style: normal;
   font-weight: 800;
   line-height: 48px;
+`;
+
+const Main = styled.main`
+  padding: 0px 24px;
+  display: flex;
+  justify-content: center;
+`;
+
+const MainInner = styled.div`
+  padding: 40px 0px;
+  max-width: 808px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+`;
+
+const Member = styled.div`
+  max-width: 808px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 `;
 
 // 실제로는 의미적 푸터가 아닌 레이아웃상 하단을 의미
