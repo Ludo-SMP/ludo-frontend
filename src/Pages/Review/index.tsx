@@ -1,4 +1,5 @@
 import { Logo } from '@/Assets';
+import { RowDivider } from '@/Components/Common/Divider/RowDivider';
 import styled from 'styled-components';
 
 export const ReviewPage = () => {
@@ -10,6 +11,7 @@ export const ReviewPage = () => {
           <HeaderText>함께했던 스터디원 평가하기</HeaderText>
         </HeaderInner>
       </Header>
+      <RowDivider />
     </ReviewPageLayout>
   );
 };
