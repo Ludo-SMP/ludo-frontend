@@ -47,3 +47,9 @@ export interface NotificationsSetting {
   positionKeyword: { positionId: number; name: string }[];
   categoryKeyword: { categoryId: number; name: string }[];
 }
+
+export interface RecruitmentKeywordsForm {
+  categoryIds: number[];
+  stackIds: number[];
+  positionIds: number[];
+}

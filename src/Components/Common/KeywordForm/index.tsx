@@ -1,3 +1,4 @@
+import { RecruitmentKeywordsForm } from '@/Types/notifications';
 import styled from 'styled-components';
 
 export interface KeyWordFormProps {
@@ -8,7 +9,7 @@ export interface KeyWordFormProps {
   children: React.ReactNode;
 
   /** keyword Type */
-  type: 'STACK' | 'POSITION' | 'CATEGORY';
+  type: keyof RecruitmentKeywordsForm;
 }
 
 export const KeywordForm = ({ label, children, type }: KeyWordFormProps) => {

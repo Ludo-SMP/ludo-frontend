@@ -6,6 +6,7 @@ import Button from '@/Components/Common/Button';
 import { useNotificationsSetting } from '@/Hooks/notifications/useNotificationsSetting';
 import { Loading } from '@/Assets';
 import { KeywordForm } from '@/Components/Common/KeywordForm';
+import { RecruitmentKeywordsForm } from '@/Types/notifications';
 
 const RecruitmentKeywordsDummy: { name: string; value: string[] }[] = [
   { name: '기술 스택', value: ['기술 스택'] },
@@ -40,39 +41,39 @@ export const NotificationsSettings = () => {
               type="RECRUITMENT"
               disabled={!notificationsSetting?.settings.all}
             />
-            <SelectKeywordsForm>
-              <div className="select__keywords">
-                <KeywordForm label={'기술 스택'} type="STACK">
+            <KeywordsSettingForm>
+              <KeywordsSettingBox>
+                <KeywordForm label={'기술 스택'} type="stackIds">
                   {RecruitmentKeywordsDummy[0].value.map((chipValue: string) => (
                     <ChipMenu key={chipValue} checked={false} onClick={() => {}}>
                       {chipValue}
                     </ChipMenu>
                   ))}
                 </KeywordForm>
-                <KeywordForm label={'포지션'} type="POSITION">
+                <KeywordForm label={'포지션'} type="positionIds">
                   {RecruitmentKeywordsDummy[1].value.map((chipValue: string) => (
                     <ChipMenu key={chipValue} checked={false} onClick={() => {}}>
                       {chipValue}
                     </ChipMenu>
                   ))}
                 </KeywordForm>
-                <KeywordForm label={'카테고리'} type="CATEGORY">
+                <KeywordForm label={'카테고리'} type="categoryIds">
                   {RecruitmentKeywordsDummy[2].value.map((chipValue: string) => (
                     <ChipMenu key={chipValue} checked={false} onClick={() => {}}>
                       {chipValue}
                     </ChipMenu>
                   ))}
                 </KeywordForm>
-              </div>
-              <div className="btns">
+              </KeywordsSettingBox>
+              <BtnsBox>
                 <Button size="fullWidth" onClick={() => {}}>
                   취소
                 </Button>
                 <Button size="fullWidth" scheme="secondary" onClick={() => {}}>
                   저장
                 </Button>
-              </div>
-            </SelectKeywordsForm>
+              </BtnsBox>
+            </KeywordsSettingForm>
           </RecruitmentSettingsSection>
           <StudySettingSection>
             <SettingTitleBox>스터디</SettingTitleBox>
@@ -139,14 +140,14 @@ const RecruitmentSettingsSection = styled.section`
   gap: 12px;
   align-self: stretch;
   width: 100%;
+`;
 
-  .select__keywords {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-    align-self: stretch;
-  }
+const KeywordsSettingBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  align-self: stretch;
 `;
 
 const SettingTitleBox = styled.p`
@@ -159,20 +160,20 @@ const SettingTitleBox = styled.p`
   align-self: stretch;
 `;
 
-const SelectKeywordsForm = styled.form`
+const KeywordsSettingForm = styled.form`
   display: flex;
   padding: 0 0 32px 0;
   flex-direction: column;
   align-items: flex-start;
   gap: 32px;
   align-self: stretch;
+`;
 
-  .btns {
-    display: flex;
-    align-items: flex-start;
-    gap: 24px;
-    align-self: stretch;
-  }
+const BtnsBox = styled.div`
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  align-self: stretch;
 `;
 
 const StudySettingSection = styled.section`

@@ -131,12 +131,6 @@ export interface RecruitFormWithSelect extends SelectType {
   stackIds?: Stack[];
 }
 
-export interface RecruitmentKeywordsForm {
-  categoryIds: number[];
-  stackIds: number[];
-  positionIds: number[];
-}
-
 export interface FilterOptionParams {
   pageParam?: number;
   last?: number;
