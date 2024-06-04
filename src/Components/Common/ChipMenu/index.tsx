@@ -6,6 +6,7 @@ export type ChipMenuProps = {
   children: React.ReactNode;
   disabled?: boolean;
   className?: string;
+  id?: number;
 };
 
 /** 칩의 wrapper로 사용됩니다. */

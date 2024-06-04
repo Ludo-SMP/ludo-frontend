@@ -59,14 +59,14 @@ export const NotificationsSettings = () => {
                 </KeywordForm>
                 <KeywordForm label="포지션" type="positionIds">
                   {RecruitmentKeywordOptions['POSITION'].map(({ value: id, label }) => (
-                    <ChipMenu key={label} checked={false} onClick={() => {}} id={id}>
+                    <ChipMenu key={label} checked={watch('positionIds').includes(id)} onClick={() => {}} id={id}>
                       {label}
                     </ChipMenu>
                   ))}
                 </KeywordForm>
                 <KeywordForm label="카테고리" type="categoryIds">
                   {RecruitmentKeywordOptions['CATEGORY'].map(({ value: id, label }) => (
-                    <ChipMenu key={label} checked={false} onClick={() => {}} id={id}>
+                    <ChipMenu key={label} checked={watch('categoryIds').includes(id)} onClick={() => {}} id={id}>
                       {label}
                     </ChipMenu>
                   ))}
