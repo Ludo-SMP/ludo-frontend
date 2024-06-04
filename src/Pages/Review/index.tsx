@@ -1,7 +1,9 @@
-import { Logo } from '@/Assets';
+import { Logo, Profile } from '@/Assets';
 import Button from '@/Components/Common/Button';
 import { RowDivider } from '@/Components/Common/Divider/RowDivider';
 import styled from 'styled-components';
+import { MemberImage } from '@/Assets';
+import { ColumnDivider } from '@/Components/Common/Divider/ColumnDivider';
 
 export const ReviewPage = () => {
   return (
@@ -15,7 +17,23 @@ export const ReviewPage = () => {
       <RowDivider />
       <Main>
         <MainInner>
-          <Member></Member>
+          <Member>
+            <MemberTitle>
+              <MemberImage width={32} height={32} />
+              <MemberTitleText>함께한 스터디원</MemberTitleText>
+            </MemberTitle>
+            <MemberProfile>
+              <Profile width={80} height={80} />
+              <MemberProfileBox>
+                <MemberName>닉네임</MemberName>
+                <MemberStudyInfo>
+                  <MemberStudyInfoText>스터디 이름</MemberStudyInfoText>
+                  <ColumnDivider />
+                  <MemberStudyInfoText>포지션</MemberStudyInfoText>
+                </MemberStudyInfo>
+              </MemberProfileBox>
+            </MemberProfile>
+          </Member>
         </MainInner>
       </Main>
       <Footer>
@@ -79,6 +97,61 @@ const Member = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
+`;
+
+const MemberTitle = styled.h2`
+  display: flex;
+  min-width: 300px;
+  max-width: 1224px;
+  align-items: center;
+  gap: 8px;
+`;
+
+const MemberTitleText = styled.h2`
+  color: ${({ theme }) => theme.color.black5};
+  font-family: Pretendard600;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 32px;
+`;
+
+const MemberProfile = styled.div`
+  display: flex;
+  min-width: 300px;
+  max-width: 808px;
+  align-items: center;
+  gap: 24px;
+`;
+
+const MemberProfileBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+`;
+
+const MemberName = styled.span`
+  color: ${({ theme }) => theme.color.black5};
+  font-family: Pretendard600;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 32px;
+`;
+
+const MemberStudyInfo = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 16px;
+`;
+
+const MemberStudyInfoText = styled.span`
+  color: ${({ theme }) => theme.color.black2};
+  font-family: Pretendard400;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
 `;
 
 // 실제로는 의미적 푸터가 아닌 레이아웃상 하단을 의미
