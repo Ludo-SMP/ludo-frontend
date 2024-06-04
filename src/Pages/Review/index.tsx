@@ -81,7 +81,7 @@ export const ReviewPage = () => {
       <Footer>
         <FooterInner>
           <Button>나중에 새로 작성하기</Button>
-          <Button>평가 작성 완료</Button>
+          <Button scheme="secondary">평가 작성 완료</Button>
         </FooterInner>
       </Footer>
     </ReviewPageLayout>
