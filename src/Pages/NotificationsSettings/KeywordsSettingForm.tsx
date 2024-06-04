@@ -6,8 +6,10 @@ import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { RecruitmentKeywordsForm } from '@/Types/notifications';
 import { useEditNotificationsKeywords } from '@/Hooks/notifications/useEditNotificationsKeywords';
+import { useState } from 'react';
+import { StackModal } from '@/Components/Modal/StackModal';
 
-const handleValues = (type: keyof RecruitmentKeywordsForm, selectedValues: number[], id: number) => {
+const handleValues = (selectedValues: number[], id: number) => {
   return selectedValues.includes(id)
     ? selectedValues.filter((selectedValue: number) => selectedValue != id)
     : [...selectedValues, id];
@@ -19,6 +21,7 @@ export interface KeywordsSettingFormProps {
 
 export const KeywordsSettingForm = ({ values }: KeywordsSettingFormProps) => {
   const { mutate: editKeywordsMutate } = useEditNotificationsKeywords();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const { setValue, watch, handleSubmit } = useForm<RecruitmentKeywordsForm>({
     defaultValues: {
@@ -36,16 +39,21 @@ export const KeywordsSettingForm = ({ values }: KeywordsSettingFormProps) => {
     >
       <KeywordsSettingBox>
         <KeywordForm label="기술 스택" type="stackIds">
-          <ChipMenu key={'기술 스택'} checked={watch('stackIds').length !== 0} onClick={() => {}}>
+          <ChipMenu
+            key={'기술 스택'}
+            checked={watch('stackIds').length !== 0}
+            onClick={() => setIsOpen((prev) => !prev)}
+          >
             {'기술 스택'}
           </ChipMenu>
+          {isOpen && <StackModal handleModal={setIsOpen} />}
         </KeywordForm>
         <KeywordForm label="포지션" type="positionIds">
           {POSITIONS_OPTIONS.map(({ value: id, label }) => (
             <ChipMenu
               key={label}
               checked={watch('positionIds').includes(id)}
-              onClick={() => setValue('positionIds', handleValues('positionIds', watch('positionIds'), id))}
+              onClick={() => setValue('positionIds', handleValues(watch('positionIds'), id))}
               id={id}
             >
               {label}
@@ -57,7 +65,7 @@ export const KeywordsSettingForm = ({ values }: KeywordsSettingFormProps) => {
             <ChipMenu
               key={label}
               checked={watch('categoryIds').includes(id)}
-              onClick={() => setValue('categoryIds', handleValues('categoryIds', watch('categoryIds'), id))}
+              onClick={() => setValue('categoryIds', handleValues(watch('categoryIds'), id))}
               id={id}
             >
               {label}
@@ -66,10 +74,18 @@ export const KeywordsSettingForm = ({ values }: KeywordsSettingFormProps) => {
         </KeywordForm>
       </KeywordsSettingBox>
       <BtnsBox>
-        <Button size="fullWidth" onClick={() => {}}>
+        <Button
+          type="button"
+          size="fullWidth"
+          onClick={() => {
+            setValue('stackIds', [...values.stackIds]);
+            setValue('positionIds', [...values.positionIds]);
+            setValue('categoryIds', [...values.categoryIds]);
+          }}
+        >
           취소
         </Button>
-        <Button size="fullWidth" scheme="secondary" onClick={() => {}}>
+        <Button size="fullWidth" scheme="secondary">
           저장
         </Button>
       </BtnsBox>
