@@ -124,9 +124,11 @@ const Main = styled.main`
   padding: 0px 24px;
   display: flex;
   justify-content: center;
+  background: ${({ theme }) => theme.color.gray1};
 `;
 
 const MainInner = styled.div`
+  flex: 1;
   padding: 40px 0px;
   max-width: 808px;
   display: flex;
@@ -200,7 +202,6 @@ const ReviewList = styled.ul`
   min-width: 348px;
   max-width: 808px;
   padding: 40px 32px;
-  align-items: center;
   display: flex;
   flex-direction: column;
   gap: 32px;
@@ -210,17 +211,22 @@ const ReviewList = styled.ul`
 
 // 실제로는 의미적 푸터가 아닌 레이아웃상 하단을 의미
 const Footer = styled.div`
-  display: flex;
   padding: 0px 24px;
+  display: flex;
   justify-content: center;
   background: ${({ theme }) => theme.color.gray1};
 `;
 
 const FooterInner = styled.div`
+  flex: 1;
   display: flex;
   max-width: 808px;
   padding: 24px 0px 40px 0px;
   justify-content: center;
   gap: 24px;
   background: ${({ theme }) => theme.color.gray1};
+
+  & > button {
+    flex: 1;
+  }
 `;
