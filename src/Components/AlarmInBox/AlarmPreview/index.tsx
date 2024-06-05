@@ -21,7 +21,13 @@ export const AlarmPreview = ({ type, content, title, createdAt }: AlarmPreviewPr
   return (
     <AlarmPreviewItem>
       <ImageWrapper $alarmType={type}>
-        <img src={type?.includes('스터디') ? Logo : DefaultStudyThumbnail} width={32} height={32} alt="alarm-image" />
+        {/* 모집공고 알림만 루도 로고, 나머지는 기본 스터디 이미지 */}
+        <img
+          src={type?.includes('RECRUITMENT') ? Logo : DefaultStudyThumbnail}
+          width={32}
+          height={32}
+          alt="alarm-image"
+        />
       </ImageWrapper>
       <SummaryWrapper>
         <Title>{title}</Title>
@@ -50,7 +56,7 @@ const AlarmPreviewItem = styled.li`
 const ImageWrapper = styled.div<{ $alarmType: NotificationsType }>`
   img {
     border: 1px solid
-      ${({ theme, $alarmType }) => ($alarmType?.includes('STUDY') ? theme.color.black1 : theme.color.gray5)};
+      ${({ theme, $alarmType }) => ($alarmType?.includes('RECRUITMENT') ? theme.color.black1 : theme.color.gray5)};
     border-radius: ${({ theme }) => theme.borderRadius.xlarge};
     object-fit: contain;
   }
