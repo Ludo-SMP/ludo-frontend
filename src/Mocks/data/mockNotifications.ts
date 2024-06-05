@@ -2,7 +2,7 @@ import { NotificationsSetting } from '@/Types/notifications';
 
 export const mockNotificationsSetting: NotificationsSetting = {
   settings: {
-    all: false,
+    all: true,
     study: {
       applicantNotification: false,
       applicantNotificationType: 'STUDY_APPLICANT_CONFIG',

@@ -56,7 +56,7 @@ export const useOnOffNotifications = ({
     mutationKey: [...NOTIFICATIONS.NOTIFICATIONS_ON_OFF],
     mutationFn: ({ on }: { on: boolean }) => onOffNotifications({ notificationConfigGroup, on }),
     onSuccess: () => {
-      if (notificationConfigGroup === 'ALL_CONFIG')
+      if (notificationConfigGroup === 'ALL_CONFIG' || notificationConfigGroup === 'RECRUITMENT_CONFIG')
         queryClient.invalidateQueries({ queryKey: [...NOTIFICATIONS.NOTIFICATIONS_SETTING] });
     },
     onMutate: () => {
