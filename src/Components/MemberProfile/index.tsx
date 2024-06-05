@@ -26,7 +26,7 @@ const MemberProfile = ({
 }: MemberProfileProps) => {
   return (
     <MemberProfileWrapper>
-      <Profile width={160} height={160} />
+      <Profile width={120} height={120} />
       <div className="private__info">
         <div className="nickname">{nickname}</div>
         <div className="email">{email}</div>
@@ -43,13 +43,14 @@ const MemberProfile = ({
 
 const MemberProfileWrapper = styled.div`
   display: flex;
-  width: 288px;
-  padding: 32px 40px;
+  width: 248px;
+  min-width: 248px;
+  max-width: 288px;
+  padding: 24px 16px;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
-  flex-shrink: 0;
-  border-radius: ${({ theme }) => theme.borderRadius.medium};
+  gap: 16px;
+  border-radius: 16px;
   border: 1px solid ${(props) => props.theme.color.black1};
   background: ${(props) => props.theme.color.white};
   box-shadow: 0px 0px 20px 0px ${(props) => props.theme.color.black0};
@@ -61,38 +62,35 @@ const MemberProfileWrapper = styled.div`
     gap: 4px;
 
     .nickname {
-      color: ${(props) => props.theme.color.black4};
-      text-align: center;
-      font-family: 'Pretendard700';
-      font-size: ${(props) => props.theme.font.xlarge};
+      color: ${(props) => props.theme.color.black5};
+      font-family: 'Pretendard600';
+      font-size: ${(props) => props.theme.font.medium};
       font-style: normal;
-      font-weight: 700;
-      line-height: 44px;
+      font-weight: 600;
+      line-height: 32px;
     }
+
     .email {
       color: ${(props) => props.theme.color.black2};
-      text-align: center;
       font-size: ${(props) => props.theme.font.small};
+      font-family: Pretendard400;
       font-weight: 400;
       line-height: 24px;
-      letter-spacing: -0.2px;
     }
   }
 
   .positions {
     display: flex;
     justify-content: center;
-    padding: 4px 0;
     align-items: center;
     gap: 16px;
 
     .position {
       color: ${(props) => props.theme.color.black2};
-      text-align: center;
-      font-size: ${(props) => props.theme.font.medium};
-      font-weight: 600;
-      line-height: 40px;
-      letter-spacing: -0.2px;
+      font-size: ${(props) => props.theme.font.small};
+      font-family: Pretendard400;
+      font-weight: 400;
+      line-height: 24px;
     }
   }
 `;
