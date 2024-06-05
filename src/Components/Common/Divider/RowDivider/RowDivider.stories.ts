@@ -16,3 +16,9 @@ export const Primary: Story = {
     rowHeight: 8,
   },
 };
+
+export const Margin: Story = {
+  args: {
+    margin: 24,
+  },
+};

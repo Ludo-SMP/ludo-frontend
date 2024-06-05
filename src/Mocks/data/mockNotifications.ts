@@ -29,14 +29,14 @@ export const mockNotificationsSetting: NotificationsSetting = {
     type: 'RECRUITMENT_CONFIG',
     on: true,
     categoryKeywords: [
-      { categoryId: 1, name: '프로젝트' },
+      { categoryId: 1, name: '개발 프로젝트' },
       { categoryId: 2, name: '코딩 테스트' },
       { categoryId: 3, name: '모의 면접' },
     ],
     positionKeywords: [
       { positionId: 1, name: '백엔드' },
       { positionId: 2, name: '프론트엔드' },
-      { positionId: 3, name: '디자이너' },
+      { positionId: 3, name: '디자인' },
     ],
     stackKeywords: [
       { stackId: 93, name: 'ReactJS' },

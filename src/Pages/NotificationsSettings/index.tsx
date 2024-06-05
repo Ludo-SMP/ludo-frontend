@@ -1,23 +1,16 @@
 import { ToggleSwitchList } from '@/Components/ToggleSwitchList';
 import styled from 'styled-components';
 import { BoldDivider } from '@/Components/Common/Divider/BoldDivider';
-import ChipMenu from '@/Components/Common/ChipMenu';
-import Button from '@/Components/Common/Button';
 import { useNotificationsSetting } from '@/Hooks/notifications/useNotificationsSetting';
 import { Loading } from '@/Assets';
-
-const RecruitmentKeywordsDummy: { name: string; value: string[] }[] = [
-  { name: '기술 스택', value: ['기술 스택'] },
-  { name: '포지션', value: ['프론트엔드', '백엔드', '디자인', '데브옵스'] },
-  { name: '카테고리', value: ['모의 면접', '개발 프로젝트', '코딩 테스트'] },
-];
+import { KeywordsSettingForm } from './KeywordsSettingForm';
 
 export const NotificationsSettings = () => {
-  const { data: notificationsSetting } = useNotificationsSetting();
+  const { data: notificationsSetting, isLoading } = useNotificationsSetting();
 
   return (
     <NotificationsSettingsLayout>
-      {!notificationsSetting ? (
+      {isLoading ? (
         <Loading />
       ) : (
         <>
@@ -39,30 +32,20 @@ export const NotificationsSettings = () => {
               type="RECRUITMENT_CONFIG"
               disabled={!notificationsSetting?.allConfig.on}
             />
-            <RecruitmentKeywordsBox>
-              <div className="select__keywords">
-                {RecruitmentKeywordsDummy.map((recruitmentKeyword: { name: string; value: string[] }) => (
-                  <KeywordBox key={recruitmentKeyword.name}>
-                    <KeywordTitleBox>{recruitmentKeyword.name}</KeywordTitleBox>
-                    <ChipsBox>
-                      {recruitmentKeyword.value.map((chipValue: string) => (
-                        <ChipMenu key={chipValue} checked={false} onClick={() => {}}>
-                          {chipValue}
-                        </ChipMenu>
-                      ))}
-                    </ChipsBox>
-                  </KeywordBox>
-                ))}
-              </div>
-              <div className="btns">
-                <Button size="fullWidth" onClick={() => {}}>
-                  취소
-                </Button>
-                <Button size="fullWidth" scheme="secondary" onClick={() => {}}>
-                  저장
-                </Button>
-              </div>
-            </RecruitmentKeywordsBox>
+            <KeywordsSettingForm
+              values={{
+                stackIds: notificationsSetting?.recruitmentConfig?.stackKeywords?.map(
+                  (stackKeyword: { stackId: number; name: string }) => stackKeyword.stackId,
+                ),
+                positionIds: notificationsSetting?.recruitmentConfig?.positionKeywords?.map(
+                  (positionKeyword: { positionId: number; name: string }) => positionKeyword.positionId,
+                ),
+                categoryIds: notificationsSetting?.recruitmentConfig?.categoryKeywords?.map(
+                  (categoryKeyword: { categoryId: number; name: string }) => categoryKeyword.categoryId,
+                ),
+              }}
+              disabled={!notificationsSetting?.allConfig.on}
+            />
           </RecruitmentSettingsSection>
           <StudySettingSection>
             <SettingTitleBox>스터디</SettingTitleBox>
@@ -129,14 +112,6 @@ const RecruitmentSettingsSection = styled.section`
   gap: 12px;
   align-self: stretch;
   width: 100%;
-
-  .select__keywords {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-    align-self: stretch;
-  }
 `;
 
 const SettingTitleBox = styled.p`
@@ -147,46 +122,6 @@ const SettingTitleBox = styled.p`
   font-weight: 600;
   line-height: 32px;
   align-self: stretch;
-`;
-
-const KeywordTitleBox = styled.p`
-  color: ${({ theme }) => theme.color.black};
-  font-family: 'Pretendard400';
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 30px;
-`;
-
-const RecruitmentKeywordsBox = styled.div`
-  display: flex;
-  padding: 0 0 32px 0;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 32px;
-  align-self: stretch;
-
-  .btns {
-    display: flex;
-    align-items: flex-start;
-    gap: 24px;
-    align-self: stretch;
-  }
-`;
-
-const KeywordBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 8px;
-  align-self: stretch;
-`;
-
-const ChipsBox = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
 `;
 
 const StudySettingSection = styled.section`

@@ -1,5 +1,4 @@
-// 알림 설정 키워드
-export interface NotificationKeywords {
+export interface RecruitmentKeywordsForm {
   categoryIds: number[];
   stackIds: number[];
   positionIds: number[];
