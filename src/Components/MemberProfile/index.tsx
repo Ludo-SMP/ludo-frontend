@@ -55,6 +55,11 @@ const MemberProfileWrapper = styled.div`
   box-shadow: 0px 0px 20px 0px ${(props) => props.theme.color.black0};
 
   .private__info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+
     .nickname {
       color: ${(props) => props.theme.color.black4};
       text-align: center;
@@ -67,9 +72,9 @@ const MemberProfileWrapper = styled.div`
     .email {
       color: ${(props) => props.theme.color.black2};
       text-align: center;
-      font-size: ${(props) => props.theme.font.medium};
+      font-size: ${(props) => props.theme.font.small};
       font-weight: 400;
-      line-height: 40px;
+      line-height: 24px;
       letter-spacing: -0.2px;
     }
   }
@@ -92,7 +97,7 @@ const MemberProfileWrapper = styled.div`
   }
 `;
 
-const AttendanceBadge = styled.div<{
+const AttendanceBadge = styled.span<{
   $attended: boolean;
 }>`
   display: flex;
