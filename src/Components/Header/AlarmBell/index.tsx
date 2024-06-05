@@ -15,7 +15,8 @@ const AlarmBell = () => {
   const { fetchSSE, eventSource } = useSSE();
 
   useEffect(() => {
-    fetchSSE();
+    // 커넥션 종료되면 자동으로 onerror 호출 후, 커넥션 다시 맺는 것 방지하기 위해 주석 처리
+    // fetchSSE();
 
     return () => {
       eventSource.current.close();
