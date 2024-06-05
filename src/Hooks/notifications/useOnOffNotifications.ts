@@ -6,14 +6,14 @@ import { AxiosResponse } from 'axios';
 
 const updateNotificatinoSettings = (
   prevNotificationSettings: AxiosResponse<{ data: NotificationsSetting }>,
-  type: NotificationsSettingConfigType,
+  notificationConfigGroup: NotificationsSettingConfigType,
 ): AxiosResponse<{ data: NotificationsSetting }> => {
   const studySettings = { ...prevNotificationSettings.data.data.settings.study };
   const recruitmentSettings = { ...prevNotificationSettings.data.data.settings.recruitment };
   const reviewSettings = { ...prevNotificationSettings.data.data.settings.review };
   let allSetting = prevNotificationSettings.data.data.settings.all;
 
-  switch (type) {
+  switch (notificationConfigGroup) {
     case 'RECRUITMENT_CONFIG':
       recruitmentSettings.notification = !recruitmentSettings.notification;
       break;
@@ -46,13 +46,18 @@ const updateNotificatinoSettings = (
   return newNotificationSettings;
 };
 
-export const useOnOffNotifications = ({ type }: { type: NotificationsSettingConfigType }) => {
+export const useOnOffNotifications = ({
+  notificationConfigGroup,
+}: {
+  notificationConfigGroup: NotificationsSettingConfigType;
+}) => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationKey: [...NOTIFICATIONS.NOTIFICATIONS_ON_OFF],
-    mutationFn: ({ on }: { on: boolean }) => onOffNotifications({ type, on }),
+    mutationFn: ({ on }: { on: boolean }) => onOffNotifications({ notificationConfigGroup, on }),
     onSuccess: () => {
-      if (type === 'ALL_CONFIG') queryClient.invalidateQueries({ queryKey: [...NOTIFICATIONS.NOTIFICATIONS_SETTING] });
+      if (notificationConfigGroup === 'ALL_CONFIG')
+        queryClient.invalidateQueries({ queryKey: [...NOTIFICATIONS.NOTIFICATIONS_SETTING] });
     },
     onMutate: () => {
       queryClient.cancelQueries({ queryKey: [...NOTIFICATIONS.NOTIFICATIONS_SETTING] });
@@ -62,7 +67,7 @@ export const useOnOffNotifications = ({ type }: { type: NotificationsSettingConf
 
       queryClient.setQueryData(
         [...NOTIFICATIONS.NOTIFICATIONS_SETTING],
-        updateNotificatinoSettings(prevNotificationSettings, type),
+        updateNotificatinoSettings(prevNotificationSettings, notificationConfigGroup),
       );
       return { prevNotificationSettings };
     },
