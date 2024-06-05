@@ -95,6 +95,12 @@ export const CATEGORIES_OPTION = [
   { value: 3, label: '모의 면접' },
 ];
 
+export const CATEGORY_KEYWORD_OPTIONS = [
+  { value: 3, label: '모의 면접' },
+  { value: 1, label: '개발 프로젝트' },
+  { value: 2, label: '코딩 테스트' },
+];
+
 export const POSITIONS: Position[] = [
   { id: 1, name: '백엔드' },
   { id: 2, name: '프론트엔드' },
@@ -106,6 +112,13 @@ export const POSITIONS_OPTIONS = [
   { value: 1, label: '백엔드' },
   { value: 2, label: '프론트엔드' },
   { value: 3, label: '디자이너' },
+  { value: 4, label: '데브옵스' },
+];
+
+export const POSITION_KEYWORD_OPTIONS = [
+  { value: 2, label: '프론트엔드' },
+  { value: 1, label: '백엔드' },
+  { value: 3, label: '디자인' },
   { value: 4, label: '데브옵스' },
 ];
 
