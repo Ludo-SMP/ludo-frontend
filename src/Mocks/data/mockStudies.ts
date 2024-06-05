@@ -100,6 +100,8 @@ export const studyDetailMockData = [
           role: 'OWNER',
           email: 'aaa@bb1.cc',
           position: { id: 3, name: '디자이너' },
+          totalAttendance: 8,
+          recentAttendanceDate: new Date().toISOString(),
         },
         {
           id: 2,
@@ -107,6 +109,8 @@ export const studyDetailMockData = [
           role: 'MEMBER',
           email: 'aaa@2bb.cc',
           position: { id: 1, name: '백엔드' },
+          totalAttendance: 0,
+          recentAttendanceDate: new Date().toISOString(),
         },
         {
           id: 3,
@@ -114,6 +118,8 @@ export const studyDetailMockData = [
           role: 'MEMBER',
           email: 'aaa@3bb.cc',
           position: { id: 1, name: '백엔드' },
+          totalAttendance: 6,
+          recentAttendanceDate: new Date().toISOString(),
         },
         {
           id: 4,
@@ -121,6 +127,8 @@ export const studyDetailMockData = [
           role: 'MEMBER',
           email: 'aaa4@bb.cc',
           position: { id: 1, name: '백엔드' },
+          totalAttendance: 9,
+          recentAttendanceDate: new Date().toISOString(),
         },
         {
           id: 5,
@@ -128,6 +136,8 @@ export const studyDetailMockData = [
           role: 'MEMBER',
           email: 'aaa5@bb.cc',
           position: { id: 2, name: '프론트엔드' },
+          totalAttendance: 2,
+          recentAttendanceDate: new Date().toISOString(),
         },
         {
           id: 6,
@@ -135,6 +145,8 @@ export const studyDetailMockData = [
           role: 'MEMBER',
           email: 'aaa6@bb.cc',
           position: { id: 2, name: '프론트엔드' },
+          totalAttendance: 0,
+          recentAttendanceDate: null,
         },
       ],
     },
