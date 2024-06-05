@@ -151,7 +151,7 @@ export interface Participant {
   // 총합 출석일
   totalAttendance: number;
   // 최근 출석일
-  recentAttendanceDate: Date;
+  recentAttendanceDate: string | null;
 }
 
 export interface Applicant extends Omit<Member, 'role'> {}
