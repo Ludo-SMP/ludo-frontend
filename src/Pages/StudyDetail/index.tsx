@@ -23,6 +23,7 @@ import { Sidebar } from './Sidebar';
 import { attendStudy } from '@/Apis/study';
 import { useAttendStudyMutation } from '@/Hooks/study/useAttendStudyMutation';
 import { isToday } from '@/utils/date';
+import { isError } from 'util';
 
 export const StudyDetailPage = () => {
   const studyId = Number(useParams().studyId);
@@ -41,9 +42,14 @@ export const StudyDetailPage = () => {
 
   const { mutate: deleteStudyMutate } = useDeleteStudyMutation(studyId);
   const { mutate: leaveStudyMutate } = useLeaveStudyMutation(studyId);
-  const { mutate: attendStudyMutate, isSuccess: isAttendStudyMutationSuccess } = useAttendStudyMutation(studyId);
+  const {
+    mutate: attendStudyMutate,
+    isSuccess: isAttendStudyMutationSuccess,
+    isError: isAttendStudyMutationError,
+  } = useAttendStudyMutation(studyId);
 
-  const [isAttendanceModalOpen, setIsAttendanceModalOpen] = useState(false);
+  const [isAttendanceModalOpen, setIsAttendanceModalOpen] = useState(true);
+  const [isErrorModalOpen, setIsErrorModalOpen] = useState(true);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -74,18 +80,11 @@ export const StudyDetailPage = () => {
                   {didIAttendToday ? (
                     <Button disabled>출석 완료</Button>
                   ) : (
-                    <Button
-                      scheme="secondary"
-                      onClick={async () => {
-                        attendStudyMutate();
-
-                        setIsAttendanceModalOpen(true);
-                      }}
-                    >
+                    <Button scheme="secondary" onClick={async () => attendStudyMutate()}>
                       출석 체크
                     </Button>
                   )}
-                  {isAttendanceModalOpen && (
+                  {isAttendanceModalOpen && isAttendStudyMutationSuccess && (
                     <Modal
                       title="해당 스터디 출석이 체크되었습니다!"
                       approveBtnText="확인하기"
@@ -98,6 +97,15 @@ export const StudyDetailPage = () => {
                         <br />
                         오늘도 열심히 스터디를 하는 회원님의 앞날을 응원합니다!
                       </p>
+                    </Modal>
+                  )}
+                  {isErrorModalOpen && isAttendStudyMutationError && (
+                    <Modal
+                      title="출석이 실패했습니다!"
+                      approveBtnText="확인"
+                      handleApprove={() => setIsErrorModalOpen(false)}
+                    >
+                      <p>새로고침 후 다시 시도해주세요!</p>
                     </Modal>
                   )}
                 </PlatformTitle>
