@@ -8,11 +8,19 @@ import { RecruitmentKeywordsForm } from '@/Types/notifications';
 import { useEditNotificationsKeywords } from '@/Hooks/notifications/useEditNotificationsKeywords';
 import { useState } from 'react';
 import { StackModal } from '@/Components/Modal/StackModal';
+import { Stack } from '@/Types/study';
 
 const handleValues = (selectedValues: number[], id: number) => {
   return selectedValues.includes(id)
     ? selectedValues.filter((selectedValue: number) => selectedValue != id)
     : [...selectedValues, id];
+};
+
+const getSelectedStacks = (keywords: RecruitmentKeywordsForm): Stack[] => {
+  const stackIds = [...keywords.stackIds];
+  return stackIds.map((stackId: number) => {
+    return { id: stackId, name: 'stack', imageUrl: 'imageUrl' };
+  });
 };
 
 export interface KeywordsSettingFormProps {
@@ -22,6 +30,8 @@ export interface KeywordsSettingFormProps {
 export const KeywordsSettingForm = ({ values }: KeywordsSettingFormProps) => {
   const { mutate: editKeywordsMutate } = useEditNotificationsKeywords();
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [selectedStacks, setSelectedStacks] = useState<Stack[]>(getSelectedStacks(values));
+  const handleSelectedStacks = (stacks: Stack[]) => setSelectedStacks(stacks);
 
   const { setValue, watch, handleSubmit } = useForm<RecruitmentKeywordsForm>({
     defaultValues: {
@@ -33,9 +43,9 @@ export const KeywordsSettingForm = ({ values }: KeywordsSettingFormProps) => {
   });
   return (
     <Form
-      onSubmit={handleSubmit(({ stackIds, positionIds, categoryIds }) => {
-        editKeywordsMutate({ stackIds, positionIds, categoryIds });
-      })}
+      onSubmit={handleSubmit(({ stackIds, positionIds, categoryIds }) =>
+        editKeywordsMutate({ stackIds, positionIds, categoryIds }),
+      )}
     >
       <KeywordsSettingBox>
         <KeywordForm label="기술 스택" type="stackIds">
@@ -46,7 +56,13 @@ export const KeywordsSettingForm = ({ values }: KeywordsSettingFormProps) => {
           >
             {'기술 스택'}
           </ChipMenu>
-          {isOpen && <StackModal handleModal={setIsOpen} />}
+          {isOpen && (
+            <StackModal
+              handleModal={setIsOpen}
+              initialSelectedStacks={selectedStacks}
+              handleSelectedStacks={handleSelectedStacks}
+            />
+          )}
         </KeywordForm>
         <KeywordForm label="포지션" type="positionIds">
           {POSITIONS_OPTIONS.map(({ value: id, label }) => (
