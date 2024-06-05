@@ -33,7 +33,6 @@ const subscribeSSE = http.get(`${baseURL}/api/notifications/subscribe`, async ()
 });
 
 const getNotifications = http.get(`${baseURL}/api/notifications`, async () => {
-  ``;
   return new HttpResponse(
     JSON.stringify({
       data: mockNotifications.data,
