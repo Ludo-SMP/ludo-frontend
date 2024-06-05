@@ -23,6 +23,7 @@ import { EditRecruitmentFetcher } from '@/Pages/EditRecruitment/EditRecruitmentF
 import { MyPageLayout } from '@/Layout/MyPageLayout';
 import { SettingLayout } from '@/Layout/SettingLayout';
 import { Notifications } from '@/Pages/Notifications';
+import { NotificationsSettings } from '@/Pages/NotificationsSettings';
 import { ReviewPage } from '@/Pages/Review';
 
 export const RouterPath = createBrowserRouter([
@@ -91,7 +92,7 @@ export const RouterPath = createBrowserRouter([
               {
                 // 알림 권한 설정
                 path: ROUTES.MYPAGE.NOTIFICATIONS_SETTINGS,
-                element: <>TODO</>,
+                element: <NotificationsSettings />,
               },
             ],
           },

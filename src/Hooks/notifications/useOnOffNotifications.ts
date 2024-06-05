@@ -1,11 +1,20 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { onOffNotifications } from '@/Apis/notification';
 import { NOTIFICATIONS } from '@/Constants/queryString';
-import { NotificationsType } from '@/Types/notifications';
+import { NotificationsSettingConfigType } from '@/Types/notifications';
 
-export const useOnOffNotifications = () => {
+export const useOnOffNotifications = ({
+  notificationConfigGroup,
+}: {
+  notificationConfigGroup: NotificationsSettingConfigType;
+}) => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationKey: [...NOTIFICATIONS.NOTIFICATIONS_ON_OFF],
-    mutationFn: (data: { type: NotificationsType; on: boolean }) => onOffNotifications(data),
+    mutationFn: ({ on }: { on: boolean }) => onOffNotifications({ notificationConfigGroup, on }),
+    onSuccess: () => {
+      if (notificationConfigGroup === 'ALL_CONFIG' || notificationConfigGroup === 'RECRUITMENT_CONFIG')
+        queryClient.invalidateQueries({ queryKey: [...NOTIFICATIONS.NOTIFICATIONS_SETTING] });
+    },
   });
 };

@@ -1,34 +1,42 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { UseMutateFunction } from '@tanstack/react-query';
 
 export interface ToggleSwitchProps {
+  toggleMutate: UseMutateFunction<unknown, Error, { on: boolean }>;
+
+  /* 초기 checked 상태 */
+  defaultChecked?: boolean;
+
   /** 비활성 여부 */
   disabled?: boolean;
 }
 
 /** 토글 스위치 */
-const ToggleSwitch = React.forwardRef<boolean, ToggleSwitchProps>(({ disabled = false }, ref) => {
-  const [clicked, setClicked] = useState(false);
+const ToggleSwitch = React.forwardRef<boolean, ToggleSwitchProps>(
+  ({ defaultChecked = false, disabled = false, toggleMutate }, ref) => {
+    const [clicked, setClicked] = useState<boolean>(defaultChecked);
+    const handleChange = () => {
+      if (ref && typeof ref !== 'function') {
+        ref.current = !clicked;
+      }
+      setClicked((prev) => !prev);
+      toggleMutate({ on: !clicked });
+    };
 
-  const handleChange = () => {
-    setClicked((prev) => !prev);
-    if (ref && typeof ref !== 'function') {
-      ref.current = !clicked;
-    }
-  };
-
-  return (
-    <Container>
-      <Switch type="checkbox" role="switch" $isChecked={clicked} onChange={handleChange} disabled={disabled} />
-    </Container>
-  );
-});
+    return (
+      <Container>
+        <Switch type="checkbox" role="switch" checked={clicked} onChange={handleChange} disabled={disabled} />
+      </Container>
+    );
+  },
+);
 
 export { ToggleSwitch };
 
 const Container = styled.div``;
 
-const Switch = styled.input<{ $isChecked: boolean }>`
+const Switch = styled.input`
   /** 체크되지 않은 상태 */
   appearance: none;
   position: relative;
@@ -72,7 +80,7 @@ const Switch = styled.input<{ $isChecked: boolean }>`
   &:enabled:hover {
     &::before {
         // x-offset, y-offset, blur-radius, spread-radius, color
-        box-shadow: 0 0 0 8px ${({ $isChecked }) => ($isChecked ? 'rgba(103, 80, 164, 0.08)' : 'rgba(28, 27, 31, 0.08)')};
+        box-shadow: 0 0 0 8px ${({ checked }) => (checked ? 'rgba(103, 80, 164, 0.08)' : 'rgba(28, 27, 31, 0.08)')};
     }
   }
 
