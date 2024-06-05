@@ -6,7 +6,6 @@ import styled, { css } from 'styled-components';
 import { One, Two, Three, Four, Loading } from '@/Assets';
 
 // components
-import Heading from '@/Components/Heading';
 import Spacing from '@/Components/Spacing';
 import Button from '@/Components/Common/Button';
 import { TextArea } from '@/Components/Textarea';
@@ -120,9 +119,7 @@ const CreateRecruitmentPage = () => {
         <Loading />
       ) : (
         <Form onSubmit={handleSubmit(onSubmit, onInvalid)}>
-          <Heading type={'Head'} component={'Page'}>
-            스터디 팀원 모집하기
-          </Heading>
+          <Heading>스터디 팀원 모집하기</Heading>
           <Spacing size={40} />
           <Stack divider={<Divider />}>
             <FormSection icon={<One />} title="스터디 모집 공고">
@@ -265,6 +262,13 @@ const CreateRecruitmentPage = () => {
 };
 
 export default CreateRecruitmentPage;
+
+const Heading = styled.h1`
+  ${({ theme }) => theme.typo.PageHeadWeb};
+  display: flex;
+  align-items: center;
+  font-family: 'Pretendard800';
+`;
 
 export const Form = styled.form`
   ${media.tablet} {

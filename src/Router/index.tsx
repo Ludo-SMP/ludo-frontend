@@ -21,7 +21,6 @@ import ErrorBoundary from '@/Components/ErrorBoundary';
 import { EditRecruitmentFetcher } from '@/Pages/EditRecruitment/EditRecruitmentFetcher';
 import { MyPageLayout } from '@/Layout/MyPageLayout';
 import { SettingLayout } from '@/Layout/SettingLayout';
-import { Notifications } from '@/Pages/Notifications';
 import { NotificationsSettings } from '@/Pages/NotificationsSettings';
 import { ReviewPage } from '@/Pages/Review';
 

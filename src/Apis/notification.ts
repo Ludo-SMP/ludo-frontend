@@ -1,5 +1,4 @@
 import { API_END_POINT } from '@/Constants/api';
-
 import { RecruitmentKeywordsForm, NotificationsSetting, NotificationsSettingConfigType } from '@/Types/notifications';
 import { httpClient } from '@/utils/axios';
 
