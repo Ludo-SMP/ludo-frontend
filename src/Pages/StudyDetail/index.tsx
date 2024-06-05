@@ -23,7 +23,6 @@ import { Sidebar } from './Sidebar';
 import { attendStudy } from '@/Apis/study';
 import { useAttendStudyMutation } from '@/Hooks/study/useAttendStudyMutation';
 import { isToday } from 'date-fns';
-import { isError } from 'util';
 
 export const StudyDetailPage = () => {
   const studyId = Number(useParams().studyId);
