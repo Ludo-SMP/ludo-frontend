@@ -7,16 +7,30 @@ import { ROLE } from '@/Shared/study';
 export interface MemberProfileProps extends Member {
   /** 스터디원의 프로필 이미지 URL */
   imgUrl?: string;
+
+  /** 스터디원의 총합 출석 횟수 */
+  totalAttendance?: number;
+
+  /** 당일 출석 여부 */
+  attended?: boolean;
 }
 
 /** 스터디원의 프로필을 보여줍니다. */
-const MemberProfile = ({ nickname, email, role, position }: MemberProfileProps) => {
+const MemberProfile = ({
+  nickname,
+  email,
+  role,
+  position,
+  totalAttendance = 0,
+  attended = false,
+}: MemberProfileProps) => {
   return (
     <MemberProfileWrapper>
       <Profile width={160} height={160} />
       <div className="private__info">
         <div className="nickname">{nickname}</div>
         <div className="email">{email}</div>
+        <AttendanceBadge $attended={attended}>{totalAttendance}일 출석 완료!</AttendanceBadge>
       </div>
       <div className="positions">
         <div className="position">{ROLE[role]}</div>
@@ -76,6 +90,25 @@ const MemberProfileWrapper = styled.div`
       letter-spacing: -0.2px;
     }
   }
+`;
+
+const AttendanceBadge = styled.div<{
+  $attended: boolean;
+}>`
+  display: flex;
+  padding: 0px 16px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 999px;
+  background: ${({ theme, $attended }) =>
+    $attended ? `linear-gradient(93deg, #6262b2, ${theme.color.orange3})` : `transparent`};
+  color: ${({ theme, $attended }) => ($attended ? theme.color.white : theme.color.black2)};
+  text-align: center;
+  font-family: Pretendard400;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
 `;
 
 export default MemberProfile;
