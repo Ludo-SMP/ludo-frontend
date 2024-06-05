@@ -152,7 +152,7 @@ const Main = styled.main`
   background: ${({ theme }) => theme.color.gray1};
 `;
 
-const MainInner = styled.form`
+const MainInner = styled.div`
   flex: 1;
   padding: 40px 0px;
   max-width: 808px;
