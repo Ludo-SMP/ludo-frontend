@@ -1,4 +1,4 @@
-import { CATEGORIES_OPTION, POSITIONS_OPTIONS } from '@/Shared/study';
+import { CATEGORY_KEYWORD_OPTIONS, POSITION_KEYWORD_OPTIONS } from '@/Shared/study';
 import { KeywordForm } from '@/Components/Common/KeywordForm';
 import ChipMenu from '@/Components/Common/ChipMenu';
 import Button from '@/Components/Common/Button';
@@ -71,7 +71,7 @@ export const KeywordsSettingForm = ({ values, disabled }: KeywordsSettingFormPro
           )}
         </KeywordForm>
         <KeywordForm label="포지션" type="positionIds">
-          {POSITIONS_OPTIONS.map(({ value: id, label }) => (
+          {POSITION_KEYWORD_OPTIONS.map(({ value: id, label }) => (
             <ChipMenu
               key={label}
               checked={watch('positionIds').includes(id)}
@@ -83,7 +83,7 @@ export const KeywordsSettingForm = ({ values, disabled }: KeywordsSettingFormPro
           ))}
         </KeywordForm>
         <KeywordForm label="카테고리" type="categoryIds">
-          {CATEGORIES_OPTION.map(({ value: id, label }) => (
+          {CATEGORY_KEYWORD_OPTIONS.map(({ value: id, label }) => (
             <ChipMenu
               key={label}
               checked={watch('categoryIds').includes(id)}
