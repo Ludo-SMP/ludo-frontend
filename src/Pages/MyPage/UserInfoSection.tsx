@@ -1,0 +1,156 @@
+import { ProfileSection } from '@/Components/ProfileSection/ProfileSection';
+import { StudyProgress } from '@/Components/StudyProgress/StudyProgress';
+import { RowDivider } from '@/Components/Common/Divider/RowDivider';
+import { CircularRate } from '@/Components/CircularRate';
+import { MyPageInfo, User } from '@/Types/study';
+import styled from 'styled-components';
+import { RightArrow } from '@/Assets/RightArrow';
+import { MemberImage } from '@/Assets';
+
+interface UserInfoSectionProps {
+  myPageInfo: MyPageInfo;
+}
+
+const UserInfoSection = ({ myPageInfo }: UserInfoSectionProps) => {
+  const user: User = myPageInfo?.user;
+
+  return (
+    <UserInfoSectionBox>
+      <div className="title">
+        <MemberImage width={32} height={32} />
+        <h5>회원정보</h5>
+      </div>
+      <UserInfoBox>
+        <ProfileSection nickname={user?.nickname || '닉네임'} email={user?.email || '이메일'} />
+        <UserInfoRows>
+          <UserInfoRow>
+            <InfoItem>
+              지금까지 이만큼
+              <br /> 달려왔어요!
+            </InfoItem>
+            <InfoItem>
+              <StudyProgress totalStudy={2} completedStudy={1} />
+              <InfoText>
+                <span className="info__label">누적 팀원 수</span>
+                <span className="info__description">00명</span>
+              </InfoText>
+              <InfoText>
+                <span className="info__label">평균 출석률</span>
+                <span className="info__description">00 퍼센트</span>
+              </InfoText>
+            </InfoItem>
+          </UserInfoRow>
+          <RowDivider margin={24} />
+          <UserInfoRow>
+            <InfoItem>
+              함께했던 팀원들이
+              <br />
+              이렇게 얘기했어요 :)
+            </InfoItem>
+            <InfoItem>
+              <InfoItemBox>
+                <CircularRate percentage={80} label="적극성" />
+                <CircularRate percentage={80} label="적극성" />
+                <CircularRate percentage={80} label="적극성" />
+                <RightArrow />
+              </InfoItemBox>
+              <InfoDesc>
+                <p>
+                  다시 <em>함께 하고 싶어하는</em> 사용자예요!
+                  <br />
+                  주변 사람에게 <em>추천하고 싶은</em> 사용자예요!
+                </p>
+              </InfoDesc>
+            </InfoItem>
+          </UserInfoRow>
+        </UserInfoRows>
+      </UserInfoBox>
+    </UserInfoSectionBox>
+  );
+};
+
+export { UserInfoSection };
+
+const InfoItemBox = styled.div`
+  display: flex;
+  gap: 12px;
+  svg:last-child {
+    margin-left: 24px;
+  }
+`;
+
+const UserInfoSectionBox = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+`;
+
+const UserInfoBox = styled.div`
+  display: flex;
+  padding: 32px 40px;
+  gap: 40px;
+  border: 1px solid ${({ theme }) => theme.color.black1};
+  background-color: ${({ theme }) => theme.color.white};
+`;
+
+const UserInfoRow = styled.div`
+  height: 100%;
+  display: flex;
+  gap: 24px;
+
+  & > div:first-child {
+    width: 160px;
+    font-family: 'Pretendard600';
+    font-weight: 600;
+    line-height: 32px;
+  }
+
+  & > div:nth-child(2) {
+    width: 400px;
+  }
+`;
+
+const UserInfoRows = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+
+const InfoItem = styled.div`
+  & > div:first-child {
+    margin-bottom: 16px;
+  }
+`;
+
+const InfoDesc = styled.div`
+  color: ${({ theme }) => theme.color.black2};
+  font-family: 'Pretendard400'
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+
+  em {
+    color: ${({ theme }) => theme.color.black4};
+
+  }
+`;
+
+const InfoText = styled.div`
+  font-family: 'Pretendard500';
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+
+  .info__label {
+    color: ${({ theme }) => theme.color.black5};
+    margin-right: 20px;
+  }
+  .info__description {
+    color: ${({ theme }) => theme.color.black2};
+  }
+
+  & + div {
+    margin-top: 8px;
+  }
+`;

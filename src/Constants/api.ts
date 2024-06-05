@@ -11,6 +11,7 @@ export const API_END_POINT = {
   // USER
   USER: `${API_PREFIX}/users/me`,
   EDIT_NICKNAME: `${API_PREFIX}/users/me/nickname`,
+  REVIEW: `${API_PREFIX}/users/me/review`,
   DEACTIVATE: `${API_PREFIX}/users/deactivate`,
 
   // RECRUITMENTS
@@ -29,6 +30,7 @@ export const API_END_POINT = {
   DELETE_STUDY: (studyId: number) => `${API_PREFIX}/studies/${studyId}`,
   LEAVE_STUDY: (studyId: number) => `${API_PREFIX}/studies/${studyId}/participants`,
   APPLICANTS: (studyId: number) => `${API_PREFIX}/studies/${studyId}/applicants`,
+  ATTEND_STUDY: (studyId: number) => `${API_PREFIX}/studies/${studyId}/attendance`,
 
   // APPLY
   APPLY: (studyId: number, recruitmentId: number) =>
@@ -50,5 +52,5 @@ export const API_END_POINT = {
   NOTIFICATIONS: `${API_PREFIX}/notifications`,
   READ_NOTIFICATIONS: (notificationId: number) => `${API_PREFIX}/notifications/${notificationId}`,
   NOTIFICATIONS_SETTING: `${API_PREFIX}/notifications/settings`,
-  EDIT_NOTIFICATIONS_KEYWORD: `${API_PREFIX}/notifications/settings/keyword`,
+  EDIT_NOTIFICATIONS_KEYWORDS: `${API_PREFIX}/notifications/settings/keywords`,
 };

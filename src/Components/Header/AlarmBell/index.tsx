@@ -15,7 +15,7 @@ const AlarmBell = () => {
   const { fetchSSE, eventSource } = useSSE();
 
   useEffect(() => {
-    fetchSSE();
+    // fetchSSE();
 
     return () => {
       eventSource.current.close();

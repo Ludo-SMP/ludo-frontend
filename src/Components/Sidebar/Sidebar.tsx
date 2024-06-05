@@ -26,7 +26,7 @@ const Navigation = styled.nav`
   display: flex;
   flex-direction: column;
   gap: 12px;
-  padding: 24px 32px;
+  padding: 0 32px;
   border-radius: 12px;
   background: ${({ theme }) => theme.color.white};
 `;

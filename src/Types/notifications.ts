@@ -1,5 +1,4 @@
-// 알림 설정 키워드
-export interface NotificationKeywords {
+export interface RecruitmentKeywordsForm {
   categoryIds: number[];
   stackIds: number[];
   positionIds: number[];
@@ -22,6 +21,52 @@ export const NOTIFICATIONS = {
 
 // 전체 알림 키
 export type NotificationsType = keyof typeof NOTIFICATIONS;
+// 알림 설정 ENUM 타입
+export const NOTIFICATION_SETTINGS_CONFIG = {
+  ALL_CONFIG: '전체 알림 설정',
+  RECRUITMENT_CONFIG: '모집공고 알림 설정',
+  STUDY_APPLICANT_CONFIG: '스터디 지원 여부 알림 설정',
+  STUDY_APPLICANT_RESULT_CONFIG: '스터디 지원 결과 알림 설정',
+  STUDY_END_DATE_CONFIG: '스터디 종료 기간 알림 설정',
+  STUDY_PARTICIPANT_LEAVE_CONFIG: '스터디 탈퇴자 알림 설정',
+  REVIEW_CONFIG: '스터디원 리뷰 평가 알림 설정',
+} as const;
+
+export type NotificationsSettingConfigType = keyof typeof NOTIFICATION_SETTINGS_CONFIG;
+
+export interface NotificationsSetting {
+  allConfig: {
+    type: 'ALL_CONFIG';
+    on: boolean;
+  };
+  studyApplicantConfig: {
+    type: 'STUDY_APPLICANT_CONFIG';
+    on: boolean;
+  };
+  studyApplicantResultConfig: {
+    type: 'STUDY_APPLICANT_RESULT_CONFIG';
+    on: boolean;
+  };
+  studyEndDateConfig: {
+    type: 'STUDY_END_DATE_CONFIG';
+    on: boolean;
+  };
+  studyParticipantLeaveConfig: {
+    type: 'STUDY_PARTICIPANT_LEAVE_CONFIG';
+    on: boolean;
+  };
+  reviewConfig: {
+    type: 'REVIEW_CONFIG';
+    on: boolean;
+  };
+  recruitmentConfig: {
+    type: 'RECRUITMENT_CONFIG';
+    on: boolean;
+    categoryKeywords: { categoryId: number; name: string }[];
+    positionKeywords: { positionId: number; name: string }[];
+    stackKeywords: { stackId: number; name: string }[];
+  };
+}
 
 /** 타입 기준 키 분류 */
 
