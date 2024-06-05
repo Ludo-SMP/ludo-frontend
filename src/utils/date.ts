@@ -70,3 +70,13 @@ export const getMillisec = (uuidStr: string) => {
   const intMillisec = Math.floor(intTime / 10000);
   return intMillisec;
 };
+
+// 주어진 Date가 오늘(지역 시간대 기준)의 시간 범위 안인지 확인
+export const isToday = (date: Date) => {
+  const today = new Date();
+  return (
+    date.getDate() === today.getDate() &&
+    date.getMonth() === today.getMonth() &&
+    date.getFullYear() === today.getFullYear()
+  );
+};
