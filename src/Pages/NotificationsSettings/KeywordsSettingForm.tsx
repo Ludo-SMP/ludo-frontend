@@ -12,7 +12,7 @@ import { Stack } from '@/Types/study';
 
 const handleValues = (selectedValues: number[], id: number) => {
   return selectedValues.includes(id)
-    ? selectedValues.filter((selectedValue: number) => selectedValue != id)
+    ? selectedValues.filter((selectedValue: number) => selectedValue !== id)
     : [...selectedValues, id];
 };
 
@@ -126,7 +126,7 @@ const KeywordsSettingBox = styled.div`
 
 const Form = styled.form`
   display: flex;
-  padding: 0 0 32px 0;
+  padding-bottom: 32px;
   flex-direction: column;
   align-items: flex-start;
   gap: 32px;

@@ -34,13 +34,13 @@ export const NotificationsSettings = () => {
             />
             <KeywordsSettingForm
               values={{
-                stackIds: notificationsSetting?.recruitmentConfig.stackKeywords.map(
+                stackIds: notificationsSetting?.recruitmentConfig?.stackKeywords?.map(
                   (stackKeyword: { stackId: number; name: string }) => stackKeyword.stackId,
                 ),
-                positionIds: notificationsSetting?.recruitmentConfig.positionKeywords.map(
+                positionIds: notificationsSetting?.recruitmentConfig?.positionKeywords?.map(
                   (positionKeyword: { positionId: number; name: string }) => positionKeyword.positionId,
                 ),
-                categoryIds: notificationsSetting?.recruitmentConfig.categoryKeywords.map(
+                categoryIds: notificationsSetting?.recruitmentConfig?.categoryKeywords?.map(
                   (categoryKeyword: { categoryId: number; name: string }) => categoryKeyword.categoryId,
                 ),
               }}
