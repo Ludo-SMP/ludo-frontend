@@ -2,23 +2,23 @@ import { NotificationsSetting } from '@/Types/notifications';
 
 export const mockNotificationsSetting: NotificationsSetting = {
   settings: {
-    all: true,
+    all: false,
     study: {
-      applicantNotification: true,
+      applicantNotification: false,
       applicantNotificationType: 'STUDY_APPLICANT_CONFIG',
-      applicantResultNotification: true,
+      applicantResultNotification: false,
       applicantResultNotificationType: 'STUDY_APPLICANT_RESULT_CONFIG',
-      endDateNotification: true,
+      endDateNotification: false,
       endDateNotificationType: 'STUDY_END_DATE_CONFIG',
-      participantLeaveNotification: true,
+      participantLeaveNotification: false,
       participantLeaveNotificationType: 'STUDY_PARTICIPANT_LEAVE_CONFIG',
     },
     recruitment: {
-      notification: true,
+      notification: false,
       notificationType: 'RECRUITMENT_CONFIG',
     },
     review: {
-      notification: true,
+      notification: false,
       notificationType: 'REVIEW_CONFIG',
     },
   },

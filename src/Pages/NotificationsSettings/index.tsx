@@ -42,6 +42,7 @@ export const NotificationsSettings = () => {
                   ({ categoryId }: { categoryId: number }) => categoryId,
                 ),
               }}
+              disabled={!notificationsSetting?.settings.all}
             />
           </RecruitmentSettingsSection>
           <StudySettingSection>

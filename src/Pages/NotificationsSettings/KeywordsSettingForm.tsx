@@ -25,9 +25,10 @@ const getSelectedStacks = (keywords: RecruitmentKeywordsForm): Stack[] => {
 
 export interface KeywordsSettingFormProps {
   values: RecruitmentKeywordsForm;
+  disabled?: boolean;
 }
 
-export const KeywordsSettingForm = ({ values }: KeywordsSettingFormProps) => {
+export const KeywordsSettingForm = ({ values, disabled }: KeywordsSettingFormProps) => {
   const { mutate: editKeywordsMutate } = useEditNotificationsKeywords();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedStacks, setSelectedStacks] = useState<Stack[]>(getSelectedStacks(values));
@@ -103,10 +104,11 @@ export const KeywordsSettingForm = ({ values }: KeywordsSettingFormProps) => {
             setValue('positionIds', [...values.positionIds]);
             setValue('categoryIds', [...values.categoryIds]);
           }}
+          disabled={disabled}
         >
           취소
         </Button>
-        <Button size="fullWidth" scheme="secondary">
+        <Button size="fullWidth" scheme="secondary" disabled={disabled}>
           저장
         </Button>
       </BtnsBox>
