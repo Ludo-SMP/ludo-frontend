@@ -18,5 +18,5 @@ export const editNotificationsKeywords = (data: NotificationKeywords) =>
   httpClient.put(API_END_POINT.EDIT_NOTIFICATIONS_KEYWORDS, data);
 
 /** 알림 on/off 설정 API */
-export const onOffNotifications = (data: { type: NotificationsSettingConfigType; on: boolean }) =>
+export const onOffNotifications = (data: { notificationConfigGroup: NotificationsSettingConfigType; on: boolean }) =>
   httpClient.post(API_END_POINT.NOTIFICATIONS_SETTING, data);
