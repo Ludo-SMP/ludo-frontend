@@ -4,7 +4,7 @@ const baseURL = import.meta.env.VITE_BASE_API_URL;
 
 const encoder = new TextEncoder();
 
-const subscribeSSE = http.get('http://localhost:8080/sse/streaming/start', async () => {
+const subscribeSSE = http.get(`${baseURL}/api/notifications/subscribe`, async () => {
   const data = {
     notificationId: 1,
     title: 'STUDY_APPLICANT',
@@ -27,10 +27,13 @@ const subscribeSSE = http.get('http://localhost:8080/sse/streaming/start', async
     headers: {
       'Content-Type': 'text/event-stream',
     },
+    status: 200,
+    statusText: 'OK',
   });
 });
 
 const getNotifications = http.get(`${baseURL}/api/notifications`, async () => {
+  ``;
   return new HttpResponse(
     JSON.stringify({
       data: mockNotifications.data,
