@@ -83,3 +83,34 @@ export interface ReviewNotification extends NotificationEvent<REVIEW_NOTIFICATIO
 
 // SSE 실시간 알림 응답 타입
 export type NotificationSSEType = RecruitmentNotification | StudyNotification | ReviewNotification;
+
+export interface NotificationsSetting {
+  settings: {
+    all: boolean;
+    study: {
+      applicantNotification: boolean;
+      applicantNotificationType: Extract<NotificationsType, 'STUDY_APPLICANT'>;
+      applicantResultNotification: boolean;
+      applicantResultNotificationType: Extract<NotificationsType, 'STUDY_APPLICANT_RESULT'>;
+      endDateNotification: boolean;
+      endDateNotificationType: Extract<NotificationsType, 'STUDY_END_DATE'>;
+      participantLeaveNotification: boolean;
+      participantLeaveNotificationType: Extract<NotificationsType, 'STUDY_PARTICIPANT_LEAVE'>;
+    };
+    recruitment: {
+      notification: boolean;
+      notificationType: Extract<NotificationsType, 'RECRUITMENT'>;
+    };
+    review: {
+      notification: boolean;
+      notificationType: Extract<NotificationsType, 'REVIEW'>;
+    };
+  };
+
+  /* 기존에 있는 stack, position, category 타입으로 변경 예정
+    API 응답에 따라 추후 수정
+  **/
+  stackKeyword: { stackId: number; name: string }[];
+  positionKeyword: { positionId: number; name: string }[];
+  categoryKeyword: { categoryId: number; name: string }[];
+}
