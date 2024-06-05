@@ -30,7 +30,9 @@ const MemberProfile = ({
       <div className="private__info">
         <div className="nickname">{nickname}</div>
         <div className="email">{email}</div>
-        <AttendanceBadge $attended={attended}>{totalAttendance}일 출석 완료!</AttendanceBadge>
+        <AttendanceBadge $attended={attended}>
+          {attended ? `${totalAttendance}일 출석 완료!` : `${totalAttendance}일 출석 중`}
+        </AttendanceBadge>
       </div>
       <div className="positions">
         <div className="position">{ROLE[role]}</div>
