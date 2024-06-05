@@ -12,17 +12,11 @@ export const useSSE = () => {
   const queryClient = useQueryClient();
   const eventSource = useRef<EventSourcePolyfill>(null);
 
-  // TODO: 개발용 node 서버 주소는 배포된 API와 테스트 후 삭제 예정
-  const url =
-    process.env.NODE_ENV === 'development'
-      ? 'http://localhost:8080/sse/streaming/start'
-      : `${import.meta.env.VITE_BASE_API_URL}/api/notifications/subscribe`;
-
   const fetchSSE = () => {
     const EventSource = EventSourcePolyfill;
 
     // 새로운 EventSource 연결
-    eventSource.current = new EventSource(url, {
+    eventSource.current = new EventSource(`${import.meta.env.VITE_BASE_API_URL}/api/notifications/subscribe`, {
       headers: {
         'Content-Type': 'text/event-stream',
       },
