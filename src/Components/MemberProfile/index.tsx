@@ -38,7 +38,7 @@ const MemberProfileWrapper = styled.div`
   border-radius: ${({ theme }) => theme.borderRadius.medium};
   border: 1px solid ${(props) => props.theme.color.black1};
   background: ${(props) => props.theme.color.white};
-  box-shadow: 0px 0px 20px 0px ${(props) => props.theme.color.black1};
+  box-shadow: 0px 0px 20px 0px ${(props) => props.theme.color.black0};
 
   .private__info {
     .nickname {
