@@ -6,7 +6,7 @@ import styled, { css } from 'styled-components';
 import { One, Two, Three, Four } from '@/Assets';
 
 // components
-import Heading from '@/Components/Heading';
+// import Heading from '@/Components/Heading';
 import Spacing from '@/Components/Spacing';
 import Button from '@/Components/Common/Button';
 import { TextArea } from '@/Components/Textarea';
@@ -95,9 +95,7 @@ const EditRecruitmentPage = ({ recruitmentDetail, mutate }: ModifyRecruitmentPag
   return (
     <RecruitmentContainer>
       <Form onSubmit={handleSubmit(onSubmit, onInvalid)}>
-        <Heading type={'Head'} component={'Page'}>
-          스터디 팀원 모집하기
-        </Heading>
+        <Heading>스터디 팀원 모집하기</Heading>
         <Spacing size={40} />
         <Stack divider={<Divider />}>
           <FormSection icon={<One />} title="스터디 모집 공고">
@@ -243,4 +241,10 @@ export default EditRecruitmentPage;
 
 export const ErrorMsg = styled.p`
   color: ${({ theme }) => theme.color.negative};
+`;
+
+const Heading = styled.h1`
+  ${({ theme }) => theme.typo.PageTitle};
+  display: flex;
+  align-items: center;
 `;
