@@ -31,7 +31,6 @@ export const KeywordsSettingForm = ({ values }: KeywordsSettingFormProps) => {
   const { mutate: editKeywordsMutate } = useEditNotificationsKeywords();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedStacks, setSelectedStacks] = useState<Stack[]>(getSelectedStacks(values));
-  const handleSelectedStacks = (stacks: Stack[]) => setSelectedStacks(stacks);
 
   const { setValue, watch, handleSubmit } = useForm<RecruitmentKeywordsForm>({
     defaultValues: {
@@ -41,6 +40,12 @@ export const KeywordsSettingForm = ({ values }: KeywordsSettingFormProps) => {
     },
     values,
   });
+
+  const handleSelectedStacks = (stacks: Stack[]) => {
+    setSelectedStacks(stacks);
+    setValue('stackIds', [...stacks.map((stack: Stack) => stack.id)]);
+  };
+
   return (
     <Form
       onSubmit={handleSubmit(({ stackIds, positionIds, categoryIds }) =>
