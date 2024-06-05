@@ -19,6 +19,7 @@ import { EditRecruitmentFetcher } from '@/Pages/EditRecruitment/EditRecruitmentF
 import { MyPageLayout } from '@/Layout/MyPageLayout';
 import { SettingLayout } from '@/Layout/SettingLayout';
 import { Notifications } from '@/Pages/Notifications';
+import { ReviewPage } from '@/Pages/Review';
 
 export const RouterPath = createBrowserRouter([
   {
@@ -134,14 +135,14 @@ export const RouterPath = createBrowserRouter([
         element: <ApplicantsPage />,
       },
       {
-        // 스터디원 평가 페이지
-        path: ROUTES.STUDY.REVIEW,
-        element: <>TODO</>,
-      },
-      {
         path: ROUTES.RECRUITMENT.EDIT,
         element: <EditRecruitmentFetcher />,
       },
     ],
+  },
+  {
+    // 스터디원 평가 페이지
+    path: ROUTES.STUDY.REVIEW,
+    element: <ReviewPage />,
   },
 ]);

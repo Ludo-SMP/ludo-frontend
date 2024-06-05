@@ -11,7 +11,7 @@ export interface CustomRadioProps {
   size?: number;
 
   /** 선택된 값을 변경하는 handler */
-  setSelectedValue: React.Dispatch<SetStateAction<number | null>>;
+  setSelectedValue: (v: number) => void;
 }
 
 const RADIO_COLOR = { 1: '#F7A477', 2: '#E1A193', 3: '#CB9FAE', 4: '#B59CCA', 5: '#7170BF' };
