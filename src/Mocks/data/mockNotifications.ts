@@ -5,21 +5,21 @@ export const mockNotificationsSetting: NotificationsSetting = {
     all: true,
     study: {
       applicantNotification: true,
-      applicantNotificationType: 'STUDY_APPLICANT',
+      applicantNotificationType: 'STUDY_APPLICANT_CONFIG',
       applicantResultNotification: true,
-      applicantResultNotificationType: 'STUDY_APPLICANT_RESULT',
+      applicantResultNotificationType: 'STUDY_APPLICANT_RESULT_CONFIG',
       endDateNotification: true,
-      endDateNotificationType: 'STUDY_END_DATE',
+      endDateNotificationType: 'STUDY_END_DATE_CONFIG',
       participantLeaveNotification: true,
-      participantLeaveNotificationType: 'STUDY_PARTICIPANT_LEAVE',
+      participantLeaveNotificationType: 'STUDY_PARTICIPANT_LEAVE_CONFIG',
     },
     recruitment: {
       notification: true,
-      notificationType: 'RECRUITMENT',
+      notificationType: 'RECRUITMENT_CONFIG',
     },
     review: {
       notification: true,
-      notificationType: 'REVIEW',
+      notificationType: 'REVIEW_CONFIG',
     },
   },
 
