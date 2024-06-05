@@ -22,6 +22,7 @@ import { match, P } from 'ts-pattern';
 import { Sidebar } from './Sidebar';
 import { attendStudy } from '@/Apis/study';
 import { useAttendStudyMutation } from '@/Hooks/study/useAttendStudyMutation';
+import { isToday } from '@/utils/date';
 
 export const StudyDetailPage = () => {
   const studyId = Number(useParams().studyId);
@@ -50,7 +51,7 @@ export const StudyDetailPage = () => {
 
   if (isLoading) return <Loading />;
 
-  const didIAttendToday = true;
+  const didIAttendToday = isToday(new Date(study.participants.find(({ id }) => id === user?.id)?.recentAttendanceDate));
 
   return (
     <Grid>
