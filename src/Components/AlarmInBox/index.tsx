@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 import { ROUTES } from '@/Constants/route';
 
 interface AlarmInboxProps {
-  isOpen?: boolean;
   handleOpen?: (prev: boolean) => void;
   alarmPreviews?: {
     notification: NotificationSSEType[];
