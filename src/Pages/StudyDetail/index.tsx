@@ -50,6 +50,8 @@ export const StudyDetailPage = () => {
 
   if (isLoading) return <Loading />;
 
+  const didIAttendToday = true;
+
   return (
     <Grid>
       <StudyDetailLayout>
@@ -68,14 +70,20 @@ export const StudyDetailPage = () => {
               <PlatformSection>
                 <PlatformTitle>
                   <TopBarSectionTitle>진행 플랫폼</TopBarSectionTitle>
-                  <Button
-                    scheme="secondary"
-                    onClick={async () => {
-                      attendStudyMutate();
-                    }}
-                  >
-                    출석 체크
-                  </Button>
+                  {true ? (
+                    <Button disabled>출석 완료</Button>
+                  ) : (
+                    <Button
+                      scheme="secondary"
+                      onClick={async () => {
+                        attendStudyMutate();
+
+                        setIsAttendanceModalOpen(true);
+                      }}
+                    >
+                      출석 체크
+                    </Button>
+                  )}
                   {isAttendanceModalOpen && (
                     <Modal
                       title="해당 스터디 출석이 체크되었습니다!"
