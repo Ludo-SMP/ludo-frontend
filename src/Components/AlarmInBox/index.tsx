@@ -4,6 +4,8 @@ import { useOutSideClick } from '@/Hooks/useOutsideClick';
 import styled from 'styled-components';
 import { Close } from '@/Assets';
 import { NotificationSSEType } from '@/Types/notifications';
+import { Link } from 'react-router-dom';
+import { ROUTES } from '@/Constants/route';
 
 interface AlarmInboxProps {
   isOpen?: boolean;
@@ -39,7 +41,7 @@ export const AlarmInbox = ({ alarmPreviews, handleOpen }: AlarmInboxProps) => {
         </PreviewList>
         <BottomBar>
           {notification?.length !== 0 && <button>전체 읽음</button>}
-          <button>알림페이지 이동</button>
+          <Link to={ROUTES.MYPAGE.NOTIFICATIONS}>알림페이지 이동</Link>
         </BottomBar>
       </AlarmPreviewsWrapper>
     </AlarmInboxWrapper>
