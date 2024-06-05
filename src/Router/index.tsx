@@ -23,6 +23,7 @@ import { MyPageLayout } from '@/Layout/MyPageLayout';
 import { SettingLayout } from '@/Layout/SettingLayout';
 import { NotificationsSettings } from '@/Pages/NotificationsSettings';
 import { ReviewPage } from '@/Pages/Review';
+import { Notifications } from '@/Pages/Notifications';
 
 export const RouterPath = createBrowserRouter([
   {
