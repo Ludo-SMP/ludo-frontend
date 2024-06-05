@@ -12,7 +12,7 @@ export interface KeyWordFormProps {
   type: keyof RecruitmentKeywordsForm;
 }
 
-export const KeywordForm = ({ label, children, type }: KeyWordFormProps) => {
+export const KeywordForm = ({ label, children }: KeyWordFormProps) => {
   return (
     <KeywordFormBox>
       <Title>{label}</Title>

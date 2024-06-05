@@ -1,5 +1,4 @@
-// 알림 설정 키워드
-export interface NotificationKeywords {
+export interface RecruitmentKeywordsForm {
   categoryIds: number[];
   stackIds: number[];
   positionIds: number[];
@@ -63,12 +62,6 @@ export interface NotificationsSetting {
   stackKeyword: { stackId: number; name: string }[];
   positionKeyword: { positionId: number; name: string }[];
   categoryKeyword: { categoryId: number; name: string }[];
-}
-
-export interface RecruitmentKeywordsForm {
-  categoryIds: number[];
-  stackIds: number[];
-  positionIds: number[];
 }
 
 /** 타입 기준 키 분류 */
