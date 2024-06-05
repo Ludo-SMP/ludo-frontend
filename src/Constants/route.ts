@@ -27,6 +27,6 @@ export const ROUTES = {
     DETAIL: '/studies/:studyId',
     MODIFY: '/studies/:studyId/edit',
     APPLICNATS: '/studies/:studyId/applicants',
-    REVIEW: '/studies/:studyId/:userId/reivew',
+    REVIEW: '/studies/:studyId/:userId/review',
   },
 } as const;
