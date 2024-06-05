@@ -71,7 +71,7 @@ export const StudyDetailPage = () => {
               <PlatformSection>
                 <PlatformTitle>
                   <TopBarSectionTitle>진행 플랫폼</TopBarSectionTitle>
-                  {true ? (
+                  {didIAttendToday ? (
                     <Button disabled>출석 완료</Button>
                   ) : (
                     <Button
