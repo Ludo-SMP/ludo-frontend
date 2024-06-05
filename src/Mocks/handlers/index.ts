@@ -2,6 +2,7 @@ import recruitmentHandler from './recruitment';
 import studyHandler from './study';
 import authHandler from './auth';
 import stackHandler from './stacks';
+import SSEnotificationHandler from './SSEnotification';
 import reviewHandler from './review';
 import notificationsHandler from './notifications';
 
@@ -12,4 +13,5 @@ export const handlers = [
   ...stackHandler,
   ...reviewHandler,
   ...notificationsHandler,
+  ...SSEnotificationHandler,
 ];

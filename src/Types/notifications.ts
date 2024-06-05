@@ -30,42 +30,9 @@ export const NOTIFICATION_SETTINGS_CONFIG = {
   REVIEW_CONFIG: '스터디원 리뷰 평가 알림 설정',
 } as const;
 
+// 전체 알림 키
 export type NotificationsType = keyof typeof NOTIFICATIONS;
 export type NotificationsSettingConfigType = keyof typeof NOTIFICATION_SETTINGS_CONFIG;
-
-export interface NotificationsSetting {
-  allConfig: {
-    type: 'ALL_CONFIG';
-    on: boolean;
-  };
-  studyApplicantConfig: {
-    type: 'STUDY_APPLICANT_CONFIG';
-    on: boolean;
-  };
-  studyApplicantResultConfig: {
-    type: 'STUDY_APPLICANT_RESULT_CONFIG';
-    on: boolean;
-  };
-  studyEndDateConfig: {
-    type: 'STUDY_END_DATE_CONFIG';
-    on: boolean;
-  };
-  studyParticipantLeaveConfig: {
-    type: 'STUDY_PARTICIPANT_LEAVE_CONFIG';
-    on: boolean;
-  };
-  reviewConfig: {
-    type: 'REVIEW_CONFIG';
-    on: boolean;
-  };
-  recruitmentConfig: {
-    type: 'RECRUITMENT_CONFIG';
-    on: boolean;
-    categoryKeywords: { categoryId: number; name: string }[];
-    positionKeywords: { positionId: number; name: string }[];
-    stackKeywords: { stackId: number; name: string }[];
-  };
-}
 
 /** 타입 기준 키 분류 */
 
@@ -127,3 +94,37 @@ export interface ReviewNotification extends NotificationEvent<REVIEW_NOTIFICATIO
 
 // SSE 실시간 알림 응답 타입
 export type NotificationSSEType = RecruitmentNotification | StudyNotification | ReviewNotification;
+
+export interface NotificationsSetting {
+  allConfig: {
+    type: 'ALL_CONFIG';
+    on: boolean;
+  };
+  studyApplicantConfig: {
+    type: 'STUDY_APPLICANT_CONFIG';
+    on: boolean;
+  };
+  studyApplicantResultConfig: {
+    type: 'STUDY_APPLICANT_RESULT_CONFIG';
+    on: boolean;
+  };
+  studyEndDateConfig: {
+    type: 'STUDY_END_DATE_CONFIG';
+    on: boolean;
+  };
+  studyParticipantLeaveConfig: {
+    type: 'STUDY_PARTICIPANT_LEAVE_CONFIG';
+    on: boolean;
+  };
+  reviewConfig: {
+    type: 'REVIEW_CONFIG';
+    on: boolean;
+  };
+  recruitmentConfig: {
+    type: 'RECRUITMENT_CONFIG';
+    on: boolean;
+    categoryKeywords: { categoryId: number; name: string }[];
+    positionKeywords: { positionId: number; name: string }[];
+    stackKeywords: { stackId: number; name: string }[];
+  };
+}
