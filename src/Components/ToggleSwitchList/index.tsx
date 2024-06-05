@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import { ToggleSwitch } from '../ToggleSwitch';
 import { textEllipsis } from '@/Styles/theme';
 import { useOnOffNotifications } from '@/Hooks/notifications/useOnOffNotifications';
-import { NotificationsType } from '@/Types/notifications';
+import { NotificationsSettingConfigType } from '@/Types/notifications';
 
 export interface ToggleSwitchListProps {
-  type: NotificationsType | 'ALL';
+  type: NotificationsSettingConfigType;
 
   /** 제목 */
   label: string;
@@ -24,7 +24,7 @@ export interface ToggleSwitchListProps {
 /** 토글 스위치 리스트 */
 const ToggleSwitchList = React.forwardRef<boolean, ToggleSwitchListProps>(
   ({ label, description, defaultChecked = false, type, disabled }, ref) => {
-    const { mutate } = useOnOffNotifications({ type });
+    const { mutate } = useOnOffNotifications({ notificationConfigGroup: type });
     return (
       <Container>
         <ContainerText>

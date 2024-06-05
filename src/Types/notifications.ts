@@ -35,34 +35,37 @@ export type NotificationsType = keyof typeof NOTIFICATIONS;
 export type NotificationsSettingConfigType = keyof typeof NOTIFICATION_SETTINGS_CONFIG;
 
 export interface NotificationsSetting {
-  settings: {
-    all: boolean;
-    study: {
-      applicantNotification: boolean;
-      applicantNotificationType: Extract<NotificationsSettingConfigType, 'STUDY_APPLICANT_CONFIG'>;
-      applicantResultNotification: boolean;
-      applicantResultNotificationType: Extract<NotificationsSettingConfigType, 'STUDY_APPLICANT_RESULT_CONFIG'>;
-      endDateNotification: boolean;
-      endDateNotificationType: Extract<NotificationsSettingConfigType, 'STUDY_END_DATE_CONFIG'>;
-      participantLeaveNotification: boolean;
-      participantLeaveNotificationType: Extract<NotificationsSettingConfigType, 'STUDY_PARTICIPANT_LEAVE_CONFIG'>;
-    };
-    recruitment: {
-      notification: boolean;
-      notificationType: Extract<NotificationsSettingConfigType, 'RECRUITMENT_CONFIG'>;
-    };
-    review: {
-      notification: boolean;
-      notificationType: Extract<NotificationsSettingConfigType, 'REVIEW_CONFIG'>;
-    };
+  allConfig: {
+    type: 'ALL_CONFIG';
+    on: boolean;
   };
-
-  /* 기존에 있는 stack, position, category 타입으로 변경 예정
-    API 응답에 따라 추후 수정
-  **/
-  stackKeyword: { stackId: number; name: string }[];
-  positionKeyword: { positionId: number; name: string }[];
-  categoryKeyword: { categoryId: number; name: string }[];
+  studyApplicantConfig: {
+    type: 'STUDY_APPLICANT_CONFIG';
+    on: boolean;
+  };
+  studyApplicantResultConfig: {
+    type: 'STUDY_APPLICANT_RESULT_CONFIG';
+    on: boolean;
+  };
+  studyEndDateConfig: {
+    type: 'STUDY_END_DATE_CONFIG';
+    on: boolean;
+  };
+  studyParticipantLeaveConfig: {
+    type: 'STUDY_PARTICIPANT_LEAVE_CONFIG';
+    on: boolean;
+  };
+  reviewConfig: {
+    type: 'REVIEW_CONFIG';
+    on: boolean;
+  };
+  recruitmentConfig: {
+    type: 'RECRUITMENT_CONFIG';
+    on: boolean;
+    categoryKeywords: { categoryId: number; name: string }[];
+    positionKeywords: { positionId: number; name: string }[];
+    stackKeywords: { stackId: number; name: string }[];
+  };
 }
 
 /** 타입 기준 키 분류 */

@@ -25,8 +25,8 @@ export const NotificationsSettings = () => {
             <ToggleSwitchList
               label="전체 알림"
               description="제목"
-              defaultChecked={notificationsSetting?.settings.all}
-              type="ALL"
+              defaultChecked={notificationsSetting?.allConfig.on}
+              type="ALL_CONFIG"
             />
           </AllOnOffSettingSection>
           <BoldDivider $rowHeight={2} />
@@ -35,9 +35,9 @@ export const NotificationsSettings = () => {
             <ToggleSwitchList
               label="모집 공고 알림"
               description="권한 허용 후, 선호하는 항목을 고르면, 해당 모집 공고가 업로드 됐을 시 알림이 갑니다."
-              defaultChecked={notificationsSetting?.settings.recruitment.notification}
-              type="RECRUITMENT"
-              disabled={!notificationsSetting?.settings.all}
+              defaultChecked={notificationsSetting?.recruitmentConfig.on}
+              type="RECRUITMENT_CONFIG"
+              disabled={!notificationsSetting?.allConfig.on}
             />
             <RecruitmentKeywordsBox>
               <div className="select__keywords">
@@ -70,37 +70,37 @@ export const NotificationsSettings = () => {
               <ToggleSwitchList
                 label="스터디 지원 여부 알림"
                 description="제목"
-                defaultChecked={notificationsSetting?.settings.study.applicantNotification}
-                type="STUDY_APPLICANT"
-                disabled={!notificationsSetting?.settings.all}
+                defaultChecked={notificationsSetting?.studyApplicantConfig.on}
+                type="STUDY_APPLICANT_CONFIG"
+                disabled={!notificationsSetting?.allConfig.on}
               />
               <ToggleSwitchList
                 label="스터디 지원 결과 알림"
                 description="제목"
-                defaultChecked={notificationsSetting?.settings.study.applicantResultNotification}
-                type="STUDY_APPLICANT_RESULT"
-                disabled={!notificationsSetting?.settings.all}
+                defaultChecked={notificationsSetting?.studyApplicantResultConfig.on}
+                type="STUDY_APPLICANT_RESULT_CONFIG"
+                disabled={!notificationsSetting?.allConfig.on}
               />
               <ToggleSwitchList
                 label="스터디 종료 기간 알림"
                 description="제목"
-                defaultChecked={notificationsSetting?.settings.study.endDateNotification}
-                type="STUDY_END_DATE"
-                disabled={!notificationsSetting?.settings.all}
+                defaultChecked={notificationsSetting?.studyEndDateConfig.on}
+                type="STUDY_END_DATE_CONFIG"
+                disabled={!notificationsSetting?.allConfig.on}
               />
               <ToggleSwitchList
                 label="스터디 탈퇴자 알림"
                 description="제목"
-                defaultChecked={notificationsSetting?.settings.study.participantLeaveNotification}
-                type="STUDY_PARTICIPANT_LEAVE"
-                disabled={!notificationsSetting?.settings.all}
+                defaultChecked={notificationsSetting?.studyParticipantLeaveConfig.on}
+                type="STUDY_PARTICIPANT_LEAVE_CONFIG"
+                disabled={!notificationsSetting?.allConfig.on}
               />
               <ToggleSwitchList
                 label="스터디 리뷰 평가 알림"
                 description="제목"
-                defaultChecked={notificationsSetting?.settings.review.notification}
-                type="REVIEW"
-                disabled={!notificationsSetting?.settings.all}
+                defaultChecked={notificationsSetting?.reviewConfig.on}
+                type="REVIEW_CONFIG"
+                disabled={!notificationsSetting?.allConfig.on}
               />
             </ToggleSwitches>
           </StudySettingSection>
