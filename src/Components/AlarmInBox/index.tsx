@@ -25,11 +25,11 @@ export const AlarmInbox = ({ alarmPreviews, handleOpen }: AlarmInboxProps) => {
   return (
     <AlarmInboxWrapper ref={inboxRef}>
       <AlarmPreviewsWrapper>
-        <TopBar alarmLength={notification?.length}>
+        <TopBar $alarmLength={notification?.length}>
           <Title>알림</Title>
           <Close onClick={() => handleOpen(false)} />
         </TopBar>
-        <TopBar alarmLength={notification?.length}>
+        <TopBar $alarmLength={notification?.length}>
           <Title>루도가 알려요</Title>
         </TopBar>
         <PreviewList>
@@ -62,7 +62,7 @@ const AlarmInboxWrapper = styled.div`
   z-index: 100;
 `;
 
-const TopBar = styled.div<{ alarmLength: number }>`
+const TopBar = styled.div<{ $alarmLength: number }>`
   display: flex;
   height: 40px;
   min-width: 348px;
@@ -70,8 +70,8 @@ const TopBar = styled.div<{ alarmLength: number }>`
   padding: 4px 24px;
   justify-content: space-between;
   align-items: center;
-  border-top-left-radius: ${({ theme, alarmLength }) => alarmLength === 0 && theme.borderRadius.small};
-  border-top-right-radius: ${({ theme, alarmLength }) => alarmLength === 0 && theme.borderRadius.small};
+  border-top-left-radius: ${({ theme, $alarmLength }) => $alarmLength === 0 && theme.borderRadius.small};
+  border-top-right-radius: ${({ theme, $alarmLength }) => $alarmLength === 0 && theme.borderRadius.small};
   border-bottom: ${({ theme }) => `1px solid ${theme.color.black1}`};
 
   svg {
