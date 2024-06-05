@@ -60,7 +60,7 @@ export const KeywordsSettingForm = ({ values, disabled }: KeywordsSettingFormPro
             checked={watch('stackIds').length !== 0}
             onClick={() => setIsOpen((prev) => !prev)}
           >
-            {'기술 스택'}
+            기술 스택
           </ChipMenu>
           {isOpen && (
             <StackModal
