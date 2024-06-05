@@ -42,7 +42,7 @@ export const StudyDetailPage = () => {
   const { mutate: leaveStudyMutate } = useLeaveStudyMutation(studyId);
   const { mutate: attendStudyMutate, isSuccess: isAttendStudyMutationSuccess } = useAttendStudyMutation(studyId);
 
-  const [isAttendanceModalOpen, setIsAttendanceModalOpen] = useState(isAttendanceModalOpen);
+  const [isAttendanceModalOpen, setIsAttendanceModalOpen] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
