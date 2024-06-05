@@ -16,6 +16,7 @@ export const RECRUITMENT = {
 
 export const STUDY = {
   STUDY: (studyId: number) => [BASE_KEY.STUDY, studyId],
+  EDIT: (studyId: number) => [BASE_KEY.STUDY, studyId],
   APPLY: (studyId: number, recruitmentId: number) => [BASE_KEY.STUDY, studyId, recruitmentId, 'APPLY'],
   APPLY_REFUSE: (studyId: number, applicantId: number) => [BASE_KEY.STUDY, studyId, applicantId, 'REFUSE'],
   APPLY_ACCEPT: (studyId: number, applicantId: number) => [BASE_KEY.STUDY, studyId, applicantId, 'ACCEPT'],
@@ -32,4 +33,13 @@ export const USER = {
 
 export const STACK = {
   STACK: ['STACK'],
+};
+
+export const NOTIFICATIONS = {
+  NOTIFICATIONS: ['NOTIFICATIONS'],
+  SUBSCRIBE_NOTIFICATIONS: ['NOTIFICATIONS', 'SUBSCRIBE'],
+  READ_NOTIFICATIONS: (notificationId: number) => ['NOTIFICATIONS', notificationId],
+  NOTIFICATIONS_SETTING: ['NOTIFICATIONS', 'SETTING'],
+  EDIT_NOTIFICATIONS_KEYWORDS: ['NOTIFICATIONS', 'SETTING', 'KEYWORDS'],
+  NOTIFICATIONS_ON_OFF: ['NOTIFICATIONS', 'SETTING', 'ON_OFF'],
 };

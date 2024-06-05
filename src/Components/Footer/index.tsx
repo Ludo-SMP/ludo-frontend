@@ -19,7 +19,7 @@ const Footer = () => {
             스터디 모집 공고 모아보기
           </div>
           {isLoggedIn && (
-            <div className="navigate" onClick={() => navigate(ROUTES.MYPAGE)}>
+            <div className="navigate" onClick={() => navigate(ROUTES.MYPAGE.HOME)}>
               마이 페이지
             </div>
           )}

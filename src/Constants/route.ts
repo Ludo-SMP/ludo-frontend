@@ -7,7 +7,15 @@ export const ROUTES = {
     LOGINFAIL: '/login/fail',
     SIGNUPFAIL: '/signup/fail',
   },
-  MYPAGE: '/mypage',
+  MYPAGE: {
+    HOME: '/mypage',
+    REVIEWS: '/mypage/reviews',
+    SAVED: '/mypage/saved',
+    SETTINGS: '/mypage/settings',
+    PROFILE_SETTINGS: '/mypage/settings/profile',
+    NOTIFICATIONS_SETTINGS: '/mypage/settings/notifications',
+    NOTIFICATIONS: '/mypage/notifications',
+  },
   RECRUITMENT: {
     CREATE: '/studies/:studyId/recruitments/create',
     RECRUITMENTS: '/studies',
@@ -19,6 +27,6 @@ export const ROUTES = {
     DETAIL: '/studies/:studyId',
     MODIFY: '/studies/:studyId/edit',
     APPLICNATS: '/studies/:studyId/applicants',
-    SAVE: '/mypage/savestudy',
+    REVIEW: '/studies/:studyId/:userId/review',
   },
 } as const;

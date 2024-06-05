@@ -1,4 +1,5 @@
-import { ComponentProps, forwardRef } from 'react';
+import { SelectArrow } from '@/Assets/SelectArrow';
+import { ComponentProps, ReactNode, forwardRef } from 'react';
 import styled from 'styled-components';
 
 // RHF와 호환되는 범용 SelectBox 컴포넌트

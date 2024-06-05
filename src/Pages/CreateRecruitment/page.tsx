@@ -313,9 +313,10 @@ export const Box = styled.div<{ display: 'row' | 'column'; gap?: string }>`
     `}
 `;
 
-export const Divider = styled.div`
-  height: 12px;
-  background: #f2f3f3;
+export const Divider = styled.div<{ height?: string | number; width?: string | number }>`
+  height: ${({ height }) => (height ? (typeof height === 'number' ? `${height}px` : `${height}`) : '12px')};
+  background: ${({ theme }) => theme.color.strokeDividerThick};
+  max-width: ${({ width }) => (width ? (typeof width === 'number' ? `${width}px` : `${width}`) : '100%')};
 `;
 
 export const ButtonBox = styled.div`

@@ -32,6 +32,8 @@ declare module 'styled-components' {
       kakao: string;
       kakaoFontColor: string;
       negative: string;
+      strokeDividerThick: string;
+      buttonHoverSecondary: string;
     };
 
     font: {
@@ -56,6 +58,7 @@ declare module 'styled-components' {
       medium: string;
       large: string;
       xlarge: string;
+      cornerRadius12: string;
     };
   }
 
