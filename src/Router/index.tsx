@@ -14,7 +14,6 @@ import LoginFailPage from '@/Pages/LoginFail';
 import SignUpFailPage from '@/Pages/SignUpFail';
 import MyPage from '@/Pages/MyPage/index';
 import { Saved } from '@/Pages/Saved';
-import { Notifications } from '@/Pages/Notifications';
 
 import Header from '@/Components/Header';
 import Footer from '@/Components/Footer';
