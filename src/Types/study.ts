@@ -28,6 +28,8 @@ export interface Member {
   email: string;
   position: Position;
   role: Role;
+  totalAttendance: number;
+  recentAttendanceDate: string | null;
 }
 
 export interface User {

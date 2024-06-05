@@ -12,6 +12,7 @@ const meta = {
       name: '백엔드',
     },
     role: 'MEMBER',
+    totalAttendance: 10,
   },
 } satisfies Meta<typeof MemberProfile>;
 
@@ -19,3 +20,10 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {};
+
+/** 당일 출석을 완료한 경우 */
+export const Attended: Story = {
+  args: {
+    attended: true,
+  },
+};
