@@ -148,7 +148,12 @@ export interface Participant {
   role: Role;
   email: string;
   position: Position;
+  // 총합 출석일
+  totalAttendance: number;
+  // 최근 출석일
+  recentAttendanceDate: string | null;
 }
+
 export interface Applicant extends Omit<Member, 'role'> {}
 
 export interface StudyCreate {
@@ -168,9 +173,12 @@ export interface StudyDetail {
     status: StudyStatus;
     title: string;
     platform: Platform;
+    platformUrl: string;
     way: ProgressMethod;
     participantCount: number;
     participantLimit: number;
+    // 출석요일
+    attendanceDay: Array<number>;
     startDateTime: string;
     endDateTime: string;
     category: Category;
@@ -179,6 +187,8 @@ export interface StudyDetail {
     hasRecruitment: boolean;
     createdDateTime: string;
     updatedDateTime: string;
+    // 스터디 지원자 수
+    applicantCount: number;
   };
 }
 
