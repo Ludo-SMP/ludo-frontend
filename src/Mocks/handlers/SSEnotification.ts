@@ -33,7 +33,6 @@ const subscribeSSE = http.get(`${baseURL}/api/notifications/subscribe`, async ()
 });
 
 const getNotifications = http.get(`${baseURL}/api/notifications`, async () => {
-  ``;
   return new HttpResponse(
     JSON.stringify({
       data: mockNotifications.data,
@@ -46,4 +45,17 @@ const getNotifications = http.get(`${baseURL}/api/notifications`, async () => {
   );
 });
 
-export default [subscribeSSE, getNotifications];
+const readNotifications = http.post(`${baseURL}/api/notifications/:notificationId`, async () => {
+  return new HttpResponse(
+    JSON.stringify({
+      data: null,
+      message: 'Success',
+    }),
+    {
+      status: 200,
+      statusText: 'OK',
+    },
+  );
+});
+
+export default [subscribeSSE, getNotifications, readNotifications];

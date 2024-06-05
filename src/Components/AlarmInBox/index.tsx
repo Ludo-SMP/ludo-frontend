@@ -34,9 +34,11 @@ export const AlarmInbox = ({ alarmPreviews, handleOpen }: AlarmInboxProps) => {
           <Title>루도가 알려요</Title>
         </TopBar>
         <PreviewList>
-          {notification?.map((alarmPreview: NotificationSSEType) => (
-            <AlarmPreview key={`${alarmPreview?.notificationId}`} {...alarmPreview} />
-          ))}
+          {notification
+            ?.filter((alarmPreview: NotificationSSEType) => !alarmPreview.read)
+            ?.map((alarmPreview: NotificationSSEType) => (
+              <AlarmPreview key={`${alarmPreview?.notificationId}`} {...alarmPreview} />
+            ))}
         </PreviewList>
         <BottomBar>
           {notification?.length !== 0 && <button>전체 읽음</button>}

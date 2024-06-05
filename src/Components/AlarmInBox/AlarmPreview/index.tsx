@@ -1,9 +1,17 @@
 import styled from 'styled-components';
 import { Logo, DefaultStudyThumbnail } from '@/Assets';
 import { getElapsedTime } from '@/utils/date';
-import { NotificationsType } from '@/Types/notifications';
+import { NotificationSSEType, NotificationsType } from '@/Types/notifications';
+import { MouseEvent } from 'react';
+import { useReadNotification } from '@/Hooks/notifications/useReadNotification';
+import { useQueryClient } from '@tanstack/react-query';
+import { NotificationResponse } from '@/Hooks/notifications/useNotifications';
+import { NOTIFICATIONS } from '@/Constants/queryString';
 
 export interface AlarmPreviewProps {
+  /** 알림 id */
+  notificationId: number;
+
   /** 알람 타입 */
   type: NotificationsType;
 
@@ -15,11 +23,35 @@ export interface AlarmPreviewProps {
 
   /** 알림 생성 시간 */
   createdAt: string;
+
+  /** 라우트 param */
+  params: NotificationSSEType['params'];
 }
 
-export const AlarmPreview = ({ type, content, title, createdAt }: AlarmPreviewProps) => {
+export const AlarmPreview = ({ notificationId, type, content, title, createdAt, params }: AlarmPreviewProps) => {
+  const { mutate } = useReadNotification(notificationId);
+  const queryClient = useQueryClient();
+
+  const readAlarm = (e: MouseEvent<HTMLLIElement>) => {
+    e.stopPropagation();
+    mutate(notificationId);
+    // TODO: params로 링크 이동
+
+    // 읽은 알림 쿼리 캐시에 반영
+    queryClient.setQueryData(NOTIFICATIONS.NOTIFICATIONS, (prev: { data: { data: NotificationResponse } }) => {
+      const newData = JSON.parse(JSON.stringify(prev));
+
+      const alarmArrIdx = prev?.data?.data?.notification.findIndex((alarm) => alarm.notificationId === notificationId);
+
+      if (alarmArrIdx !== -1) {
+        newData.data.data.notification[alarmArrIdx].read = true;
+      }
+      return newData;
+    });
+  };
+
   return (
-    <AlarmPreviewItem>
+    <AlarmPreviewItem onClick={readAlarm}>
       <ImageWrapper $alarmType={type}>
         {/* 모집공고 알림만 루도 로고, 나머지는 기본 스터디 이미지 */}
         <img
