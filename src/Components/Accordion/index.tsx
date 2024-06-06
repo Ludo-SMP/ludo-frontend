@@ -1,5 +1,6 @@
 import { SelectArrow } from '@/Assets/SelectArrow';
 import { textEllipsis } from '@/Styles/theme';
+import { getElapsedTime } from '@/utils/date';
 import { useEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 
@@ -7,8 +8,8 @@ export interface AccordionProps {
   /** 아코디언 써머리 영역에 나타날 제목 */
   title: string;
 
-  /** 아코디언 제목 아래의 설명 */
-  description?: string;
+  /** 알림 생성 시간 */
+  createdAt: string;
 
   /** 아코디언을 펼쳤을 때 나타날 내용 */
   children?: React.ReactNode;
@@ -16,7 +17,7 @@ export interface AccordionProps {
 
 /** 마이페이지 아코디언 */
 const Accordion = (props: AccordionProps) => {
-  const { title, description, children } = props;
+  const { title, createdAt, children } = props;
 
   const [isOpen, setIsOpen] = useState<boolean | null>(null);
 
@@ -34,7 +35,7 @@ const Accordion = (props: AccordionProps) => {
       <Box onClick={() => setIsOpen((prev) => !prev)}>
         <Item>
           <Title>{title}</Title>
-          {description && <Description>{description}</Description>}
+          <ElapsedTime>{getElapsedTime(createdAt)}</ElapsedTime>
         </Item>
         <SelectArrow isOpen={isOpen} />
       </Box>
@@ -83,7 +84,7 @@ export const Title = styled.span`
   ${textEllipsis}
 `;
 
-export const Description = styled.p`
+export const ElapsedTime = styled.p`
   color: ${({ theme }) => theme.color.black2};
 
   /* TODO: 타이포 브랜치 머지 후, typo 적용 */
