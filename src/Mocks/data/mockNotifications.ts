@@ -19,7 +19,7 @@ export const mockNotifications = {
         title: NOTIFICATIONS.REVIEW_START,
         content: NOTIFICATIONS.REVIEW_START,
         type: 'REVIEW_START',
-        read: true,
+        read: false,
         params: {
           studyId: 3,
           userId: 5,
