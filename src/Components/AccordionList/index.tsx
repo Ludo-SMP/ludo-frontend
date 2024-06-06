@@ -24,12 +24,6 @@ const Box = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 912px;
-  padding: 24px 32px;
-
-  border: 1px solid ${({ theme }) => theme.color.black1};
-  border-radius: 12px;
-  background: ${({ theme }) => theme.color.white};
 `;
 
 /** TODO: 타이포 적용 */

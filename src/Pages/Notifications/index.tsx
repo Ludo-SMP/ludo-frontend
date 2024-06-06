@@ -4,6 +4,7 @@ import { Stack } from '@/Components/Common/Stack';
 import { Divider } from '../CreateRecruitment/page';
 import Button from '@/Components/Common/Button';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 type NotiType = 'accordion' | 'text' | 'button';
 
@@ -58,31 +59,32 @@ const dummy: Array<AccordionNotiType | NotiListType<'text'> | NotiListType<'butt
   },
 ];
 
-//TODO: 명세와 타입 일치시키기
 const Notifications = () => {
   return (
-    <AccordionList title="제목">
-      <Stack divider={<Divider height={3} />} gap={'0px'}>
-        {dummy.map((props, idx) => {
-          const { title } = props;
-          const key = `${title}-${idx}`;
-          switch (props.type) {
-            case 'accordion':
-              return (
-                <Accordion key={key} {...props}>
-                  {props.content}
-                </Accordion>
-              );
-            case 'text':
-              return <AlarmText key={key} {...props} />;
-            case 'button':
-              return <AlarmTextWithBtn key={key} {...props} />;
-            default:
-              return null;
-          }
-        })}
-      </Stack>
-    </AccordionList>
+    <NotificationsLayout>
+      <AccordionList>
+        <Stack divider={<Divider height={3} />} gap={'0px'}>
+          {dummy.map((props, idx) => {
+            const { title } = props;
+            const key = `${title}-${idx}`;
+            switch (props.type) {
+              case 'accordion':
+                return (
+                  <Accordion key={key} {...props}>
+                    {props.content}
+                  </Accordion>
+                );
+              case 'text':
+                return <AlarmText key={key} {...props} />;
+              case 'button':
+                return <AlarmTextWithBtn key={key} {...props} />;
+              default:
+                return null;
+            }
+          })}
+        </Stack>
+      </AccordionList>
+    </NotificationsLayout>
   );
 };
 
@@ -122,3 +124,14 @@ const AlarmText = ({ title, description }: AlarmTextProps) => {
     </List>
   );
 };
+
+const NotificationsLayout = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 912px;
+  padding: 24px 32px;
+  border: 1px solid ${({ theme }) => theme.color.black1};
+  border-radius: 12px;
+  background: ${({ theme }) => theme.color.white};
+`;
