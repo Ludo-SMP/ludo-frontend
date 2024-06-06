@@ -43,6 +43,8 @@ export const NotificationWithText = <T extends RecruitmentNotification | ReviewN
 
   const readNotification = (e: MouseEvent<HTMLLIElement>) => {
     e.stopPropagation();
+    /** 이미 읽은 경우 */
+    if (read) return;
 
     /** 클릭한 요소의 태그 */
     const isButtonElement = e.target.toString().includes('ButtonElement');
