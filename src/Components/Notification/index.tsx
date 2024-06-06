@@ -1,7 +1,6 @@
 import { RecruitmentNotification, ReviewNotification, StudyNotification } from '@/Types/notifications';
-import { List, Box, Item, Title, ElapsedTime, Accordion } from '../Accordion';
-import Button from '../Common/Button';
-import { getElapsedTime } from '@/utils/date';
+import { Accordion } from '../Accordion';
+import { NotificationWithText } from './NotificationWithText';
 
 interface NotificationProps<T extends RecruitmentNotification | StudyNotification | ReviewNotification> {
   /** 알림 타입 */
@@ -26,33 +25,15 @@ interface NotificationProps<T extends RecruitmentNotification | StudyNotificatio
   createdAt: string;
 }
 
-export const Notification = <T extends RecruitmentNotification | StudyNotification | ReviewNotification>({
-  type,
-  notificationId,
-  title,
-  content,
-  read,
-  params,
-  createdAt,
-}: NotificationProps<T>) => {
+export const Notification = <T extends RecruitmentNotification | StudyNotification | ReviewNotification>(
+  props: NotificationProps<T>,
+) => {
   return (
     <>
-      {type?.includes('STUDY') ? (
-        <Accordion title={title} createdAt={createdAt} children={content} />
+      {props.type.includes('STUDY') ? (
+        <Accordion {...props} children={props.content} />
       ) : (
-        <List>
-          <Box>
-            <Item>
-              <Title>{title}</Title>
-              <ElapsedTime>{getElapsedTime(createdAt)}</ElapsedTime>
-            </Item>
-            {type?.includes('RECRUITMENT') && (
-              <Button type="button" scheme="secondary">
-                페이지로 이동
-              </Button>
-            )}
-          </Box>
-        </List>
+        <NotificationWithText {...props} />
       )}
     </>
   );
