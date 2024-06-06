@@ -22,8 +22,8 @@ export const useApplyStudyMutation = (
     onError: (e: AxiosError<{ ok: boolean; message: string; data: null }>) => {
       const errorMessage = e.response.data?.message;
       if (errorMessage === '이미 지원한 모집 공고입니다.' || errorMessage === '이미 거절된 모집 공고입니다.')
-        handleApplyApprove(() => 'ALREDAY_APPLY');
-      if (errorMessage === '이미 수락된 모집 공고입니다.') handleApplyApprove(() => 'ALREDY_PARTICIPATED');
+        handleApplyApprove(() => 'ALREADY_APPLY');
+      if (errorMessage === '이미 수락된 모집 공고입니다.') handleApplyApprove(() => 'ALREADY_PARTICIPATED');
       if (errorMessage === '현재 모집 중인 스터디가 아닙니다.') handleApplyApprove(() => 'CLOSED');
       openModal();
     },
