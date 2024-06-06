@@ -1,12 +1,28 @@
 import { SelectArrow } from '@/Assets/SelectArrow';
 import { textEllipsis } from '@/Styles/theme';
+import { StudyNotification } from '@/Types/notifications';
 import { getElapsedTime } from '@/utils/date';
 import { useEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 
-export interface AccordionProps {
-  /** 아코디언 써머리 영역에 나타날 제목 */
+export interface AccordionProps<T extends StudyNotification> {
+  /** 알림 타입 */
+  type: T['type'];
+
+  /** 알림 id */
+  notificationId: number;
+
+  /** 알림 Title */
   title: string;
+
+  /** 알림 상세 내용 */
+  content?: string;
+
+  /** 읽은 기록  */
+  read: boolean;
+
+  /** 페이지 이동에 필요한 params */
+  params: T['params'];
 
   /** 알림 생성 시간 */
   createdAt: string;
@@ -16,7 +32,7 @@ export interface AccordionProps {
 }
 
 /** 마이페이지 아코디언 */
-const Accordion = (props: AccordionProps) => {
+const Accordion = <T extends StudyNotification>(props: AccordionProps<T>) => {
   const { title, createdAt, children } = props;
 
   const [isOpen, setIsOpen] = useState<boolean | null>(null);
