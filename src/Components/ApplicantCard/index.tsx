@@ -44,7 +44,14 @@ export const ApplicantCard = ({
     setApplyStatus('REFUSED');
   });
 
-  return <CardBox></CardBox>;
+  return (
+    <CardBox>
+      <Buttons>
+        <Button>거절하기</Button>
+        <Button scheme="secondary">수락하기</Button>
+      </Buttons>
+    </CardBox>
+  );
 };
 
 const CardBox = styled.article`
@@ -59,4 +66,13 @@ const CardBox = styled.article`
   border: 1px solid ${({ theme }) => theme.color.black1};
   background: ${({ theme }) => theme.color.white};
   box-shadow: 0px 0px 20px 0px ${({ theme }) => theme.color.black0};
+`;
+
+const Buttons = styled.div`
+  display: flex;
+  gap: 12px;
+
+  & > button {
+    flex: 1;
+  }
 `;
