@@ -47,37 +47,30 @@ const Accordion = <T extends StudyNotification>(props: AccordionProps<T>) => {
   }, []);
 
   return (
-    <List>
-      <Box onClick={() => setIsOpen((prev) => !prev)}>
+    <AccordionBox $isOpen={isOpen}>
+      <AccordionInnerBox onClick={() => setIsOpen((prev) => !prev)}>
         <Item>
           <Title>{title}</Title>
-          <ElapsedTime>{getElapsedTime(createdAt)}</ElapsedTime>
+          <ElapsedTimeText>{getElapsedTime(createdAt)}</ElapsedTimeText>
         </Item>
         <SelectArrow isOpen={isOpen} />
-      </Box>
-
-      <AccordionDetail ref={contentRef} $isOpen={isOpen} $contentHeight={contentHeight}>
+      </AccordionInnerBox>
+      <AccordionDetailText ref={contentRef} $isOpen={isOpen} $contentHeight={contentHeight}>
         {children}
-      </AccordionDetail>
-    </List>
+      </AccordionDetailText>
+    </AccordionBox>
   );
 };
 
-export const Item = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  width: calc(100% - 24px);
-`;
-
-export const List = styled.li`
+export const AccordionBox = styled.li<{ $isOpen?: null | boolean }>`
   display: flex;
   flex-direction: column;
   max-width: 912px;
   padding: 16px 0px;
+  gap: ${({ $isOpen }) => ($isOpen ? '16px' : '0px')};
 `;
 
-export const Box = styled.div`
+export const AccordionInnerBox = styled.div`
   display: flex;
   width: 100%;
   align-items: center;
@@ -85,6 +78,13 @@ export const Box = styled.div`
   min-width: 300px;
   background-color: ${({ theme }) => theme.color.white};
   min-height: 56px;
+`;
+
+export const Item = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: calc(100% - 24px);
 `;
 
 export const Title = styled.span`
@@ -100,7 +100,7 @@ export const Title = styled.span`
   ${textEllipsis}
 `;
 
-export const ElapsedTime = styled.p`
+export const ElapsedTimeText = styled.p`
   color: ${({ theme }) => theme.color.black2};
 
   /* TODO: 타이포 브랜치 머지 후, typo 적용 */
@@ -112,10 +112,23 @@ export const ElapsedTime = styled.p`
   ${textEllipsis}
 `;
 
-const AccordionDetail = styled.p<{ $isOpen?: null | boolean; $contentHeight: number }>`
+const AccordionDetailText = styled.p<{ $isOpen?: null | boolean; $contentHeight: number }>`
+  display: flex;
   min-width: 300px;
-  padding: 8px 64px 8px 0px;
+  max-width: 912px;
+  padding: 8px 64px 32px 0px;
+  align-items: flex-start;
   gap: 16px;
+  align-self: stretch;
+
+  color: ${({ theme }) => theme.color.black4};
+
+  /* Page/Body-Medium */
+  font-family: 'Pretendard400';
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 32px;
 
   visibility: ${({ $isOpen }) => ($isOpen ? 'visible' : 'hidden')};
   opacity: 0;
