@@ -26,7 +26,9 @@ const Box = styled.div`
   width: 100%;
 `;
 
-/** TODO: 타이포 적용 */
 const Title = styled.h1`
-  margin-bottom: 10px;
+  color: ${({ theme }) => theme.color.black5};
+
+  /* Page/Title-SemiBold */
+  ${({ theme }) => theme.typo.PageTitle}
 `;
