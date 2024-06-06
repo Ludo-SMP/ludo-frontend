@@ -11,6 +11,7 @@ import { APPLY } from '@/Constants/messages';
 import { STUDY } from '@/Constants/queryString';
 import { useModalStore } from '@/store/modal';
 import { useQueryClient } from '@tanstack/react-query';
+import { RowDivider } from '../Common/Divider/RowDivider';
 
 interface ApplicantCardProps extends Omit<Member, 'role'> {
   /** 스터디 ID */
@@ -46,6 +47,22 @@ export const ApplicantCard = ({
 
   return (
     <CardBox>
+      <CardInner>
+        <Title>지원한 스터디 이름</Title>
+        <Content>
+          <ProfileSection>
+            <Profile width={100} height={100} />
+            <ProfileInfoBox>
+              <Nickname>닉네임</Nickname>
+              <Fields>
+                <Field>이메일</Field>
+                <Field>포지션</Field>
+              </Fields>
+            </ProfileInfoBox>
+          </ProfileSection>
+          <RowDivider />
+        </Content>
+      </CardInner>
       <Buttons>
         <Button>거절하기</Button>
         <Button scheme="secondary">수락하기</Button>
@@ -66,6 +83,62 @@ const CardBox = styled.article`
   border: 1px solid ${({ theme }) => theme.color.black1};
   background: ${({ theme }) => theme.color.white};
   box-shadow: 0px 0px 20px 0px ${({ theme }) => theme.color.black0};
+`;
+
+const CardInner = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+`;
+
+const Title = styled.p`
+  color: ${({ theme }) => theme.color.black2};
+  font-family: Pretendard400;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+`;
+
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+`;
+
+const ProfileSection = styled.section`
+  display: flex;
+  gap: 16px;
+`;
+
+const ProfileInfoBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+`;
+
+const Nickname = styled.span`
+  color: ${({ theme }) => theme.color.black5};
+  font-family: Pretendard600;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 32px;
+`;
+
+const Fields = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`;
+
+const Field = styled.span`
+  color: ${({ theme }) => theme.color.black2};
+  font-family: Pretendard500;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
 `;
 
 const Buttons = styled.div`
