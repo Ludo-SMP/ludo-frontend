@@ -48,7 +48,7 @@ const Accordion = <T extends StudyNotification>(props: AccordionProps<T>) => {
 
   return (
     <AccordionBox $isOpen={isOpen}>
-      <AccordionInnerBox onClick={() => setIsOpen((prev) => !prev)}>
+      <AccordionInnerBox onClick={() => setIsOpen((prev) => !prev)} $read={props.read}>
         <Item>
           <Title>{title}</Title>
           <ElapsedTimeText>{getElapsedTime(createdAt)}</ElapsedTimeText>
@@ -70,7 +70,7 @@ export const AccordionBox = styled.li<{ $isOpen?: null | boolean }>`
   gap: ${({ $isOpen }) => ($isOpen ? '16px' : '0px')};
 `;
 
-export const AccordionInnerBox = styled.div`
+export const AccordionInnerBox = styled.div<{ $read: boolean }>`
   display: flex;
   width: 100%;
   align-items: center;
@@ -78,6 +78,8 @@ export const AccordionInnerBox = styled.div`
   min-width: 300px;
   background-color: ${({ theme }) => theme.color.white};
   min-height: 56px;
+  /** opacitiy 추후 수정 반영 */
+  opacity: ${({ $read }) => ($read ? 0.5 : 1)};
 `;
 
 export const Item = styled.div`

@@ -110,7 +110,7 @@ export const NotificationWithText = <T extends RecruitmentNotification | ReviewN
 
   return (
     <NotificationWithTextBox onClick={readNotification}>
-      <NotificationWithTextInnerBox>
+      <NotificationWithTextInnerBox $read={read}>
         <Item>
           <Title>{title}</Title>
           <ElapsedTimeText>{getElapsedTime(createdAt)}</ElapsedTimeText>
@@ -132,7 +132,7 @@ const NotificationWithTextBox = styled.li`
   padding: 16px 0px;
 `;
 
-const NotificationWithTextInnerBox = styled.div`
+const NotificationWithTextInnerBox = styled.div<{ $read: boolean }>`
   display: flex;
   width: 100%;
   align-items: center;
@@ -140,6 +140,8 @@ const NotificationWithTextInnerBox = styled.div`
   min-width: 300px;
   background-color: ${({ theme }) => theme.color.white};
   min-height: 56px;
+  /** opacitiy 추후 수정 반영 */
+  opacity: ${({ $read }) => ($read ? 0.5 : 1)};
 `;
 
 const Item = styled.div`
