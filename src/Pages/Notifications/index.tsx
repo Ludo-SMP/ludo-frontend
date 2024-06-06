@@ -36,4 +36,6 @@ const NotificationsLayout = styled.div`
   border: 1px solid ${({ theme }) => theme.color.black1};
   border-radius: 12px;
   background: ${({ theme }) => theme.color.white};
+  max-height: 1400px;
+  overflow: auto;
 `;
