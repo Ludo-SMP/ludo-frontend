@@ -3,7 +3,9 @@ import { getElapsedTime } from '@/utils/date';
 import Button from '@/Components/Common/Button';
 import styled from 'styled-components';
 import { textEllipsis } from '@/Styles/theme';
-
+import { useReadNotification } from '@/Hooks/notifications/useReadNotification';
+import { useQueryClient } from '@tanstack/react-query';
+import { MouseEvent } from 'react';
 interface NotificationWithTextProps<T extends RecruitmentNotification | ReviewNotification> {
   /** 알림 타입 */
   type: T['type'];
@@ -36,8 +38,21 @@ export const NotificationWithText = <T extends RecruitmentNotification | ReviewN
   params,
   createdAt,
 }: NotificationWithTextProps<T>) => {
+  const { mutate: readMutate } = useReadNotification(notificationId);
+  const queryClient = useQueryClient();
+
+  const readNotification = (e: MouseEvent<HTMLLIElement>) => {
+    e.stopPropagation();
+
+    /** 클릭한 요소의 태그 */
+    const isButtonElement = e.target.toString().includes('ButtonElement');
+
+    /** 모집공고 관련 알림일 때, 버튼을 누르지 않은 경우 읽음 처리 X */
+    if (type === 'RECRUITMENT' && !isButtonElement) return;
+  };
+
   return (
-    <NotificationWithTextBox>
+    <NotificationWithTextBox onClick={readNotification}>
       <NotificationWithTextInnerBox>
         <Item>
           <Title>{title}</Title>
