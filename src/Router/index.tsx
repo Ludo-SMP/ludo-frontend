@@ -137,7 +137,7 @@ export const RouterPath = createBrowserRouter([
         element: <SignUpFailPage />,
       },
       {
-        path: ROUTES.STUDY.APPLICNATS,
+        path: ROUTES.STUDY.APPLICANTS,
         element: <ApplicantsPage />,
       },
       {
