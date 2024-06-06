@@ -66,7 +66,7 @@ export const Box = styled.div`
   align-items: center;
   cursor: pointer;
   min-width: 300px;
-  background-color: ${({ theme }) => theme.color.white};
+  background-color: inherit;
   min-height: 56px;
 `;
 
