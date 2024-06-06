@@ -2,8 +2,14 @@ import { SelectArrow } from '@/Assets/SelectArrow';
 import { textEllipsis } from '@/Styles/theme';
 import { StudyNotification } from '@/Types/notifications';
 import { getElapsedTime } from '@/utils/date';
+import { useQueryClient } from '@tanstack/react-query';
 import { useEffect, useRef, useState } from 'react';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 import styled, { css } from 'styled-components';
+import { MouseEvent } from 'react';
+import { useReadNotification } from '@/Hooks/notifications/useReadNotification';
+import { NOTIFICATIONS } from '@/Constants/queryString';
+import { NotificationResponse } from '@/Hooks/notifications/useNotifications';
 
 export interface AccordionProps<T extends StudyNotification> {
   /** 알림 타입 */
@@ -33,18 +39,68 @@ export interface AccordionProps<T extends StudyNotification> {
 
 /** 마이페이지 아코디언 */
 const Accordion = <T extends StudyNotification>(props: AccordionProps<T>) => {
-  const { title, createdAt, children } = props;
+  const { title, type, params, notificationId, createdAt, read, children } = props;
 
   const [isOpen, setIsOpen] = useState<boolean | null>(null);
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const [contentHeight, setContentHeight] = useState<number>(0);
 
   const contentRef = useRef<HTMLDivElement>(null);
 
+  const { mutate: readMutate } = useReadNotification(notificationId);
+
   useEffect(() => {
     setContentHeight(contentRef?.current?.clientHeight ?? 0);
     setIsOpen(null);
   }, []);
+
+  const moveToDestPage = (
+    { type, params }: { type: StudyNotification['type']; params: StudyNotification['params'] },
+    navigate: NavigateFunction,
+  ) => {
+    let destPagePath = null;
+    // 스터디 종료 임박 OR 스터디 지원 탈락인 경우 이동 X
+    if (type === 'STUDY_END_DATE' || type === 'STUDY_APPLICANT_REJECT') return;
+
+    switch (type) {
+      /** 스터디 지원자 발생 => 스터디 지원자 확인 페이지 */
+      case 'STUDY_APPLICANT':
+        destPagePath = `/studies/${params.studyId}/applicants`;
+        break;
+      /** 스터디 지원 승인, 스터디 탈퇴 신청, 스터디원 탈퇴원 발생 => 스터디 상테 페이지 */
+      default:
+        destPagePath = `/studies/${params.studyId}`;
+    }
+    navigate(destPagePath);
+  };
+
+  const readNotification = (e: MouseEvent<HTMLParagraphElement>) => {
+    e.stopPropagation();
+
+    // 관련 페이지로 이동
+    moveToDestPage({ type: type, params: params }, navigate);
+
+    /** 이미 읽은 경우, 읽음 처리 X */
+    if (read) return;
+
+    readMutate(notificationId);
+
+    // 얼람 앍움 처리 캐시 반영
+    queryClient.setQueryData(NOTIFICATIONS.NOTIFICATIONS, (prev: { data: { data: NotificationResponse } }) => {
+      const newData = JSON.parse(JSON.stringify(prev));
+
+      const alarmArrIdx = prev?.data?.data?.notification.findIndex(
+        (notification) => notification.notificationId === notificationId,
+      );
+
+      if (alarmArrIdx !== -1) {
+        newData.data.data.notification[alarmArrIdx].read = true;
+      }
+      return newData;
+    });
+  };
 
   return (
     <AccordionBox $isOpen={isOpen}>
@@ -55,7 +111,7 @@ const Accordion = <T extends StudyNotification>(props: AccordionProps<T>) => {
         </Item>
         <SelectArrow isOpen={isOpen} />
       </AccordionInnerBox>
-      <AccordionDetailText ref={contentRef} $isOpen={isOpen} $contentHeight={contentHeight}>
+      <AccordionDetailText ref={contentRef} $isOpen={isOpen} $contentHeight={contentHeight} onClick={readNotification}>
         {children}
       </AccordionDetailText>
     </AccordionBox>
