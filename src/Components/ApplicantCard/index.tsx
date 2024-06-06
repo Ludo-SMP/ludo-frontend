@@ -12,6 +12,7 @@ import { STUDY } from '@/Constants/queryString';
 import { useModalStore } from '@/store/modal';
 import { useQueryClient } from '@tanstack/react-query';
 import { RowDivider } from '../Common/Divider/RowDivider';
+import { CircularRate } from '../CircularRate';
 
 interface ApplicantCardProps extends Omit<Member, 'role'> {
   /** 스터디 ID */
@@ -62,6 +63,17 @@ export const ApplicantCard = ({
           </ProfileSection>
           <RowDivider />
           <StatsSection>
+            <Stats>
+              <li>
+                <CircularRate percentage={80} label="적극성" />
+              </li>
+              <li>
+                <CircularRate percentage={78} label="전문성" />
+              </li>
+              <li>
+                <CircularRate percentage={34} label="소통력" />
+              </li>
+            </Stats>
             <StatsDescription>
               다시 <Bold>함께 하고 싶어하는</Bold> 사용자예요!
               <br />
@@ -152,6 +164,11 @@ const StatsSection = styled.section`
   display: flex;
   flex-direction: column;
   gap: 16px;
+`;
+
+const Stats = styled.ul`
+  display: flex;
+  gap: 12px;
 `;
 
 const StatsDescription = styled.p`
