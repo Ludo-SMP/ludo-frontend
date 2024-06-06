@@ -1,19 +1,20 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { StudyProgressSection } from './StudyProgressSection';
 import Button from '@/Components/Common/Button';
 import Modal from '@/Components/Common/Modal';
 import ApplyModal from '@/Components/Modal/ApplyModal';
+import { useCloseRecruitmentMutation } from '@/Hooks/recruitments/useCloseRecruitmentMutation';
+
 import { APPLY, RECRUITMENT } from '@/Constants/messages';
 import { ROUTES } from '@/Constants/route';
-import { useCloseRecruitmentMutation } from '@/Hooks/recruitments/useCloseRecruitmentMutation';
 import { ApplyTryStatus, RecruitmentDetail } from '@/Types/study';
 import { useLoginStore } from '@/store/auth';
 import { useModalStore } from '@/store/modal';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { StudyProgressSection } from './StudyProgressSection';
 import { getPeriod } from '@/utils/date';
 
-interface ApplySectionProps {
+export interface ApplySectionProps {
   isMine: boolean;
   recruitment: RecruitmentDetail['recruitment'];
   study: RecruitmentDetail['study'];
@@ -24,7 +25,7 @@ const ApplySection = ({ isMine, recruitment, study }: ApplySectionProps) => {
   const { isModalOpen, openModal, closeModal } = useModalStore();
   const { isLoggedIn } = useLoginStore();
   const [applyTryStatus, setApplyTryStatus] = useState<ApplyTryStatus>('NOT APPLY');
-  const [isCloseRecruitmentBtnClicked, setIsCloseRecruitmentBtnClicked] = useState<boolean>(false);
+  const [closeRecruitment, setCloseRecruitment] = useState<boolean>(false);
 
   const { mutate: closeRecruitmentMutate } = useCloseRecruitmentMutation(study?.id);
 
@@ -39,41 +40,40 @@ const ApplySection = ({ isMine, recruitment, study }: ApplySectionProps) => {
         category={study.category?.name}
         // TODO: 진행요일 추가
       />
-      {/* TODO: 참여자, 비참여자, 이미 지원한 참여자 시점 UI 분기 로직 개선 */}
-      <ButtonBox>
-        {isMine ? (
-          <>
-            <Button
-              scheme="normal"
-              onClick={() => {
-                setIsCloseRecruitmentBtnClicked(true);
-                openModal();
-              }}
-            >
-              모집 마감하기
+      {isMine ? (
+        <ButtonBox>
+          <Button
+            scheme="secondary"
+            onClick={() => {
+              navigate(`/studies/${study.id}/recruitments/${recruitment.id}/edit`);
+            }}
+          >
+            스터디 모집 공고 수정하기
+          </Button>
+          <Button
+            scheme="normal"
+            onClick={() => {
+              setCloseRecruitment(true);
+              openModal();
+            }}
+          >
+            모집 마감하기
+          </Button>
+        </ButtonBox>
+      ) : (
+        <ButtonBox>
+          {applyTryStatus === 'ALREADY_APPLY' ? (
+            <AlertText>이미 지원한 스터디입니다.</AlertText>
+          ) : (
+            <Button scheme="secondary" onClick={openModal}>
+              스터디 지원하기
             </Button>
-            <Button
-              scheme="secondary"
-              onClick={() => {
-                navigate(`/studies/${study.id}/recruitments/${recruitment.id}/edit`);
-              }}
-            >
-              스터디 모집 공고 수정하기
-            </Button>
-          </>
-        ) : (
-          <>
-            {applyTryStatus === 'ALREDAY_APPLY' ? (
-              <div className="text__alert">이미 지원한 스터디입니다.</div>
-            ) : (
-              <Button scheme="secondary" onClick={openModal}>
-                스터디 지원하기
-              </Button>
-            )}
-          </>
-        )}
-      </ButtonBox>
-      {!isLoggedIn && isModalOpen && !isCloseRecruitmentBtnClicked && (
+          )}
+        </ButtonBox>
+      )}
+
+      {/* 로그인 안내 모달 */}
+      {!isLoggedIn && isModalOpen && !closeRecruitment && (
         <Modal
           title={APPLY.LOGIN.title}
           handleApprove={() => navigate(ROUTES.AUTH.LOGIN)}
@@ -84,7 +84,8 @@ const ApplySection = ({ isMine, recruitment, study }: ApplySectionProps) => {
           {APPLY.LOGIN.content}
         </Modal>
       )}
-      {isLoggedIn && isModalOpen && !isCloseRecruitmentBtnClicked && applyTryStatus === 'NOT APPLY' && (
+      {/* 지원하기 모달 */}
+      {isLoggedIn && isModalOpen && !closeRecruitment && applyTryStatus === 'NOT APPLY' && (
         <ApplyModal
           handleApplyApprove={setApplyTryStatus}
           studyId={study.id}
@@ -92,7 +93,8 @@ const ApplySection = ({ isMine, recruitment, study }: ApplySectionProps) => {
           positions={recruitment.positions}
         />
       )}
-      {isLoggedIn && isModalOpen && !isCloseRecruitmentBtnClicked && applyTryStatus === 'SUCCESS' && (
+      {/* 지원완료 모달 */}
+      {isLoggedIn && isModalOpen && !closeRecruitment && applyTryStatus === 'SUCCESS' && (
         <Modal
           title={APPLY.SUCCESS.title}
           handleApprove={() => {
@@ -105,40 +107,33 @@ const ApplySection = ({ isMine, recruitment, study }: ApplySectionProps) => {
           <div className="approve__image"></div>
         </Modal>
       )}
+
+      {/* 지원이 마감된 스터디입니다 모달 */}
       {isLoggedIn &&
         isModalOpen &&
-        !isCloseRecruitmentBtnClicked &&
+        !closeRecruitment &&
         (applyTryStatus === 'CLOSED' ||
-          applyTryStatus === 'ALREDAY_APPLY' ||
-          applyTryStatus === 'ALREDY_PARTICIPATED') && (
+          applyTryStatus === 'ALREADY_APPLY' ||
+          applyTryStatus === 'ALREADY_PARTICIPATED') && (
           <Modal
-            title={
-              applyTryStatus === 'CLOSED'
-                ? APPLY.CLOSED.title
-                : applyTryStatus === 'ALREDAY_APPLY'
-                  ? APPLY.ALREADY_APPLY.title
-                  : APPLY.ALREADY_PARTICIPATED.title
-            }
+            title={APPLY?.[applyTryStatus]?.title}
             handleApprove={() => {
-              setApplyTryStatus(() => 'ALREDAY_APPLY');
+              setApplyTryStatus(() => 'ALREADY_APPLY');
               closeModal();
             }}
             approveBtnText="확인"
           >
-            {applyTryStatus === 'CLOSED'
-              ? APPLY.CLOSED.content
-              : applyTryStatus === 'ALREDAY_APPLY'
-                ? APPLY.ALREADY_APPLY.content
-                : APPLY.ALREADY_PARTICIPATED.content}
+            {APPLY?.[applyTryStatus]?.content}
           </Modal>
         )}
-      {isModalOpen && isCloseRecruitmentBtnClicked && (
+      {/* 스터디 모집을 마감하시겠습니까 모달 */}
+      {isModalOpen && closeRecruitment && (
         <Modal
           isBtnWidthEqual={true}
           cancelBtnText={'취소하기'}
           approveBtnText={'네'}
           handleApprove={() => {
-            setIsCloseRecruitmentBtnClicked(false);
+            setCloseRecruitment(false);
             closeRecruitmentMutate();
           }}
           title={RECRUITMENT.CLOSE.title}
@@ -159,7 +154,6 @@ const ApplySectionBox = styled.section`
   width: 100%;
   padding: 16px;
   gap: 16px;
-
   height: 100%;
   border-radius: 16px;
   border: 1px solid ${({ theme }) => theme.color.black1};
@@ -167,9 +161,8 @@ const ApplySectionBox = styled.section`
 
 const ButtonBox = styled.div`
   display: flex;
-  justify-content: center;
-  gap: 24px;
-  align-self: stretch;
+  flex-direction: column;
+  gap: 12px;
   margin-top: 32px;
 
   & > button {
@@ -179,12 +172,10 @@ const ButtonBox = styled.div`
     gap: 8px;
     flex: 1 0 0;
   }
+`;
 
-  .text__alert {
-    font-family: 'Pretendard600';
-    font-size: 16px;
-    font-style: normal;
-    line-height: 40px; /* 250% */
-    color: ${({ theme }) => theme.color.black2};
-  }
+const AlertText = styled.div`
+  font-family: 'Pretendard600';
+  ${({ theme }) => theme.typo.buttonButton};
+  color: ${({ theme }) => theme.color.black2};
 `;
