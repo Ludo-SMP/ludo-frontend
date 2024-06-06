@@ -61,6 +61,13 @@ export const ApplicantCard = ({
             </ProfileInfoBox>
           </ProfileSection>
           <RowDivider />
+          <StatsSection>
+            <StatsDescription>
+              다시 <Bold>함께 하고 싶어하는</Bold> 사용자예요!
+              <br />
+              주변 사람에게 <Bold>추천하고 싶은</Bold> 사용자예요!
+            </StatsDescription>
+          </StatsSection>
         </Content>
       </CardInner>
       <Buttons>
@@ -139,6 +146,24 @@ const Field = styled.span`
   font-size: 18px;
   font-weight: 500;
   line-height: 24px;
+`;
+
+const StatsSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`;
+
+const StatsDescription = styled.p`
+  color: ${({ theme }) => theme.color.black2};
+  font-family: Pretendard400;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 28px;
+`;
+
+const Bold = styled.span`
+  color: ${({ theme }) => theme.color.black5};
 `;
 
 const Buttons = styled.div`
