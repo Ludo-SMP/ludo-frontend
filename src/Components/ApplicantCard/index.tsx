@@ -24,7 +24,15 @@ interface ApplicantCardProps extends Omit<Member, 'role'> {
 }
 
 /** 지원자 카드 */
-const ApplicantCard = ({ studyId, id: applicantId, title, nickname, email, position, isOwner }: ApplicantCardProps) => {
+export const ApplicantCard = ({
+  studyId,
+  id: applicantId,
+  title,
+  nickname,
+  email,
+  position,
+  isOwner,
+}: ApplicantCardProps) => {
   const [applyStatus, setApplyStatus] = useState<ApplyStatus>('UNCHECKED');
   const { isModalOpen, closeModal } = useModalStore();
   const queryClient = useQueryClient();
@@ -36,124 +44,19 @@ const ApplicantCard = ({ studyId, id: applicantId, title, nickname, email, posit
     setApplyStatus('REFUSED');
   });
 
-  return (
-    <ApplicantCardWrapper>
-      <Profile width={180} height={180} />
-      <ApplicantInfoWrapper>
-        <div className="title">{title}</div>
-        <div className="detail__info">
-          <span className="nickname">{nickname}</span>
-          <InfoField title="이메일" content={email} />
-          <InfoField title="포지션" content={position?.name} />
-        </div>
-      </ApplicantInfoWrapper>
-      {isOwner && (
-        <ApplicantButtonsWrapper>
-          <Button
-            onClick={(e) => {
-              e.stopPropagation();
-              refuseMutate();
-            }}
-          >
-            거절하기
-          </Button>
-          <Button
-            scheme="secondary"
-            onClick={(e) => {
-              e.stopPropagation();
-              acceptMutate();
-            }}
-          >
-            수락하기
-          </Button>
-        </ApplicantButtonsWrapper>
-      )}
-      {isModalOpen && applyStatus === 'ACCEPTED' && (
-        <Modal
-          handleApprove={() => {
-            closeModal();
-            queryClient.invalidateQueries({ queryKey: [...STUDY.APPLICNATS(studyId)] });
-          }}
-          title={APPLY.ACCEPT.title}
-          approveBtnText="확인하기"
-        >
-          {APPLY.ACCEPT.content}
-        </Modal>
-      )}
-      {isModalOpen && applyStatus === 'REFUSED' && (
-        <Modal
-          handleApprove={() => {
-            closeModal();
-            queryClient.invalidateQueries({ queryKey: [...STUDY.APPLICNATS(studyId)] });
-          }}
-          title={APPLY.REFUSE.title}
-          approveBtnText="확인하기"
-        >
-          {APPLY.REFUSE.content}
-        </Modal>
-      )}
-    </ApplicantCardWrapper>
-  );
+  return <CardBox></CardBox>;
 };
 
-const ApplicantCardWrapper = styled.div`
-  position: relative;
+const CardBox = styled.article`
   display: flex;
-  width: 100%;
-  height: auto;
-  padding: 32px 40px;
-  align-items: flex-start;
-  gap: 40px;
-  border-radius: ${({ theme }) => theme.borderRadius.medium};
+  width: 392px;
+  min-width: 248px;
+  max-width: 1224px;
+  padding: 24px;
+  flex-direction: column;
+  gap: 24px;
+  border-radius: 16px;
   border: 1px solid ${({ theme }) => theme.color.black1};
   background: ${({ theme }) => theme.color.white};
   box-shadow: 0px 0px 20px 0px ${({ theme }) => theme.color.black0};
 `;
-
-const ApplicantInfoWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: auto;
-  align-items: flex-start;
-  gap: 8px;
-  align-self: stretch;
-
-  .title {
-    color: ${({ theme }) => theme.color.black3};
-    font-family: 'Pretendard500';
-    font-size: ${({ theme }) => theme.font.small};
-    font-style: normal;
-    font-weight: 500;
-    line-height: 30px;
-  }
-
-  .detail__info {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-    align-self: stretch;
-
-    .nickname {
-      color: ${({ theme }) => theme.color.black5};
-      font-family: 'Pretendard700';
-      font-size: ${({ theme }) => theme.font.xxlarge};
-      font-style: normal;
-      font-weight: 700;
-      line-height: 40px;
-    }
-    .email {
-      color: ${({ theme }) => theme.color.black2};
-    }
-  }
-`;
-const ApplicantButtonsWrapper = styled.div`
-  position: absolute;
-  right: 32px;
-  bottom: 40px;
-  display: flex;
-  gap: 24px;
-  align-items: flex-end;
-`;
-
-export default ApplicantCard;
