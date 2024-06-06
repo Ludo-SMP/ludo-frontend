@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
 
-export interface AccordionListProps {
-  /** 아코디언 리스트 제목 */
+export interface NotificationListProps {
+  /** 알림 리스트 제목 */
   title?: string;
 
   /** 제목 아래 들어갈 노드 (ex. 아코디언) */
@@ -9,7 +9,7 @@ export interface AccordionListProps {
 }
 
 /** 아코디언 목록 */
-const AccordionList = ({ title, children }: AccordionListProps) => {
+const NotificationList = ({ title, children }: NotificationListProps) => {
   return (
     <Box>
       <Title>{title ?? '루도가 알려요'}</Title>
@@ -18,7 +18,7 @@ const AccordionList = ({ title, children }: AccordionListProps) => {
   );
 };
 
-export { AccordionList };
+export { NotificationList };
 
 const Box = styled.div`
   display: flex;

@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { AccordionList } from '.';
+import { NotificationList } from '.';
 import { Accordion } from '../Accordion';
 
 const meta = {
-  component: AccordionList,
+  component: NotificationList,
   args: {
     children: (
       <Accordion title="스터디 탈퇴 승인 결과가 나왔습니다.">
@@ -11,7 +11,7 @@ const meta = {
       </Accordion>
     ),
   },
-} satisfies Meta<typeof AccordionList>;
+} satisfies Meta<typeof NotificationList>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

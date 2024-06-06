@@ -1,5 +1,5 @@
 import { Accordion, Box, List, Item, Title, Description } from '@/Components/Accordion';
-import { AccordionList } from '@/Components/AccordionList';
+import { NotificationList } from '@/Components/NotificationList';
 import { Stack } from '@/Components/Common/Stack';
 import { Divider } from '../CreateRecruitment/page';
 import Button from '@/Components/Common/Button';
@@ -62,7 +62,7 @@ const dummy: Array<AccordionNotiType | NotiListType<'text'> | NotiListType<'butt
 const Notifications = () => {
   return (
     <NotificationsLayout>
-      <AccordionList>
+      <NotificationList>
         <Stack divider={<Divider height={3} />} gap={'0px'}>
           {dummy.map((props, idx) => {
             const { title } = props;
@@ -83,7 +83,7 @@ const Notifications = () => {
             }
           })}
         </Stack>
-      </AccordionList>
+      </NotificationList>
     </NotificationsLayout>
   );
 };
