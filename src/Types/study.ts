@@ -53,7 +53,6 @@ export interface Stack {
   imageUrl: string;
 }
 
-// TODO: 타입 구조 개선
 export interface RecruitmentDetail {
   recruitment: {
     id: number;
@@ -74,6 +73,7 @@ export interface RecruitmentDetail {
     category: Category;
     owner: User;
     platform: Platform;
+    platformUrl: string;
     way: ProgressMethod;
     participantLimit: number;
     startDateTime: string;
