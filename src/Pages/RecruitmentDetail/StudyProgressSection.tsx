@@ -1,7 +1,7 @@
 import { InfoField } from '@/Components/Common/InfoField';
 import { RowDivider } from '@/Components/Common/Divider/RowDivider';
 import styled from 'styled-components';
-import { Category, ProgressMethod } from '@/Types/study';
+import { ProgressMethod } from '@/Types/study';
 import { PROGRESS_METHOD } from '@/Shared/study';
 
 export interface StudyProgressSectionProps {
