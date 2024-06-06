@@ -178,8 +178,11 @@ const AccordionDetailText = styled.p<{ $isOpen?: null | boolean; $contentHeight:
   align-items: flex-start;
   gap: 16px;
   align-self: stretch;
-
   color: ${({ theme }) => theme.color.black4};
+
+  &:hover {
+    cursor: pointer;
+  }
 
   /* Page/Body-Medium */
   font-family: 'Pretendard400';
