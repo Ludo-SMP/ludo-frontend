@@ -1,6 +1,6 @@
 import { HttpResponse, http } from 'msw';
 import { applicantsDetailMockData, studyDetailMockData, myPageInfoData } from '../data/mockStudies';
-const baseURL = import.meta.env.VITE_MOCK_API_URL;
+const baseURL = import.meta.env.VITE_BASE_API_URL;
 
 const createStudy = http.post(`${baseURL}/api/studies`, async ({ params }) => {
   return new HttpResponse(
