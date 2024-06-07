@@ -34,6 +34,7 @@ const MyPageReviewsLayout = styled.div`
 const StudyReviewsList = styled.ul`
   display: flex;
   flex-direction: column;
+  width: 100%;
   gap: 16px;
   overflow: auto;
 `;
