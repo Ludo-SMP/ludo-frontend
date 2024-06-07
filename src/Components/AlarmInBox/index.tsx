@@ -4,8 +4,12 @@ import { useOutSideClick } from '@/Hooks/useOutsideClick';
 import styled from 'styled-components';
 import { Close } from '@/Assets';
 import { NotificationSSEType } from '@/Types/notifications';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ROUTES } from '@/Constants/route';
+import { RightArrow } from '@/Assets/RightArrow';
+import Button from '../Common/Button';
+import { flexCenter } from '@/Styles/theme';
+import { RowDivider } from '../Common/Divider/RowDivider';
 
 interface AlarmInboxProps {
   handleOpen?: (prev: boolean) => void;
@@ -23,27 +27,33 @@ export const AlarmInbox = ({ alarmPreviews, handleOpen }: AlarmInboxProps) => {
     handleOpen && handleOpen(false);
   });
 
+  const isReadAll = () => notification?.filter((alarm) => !alarm.read).length === 0;
+
   return (
     <AlarmInboxWrapper ref={inboxRef}>
       <AlarmPreviewsWrapper>
-        <TopBar $alarmLength={notification?.length}>
+        <TopBar $isReadAll={isReadAll()}>
           <Title>알림</Title>
           <Close onClick={() => handleOpen(false)} />
         </TopBar>
-        <TopBar $alarmLength={notification?.length}>
+        <TopBar $isReadAll={isReadAll()}>
           <Title>루도가 알려요</Title>
+          <LinkBox to={ROUTES.MYPAGE.NOTIFICATIONS} onClick={() => handleOpen(false)}>
+            알림페이지 이동
+            <RightArrow />
+          </LinkBox>
         </TopBar>
         <PreviewList>
           {notification
-            ?.filter((alarmPreview: NotificationSSEType) => !alarmPreview.read)
-            ?.map((alarmPreview: NotificationSSEType) => (
-              <AlarmPreview key={`${alarmPreview?.notificationId}`} {...alarmPreview} />
-            ))}
+            ?.filter((alarm: NotificationSSEType) => !alarm.read)
+            ?.map((alarm) => <AlarmPreview key={`${alarm?.notificationId}`} {...alarm} />)}
         </PreviewList>
-        <BottomBar>
-          {notification?.length !== 0 && <button>전체 읽음</button>}
-          <Link to={ROUTES.MYPAGE.NOTIFICATIONS}>알림페이지 이동</Link>
-        </BottomBar>
+        <RowDivider rowHeight={1} />
+        {!isReadAll() && (
+          <BottomBar>
+            <Button scheme="text">전체 읽음 처리하기</Button>
+          </BottomBar>
+        )}
       </AlarmPreviewsWrapper>
     </AlarmInboxWrapper>
   );
@@ -65,7 +75,15 @@ const AlarmInboxWrapper = styled.div`
   z-index: 100;
 `;
 
-const TopBar = styled.div<{ $alarmLength: number }>`
+const LinkBox = styled(Link)`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  ${({ theme }) => theme.typo.ButtonButton};
+  color: ${({ theme }) => theme.color.black3};
+`;
+
+const TopBar = styled.div<{ $isReadAll: boolean }>`
   display: flex;
   height: 40px;
   min-width: 348px;
@@ -73,8 +91,8 @@ const TopBar = styled.div<{ $alarmLength: number }>`
   padding: 4px 24px;
   justify-content: space-between;
   align-items: center;
-  border-top-left-radius: ${({ theme, $alarmLength }) => $alarmLength === 0 && theme.borderRadius.small};
-  border-top-right-radius: ${({ theme, $alarmLength }) => $alarmLength === 0 && theme.borderRadius.small};
+  border-top-left-radius: ${({ theme, $isReadAll }) => $isReadAll && theme.borderRadius.small};
+  border-top-right-radius: ${({ theme, $isReadAll }) => $isReadAll && theme.borderRadius.small};
   border-bottom: ${({ theme }) => `1px solid ${theme.color.black1}`};
 
   svg {
@@ -82,14 +100,18 @@ const TopBar = styled.div<{ $alarmLength: number }>`
   }
 `;
 
-// TODO: 디자인 반영 후 수정
 const BottomBar = styled.div`
-  display: flex;
+  ${flexCenter}
   width: 100%;
   height: 40px;
-  justify-content: flex-end;
-  gap: 20px;
   padding: 2px;
+  ${({ theme }) => theme.typo.ButtonButton};
+  color: ${({ theme }) => theme.color.black3};
+
+  /* Header에서 button box-shadow 속성 적용한 것 무효화시키기 */
+  button {
+    box-shadow: none !important;
+  }
 `;
 
 const Title = styled.div`
