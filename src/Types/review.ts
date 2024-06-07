@@ -27,7 +27,7 @@ export interface PeerToPeerReview {
 }
 
 /** 스터디 정보 & 작성한 or 스터디원이 남긴 리뷰 */
-export interface StudyReviews {
+export interface StudyReviewsType {
   /** 스터디 id */
   id: number;
   /** 스터디 제목 */
@@ -38,5 +38,5 @@ export interface StudyReviews {
 
 /** 모든 참여, 종료한 스터디 정보 & 작성한 or 스터디원이 남긴 리뷰 */
 export interface AllStudyReviews {
-  studies: StudyReviews[];
+  studies: StudyReviewsType[];
 }
