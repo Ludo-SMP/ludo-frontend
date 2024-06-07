@@ -22,8 +22,8 @@ export interface Review {
 /* 스터디원 상호간의 리뷰 결과 */
 export interface PeerToPeerReview {
   /* 스터디명 */
-  selfReview: Review;
-  peerReview: Review;
+  selfReview: Review | null;
+  peerReview: Review | null;
 }
 
 /** 스터디 정보 & 작성한 or 스터디원이 남긴 리뷰 */
