@@ -1,23 +1,29 @@
-import { DefaultStudyThumbnail } from '@/Assets';
-import { Accordion } from '@/Components/Accordion';
+import { Loading } from '@/Assets';
+
+import { StudyReviews } from '@/Components/StudyReviews';
 import { useReviews } from '@/Hooks/review/useReviews';
+import { StudyReviewsType } from '@/Types/review';
 import styled from 'styled-components';
 
 export const MyPageReviews = () => {
-  const { data: reviews, isLoading } = useReviews();
-  console.log(reviews);
+  const { data: allStudyreviews, isLoading } = useReviews();
+
   return (
     <MyPageReviewsLayout>
-      <ReviewBox>
-        <Accordion title="스터디명" imgUrl={DefaultStudyThumbnail}>
-          스터디
-        </Accordion>
-      </ReviewBox>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <StudyReviewsList>
+          {allStudyreviews?.studies.map((studyReviews: StudyReviewsType) => (
+            <StudyReviews key={studyReviews.id} {...studyReviews} />
+          ))}
+        </StudyReviewsList>
+      )}
     </MyPageReviewsLayout>
   );
 };
 
-const MyPageReviewsLayout = styled.ul`
+const MyPageReviewsLayout = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -25,11 +31,9 @@ const MyPageReviewsLayout = styled.ul`
   gap: 16px;
 `;
 
-const ReviewBox = styled.li`
-  width: 100%;
-  max-width: 912px;
-  padding: 16px 32px;
-  background-color: ${({ theme }) => theme.color.white};
-  border-radius: ${({ theme }) => theme.borderRadius.cornerRadius12};
-  border: 1px solid ${({ theme }) => theme.color.black1};
+const StudyReviewsList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow: auto;
 `;
