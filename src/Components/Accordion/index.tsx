@@ -4,11 +4,14 @@ import { useEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 
 export interface AccordionProps {
-  /** 아코디언 Summary 영역의 Title */
+  /** 아코디언 써머리 영역에 나타날 제목 */
   title: string;
 
   /** 아코디언 Summary 영역의 이미지의 URL */
-  imgUrl: string;
+  imgUrl?: string;
+
+  /** 아코디언 제목 아래의 설명 */
+  description?: string;
 
   /** 아코디언을 펼쳤을 때 나타날 내용 */
   children?: React.ReactNode;
@@ -16,7 +19,7 @@ export interface AccordionProps {
 
 /** 마이페이지 아코디언 */
 const Accordion = (props: AccordionProps) => {
-  const { title, imgUrl, children } = props;
+  const { title, imgUrl, description, children } = props;
 
   const [isOpen, setIsOpen] = useState<boolean | null>(null);
 
@@ -30,51 +33,54 @@ const Accordion = (props: AccordionProps) => {
   }, []);
 
   return (
-    <AccordionBox>
-      <AccordionSummaryBox onClick={() => setIsOpen((prev) => !prev)}>
-        <SummaryContentBox>
-          <SummaryImg src={imgUrl} />
-          <SummaryTitle>{title}</SummaryTitle>
-        </SummaryContentBox>
+    <List>
+      <Box onClick={() => setIsOpen((prev) => !prev)}>
+        <Item $imgUrl={imgUrl}>
+          {imgUrl && <Image src={imgUrl} />}
+          <Title>{title}</Title>
+          {description && <Description>{description}</Description>}
+        </Item>
         <SelectArrow isOpen={isOpen} />
-      </AccordionSummaryBox>
-      <AccordionDetailBox ref={contentRef} $isOpen={isOpen} $contentHeight={contentHeight}>
+      </Box>
+
+      <AccordionDetail ref={contentRef} $isOpen={isOpen} $contentHeight={contentHeight}>
         {children}
-      </AccordionDetailBox>
-    </AccordionBox>
+      </AccordionDetail>
+    </List>
   );
 };
 
-const AccordionBox = styled.li`
+export const Item = styled.div<{ $imgUrl: string | null }>`
+  display: flex;
+  flex-direction: ${({ $imgUrl }) => ($imgUrl ? 'row' : 'column')};
+  align-items: ${({ $imgUrl }) => $imgUrl && 'flex-start'};
+  gap: ${({ $imgUrl }) => $imgUrl && '8px'};
+  flex: 1;
+  width: calc(100% - 24px);
+`;
+
+export const List = styled.li`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  width: 100%;
   max-width: 912px;
   padding: 16px 0px;
 `;
 
-const AccordionSummaryBox = styled.div`
+export const Box = styled.div`
   display: flex;
+  width: 100%;
   align-items: center;
-  gap: 24px;
-  align-self: stretch;
-  min-height: 40px;
   cursor: pointer;
+  min-width: 300px;
+  background-color: inherit;
+  min-height: 40px;
 `;
 
-const SummaryContentBox = styled.div`
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  flex: 1 0 0;
-`;
-
-const SummaryImg = styled.img`
+export const Image = styled.img`
   border-radius: ${({ theme }) => theme.borderRadius.xlarge};
 `;
 
-const SummaryTitle = styled.span`
+export const Title = styled.span`
   color: ${({ theme }) => theme.color.black4};
 
   /* TODO: 타이포 브랜치 머지 후, typo 적용 */
@@ -99,7 +105,7 @@ export const Description = styled.p`
   ${textEllipsis}
 `;
 
-const AccordionDetailBox = styled.p<{ $isOpen?: null | boolean; $contentHeight: number }>`
+const AccordionDetail = styled.p<{ $isOpen?: null | boolean; $contentHeight: number }>`
   min-width: 300px;
   padding: 8px 64px 8px 0px;
   gap: 16px;
