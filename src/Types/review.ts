@@ -9,7 +9,7 @@ export interface ReviewCreate {
 }
 
 /** 스터디원 사이(reviewer - reviewee)의 리뷰 결과 interface */
-export interface Review {
+export interface ReviewType {
   reviewerId: number;
   revieweeId: number;
   activenessScore: number;
@@ -22,9 +22,9 @@ export interface Review {
 /* 스터디원 상호간의 리뷰 결과 */
 export interface PeerToPeerReviewType {
   /** 내가 한 리뷰 */
-  selfReview: Review | null;
+  selfReview: ReviewType | null;
   /** 상대방이 나한테 한 리뷰 */
-  peerReview: Review | null;
+  peerReview: ReviewType | null;
 }
 
 /** 스터디 정보 & 작성한 or 스터디원이 남긴 리뷰 */
