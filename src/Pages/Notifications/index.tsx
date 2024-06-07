@@ -1,9 +1,11 @@
-import { Accordion, Box, List, Item, Title, Description } from '@/Components/Accordion';
+import { Accordion } from '@/Components/Accordion';
 import { AccordionList } from '@/Components/AccordionList';
 import { Stack } from '@/Components/Common/Stack';
 import { Divider } from '../CreateRecruitment/page';
 import Button from '@/Components/Common/Button';
 import { Link } from 'react-router-dom';
+import { textEllipsis } from '@/Styles/theme';
+import styled from 'styled-components';
 
 type NotiType = 'accordion' | 'text' | 'button';
 
@@ -122,3 +124,52 @@ const AlarmText = ({ title, description }: AlarmTextProps) => {
     </List>
   );
 };
+
+const Item = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: calc(100% - 24px);
+`;
+
+const List = styled.li`
+  display: flex;
+  flex-direction: column;
+  max-width: 912px;
+  padding: 16px 0px;
+`;
+
+const Box = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  cursor: pointer;
+  min-width: 300px;
+  background-color: ${({ theme }) => theme.color.white};
+  min-height: 56px;
+`;
+
+const Title = styled.span`
+  color: ${({ theme }) => theme.color.black5};
+
+  /* TODO: 타이포 브랜치 머지 후, typo 적용 */
+  /* Page/Sub Title-Medium */
+  font-family: 'Pretendard500';
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 32px;
+
+  ${textEllipsis}
+`;
+
+const Description = styled.p`
+  color: ${({ theme }) => theme.color.black2};
+
+  /* TODO: 타이포 브랜치 머지 후, typo 적용 */
+  /* List,Alert/Lable-Medium */
+  font-family: 'Pretendard400';
+  font-size: 16px;
+  line-height: 24px;
+
+  ${textEllipsis}
+`;
