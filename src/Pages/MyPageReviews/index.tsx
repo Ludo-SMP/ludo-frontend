@@ -1,8 +1,11 @@
 import { DefaultStudyThumbnail } from '@/Assets';
 import { Accordion } from '@/Components/Accordion';
+import { useReviews } from '@/Hooks/review/useReviews';
 import styled from 'styled-components';
 
 export const MyPageReviews = () => {
+  const { data: reviews, isLoading } = useReviews();
+  console.log(reviews);
   return (
     <MyPageReviewsLayout>
       <ReviewBox>

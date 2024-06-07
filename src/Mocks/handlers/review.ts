@@ -1,4 +1,5 @@
 import { HttpResponse, http } from 'msw';
+import { mockReviews } from '../data/mockReviews';
 
 const baseURL = import.meta.env.VITE_BASE_API_URL;
 
@@ -17,4 +18,17 @@ const submitReview = http.post(
     ),
 );
 
-export default [submitReview];
+export const getReviews = http.get(`${baseURL}/api/reviews`, async () => {
+  return new HttpResponse(
+    JSON.stringify({
+      data: mockReviews,
+      message: 'Success',
+    }),
+    {
+      status: 200,
+      statusText: 'OK',
+    },
+  );
+});
+
+export default [submitReview, getReviews];
