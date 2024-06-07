@@ -53,6 +53,14 @@ export const Normal: Story = {
   },
 };
 
+/** 테두리 없이 텍스트만 있는 버튼입니다. */
+export const Text: Story = {
+  args: {
+    children: 'Text',
+    scheme: 'text',
+  },
+};
+
 /** 비활성화된 상태의 버튼입니다. */
 export const Disabled: Story = {
   args: {
