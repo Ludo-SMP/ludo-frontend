@@ -11,7 +11,8 @@ export const API_END_POINT = {
   // USER
   USER: `${API_PREFIX}/users/me`,
   EDIT_NICKNAME: `${API_PREFIX}/users/me/nickname`,
-  REVIEW: `${API_PREFIX}/users/me/review`,
+  REVIEW: (studyId: number) => `${API_PREFIX}/studies/${studyId}/reviews`,
+  GET_REVIEWS: `${API_PREFIX}/reviews`,
   DEACTIVATE: `${API_PREFIX}/users/deactivate`,
 
   // RECRUITMENTS
