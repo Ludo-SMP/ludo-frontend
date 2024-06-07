@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { STUDY } from '@/Constants/queryString';
-import { getMyPageInfo } from '@/Apis/study';
+import { getMyPageInfo } from '@/Apis/user';
 import { MyPageInfo } from '@/Types/study';
 
 export const useMyPageInfo = () => {

@@ -1,11 +1,9 @@
 import { httpClient } from '@/utils/axios';
 import { API_END_POINT } from '@/Constants/api';
-import { ApplicantsDetail, MyPageInfo, StudyCreate, StudyDetail } from '@/Types/study';
+import { ApplicantsDetail, StudyCreate, StudyDetail } from '@/Types/study';
 
 export const getStudyDetail = (studyId: number): Promise<{ data: { data: StudyDetail } }> =>
   httpClient.get(API_END_POINT.STUDY(studyId));
-
-export const getMyPageInfo = (): Promise<{ data: { data: MyPageInfo } }> => httpClient.get(API_END_POINT.MYPAGE);
 
 export const getApplicantsDetail = (studyId: number): Promise<{ data: { data: ApplicantsDetail } }> =>
   httpClient.get(API_END_POINT.APPLICANTS(studyId));
