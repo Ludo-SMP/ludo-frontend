@@ -42,7 +42,8 @@ export const AlarmInbox = ({ alarmPreviews, handleOpen }: AlarmInboxProps) => {
             <RightArrow />
           </LinkBox>
         </TopBar>
-        <AlarmList>
+        {/* 페이지 이동 후 알림 인박스 닫기 */}
+        <AlarmList onClick={() => handleOpen(false)}>
           {notification
             ?.filter((alarm: NotificationSSEType) => !alarm.read)
             ?.map((alarm) => <AlarmPreview key={`${alarm?.notificationId}`} {...alarm} />)}
