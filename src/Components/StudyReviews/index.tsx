@@ -3,6 +3,7 @@ import { Accordion } from '../Accordion';
 import { PeerToPeerReviewType } from '@/Types/review';
 import { PeerToPeerReview } from './PeerToPeerReview';
 import { DefaultStudyThumbnail } from '@/Assets';
+import { v1 as uuidv1 } from 'uuid';
 
 export interface StudyReviewsProps {
   /** 스터디 id */
@@ -18,16 +19,21 @@ export const StudyReviews = ({ title, reviews: peerTopeerReviews }: StudyReviews
     <StudyReviewsBox>
       <Accordion title={title} imgUrl={DefaultStudyThumbnail}>
         <PeerToPeerReviewList>
-          {peerTopeerReviews.map((peerTopeerReview: PeerToPeerReviewType) => (
-            <PeerToPeerReview {...peerTopeerReview} />
-          ))}
+          {peerTopeerReviews.map((peerTopeerReview: PeerToPeerReviewType) => {
+            /** Unique Key를 처리방안 고민 */
+            const { peerReview, selfReview } = peerTopeerReview;
+            const uniqueKey = peerReview
+              ? `${peerReview.revieweeId}-${peerReview.revieweeId}-${uuidv1()}`
+              : `${selfReview.revieweeId}-${selfReview.revieweeId}-${uuidv1()}`;
+            return <PeerToPeerReview {...peerTopeerReview} key={uniqueKey} />;
+          })}
         </PeerToPeerReviewList>
       </Accordion>
     </StudyReviewsBox>
   );
 };
 
-const StudyReviewsBox = styled.li`
+const StudyReviewsBox = styled.div`
   width: 100%;
   max-width: 912px;
   padding: 16px 32px;
@@ -38,4 +44,6 @@ const StudyReviewsBox = styled.li`
 
 const PeerToPeerReviewList = styled.ul`
   display: flex;
+  flex-direction: column;
+  align-items: center;
 `;

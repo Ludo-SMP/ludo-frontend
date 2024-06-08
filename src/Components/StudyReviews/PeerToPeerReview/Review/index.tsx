@@ -65,11 +65,7 @@ const ReviewRow = styled.div`
   gap: 8px;
 `;
 
-const ReviewTitle = styled.p``;
-
-const RevieweeText = styled.span`
-  color: ${({ theme }) => theme.color.black4};
-
+const ReviewTitle = styled.span`
   /* List,Alert/Body-Medium */
   font-family: 'Pretendard500';
   font-size: 18px;
@@ -78,15 +74,12 @@ const RevieweeText = styled.span`
   line-height: 24px;
 `;
 
+const RevieweeText = styled.span`
+  color: ${({ theme }) => theme.color.black4};
+`;
+
 const DescText = styled.span`
   color: ${({ theme }) => theme.color.black2};
-
-  /* List,Alert/Body-Medium */
-  font-family: 'Pretendard500';
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 24px;
 `;
 
 const ReviewScoreList = styled.ul`

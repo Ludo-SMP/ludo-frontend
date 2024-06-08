@@ -1,5 +1,4 @@
 import { Loading } from '@/Assets';
-
 import { StudyReviews } from '@/Components/StudyReviews';
 import { useReviews } from '@/Hooks/review/useReviews';
 import { StudyReviewsType } from '@/Types/review';
