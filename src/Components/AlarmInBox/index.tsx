@@ -1,17 +1,16 @@
 import { useRef } from 'react';
 import { AlarmPreview } from './AlarmPreview';
 import { useOutSideClick } from '@/Hooks/useOutsideClick';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Close } from '@/Assets';
 import { NotificationSSEType } from '@/Types/notifications';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { ROUTES } from '@/Constants/route';
 import { RightArrow } from '@/Assets/RightArrow';
-import Button from '../Common/Button';
 import { flexCenter } from '@/Styles/theme';
 import { RowDivider } from '../Common/Divider/RowDivider';
 
-interface AlarmInboxProps {
+export interface AlarmInboxProps {
   handleOpen?: (prev: boolean) => void;
   alarmPreviews?: {
     notification: NotificationSSEType[];
@@ -30,8 +29,8 @@ export const AlarmInbox = ({ alarmPreviews, handleOpen }: AlarmInboxProps) => {
   const isReadAll = () => notification?.filter((alarm) => !alarm.read).length === 0;
 
   return (
-    <AlarmInboxWrapper ref={inboxRef}>
-      <AlarmPreviewsWrapper>
+    <AlarmInboxBox ref={inboxRef}>
+      <AlarmBox>
         <TopBar $isReadAll={isReadAll()}>
           <Title>알림</Title>
           <Close onClick={() => handleOpen(false)} />
@@ -43,23 +42,23 @@ export const AlarmInbox = ({ alarmPreviews, handleOpen }: AlarmInboxProps) => {
             <RightArrow />
           </LinkBox>
         </TopBar>
-        <PreviewList>
+        <AlarmList>
           {notification
             ?.filter((alarm: NotificationSSEType) => !alarm.read)
             ?.map((alarm) => <AlarmPreview key={`${alarm?.notificationId}`} {...alarm} />)}
-        </PreviewList>
+        </AlarmList>
         <RowDivider rowHeight={1} />
         {!isReadAll() && (
           <BottomBar>
-            <Button scheme="text">전체 읽음 처리하기</Button>
+            <GreyTextBox>전체 읽음 처리하기</GreyTextBox>
           </BottomBar>
         )}
-      </AlarmPreviewsWrapper>
-    </AlarmInboxWrapper>
+      </AlarmBox>
+    </AlarmInboxBox>
   );
 };
 
-const AlarmInboxWrapper = styled.div`
+const AlarmInboxBox = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -68,29 +67,44 @@ const AlarmInboxWrapper = styled.div`
   border: 1px solid ${({ theme }) => theme.color.black1};
   border-radius: ${({ theme }) => theme.borderRadius.small};
   background: ${({ theme }) => theme.color.white};
-
   position: absolute;
   top: 60px;
   right: -40px;
   z-index: 100;
 `;
 
-const LinkBox = styled(Link)`
+const AlarmBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 0px 10px 0px ${({ theme }) => theme.color.black0};
+`;
+
+/** 알림 페이지 이동, 전체 읽음 처리하기 text */
+const GreyText = css`
   display: flex;
   align-items: center;
-  gap: 8px;
   ${({ theme }) => theme.typo.ButtonButton};
   color: ${({ theme }) => theme.color.black3};
+  font: none !important;
+`;
+
+const LinkBox = styled(Link)`
+  ${GreyText}
+  gap: 8px;
+`;
+
+const GreyTextBox = styled.div`
+  ${GreyText}
 `;
 
 const TopBar = styled.div<{ $isReadAll: boolean }>`
   display: flex;
-  height: 40px;
-  min-width: 348px;
-  max-width: 600px;
-  padding: 4px 24px;
   justify-content: space-between;
   align-items: center;
+  min-width: 348px;
+  max-width: 600px;
+  height: 40px;
+  padding: 4px 24px;
   border-top-left-radius: ${({ theme, $isReadAll }) => $isReadAll && theme.borderRadius.small};
   border-top-right-radius: ${({ theme, $isReadAll }) => $isReadAll && theme.borderRadius.small};
   border-bottom: ${({ theme }) => `1px solid ${theme.color.black1}`};
@@ -108,7 +122,7 @@ const BottomBar = styled.div`
   ${({ theme }) => theme.typo.ButtonButton};
   color: ${({ theme }) => theme.color.black3};
 
-  /* Header에서 button box-shadow 속성 적용한 것 무효화시키기 */
+  /* Header에서 적용한 button box-shadow 속성 무효화시키기 */
   button {
     box-shadow: none !important;
   }
@@ -122,13 +136,7 @@ const Title = styled.div`
   line-height: 32px;
 `;
 
-const AlarmPreviewsWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0px 0px 10px 0px ${({ theme }) => theme.color.black0};
-`;
-
-const PreviewList = styled.ul`
+const AlarmList = styled.ul`
   display: flex;
   flex-direction: column;
   max-height: 500px;
