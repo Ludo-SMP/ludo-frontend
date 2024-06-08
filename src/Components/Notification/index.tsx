@@ -1,7 +1,13 @@
 import { RightArrow } from '@/Assets/RightArrow';
+import { NOTIFICATIONS } from '@/Constants/queryString';
+import { NotificationResponse } from '@/Hooks/notifications/useNotifications';
+import { useReadNotification } from '@/Hooks/notifications/useReadNotification';
 import { NotificationSSEType } from '@/Types/notifications';
 import { getElapsedTime } from '@/utils/date';
+import { moveToDest } from '@/utils/moveToDest';
+import { useQueryClient } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
+import { MouseEvent } from 'react';
 
 import styled from 'styled-components';
 
@@ -30,6 +36,35 @@ interface NotificationProps<T extends NotificationSSEType> {
 
 export const Notification = <T extends NotificationSSEType>(props: NotificationProps<T>) => {
   const { type, notificationId, title, content, read, params, createdAt } = props;
+
+  const { mutate: readMutate } = useReadNotification(notificationId);
+  const queryClient = useQueryClient();
+
+  const destPagePath = moveToDest(type, params);
+
+  const readNotification = (e: MouseEvent<HTMLAnchorElement>) => {
+    e.stopPropagation();
+
+    /** 이미 읽은 경우, 읽음 처리 X */
+    if (read) return;
+
+    readMutate(notificationId);
+
+    // 얼람 앍움 처리 캐시 반영
+    queryClient.setQueryData(NOTIFICATIONS.NOTIFICATIONS, (prev: { data: { data: NotificationResponse } }) => {
+      const newData = JSON.parse(JSON.stringify(prev));
+
+      const alarmArrIdx = prev?.data?.data?.notification.findIndex(
+        (notification) => notification.notificationId === notificationId,
+      );
+
+      if (alarmArrIdx !== -1) {
+        newData.data.data.notification[alarmArrIdx].read = true;
+      }
+      return newData;
+    });
+  };
+
   return (
     <NotificationBox>
       <TopBar>
@@ -37,10 +72,12 @@ export const Notification = <T extends NotificationSSEType>(props: NotificationP
           <Title>{title}</Title>
           <ElapsedTimeText>{getElapsedTime(createdAt)}</ElapsedTimeText>
         </SummaryBox>
-        <LinkBox to={'/'}>
-          <LinkText>해당 페이지 이동</LinkText>
-          <RightArrow width={20} height={20} />
-        </LinkBox>
+        {destPagePath && (
+          <LinkBox to={destPagePath} onClick={readNotification}>
+            <LinkText>해당 페이지 이동</LinkText>
+            <RightArrow width={20} height={20} />
+          </LinkBox>
+        )}
       </TopBar>
       <DescBox>{content}</DescBox>
     </NotificationBox>
