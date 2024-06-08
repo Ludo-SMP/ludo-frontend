@@ -105,7 +105,7 @@ export const Description = styled.p`
   ${textEllipsis}
 `;
 
-const AccordionDetail = styled.p<{ $isOpen?: null | boolean; $contentHeight: number }>`
+const AccordionDetail = styled.div<{ $isOpen?: null | boolean; $contentHeight: number }>`
   min-width: 300px;
   padding: 8px 64px 8px 0px;
   gap: 16px;
