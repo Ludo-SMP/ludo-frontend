@@ -1,6 +1,7 @@
 import { ReviewType } from '@/Types/review';
 import styled from 'styled-components';
 import { Profile } from '@/Assets';
+import { ReviewScore } from '@/Components/ReviewScore';
 
 interface ReviewProps extends Partial<ReviewType> {
   /** 리뷰를 작성한 사람(reviewer) 기준으로 분류하는 type  */
@@ -8,7 +9,7 @@ interface ReviewProps extends Partial<ReviewType> {
 }
 
 const getReviewTitleTexts = (type: 'SELF' | 'PEER', reviewerId?: number) => {
-  const revieweeText = type === 'SELF' ? "'스터디원'" : reviewerId ? '나는' : '';
+  const revieweeText = type === 'SELF' ? "'스터디원'" : reviewerId ? '나는 ' : '';
   const descText =
     type === 'SELF'
       ? reviewerId
@@ -20,17 +21,9 @@ const getReviewTitleTexts = (type: 'SELF' | 'PEER', reviewerId?: number) => {
   return { revieweeText, descText };
 };
 
-export const Review = ({
-  type,
-  revieweeId,
-  reviewerId,
-  activenessScore,
-  professionalismScore,
-  communicationScore,
-  togetherScore,
-  recommendScore,
-}: ReviewProps) => {
-  const { revieweeText, descText } = getReviewTitleTexts(type, revieweeId);
+export const Review = (reviewProps: ReviewProps) => {
+  const { revieweeId, reviewerId, type, ...reviewScores } = reviewProps;
+  const { revieweeText, descText } = getReviewTitleTexts(type, reviewerId);
   return (
     <ReviewBox>
       <ReviewRow>
@@ -40,6 +33,19 @@ export const Review = ({
           <DescText>{descText}</DescText>
         </ReviewTitle>
       </ReviewRow>
+      {revieweeId ? (
+        <ReviewScoreList>
+          <ReviewScore standard="적극성" score={reviewScores.activenessScore} />
+          <ReviewScore standard="전문성" score={reviewScores.professionalismScore} />
+          <ReviewScore standard="소통력" score={reviewScores.communicationScore} />
+          <ReviewScore standard="만족도" score={reviewScores.togetherScore} />
+          <ReviewScore standard="추천도" score={reviewScores.recommendScore} />
+        </ReviewScoreList>
+      ) : (
+        <EmptyReviewText>
+          {type === 'SELF' ? '해당 스터디원에 대한 리뷰가 없어요.' : '스터디원이 나에게 남긴 리뷰가 없어요.'}
+        </EmptyReviewText>
+      )}
     </ReviewBox>
   );
 };
@@ -48,12 +54,14 @@ const ReviewBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  min-width: 304px;
   gap: 16px;
 `;
 
 const ReviewRow = styled.div`
   display: flex;
   align-items: flex-start;
+  width: 100%;
   gap: 8px;
 `;
 
@@ -79,4 +87,29 @@ const DescText = styled.span`
   font-style: normal;
   font-weight: 500;
   line-height: 24px;
+`;
+
+const ReviewScoreList = styled.ul`
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  height: 72px;
+  gap: 16px;
+`;
+
+const EmptyReviewText = styled.p`
+  display: flex;
+  width: 100%;
+  height: 72px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  color: ${({ theme }) => theme.color.black2};
+  /* List,Alert/Lable-Medium */
+  font-family: 'Pretendard400';
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 150% */
 `;

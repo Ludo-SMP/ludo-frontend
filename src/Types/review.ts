@@ -41,3 +41,5 @@ export interface StudyReviewsType {
 export interface AllStudyReviews {
   studies: StudyReviewsType[];
 }
+
+export type ReviewStandard = '적극성' | '전문성' | '소통력' | '만족도' | '추천도';
