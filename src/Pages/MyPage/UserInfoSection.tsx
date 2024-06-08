@@ -15,9 +15,6 @@ const UserInfoSection = ({ myPageInfo }: UserInfoSectionProps) => {
   const user: User = myPageInfo?.user;
   const trust: Trust = myPageInfo?.trust;
 
-  const togetherText = trust?.together >= 80 ? '함께 하고 싶어하는' : '~~ 싶은';
-  const recommendText = trust?.recommend >= 80 ? '추천하고 싶은' : '~~ 싶은';
-
   return (
     <UserInfoSectionBox>
       <div className="title">
@@ -58,12 +55,16 @@ const UserInfoSection = ({ myPageInfo }: UserInfoSectionProps) => {
                 <CircularRate percentage={trust?.communication || 0} label="소통력" />
                 <RightArrow />
               </InfoItemBox>
-              <InfoDesc>
-                다시 <em>{togetherText}</em> 사용자예요!
-              </InfoDesc>
-              <InfoDesc>
-                주변 사람에게 <em>{recommendText}</em> 사용자예요!
-              </InfoDesc>
+              {trust?.together >= 80 && (
+                <InfoDesc>
+                  다시 <em>함께 하고 싶어하는</em> 사용자예요!
+                </InfoDesc>
+              )}
+              {trust?.recommend >= 80 && (
+                <InfoDesc>
+                  주변 사람에게 <em>추천하고 싶은</em> 사용자예요!
+                </InfoDesc>
+              )}
             </InfoItem>
           </UserInfoRow>
         </UserInfoRows>
