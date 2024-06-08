@@ -1,4 +1,3 @@
-import { NotificationList } from '@/Components/NotificationList';
 import { Stack } from '@/Components/Common/Stack';
 import { Divider } from '../CreateRecruitment/page';
 import styled from 'styled-components';
@@ -7,7 +6,7 @@ import { Notification } from '@/Components/Notification';
 import { NotificationSSEType } from '@/Types/notifications';
 import { Loading } from '@/Assets';
 
-const Notifications = () => {
+export const Notifications = () => {
   const { data, isLoading } = useNotifications();
 
   return (
@@ -16,16 +15,16 @@ const Notifications = () => {
         <Loading />
       ) : (
         <NotificationList>
-          <Stack divider={<Divider height={3} />} gap={'0px'}>
-            {data?.notification.map((notification: NotificationSSEType) => <Notification {...notification} />)}
+          <Stack divider={<Divider height={2} $dividerColor="#e5e6e8" />} gap={'0px'}>
+            {data?.notification.map((notification: NotificationSSEType) => (
+              <Notification {...notification} key={notification.notificationId} />
+            ))}
           </Stack>
         </NotificationList>
       )}
     </NotificationsLayout>
   );
 };
-
-export { Notifications };
 
 const NotificationsLayout = styled.div`
   display: flex;
@@ -38,4 +37,11 @@ const NotificationsLayout = styled.div`
   background: ${({ theme }) => theme.color.white};
   max-height: 1400px;
   overflow: auto;
+`;
+
+const NotificationList = styled.ul`
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-self: stretch;
 `;
