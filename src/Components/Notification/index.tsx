@@ -69,7 +69,7 @@ export const Notification = <T extends NotificationSSEType>(props: NotificationP
     <NotificationBox>
       <TopBar>
         <SummaryBox>
-          <Title>{title}</Title>
+          <Title $isRead={read}>{title}</Title>
           <ElapsedTimeText>{getElapsedTime(createdAt)}</ElapsedTimeText>
         </SummaryBox>
         {destPagePath && (
@@ -79,7 +79,7 @@ export const Notification = <T extends NotificationSSEType>(props: NotificationP
           </LinkBox>
         )}
       </TopBar>
-      <DescBox>{content}</DescBox>
+      <DescBox $isRead={read}>{content}</DescBox>
     </NotificationBox>
   );
 };
@@ -93,6 +93,11 @@ const NotificationBox = styled.div`
   align-items: flex-start;
   gap: 12px;
   border-radius: ${({ theme }) => theme.borderRadius.small};
+
+  &:hover {
+    cursor: pointer;
+    background-color: #f2f3f3;
+  }
 `;
 
 const TopBar = styled.div`
@@ -109,8 +114,8 @@ const SummaryBox = styled.div`
   flex-direction: column;
 `;
 
-const Title = styled.p`
-  color: ${({ theme }) => theme.color.black5};
+const Title = styled.p<{ $isRead: boolean }>`
+  color: ${({ theme, $isRead }) => ($isRead ? theme.color.black2 : theme.color.black5)};
 
   /* Page/Sub Title-Medium */
   font-family: 'Pretendard500';
@@ -154,9 +159,9 @@ const LinkText = styled.span`
   line-height: 16px; /* 100% */
 `;
 
-const DescBox = styled.p`
+const DescBox = styled.p<{ $isRead: boolean }>`
   width: 100%;
-  color: ${({ theme }) => theme.color.black4};
+  color: ${({ theme, $isRead }) => ($isRead ? theme.color.black2 : theme.color.black4)};
 
   /* Page/Body-Medium */
   font-family: Pretendard;
