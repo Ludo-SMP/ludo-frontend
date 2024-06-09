@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Profile } from '@/Assets';
 import { ReviewScore } from '@/Components/ReviewScore';
 
-interface ReviewProps extends Partial<ReviewType> {
+export interface ReviewProps extends Partial<ReviewType> {
   /** 리뷰를 작성한 사람(reviewer) 기준으로 분류하는 type  */
   type: 'SELF' | 'PEER';
 }
