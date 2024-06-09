@@ -1,8 +1,8 @@
 import { ReviewStandard } from '@/Types/review';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { StarScore } from './StarScore';
 
-interface ReviewScoreProps {
+export interface ReviewScoreProps {
   /** 리뷰 평가 기준 */
   standard: ReviewStandard;
   /** 평가 점수 */
@@ -35,16 +35,26 @@ const ReviewScoreRow = styled.div`
 
 const ReviewScoreText = styled.p<{ $score: number }>`
   position: absolute;
-  top: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -40%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: ${({ theme, $score }) => ($score <= 2 ? theme.color.black5 : theme.color.white)};
-  width: 40px;
+  top: 14px;
+  left: calc(50%-20px);
+  ${({ theme, $score }) =>
+    $score === 2
+      ? css`
+          background-clip: text;
+          background-image: linear-gradient(
+            to top,
+            ${theme.color.white} ${$score * 20}%,
+            ${theme.color.black5} ${$score * 20}%
+          );
+          color: transparent;
+          -webkit-text-fill-color: transparent;
+        `
+      : css`
+          color: ${$score <= 2 ? theme.color.black5 : theme.color.white};
+        `}
   text-align: center;
+  width: 100%;
+  height: 24px;
 
   /* List,Alert/Body-Medium */
   font-family: 'Pretendard500';
