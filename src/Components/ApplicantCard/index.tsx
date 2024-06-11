@@ -92,7 +92,7 @@ export const ApplicantCard = ({
           </StatsSection>
         </Content>
       </CardInner>
-      {isOwner ?? (
+      {isOwner && (
         <Buttons>
           <Button onClick={() => refuseMutate()}>거절하기</Button>
           <Button scheme="secondary" onClick={() => acceptMutate()}>
