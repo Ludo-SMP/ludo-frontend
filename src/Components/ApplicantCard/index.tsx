@@ -83,13 +83,11 @@ export const ApplicantCard = ({
                 </StatsDescription>
               </>
             ) : (
-              <Padding>
-                <StatsDescription>
-                  이 분은 아직 신뢰도가 측정되지 않은 <Bold>새 회원</Bold>이에요!
-                  <br />
-                  <Bold>새로운 분과 함께 하는 스터디, 설렐 것 같지 않나요?</Bold>
-                </StatsDescription>
-              </Padding>
+              <StatsDescription>
+                이 분은 아직 신뢰도가 측정되지 않은 <Bold>새 회원</Bold>이에요!
+                <br />
+                <Bold>새로운 분과 함께 하는 스터디, 설렐 것 같지 않나요?</Bold>
+              </StatsDescription>
             )}
           </StatsSection>
         </Content>
@@ -183,15 +181,6 @@ const StatsSection = styled.section`
 const Stats = styled.ul`
   display: flex;
   gap: 12px;
-`;
-
-const Padding = styled.div`
-  display: flex;
-  min-height: 154px;
-  flex-direction: column;
-  justify-content: center;
-  gap: 16px;
-  flex: 1 0 0;
 `;
 
 const StatsDescription = styled.p`
