@@ -92,12 +92,14 @@ export const ApplicantCard = ({
           </StatsSection>
         </Content>
       </CardInner>
-      <Buttons>
-        <Button onClick={() => refuseMutate()}>거절하기</Button>
-        <Button scheme="secondary" onClick={() => acceptMutate()}>
-          수락하기
-        </Button>
-      </Buttons>
+      {isOwner ?? (
+        <Buttons>
+          <Button onClick={() => refuseMutate()}>거절하기</Button>
+          <Button scheme="secondary" onClick={() => acceptMutate()}>
+            수락하기
+          </Button>
+        </Buttons>
+      )}
     </CardBox>
   );
 };
