@@ -8,10 +8,9 @@ import { moveToDest } from '@/utils/moveToDest';
 import { useQueryClient } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { MouseEvent } from 'react';
-
 import styled from 'styled-components';
-import { getNotificationTypeText } from '@/utils/getNotificationTypeText';
 import { media } from '@/Styles/theme';
+import { getNotificationTypeText } from '@/utils/getText';
 
 interface NotificationProps<T extends NotificationSSEType> {
   /** 알림 타입 */
