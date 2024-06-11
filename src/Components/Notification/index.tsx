@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 import { MouseEvent } from 'react';
 
 import styled from 'styled-components';
+import { getNotificationTypeText } from '@/utils/getNotificationTypeText';
 
 interface NotificationProps<T extends NotificationSSEType> {
   /** 알림 타입 */
@@ -69,7 +70,7 @@ export const Notification = <T extends NotificationSSEType>(props: NotificationP
     <NotificationBox>
       <TopBar>
         <SummaryBox>
-          <Title $isRead={read}>{title}</Title>
+          <Title $isRead={read}>{`[${getNotificationTypeText(type)}] ${title}`}</Title>
           <ElapsedTimeText>{getElapsedTime(createdAt)}</ElapsedTimeText>
         </SummaryBox>
         {destPagePath && (
