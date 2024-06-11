@@ -7,6 +7,7 @@ import { NotificationSSEType } from '@/Types/notifications';
 import { Loading } from '@/Assets';
 import ChipMenu from '@/Components/Common/ChipMenu';
 import { useState } from 'react';
+import { media } from '@/Styles/theme';
 
 export const Notifications = () => {
   const { data, isLoading } = useNotifications();
@@ -69,16 +70,24 @@ const NotificationTypeChipsBox = styled.div`
   width: 100%;
   gap: 12px;
   overflow: scroll;
+
+  ${media.mobile} {
+    padding-top: 24px;
+  }
 `;
 
 const NotificationList = styled.ul`
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 24px 32px;
+  padding: 24px;
   border: 1px solid ${({ theme }) => theme.color.black1};
   border-radius: 12px;
   background: ${({ theme }) => theme.color.white};
   max-height: 1400px;
   overflow: auto;
+
+  ${media.mobile} {
+    padding: 0 0 24px 0;
+  }
 `;

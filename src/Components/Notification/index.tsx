@@ -11,6 +11,7 @@ import { MouseEvent } from 'react';
 
 import styled from 'styled-components';
 import { getNotificationTypeText } from '@/utils/getNotificationTypeText';
+import { media } from '@/Styles/theme';
 
 interface NotificationProps<T extends NotificationSSEType> {
   /** 알림 타입 */
@@ -99,6 +100,10 @@ const NotificationBox = styled.div`
     cursor: pointer;
     background-color: #f2f3f3;
   }
+
+  ${media.mobile} {
+    padding: 16px 24px;
+  }
 `;
 
 const TopBar = styled.div`
@@ -145,6 +150,16 @@ const LinkBox = styled(Link)`
   align-items: center;
   gap: 8px;
   border-radius: ${({ theme }) => theme.borderRadius.small};
+
+  ${media.mobile} {
+    display: flex;
+    width: auto;
+    padding: 8px;
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
 `;
 
 const LinkText = styled.span`
@@ -158,6 +173,10 @@ const LinkText = styled.span`
   font-style: normal;
   font-weight: 600;
   line-height: 16px; /* 100% */
+
+  ${media.mobile} {
+    display: none;
+  }
 `;
 
 const DescBox = styled.p<{ $isRead: boolean }>`
