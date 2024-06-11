@@ -1,5 +1,6 @@
 import { MessageType } from '@/Types/message';
 import { RecruitmentForm } from '@/Types/study';
+import { NotificationsSettingConfigType } from '@/Types/notifications';
 
 export const APPLY = Object.freeze({
   LOGIN: {
@@ -123,3 +124,38 @@ export const PROFILE = Object.freeze({
     DUPLICATED: { title: '닉네임 변경 실패', content: '이미 존재하는 닉네임입니다.' },
   },
 });
+
+export const NOTIFICATIONS_SETTINGS_CONTENTS: Record<
+  NotificationsSettingConfigType,
+  { title: string; description: string }
+> = {
+  ALL_CONFIG: {
+    title: '전체 알림',
+    description: '제목',
+  },
+  RECRUITMENT_CONFIG: {
+    title: '모집 공고 알림',
+    description: '선호하는 항목에 대한 모집 공고가 업로드 됐을 시 알림을 제공합니다.',
+  },
+  STUDY_APPLICANT_CONFIG: {
+    title: '스터디 지원 여부 알림',
+    description: '내가 속한 스터디에 지원자가 생겼을 시, 알림을 제공합니다.',
+  },
+  STUDY_APPLICANT_RESULT_CONFIG: {
+    title: '스터디 지원 결과 알림',
+    description: '지원한 스터디에서 합류 승인 혹은 거절되었을 시, 결과를 알려줍니다.',
+  },
+  STUDY_END_DATE_CONFIG: {
+    title: '스터디 종료 기간 알림',
+    description: '스터디 종료 5일 전에 알림이 가며, 필요시 스터디 기간을 늘릴 것을 안내해줍니다.',
+  },
+  STUDY_PARTICIPANT_LEAVE_CONFIG: {
+    title: '스터디 탈퇴자 알림',
+    description: '내가 속한 스터디에서 탈퇴자가 발생했을 시, 알림을 제공합니다.',
+  },
+  REVIEW_CONFIG: {
+    title: '스터디원 리뷰 평가 알림',
+    description:
+      '스터디 진행 완료시, 팀원에 대해 리뷰합니다. 각자의 평가는 상호 완료 이후에 공개되며, 알림을 제공합니다.',
+  },
+};

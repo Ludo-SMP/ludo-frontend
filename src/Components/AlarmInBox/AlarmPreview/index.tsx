@@ -4,6 +4,8 @@ import { getElapsedTime } from '@/utils/date';
 import { NotificationSSEType, NotificationsType } from '@/Types/notifications';
 import { MouseEvent } from 'react';
 import { useReadNotification } from '@/Hooks/notifications/useReadNotification';
+import { moveToDest } from '@/utils/moveToDest';
+import { useNavigate } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import { NotificationResponse } from '@/Hooks/notifications/useNotifications';
 import { NOTIFICATIONS } from '@/Constants/queryString';
@@ -30,19 +32,23 @@ export interface AlarmPreviewProps {
 
 export const AlarmPreview = ({ notificationId, type, content, title, createdAt, params }: AlarmPreviewProps) => {
   const { mutate } = useReadNotification(notificationId);
+
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  const readAlarm = (e: MouseEvent<HTMLLIElement>) => {
-    e.stopPropagation();
+  const readAlarm = () => {
     mutate(notificationId);
-    // TODO: params로 링크 이동
+
+    // 알림 종류별 페이지 이동
+    let destPage = moveToDest(type, params);
+    if (destPage) navigate(destPage);
 
     // 읽은 알림 쿼리 캐시에 반영
     queryClient.setQueryData(NOTIFICATIONS.NOTIFICATIONS, (prev: { data: { data: NotificationResponse } }) => {
       const newData = JSON.parse(JSON.stringify(prev));
 
+      // 읽은 알림 read값 변경
       const alarmArrIdx = prev?.data?.data?.notification.findIndex((alarm) => alarm.notificationId === notificationId);
-
       if (alarmArrIdx !== -1) {
         newData.data.data.notification[alarmArrIdx].read = true;
       }

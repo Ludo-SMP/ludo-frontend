@@ -4,6 +4,7 @@ import { BoldDivider } from '@/Components/Common/Divider/BoldDivider';
 import { useNotificationsSetting } from '@/Hooks/notifications/useNotificationsSetting';
 import { Loading } from '@/Assets';
 import { KeywordsSettingForm } from './KeywordsSettingForm';
+import { NOTIFICATIONS_SETTINGS_CONTENTS } from '@/Constants/messages';
 
 export const NotificationsSettings = () => {
   const { data: notificationsSetting, isLoading } = useNotificationsSetting();
@@ -16,8 +17,8 @@ export const NotificationsSettings = () => {
         <>
           <AllOnOffSettingSection>
             <ToggleSwitchList
-              label="전체 알림"
-              description="제목"
+              label={NOTIFICATIONS_SETTINGS_CONTENTS.ALL_CONFIG.title}
+              description={NOTIFICATIONS_SETTINGS_CONTENTS.ALL_CONFIG.description}
               defaultChecked={notificationsSetting?.allConfig.on}
               type="ALL_CONFIG"
             />
@@ -26,8 +27,8 @@ export const NotificationsSettings = () => {
           <RecruitmentSettingsSection>
             <SettingTitleBox>모집 공고</SettingTitleBox>
             <ToggleSwitchList
-              label="모집 공고 알림"
-              description="권한 허용 후, 선호하는 항목을 고르면, 해당 모집 공고가 업로드 됐을 시 알림이 갑니다."
+              label={NOTIFICATIONS_SETTINGS_CONTENTS.RECRUITMENT_CONFIG.title}
+              description={NOTIFICATIONS_SETTINGS_CONTENTS.RECRUITMENT_CONFIG.description}
               defaultChecked={notificationsSetting?.recruitmentConfig.on}
               type="RECRUITMENT_CONFIG"
               disabled={!notificationsSetting?.allConfig.on}
@@ -51,36 +52,36 @@ export const NotificationsSettings = () => {
             <SettingTitleBox>스터디</SettingTitleBox>
             <ToggleSwitches>
               <ToggleSwitchList
-                label="스터디 지원 여부 알림"
-                description="제목"
+                label={NOTIFICATIONS_SETTINGS_CONTENTS.STUDY_APPLICANT_CONFIG.title}
+                description={NOTIFICATIONS_SETTINGS_CONTENTS.STUDY_APPLICANT_CONFIG.description}
                 defaultChecked={notificationsSetting?.studyApplicantConfig.on}
                 type="STUDY_APPLICANT_CONFIG"
                 disabled={!notificationsSetting?.allConfig.on}
               />
               <ToggleSwitchList
-                label="스터디 지원 결과 알림"
-                description="제목"
+                label={NOTIFICATIONS_SETTINGS_CONTENTS.STUDY_APPLICANT_RESULT_CONFIG.title}
+                description={NOTIFICATIONS_SETTINGS_CONTENTS.STUDY_APPLICANT_RESULT_CONFIG.description}
                 defaultChecked={notificationsSetting?.studyApplicantResultConfig.on}
                 type="STUDY_APPLICANT_RESULT_CONFIG"
                 disabled={!notificationsSetting?.allConfig.on}
               />
               <ToggleSwitchList
-                label="스터디 종료 기간 알림"
-                description="제목"
+                label={NOTIFICATIONS_SETTINGS_CONTENTS.STUDY_END_DATE_CONFIG.title}
+                description={NOTIFICATIONS_SETTINGS_CONTENTS.STUDY_END_DATE_CONFIG.description}
                 defaultChecked={notificationsSetting?.studyEndDateConfig.on}
                 type="STUDY_END_DATE_CONFIG"
                 disabled={!notificationsSetting?.allConfig.on}
               />
               <ToggleSwitchList
-                label="스터디 탈퇴자 알림"
-                description="제목"
+                label={NOTIFICATIONS_SETTINGS_CONTENTS.STUDY_PARTICIPANT_LEAVE_CONFIG.title}
+                description={NOTIFICATIONS_SETTINGS_CONTENTS.STUDY_PARTICIPANT_LEAVE_CONFIG.description}
                 defaultChecked={notificationsSetting?.studyParticipantLeaveConfig.on}
                 type="STUDY_PARTICIPANT_LEAVE_CONFIG"
                 disabled={!notificationsSetting?.allConfig.on}
               />
               <ToggleSwitchList
-                label="스터디 리뷰 평가 알림"
-                description="제목"
+                label={NOTIFICATIONS_SETTINGS_CONTENTS.REVIEW_CONFIG.title}
+                description={NOTIFICATIONS_SETTINGS_CONTENTS.REVIEW_CONFIG.description}
                 defaultChecked={notificationsSetting?.reviewConfig.on}
                 type="REVIEW_CONFIG"
                 disabled={!notificationsSetting?.allConfig.on}

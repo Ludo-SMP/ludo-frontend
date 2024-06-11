@@ -7,6 +7,9 @@ export interface AccordionProps {
   /** 아코디언 써머리 영역에 나타날 제목 */
   title: string;
 
+  /** 아코디언 Summary 영역의 이미지의 URL */
+  imgUrl?: string;
+
   /** 아코디언 제목 아래의 설명 */
   description?: string;
 
@@ -16,7 +19,7 @@ export interface AccordionProps {
 
 /** 마이페이지 아코디언 */
 const Accordion = (props: AccordionProps) => {
-  const { title, description, children } = props;
+  const { title, imgUrl, description, children } = props;
 
   const [isOpen, setIsOpen] = useState<boolean | null>(null);
 
@@ -32,7 +35,8 @@ const Accordion = (props: AccordionProps) => {
   return (
     <List>
       <Box onClick={() => setIsOpen((prev) => !prev)}>
-        <Item>
+        <Item $imgUrl={imgUrl}>
+          {imgUrl && <Image src={imgUrl} />}
           <Title>{title}</Title>
           {description && <Description>{description}</Description>}
         </Item>
@@ -46,9 +50,11 @@ const Accordion = (props: AccordionProps) => {
   );
 };
 
-export const Item = styled.div`
+export const Item = styled.div<{ $imgUrl: string | null }>`
   display: flex;
-  flex-direction: column;
+  flex-direction: ${({ $imgUrl }) => ($imgUrl ? 'row' : 'column')};
+  align-items: ${({ $imgUrl }) => $imgUrl && 'flex-start'};
+  gap: ${({ $imgUrl }) => $imgUrl && '8px'};
   flex: 1;
   width: calc(100% - 24px);
 `;
@@ -67,18 +73,22 @@ export const Box = styled.div`
   cursor: pointer;
   min-width: 300px;
   background-color: inherit;
-  min-height: 56px;
+  min-height: 40px;
+`;
+
+export const Image = styled.img`
+  border-radius: ${({ theme }) => theme.borderRadius.xlarge};
 `;
 
 export const Title = styled.span`
-  color: ${({ theme }) => theme.color.black5};
+  color: ${({ theme }) => theme.color.black4};
 
   /* TODO: 타이포 브랜치 머지 후, typo 적용 */
   /* Page/Sub Title-Medium */
   font-family: 'Pretendard500';
   font-size: 18px;
   font-weight: 500;
-  line-height: 32px;
+  line-height: 24px;
 
   ${textEllipsis}
 `;
@@ -95,7 +105,7 @@ export const Description = styled.p`
   ${textEllipsis}
 `;
 
-const AccordionDetail = styled.p<{ $isOpen?: null | boolean; $contentHeight: number }>`
+const AccordionDetail = styled.div<{ $isOpen?: null | boolean; $contentHeight: number }>`
   min-width: 300px;
   padding: 8px 64px 8px 0px;
   gap: 16px;

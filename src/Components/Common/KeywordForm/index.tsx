@@ -28,6 +28,7 @@ const KeywordFormBox = styled.div`
   align-items: flex-start;
   gap: 8px;
   align-self: stretch;
+  overflow: scroll;
 `;
 
 const Title = styled.p`

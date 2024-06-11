@@ -1,124 +1,93 @@
-import { Accordion, Box, List, Item, Title, Description } from '@/Components/Accordion';
-import { AccordionList } from '@/Components/AccordionList';
 import { Stack } from '@/Components/Common/Stack';
 import { Divider } from '../CreateRecruitment/page';
-import Button from '@/Components/Common/Button';
-import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import { useNotifications } from '@/Hooks/notifications/useNotifications';
+import { Notification } from '@/Components/Notification';
+import { NotificationSSEType } from '@/Types/notifications';
+import { Loading } from '@/Assets';
+import ChipMenu from '@/Components/Common/ChipMenu';
+import { useState } from 'react';
+import { media } from '@/Styles/theme';
 
-type NotiType = 'accordion' | 'text' | 'button';
+export const Notifications = () => {
+  const { data, isLoading } = useNotifications();
+  const [selectedNotificationType, setSelectedNotificationType] = useState<'REVIEW' | 'RECRUITMENT' | 'STUDY'>('STUDY');
 
-/** 루도가 알려요 목록에 들어가는 리스트 공통 타입 */
-type NotiListType<T extends NotiType> = {
-  type: T;
-  title: string;
-  description: string;
-};
-
-type AccordionNotiType = NotiListType<'accordion'> & {
-  content: string;
-};
-
-const dummy: Array<AccordionNotiType | NotiListType<'text'> | NotiListType<'button'>> = [
-  {
-    type: 'accordion',
-    title: '스터디 탈퇴 승인 결과가 나왔습니다.',
-    description: '20분 전',
-    content: '안녕하세요. 루도입니다. 스터디 탈퇴 승인 결과가 나왔습니다. 승인이 완료되었습니다. 감사합니다.',
-  },
-  {
-    type: 'accordion',
-    title: '스터디 탈퇴 승인 결과가 나왔습니다.',
-    description: '20분 전',
-    content: '안녕하세요. 루도입니다. 스터디 탈퇴 승인 결과가 나왔습니다. 승인이 완료되었습니다. 감사합니다.',
-  },
-  {
-    type: 'text',
-    title: '스터디 탈퇴 승인 결과가 나왔습니다.',
-    description: '20분 전',
-  },
-  {
-    type: 'button',
-    title: '관심 항목으로 선택한 ‘디자이너 모집 공고가 나왔습니다.',
-    description: '20분 전',
-  },
-  {
-    type: 'button',
-    title: '관심 항목으로 선택한 ‘디자이너 모집 공고가 나왔습니다.',
-    description: '20분 전',
-  },
-  {
-    type: 'button',
-    title: '관심 항목으로 선택한 ‘디자이너 모집 공고가 나왔습니다.',
-    description: '20분 전',
-  },
-  {
-    type: 'button',
-    title: '관심 항목으로 선택한 ‘디자이너 모집 공고가 나왔습니다.',
-    description: '20분 전',
-  },
-];
-
-//TODO: 명세와 타입 일치시키기
-const Notifications = () => {
   return (
-    <AccordionList title="제목">
-      <Stack divider={<Divider height={3} />} gap={'0px'}>
-        {dummy.map((props, idx) => {
-          const { title } = props;
-          const key = `${title}-${idx}`;
-          switch (props.type) {
-            case 'accordion':
-              return (
-                <Accordion key={key} {...props}>
-                  {props.content}
-                </Accordion>
-              );
-            case 'text':
-              return <AlarmText key={key} {...props} />;
-            case 'button':
-              return <AlarmTextWithBtn key={key} {...props} />;
-            default:
-              return null;
-          }
-        })}
-      </Stack>
-    </AccordionList>
+    <NotificationsLayout>
+      <NotificationTypeChipsBox>
+        <ChipMenu checked={selectedNotificationType === 'STUDY'} onClick={() => setSelectedNotificationType('STUDY')}>
+          스터디 (모집, 지원, 탈퇴, 마감임박)
+        </ChipMenu>
+        <ChipMenu checked={selectedNotificationType === 'REVIEW'} onClick={() => setSelectedNotificationType('REVIEW')}>
+          스터디원 (리뷰, 신고)
+        </ChipMenu>
+        <ChipMenu
+          checked={selectedNotificationType === 'RECRUITMENT'}
+          onClick={() => setSelectedNotificationType('RECRUITMENT')}
+        >
+          모집공고
+        </ChipMenu>
+        {/* 기타 알림 */}
+        {/* <ChipMenu checked={false} onClick={() => {}}>
+          기타
+        </ChipMenu> */}
+      </NotificationTypeChipsBox>
+      <NotificationList>
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <Stack divider={<Divider height={2} $dividerColor="#e5e6e8" />} gap={'0px'}>
+            {data?.notification
+              .filter((notification: NotificationSSEType) => {
+                if (selectedNotificationType === 'STUDY')
+                  return !notification.type.includes('REVIEW') && !notification.type.includes('RECRUITMENT');
+                return notification.type.includes(selectedNotificationType);
+              })
+              .map((notification: NotificationSSEType) => (
+                <Notification {...notification} key={notification.notificationId} />
+              ))}
+          </Stack>
+        )}
+      </NotificationList>
+    </NotificationsLayout>
   );
 };
 
-export { Notifications };
+const NotificationsLayout = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 912px;
+  align-items: flex-start;
+  gap: 24px;
+  flex: 1 0 0;
+`;
 
-interface AlarmTextProps {
-  type: string;
-  title: string;
-  description?: string;
-}
+const NotificationTypeChipsBox = styled.div`
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  gap: 12px;
+  overflow: scroll;
 
-const AlarmTextWithBtn = ({ type, title, description }: AlarmTextProps) => {
-  return (
-    <List>
-      <Box>
-        <Item>
-          <Title>{title}</Title>
-          {description && <Description>{description}</Description>}
-        </Item>
-        <Button type="button" scheme="secondary">
-          <Link to="">페이지로 이동</Link>
-        </Button>
-      </Box>
-    </List>
-  );
-};
+  ${media.mobile} {
+    padding-top: 24px;
+  }
+`;
 
-const AlarmText = ({ title, description }: AlarmTextProps) => {
-  return (
-    <List>
-      <Box>
-        <Item>
-          <Title>{title}</Title>
-          {description && <Description>{description}</Description>}
-        </Item>
-      </Box>
-    </List>
-  );
-};
+const NotificationList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 24px;
+  border: 1px solid ${({ theme }) => theme.color.black1};
+  border-radius: 12px;
+  background: ${({ theme }) => theme.color.white};
+  max-height: 1400px;
+  overflow: auto;
+
+  ${media.mobile} {
+    padding: 0 0 24px 0;
+  }
+`;
