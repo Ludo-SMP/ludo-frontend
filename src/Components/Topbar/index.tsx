@@ -61,9 +61,11 @@ const MoveBack = styled.button`
 
 const TopBarContent = styled.p`
   color: ${({ theme }) => theme.color.black5};
-  font-family: 'Pretendard600';
+  text-align: center;
+
+  font-family: 'Pretendard500';
   font-size: 18px;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 32px;
 `;

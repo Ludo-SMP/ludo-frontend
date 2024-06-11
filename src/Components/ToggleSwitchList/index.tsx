@@ -52,7 +52,6 @@ const ContainerText = styled.div`
   flex-direction: column;
   flex: 1;
   width: calc(100% - 52px);
-  min-width: 300px;
 `;
 
 export const Label = styled.label`
@@ -76,6 +75,4 @@ export const Description = styled.div`
   font-family: 'Pretendard400';
   font-size: 16px;
   line-height: 24px;
-
-  ${textEllipsis}
 `;
