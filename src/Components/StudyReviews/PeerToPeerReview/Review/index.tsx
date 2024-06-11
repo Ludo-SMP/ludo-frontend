@@ -35,11 +35,11 @@ export const Review = (reviewProps: ReviewProps) => {
       </ReviewRow>
       {revieweeId ? (
         <ReviewScoreList>
-          <ReviewScore standard="적극성" score={reviewScores.activenessScore} />
-          <ReviewScore standard="전문성" score={reviewScores.professionalismScore} />
-          <ReviewScore standard="소통력" score={reviewScores.communicationScore} />
-          <ReviewScore standard="만족도" score={reviewScores.togetherScore} />
-          <ReviewScore standard="추천도" score={reviewScores.recommendScore} />
+          <ReviewScore standard="적극성" score={reviewScores.activeness} />
+          <ReviewScore standard="전문성" score={reviewScores.professionalism} />
+          <ReviewScore standard="소통력" score={reviewScores.communication} />
+          <ReviewScore standard="만족도" score={reviewScores.together} />
+          <ReviewScore standard="추천도" score={reviewScores.recommend} />
         </ReviewScoreList>
       ) : (
         <EmptyReviewText>

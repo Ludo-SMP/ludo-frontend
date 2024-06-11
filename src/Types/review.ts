@@ -12,11 +12,11 @@ export interface ReviewCreate {
 export interface ReviewType {
   reviewerId: number;
   revieweeId: number;
-  activenessScore: number;
-  professionalismScore: number;
-  communicationScore: number;
-  togetherScore: number;
-  recommendScore: number;
+  activeness: number;
+  professionalism: number;
+  communication: number;
+  together: number;
+  recommend: number;
 }
 
 /* 스터디원 상호간의 리뷰 결과 */
