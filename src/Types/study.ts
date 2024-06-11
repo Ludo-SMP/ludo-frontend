@@ -10,7 +10,7 @@ export type Platform = keyof typeof PLATFORM;
 export type PositionId = typeof POSITION;
 export type Card = 'STUDY' | 'RECRUITMENT';
 export type Sort = '최신순' | '조회순';
-export type ApplyTryStatus = 'NOT APPLY' | 'SUCCESS' | 'CLOSED' | 'ALREDAY_APPLY' | 'ALREDY_PARTICIPATED';
+export type ApplyTryStatus = 'NOT APPLY' | 'SUCCESS' | 'CLOSED' | 'ALREADY_APPLY' | 'ALREADY_PARTICIPATED';
 
 export interface Position {
   id: number;
@@ -53,7 +53,6 @@ export interface Stack {
   imageUrl: string;
 }
 
-// TODO: 타입 구조 개선
 export interface RecruitmentDetail {
   recruitment: {
     id: number;
@@ -74,6 +73,7 @@ export interface RecruitmentDetail {
     category: Category;
     owner: User;
     platform: Platform;
+    platformUrl: string;
     way: ProgressMethod;
     participantLimit: number;
     startDateTime: string;

@@ -1,43 +1,30 @@
-import styled from 'styled-components';
-import { InfoField } from '../../Components/Common/InfoField';
+import { useEffect } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
 import { RowDivider } from '../../Components/Common/Divider/RowDivider';
 import { ColumnDivider } from '../../Components/Common/Divider/ColumnDivider';
 import { useRecruitmentDetail } from '@/Hooks/recruitments/useRecruitmentDetail';
-import { useCloseRecruitmentMutation } from '@/Hooks/recruitments/useCloseRecruitmentMutation';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { dateFormatter, getPeriod, isEdited } from '@/utils/date';
-import RecruitmentInfoSection from './RecruitmentInfoSection';
-import StudyProgressInfoSection from './StudyProgessInfoSection';
-import StudyBasicInfoSection from './StudyBasicInfoSection';
-import Button from '@/Components/Common/Button';
-import Modal from '@/Components/Common/Modal';
-import { APPLY, RECRUITMENT } from '@/Constants/messages';
-import { useLoginStore } from '@/store/auth';
-import { ROUTES } from '@/Constants/route';
+import { Stack } from '@/Components/Common/Stack';
+import { ApplySection } from './ApplySection';
+import { RecruitInfoSection } from './RecruitInfoSection';
+import { StudyBasicInfoSection } from './StudyBasicInfoSection';
+
+import { dateFormatter, isEdited } from '@/utils/date';
+import styled from 'styled-components';
 import { useModalStore } from '@/store/modal';
 import { useUserStore } from '@/store/user';
-import { useEffect, useState } from 'react';
-import ApplyModal from '@/Components/Modal/ApplyModal';
-import { ApplyTryStatus } from '@/Types/study';
 import { Loading } from '@/Assets';
+import { LeftArrow } from '@/Assets/LeftArrow';
 
 const RecruitmentDetailPage = () => {
   const recruitmentId = Number(useParams().recruitmentId);
 
-  const { isModalOpen, openModal, closeModal } = useModalStore();
-  const { isLoggedIn } = useLoginStore();
+  const { closeModal } = useModalStore();
   const { user } = useUserStore();
-  const [applyTryStatus, setApplyTryStatus] = useState<ApplyTryStatus>('NOT APPLY');
-  const [isCloseRecruitmentBtnClicked, setIsCloseRecruitmentBtnClicked] = useState<boolean>(false);
 
-  const navigate = useNavigate();
   const { data: recruitmentDetail, isLoading } = useRecruitmentDetail(recruitmentId);
   const { pathname } = useLocation();
   const recruitment = recruitmentDetail?.recruitment;
   const study = recruitmentDetail?.study;
-
-  const { mutate: closeRecruitmentMutate } = useCloseRecruitmentMutation(study?.id);
-
   const isMine = user?.id === study?.owner?.id;
 
   useEffect(() => {
@@ -49,257 +36,105 @@ const RecruitmentDetailPage = () => {
   }, [pathname]);
 
   return (
-    <RecruitmentDetailWrapper>
+    <RecruitmentDetailLayout>
       {isLoading ? (
         <Loading />
       ) : (
         <>
-          <RecruitmentTitleWrapper>
-            <div className="title">{recruitment.title}</div>
-          </RecruitmentTitleWrapper>
-          <RecruitmentInfoWrapper>
-            <div className="recruitment__status">
-              <div className="creator">{study?.owner?.nickname}</div>
-              <ColumnDivider />
-              <div className="edit__info">
-                <div className="createdAt">{dateFormatter(recruitment.createdDateTime)}</div>
-                <div className="edit__status">
+          <RecruitmentTitleBox>
+            <LeftArrow />
+            <TitleRows>
+              <TitleRow>
+                <Title>{recruitment.title}</Title>
+              </TitleRow>
+              <TitleRow>
+                <Nickname>{study?.owner?.nickname}</Nickname>
+                <ColumnDivider />
+                <GreyText>{dateFormatter(recruitment.createdDateTime)}</GreyText>
+                <GreyText>
                   {isEdited(recruitment.createdDateTime, recruitment.updatedDateTime) ? '수정됨' : '생성'}
-                </div>
-              </div>
-            </div>
-            <div className="recruitment__details">
-              <RecruitmentInfoSection
-                applicantCnt={recruitment.applicantCount}
-                endDate={dateFormatter(recruitment.endDateTime)}
-                positions={recruitment.positions}
-                stacks={recruitment.stacks}
-                contact={recruitment.contact}
-                platformUrl={recruitment.callUrl}
-              />
-              <RowDivider rowHeight={16} />
-              <StudyProgressInfoSection
-                method={study.way}
-                platform={study.platform}
-                period={getPeriod(study.startDateTime, study.endDateTime)}
-              />
-              <RowDivider rowHeight={16} />
-              <StudyBasicInfoSection
-                studyTitle={study.title}
-                category={study.category}
-                participantLimit={study.participantLimit}
-              />
-              <RowDivider />
-              <div className="study__detail">
-                <InfoField
-                  title="상세내용"
-                  content={recruitment.content || '상세내용'}
-                  flexDirection="column"
-                  width="100%"
+                </GreyText>
+              </TitleRow>
+            </TitleRows>
+          </RecruitmentTitleBox>
+          <RecruitmentInfoBox>
+            <StudyInfoSection>
+              <Stack divider={<RowDivider rowHeight={12} margin={24} />}>
+                <RecruitInfoSection
+                  applicantCnt={recruitment.applicantCount}
+                  endDate={dateFormatter(recruitment.endDateTime)}
+                  positions={recruitment.positions}
+                  stacks={recruitment.stacks}
+                  contact={recruitment.contact}
+                  platformUrl={recruitment.callUrl}
                 />
-              </div>
-            </div>
-          </RecruitmentInfoWrapper>
-          <StudyButtonsWrapper>
-            {isMine ? (
-              <>
-                <Button
-                  scheme="normal"
-                  onClick={() => {
-                    setIsCloseRecruitmentBtnClicked(true);
-                    openModal();
-                  }}
-                >
-                  모집 마감하기
-                </Button>
-                <Button
-                  scheme="secondary"
-                  onClick={() => {
-                    navigate(`/studies/${study.id}/recruitments/${recruitment.id}/edit`);
-                  }}
-                >
-                  스터디 모집 공고 수정하기
-                </Button>
-              </>
-            ) : (
-              <>
-                {applyTryStatus === 'ALREDAY_APPLY' ? (
-                  <div className="text__alert">이미 지원한 스터디입니다.</div>
-                ) : (
-                  <Button scheme="secondary" onClick={openModal}>
-                    스터디 지원하기
-                  </Button>
-                )}
-              </>
-            )}
-          </StudyButtonsWrapper>
-          {!isLoggedIn && isModalOpen && !isCloseRecruitmentBtnClicked && (
-            <Modal
-              title={APPLY.LOGIN.title}
-              handleApprove={() => navigate(ROUTES.AUTH.LOGIN)}
-              approveBtnText="로그인하기"
-              cancelBtnText="나중에 하기"
-              isBtnWidthEqual={false}
-            >
-              {APPLY.LOGIN.content}
-            </Modal>
-          )}
-          {isLoggedIn && isModalOpen && !isCloseRecruitmentBtnClicked && applyTryStatus === 'NOT APPLY' && (
-            <ApplyModal
-              handleApplyApprove={setApplyTryStatus}
-              studyId={study.id}
-              recruitmentId={recruitment.id}
-              positions={recruitment.positions}
-            />
-          )}
-          {isLoggedIn && isModalOpen && !isCloseRecruitmentBtnClicked && applyTryStatus === 'SUCCESS' && (
-            <Modal
-              title={APPLY.SUCCESS.title}
-              handleApprove={() => {
-                setApplyTryStatus(() => 'NOT APPLY');
-                closeModal();
-              }}
-              approveBtnText="확인"
-              alignTitle="center"
-            >
-              <div className="approve__image"></div>
-            </Modal>
-          )}
-          {isLoggedIn &&
-            isModalOpen &&
-            !isCloseRecruitmentBtnClicked &&
-            (applyTryStatus === 'CLOSED' ||
-              applyTryStatus === 'ALREDAY_APPLY' ||
-              applyTryStatus === 'ALREDY_PARTICIPATED') && (
-              <Modal
-                title={
-                  applyTryStatus === 'CLOSED'
-                    ? APPLY.CLOSED.title
-                    : applyTryStatus === 'ALREDAY_APPLY'
-                      ? APPLY.ALREADY_APPLY.title
-                      : APPLY.ALREADY_PARTICIPATED.title
-                }
-                handleApprove={() => {
-                  setApplyTryStatus(() => 'ALREDAY_APPLY');
-                  closeModal();
-                }}
-                approveBtnText="확인"
-              >
-                {applyTryStatus === 'CLOSED'
-                  ? APPLY.CLOSED.content
-                  : applyTryStatus === 'ALREDAY_APPLY'
-                    ? APPLY.ALREADY_APPLY.content
-                    : APPLY.ALREADY_PARTICIPATED.content}
-              </Modal>
-            )}
-          {isModalOpen && isCloseRecruitmentBtnClicked && (
-            <Modal
-              isBtnWidthEqual={true}
-              cancelBtnText={'취소하기'}
-              approveBtnText={'네'}
-              handleApprove={() => {
-                setIsCloseRecruitmentBtnClicked(false);
-                closeRecruitmentMutate();
-              }}
-              title={RECRUITMENT.CLOSE.title}
-            >
-              {RECRUITMENT.CLOSE.content}
-            </Modal>
-          )}
+                <StudyBasicInfoSection
+                  studyTitle={study.title}
+                  participantLimit={study.participantLimit}
+                  content={recruitment.content}
+                />
+              </Stack>
+            </StudyInfoSection>
+            <ApplySection isMine={isMine} recruitment={recruitment} study={study} />
+          </RecruitmentInfoBox>
         </>
       )}
-    </RecruitmentDetailWrapper>
+    </RecruitmentDetailLayout>
   );
 };
 
-const RecruitmentDetailWrapper = styled.div`
+const RecruitmentDetailLayout = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 1224px;
   margin: 0 auto;
-  margin-top: 40px;
-  padding-bottom: 80px;
-  gap: 40px;
-`;
-
-const RecruitmentTitleWrapper = styled.div`
-  display: flex;
-  align-items: center;
+  padding: 24px 0 40px;
   gap: 24px;
-  align-self: stretch;
-  color: ${(props) => props.theme.color.black5};
-  font-family: 'Pretendard800';
-  font-size: ${(props) => props.theme.font.xxxxlarge};
-  font-style: normal;
-  font-weight: 800;
-  line-height: 48px;
 `;
 
-const RecruitmentInfoWrapper = styled.div`
+const TitleRows = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 32px;
-  align-self: stretch;
-  padding-bottom: 20px;
-
-  .recruitment__status {
-    display: flex;
-    padding: 10px;
-    align-items: center;
-    gap: 12px;
-    align-self: stretch;
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 40px;
-    letter-spacing: -0.2px;
-
-    .creator {
-      color: ${(props) => props.theme.color.black4};
-    }
-
-    .edit__info {
-      display: flex;
-      gap: 12px;
-      color: ${(props) => props.theme.color.black2};
-    }
-  }
-
-  .recruitment__details {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 32px;
-  }
-
-  .study__detail {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-  }
+  gap: 12px;
 `;
-const StudyButtonsWrapper = styled.div`
+
+const TitleRow = styled.div`
   display: flex;
-  justify-content: center;
+  gap: 12px;
+  font-family: 'Pretendard500';
+  ${({ theme }) => theme.typo.InputTitle};
+`;
+
+const Nickname = styled.span`
+  display: flex;
+`;
+
+const GreyText = styled.span`
+  display: flex;
+  color: ${({ theme }) => theme.color.black2};
+`;
+
+const Title = styled.h1`
+  font-family: 'Pretendard800';
+  ${({ theme }) => theme.typo.PageHeadWeb};
+`;
+
+const StudyInfoSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  max-width: 912px;
+  width: 100%;
+`;
+
+const RecruitmentTitleBox = styled.div`
+  display: flex;
+  gap: 12px;
+`;
+
+const RecruitmentInfoBox = styled.div`
+  display: flex;
   gap: 24px;
-  align-self: stretch;
-
-  & > button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    flex: 1 0 0;
-  }
-
-  .text__alert {
-    font-family: 'Pretendard600';
-    font-size: 16px;
-    font-style: normal;
-    line-height: 40px; /* 250% */
-    color: ${({ theme }) => theme.color.black2};
-  }
+  padding-bottom: 20px;
 `;
 
 export default RecruitmentDetailPage;

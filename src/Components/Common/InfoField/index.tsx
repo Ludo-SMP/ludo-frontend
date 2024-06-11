@@ -53,7 +53,7 @@ const InfoFieldWrapper = styled.div<{
   flex-direction: ${(props) => props.flexDirection || 'row'};
   width: ${(props) => props.width};
   text-align: start;
-  gap: ${(props) => (props.flexDirection ? '4px' : '24px')};
+  gap: ${(props) => (props.flexDirection ? '8px' : '24px')};
   font-size: ${(props) => (props.fontSize ? props.fontSize : props.theme.font.medium)};
   font-weight: 500;
   line-height: 24px;
