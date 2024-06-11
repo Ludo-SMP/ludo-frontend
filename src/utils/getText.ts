@@ -1,3 +1,4 @@
+import { ROUTES } from '@/Constants/route';
 import { NotificationsType } from '@/Types/notifications';
 
 export const getNotificationTypeText = (type: NotificationsType) => {
@@ -31,4 +32,28 @@ export const getNotificationTypeText = (type: NotificationsType) => {
       notificationTypeText = '스터디';
   }
   return notificationTypeText;
+};
+
+export const getTabTitle = (pathName: string) => {
+  let tabTitle = '';
+  switch (pathName) {
+    case ROUTES.MYPAGE.NOTIFICATIONS:
+      tabTitle = '루도가 알려요';
+      break;
+    case ROUTES.MYPAGE.REVIEWS:
+      tabTitle = '스터디원이 남긴 나의 리뷰';
+      break;
+    case ROUTES.MYPAGE.SAVED:
+      tabTitle = '임시 저장된 글';
+      break;
+    case ROUTES.MYPAGE.PROFILE_SETTINGS:
+      tabTitle = '프로필 설정';
+      break;
+    case ROUTES.MYPAGE.NOTIFICATIONS_SETTINGS:
+      tabTitle = '알림 권한 설정';
+      break;
+    default:
+      tabTitle = '회원 정보';
+  }
+  return tabTitle;
 };

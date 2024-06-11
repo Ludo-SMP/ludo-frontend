@@ -9,7 +9,7 @@ export interface TopBarProps {
   children?: React.ReactNode;
 }
 
-export const TopBar = ({ gap = 12, children }: TopBarProps) => {
+export const TopBar = ({ gap = 0, children }: TopBarProps) => {
   const navigate = useNavigate();
   return (
     <TopbarWrapper $gap={gap}>
@@ -23,17 +23,26 @@ export const TopBar = ({ gap = 12, children }: TopBarProps) => {
         </svg>
       </MoveBack>
       <TopBarContent>{children}</TopBarContent>
+      <span className="empty__box" />
     </TopbarWrapper>
   );
 };
 
 const TopbarWrapper = styled.div<{ $gap?: number }>`
   display: flex;
-  flex: 1 0 0;
+  height: 48px;
+  min-width: 300px;
   max-width: 1224px;
   width: 100%;
+  padding: 4px 24px;
+  justify-content: space-between;
   align-items: center;
-  gap: ${({ $gap }) => `${$gap}px`};
+  align-self: stretch;
+
+  .empty__box {
+    visibility: hidden;
+    width: 40px;
+  }
 `;
 
 const MoveBack = styled.button`
@@ -57,5 +66,4 @@ const TopBarContent = styled.p`
   font-style: normal;
   font-weight: 600;
   line-height: 32px;
-  flex: 1 0 0;
 `;
