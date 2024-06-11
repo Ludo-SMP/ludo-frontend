@@ -22,6 +22,8 @@ export interface Category {
   name: '프로젝트' | '코딩 테스트' | '모의 면접';
 }
 
+// WARN: 해당 타입과 `Participant` 타입은 중복됨.
+// 이에 대한 타입 merge 및 삭제, 참조 코드 수정 등등이 필요.
 export interface Member {
   id: number;
   nickname: string;
@@ -144,6 +146,8 @@ export interface FilterOptionParams {
   sort?: Sort[];
 }
 
+// WARN: 해당 타입과 `Member` 타입은 중복됨.
+// 이에 대한 타입 merge 및 삭제, 참조 코드 수정 등등이 필요.
 export interface Participant {
   id: number;
   nickname: string;
@@ -156,7 +160,12 @@ export interface Participant {
   recentAttendanceDate: string | null;
 }
 
-export interface Applicant extends Omit<Member, 'role'> {}
+/**
+ * 스터디 지원자 타입
+ *
+ * NOTE: 추후 Participant/Member 타입이 해당 타입을 상속하도록 구조 변경 필요.
+ */
+export interface Applicant extends Omit<Member, 'role' | 'totalAttendance' | 'recentAttendanceDate'> {}
 
 export interface StudyCreate {
   title: string;
