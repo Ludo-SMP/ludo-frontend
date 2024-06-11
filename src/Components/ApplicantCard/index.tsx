@@ -1,5 +1,5 @@
 import { Profile } from '@/Assets';
-import { Member, ApplyStatus } from '@/Types/study';
+import { ApplyStatus, Applicant } from '@/Types/study';
 import styled from 'styled-components';
 import { InfoField } from '../Common/InfoField';
 import Button from '../Common/Button';
@@ -14,7 +14,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { RowDivider } from '../Common/Divider/RowDivider';
 import { CircularRate } from '../CircularRate';
 
-interface ApplicantCardProps extends Omit<Member, 'role'> {
+interface ApplicantCardProps extends Applicant {
   /** 스터디 ID */
   studyId: number;
 
