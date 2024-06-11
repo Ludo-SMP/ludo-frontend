@@ -18,6 +18,6 @@ const RowDividerWrapper = styled.div<{ rowHeight: number; margin?: number }>`
   ${({ margin }) =>
     margin &&
     css`
-      margin: ${margin}px;
+      margin: ${margin}px 0;
     `}
 `;
