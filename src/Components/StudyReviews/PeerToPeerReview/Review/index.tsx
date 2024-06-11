@@ -54,7 +54,7 @@ const ReviewBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  min-width: 304px;
+  min-width: 292px;
   gap: 16px;
 `;
 
@@ -87,7 +87,7 @@ const ReviewScoreList = styled.ul`
   align-items: flex-start;
   width: 100%;
   height: 72px;
-  gap: 16px;
+  gap: 12px;
 `;
 
 const EmptyReviewText = styled.p`

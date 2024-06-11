@@ -15,6 +15,9 @@ export interface AccordionProps {
 
   /** 아코디언을 펼쳤을 때 나타날 내용 */
   children?: React.ReactNode;
+
+  /** breakPoint*/
+  breakPoint?: number;
 }
 
 /** 마이페이지 아코디언 */

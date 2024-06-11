@@ -2,6 +2,7 @@ import { ReviewType } from '@/Types/review';
 import styled from 'styled-components';
 import { TwoWay } from '@/Assets';
 import { Review } from './Review';
+import { media } from '@/Styles/theme';
 
 export interface PeerToPeerReviewProps {
   selfReview: ReviewType | null;
@@ -20,14 +21,28 @@ export const PeerToPeerReview = ({ selfReview, peerReview }: PeerToPeerReviewPro
 
 const PeerToPeerReviewBox = styled.li`
   display: flex;
+  flex-wrap: wrap;
   min-width: 300px;
   padding: 24px 0px 24px 32px;
   align-items: center;
-  gap: 40px;
+  gap: 32px;
   align-self: stretch;
   width: 100%;
 
   & + & {
     border-top: 1px solid #e5e6e8;
+  }
+
+  ${media.custom(900)} {
+    flex-direction: column;
+    gap: 16px;
+
+    & > svg {
+      transform: rotate(90deg);
+    }
+  }
+
+  ${media.mobile} {
+    padding: 24px 0;
   }
 `;

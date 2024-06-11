@@ -3,6 +3,7 @@ import { Accordion } from '../Accordion';
 import { PeerToPeerReviewType } from '@/Types/review';
 import { PeerToPeerReview } from './PeerToPeerReview';
 import { DefaultStudyThumbnail } from '@/Assets';
+import { media } from '@/Styles/theme';
 
 export interface StudyReviewsProps {
   /** 스터디 id */
@@ -34,10 +35,20 @@ export const StudyReviews = ({ id: studyId, title, reviews: peerTopeerReviews }:
 const StudyReviewsBox = styled.div`
   width: 100%;
   max-width: 912px;
-  padding: 16px 32px;
+  padding: 0 24px;
   background-color: ${({ theme }) => theme.color.white};
   border-radius: ${({ theme }) => theme.borderRadius.cornerRadius12};
   border: 1px solid ${({ theme }) => theme.color.black1};
+
+  ${media.mobile} {
+    padding: 16px 24px;
+
+    & > li {
+      & > div:last-child {
+        padding: 0;
+      }
+    }
+  }
 `;
 
 const PeerToPeerReviewList = styled.ul`

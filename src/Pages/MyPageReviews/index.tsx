@@ -27,13 +27,12 @@ const MyPageReviewsLayout = styled.div`
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
-  gap: 16px;
 `;
 
 const StudyReviewsList = styled.ul`
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: 16px;
+  gap: 12px;
   overflow: auto;
 `;
