@@ -128,18 +128,6 @@ export const mockReviews: AllStudyReviews = {
             recommend: 4,
           },
         },
-        {
-          selfReview: {
-            reviewerId: 1,
-            revieweeId: 5,
-            activeness: 2,
-            professionalism: 3,
-            communication: 4,
-            together: 5,
-            recommend: 1,
-          },
-          peerReview: null,
-        },
       ],
     },
     {
@@ -216,26 +204,6 @@ export const mockReviews: AllStudyReviews = {
       id: 4,
       title: 'Ludo 4',
       reviews: [
-        {
-          selfReview: {
-            reviewerId: 1,
-            revieweeId: 2,
-            activeness: 4,
-            professionalism: 5,
-            communication: 1,
-            together: 2,
-            recommend: 3,
-          },
-          peerReview: {
-            reviewerId: 2,
-            revieweeId: 1,
-            activeness: 5,
-            professionalism: 5,
-            communication: 3,
-            together: 2,
-            recommend: 1,
-          },
-        },
         {
           selfReview: {
             reviewerId: 1,

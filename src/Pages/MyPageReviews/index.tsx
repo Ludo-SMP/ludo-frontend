@@ -1,6 +1,7 @@
 import { Loading } from '@/Assets';
 import { StudyReviews } from '@/Components/StudyReviews';
 import { useReviews } from '@/Hooks/review/useReviews';
+import { media } from '@/Styles/theme';
 import { StudyReviewsType } from '@/Types/review';
 import styled from 'styled-components';
 
@@ -35,4 +36,8 @@ const StudyReviewsList = styled.ul`
   width: 100%;
   gap: 12px;
   overflow: auto;
+
+  ${media.mobile} {
+    gap: 0;
+  }
 `;

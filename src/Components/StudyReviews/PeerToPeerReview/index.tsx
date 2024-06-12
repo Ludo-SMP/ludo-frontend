@@ -21,7 +21,6 @@ export const PeerToPeerReview = ({ selfReview, peerReview }: PeerToPeerReviewPro
 
 const PeerToPeerReviewBox = styled.li`
   display: flex;
-  flex-wrap: wrap;
   min-width: 300px;
   padding: 24px 0px 24px 32px;
   align-items: center;
@@ -33,16 +32,13 @@ const PeerToPeerReviewBox = styled.li`
     border-top: 1px solid #e5e6e8;
   }
 
-  ${media.custom(900)} {
+  ${media.custom(1000)} {
     flex-direction: column;
+    padding: 24px 0;
     gap: 16px;
 
     & > svg {
       transform: rotate(90deg);
     }
-  }
-
-  ${media.mobile} {
-    padding: 24px 0;
   }
 `;

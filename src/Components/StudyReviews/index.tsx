@@ -40,8 +40,24 @@ const StudyReviewsBox = styled.div`
   border-radius: ${({ theme }) => theme.borderRadius.cornerRadius12};
   border: 1px solid ${({ theme }) => theme.color.black1};
 
+  & > li {
+    & > div:first-child {
+      height: 40px;
+    }
+
+    & > div:last-child {
+      padding: 0;
+    }
+  }
+
   ${media.mobile} {
     padding: 16px 24px;
+    border: 0;
+    border-radius: 0;
+
+    & + & {
+      border-top: 1px solid #e5e6e8;
+    }
 
     & > li {
       & > div:last-child {
