@@ -31,8 +31,20 @@ const Accordion = (props: AccordionProps) => {
   const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        setContentHeight(entry.contentRect.height);
+      }
+    });
+
+    if (contentRef.current) resizeObserver.observe(contentRef.current, { box: 'content-box' });
+
     setContentHeight(contentRef?.current?.clientHeight ?? 0);
     setIsOpen(null);
+
+    return () => {
+      resizeObserver.disconnect();
+    };
   }, []);
 
   return (
