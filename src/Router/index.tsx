@@ -24,6 +24,8 @@ import { SettingLayout } from '@/Layout/SettingLayout';
 import { NotificationsSettings } from '@/Pages/NotificationsSettings';
 import { ReviewPage } from '@/Pages/Review';
 import { Notifications } from '@/Pages/Notifications';
+import { MyPageReviews } from '@/Pages/MyPageReviews';
+import { ProfileLayout } from '@/Layout/ProfileLayout';
 
 export const RouterPath = createBrowserRouter([
   {
@@ -67,7 +69,11 @@ export const RouterPath = createBrowserRouter([
           {
             // 스터디원이 남긴 나의 리뷰
             path: ROUTES.MYPAGE.REVIEWS,
-            element: <>TODO</>,
+            element: (
+              <ProfileLayout>
+                <MyPageReviews />
+              </ProfileLayout>
+            ),
           },
           {
             // 임시 저장된 글

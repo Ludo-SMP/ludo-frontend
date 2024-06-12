@@ -25,6 +25,7 @@ export const STUDY = {
   MYPAGE_INFO: () => [BASE_KEY.STUDY, 'MYPAGE'],
   DELETE: (studyId: number) => [BASE_KEY.STUDY, studyId, 'DELETE'],
   LEAVE: (studyId: number) => [BASE_KEY.STUDY, studyId, 'LEAVE'],
+  REVIEWS: [BASE_KEY.STUDY, 'MYPAGE', 'REVIEWS'],
 };
 
 export const USER = {

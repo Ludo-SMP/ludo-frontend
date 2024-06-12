@@ -38,10 +38,10 @@ export const getTabTitle = (pathName: string) => {
   let tabTitle = '';
   switch (pathName) {
     case ROUTES.MYPAGE.NOTIFICATIONS:
-      tabTitle = '루도가 알려요';
+      tabTitle = '알림';
       break;
     case ROUTES.MYPAGE.REVIEWS:
-      tabTitle = '스터디원이 남긴 나의 리뷰';
+      tabTitle = '스터디원 상호 평가';
       break;
     case ROUTES.MYPAGE.SAVED:
       tabTitle = '임시 저장된 글';
