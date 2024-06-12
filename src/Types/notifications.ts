@@ -64,7 +64,7 @@ export interface NotificationEvent<T extends NotificationsType> {
   title: string;
   content: string;
   createdAt: string;
-  read: false;
+  read: boolean;
 }
 
 // 모집공고 알림 응답 타입

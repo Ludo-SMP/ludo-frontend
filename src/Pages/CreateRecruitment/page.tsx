@@ -313,9 +313,9 @@ export const Box = styled.div<{ display: 'row' | 'column'; gap?: string }>`
     `}
 `;
 
-export const Divider = styled.div<{ height?: string | number; width?: string | number }>`
+export const Divider = styled.div<{ height?: string | number; width?: string | number; $dividerColor?: string }>`
   height: ${({ height }) => (height ? (typeof height === 'number' ? `${height}px` : `${height}`) : '12px')};
-  background: ${({ theme }) => theme.color.strokeDividerThick};
+  background: ${({ theme, $dividerColor }) => ($dividerColor ? $dividerColor : theme.color.strokeDividerThick)};
   max-width: ${({ width }) => (width ? (typeof width === 'number' ? `${width}px` : `${width}`) : '100%')};
 `;
 
