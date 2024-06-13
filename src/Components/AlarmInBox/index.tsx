@@ -9,6 +9,7 @@ import { ROUTES } from '@/Constants/route';
 import { RightArrow } from '@/Assets/RightArrow';
 import { flexCenter } from '@/Styles/theme';
 import { RowDivider } from '../Common/Divider/RowDivider';
+import { useReadNotification } from '@/Hooks/notifications/useReadNotification';
 
 export interface AlarmInboxProps {
   handleOpen?: (prev: boolean) => void;
@@ -26,7 +27,9 @@ export const AlarmInbox = ({ alarmPreviews, handleOpen }: AlarmInboxProps) => {
     handleOpen && handleOpen(false);
   });
 
-  const isReadAll = () => notification?.filter((alarm) => !alarm.read).length === 0;
+  const notReadAlarm = notification?.filter((alarm) => !alarm.read);
+  const isReadAll = () => notReadAlarm.length === 0;
+  const { mutate } = useReadNotification([...notReadAlarm.map((alarm) => alarm.notificationId)]);
 
   return (
     <AlarmInboxBox ref={inboxRef}>
@@ -51,7 +54,7 @@ export const AlarmInbox = ({ alarmPreviews, handleOpen }: AlarmInboxProps) => {
         <RowDivider rowHeight={1} />
         {!isReadAll() && (
           <BottomBar>
-            <GreyTextBox>전체 읽음 처리하기</GreyTextBox>
+            <GreyTextBox onClick={() => mutate()}>전체 읽음 처리하기</GreyTextBox>
           </BottomBar>
         )}
       </AlarmBox>
