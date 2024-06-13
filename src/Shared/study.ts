@@ -128,8 +128,8 @@ export const PROGRESS_METHODS = [
 ];
 
 export const PROGRESS_METHODS_OPTIONS = [
-  { value: 1, label: '온라인' },
-  { value: 2, label: '오프라인' },
+  { value: 'ONLINE', label: '온라인' },
+  { value: 'OFFLINE', label: '오프라인' },
 ];
 
 export const SORTS = [
