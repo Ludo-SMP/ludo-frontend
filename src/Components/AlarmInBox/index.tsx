@@ -99,6 +99,7 @@ const LinkBox = styled(Link)`
 
 const GreyTextBox = styled.div`
   ${GreyText}
+  cursor: pointer;
 `;
 
 const TopBar = styled.div<{ $isReadAll: boolean }>`
