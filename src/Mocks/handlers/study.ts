@@ -1,8 +1,8 @@
 import { HttpResponse, http } from 'msw';
-import { applicantsDetailMockData, studyDetailMockData, myPageInfoData } from '../data/mockStudies';
+import { applicantsDetailMockData, studyDetailMockData } from '../data/mockStudies';
 const baseURL = import.meta.env.VITE_MOCK_API_URL;
 
-const createStudy = http.post(`${baseURL}/api/studies`, async ({ params }) => {
+const createStudy = http.post(`${baseURL}/api/studies`, async () => {
   return new HttpResponse(
     JSON.stringify({
       data: studyDetailMockData[0],
@@ -25,19 +25,6 @@ const getStudyDetail = http.get(`${baseURL}/api/studies/:studyId`, async ({ para
     {
       status: 200,
       statusText: 'OK',
-    },
-  );
-});
-
-const getMyPageInfo = http.get(`${baseURL}/api/users/mypage`, async () => {
-  return new HttpResponse(
-    JSON.stringify({
-      data: { ...myPageInfoData },
-      message: 'Success',
-    }),
-    {
-      status: 200,
-      statusText: '',
     },
   );
 });
@@ -214,7 +201,6 @@ export default [
   createStudy,
   getStudyDetail,
   getApplicantsDetail,
-  getMyPageInfo,
   applyStudy,
   refuseApply,
   failRefuseApply,

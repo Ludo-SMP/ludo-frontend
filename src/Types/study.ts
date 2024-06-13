@@ -250,6 +250,33 @@ export interface MyStudies {
   completedStudies: CompletedStudy[];
 }
 
+/**
+ * @description 마이페이지 신뢰도 항목 타입
+ *
+ * @property {number} finishStudy - 진행한 스터디
+ * @property {number} perfectStudy - 완주한 스터디
+ * @property {number} accumulatedTeamMembers - 누적 팀원 수
+ * @property {number} averageAttendanceRate - 평균 출석률
+ * @property {number} activeness - 적극성
+ * @property {number} professionalism - 전문성
+ * @property {number} communication - 의사소통능력
+ * @property {number} together - 협업능력 (80% 이상)
+ * @property {number} recommend - 추천도 (80% 이상)
+ *
+ */
+export interface Trust {
+  finishStudy: number;
+  perfectStudy: number;
+  accumulatedTeamMembers: number;
+  averageAttendanceRate: number;
+  activeness: number;
+  professionalism: number;
+  communication: number;
+  together: number;
+  recommend: number;
+}
+
 export interface MyPageInfo extends MyStudies {
   user: User;
+  trust: Trust;
 }

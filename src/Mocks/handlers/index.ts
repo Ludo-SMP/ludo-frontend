@@ -5,6 +5,7 @@ import stackHandler from './stacks';
 import SSEnotificationHandler from './SSEnotification';
 import reviewHandler from './review';
 import notificationsHandler from './notifications';
+import mypageHandler from './users';
 
 export const handlers = [
   ...studyHandler,
@@ -14,4 +15,5 @@ export const handlers = [
   ...reviewHandler,
   ...notificationsHandler,
   ...SSEnotificationHandler,
+  ...mypageHandler,
 ];

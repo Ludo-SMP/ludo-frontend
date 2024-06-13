@@ -2,7 +2,7 @@ import { ProfileSection } from '@/Components/ProfileSection/ProfileSection';
 import { StudyProgress } from '@/Components/StudyProgress/StudyProgress';
 import { RowDivider } from '@/Components/Common/Divider/RowDivider';
 import { CircularRate } from '@/Components/CircularRate';
-import { MyPageInfo, User } from '@/Types/study';
+import { MyPageInfo, Trust, User } from '@/Types/study';
 import styled from 'styled-components';
 import { RightArrow } from '@/Assets/RightArrow';
 import { MemberImage } from '@/Assets';
@@ -13,6 +13,7 @@ interface UserInfoSectionProps {
 
 const UserInfoSection = ({ myPageInfo }: UserInfoSectionProps) => {
   const user: User = myPageInfo?.user;
+  const trust: Trust = myPageInfo?.trust;
 
   return (
     <UserInfoSectionBox>
@@ -29,14 +30,14 @@ const UserInfoSection = ({ myPageInfo }: UserInfoSectionProps) => {
               <br /> 달려왔어요!
             </InfoItem>
             <InfoItem>
-              <StudyProgress totalStudy={2} completedStudy={1} />
+              <StudyProgress totalStudy={trust?.finishStudy} completedStudy={trust?.perfectStudy} />
               <InfoText>
                 <span className="info__label">누적 팀원 수</span>
-                <span className="info__description">00명</span>
+                <span className="info__description">{trust?.accumulatedTeamMembers || 0}명</span>
               </InfoText>
               <InfoText>
                 <span className="info__label">평균 출석률</span>
-                <span className="info__description">00 퍼센트</span>
+                <span className="info__description">{trust?.averageAttendanceRate || 0} 퍼센트</span>
               </InfoText>
             </InfoItem>
           </UserInfoRow>
@@ -49,18 +50,21 @@ const UserInfoSection = ({ myPageInfo }: UserInfoSectionProps) => {
             </InfoItem>
             <InfoItem>
               <InfoItemBox>
-                <CircularRate percentage={80} label="적극성" />
-                <CircularRate percentage={80} label="적극성" />
-                <CircularRate percentage={80} label="적극성" />
+                <CircularRate percentage={trust?.activeness || 0} label="적극성" />
+                <CircularRate percentage={trust?.professionalism || 0} label="전문성" />
+                <CircularRate percentage={trust?.communication || 0} label="소통력" />
                 <RightArrow />
               </InfoItemBox>
-              <InfoDesc>
-                <p>
+              {trust?.together >= 80 && (
+                <InfoDesc>
                   다시 <em>함께 하고 싶어하는</em> 사용자예요!
-                  <br />
+                </InfoDesc>
+              )}
+              {trust?.recommend >= 80 && (
+                <InfoDesc>
                   주변 사람에게 <em>추천하고 싶은</em> 사용자예요!
-                </p>
-              </InfoDesc>
+                </InfoDesc>
+              )}
             </InfoItem>
           </UserInfoRow>
         </UserInfoRows>
@@ -123,16 +127,16 @@ const InfoItem = styled.div`
   }
 `;
 
-const InfoDesc = styled.div`
+const InfoDesc = styled.p`
+  ${({ theme }) => theme.typo.InputField};
   color: ${({ theme }) => theme.color.black2};
-  font-family: 'Pretendard400'
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 24px;
+  font-family: 'Pretendard400';
 
   em {
     color: ${({ theme }) => theme.color.black4};
-
+  }
+  & + p {
+    margin-top: 4px;
   }
 `;
 
