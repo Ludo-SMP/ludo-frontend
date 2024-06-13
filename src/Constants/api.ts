@@ -51,7 +51,7 @@ export const API_END_POINT = {
 
   // NOTIFICATIONS
   NOTIFICATIONS: `${API_PREFIX}/notifications`,
-  READ_NOTIFICATIONS: (notificationId: number) => `${API_PREFIX}/notifications/${notificationId}`,
+  READ_NOTIFICATIONS: `${API_PREFIX}/notifications/check`,
   NOTIFICATIONS_SETTING: `${API_PREFIX}/notifications/settings`,
   EDIT_NOTIFICATIONS_KEYWORDS: `${API_PREFIX}/notifications/settings/keywords`,
 };
