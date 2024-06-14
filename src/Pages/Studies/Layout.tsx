@@ -1,10 +1,10 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { One, Three, Two } from '@/Assets';
 import { ProgressPeriod } from '@/Components/Calendar/ProgressPeriod';
 import Button from '@/Components/Common/Button';
 import { Grid } from '@/Components/Common/Grid';
 import InputText from '@/Components/Common/InputText';
-import { LabelForm } from '@/Components/Common/LabelForm';
+import { ErrorMsg, LabelForm } from '@/Components/Common/LabelForm';
 import { Stack } from '@/Components/Common/Stack';
 import ErrorBoundary from '@/Components/ErrorBoundary';
 import { HeaderWithLogo } from '@/Components/Header/HeaderWithLogo';
@@ -22,6 +22,8 @@ import { AxiosResponse } from 'axios';
 import { Controller, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { useModalStore } from '@/store/modal';
+import { useAttendanceModal } from '@/Hooks/useAttendanceModal';
 
 interface StudyCreateForm {
   title: string;
@@ -32,7 +34,6 @@ interface StudyCreateForm {
   platform: Option<Platform, string>;
   platformUrl: string;
   progressPeriod: DateRange;
-  attendanceDay?: number[];
 }
 const memberLimit = Array(10)
   .fill(void 0)
@@ -53,6 +54,11 @@ export default ({ query, mutation }: StudyFormLayoutProps) => {
   } = useForm<StudyCreateForm>();
 
   const { savedKey, tempSaved } = useTempSaved();
+
+  const { isModalOpen, openModal } = useModalStore();
+
+  const { attendanceDay, content, toggleAttendanceDay, isValidAttendanceDay } = useAttendanceModal();
+
   const navigate = useNavigate();
 
   const { mutate, isError } = mutation;
@@ -61,17 +67,14 @@ export default ({ query, mutation }: StudyFormLayoutProps) => {
 
   if (isError) return <ErrorBoundary />;
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
   return (
     <>
-      {isModalOpen && <AttendanceModal />}
-
       <HeaderWithLogo title="스터디 생성하기" />
       <PageWrapper>
         <Form
           onSubmit={handleSubmit(
             ({ title, category, memberLimit, position, progressMethod, platform, progressPeriod }) => {
+              if (!isValidAttendanceDay()) return;
               mutate({
                 title,
                 categoryId: category.value,
@@ -81,8 +84,10 @@ export default ({ query, mutation }: StudyFormLayoutProps) => {
                 participantLimit: memberLimit.value,
                 startDateTime: progressPeriod[0].toISOString(),
                 endDateTime: progressPeriod[1].toISOString(),
+                attendanceDay: attendanceDay?.map((day) => day.id),
               });
             },
+            isValidAttendanceDay,
           )}
         >
           <Stack divider={<Divider />} gap={24}>
@@ -200,8 +205,17 @@ export default ({ query, mutation }: StudyFormLayoutProps) => {
                     />
                   </CalendarButton>
                 </LabelForm>
-                <LabelForm<StudyCreateForm> label="출석일" name="attendanceDay" errors={errors}>
-                  <InputText onClick={() => setIsModalOpen(true)} placeholder="ex) 화요일, 목요일" value={null} />
+
+                <LabelForm<StudyCreateForm> label="출석일">
+                  <InputText
+                    onClick={openModal}
+                    placeholder={'ex) 화요일, 목요일'}
+                    value={content === 'ex) 화요일, 목요일' ? null : content}
+                  />
+                  {isModalOpen && (
+                    <AttendanceModal attendanceDay={attendanceDay} toggleAttendanceDay={toggleAttendanceDay} />
+                  )}
+                  {attendanceDay?.length === 0 && <ErrorMsg>{'출석일을 선택해주세요'}</ErrorMsg>}
                 </LabelForm>
               </Grid>
             </FormSection>
