@@ -1,19 +1,32 @@
+import { PropsWithChildren, useRef, useState } from 'react';
+
 import Button from '@/Components/Common/Button';
-import Chip from '@/Components/Common/Chip';
+import ChipMenu from '@/Components/Common/ChipMenu';
 import { RowDivider } from '@/Components/Common/Divider/RowDivider';
-import { Position } from '@/Types/study';
-import { PropsWithChildren } from 'react';
 import styled from 'styled-components';
+import { ATTENDANCE_DAY } from '@/Shared/study';
+import { useModalStore } from '@/store/modal';
+import { useOutSideClick } from '@/Hooks/useOutsideClick';
 
 const AttendanceModal = () => {
-  const test: Position[] = [
-    { id: 1, name: '백엔드' },
-    { id: 2, name: '프론트엔드' },
-    { id: 3, name: '디자이너' },
-    { id: 4, name: '데브옵스' },
-  ];
+  const [dayIds, setDayIds] = useState<number[]>([]);
+
+  const toggleId = (id: number) => {
+    if (dayIds.includes(id)) {
+      setDayIds([...dayIds.filter((dayId) => dayId !== id)]);
+    } else {
+      setDayIds([...dayIds, id]);
+    }
+  };
+
+  const { closeModal } = useModalStore();
+
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  useOutSideClick(modalRef, closeModal);
+
   return (
-    <ModalLayout>
+    <ModalLayout ref={modalRef}>
       <ModalInner>
         <ModalHeader>
           <ModalText>스터디 출석일을 골라주세요.</ModalText>
@@ -21,22 +34,30 @@ const AttendanceModal = () => {
         <ModalBody>
           <FormSection title="평일">
             <ButtonBox>
-              {test.map((el: Position) => (
-                <Chip chipType="Secondary" position={el} />
+              {ATTENDANCE_DAY.slice(0, 5).map(({ name, id }) => (
+                <ChipMenu key={`chip-${id}`} onClick={() => toggleId(id)} checked={dayIds.includes(id)}>
+                  {name}
+                </ChipMenu>
               ))}
             </ButtonBox>
           </FormSection>
           <FormSection title="주말">
             <ButtonBox>
-              {test.map((el: Position) => (
-                <Chip chipType="Secondary" position={el} />
+              {ATTENDANCE_DAY.slice(5).map(({ name, id }) => (
+                <ChipMenu key={`chip-${id}`} onClick={() => toggleId(id)} checked={dayIds.includes(id)}>
+                  {name}
+                </ChipMenu>
               ))}
             </ButtonBox>
           </FormSection>
         </ModalBody>
         <ModalFooter>
-          <Button>선택 취소</Button>
-          <Button>선택 완료</Button>
+          <Button scheme="normal" className="button__cancel" onClick={closeModal}>
+            선택 취소
+          </Button>
+          <Button scheme="primary" className="button__approve">
+            선택 완료
+          </Button>
         </ModalFooter>
       </ModalInner>
     </ModalLayout>
@@ -112,4 +133,11 @@ const ModalFooter = styled.div`
   display: flex;
   gap: 24px;
   margin-top: 32px;
+
+  button.button__cancel {
+    width: 158px;
+  }
+  button.button__approve {
+    width: 354px;
+  }
 `;
