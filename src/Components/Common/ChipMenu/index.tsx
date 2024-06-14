@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export type ChipMenuProps = {
   onClick: () => void;
-  checked: boolean;
+  checked: boolean | (() => boolean);
   children: React.ReactNode;
   disabled?: boolean;
   className?: string;
@@ -16,7 +16,7 @@ const ChipMenu = ({ onClick, checked, children, disabled, className }: ChipMenuP
   </ChipMenuContainer>
 );
 
-const ChipMenuContainer = styled.div<{ checked: boolean }>`
+const ChipMenuContainer = styled.div<{ checked: boolean | (() => boolean) }>`
   display: flex;
   padding: 0px 16px;
   justify-content: center;
