@@ -1,3 +1,4 @@
+import { ReactNode, useState } from 'react';
 import { One, Three, Two } from '@/Assets';
 import { ProgressPeriod } from '@/Components/Calendar/ProgressPeriod';
 import Button from '@/Components/Common/Button';
@@ -8,6 +9,7 @@ import { Stack } from '@/Components/Common/Stack';
 import ErrorBoundary from '@/Components/ErrorBoundary';
 import { HeaderWithLogo } from '@/Components/Header/HeaderWithLogo';
 import Heading from '@/Components/Heading';
+import { AttendanceModal } from '@/Components/Modal/AttendanceModal';
 import { CalendarButton } from '@/Components/Selectbox/CalendarButton';
 import CustomSelect from '@/Components/Selectbox/CustomSelect';
 import { useTempSaved } from '@/Hooks/useTempSaved';
@@ -17,7 +19,6 @@ import { Category, Platform, Position, ProgressMethod, StudyCreate, StudyDetail,
 import { saveTemporary } from '@/utils/temporarySavedUtils';
 import { UseMutationResult, UseQueryResult } from '@tanstack/react-query';
 import { AxiosResponse } from 'axios';
-import { ReactNode } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -31,6 +32,7 @@ interface StudyCreateForm {
   platform: Option<Platform, string>;
   platformUrl: string;
   progressPeriod: DateRange;
+  attendanceDay?: number[];
 }
 const memberLimit = Array(10)
   .fill(void 0)
@@ -59,8 +61,12 @@ export default ({ query, mutation }: StudyFormLayoutProps) => {
 
   if (isError) return <ErrorBoundary />;
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <>
+      {isModalOpen && <AttendanceModal />}
+
       <HeaderWithLogo title="스터디 생성하기" />
       <PageWrapper>
         <Form
@@ -182,6 +188,8 @@ export default ({ query, mutation }: StudyFormLayoutProps) => {
                     {...register('platformUrl', { required: '진행 플랫폼 URL을 입력해주세요' })}
                   />
                 </LabelForm>
+              </Grid>
+              <Grid col={2}>
                 <LabelForm<StudyCreateForm> label="진행 기간" name="progressPeriod" errors={errors}>
                   <CalendarButton>
                     <Controller
@@ -191,6 +199,9 @@ export default ({ query, mutation }: StudyFormLayoutProps) => {
                       render={({ field }) => <ProgressPeriod {...field} />}
                     />
                   </CalendarButton>
+                </LabelForm>
+                <LabelForm<StudyCreateForm> label="출석일" name="attendanceDay" errors={errors}>
+                  <InputText onClick={() => setIsModalOpen(true)} placeholder="ex) 화요일, 목요일" value={null} />
                 </LabelForm>
               </Grid>
             </FormSection>
@@ -257,6 +268,7 @@ const FormSectionInnerHeader = styled.h3`
 const FormSectionInnerBody = styled.div`
   display: flex;
   gap: 24px;
+  flex-direction: column;
   & > * {
     flex: 1;
   }
