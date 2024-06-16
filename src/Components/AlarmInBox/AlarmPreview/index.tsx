@@ -35,7 +35,7 @@ export const AlarmPreview = ({ notificationId, type, content, title, createdAt, 
     mutate();
 
     // 알림 종류별 페이지 이동
-    let destPage = moveToDest(type, params);
+    const destPage = moveToDest(type, params);
     if (destPage) navigate(destPage);
   };
 
