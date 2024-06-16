@@ -20,8 +20,6 @@ export const EditRecruitmentFetcher = () => {
   const { mutate } = useEditRecruitmentMutation(studyId);
 
   const recruitmentData = recruitmentDetail?.recruitment;
-  const { createdDateTime, endDateTime, updatedDateTime, positions, stacks, ...recruitmentForm } =
-    recruitmentData ?? {};
 
   const parseSelectValue = useSelectDefaultValue('api', recruitmentDetail?.recruitment ?? {});
 
