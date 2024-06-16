@@ -30,6 +30,9 @@ export { default as Study } from './icons/study.svg?react';
 export { default as StudyThumbnail } from './icons/studyThumbnail.svg?react';
 export { default as Setting } from './icons/setting.svg?react';
 export { default as TwoWay } from './icons/twoway.svg?react';
+export { default as PrevArrow } from './icons/prevArrow.svg?react';
+export { default as NextArrow } from './icons/nextArrow.svg?react';
+
 // Logo
 export { default as BlankLogo } from './images/blank-logo.png';
 export { default as Logo } from './images/logo.png';
