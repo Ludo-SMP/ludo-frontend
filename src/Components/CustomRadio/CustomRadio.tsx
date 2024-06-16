@@ -1,5 +1,7 @@
 import styled from 'styled-components';
-import { SetStateAction } from 'react';
+
+const RADIO_COLOR: { [key: number]: string } = { 1: '#F7A477', 2: '#E1A193', 3: '#CB9FAE', 4: '#B59CCA', 5: '#7170BF' };
+
 export interface CustomRadioProps {
   /* 값 */
   value: number;
@@ -14,13 +16,11 @@ export interface CustomRadioProps {
   setSelectedValue: (v: number) => void;
 }
 
-const RADIO_COLOR = { 1: '#F7A477', 2: '#E1A193', 3: '#CB9FAE', 4: '#B59CCA', 5: '#7170BF' };
-
 export const CustomRadio = ({ value, checked, setSelectedValue, size = 32 }: CustomRadioProps) => {
   return (
     <Label>
       <span>{value}</span>
-      <Radio value={value} checked={checked} size={size}>
+      <Radio value={value <= 5 ? value : -1} checked={checked} size={size}>
         <div className="outer" />
         <div className="inner" />
         <input type="radio" value={value} checked={checked} onChange={() => setSelectedValue(value)} />

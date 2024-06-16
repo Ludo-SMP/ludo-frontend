@@ -7,6 +7,12 @@ import { ColumnDivider } from '@/Components/Common/Divider/ColumnDivider';
 import { ReviewQuestion } from '@/Components/ReviewQuestion/ReviewQuestion';
 import { Controller, useForm } from 'react-hook-form';
 
+// interface ReviewData {
+//   title: string;
+//   yes: string;
+//   no: string;
+// }
+
 const reviewDataList = {
   activenessScore: {
     title: '이 스터디원은 스터디에 적극적이었나요?',
