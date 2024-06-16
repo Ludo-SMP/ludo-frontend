@@ -15,8 +15,7 @@ const AlarmBell = () => {
   const { fetchSSE, eventSource } = useSSE();
 
   useEffect(() => {
-    // 커넥션 종료되면 자동으로 onerror 호출 후, 커넥션 다시 맺는 것 방지하기 위해 주석 처리
-    // fetchSSE();
+    fetchSSE();
 
     return () => {
       eventSource.current.close();
@@ -31,7 +30,7 @@ const AlarmBell = () => {
       <AlarmCnt>
         <Inner>{data?.notification?.length ?? 0}</Inner>
       </AlarmCnt>
-      {isOpen && <AlarmInbox alarmPreviews={data} isOpen={isOpen} handleOpen={handleOpen} />}
+      {isOpen && <AlarmInbox alarmPreviews={data} handleOpen={handleOpen} />}
     </Box>
   );
 };
