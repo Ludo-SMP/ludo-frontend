@@ -9,10 +9,9 @@ export interface CustomArrowBtnprops {
 export const CustomArrowBtn = ({
   type,
   onClick,
-  style,
 }: CustomArrowBtnprops & Pick<CustomArrowProps, 'onClick' | 'style'>) => {
   return (
-    <CustomArrowBtnWrapper style={{ ...style, display: 'block' }} $type={type} onClick={onClick}>
+    <CustomArrowBtnWrapper $type={type} onClick={onClick}>
       {type === 'PREV' ? <PrevArrow /> : <NextArrow />}
     </CustomArrowBtnWrapper>
   );
