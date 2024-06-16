@@ -4,16 +4,38 @@ import { Banner1, Banner2 } from '@/Assets';
 import { Settings } from 'react-slick';
 import { Link } from 'react-router-dom';
 import { NOTION_URL } from '@/Constants/common';
+import { CustomArrowBtn } from './CustomArrowBtn';
 
 export const carouselOptions: Settings = {
+  /** 배너의 contents 갯수로를 표시하는 dot의 유무 */
   dots: false,
+
+  /** 자동 스크롤 사용 유무 */
   autoplay: true,
+
+  /** 다음으로 넘어가는데 걸리는 시간(ms) */
   autoplaySpeed: 5000,
-  draggable: true,
+
+  /** 드래그 가능 여부 */
+  draggable: false,
+
+  /** 무한 반복 */
   infinite: true,
+
+  /** 버튼으로 다음 이미지 보이는데 걸리는 시간(ms) */
   speed: 400,
+
+  /** 배너에 보여질 이미지의 개수 */
   slidesToShow: 1,
-  arrows: false,
+
+  /** 앞뒤로 넘기는 arrow 유무 */
+  arrows: true,
+
+  /** 이전으로 이동하는 화살표 컴포넌트 */
+  prevArrow: <CustomArrowBtn type="PREV" />,
+
+  /** 다음으로 이동하는 화살표 컴포넌트 */
+  nextArrow: <CustomArrowBtn type="NEXT" />,
 };
 
 /** 메인 페이지 배너 */
@@ -37,11 +59,13 @@ const Banner = () => {
 
 const BannerBox = styled.div`
   display: flex;
-  position: relative;
   width: 100%;
   max-width: 1920px;
+  height: 320px;
 
   & > div {
+    position: relative;
+    display: flex;
     width: 100%;
   }
 
@@ -49,7 +73,7 @@ const BannerBox = styled.div`
     position: absolute;
     bottom: 20px;
     right: 10px;
-    border-radius: var(--Corner-radius-24, 24px);
+    border-radius: ${({ theme }) => theme.borderRadius.large};
     padding: 4px 12px;
     border: 1px solid ${({ theme }) => theme.color.black1};
     background: ${({ theme }) => theme.color.black3};
@@ -59,9 +83,10 @@ const BannerBox = styled.div`
 
 const BannerItemWrapper = styled(Link)`
   cursor: pointer;
-
   img {
+    height: 320px;
     width: 100%;
+    object-fit: cover;
   }
 `;
 
