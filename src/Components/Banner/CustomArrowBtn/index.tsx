@@ -1,5 +1,4 @@
 import { NextArrow, PrevArrow } from '@/Assets';
-import { media } from '@/Styles/theme';
 import { CustomArrowProps } from 'react-slick';
 import styled from 'styled-components';
 
