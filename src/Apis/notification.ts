@@ -1,13 +1,17 @@
 import { API_END_POINT } from '@/Constants/api';
-import { RecruitmentKeywordsForm, NotificationsSetting, NotificationsSettingConfigType } from '@/Types/notifications';
+import {
+  RecruitmentKeywordsForm,
+  NotificationsSetting,
+  NotificationsSettingConfigType,
+  NotificationIds,
+} from '@/Types/notifications';
 import { httpClient } from '@/utils/axios';
 
 /** 알림 목록 API */
 export const getNotifications = () => httpClient.get(API_END_POINT.NOTIFICATIONS);
 
 /** 알림 읽음 API */
-export const readNotifications = (notificationId: number) =>
-  httpClient.post(API_END_POINT.READ_NOTIFICATIONS(notificationId));
+export const readNotifications = (data: NotificationIds) => httpClient.post(API_END_POINT.READ_NOTIFICATIONS, data);
 
 /** 알림 설정 조회 API */
 export const getNotificationsSetting = (): Promise<{ data: { data: NotificationsSetting } }> =>

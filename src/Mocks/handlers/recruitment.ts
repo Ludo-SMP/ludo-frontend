@@ -1,7 +1,7 @@
 import { HttpResponse, http } from 'msw';
 import { popularRecruitmentsMockData, recruitmentDetailMockData } from '../data/mockRecruitments';
 
-const baseURL = import.meta.env.VITE_MOCK_API_URL;
+const baseURL = import.meta.env.VITE_BASE_API_URL;
 
 const getPopularRecruitments = http.get(`${baseURL}/api/recruitments/popular`, ({ request }) => {
   const url = new URL(request.url);
