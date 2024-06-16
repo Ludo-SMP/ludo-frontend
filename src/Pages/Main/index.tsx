@@ -115,7 +115,6 @@ const MainPage = () => {
 const MainPageWrapper = styled.section`
   display: flex;
   margin: 0 auto;
-  margin-top: 40px;
   flex-direction: column;
   gap: 40px;
 `;
@@ -123,6 +122,12 @@ const MainPageWrapper = styled.section`
 const BannerSectionWrapper = styled.section`
   display: flex;
   margin: 0 auto;
+  width: 100%;
+  max-width: 1920px;
+
+  ${media.custom(800)} {
+    display: none;
+  }
 `;
 
 const RecruitmentsSectionWrapper = styled.div`
