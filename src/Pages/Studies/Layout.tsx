@@ -50,7 +50,7 @@ export default ({ query, mutation }: StudyFormLayoutProps) => {
     control,
   } = useForm<StudyCreateForm>();
 
-  const { savedKey, tempSaved } = useTempSaved();
+  const { savedKey } = useTempSaved();
   const navigate = useNavigate();
 
   const { mutate, isError } = mutation;
