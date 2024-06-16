@@ -7,11 +7,11 @@ import { ColumnDivider } from '@/Components/Common/Divider/ColumnDivider';
 import { ReviewQuestion } from '@/Components/ReviewQuestion/ReviewQuestion';
 import { Controller, useForm } from 'react-hook-form';
 
-interface ReviewData {
-  title: string;
-  yes: string;
-  no: string;
-}
+// interface ReviewData {
+//   title: string;
+//   yes: string;
+//   no: string;
+// }
 
 const reviewDataList = {
   activenessScore: {
