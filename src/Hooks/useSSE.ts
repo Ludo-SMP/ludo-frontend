@@ -24,9 +24,6 @@ export const useSSE = () => {
       heartbeatTimeout: 60 * 60 * 1000, // sse 연결 시간 (토큰 유지 1시간)
     });
 
-    // 연결 이벤트
-    eventSource.current.addEventListener('publish', (evt: Event) => {});
-
     // 메시지 수신 시 캐시에 저장 - 이름을 따로 설정한 경우, 이벤트 리스너 부착
     eventSource.current.addEventListener('notification', (evt: Event) => {
       const messageEvent = evt as MessageEvent;
