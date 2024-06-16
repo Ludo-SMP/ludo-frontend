@@ -89,15 +89,11 @@ const CreateRecruitmentPage = () => {
 
     mutate({
       ...data,
-      applicationCount: data.applicantCount.value,
+      applicantCount: data.applicantCount.value,
       contact: data.contact.value,
       positionIds: data.positionIds.map(({ value }) => Number(value)),
       stackIds: selectedStacks.map((stack) => stack.id),
     });
-  };
-
-  const onInvalid = () => {
-    isValidStack();
   };
 
   return (
@@ -118,7 +114,7 @@ const CreateRecruitmentPage = () => {
       {isLoading ? (
         <Loading />
       ) : (
-        <Form onSubmit={handleSubmit(onSubmit, onInvalid)}>
+        <Form onSubmit={handleSubmit(onSubmit, isValidStack)}>
           <Heading>스터디 팀원 모집하기</Heading>
           <Spacing size={40} />
           <Stack divider={<Divider />}>

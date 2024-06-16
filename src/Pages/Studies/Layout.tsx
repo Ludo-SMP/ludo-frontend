@@ -12,7 +12,7 @@ import CustomSelect from '@/Components/Selectbox/CustomSelect';
 import { useTempSaved } from '@/Hooks/useTempSaved';
 import { CATEGORIES_OPTION, PLATFORM_OPTIONS, POSITIONS_OPTIONS, PROGRESS_METHODS_OPTIONS } from '@/Shared/study';
 import { DateRange } from '@/Types/atoms';
-import { Category, Platform, Position, ProgressMethod, StudyCreate, StudyDetail } from '@/Types/study';
+import { Category, Platform, Position, ProgressMethod, StudyCreate, StudyDetail, Option } from '@/Types/study';
 import { saveTemporary } from '@/utils/temporarySavedUtils';
 import { UseMutationResult, UseQueryResult } from '@tanstack/react-query';
 import { AxiosResponse } from 'axios';
@@ -23,11 +23,11 @@ import styled from 'styled-components';
 
 interface StudyCreateForm {
   title: string;
-  category: Category;
-  memberLimit: number;
-  position: Position;
-  progressMethod: ProgressMethod;
-  platform: Platform;
+  category: Option<number, Category>;
+  memberLimit: Option<number, string>;
+  position: Option<number, Position>;
+  progressMethod: Option<ProgressMethod, string>;
+  platform: Option<Platform, string>;
   platformUrl: string;
   progressPeriod: DateRange;
 }
@@ -50,7 +50,7 @@ export default ({ query, mutation }: StudyFormLayoutProps) => {
     control,
   } = useForm<StudyCreateForm>();
 
-  const { savedKey, tempSaved } = useTempSaved<StudyCreateForm>();
+  const { savedKey, tempSaved } = useTempSaved();
   const navigate = useNavigate();
 
   const { mutate, isError } = mutation;
@@ -62,17 +62,19 @@ export default ({ query, mutation }: StudyFormLayoutProps) => {
   return (
     <PageWrapper>
       <Form
-        onSubmit={handleSubmit(({ title, category, memberLimit, position, progressMethod, platform, progressPeriod }) =>
-          mutate({
-            title,
-            categoryId: category.id,
-            positionId: position.id,
-            way: progressMethod,
-            platform,
-            participantLimit: memberLimit,
-            startDateTime: progressPeriod[0].toISOString(),
-            endDateTime: progressPeriod[1].toISOString(),
-          }),
+        onSubmit={handleSubmit(
+          ({ title, category, memberLimit, position, progressMethod, platform, progressPeriod }) => {
+            mutate({
+              title,
+              categoryId: category.value,
+              positionId: position.value,
+              way: progressMethod.value,
+              platform: platform.value,
+              participantLimit: memberLimit.value,
+              startDateTime: progressPeriod[0].toISOString(),
+              endDateTime: progressPeriod[1].toISOString(),
+            });
+          },
         )}
       >
         <Stack divider={<Divider />} gap={24}>
@@ -114,7 +116,7 @@ export default ({ query, mutation }: StudyFormLayoutProps) => {
                     <CustomSelect
                       label="스터디 최대 인원"
                       placeholder="ex) 5명"
-                      defaultValue={query?.data?.study?.participantsLimit}
+                      defaultValue={query?.data?.study?.participantLimit}
                       values={memberLimit}
                       {...field}
                     />
