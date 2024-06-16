@@ -81,12 +81,17 @@ const RecruitmentsPageWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  margin-top: 40px;
   gap: 40px;
 `;
 const BannerSectionWrapper = styled.section`
   display: flex;
   margin: 0 auto;
+  width: 100%;
+  max-width: 1920px;
+
+  ${media.custom(800)} {
+    display: none;
+  }
 `;
 
 const RecruitmentsSectionWrapper = styled.div`
