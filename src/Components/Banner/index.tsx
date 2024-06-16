@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { Carousel } from '../Common/Carousel';
 import { Banner1, Banner2 } from '@/Assets';
-import { useNavigate } from 'react-router-dom';
-import { ROUTES } from '@/Constants/route';
 import { Settings } from 'react-slick';
+import { Link } from 'react-router-dom';
+import { NOTION_URL } from '@/Constants/common';
 
 export const carouselOptions: Settings = {
   dots: false,
@@ -18,7 +18,6 @@ export const carouselOptions: Settings = {
 
 /** 메인 페이지 배너 */
 const Banner = () => {
-  const navigate = useNavigate();
   const banners = [Banner2, Banner1];
   // const [slideIdx, setSlideIdx] = useState(1);
 
@@ -26,7 +25,7 @@ const Banner = () => {
     <BannerBox>
       <Carousel options={carouselOptions}>
         {banners.map((banner, idx) => (
-          <BannerItemWrapper key={idx} onClick={() => navigate(ROUTES.RECRUITMENT.RECRUITMENTS)}>
+          <BannerItemWrapper key={idx} to={NOTION_URL} target="_blank">
             <img src={banner} />
           </BannerItemWrapper>
         ))}
@@ -58,7 +57,7 @@ const BannerBox = styled.div`
   }
 `;
 
-const BannerItemWrapper = styled.li`
+const BannerItemWrapper = styled(Link)`
   cursor: pointer;
 
   img {
