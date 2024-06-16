@@ -28,8 +28,8 @@ export const AlarmInbox = ({ alarmPreviews, handleOpen }: AlarmInboxProps) => {
   });
 
   const notReadAlarm = notification?.filter((alarm) => !alarm.read);
-  const isReadAll = () => notReadAlarm.length === 0;
-  const { mutate } = useReadNotification([...notReadAlarm.map((alarm) => alarm.notificationId)]);
+  const isReadAll = () => notReadAlarm?.length === 0;
+  const { mutate } = useReadNotification([...(notReadAlarm ?? []).map((alarm) => alarm.notificationId)]);
 
   return (
     <AlarmInboxBox ref={inboxRef}>
