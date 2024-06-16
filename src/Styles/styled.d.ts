@@ -5,6 +5,7 @@ declare module 'styled-components' {
     color: {
       white: string;
       white1: string;
+      white2: string;
       black: string;
       black0: string;
       black1: string;
@@ -30,6 +31,9 @@ declare module 'styled-components' {
       naver: string;
       kakao: string;
       kakaoFontColor: string;
+      negative: string;
+      strokeDividerThick: string;
+      buttonHoverSecondary: string;
     };
 
     font: {
@@ -54,6 +58,7 @@ declare module 'styled-components' {
       medium: string;
       large: string;
       xlarge: string;
+      cornerRadius12: string;
     };
   }
 

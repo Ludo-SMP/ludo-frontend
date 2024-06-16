@@ -12,13 +12,13 @@ import SkeletonRecruitmentCardList from '../Skeleton/SkeletonRecruitmentCardList
 import { media } from '@/Styles/theme';
 
 const RecruitmentCardList = () => {
-  const { categoryId, stackId, positionId, progressMethodId } = useFilterOptionsStore();
+  const { categoryId, stackIds, positionId, progressMethodId } = useFilterOptionsStore();
   const progressMethod = getProgressMethod(progressMethodId);
 
   const observeRef = useRef<HTMLDivElement>(null);
 
   const { data, hasNextPage, fetchNextPage, isLoading } = useRecruitments({
-    filterOptions: { categoryId, stackId, positionId, progressMethod },
+    filterOptions: { categoryId, stackIds, positionId, progressMethod },
     count: INFINITE_RECRUITMENTS_COUMT_PER_PAGE,
   });
 
@@ -33,7 +33,7 @@ const RecruitmentCardList = () => {
     <RecruitmentCardsWrapper>
       {isLoading ? (
         <SkeletonRecruitmentCardList count={21} />
-      ) : recruitmentsPages.length && recruitmentsPages[0].recruitments.length ? (
+      ) : recruitmentsPages?.length && recruitmentsPages[0]?.recruitments?.length ? (
         recruitmentsPages.map((recruitmentsPage) =>
           recruitmentsPage?.recruitments.map((recruitment: Recruitment) => (
             <RecruitmentCard key={recruitment.id} {...recruitment} />

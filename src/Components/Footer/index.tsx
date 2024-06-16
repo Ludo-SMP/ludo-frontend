@@ -19,7 +19,7 @@ const Footer = () => {
             스터디 모집 공고 모아보기
           </div>
           {isLoggedIn && (
-            <div className="navigate" onClick={() => navigate(ROUTES.MYPAGE)}>
+            <div className="navigate" onClick={() => navigate(ROUTES.MYPAGE.HOME)}>
               마이 페이지
             </div>
           )}
@@ -60,7 +60,7 @@ const FooterWrapper = styled.footer`
   background-color: ${({ theme }) => theme.color.gray1};
 
   ${media.custom(800)} {
-    width: 400px;
+    width: 100%;
     margin: 20px auto 0 auto;
   }
 `;
@@ -84,7 +84,7 @@ const FooterContentWrapper = styled.div`
     }
     color: ${({ theme }) => theme.color.black4};
     text-align: center;
-    font-family: Pretendard;
+    font-family: 'Pretendard600';
     font-size: ${({ theme }) => theme.font.xsmall};
     font-style: normal;
     font-weight: 600;
@@ -126,7 +126,7 @@ const ServiceMainContentWrapper = styled.div`
 
   .slogan {
     color: ${({ theme }) => theme.color.black5};
-    font-family: Pretendard;
+    font-family: 'Pretendard600';
     font-size: ${({ theme }) => theme.font.medium};
     font-style: normal;
     font-weight: 600;
@@ -137,7 +137,7 @@ const ServiceMainContentWrapper = styled.div`
   .member {
     color: ${({ theme }) => theme.color.black2};
     text-align: center;
-    font-family: Pretendard;
+    font-family: 'Pretendard500';
     font-size: ${({ theme }) => theme.font.xsmall};
     font-style: normal;
     font-weight: 500;

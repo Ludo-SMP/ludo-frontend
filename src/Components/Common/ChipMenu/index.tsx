@@ -6,8 +6,10 @@ export type ChipMenuProps = {
   children: React.ReactNode;
   disabled?: boolean;
   className?: string;
+  id?: number;
 };
 
+/** 칩의 wrapper로 사용됩니다. */
 const ChipMenu = ({ onClick, checked, children, disabled, className }: ChipMenuProps) => (
   <ChipMenuContainer {...{ checked, onClick, disabled, className }}>
     <>{children}</>
@@ -24,14 +26,18 @@ const ChipMenuContainer = styled.div<{ checked: boolean }>`
   background: ${({ theme }) => theme.color.white};
   color: ${({ checked, theme }) => (checked ? theme.color.orange3 : theme.color.black3)};
   text-align: center;
-  font-family: Pretendard;
+  font-family: 'Pretendard600';
   font-size: ${({ theme }) => theme.font.small};
   font-style: normal;
   font-weight: 600;
   line-height: 40px;
+  white-space: nowrap;
 
   &:hover {
     cursor: pointer;
+    border: 1px solid ${({ theme }) => theme.color.black1};
+    background: ${({ theme }) => theme.color.orange4};
+    color: ${({ theme }) => theme.color.white};
   }
 `;
 

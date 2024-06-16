@@ -3,17 +3,34 @@ import Button from '../Button';
 import { useModalStore } from '@/store/modal';
 
 export interface ModalProps {
+  /** 모달 안쪽 컴포넌트 */
   children: React.ReactNode;
+
+  /** 제목 정렬 방식 */
   alignTitle?: 'flex-start' | 'center';
+
+  /** 제목 */
   title?: string;
+
+  /** 확인 버튼 클릭 시 실행 함수 */
   handleApprove: () => void;
+
+  /** 취소 버튼 클릭 시 실행 함수 */
   handleCancel?: () => void;
+
   data?: object;
+
+  /** 확인 버튼 텍스트 */
   approveBtnText: string;
+
+  /** 취소 버튼 텍스트 */
   cancelBtnText?: string;
+
+  /** 버튼 너비 동일 여부 */
   isBtnWidthEqual?: boolean;
 }
 
+/** 모달 컴포넌트 */
 const Modal = ({
   children,
   alignTitle = 'flex-start',
@@ -88,7 +105,7 @@ const ModalInfoWrapper = styled.div<{ alignTitle: 'flex-start' | 'center' }>`
     align-self: stretch;
     color: ${({ theme }) => theme.color.black5};
     text-align: center;
-    font-family: Pretendard;
+    font-family: 'Pretendard700';
     font-size: ${({ theme }) => theme.font.large};
     font-style: normal;
     font-weight: 700;
@@ -103,7 +120,7 @@ const ModalContentWrapper = styled.div`
   align-items: center;
   flex-shrink: 0;
   color: ${({ theme }) => theme.color.black4};
-  font-family: Pretendard;
+  font-family: 'Pretendard500';
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
@@ -135,7 +152,7 @@ const ModalBtnsWrapper = styled.div<{ isBtnWidthEqual: boolean; cancelBtnText: s
     gap: 8px;
     border-radius: ${({ theme }) => theme.borderRadius.small};
     text-align: center;
-    font-family: Pretendard;
+    font-family: 'Pretendard600';
     font-size: 18px;
     font-style: normal;
     font-weight: 600;

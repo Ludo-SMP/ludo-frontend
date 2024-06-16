@@ -25,6 +25,7 @@ const useInterval: { (callback: () => void, interval: number): void } = (callbac
   }, [interval]);
 };
 
+/** 메인 페이지 배너 */
 const Banner = () => {
   const outRef = useRef<HTMLDivElement>(null);
   const slideRef = useRef<HTMLDivElement>(null);
@@ -55,7 +56,7 @@ const Banner = () => {
 
   return (
     <BannerWrapper ref={outRef}>
-      <BannerItemsWrapper ref={slideRef} bannerLength={3} idx={slideIdx}>
+      <BannerItemsWrapper ref={slideRef} $bannerLength={3} idx={slideIdx}>
         {banners.map((banner, idx) => (
           <BannerItemWrapper key={idx} onClick={() => navigate(ROUTES.RECRUITMENT.RECRUITMENTS)}>
             <img src={banner} />
@@ -101,21 +102,21 @@ const BannerWrapper = styled.div`
   }
 `;
 
-const BannerItemsWrapper = styled.div<{ bannerLength: number; idx: number }>`
+const BannerItemsWrapper = styled.div<{ $bannerLength: number; idx: number }>`
   display: flex;
   transition: 'all 500ms ease-in-out';
-  transform: ${({ bannerLength, idx }) => `translateX(${-1 * ((100 / bannerLength) * idx)}%)`};
+  transform: ${({ $bannerLength, idx }) => `translateX(${-1 * ((100 / $bannerLength) * idx)}%)`};
 
   ${media.custom(1224)} {
-    width: ${({ bannerLength }) => `${1024 * bannerLength}px`};
+    width: ${({ $bannerLength }) => `${1024 * $bannerLength}px`};
   }
 
   ${media.custom(1024)} {
-    width: ${({ bannerLength }) => `${800 * bannerLength}px`};
+    width: ${({ $bannerLength }) => `${800 * $bannerLength}px`};
   }
 
   ${media.custom(800)} {
-    width: ${({ bannerLength }) => `${600 * bannerLength}px`};
+    width: ${({ $bannerLength }) => `${600 * $bannerLength}px`};
   }
 `;
 

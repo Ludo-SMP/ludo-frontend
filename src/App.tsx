@@ -7,9 +7,17 @@ import { RouterPath } from './Router/index.tsx';
 import LoginProvider from './Providers/LoginProvider/index.tsx';
 import ReactQueryProvider from './Providers/QueryProvider/index.tsx';
 
+if (process.env.NODE_ENV === 'development') {
+  const { worker } = await import('./Mocks/browser');
+
+  worker.start({
+    onUnhandledRequest: 'bypass',
+  });
+}
+
 const App = () => {
   return (
-    <ReactQueryProvider>
+    <ReactQueryProvider showDevTools>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <LoginProvider>

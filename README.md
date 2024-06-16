@@ -27,7 +27,7 @@
 #### 📓 [IA(정보 구조도)](https://www.figma.com/file/Sho4QHn0XqEptYBBlbf704/Page-Layout?type=design&node-id=206-31&mode=design&t=YTrENpZjUN2rJ4Dj-0)
 
 ### 📄 기능 명세
-#### 📓 [API 설계서](https://docs.google.com/spreadsheets/d/1k5yFrSlqPm0CyEveOGeCBCnf-aVGZu66lDkS83l4K-A/edit?invite=CLiLo-UL#gid=0)
+#### 📓 [API 설계서](http://34.82.109.226/swagger-ui/index.html#/)
 #### 📓 [페이지 기능명세서](https://docs.google.com/spreadsheets/d/1TejPT93Gi3ztsGqPt5lpAY1UMFvruP80D9pFmkwy1fI/edit?invite=CLS0q4EH#gid=0)
 
 ### 🎨 디자인
@@ -141,6 +141,11 @@ VITE_BASE_API_URL = Base API Endpoint
     yarn start:windows
   ```
 
+### 5. Storybook 실행
+
+```sh
+yarn storybook
+````
 
 ## 📁 Directory Structure
 ```

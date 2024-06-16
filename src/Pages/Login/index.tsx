@@ -51,7 +51,7 @@ const LoginGuideWrapper = styled.div`
   .title {
     color: ${({ theme }) => theme.color.black5};
     text-align: center;
-    font-family: Pretendard;
+    font-family: 'Pretendard800';
     font-size: ${({ theme }) => theme.font.xxxxlarge};
     font-style: normal;
     font-weight: 800;
@@ -61,7 +61,7 @@ const LoginGuideWrapper = styled.div`
   .content {
     color: ${({ theme }) => theme.color.black5};
     text-align: center;
-    font-family: Pretendard;
+    font-family: 'Pretendard500';
     font-size: ${({ theme }) => theme.font.medium};
     font-style: normal;
     font-weight: 500;

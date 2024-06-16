@@ -21,7 +21,7 @@ const ButtonContainer = styled.button`
   align-items: center;
   gap: 8px;
   border-radius: 8px;
-  background: #f2f3f3;
+  background: ${({ theme }) => theme.color.strokeDividerThick};
 `;
 
 const ButtonText = styled.p`

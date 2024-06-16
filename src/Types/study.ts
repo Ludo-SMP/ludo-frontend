@@ -1,4 +1,4 @@
-import { APPLY_STATUS, MEMBER_STATUS, PLATFORM, PROGRESS_METHOD, ROLE, STUDY_STATUS } from '@/Shared/study';
+import { APPLY_STATUS, POSITION, MEMBER_STATUS, PLATFORM, PROGRESS_METHOD, ROLE, STUDY_STATUS } from '@/Shared/study';
 
 export type CategoryPropertyType = 'category' | 'stacks' | 'positions' | 'way' | 'sort';
 export type StudyStatus = keyof typeof STUDY_STATUS;
@@ -7,9 +7,10 @@ export type ApplyStatus = keyof typeof APPLY_STATUS;
 export type ProgressMethod = keyof typeof PROGRESS_METHOD;
 export type Role = keyof typeof ROLE;
 export type Platform = keyof typeof PLATFORM;
+export type PositionId = typeof POSITION;
 export type Card = 'STUDY' | 'RECRUITMENT';
 export type Sort = '최신순' | '조회순';
-export type ApplyTryStatus = 'NOT APPLY' | 'SUCCESS' | 'CLOSED' | 'ALREDAY_APPLY' | 'ALREDY_PARTICIPATED';
+export type ApplyTryStatus = 'NOT APPLY' | 'SUCCESS' | 'CLOSED' | 'ALREADY_APPLY' | 'ALREADY_PARTICIPATED';
 
 export interface Position {
   id: number;
@@ -27,6 +28,8 @@ export interface Member {
   email: string;
   position: Position;
   role: Role;
+  totalAttendance: number;
+  recentAttendanceDate: string | null;
 }
 
 export interface User {
@@ -57,7 +60,7 @@ export interface RecruitmentDetail {
     stacks: Stack[];
     positions: Position[];
     applicantCount: number;
-    contact: string;
+    contact: 'KAKAO' | 'EMAIL';
     callUrl: string;
     content: string;
     createdDateTime: string;
@@ -70,6 +73,7 @@ export interface RecruitmentDetail {
     category: Category;
     owner: User;
     platform: Platform;
+    platformUrl: string;
     way: ProgressMethod;
     participantLimit: number;
     startDateTime: string;
@@ -102,11 +106,38 @@ export interface Recruitments {
   recruitments: Recruitment[];
 }
 
+export interface RecruitmentForm {
+  title: string;
+  stackIds: number[];
+  positionIds: Position[];
+  applicantCount: number;
+  recruitmentEndDateTime: string;
+  contact: 'KAKAO' | 'EMAIL';
+  callUrl: string;
+  content: string;
+}
+
+// 셀렉트로 관리해야 하는 타입
+export type SingleSelectValue = Pick<RecruitmentForm, 'applicantCount' | 'contact'>;
+export type SelectOptionType = Record<keyof SingleSelectValue, Option<number, string>>;
+export type MultiSelectType = Record<'positionIds', Option<number, string>[]>;
+
+export type SelectType = SelectOptionType & MultiSelectType;
+
+// 셀렉트가 포함된 모집공고 폼 관리 타입
+export interface RecruitFormWithSelect extends SelectType {
+  title: RecruitmentForm['title'];
+  recruitmentEndDateTime: RecruitmentForm['recruitmentEndDateTime'];
+  callUrl: RecruitmentForm['callUrl'];
+  content: RecruitmentForm['content'];
+  stackIds?: Stack[];
+}
+
 export interface FilterOptionParams {
   pageParam?: number;
   last?: number;
   count: number;
-  stackId?: number;
+  stackIds?: number[];
   progressMethod?: string;
   positionId?: number;
   categoryId?: number;
@@ -119,8 +150,24 @@ export interface Participant {
   role: Role;
   email: string;
   position: Position;
+  // 총합 출석일
+  totalAttendance: number;
+  // 최근 출석일
+  recentAttendanceDate: string | null;
 }
+
 export interface Applicant extends Omit<Member, 'role'> {}
+
+export interface StudyCreate {
+  title: string;
+  categoryId: number;
+  positionId: number;
+  way: ProgressMethod;
+  platform: Platform;
+  participantLimit: number;
+  startDateTime: string;
+  endDateTime: string;
+}
 
 export interface StudyDetail {
   study: {
@@ -128,9 +175,12 @@ export interface StudyDetail {
     status: StudyStatus;
     title: string;
     platform: Platform;
+    platformUrl: string;
     way: ProgressMethod;
-    participantsCount: number;
-    participantsLimit: number;
+    participantCount: number;
+    participantLimit: number;
+    // 출석요일
+    attendanceDay: Array<number>;
     startDateTime: string;
     endDateTime: string;
     category: Category;
@@ -139,6 +189,8 @@ export interface StudyDetail {
     hasRecruitment: boolean;
     createdDateTime: string;
     updatedDateTime: string;
+    // 스터디 지원자 수
+    applicantCount: number;
   };
 }
 
@@ -175,6 +227,11 @@ export interface ApplicantRecruitment {
   applicantStatus: ApplyStatus;
 }
 
+export interface Option<T, K> {
+  value: T;
+  label: K;
+}
+
 export interface CompletedStudy {
   studyId: number;
   title: string;
@@ -193,6 +250,33 @@ export interface MyStudies {
   completedStudies: CompletedStudy[];
 }
 
+/**
+ * @description 마이페이지 신뢰도 항목 타입
+ *
+ * @property {number} finishStudy - 진행한 스터디
+ * @property {number} perfectStudy - 완주한 스터디
+ * @property {number} accumulatedTeamMembers - 누적 팀원 수
+ * @property {number} averageAttendanceRate - 평균 출석률
+ * @property {number} activeness - 적극성
+ * @property {number} professionalism - 전문성
+ * @property {number} communication - 의사소통능력
+ * @property {number} together - 협업능력 (80% 이상)
+ * @property {number} recommend - 추천도 (80% 이상)
+ *
+ */
+export interface Trust {
+  finishStudy: number;
+  perfectStudy: number;
+  accumulatedTeamMembers: number;
+  averageAttendanceRate: number;
+  activeness: number;
+  professionalism: number;
+  communication: number;
+  together: number;
+  recommend: number;
+}
+
 export interface MyPageInfo extends MyStudies {
   user: User;
+  trust: Trust;
 }

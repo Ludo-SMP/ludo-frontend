@@ -11,6 +11,8 @@ export const API_END_POINT = {
   // USER
   USER: `${API_PREFIX}/users/me`,
   EDIT_NICKNAME: `${API_PREFIX}/users/me/nickname`,
+  REVIEW: (studyId: number) => `${API_PREFIX}/studies/${studyId}/reviews`,
+  GET_REVIEWS: `${API_PREFIX}/reviews`,
   DEACTIVATE: `${API_PREFIX}/users/deactivate`,
 
   // RECRUITMENTS
@@ -29,6 +31,7 @@ export const API_END_POINT = {
   DELETE_STUDY: (studyId: number) => `${API_PREFIX}/studies/${studyId}`,
   LEAVE_STUDY: (studyId: number) => `${API_PREFIX}/studies/${studyId}/participants`,
   APPLICANTS: (studyId: number) => `${API_PREFIX}/studies/${studyId}/applicants`,
+  ATTEND_STUDY: (studyId: number) => `${API_PREFIX}/studies/${studyId}/attendance`,
 
   // APPLY
   APPLY: (studyId: number, recruitmentId: number) =>
@@ -40,9 +43,15 @@ export const API_END_POINT = {
   APPLY_REFUSE: (studyId: number, applicantId: number) =>
     `${API_PREFIX}/studies/${studyId}/apply-refuse/${applicantId}`,
 
-  // MyPage
+  // MYPAGE
   MYPAGE: `${API_PREFIX}/users/mypage`,
 
-  // Stack
+  // STACK
   STACK: `${API_PREFIX}/stacks`,
+
+  // NOTIFICATIONS
+  NOTIFICATIONS: `${API_PREFIX}/notifications`,
+  READ_NOTIFICATIONS: `${API_PREFIX}/notifications/check`,
+  NOTIFICATIONS_SETTING: `${API_PREFIX}/notifications/settings`,
+  EDIT_NOTIFICATIONS_KEYWORDS: `${API_PREFIX}/notifications/settings/keywords`,
 };

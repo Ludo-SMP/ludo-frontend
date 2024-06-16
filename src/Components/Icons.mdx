@@ -1,0 +1,86 @@
+import { Meta, Title, IconGallery, IconItem } from '@storybook/blocks';
+import {
+  Alarm,
+  Article,
+  Calendar,
+  Close,
+  Create,
+  Down,
+  DropDown,
+  Filter,
+  Four,
+  Google,
+  Hamburger,
+  Kakao,
+  Left,
+  Loading,
+  Logout,
+  MemberImage,
+  More,
+  Naver,
+  One,
+  Profile,
+  Right,
+  Search,
+  StudyInfo,
+  Three,
+  Two,
+  Up,
+  Views,
+  StudyThumbnail,
+  Setting,
+} from '@/Assets';
+
+<Meta title="Iconography" />
+
+# Iconography
+
+<IconGallery>
+  {[
+    Alarm,
+    Article,
+    Calendar,
+    Close,
+    Create,
+    DropDown,
+    Filter,
+    Four,
+    Hamburger,
+    Loading,
+    Logout,
+    MemberImage,
+    More,
+    Profile,
+    Search,
+    StudyInfo,
+    Views,
+  ].map((Icon, i) => (
+    <IconItem key={i} name={Icon.name}>
+      <Icon />
+    </IconItem>
+  ))}
+</IconGallery>
+
+<IconGallery>
+  {[One, Two, Three].map((Icon, i) => (
+    <IconItem key={i} name={Icon.name}>
+      <Icon />
+    </IconItem>
+  ))}
+</IconGallery>
+
+<IconGallery>
+  {[Up, Down, Left, Right].map((Icon, i) => (
+    <IconItem key={i} name={Icon.name}>
+      <Icon />
+    </IconItem>
+  ))}
+</IconGallery>
+
+<IconGallery>
+  {[Google, Naver, Kakao].map((Icon, i) => (
+    <IconItem key={i} name={Icon.name}>
+      <Icon />
+    </IconItem>
+  ))}
+</IconGallery>

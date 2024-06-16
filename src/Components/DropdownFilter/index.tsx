@@ -1,21 +1,22 @@
 import styled from 'styled-components';
 import { useState, useRef } from 'react';
-import { FilterOption } from '@/Types/study';
+import { FilterOption, Stack } from '@/Types/study';
 import DropdownItem from './DropdownItem';
 import { useOutSideClick } from '@/Hooks/useOutsideClick';
 import { Up, Down } from '@/Assets';
 import { useFilterOptionsStore } from '@/store/filter';
 import { media } from '@/Styles/theme';
+import { StackModal } from '../Modal/StackModal';
 
 export interface DropdownFilterProps {
   filterName: string;
-  items: { id: number; name: string }[];
+  items?: { id: number; name: string }[];
   filterOption: FilterOption;
   checked?: boolean;
 }
 
 const DropdownFilter = ({ filterName, items, filterOption }: DropdownFilterProps) => {
-  const { setFilterOptions } = useFilterOptionsStore();
+  const { setFilterOptions, setStackFilterOption } = useFilterOptionsStore();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [content, setContent] = useState(filterName);
   const dropDownItemsRef = useRef(null);
@@ -31,6 +32,20 @@ const DropdownFilter = ({ filterName, items, filterOption }: DropdownFilterProps
     setIsOpen(!isOpen);
   };
 
+  const [selectedStacks, setSelectedStacks] = useState<Stack[]>([]);
+  const handleSelectedStacks = (stacks: Stack[]) => {
+    const selectedStacksLength = stacks.length;
+    setSelectedStacks([...stacks]);
+    setContent(
+      selectedStacksLength === 0
+        ? '전체'
+        : selectedStacksLength === 1
+          ? stacks[0].name
+          : `${stacks[0].name} 등 ${selectedStacksLength}개`,
+    );
+    setStackFilterOption([...stacks.map((stack: Stack) => stack.id)]);
+  };
+
   useOutSideClick(dropDownItemsRef, toggleDropdonwItems);
 
   return (
@@ -39,18 +54,25 @@ const DropdownFilter = ({ filterName, items, filterOption }: DropdownFilterProps
         <span className="filter__text">{content}</span>
         {isOpen ? <Up width={24} height={24} /> : <Down />}
       </DropdownSelectWrapper>
-      {isOpen && (
-        <DropdownItemsWrapper ref={dropDownItemsRef} filterOption={filterOption}>
-          {items.map((item) => (
-            <DropdownItem
-              handleClick={() => handleSelectedItem(item, filterOption)}
-              item={item}
-              key={item.id}
-              filterOption={filterOption}
-            />
-          ))}
-        </DropdownItemsWrapper>
-      )}
+      {isOpen &&
+        (filterOption === 'STACK' ? (
+          <StackModal
+            handleModal={setIsOpen}
+            initialSelectedStacks={selectedStacks}
+            handleSelectedStacks={handleSelectedStacks}
+          />
+        ) : (
+          <DropdownItemsWrapper ref={dropDownItemsRef} filterOption={filterOption}>
+            {items.map((item) => (
+              <DropdownItem
+                handleClick={() => handleSelectedItem(item, filterOption)}
+                item={item}
+                key={item.id}
+                filterOption={filterOption}
+              />
+            ))}
+          </DropdownItemsWrapper>
+        ))}
     </DropdownFilterWrapper>
   );
 };
@@ -66,12 +88,10 @@ const DropdownFilterWrapper = styled.ul`
     font-size: ${(props) => props.theme.font.small};
     font-weight: 500;
     line-height: 30px;
+    max-width: 60px;
     white-space: nowrap;
     overflow: hidden;
-  }
-
-  &:hover {
-    cursor: pointer;
+    text-overflow: ellipsis;
   }
 
   ${media.custom(800)} {
@@ -99,6 +119,7 @@ const DropdownSelectWrapper = styled.div<{ checked?: boolean }>`
     svg > path {
       fill: ${(props) => props.theme.color.white};
     }
+    cursor: pointer;
   }
   svg > path {
     fill: ${({ theme, checked }) => (checked ? theme.color.orange2 : theme.color.black3)};

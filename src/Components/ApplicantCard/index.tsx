@@ -13,11 +13,17 @@ import { useModalStore } from '@/store/modal';
 import { useQueryClient } from '@tanstack/react-query';
 
 interface ApplicantCardProps extends Omit<Member, 'role'> {
+  /** 스터디 ID */
   studyId: number;
+
+  /** 스터디명 */
   title: string;
+
+  /** 스터디장 여부 */
   isOwner: boolean;
 }
 
+/** 지원자 카드 */
 const ApplicantCard = ({ studyId, id: applicantId, title, nickname, email, position, isOwner }: ApplicantCardProps) => {
   const [applyStatus, setApplyStatus] = useState<ApplyStatus>('UNCHECKED');
   const { isModalOpen, closeModal } = useModalStore();
@@ -114,7 +120,7 @@ const ApplicantInfoWrapper = styled.div`
 
   .title {
     color: ${({ theme }) => theme.color.black3};
-    font-family: Pretendard;
+    font-family: 'Pretendard500';
     font-size: ${({ theme }) => theme.font.small};
     font-style: normal;
     font-weight: 500;
@@ -130,7 +136,7 @@ const ApplicantInfoWrapper = styled.div`
 
     .nickname {
       color: ${({ theme }) => theme.color.black5};
-      font-family: Pretendard;
+      font-family: 'Pretendard700';
       font-size: ${({ theme }) => theme.font.xxlarge};
       font-style: normal;
       font-weight: 700;

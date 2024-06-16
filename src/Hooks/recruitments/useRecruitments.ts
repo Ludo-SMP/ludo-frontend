@@ -9,14 +9,14 @@ export const useRecruitments = ({
 }: {
   last?: number;
   count: number;
-  filterOptions: Pick<FilterOptionParams, 'categoryId' | 'positionId' | 'progressMethod' | 'stackId'>;
+  filterOptions: Pick<FilterOptionParams, 'categoryId' | 'positionId' | 'progressMethod' | 'stackIds'>;
 }) => {
   const { data, hasNextPage, fetchNextPage, isLoading } = useInfiniteQuery({
     queryKey: [...RECRUITMENT.RECRUITMENTS(filterOptions)],
     queryFn: ({ pageParam }) => getRecruitments(filterOptions, count, pageParam),
     getNextPageParam: (lastPage) => {
       const recruitments = lastPage?.data?.data?.recruitments;
-      if (recruitments.length !== count) return undefined;
+      if (recruitments?.length !== count) return undefined;
       return recruitments[recruitments.length - 1].id;
     },
     initialPageParam: undefined,

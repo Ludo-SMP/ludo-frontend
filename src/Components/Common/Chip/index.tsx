@@ -38,7 +38,7 @@ const ChipWrapper = styled.span<{ chipType: ChipType; isSelected: boolean }>`
   color: ${({ isSelected, chipType, theme }) =>
     isSelected ? (chipType === 'Primary' ? theme.color.white : theme.color.orange3) : theme.color.black3};
   text-align: center;
-  font-family: Pretendard;
+  font-family: 'Pretendard600';
   font-size: 18px;
   font-style: normal;
   font-weight: 600;

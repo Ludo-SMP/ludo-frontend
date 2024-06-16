@@ -5,13 +5,14 @@ import styled from 'styled-components';
 import { useLogOutMutation } from '@/Hooks/auth/useLogOutMutation';
 import { useLoginStore } from '@/store/auth';
 
+/** 로그인, 회원가입 버튼 */
 const SignButtonSection = () => {
   const navigate = useNavigate();
   const { isLoggedIn } = useLoginStore();
   const { mutate: logoutMutate } = useLogOutMutation();
 
   return (
-    <SignButtonSectionWrapper isLoggedIn={isLoggedIn}>
+    <SignButtonSectionWrapper $isLoggedIn={isLoggedIn}>
       {isLoggedIn ? (
         <Button className="logout" type="button" onClick={() => logoutMutate()}>
           로그아웃
@@ -42,9 +43,9 @@ const SignButtonSection = () => {
   );
 };
 
-const SignButtonSectionWrapper = styled.div<{ isLoggedIn: boolean }>`
+const SignButtonSectionWrapper = styled.div<{ $isLoggedIn: boolean }>`
   display: flex;
-  gap: ${({ isLoggedIn }) => (isLoggedIn ? '8px' : '12px')};
+  gap: ${({ $isLoggedIn }) => ($isLoggedIn ? '8px' : '12px')};
 
   .logout {
     padding: 0 12px 0 16px;

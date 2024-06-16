@@ -1,5 +1,5 @@
 import Button from '@/Components/Common/Button';
-import InputText from '@/Components/Common/InputText/iindex';
+import InputText from '@/Components/Common/InputText';
 import { PROFILE } from '@/Constants/messages';
 import { STUDY } from '@/Constants/queryString';
 import { useEditProfileNickname } from '@/Hooks/user/useEditProfileNickname';
@@ -14,7 +14,7 @@ interface EdiptProfileModalProps {
   handleEdit: React.Dispatch<SetStateAction<'NOT START' | 'EDIT' | 'END'>>;
 }
 
-const EditProfileModal = ({ userNickname, handleEdit }: EdiptProfileModalProps) => {
+export const EditProfileModal = ({ userNickname, handleEdit }: EdiptProfileModalProps) => {
   const { closeModal } = useModalStore();
   const queryClient = useQueryClient();
   const submitSuccessHandler = () => {
@@ -66,10 +66,10 @@ const EditProfileModal = ({ userNickname, handleEdit }: EdiptProfileModalProps) 
                   {errors?.nickname?.type && errors?.nickname?.type === 'required'
                     ? PROFILE.NICNAME_ERROR.REQUIRED
                     : errors?.nickname?.type === 'pattern'
-                    ? PROFILE.NICNAME_ERROR.WHITE_SPACE
-                    : errors?.nickname?.type === 'validate'
-                    ? PROFILE.NICNAME_ERROR.SAME
-                    : PROFILE.NICNAME_ERROR.LEGNTH}
+                      ? PROFILE.NICNAME_ERROR.WHITE_SPACE
+                      : errors?.nickname?.type === 'validate'
+                        ? PROFILE.NICNAME_ERROR.SAME
+                        : PROFILE.NICNAME_ERROR.LEGNTH}
                 </p>
               </ErrorWrapper>
             </fieldset>
@@ -129,7 +129,7 @@ const ModalTitleWrapper = styled.div`
     align-self: stretch;
     color: ${({ theme }) => theme.color.black5};
     text-align: center;
-    font-family: Pretendard;
+    font-family: 'Pretendard700';
     font-size: ${({ theme }) => theme.font.large};
     font-style: normal;
     font-weight: 700;
@@ -141,7 +141,7 @@ const FormWrapper = styled.div`
   width: 520px;
   .input__description {
     color: ${({ theme }) => theme.color.black3};
-    font-family: Pretendard;
+    font-family: 'Pretendard700';
     font-size: ${({ theme }) => theme.font.small};
     font-style: normal;
     font-weight: 500;
@@ -157,6 +157,10 @@ const FormWrapper = styled.div`
   .input__section {
     display: flex;
     gap: 8px;
+
+    & > div {
+      width: 100%;
+    }
   }
 
   .error__message {
@@ -183,5 +187,3 @@ const ModalBtnsWrapper = styled.div`
     width: 100%;
   }
 `;
-
-export default EditProfileModal;

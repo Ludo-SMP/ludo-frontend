@@ -3,14 +3,24 @@ import styled from 'styled-components';
 
 export type ButtonProps = {
   onClick?: MouseEventHandler<HTMLButtonElement>;
+
+  /** 버튼이 form 내부에서 사용될 경우, `type`을 `submit`으로 설정합니다. */
   type?: 'button' | 'submit';
-  scheme?: 'primary' | 'secondary' | 'third' | 'normal';
+
+  /** 버튼의 의미를 결정합니다. */
+  scheme?: 'primary' | 'secondary' | 'third' | 'normal' | 'text';
+
+  /** 버튼을 비활성화합니다. */
   disabled?: boolean;
+
   children: React.ReactNode;
   className?: string;
+
+  /** `fullWidth`의 경우, 크기가 100%로 설정됩니다. */
   size?: 'normal' | 'fullWidth';
 };
 
+/** 재사용 가능한 버튼 컴포넌트입니다. */
 const Button = ({
   onClick,
   type,
@@ -19,16 +29,15 @@ const Button = ({
   children,
   className,
   size = 'normal',
-}: ButtonProps) => (
-  <ButtonContainer {...{ onClick, type, scheme, disabled, className, size }}>
-    <>{children}</>
-  </ButtonContainer>
-);
+}: ButtonProps) => {
+  return (
+    <ButtonContainer {...{ onClick, type, scheme, disabled, className, size }}>
+      <>{children}</>
+    </ButtonContainer>
+  );
+};
 
-const ButtonContainer = styled.button<{
-  scheme: 'primary' | 'secondary' | 'third' | 'normal';
-  size: 'normal' | 'fullWidth';
-}>`
+const ButtonContainer = styled.button<ButtonProps>`
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -38,16 +47,20 @@ const ButtonContainer = styled.button<{
   box-sizing: border-box;
   opacity: 1;
   width: ${({ size, theme }) => (size === 'fullWidth' ? theme.buttonSize.fullWidth : theme.buttonSize.normal)};
-  font-size: ${({ theme }) => theme.font.small};
-  font-family: Pretendard;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 40px;
+  font-family: 'Pretendard600';
+  ${({ theme }) => theme.typo.ButtonButton};
+
   white-space: nowrap;
   color: ${({ scheme, theme }) => (scheme === 'primary' ? theme.color.white : theme.color.black3)};
   background: ${({ scheme, theme }) =>
-    scheme === 'primary' ? theme.color.purple1 : scheme === 'secondary' ? theme.color.purple2 : theme.color.white};
-  border: 1px solid ${({ theme }) => theme.color.black1};
+    scheme === 'primary'
+      ? theme.color.purple1
+      : scheme === 'secondary'
+        ? theme.color.purple2
+        : scheme === 'text'
+          ? 'inherit'
+          : theme.color.white};
+  border: ${({ scheme, theme }) => (scheme === 'text' ? 'none' : `1px solid ${theme.color.black1}`)};
   border-radius: ${({ scheme, theme }) => (scheme === 'third' ? theme.borderRadius.xlarge : theme.borderRadius.small)};
 
   &:hover {

@@ -6,6 +6,7 @@ export type FilterProps = {
   children?: React.ReactNode;
 };
 
+/** 검색시 사용되는 필터 버튼입니다. */
 const Filter = ({ children, onClick, checked }: FilterProps) => {
   return (
     <FilterWrapper onClick={onClick} checked={checked}>

@@ -14,6 +14,10 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
 
+  body {
+    font-family: "Pretendard500";
+  }
+
   button,
   input,
   select,
@@ -34,15 +38,29 @@ export const GlobalStyle = createGlobalStyle`
       outline: none;
     }
   }
+
   
   a {
     text-decoration: none;
+    color: inherit;
   }
+  
   button:hover {
     cursor: pointer;
   }
 
   ul, li {
     list-style: none;
+  }
+
+  /* 셀렉트 박스 화살표 제거 */
+  select{
+    -webkit-appearance: none; /* 크롬 화살표 없애기 */
+    -moz-appearance: none; /* 파이어폭스 화살표 없애기 */
+    appearance: none; /* 화살표 없애기 */
+  }
+
+  input[type="checkbox"] {
+    appearance: none;
   }
 `;

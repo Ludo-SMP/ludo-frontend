@@ -7,9 +7,7 @@ import { Create, Up } from '@/Assets';
 import Button from '@/Components/Common/Button';
 import UtiltiyButtons from '@/Components/UtilityButtons';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useStack } from '@/Hooks/stack/useStack';
 import { ALL, CATEGORIES, POSITIONS, PROGRESS_METHODS } from '@/Shared/study';
-import { Stack } from '@/Types/study';
 import { useLoginStore } from '@/store/auth';
 import { useModalStore } from '@/store/modal';
 import { CREATE_STUDY } from '@/Constants/messages';
@@ -18,7 +16,6 @@ import { ROUTES } from '@/Constants/route';
 import { useEffect } from 'react';
 
 const RecruitmentsPage = () => {
-  const { data, isLoading } = useStack();
   const navigate = useNavigate();
   const { isLoggedIn } = useLoginStore();
   const { isModalOpen, openModal } = useModalStore();
@@ -32,10 +29,6 @@ const RecruitmentsPage = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const stacks = data?.stacks?.map((stack: Stack) => {
-    return { id: stack.id, name: stack.name };
-  });
-
   return (
     <RecruitmentsPageWrapper>
       <BannerSectionWrapper>
@@ -45,26 +38,9 @@ const RecruitmentsPage = () => {
       <RecruitmentsSectionWrapper>
         <SelectFilterSectionWrapper>
           <div className="section__title">나에게 필요한 스터디를 찾아보아요</div>
-
           <DropdownFiltersWrapper>
             <DropdownFilter filterName={'카테고리'} items={[{ ...ALL }, ...CATEGORIES]} filterOption="CATEGORY" />
-            {isLoading ? (
-              <DropdownFilter filterName={'기술 스택'} items={[]} filterOption="STACK" />
-            ) : (
-              data?.stacks && (
-                <DropdownFilter
-                  filterName={'기술 스택'}
-                  items={[
-                    { ...ALL },
-                    ...stacks.map((stack: Stack) => {
-                      return { id: stack.id, name: stack.name };
-                    }),
-                  ]}
-                  filterOption="STACK"
-                />
-              )
-            )}
-
+            <DropdownFilter filterName={'기술 스택'} filterOption="STACK" />
             <DropdownFilter filterName={'포지션'} items={[{ ...ALL }, ...POSITIONS]} filterOption="POSITION" />
             <DropdownFilter
               filterName={'진행방식'}
@@ -123,7 +99,7 @@ const RecruitmentsSectionWrapper = styled.div`
 
   .section__title {
     color: ${({ theme }) => theme.color.black5};
-    font-family: Pretendard;
+    font-family: 'Pretendard800';
     font-size: ${({ theme }) => theme.font.xxlarge};
     font-style: normal;
     font-weight: 800;

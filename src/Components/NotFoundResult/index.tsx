@@ -7,6 +7,7 @@ import { ROUTES } from '@/Constants/route';
 import { useModalStore } from '@/store/modal';
 import { NotFound } from '@/Assets';
 
+/** 찾고자 하는 스터디가 존재하지 않을 때 대신 보여주는 화면입니다. */
 const NotFoundResult = () => {
   const { isLoggedIn } = useLoginStore();
   const { openModal } = useModalStore();

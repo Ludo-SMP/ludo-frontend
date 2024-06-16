@@ -1,4 +1,6 @@
 import { MessageType } from '@/Types/message';
+import { RecruitmentForm } from '@/Types/study';
+import { NotificationsSettingConfigType } from '@/Types/notifications';
 
 export const APPLY = Object.freeze({
   LOGIN: {
@@ -78,10 +80,24 @@ export const CREATE_STUDY = Object.freeze({
   } as MessageType,
 });
 
+export const CREATE_RECRUITMENT: Omit<Record<keyof RecruitmentForm, string>, 'content'> = Object.freeze({
+  applicantCount: '모집 인원을 정해주세요.',
+  recruitmentEndDateTime: '모집 마감일을 정해주세요.',
+  positionIds: '포지션을 정해주세요.',
+  stackIds: '기술 스택을 정해주세요.',
+  title: '제목을 기입해주세요.',
+  contact: '연락 방법을 정해주세요.',
+  callUrl: '연결 url을 작성해주세요.',
+});
+
 export const DELETE = Object.freeze({
   STUDY: {
     title: '스터디를 삭제하시겠습니까?',
     content: '스터디를 삭제하면 관련한 정보는 모두 삭제되며 복구는 뷸가합니다.\n정말로 삭제하시겠습니까?',
+  },
+  TEMP_SAVED: {
+    title: '작성 중인 스터디 생성 글을 삭제 하시겠습니까?',
+    content: '삭제 된 글은 복구가 불가능합니다.\n그래도 삭제하시겠습니까?',
   },
 });
 
@@ -108,3 +124,38 @@ export const PROFILE = Object.freeze({
     DUPLICATED: { title: '닉네임 변경 실패', content: '이미 존재하는 닉네임입니다.' },
   },
 });
+
+export const NOTIFICATIONS_SETTINGS_CONTENTS: Record<
+  NotificationsSettingConfigType,
+  { title: string; description: string }
+> = {
+  ALL_CONFIG: {
+    title: '전체 알림',
+    description: '제목',
+  },
+  RECRUITMENT_CONFIG: {
+    title: '모집 공고 알림',
+    description: '선호하는 항목에 대한 모집 공고가 업로드 됐을 시 알림을 제공합니다.',
+  },
+  STUDY_APPLICANT_CONFIG: {
+    title: '스터디 지원 여부 알림',
+    description: '내가 속한 스터디에 지원자가 생겼을 시, 알림을 제공합니다.',
+  },
+  STUDY_APPLICANT_RESULT_CONFIG: {
+    title: '스터디 지원 결과 알림',
+    description: '지원한 스터디에서 합류 승인 혹은 거절되었을 시, 결과를 알려줍니다.',
+  },
+  STUDY_END_DATE_CONFIG: {
+    title: '스터디 종료 기간 알림',
+    description: '스터디 종료 5일 전에 알림이 가며, 필요시 스터디 기간을 늘릴 것을 안내해줍니다.',
+  },
+  STUDY_PARTICIPANT_LEAVE_CONFIG: {
+    title: '스터디 탈퇴자 알림',
+    description: '내가 속한 스터디에서 탈퇴자가 발생했을 시, 알림을 제공합니다.',
+  },
+  REVIEW_CONFIG: {
+    title: '스터디원 리뷰 평가 알림',
+    description:
+      '스터디 진행 완료시, 팀원에 대해 리뷰합니다. 각자의 평가는 상호 완료 이후에 공개되며, 알림을 제공합니다.',
+  },
+};

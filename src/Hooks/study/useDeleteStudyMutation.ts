@@ -10,7 +10,7 @@ export const useDeleteStudyMutation = (studyId: number) => {
     mutationKey: [...STUDY.DELETE(studyId)],
     mutationFn: () => deleteStudy(studyId),
     onSuccess: () => {
-      navigate(ROUTES.MYPAGE);
+      navigate(ROUTES.MYPAGE.HOME);
     },
     onError: () => {},
   });
