@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { CustomRadio } from '../CustomRadio/CustomRadio';
-import { useState } from 'react';
 
 interface ReviewQuestionProps {
   /** 설문 문항 */

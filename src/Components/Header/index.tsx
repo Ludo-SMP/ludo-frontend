@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { media } from '@/Styles/theme';
 import { ROUTES } from '@/Constants/route';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
-import { Logo, Alarm, Profile } from '@/Assets';
+import { Logo, Profile } from '@/Assets';
 import { useLoginStore } from '@/store/auth';
 import Button from '../Common/Button';
 import StudyButtonSection from './StudyButtonSection';
