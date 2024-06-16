@@ -36,6 +36,15 @@ export const carouselOptions: Settings = {
 
   /** 다음으로 이동하는 화살표 컴포넌트 */
   nextArrow: <CustomArrowBtn type="NEXT" />,
+
+  /** CustomPaging */
+  customPaging: (index: number) => {
+    return (
+      <a>
+        <div>{index}</div>
+      </a>
+    );
+  },
 };
 
 /** 메인 페이지 배너 */
@@ -67,22 +76,17 @@ const BannerBox = styled.div`
     position: relative;
     display: flex;
     width: 100%;
-  }
 
-  .bannerIdx {
-    position: absolute;
-    bottom: 20px;
-    right: 10px;
-    border-radius: ${({ theme }) => theme.borderRadius.large};
-    padding: 4px 12px;
-    border: 1px solid ${({ theme }) => theme.color.black1};
-    background: ${({ theme }) => theme.color.black3};
-    color: ${({ theme }) => theme.color.white};
+    div {
+      width: 100%;
+    }
   }
 `;
 
 const BannerItemWrapper = styled(Link)`
   cursor: pointer;
+  width: 100%;
+
   img {
     height: 320px;
     width: 100%;
