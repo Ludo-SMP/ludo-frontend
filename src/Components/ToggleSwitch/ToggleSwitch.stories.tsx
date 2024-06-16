@@ -3,13 +3,18 @@ import { ToggleSwitch } from '.';
 
 const meta = {
   component: ToggleSwitch,
+  args: {
+    toggleMutate: () => Promise<any>,
+  },
 } satisfies Meta<typeof ToggleSwitch>;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {};
+export const Primary: Story = {
+  args: {},
+};
 
 export const Disabled: Story = {
   args: {
