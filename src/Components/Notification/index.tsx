@@ -35,7 +35,7 @@ interface NotificationProps<T extends NotificationSSEType> {
 export const Notification = <T extends NotificationSSEType>(props: NotificationProps<T>) => {
   const { type, notificationId, title, content, read, params, createdAt } = props;
 
-  const { mutate: readMutate } = useReadNotification(notificationId);
+  const { mutate: readMutate } = useReadNotification([notificationId]);
 
   const destPagePath = moveToDest(type, params);
 
@@ -43,7 +43,7 @@ export const Notification = <T extends NotificationSSEType>(props: NotificationP
     e.stopPropagation();
     /** 이미 읽은 경우, 읽음 처리 X */
     if (read) return;
-    readMutate(notificationId);
+    readMutate();
   };
   return (
     <NotificationBox>
