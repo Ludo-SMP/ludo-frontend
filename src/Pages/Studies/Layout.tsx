@@ -283,9 +283,6 @@ const FormSectionInnerBody = styled.div`
   display: flex;
   gap: 24px;
   flex-direction: column;
-  & > * {
-    flex: 1;
-  }
 `;
 
 const Buttons = styled.div`
