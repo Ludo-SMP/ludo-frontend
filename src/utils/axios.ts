@@ -1,4 +1,4 @@
-import { logOut } from '@/Apis/auth';
+// import { logOut } from '@/Apis/auth';
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 
 export const createClient = (config?: AxiosRequestConfig) => {
@@ -20,12 +20,18 @@ export const createClient = (config?: AxiosRequestConfig) => {
       return response;
     },
     async (error: AxiosError) => {
-      if (error.response?.status === 401) {
-        try {
-          const data = await logOut(); // 로그아웃 통해 쿠키 제거
-          if (data) window.location.href = '/';
-        } catch {}
-      }
+      // if (error.response?.status === 400) {
+      //   console.log(error.response.data);
+      // }
+
+      // // 토큰이 만료된 경우
+      // else if (error.response?.status === 401) {
+      //   console.log(error.response);
+      //   try {
+      //     //const data = await logOut(); // 로그아웃 통해 쿠키 제거
+      //     //if (data) window.location.href = '/';
+      //   } catch {}
+      // }
       // Login Provider에서 에러 핸들링하도록 reject
       return Promise.reject(error);
     },
