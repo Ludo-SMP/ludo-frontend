@@ -129,6 +129,7 @@ const BannerSectionWrapper = styled.section`
 
 const RecruitmentsSectionWrapper = styled.div`
   display: flex;
+  width: 1224px;
   margin: 0 auto;
   max-width: 1224px;
   flex-direction: column;
@@ -145,6 +146,10 @@ const RecruitmentsSectionWrapper = styled.div`
     font-weight: 800;
     line-height: 40px;
     white-space: nowrap;
+  }
+
+  ${media.custom(1224)} {
+    width: 100vw;
   }
 
   ${media.custom(800)} {
