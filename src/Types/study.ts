@@ -167,6 +167,7 @@ export interface StudyCreate {
   participantLimit: number;
   startDateTime: string;
   endDateTime: string;
+  attendanceDay: number[];
 }
 
 export interface StudyDetail {
