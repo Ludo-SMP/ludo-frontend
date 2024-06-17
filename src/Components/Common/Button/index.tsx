@@ -8,7 +8,7 @@ export type ButtonProps = {
   type?: 'button' | 'submit';
 
   /** 버튼의 의미를 결정합니다. */
-  scheme?: 'primary' | 'secondary' | 'third' | 'normal';
+  scheme?: 'primary' | 'secondary' | 'third' | 'normal' | 'text';
 
   /** 버튼을 비활성화합니다. */
   disabled?: boolean;
@@ -47,16 +47,20 @@ const ButtonContainer = styled.button<ButtonProps>`
   box-sizing: border-box;
   opacity: 1;
   width: ${({ size, theme }) => (size === 'fullWidth' ? theme.buttonSize.fullWidth : theme.buttonSize.normal)};
-  font-size: ${({ theme }) => theme.font.small};
   font-family: 'Pretendard600';
-  font-style: normal;
-  font-weight: 600;
-  line-height: 40px;
+  ${({ theme }) => theme.typo.ButtonButton};
+
   white-space: nowrap;
   color: ${({ scheme, theme }) => (scheme === 'primary' ? theme.color.white : theme.color.black3)};
   background: ${({ scheme, theme }) =>
-    scheme === 'primary' ? theme.color.purple1 : scheme === 'secondary' ? theme.color.purple2 : theme.color.white};
-  border: 1px solid ${({ theme }) => theme.color.black1};
+    scheme === 'primary'
+      ? theme.color.purple1
+      : scheme === 'secondary'
+        ? theme.color.purple2
+        : scheme === 'text'
+          ? 'inherit'
+          : theme.color.white};
+  border: ${({ scheme, theme }) => (scheme === 'text' ? 'none' : `1px solid ${theme.color.black1}`)};
   border-radius: ${({ scheme, theme }) => (scheme === 'third' ? theme.borderRadius.xlarge : theme.borderRadius.small)};
 
   &:hover {

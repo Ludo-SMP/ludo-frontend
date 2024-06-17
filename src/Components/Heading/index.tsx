@@ -42,10 +42,6 @@ const Property = {
   },
 };
 
-const Bold = {
-  fontSize: '50px',
-};
-
 const Heading = ({ component, type, children }: HeadingProps) => {
   if (Property[component][type])
     switch (type) {

@@ -9,7 +9,7 @@ export interface MemberProfileProps extends Member {
   imgUrl?: string;
 
   /** 스터디원의 총합 출석 횟수 */
-  totalAttendance?: number;
+  totalAttendance: number;
 
   /** 당일 출석 여부 */
   attended?: boolean;

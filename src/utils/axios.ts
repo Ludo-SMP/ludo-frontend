@@ -20,9 +20,17 @@ export const createClient = (config?: AxiosRequestConfig) => {
       return response;
     },
     async (error: AxiosError) => {
-      if (error.response?.status === 401) {
+      console.log('axios response', error, error.response, error.response?.status);
+
+      if (error.response?.status === 400) {
+        console.log('400', error.response);
+      }
+
+      // 토큰이 만료된 경우
+      else if (error.response?.status === 401) {
+        console.log('401', error.response);
         try {
-          const data = await logOut(); // 로그아웃 통해 쿠키 제거
+          const data = await logOut();
           if (data) window.location.href = '/';
         } catch {}
       }

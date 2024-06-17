@@ -24,7 +24,7 @@ export const useSSE = () => {
       heartbeatTimeout: 60 * 60 * 1000, // sse 연결 시간 (토큰 유지 1시간)
     });
 
-    // 메시지 수신 시 캐시에 저장
+    // 메시지 수신 시 캐시에 저장 - 이름을 따로 설정한 경우, 이벤트 리스너 부착
     eventSource.current.addEventListener('notification', (evt: Event) => {
       const messageEvent = evt as MessageEvent;
       const data: { data: NotificationSSEType } = JSON.parse(messageEvent.data);

@@ -128,3 +128,8 @@ export interface NotificationsSetting {
     stackKeywords: { stackId: number; name: string }[];
   };
 }
+
+/** 알림 id 배열 타입 */
+export interface NotificationIds {
+  notificationIds: number[];
+}

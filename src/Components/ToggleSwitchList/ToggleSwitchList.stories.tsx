@@ -13,4 +13,16 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {};
+export const Primary: Story = {
+  args: {
+    type: 'ALL_CONFIG',
+    defaultChecked: false,
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    type: 'ALL_CONFIG',
+    disabled: true,
+  },
+};

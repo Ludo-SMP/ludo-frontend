@@ -55,7 +55,7 @@ export const mockNotifications = {
         type: 'STUDY_APPLICANT_REJECT',
         read: false,
         params: {
-          studyId: null,
+          studyId: null as null,
         },
         createdAt: '2024-05-21T20:34:19.884948',
       },
@@ -66,7 +66,7 @@ export const mockNotifications = {
         type: 'STUDY_END_DATE',
         read: false,
         params: {
-          studyId: null,
+          studyId: null as null,
         },
         createdAt: '2024-05-21T20:34:19.884948',
       },
@@ -99,8 +99,8 @@ export const mockNotifications = {
         type: 'REVIEW_PEER_FINISH',
         read: false,
         params: {
-          studyId: null,
-          userId: null,
+          studyId: null as null,
+          userId: null as null,
         },
         createdAt: '2024-05-21T20:34:19.884948',
       },

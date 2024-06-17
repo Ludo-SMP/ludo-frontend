@@ -1,11 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import TemporarySavedCard from '.';
+import { fn } from '@storybook/test';
 
 const meta = {
   component: TemporarySavedCard,
   args: {
     title: '제목',
-    content: '내용',
+    onRemove: fn(),
   },
 } satisfies Meta<typeof TemporarySavedCard>;
 
@@ -15,13 +16,13 @@ type Story = StoryObj<typeof meta>;
 /** 스터디 작성 임시저장 */
 export const Study: Story = {
   args: {
-    card: 'STUDY',
+    savedKey: 'STUDY-UUID-KEY',
   },
 };
 
 /** 스터디 모집 공고 임시저장 */
 export const Recruitment: Story = {
   args: {
-    card: 'RECRUITMENT',
+    savedKey: 'RECRUITMENT-UUID-KEY',
   },
 };

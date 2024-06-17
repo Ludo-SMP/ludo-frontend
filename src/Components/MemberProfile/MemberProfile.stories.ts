@@ -13,6 +13,7 @@ const meta = {
     },
     role: 'MEMBER',
     totalAttendance: 10,
+    recentAttendanceDate: '2024-5-21',
   },
 } satisfies Meta<typeof MemberProfile>;
 

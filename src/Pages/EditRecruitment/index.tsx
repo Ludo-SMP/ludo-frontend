@@ -2,11 +2,10 @@ import { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { One, Two, Three, Four } from '@/Assets';
 
 // components
-// import Heading from '@/Components/Heading';
 import Spacing from '@/Components/Spacing';
 import Button from '@/Components/Common/Button';
 import { TextArea } from '@/Components/Textarea';

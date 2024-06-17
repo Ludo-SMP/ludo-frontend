@@ -8,11 +8,11 @@ import { ReviewQuestion } from '@/Components/ReviewQuestion/ReviewQuestion';
 import { Controller, useForm } from 'react-hook-form';
 import { HeaderWithLogo } from '@/Components/Header/HeaderWithLogo';
 
-interface ReviewData {
-  title: string;
-  yes: string;
-  no: string;
-}
+// interface ReviewData {
+//   title: string;
+//   yes: string;
+//   no: string;
+// }
 
 const reviewDataList = {
   activenessScore: {

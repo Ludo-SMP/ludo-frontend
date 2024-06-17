@@ -53,7 +53,7 @@ export default ({ query, mutation }: StudyFormLayoutProps) => {
     control,
   } = useForm<StudyCreateForm>();
 
-  const { savedKey, tempSaved } = useTempSaved();
+  const { savedKey } = useTempSaved();
 
   const { isModalOpen, openModal } = useModalStore();
 
