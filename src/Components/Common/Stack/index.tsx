@@ -16,5 +16,5 @@ export const Stack = ({ divider, gap, children }: StackProps) => {
 const Box = styled.div<{ $gap?: number | string }>`
   display: flex;
   flex-direction: column;
-  $gap: ${({ $gap }) => ($gap ? (typeof $gap === 'number' ? `${$gap}px` : $gap) : '16px')};
+  gap: ${({ $gap }) => ($gap ? (typeof $gap === 'number' ? `${$gap}px` : $gap) : '16px')};
 `;

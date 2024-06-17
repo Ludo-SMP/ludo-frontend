@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { AlarmInbox } from '@/Components/AlarmInBox';
 import { useNotifications } from '@/Hooks/notifications/useNotifications';
-// import { useSSE } from '@/Hooks/useSSE';
+import { useSSE } from '@/Hooks/useSSE';
 import styled from 'styled-components';
 import { flexCenter } from '@/Styles/theme';
 import { Alarm } from '@/Assets';
@@ -12,14 +12,14 @@ const AlarmBell = () => {
 
   const { data } = useNotifications();
 
-  //const { fetchSSE, eventSource } = useSSE();
+  const { fetchSSE, eventSource } = useSSE();
 
   useEffect(() => {
     // 커넥션 종료되면 자동으로 onerror 호출 후, 커넥션 다시 맺는 것 방지하기 위해 주석 처리
-    //fetchSSE();
+    fetchSSE();
 
     return () => {
-      // eventSource.current.close();
+      eventSource.current.close();
     };
   }, []);
 
