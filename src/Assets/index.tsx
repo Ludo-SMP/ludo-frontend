@@ -50,6 +50,8 @@ export { default as SignUpBackground } from './images/background.png';
 // Banner
 export { default as Banner1 } from './images/banner1.png';
 export { default as Banner2 } from './images/banner2.png';
+export { default as MobileBanner1 } from './images/mobilebanner1.png';
+export { default as MobileBanner2 } from './images/mobilebanner2.png';
 
 // Study
 export { default as DefaultStudyThumbnail } from './icons/studyThumbnail.svg';

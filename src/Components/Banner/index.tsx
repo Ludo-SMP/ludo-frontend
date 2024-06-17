@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Carousel } from '../Common/Carousel';
-import { Banner1, Banner2 } from '@/Assets';
+import { Banner1, Banner2, MobileBanner1, MobileBanner2 } from '@/Assets';
 import { Settings } from 'react-slick';
 import { Link } from 'react-router-dom';
 import { NOTION_URL } from '@/Constants/common';
@@ -49,7 +49,8 @@ export const createCarouselOptions = (handleSlideIdx: React.Dispatch<SetStateAct
 /** 메인 페이지 배너 */
 const Banner = () => {
   const banners = [Banner1, Banner2];
-  const [slideIdx, setSlideIdx] = useState(1);
+  const mobileBanners = [MobileBanner1, MobileBanner2];
+  const [slideIdx, setSlideIdx] = useState<number>(1);
   const carouselOptions = createCarouselOptions(setSlideIdx);
 
   return (
@@ -57,7 +58,7 @@ const Banner = () => {
       <Carousel options={carouselOptions}>
         {banners.map((banner, idx) => (
           <BannerItemList key={idx} to={NOTION_URL} target="_blank">
-            <img src={banner} />
+            <BannerImage src={banner} srcSet={`${mobileBanners[idx]} 500w, ${banner}`} alt="banner" />
           </BannerItemList>
         ))}
       </Carousel>
@@ -82,6 +83,12 @@ const BannerBox = styled.div`
       width: 100%;
     }
   }
+
+  ${media.custom(500)} {
+    display: flex;
+    justify-content: center;
+    height: 240px;
+  }
 `;
 
 const SlideIdxBox = styled.div`
@@ -103,16 +110,27 @@ const SlideIdxBox = styled.div`
   ${media.custom(1400)} {
     right: 50px;
   }
+
+  ${media.custom(500)} {
+    display: none;
+  }
 `;
 
 const BannerItemList = styled(Link)`
+  display: block;
   cursor: pointer;
   width: 100%;
+`;
 
-  img {
-    height: 320px;
+const BannerImage = styled.img`
+  height: 320px;
+  width: 100%;
+  object-fit: cover;
+
+  ${media.custom(500)} {
     width: 100%;
-    object-fit: cover;
+    object-fit: fill;
+    height: 240px;
   }
 `;
 
