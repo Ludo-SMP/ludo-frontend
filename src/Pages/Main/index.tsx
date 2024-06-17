@@ -121,6 +121,7 @@ const MainPageWrapper = styled.section`
 
 const BannerSectionWrapper = styled.section`
   display: flex;
+  justify-content: center;
   margin: 0 auto;
   width: 100%;
   max-width: 1920px;
