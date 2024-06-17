@@ -1,4 +1,5 @@
 import { NextArrow, PrevArrow } from '@/Assets';
+import { media } from '@/Styles/theme';
 import { CustomArrowProps } from 'react-slick';
 import styled from 'styled-components';
 
@@ -25,4 +26,8 @@ const CustomArrowBtnWrapper = styled.button<{ $type: 'PREV' | 'NEXT' }>`
   top: calc(50% - 36px);
   left: ${({ $type }) => $type === 'PREV' && '40px'};
   right: ${({ $type }) => $type === 'NEXT' && '40px'};
+
+  ${media.custom(500)} {
+    display: none;
+  }
 `;
