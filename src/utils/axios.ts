@@ -1,4 +1,4 @@
-import { logOut } from '@/Apis/auth';
+// import { logOut } from '@/Apis/auth';
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 
 export const createClient = (config?: AxiosRequestConfig) => {
