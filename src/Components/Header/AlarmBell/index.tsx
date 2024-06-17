@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { AlarmInbox } from '@/Components/AlarmInBox';
 import { useNotifications } from '@/Hooks/notifications/useNotifications';
-// import { useSSE } from '@/Hooks/useSSE';
+import { useSSE } from '@/Hooks/useSSE';
 import styled from 'styled-components';
 import { flexCenter } from '@/Styles/theme';
 import { Alarm } from '@/Assets';
@@ -19,7 +19,7 @@ const AlarmBell = () => {
     fetchSSE();
 
     return () => {
-     eventSource.current.close();
+      eventSource.current.close();
     };
   }, []);
 

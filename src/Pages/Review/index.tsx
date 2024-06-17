@@ -1,4 +1,4 @@
-import { Logo, Profile } from '@/Assets';
+import { Profile } from '@/Assets';
 import Button from '@/Components/Common/Button';
 import { RowDivider } from '@/Components/Common/Divider/RowDivider';
 import styled from 'styled-components';
