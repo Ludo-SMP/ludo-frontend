@@ -39,12 +39,12 @@ export const Notifications = () => {
         ) : (
           <Stack divider={<Divider height={2} $dividerColor="#e5e6e8" />} gap={'0px'}>
             {data?.notification
-              .filter((notification: NotificationSSEType) => {
+              ?.filter((notification: NotificationSSEType) => {
                 if (selectedNotificationType === 'STUDY')
                   return !notification.type.includes('REVIEW') && !notification.type.includes('RECRUITMENT');
                 return notification.type.includes(selectedNotificationType);
               })
-              .map((notification: NotificationSSEType) => (
+              ?.map((notification: NotificationSSEType) => (
                 <Notification {...notification} key={notification.notificationId} />
               ))}
           </Stack>
