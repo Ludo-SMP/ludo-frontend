@@ -11,6 +11,7 @@ import { useApplicantsDetail } from '@/Hooks/study/useApplicantsDetail';
 import { useCloseRecruitmentMutation } from '@/Hooks/recruitments/useCloseRecruitmentMutation';
 import { useEffect } from 'react';
 import { RowDivider } from '@/Components/Common/Divider/RowDivider';
+import Footer from '@/Components/Footer';
 
 export const ApplicantsPage = () => {
   const studyId = Number(useParams().studyId);
@@ -47,6 +48,9 @@ export const ApplicantsPage = () => {
           <Button scheme="secondary">모집 마감하기</Button>
         </CloseSectionInner>
       </CloseSection>
+      <FooterSection>
+        <Footer />
+      </FooterSection>
     </Page>
   );
 };
@@ -99,4 +103,11 @@ const CloseSectionInner = styled.div`
   width: 100%;
   max-width: 1224px;
   padding-bottom: 72px;
+`;
+
+const FooterSection = styled.div`
+  display: flex;
+  padding: 0px 24px;
+  justify-content: center;
+  background: ${({ theme }) => theme.color.gray1};
 `;
