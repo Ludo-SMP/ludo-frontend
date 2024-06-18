@@ -44,7 +44,9 @@ export const ApplicantsPage = () => {
       </Header>
       <RowDivider />
       <Main>
-        <MainInner></MainInner>
+        <MainInner>
+          <ParentNav studyTitle={study.title} />
+        </MainInner>
       </Main>
       <CloseSection>
         <CloseSectionInner>
@@ -107,6 +109,49 @@ const MainInner = styled.main`
   padding: 40px 0px;
   flex-direction: column;
   gap: 24px;
+`;
+
+const ParentNav = ({ studyTitle }: { studyTitle: string }) => (
+  <ParentNavBox>
+    <StudyTitleBox>
+      <Left />
+      <StudyTitle>
+        <StudyInfo />
+        <StudyTitleText>{studyTitle}</StudyTitleText>
+      </StudyTitle>
+    </StudyTitleBox>
+  </ParentNavBox>
+);
+
+const ParentNavBox = styled.div`
+  display: flex;
+  min-width: 300px;
+  max-width: 1224px;
+  padding-right: 933px;
+  align-items: center;
+  align-self: stretch;
+`;
+
+const StudyTitleBox = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+`;
+
+const StudyTitle = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
+
+const StudyTitleText = styled.span`
+  color: ${({ theme }) => theme.color.black5};
+  font-family: Pretendard600;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 32px;
+  white-space: nowrap;
 `;
 
 const CloseSection = styled.div`
