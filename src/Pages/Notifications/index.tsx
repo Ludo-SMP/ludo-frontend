@@ -38,7 +38,7 @@ export const Notifications = () => {
           <Loading />
         ) : (
           <Stack divider={<Divider height={2} $dividerColor="#e5e6e8" />} gap={'0px'}>
-            {data?.notification
+            {data
               ?.filter((notification: NotificationSSEType) => {
                 if (selectedNotificationType === 'STUDY')
                   return !notification.type.includes('REVIEW') && !notification.type.includes('RECRUITMENT');
