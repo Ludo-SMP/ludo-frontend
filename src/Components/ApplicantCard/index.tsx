@@ -49,15 +49,15 @@ export const ApplicantCard = ({
   return (
     <CardBox>
       <CardInner>
-        <Title>지원한 스터디 이름</Title>
+        <Title>{title}</Title>
         <Content>
           <ProfileSection>
             <Profile width={100} height={100} />
             <ProfileInfoBox>
-              <Nickname>닉네임</Nickname>
+              <Nickname>{nickname}</Nickname>
               <Fields>
-                <Field>이메일</Field>
-                <Field>포지션</Field>
+                <Field>{email}</Field>
+                <Field>{position.name}</Field>
               </Fields>
             </ProfileInfoBox>
           </ProfileSection>
