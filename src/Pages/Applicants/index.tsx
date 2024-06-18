@@ -43,6 +43,9 @@ export const ApplicantsPage = () => {
         </HeaderInner>
       </Header>
       <RowDivider />
+      <Main>
+        <MainInner></MainInner>
+      </Main>
       <CloseSection>
         <CloseSectionInner>
           <Button scheme="secondary">모집 마감하기</Button>
@@ -89,6 +92,21 @@ const Title = styled.h1`
   font-style: normal;
   font-weight: 800;
   line-height: 48px;
+`;
+
+const Main = styled.main`
+  display: flex;
+  padding: 24px;
+  justify-content: center;
+`;
+
+const MainInner = styled.main`
+  display: flex;
+  max-width: 1224px;
+  width: 100%;
+  padding: 40px 0px;
+  flex-direction: column;
+  gap: 24px;
 `;
 
 const CloseSection = styled.div`
