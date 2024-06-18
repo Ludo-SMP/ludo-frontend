@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Left, Loading, Logo, StudyInfo } from '@/Assets';
 import { InfoField } from '@/Components/Common/InfoField';
-import ApplicantCard from '@/Components/ApplicantCard';
+import { ApplicantCard } from '@/Components/ApplicantCard';
 import { Applicant } from '@/Types/study';
 import Button from '@/Components/Common/Button';
 import StudyToken from '@/Components/Common/StudyToken';
@@ -47,7 +47,21 @@ export const ApplicantsPage = () => {
         <MainInner>
           <ParentNav studyTitle={study.title} />
           <InfoSection>
-            <Applicants></Applicants>
+            <Applicants>
+              {applicants.map((applicant) => (
+                <li key={applicant.id}>
+                  <ApplicantCard
+                    studyId={study.id}
+                    id={applicant.id}
+                    title={study.title}
+                    nickname={applicant.nickname}
+                    email={applicant.email}
+                    position={applicant.position}
+                    isOwner={study.owner.id === applicant.id}
+                  />
+                </li>
+              ))}
+            </Applicants>
           </InfoSection>
         </MainInner>
       </Main>
