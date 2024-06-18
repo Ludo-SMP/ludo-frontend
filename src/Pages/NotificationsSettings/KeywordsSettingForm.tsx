@@ -32,6 +32,7 @@ export const KeywordsSettingForm = ({ values, disabled }: KeywordsSettingFormPro
   const { mutate: editKeywordsMutate } = useEditNotificationsKeywords();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedStacks, setSelectedStacks] = useState<Stack[]>(getSelectedStacks(values));
+  console.log(disabled);
 
   const { setValue, watch, handleSubmit } = useForm<RecruitmentKeywordsForm>({
     defaultValues: {
@@ -59,6 +60,7 @@ export const KeywordsSettingForm = ({ values, disabled }: KeywordsSettingFormPro
             key={'기술 스택'}
             checked={watch('stackIds').length !== 0}
             onClick={() => setIsOpen((prev) => !prev)}
+            disabled={disabled}
           >
             기술 스택
           </ChipMenu>
@@ -77,6 +79,7 @@ export const KeywordsSettingForm = ({ values, disabled }: KeywordsSettingFormPro
               checked={watch('positionIds').includes(id)}
               onClick={() => setValue('positionIds', handleValues(watch('positionIds'), id))}
               id={id}
+              disabled={disabled}
             >
               {label}
             </ChipMenu>
@@ -89,6 +92,7 @@ export const KeywordsSettingForm = ({ values, disabled }: KeywordsSettingFormPro
               checked={watch('categoryIds').includes(id)}
               onClick={() => setValue('categoryIds', handleValues(watch('categoryIds'), id))}
               id={id}
+              disabled={disabled}
             >
               {label}
             </ChipMenu>
