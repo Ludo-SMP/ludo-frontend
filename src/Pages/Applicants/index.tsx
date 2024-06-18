@@ -42,6 +42,11 @@ export const ApplicantsPage = () => {
         </HeaderInner>
       </Header>
       <RowDivider />
+      <CloseSection>
+        <CloseSectionInner>
+          <Button scheme="secondary">모집 마감하기</Button>
+        </CloseSectionInner>
+      </CloseSection>
     </Page>
   );
 };
@@ -80,4 +85,18 @@ const Title = styled.h1`
   font-style: normal;
   font-weight: 800;
   line-height: 48px;
+`;
+
+const CloseSection = styled.div`
+  display: flex;
+  padding: 0px 24px;
+  justify-content: center;
+`;
+
+const CloseSectionInner = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1224px;
+  padding-bottom: 72px;
 `;
