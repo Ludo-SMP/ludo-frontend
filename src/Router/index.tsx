@@ -5,7 +5,7 @@ import MainPage from '@/Pages/Main';
 import RecruitmentDetailPage from '@/Pages/RecruitmentDetail';
 import RecruitmentsPage from '@/Pages/Recruitments';
 import SignUpPage from '@/Pages/SignUp';
-import ApplicantsPage from '@/Pages/Applicants';
+import { ApplicantsPage } from '@/Pages/Applicants';
 import StudyDetailPage from '@/Pages/StudyDetail';
 import CreateStudyPage from '@/Pages/Studies/CreateStudy';
 import ModifyStudyPage from '@/Pages/Studies/EditStudy';
