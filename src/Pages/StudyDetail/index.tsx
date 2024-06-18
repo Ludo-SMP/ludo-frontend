@@ -42,7 +42,9 @@ export const StudyDetailPage = () => {
 
   if (isLoading) return <Loading />;
 
-  const didIAttendToday = isToday(new Date(study.participants.find(({ id }) => id === user?.id)?.recentAttendanceDate));
+  const didIAttendToday = isToday(
+    new Date(study.participants?.find(({ id }) => id === user?.id)?.recentAttendanceDate),
+  );
 
   return (
     <Grid>
@@ -113,7 +115,7 @@ export const StudyDetailPage = () => {
             <RowDivider />
             <Members>
               <MembersCountBar>
-                <MemberCounts count={study.participants.length} />
+                <MemberCounts count={study.participants?.length} />
                 {isOwner && (
                   <ApplicationButton>
                     <Link to={'#'}>스터디원 모집</Link>
