@@ -32,7 +32,6 @@ export const KeywordsSettingForm = ({ values, disabled }: KeywordsSettingFormPro
   const { mutate: editKeywordsMutate } = useEditNotificationsKeywords();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedStacks, setSelectedStacks] = useState<Stack[]>(getSelectedStacks(values));
-  console.log(disabled);
 
   const { setValue, watch, handleSubmit } = useForm<RecruitmentKeywordsForm>({
     defaultValues: {
