@@ -46,6 +46,9 @@ export const ApplicantsPage = () => {
       <Main>
         <MainInner>
           <ParentNav studyTitle={study.title} />
+          <InfoSection>
+            <Applicants></Applicants>
+          </InfoSection>
         </MainInner>
       </Main>
       <CloseSection>
@@ -152,6 +155,19 @@ const StudyTitleText = styled.span`
   font-weight: 600;
   line-height: 32px;
   white-space: nowrap;
+`;
+
+const InfoSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+`;
+
+const Applicants = styled.ul`
+  display: flex;
+  min-width: 300px;
+  max-width: 1224px;
+  gap: 24px;
 `;
 
 const CloseSection = styled.div`
