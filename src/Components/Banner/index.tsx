@@ -56,11 +56,16 @@ const Banner = () => {
   return (
     <BannerBox>
       <Carousel options={carouselOptions}>
-        {banners.map((banner, idx) => (
-          <BannerItemList key={idx} to={NOTION_URL} target="_blank">
-            <BannerImage src={banner} srcSet={`${mobileBanners[idx]} 500w, ${banner}`} alt="banner" />
-          </BannerItemList>
-        ))}
+        <BannerItemList to={NOTION_URL} target="_blank">
+          {banners.map((banner, idx) => (
+            <BannerImage
+              key={`banner-${idx}`}
+              src={banner}
+              srcSet={`${mobileBanners[idx]} 500w, ${banner}`}
+              alt="banner"
+            />
+          ))}
+        </BannerItemList>
       </Carousel>
       <SlideIdxBox>{`${slideIdx}  /  ${banners.length}`}</SlideIdxBox>
     </BannerBox>
