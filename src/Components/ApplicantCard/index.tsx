@@ -34,10 +34,14 @@ export const ApplicantCard = ({
   email,
   position,
   isOwner,
+  reviewStatistics,
 }: ApplicantCardProps) => {
   const [applyStatus, setApplyStatus] = useState<ApplyStatus>('UNCHECKED');
   const { isModalOpen, closeModal } = useModalStore();
   const queryClient = useQueryClient();
+
+  // 평가 항목이 전부 0인 경우 스터디 종료를 경험한 적 없는 신규 사용자로 판단
+  const isNewbie = Object.values(reviewStatistics).every((v) => v === 0);
 
   const { mutate: acceptMutate } = useAcceptApplyMutation(studyId, applicantId, () => {
     setApplyStatus('ACCEPTED');
@@ -63,7 +67,7 @@ export const ApplicantCard = ({
           </ProfileSection>
           <RowDivider />
           <StatsSection>
-            {false ? (
+            {isNewbie ? (
               <>
                 <Stats>
                   <li>
