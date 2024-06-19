@@ -13,23 +13,19 @@ import { useReadNotification } from '@/Hooks/notifications/useReadNotification';
 
 export interface AlarmInboxProps {
   handleOpen?: (prev: boolean) => void;
-  alarmPreviews?: {
-    notification: NotificationSSEType[];
-  };
+  alarmPreviews?: NotificationSSEType[];
 }
 
 export const AlarmInbox = ({ alarmPreviews, handleOpen }: AlarmInboxProps) => {
-  const { notification } = alarmPreviews ?? {};
-
   const inboxRef = useRef<HTMLDivElement>(null);
 
   useOutSideClick(inboxRef, () => {
     handleOpen && handleOpen(false);
   });
 
-  const notReadAlarm = notification?.filter((alarm) => !alarm.read);
+  const notReadAlarm = alarmPreviews?.filter((alarm) => !alarm?.read);
   const isReadAll = () => notReadAlarm?.length === 0;
-  const { mutate } = useReadNotification([...(notReadAlarm ?? []).map((alarm) => alarm.notificationId)]);
+  const { mutate } = useReadNotification([...(notReadAlarm ?? []).map((alarm) => alarm?.notificationId)]);
 
   return (
     <AlarmInboxBox ref={inboxRef}>
@@ -47,8 +43,8 @@ export const AlarmInbox = ({ alarmPreviews, handleOpen }: AlarmInboxProps) => {
         </TopBar>
         {/* 페이지 이동 후 알림 인박스 닫기 */}
         <AlarmList onClick={() => handleOpen(false)}>
-          {notification
-            ?.filter((alarm: NotificationSSEType) => !alarm.read)
+          {alarmPreviews
+            ?.filter((alarm: NotificationSSEType) => !alarm?.read)
             ?.map((alarm) => <AlarmPreview key={`${alarm?.notificationId}`} {...alarm} />)}
         </AlarmList>
         <RowDivider rowHeight={1} />
