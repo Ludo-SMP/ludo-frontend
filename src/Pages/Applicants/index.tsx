@@ -89,6 +89,11 @@ const Page = styled.div`
   display: flex;
   flex-direction: column;
   background: ${({ theme }) => theme.color.white2};
+  min-height: 100vh;
+
+  & > *:last-child {
+    margin-top: auto;
+  }
 `;
 
 const Header = styled.header`
