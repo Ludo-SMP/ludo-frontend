@@ -74,14 +74,15 @@ export default ({ query, mutation }: StudyFormLayoutProps) => {
       <PageWrapper>
         <Form
           onSubmit={handleSubmit(
-            ({ title, category, memberLimit, position, progressMethod, platform, progressPeriod }) => {
+            ({ title, category, memberLimit, position, progressMethod, platform, platformUrl, progressPeriod }) => {
               if (!isValidAttendanceDay()) return;
               mutate({
                 title,
                 categoryId: category.value,
                 positionId: position.value,
                 way: progressMethod.value,
-                platform: platform.value,
+                platform: platform.value ?? null,
+                platformUrl: platformUrl ?? null,
                 participantLimit: memberLimit.value,
                 startDateTime: progressPeriod[0].toISOString(),
                 endDateTime: progressPeriod[1].toISOString(),
