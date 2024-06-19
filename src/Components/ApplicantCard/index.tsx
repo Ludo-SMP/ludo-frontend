@@ -67,7 +67,7 @@ export const ApplicantCard = ({
           </ProfileSection>
           <RowDivider />
           <StatsSection>
-            {isNewbie ? (
+            {!isNewbie ? (
               <>
                 <Stats>
                   <li>
