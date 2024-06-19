@@ -23,6 +23,23 @@ const getSelectedStacks = (keywords: RecruitmentKeywordsForm): Stack[] => {
   });
 };
 
+const isEqualValues = (selectedValues: number[], defaultValues: number[]) => {
+  return (
+    selectedValues.length == defaultValues.length &&
+    selectedValues.every((selectedValue: number) => defaultValues.includes(selectedValue))
+  );
+};
+
+const isEqualKeywords = (selectedKeywords: RecruitmentKeywordsForm, defaultKeywords: RecruitmentKeywordsForm) => {
+  const { stackIds: newStackIds, positionIds: newPositionIds, categoryIds: newCategoryIds } = selectedKeywords;
+  const { stackIds: defStackIds, positionIds: defPositionIds, categoryIds: defCategoryIds } = defaultKeywords;
+  return (
+    isEqualValues(newStackIds, defStackIds) &&
+    isEqualValues(newPositionIds, defPositionIds) &&
+    isEqualValues(newCategoryIds, defCategoryIds)
+  );
+};
+
 export interface KeywordsSettingFormProps {
   values: RecruitmentKeywordsForm;
   disabled?: boolean;
@@ -107,11 +124,27 @@ export const KeywordsSettingForm = ({ values, disabled }: KeywordsSettingFormPro
             setValue('positionIds', [...values.positionIds]);
             setValue('categoryIds', [...values.categoryIds]);
           }}
-          disabled={disabled}
+          disabled={
+            disabled ||
+            isEqualKeywords(
+              { stackIds: watch('stackIds'), positionIds: watch('positionIds'), categoryIds: watch('categoryIds') },
+              values,
+            )
+          }
         >
           취소
         </Button>
-        <Button size="fullWidth" scheme="secondary" disabled={disabled}>
+        <Button
+          size="fullWidth"
+          scheme="secondary"
+          disabled={
+            disabled ||
+            isEqualKeywords(
+              { stackIds: watch('stackIds'), positionIds: watch('positionIds'), categoryIds: watch('categoryIds') },
+              values,
+            )
+          }
+        >
           저장
         </Button>
       </BtnsBox>
