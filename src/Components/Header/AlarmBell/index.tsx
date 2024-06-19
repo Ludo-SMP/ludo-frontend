@@ -10,7 +10,9 @@ import { Alarm } from '@/Assets';
 const AlarmBell = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const { data } = useNotifications();
+  const { data, isLoading } = useNotifications();
+
+  if (isLoading) return null;
 
   const { fetchSSE, eventSource } = useSSE();
 
