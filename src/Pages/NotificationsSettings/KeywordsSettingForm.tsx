@@ -23,6 +23,23 @@ const getSelectedStacks = (keywords: RecruitmentKeywordsForm): Stack[] => {
   });
 };
 
+const isEqualValues = (selectedValues: number[], defaultValues: number[]) => {
+  return (
+    selectedValues.length == defaultValues.length &&
+    selectedValues.every((selectedValue: number) => defaultValues.includes(selectedValue))
+  );
+};
+
+const isEqualKeywords = (selectedKeywords: RecruitmentKeywordsForm, defaultKeywords: RecruitmentKeywordsForm) => {
+  const { stackIds: newStackIds, positionIds: newPositionIds, categoryIds: newCategoryIds } = selectedKeywords;
+  const { stackIds: defStackIds, positionIds: defPositionIds, categoryIds: defCategoryIds } = defaultKeywords;
+  return (
+    isEqualValues(newStackIds, defStackIds) &&
+    isEqualValues(newPositionIds, defPositionIds) &&
+    isEqualValues(newCategoryIds, defCategoryIds)
+  );
+};
+
 export interface KeywordsSettingFormProps {
   values: RecruitmentKeywordsForm;
   disabled?: boolean;
@@ -59,6 +76,7 @@ export const KeywordsSettingForm = ({ values, disabled }: KeywordsSettingFormPro
             key={'기술 스택'}
             checked={watch('stackIds').length !== 0}
             onClick={() => setIsOpen((prev) => !prev)}
+            disabled={disabled}
           >
             기술 스택
           </ChipMenu>
@@ -77,6 +95,7 @@ export const KeywordsSettingForm = ({ values, disabled }: KeywordsSettingFormPro
               checked={watch('positionIds').includes(id)}
               onClick={() => setValue('positionIds', handleValues(watch('positionIds'), id))}
               id={id}
+              disabled={disabled}
             >
               {label}
             </ChipMenu>
@@ -89,6 +108,7 @@ export const KeywordsSettingForm = ({ values, disabled }: KeywordsSettingFormPro
               checked={watch('categoryIds').includes(id)}
               onClick={() => setValue('categoryIds', handleValues(watch('categoryIds'), id))}
               id={id}
+              disabled={disabled}
             >
               {label}
             </ChipMenu>
@@ -104,11 +124,27 @@ export const KeywordsSettingForm = ({ values, disabled }: KeywordsSettingFormPro
             setValue('positionIds', [...values.positionIds]);
             setValue('categoryIds', [...values.categoryIds]);
           }}
-          disabled={disabled}
+          disabled={
+            disabled ||
+            isEqualKeywords(
+              { stackIds: watch('stackIds'), positionIds: watch('positionIds'), categoryIds: watch('categoryIds') },
+              values,
+            )
+          }
         >
           취소
         </Button>
-        <Button size="fullWidth" scheme="secondary" disabled={disabled}>
+        <Button
+          size="fullWidth"
+          scheme="secondary"
+          disabled={
+            disabled ||
+            isEqualKeywords(
+              { stackIds: watch('stackIds'), positionIds: watch('positionIds'), categoryIds: watch('categoryIds') },
+              values,
+            )
+          }
+        >
           저장
         </Button>
       </BtnsBox>

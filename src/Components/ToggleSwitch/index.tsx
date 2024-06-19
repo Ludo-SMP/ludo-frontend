@@ -1,32 +1,50 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { UseMutateFunction } from '@tanstack/react-query';
+import { NotificationsSettingConfigType } from '@/Types/notifications';
+import { useClickedNotificationSettingConfig } from '@/store/notificationSettingClicked';
 
 export interface ToggleSwitchProps {
-  toggleMutate: UseMutateFunction<unknown, Error, { on: boolean }>;
+  /** 알림 설정 타입 */
+  type: NotificationsSettingConfigType;
 
-  /* 초기 checked 상태 */
-  defaultChecked?: boolean;
+  toggleMutate: UseMutateFunction<unknown, Error, { on: boolean }>;
 
   /** 비활성 여부 */
   disabled?: boolean;
+
+  /* 초기 checked 상태 */
+  defaultChecked?: boolean;
 }
 
 /** 토글 스위치 */
 const ToggleSwitch = React.forwardRef<boolean, ToggleSwitchProps>(
-  ({ defaultChecked = false, disabled = false, toggleMutate }, ref) => {
-    const [clicked, setClicked] = useState<boolean>(defaultChecked);
-    const handleChange = () => {
+  ({ disabled = false, toggleMutate, type, defaultChecked }, ref) => {
+    const { setAllOffSettingConfigs, setSettingConfig, settingConfigs } = useClickedNotificationSettingConfig();
+    // console.log(settingConfigs[type], type);
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       if (ref && typeof ref !== 'function') {
-        ref.current = !clicked;
+        ref.current = null;
       }
-      setClicked((prev) => !prev);
-      toggleMutate({ on: !clicked });
+      if (type === 'ALL_CONFIG' || type === 'RECRUITMENT_CONFIG') {
+        setAllOffSettingConfigs();
+        toggleMutate({ on: !defaultChecked });
+        return;
+      }
+      setSettingConfig({ configType: type, on: !settingConfigs[type] });
+      toggleMutate({ on: e.target.checked });
     };
 
     return (
       <Container>
-        <Switch type="checkbox" role="switch" checked={clicked} onChange={handleChange} disabled={disabled} />
+        <Switch
+          type="checkbox"
+          role="switch"
+          checked={defaultChecked ? !settingConfigs[type] : settingConfigs[type]}
+          onChange={handleChange}
+          disabled={disabled}
+        />
       </Container>
     );
   },
@@ -62,25 +80,25 @@ const Switch = styled.input`
   /** 체크된 상태 */
   &:checked {
     background-color: ${({ theme }) => theme.color.purple1};
-    transition: background-color: 0.15s ease;
+    transition: 0.15s ease;
     border: none;
 
     /** 체크됐을 때 좌우로 움직이는 thumb 스타일 */
     &::before {
-        position: absolute;
-        top: calc(50% - 12px);
-        left: calc(100% - 24px - 6px);
-        width: 24px;
-        height: 24px;
-        background-color: ${({ theme }) => theme.color.white};
+      position: absolute;
+      top: calc(50% - 12px);
+      left: calc(100% - 24px - 6px);
+      width: 24px;
+      height: 24px;
+      background-color: ${({ theme }) => theme.color.white};
     }
   }
 
   /** thumb 호버됐을 때 */
   &:enabled:hover {
     &::before {
-        // x-offset, y-offset, blur-radius, spread-radius, color
-        box-shadow: 0 0 0 8px ${({ checked }) => (checked ? 'rgba(103, 80, 164, 0.08)' : 'rgba(28, 27, 31, 0.08)')};
+      // x-offset, y-offset, blur-radius, spread-radius, color
+      box-shadow: 0 0 0 8px ${({ checked }) => (checked ? 'rgba(103, 80, 164, 0.08)' : 'rgba(28, 27, 31, 0.08)')};
     }
   }
 

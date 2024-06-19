@@ -25,13 +25,14 @@ export interface ToggleSwitchListProps {
 const ToggleSwitchList = React.forwardRef<boolean, ToggleSwitchListProps>(
   ({ label, description, defaultChecked = false, type, disabled }, ref) => {
     const { mutate } = useOnOffNotifications({ notificationConfigGroup: type });
+
     return (
       <Container>
         <ContainerText>
           <Label>{label}</Label>
           <Description>{description}</Description>
         </ContainerText>
-        <ToggleSwitch ref={ref} defaultChecked={defaultChecked} toggleMutate={mutate} disabled={disabled} />
+        <ToggleSwitch ref={ref} defaultChecked={defaultChecked} type={type} toggleMutate={mutate} disabled={disabled} />
       </Container>
     );
   },

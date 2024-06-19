@@ -10,7 +10,8 @@ import { useState } from 'react';
 import { media } from '@/Styles/theme';
 
 export const Notifications = () => {
-  const { data, isLoading } = useNotifications();
+  const { data: notifications, isLoading } = useNotifications();
+
   const [selectedNotificationType, setSelectedNotificationType] = useState<'REVIEW' | 'RECRUITMENT' | 'STUDY'>('STUDY');
 
   return (
@@ -38,7 +39,7 @@ export const Notifications = () => {
           <Loading />
         ) : (
           <Stack divider={<Divider height={2} $dividerColor="#e5e6e8" />} gap={'0px'}>
-            {data
+            {notifications
               ?.filter((notification: NotificationSSEType) => {
                 if (selectedNotificationType === 'STUDY')
                   return !notification.type.includes('REVIEW') && !notification.type.includes('RECRUITMENT');

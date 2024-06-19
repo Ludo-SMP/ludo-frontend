@@ -45,7 +45,7 @@ export const NotificationsSettings = () => {
                   (categoryKeyword: { categoryId: number; name: string }) => categoryKeyword.categoryId,
                 ),
               }}
-              disabled={!notificationsSetting?.allConfig.on}
+              disabled={!notificationsSetting?.recruitmentConfig.on}
             />
           </RecruitmentSettingsSection>
           <StudySettingSection>
