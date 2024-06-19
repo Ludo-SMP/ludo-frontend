@@ -4,11 +4,14 @@ import {
   NotificationsSetting,
   NotificationsSettingConfigType,
   NotificationIds,
+  NotificationSSEType,
 } from '@/Types/notifications';
 import { httpClient } from '@/utils/axios';
 
 /** 알림 목록 API */
-export const getNotifications = () => httpClient.get(API_END_POINT.NOTIFICATIONS);
+export const getNotifications = (): Promise<{
+  data: Array<NotificationSSEType>;
+}> => httpClient.get(API_END_POINT.NOTIFICATIONS);
 
 /** 알림 읽음 API */
 export const readNotifications = (data: NotificationIds) => httpClient.post(API_END_POINT.READ_NOTIFICATIONS, data);
