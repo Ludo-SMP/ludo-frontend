@@ -6,7 +6,7 @@ export const useNotifications = () => {
   return useQuery({
     queryKey: [...NOTIFICATIONS.NOTIFICATIONS],
     queryFn: () => getNotifications(),
-    select: (data) => data?.data,
+    select: (data) => data?.data.data,
     staleTime: 60 * 60 * 1000,
     gcTime: 60 * 60 * 1000,
   });

@@ -10,7 +10,9 @@ import { httpClient } from '@/utils/axios';
 
 /** 알림 목록 API */
 export const getNotifications = (): Promise<{
-  data: Array<NotificationSSEType>;
+  data: {
+    data: Array<NotificationSSEType>;
+  };
 }> => httpClient.get(API_END_POINT.NOTIFICATIONS);
 
 /** 알림 읽음 API */
