@@ -19,7 +19,7 @@ export const NotificationsSettings = () => {
             <ToggleSwitchList
               label={NOTIFICATIONS_SETTINGS_CONTENTS.ALL_CONFIG.title}
               description={NOTIFICATIONS_SETTINGS_CONTENTS.ALL_CONFIG.description}
-              checked={notificationsSetting?.allConfig.on}
+              defaultChecked={notificationsSetting?.allConfig.on}
               type="ALL_CONFIG"
             />
           </AllOnOffSettingSection>
@@ -29,7 +29,7 @@ export const NotificationsSettings = () => {
             <ToggleSwitchList
               label={NOTIFICATIONS_SETTINGS_CONTENTS.RECRUITMENT_CONFIG.title}
               description={NOTIFICATIONS_SETTINGS_CONTENTS.RECRUITMENT_CONFIG.description}
-              checked={notificationsSetting?.recruitmentConfig.on}
+              defaultChecked={notificationsSetting?.recruitmentConfig.on}
               type="RECRUITMENT_CONFIG"
               disabled={!notificationsSetting?.allConfig.on}
             />
@@ -54,35 +54,35 @@ export const NotificationsSettings = () => {
               <ToggleSwitchList
                 label={NOTIFICATIONS_SETTINGS_CONTENTS.STUDY_APPLICANT_CONFIG.title}
                 description={NOTIFICATIONS_SETTINGS_CONTENTS.STUDY_APPLICANT_CONFIG.description}
-                checked={notificationsSetting?.studyApplicantConfig.on}
+                defaultChecked={notificationsSetting?.studyApplicantConfig.on}
                 type="STUDY_APPLICANT_CONFIG"
                 disabled={!notificationsSetting?.allConfig.on}
               />
               <ToggleSwitchList
                 label={NOTIFICATIONS_SETTINGS_CONTENTS.STUDY_APPLICANT_RESULT_CONFIG.title}
                 description={NOTIFICATIONS_SETTINGS_CONTENTS.STUDY_APPLICANT_RESULT_CONFIG.description}
-                checked={notificationsSetting?.studyApplicantResultConfig.on}
+                defaultChecked={notificationsSetting?.studyApplicantResultConfig.on}
                 type="STUDY_APPLICANT_RESULT_CONFIG"
                 disabled={!notificationsSetting?.allConfig.on}
               />
               <ToggleSwitchList
                 label={NOTIFICATIONS_SETTINGS_CONTENTS.STUDY_END_DATE_CONFIG.title}
                 description={NOTIFICATIONS_SETTINGS_CONTENTS.STUDY_END_DATE_CONFIG.description}
-                checked={notificationsSetting?.studyEndDateConfig.on}
+                defaultChecked={notificationsSetting?.studyEndDateConfig.on}
                 type="STUDY_END_DATE_CONFIG"
                 disabled={!notificationsSetting?.allConfig.on}
               />
               <ToggleSwitchList
                 label={NOTIFICATIONS_SETTINGS_CONTENTS.STUDY_PARTICIPANT_LEAVE_CONFIG.title}
                 description={NOTIFICATIONS_SETTINGS_CONTENTS.STUDY_PARTICIPANT_LEAVE_CONFIG.description}
-                checked={notificationsSetting?.studyParticipantLeaveConfig.on}
+                defaultChecked={notificationsSetting?.studyParticipantLeaveConfig.on}
                 type="STUDY_PARTICIPANT_LEAVE_CONFIG"
                 disabled={!notificationsSetting?.allConfig.on}
               />
               <ToggleSwitchList
                 label={NOTIFICATIONS_SETTINGS_CONTENTS.REVIEW_CONFIG.title}
                 description={NOTIFICATIONS_SETTINGS_CONTENTS.REVIEW_CONFIG.description}
-                checked={notificationsSetting?.reviewConfig.on}
+                defaultChecked={notificationsSetting?.reviewConfig.on}
                 type="REVIEW_CONFIG"
                 disabled={!notificationsSetting?.allConfig.on}
               />
