@@ -109,14 +109,18 @@ export const StudyDetailPage = () => {
                   )}
                 </PlatformTitle>
                 <TopBarSectionText>
-                  <a
-                    href="#"
-                    style={{
-                      textDecoration: 'underline',
-                    }}
-                  >
-                    {study?.platform}
-                  </a>
+                  {study?.way === 'OFFLINE' ? (
+                    '오프라인'
+                  ) : (
+                    <Link
+                      to={study?.platformUrl}
+                      style={{
+                        textDecoration: 'underline',
+                      }}
+                    >
+                      {study?.platform}
+                    </Link>
+                  )}
                 </TopBarSectionText>
               </PlatformSection>
               <WeekdaySection>
