@@ -30,6 +30,8 @@ export const ApplicantsPage = () => {
 
   if (isLoading) return <Loading />;
 
+  const isOwner = user?.id === study.owner.id;
+
   return (
     <Page>
       <Header>
@@ -45,19 +47,19 @@ export const ApplicantsPage = () => {
       <RowDivider />
       <Main>
         <MainInner>
-          <ParentNav studyTitle={study.title} />
+          <ParentNav studyTitle={study.title} id={studyId} />
           <InfoSection>
             <Applicants>
               {applicants.map((applicant) => (
                 <li key={applicant.id}>
                   <ApplicantCard
-                    studyId={study.id}
+                    studyId={studyId}
                     id={applicant.id}
                     title={study.title}
                     nickname={applicant.nickname}
                     email={applicant.email}
                     position={applicant.position}
-                    isOwner={study.owner.id === applicant.id}
+                    isOwner={isOwner}
                   />
                 </li>
               ))}
@@ -128,16 +130,18 @@ const MainInner = styled.main`
   gap: 24px;
 `;
 
-const ParentNav = ({ studyTitle }: { studyTitle: string }) => (
-  <ParentNavBox>
-    <StudyTitleBox>
-      <Left />
-      <StudyTitle>
-        <StudyInfo />
-        <StudyTitleText>{studyTitle}</StudyTitleText>
-      </StudyTitle>
-    </StudyTitleBox>
-  </ParentNavBox>
+const ParentNav = ({ studyTitle, id }: { studyTitle: string; id: number }) => (
+  <Link to={`/studies/${id}`}>
+    <ParentNavBox>
+      <StudyTitleBox>
+        <Left />
+        <StudyTitle>
+          <StudyInfo />
+          <StudyTitleText>{studyTitle}</StudyTitleText>
+        </StudyTitle>
+      </StudyTitleBox>
+    </ParentNavBox>
+  </Link>
 );
 
 const ParentNavBox = styled.div`
@@ -182,6 +186,7 @@ const Applicants = styled.ul`
   min-width: 300px;
   max-width: 1224px;
   gap: 24px;
+  flex-wrap: wrap;
 `;
 
 const CloseSection = styled.div`
