@@ -22,6 +22,7 @@ const InputText = forwardRef<HTMLInputElement, ComponentProps<'input'> & InputTe
       currentLength,
       label,
       icon,
+      disabled,
       ...props
     }: InputTextProps,
     ref: ForwardedRef<HTMLInputElement>,
@@ -37,6 +38,7 @@ const InputText = forwardRef<HTMLInputElement, ComponentProps<'input'> & InputTe
           type={inputType ?? 'text'}
           onChange={onChange}
           autoComplete="off"
+          disabled={disabled}
           {...props}
         />
         {maxLength && (
@@ -69,6 +71,11 @@ const InputWrapper = styled.input`
   display: block;
   white-space: nowrap;
   overflow: hidden;
+
+  &:disabled {
+    opacity: 0.65;
+    background: ${({ theme }) => theme.color.white};
+  }
 
   &::placeholder {
     color: ${({ theme }) => theme.color.black2};
