@@ -13,6 +13,9 @@ export interface MemberProfileProps extends Member {
 
   /** 당일 출석 여부 */
   attended?: boolean;
+
+  /** 해당 멤버가 자신인지 나타냅니다. */
+  isSelf?: boolean;
 }
 
 /** 스터디원의 프로필을 보여줍니다. */
@@ -23,12 +26,15 @@ const MemberProfile = ({
   position,
   totalAttendance = 0,
   attended = false,
+  isSelf = true,
 }: MemberProfileProps) => {
   return (
     <MemberProfileWrapper>
-      <OptionsButton onClick={() => console.log('kimo')}>
-        <More />
-      </OptionsButton>
+      {isSelf && (
+        <OptionsButton onClick={() => console.log('kimo')}>
+          <More />
+        </OptionsButton>
+      )}
       <Profile width={120} height={120} />
       <div className="private__info">
         <div className="nickname">{nickname}</div>
