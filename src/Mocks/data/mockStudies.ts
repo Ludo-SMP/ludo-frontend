@@ -1,4 +1,4 @@
-import { StudyDetail } from '@/Types/study';
+import { Applicant, StudyDetail } from '@/Types/study';
 
 export const studyDetailMockData: Array<StudyDetail> = [
   {
@@ -1796,38 +1796,67 @@ export const applicantsMockData = [
     nickname: '지원자 포키',
     email: 'aaa@bb1.cc',
     position: { id: 3, name: '디자이너' },
+    reviewStatistics: {
+      activeness: 0,
+      professionalism: 0,
+      communication: 0,
+      together: 0,
+      recommend: 0,
+    },
   },
   {
     id: 12,
     nickname: '지원자 빽',
     email: 'aaa@2bb.cc',
     position: { id: 1, name: '백엔드' },
+    reviewStatistics: {
+      activeness: 34,
+      professionalism: 38,
+      communication: 99,
+      together: 21,
+      recommend: 49,
+    },
   },
   {
     id: 13,
     nickname: '지원자 아카',
     email: 'aaa@3bb.cc',
     position: { id: 1, name: '백엔드' },
+    reviewStatistics: {
+      activeness: 0,
+      professionalism: 0,
+      communication: 0,
+      together: 0,
+      recommend: 0,
+    },
   },
   {
     id: 14,
     nickname: '지원자 휴',
     email: 'aaa4@bb.cc',
     position: { id: 1, name: '백엔드' },
+    reviewStatistics: {
+      activeness: 11,
+      professionalism: 84,
+      communication: 34,
+      together: 43,
+      recommend: 32,
+    },
   },
   {
     id: 15,
     nickname: '지원자 타로',
     email: 'aaa5@bb.cc',
     position: { id: 2, name: '프론트엔드' },
+    reviewStatistics: {
+      activeness: 35,
+      professionalism: 15,
+      communication: 94,
+      together: 35,
+      recommend: 4,
+    },
   },
-  {
-    id: 16,
-    nickname: '지원자 Hyun',
-    email: 'aaa6@bb.cc',
-    position: { id: 2, name: '프론트엔드' },
-  },
-];
+] satisfies Array<Applicant>;
 
 export const applicantsDetailMockData = (studyId: number) => {
   return {
