@@ -8,5 +8,7 @@ export const useNotificationsSetting = () => {
     queryKey: [...NOTIFICATIONS.NOTIFICATIONS_SETTING],
     queryFn: () => getNotificationsSetting(),
     select: (data: { data: { data: NotificationsSetting } }) => data?.data?.data,
+    staleTime: 60 * 60 * 1000,
+    gcTime: 60 * 60 * 1000,
   });
 };
