@@ -56,7 +56,12 @@ export const ApplicantsPage = () => {
             </InfoFields>
             <Applicants>
               {applicants.map((applicant) => (
-                <li key={applicant.id}>
+                <li
+                  key={applicant.id}
+                  style={{
+                    display: 'flex',
+                  }}
+                >
                   <ApplicantCard
                     studyId={studyId}
                     id={applicant.id}
@@ -65,6 +70,7 @@ export const ApplicantsPage = () => {
                     email={applicant.email}
                     position={applicant.position}
                     isOwner={isOwner}
+                    reviewStatistics={applicant.reviewStatistics}
                   />
                 </li>
               ))}
