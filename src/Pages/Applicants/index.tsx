@@ -71,11 +71,13 @@ export const ApplicantsPage = () => {
           </InfoSection>
         </MainInner>
       </Main>
-      <CloseSection>
-        <CloseSectionInner>
-          <Button scheme="secondary">모집 마감하기</Button>
-        </CloseSectionInner>
-      </CloseSection>
+      {isOwner && (
+        <CloseSection>
+          <CloseSectionInner>
+            <Button scheme="secondary">모집 마감하기</Button>
+          </CloseSectionInner>
+        </CloseSection>
+      )}
       <FooterSection>
         <Footer />
       </FooterSection>
