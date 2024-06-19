@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { media } from '@/Styles/theme';
 import { ROUTES } from '@/Constants/route';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
-import { Logo, Alarm, Profile } from '@/Assets';
+import { Logo, Profile } from '@/Assets';
 import { useLoginStore } from '@/store/auth';
 import Button from '../Common/Button';
 import StudyButtonSection from './StudyButtonSection';
@@ -110,16 +110,12 @@ const TopBarWrapper = styled.div`
   background-color: ${(props) => props.theme.color.white};
 
   button {
-    display: inline-flex;
     justify-content: center;
     align-items: center;
     gap: 8px;
-    font-size: calc((${(props) => props.theme.font.small} + ${(props) => props.theme.font.medium}) / 2);
+    ${({ theme }) => theme.typo.ButtonButton};
     font-family: 'Pretendard600';
-    font-style: normal;
     text-align: center;
-    font-weight: 600;
-    line-height: 48px;
     box-shadow: 0px 0px 10px 0px ${(props) => props.theme.color.black0};
   }
 

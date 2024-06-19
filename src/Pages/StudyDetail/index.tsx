@@ -1,26 +1,19 @@
 import styled from 'styled-components';
 import { RowDivider } from '../../Components/Common/Divider/RowDivider';
-import { Left, Loading, Right, StudyInfo } from '@/Assets';
+import { Left, Loading, StudyInfo } from '@/Assets';
 import Button from '@/Components/Common/Button';
 import StudyToken from '@/Components/Common/StudyToken';
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import { MemberSection } from './MemberSection';
-import { useLeaveStudyMutation } from '@/Hooks/study/useLeaveStudyMutation ';
-import { useDeleteStudyMutation } from '@/Hooks/study/useDeleteStudyMutation';
 import { useStudyDetail } from '@/Hooks/study/useStudyDetail';
 import { useUserStore } from '@/store/user';
-import { useCloseRecruitmentMutation } from '@/Hooks/recruitments/useCloseRecruitmentMutation';
-import { useQueryClient } from '@tanstack/react-query';
-import { STUDY } from '@/Constants/queryString';
 import Modal from '@/Components/Common/Modal';
-import { DELETE, LEAVE } from '@/Constants/messages';
 import { useEffect, useState } from 'react';
 import { MemberImage } from '@/Assets';
 import { ApplicationButton } from '@/Components/Common/Button/ApplicationButton/ApplicationButton';
 import { StudyStatus } from '@/Types/study';
 import { match, P } from 'ts-pattern';
 import { Sidebar } from './Sidebar';
-import { attendStudy } from '@/Apis/study';
 import { useAttendStudyMutation } from '@/Hooks/study/useAttendStudyMutation';
 import { isToday } from 'date-fns';
 
@@ -28,19 +21,12 @@ export const StudyDetailPage = () => {
   const studyId = Number(useParams().studyId);
   const { user } = useUserStore();
   const { pathname } = useLocation();
-  const queryClient = useQueryClient();
 
   const { data: studyDetail, isLoading } = useStudyDetail(studyId);
 
   const study = studyDetail?.study;
   const isOwner = user?.id === study?.owner.id;
 
-  const { mutate: closeRecruitmentMutate } = useCloseRecruitmentMutation(studyId, () => {
-    queryClient.invalidateQueries({ queryKey: [...STUDY.STUDY(studyId)] });
-  });
-
-  const { mutate: deleteStudyMutate } = useDeleteStudyMutation(studyId);
-  const { mutate: leaveStudyMutate } = useLeaveStudyMutation(studyId);
   const {
     mutate: attendStudyMutate,
     isSuccess: isAttendStudyMutationSuccess,
@@ -56,19 +42,21 @@ export const StudyDetailPage = () => {
 
   if (isLoading) return <Loading />;
 
-  const didIAttendToday = isToday(new Date(study.participants.find(({ id }) => id === user?.id)?.recentAttendanceDate));
+  const didIAttendToday = isToday(
+    new Date(study?.participants?.find(({ id }) => id === user?.id)?.recentAttendanceDate),
+  );
 
   return (
     <Grid>
       <StudyDetailLayout>
-        <ParentNav studyTitle={study.title} status={study.status} />
+        <ParentNav studyTitle={study?.title} status={study?.status} />
         <Main>
           <Sidebar
-            id={study.id}
-            category={study.category.name}
-            startDateTime={study.startDateTime}
-            endDateTime={study.endDateTime}
-            way={study.way}
+            id={study?.id}
+            category={study?.category.name}
+            startDateTime={study?.startDateTime}
+            endDateTime={study?.endDateTime}
+            way={study?.way}
             isOwner={isOwner}
           />
           <MainSection>
@@ -115,7 +103,7 @@ export const StudyDetailPage = () => {
                       textDecoration: 'underline',
                     }}
                   >
-                    {study.platform}
+                    {study?.platform}
                   </a>
                 </TopBarSectionText>
               </PlatformSection>
@@ -127,7 +115,7 @@ export const StudyDetailPage = () => {
             <RowDivider />
             <Members>
               <MembersCountBar>
-                <MemberCounts count={study.participants.length} />
+                <MemberCounts count={study?.participants?.length} />
                 {isOwner && (
                   <ApplicationButton>
                     <Link to={'#'}>스터디원 모집</Link>
@@ -135,7 +123,7 @@ export const StudyDetailPage = () => {
                 )}
               </MembersCountBar>
               <MemberList>
-                <MemberSection members={study.participants} />
+                <MemberSection members={study?.participants} />
               </MemberList>
             </Members>
           </MainSection>

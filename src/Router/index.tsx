@@ -109,10 +109,6 @@ export const RouterPath = createBrowserRouter([
         ],
       },
       {
-        path: ROUTES.STUDY.CREATE,
-        element: <CreateStudyPage />,
-      },
-      {
         path: ROUTES.STUDY.MODIFY,
         element: <ModifyStudyPage />,
       },
@@ -154,5 +150,9 @@ export const RouterPath = createBrowserRouter([
     // 스터디원 평가 페이지
     path: ROUTES.STUDY.REVIEW,
     element: <ReviewPage />,
+  },
+  {
+    path: ROUTES.STUDY.CREATE,
+    element: <CreateStudyPage />,
   },
 ]);
