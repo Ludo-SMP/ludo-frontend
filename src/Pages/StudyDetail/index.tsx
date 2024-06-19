@@ -42,19 +42,21 @@ export const StudyDetailPage = () => {
 
   if (isLoading) return <Loading />;
 
-  const didIAttendToday = isToday(new Date(study.participants.find(({ id }) => id === user?.id)?.recentAttendanceDate));
+  const didIAttendToday = isToday(
+    new Date(study?.participants?.find(({ id }) => id === user?.id)?.recentAttendanceDate),
+  );
 
   return (
     <Grid>
       <StudyDetailLayout>
-        <ParentNav studyTitle={study.title} status={study.status} />
+        <ParentNav studyTitle={study?.title} status={study?.status} />
         <Main>
           <Sidebar
-            id={study.id}
-            category={study.category.name}
-            startDateTime={study.startDateTime}
-            endDateTime={study.endDateTime}
-            way={study.way}
+            id={study?.id}
+            category={study?.category.name}
+            startDateTime={study?.startDateTime}
+            endDateTime={study?.endDateTime}
+            way={study?.way}
             isOwner={isOwner}
           />
           <MainSection>
@@ -101,7 +103,7 @@ export const StudyDetailPage = () => {
                       textDecoration: 'underline',
                     }}
                   >
-                    {study.platform}
+                    {study?.platform}
                   </a>
                 </TopBarSectionText>
               </PlatformSection>
@@ -113,7 +115,7 @@ export const StudyDetailPage = () => {
             <RowDivider />
             <Members>
               <MembersCountBar>
-                <MemberCounts count={study.participants.length} />
+                <MemberCounts count={study?.participants?.length} />
                 {isOwner && (
                   <ApplicationButton>
                     <Link to={'#'}>스터디원 모집</Link>
@@ -121,7 +123,7 @@ export const StudyDetailPage = () => {
                 )}
               </MembersCountBar>
               <MemberList>
-                <MemberSection members={study.participants} />
+                <MemberSection members={study?.participants} />
               </MemberList>
             </Members>
           </MainSection>
