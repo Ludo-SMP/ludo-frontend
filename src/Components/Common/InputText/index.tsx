@@ -75,6 +75,7 @@ const InputWrapper = styled.input`
   &:disabled {
     opacity: 0.65;
     background: ${({ theme }) => theme.color.white};
+    cursor: not-allowed;
   }
 
   &::placeholder {
