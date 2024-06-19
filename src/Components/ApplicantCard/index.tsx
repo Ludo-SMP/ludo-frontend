@@ -71,13 +71,13 @@ export const ApplicantCard = ({
               <>
                 <Stats>
                   <li>
-                    <CircularRate percentage={80} label="적극성" />
+                    <CircularRate percentage={reviewStatistics.activeness} label="적극성" />
                   </li>
                   <li>
-                    <CircularRate percentage={78} label="전문성" />
+                    <CircularRate percentage={reviewStatistics.professionalism} label="전문성" />
                   </li>
                   <li>
-                    <CircularRate percentage={34} label="소통력" />
+                    <CircularRate percentage={reviewStatistics.communication} label="소통력" />
                   </li>
                 </Stats>
                 <StatsDescription>
