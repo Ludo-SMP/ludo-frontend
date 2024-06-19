@@ -175,6 +175,8 @@ export interface Applicant extends Omit<Member, 'role' | 'totalAttendance' | 're
   };
 }
 
+export type AttendanceDay = 1 | 2 | 3 | 4 | 5 | 6 | 7;
+
 export interface StudyCreate {
   title: string;
   categoryId: number;
@@ -184,7 +186,7 @@ export interface StudyCreate {
   participantLimit: number;
   startDateTime: string;
   endDateTime: string;
-  attendanceDay: number[];
+  attendanceDay: AttendanceDay[];
 }
 
 export interface StudyDetail {
@@ -198,7 +200,7 @@ export interface StudyDetail {
     participantCount: number;
     participantLimit: number;
     // 출석요일
-    attendanceDay: Array<number>;
+    attendanceDay: Array<AttendanceDay>;
     startDateTime: string;
     endDateTime: string;
     category: Category;
