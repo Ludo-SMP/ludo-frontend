@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { ColumnDivider } from '../Common/Divider/ColumnDivider';
-import { Profile } from '@/Assets';
+import { More, Profile } from '@/Assets';
 import { Member } from '@/Types/study';
 import { ROLE } from '@/Shared/study';
 
@@ -26,6 +26,9 @@ const MemberProfile = ({
 }: MemberProfileProps) => {
   return (
     <MemberProfileWrapper>
+      <OptionsButton onClick={() => console.log('kimo')}>
+        <More />
+      </OptionsButton>
       <Profile width={120} height={120} />
       <div className="private__info">
         <div className="nickname">{nickname}</div>
@@ -56,6 +59,7 @@ const MemberProfileWrapper = styled.div`
   border: 1px solid ${(props) => props.theme.color.black1};
   background: ${(props) => props.theme.color.white};
   box-shadow: 0px 0px 20px 0px ${(props) => props.theme.color.black0};
+  position: relative;
 
   .private__info {
     display: flex;
@@ -95,6 +99,14 @@ const MemberProfileWrapper = styled.div`
       line-height: 24px;
     }
   }
+`;
+
+const OptionsButton = styled.button`
+  position: absolute;
+  top: 24px;
+  right: 16px;
+  padding: 0;
+  background-color: transparent;
 `;
 
 const AttendanceBadge = styled.span<{
