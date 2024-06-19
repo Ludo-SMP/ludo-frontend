@@ -13,6 +13,7 @@ import { useModalStore } from '@/store/modal';
 import { useQueryClient } from '@tanstack/react-query';
 import { RowDivider } from '../Common/Divider/RowDivider';
 import { CircularRate } from '../CircularRate';
+import { setISODay } from 'date-fns';
 
 interface ApplicantCardProps extends Applicant {
   /** 스터디 ID */
@@ -37,18 +38,16 @@ export const ApplicantCard = ({
   reviewStatistics,
 }: ApplicantCardProps) => {
   const [applyStatus, setApplyStatus] = useState<ApplyStatus>('UNCHECKED');
-  const { isModalOpen, closeModal } = useModalStore();
   const queryClient = useQueryClient();
 
   // 평가 항목이 전부 0인 경우 스터디 종료를 경험한 적 없는 신규 사용자로 판단
   const isNewbie = Object.values(reviewStatistics).every((v) => v === 0);
 
-  const { mutate: acceptMutate } = useAcceptApplyMutation(studyId, applicantId, () => {
-    setApplyStatus('ACCEPTED');
-  });
-  const { mutate: refuseMutate } = useRefuseApplyMutation(studyId, applicantId, () => {
-    setApplyStatus('REFUSED');
-  });
+  const [isAcceptModalOpen, setIsAcceptModalOpen] = useState(false);
+  const { mutate: acceptMutate } = useAcceptApplyMutation(studyId, applicantId, () => setApplyStatus('ACCEPTED'));
+
+  const [isRefuseModalOpen, setIsRefuseModalOpen] = useState(false);
+  const { mutate: refuseMutate } = useRefuseApplyMutation(studyId, applicantId, () => setApplyStatus('REFUSED'));
 
   return (
     <CardBox>
@@ -81,6 +80,7 @@ export const ApplicantCard = ({
                   </li>
                 </Stats>
                 <StatsDescription>
+                  {/* TODO: 이 부분은 bold부분에 부분적으로 JSX가 들어가기 때문에 constant 메세지로 분리하기 위한 작업이 조금 어려울듯? */}
                   다시 <Bold>함께 하고 싶어하는</Bold> 사용자예요!
                   <br />
                   주변 사람에게 <Bold>추천하고 싶은</Bold> 사용자예요!
@@ -88,6 +88,7 @@ export const ApplicantCard = ({
               </>
             ) : (
               <StatsDescription>
+                {/* TODO: 이 부분은 bold부분에 부분적으로 JSX가 들어가기 때문에 constant 메세지로 분리하기 위한 작업이 조금 어려울듯? */}
                 이 분은 아직 신뢰도가 측정되지 않은 <Bold>새 회원</Bold>이에요!
                 <br />
                 <Bold>새로운 분과 함께 하는 스터디, 설렐 것 같지 않나요?</Bold>
@@ -98,10 +99,32 @@ export const ApplicantCard = ({
       </CardInner>
       {isOwner && (
         <Buttons>
-          <Button onClick={() => refuseMutate()}>거절하기</Button>
-          <Button scheme="secondary" onClick={() => acceptMutate()}>
+          <Button onClick={() => (refuseMutate(), setIsRefuseModalOpen(true))}>거절하기</Button>
+          <Button scheme="secondary" onClick={() => (acceptMutate(), setIsAcceptModalOpen(true))}>
             수락하기
           </Button>
+          {isRefuseModalOpen && (
+            <Modal
+              title="스터디 지원자를 거절했습니다!"
+              approveBtnText="확인하기"
+              handleApprove={() => setIsRefuseModalOpen(false)}
+            >
+              스터디 지원자를 거절했습니다.
+              <br />
+              다음에 더 좋은 인연으로 만날 수 있길 바랍니다.
+            </Modal>
+          )}
+          {isAcceptModalOpen && (
+            <Modal
+              title="스터디 지원자를 수락했습니다!"
+              approveBtnText="확인하기"
+              handleApprove={() => setIsAcceptModalOpen(false)}
+            >
+              수락된 지원자는 '스터디' 항목에 업로드 되었습니다.
+              <br />
+              확인 부탁드립니다.
+            </Modal>
+          )}
         </Buttons>
       )}
     </CardBox>
