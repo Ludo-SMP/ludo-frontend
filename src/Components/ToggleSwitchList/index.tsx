@@ -32,7 +32,7 @@ const ToggleSwitchList = React.forwardRef<boolean, ToggleSwitchListProps>(
           <Label>{label}</Label>
           <Description>{description}</Description>
         </ContainerText>
-        <ToggleSwitch ref={ref} checked={checked} toggleMutate={mutate} disabled={disabled} />
+        <ToggleSwitch ref={ref} checked={checked} type={type} toggleMutate={mutate} disabled={disabled} />
       </Container>
     );
   },
