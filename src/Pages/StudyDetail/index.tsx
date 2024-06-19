@@ -17,6 +17,16 @@ import { Sidebar } from './Sidebar';
 import { useAttendStudyMutation } from '@/Hooks/study/useAttendStudyMutation';
 import { isToday } from 'date-fns';
 
+const dayMap = {
+  1: '월요일',
+  2: '화요일',
+  3: '수요일',
+  4: '목요일',
+  5: '금요일',
+  6: '토요일',
+  7: '일요일',
+};
+
 export const StudyDetailPage = () => {
   const studyId = Number(useParams().studyId);
   const { user } = useUserStore();
@@ -45,6 +55,8 @@ export const StudyDetailPage = () => {
   const didIAttendToday = isToday(
     new Date(study?.participants?.find(({ id }) => id === user?.id)?.recentAttendanceDate),
   );
+
+  const attendDays = study.attendanceDay.map((day) => dayMap[day]).join(', ');
 
   return (
     <Grid>
@@ -109,7 +121,7 @@ export const StudyDetailPage = () => {
               </PlatformSection>
               <WeekdaySection>
                 <TopBarSectionTitle>출석일</TopBarSectionTitle>
-                <TopBarSectionText>출석일</TopBarSectionText>
+                <TopBarSectionText>{attendDays}</TopBarSectionText>
               </WeekdaySection>
             </AttendanceTopBar>
             <RowDivider />
