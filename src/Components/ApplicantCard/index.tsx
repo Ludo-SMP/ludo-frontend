@@ -1,5 +1,5 @@
 import { Profile } from '@/Assets';
-import { ApplyStatus, Applicant } from '@/Types/study';
+import { Applicant } from '@/Types/study';
 import styled from 'styled-components';
 import Button from '../Common/Button';
 import { useState } from 'react';
@@ -7,12 +7,8 @@ import { useAcceptApplyMutation } from '@/Hooks/study/useAcceptApplyMutation';
 import { useRefuseApplyMutation } from '@/Hooks/study/useRefuseApplyMutation';
 import Modal from '../Common/Modal';
 import { APPLY } from '@/Constants/messages';
-import { STUDY } from '@/Constants/queryString';
-import { useModalStore } from '@/store/modal';
-import { useQueryClient } from '@tanstack/react-query';
 import { RowDivider } from '../Common/Divider/RowDivider';
 import { CircularRate } from '../CircularRate';
-import { setISODay } from 'date-fns';
 
 interface ApplicantCardProps extends Applicant {
   /** 스터디 ID */
@@ -36,17 +32,14 @@ export const ApplicantCard = ({
   isOwner,
   reviewStatistics,
 }: ApplicantCardProps) => {
-  const [applyStatus, setApplyStatus] = useState<ApplyStatus>('UNCHECKED');
-  const queryClient = useQueryClient();
-
   // 평가 항목이 전부 0인 경우 스터디 종료를 경험한 적 없는 신규 사용자로 판단
   const isNewbie = Object.values(reviewStatistics).every((v) => v === 0);
 
   const [isAcceptModalOpen, setIsAcceptModalOpen] = useState(false);
-  const { mutate: acceptMutate } = useAcceptApplyMutation(studyId, applicantId, () => setApplyStatus('ACCEPTED'));
+  const { mutate: acceptMutate } = useAcceptApplyMutation(studyId, applicantId, () => void 0);
 
   const [isRefuseModalOpen, setIsRefuseModalOpen] = useState(false);
-  const { mutate: refuseMutate } = useRefuseApplyMutation(studyId, applicantId, () => setApplyStatus('REFUSED'));
+  const { mutate: refuseMutate } = useRefuseApplyMutation(studyId, applicantId, () => void 0);
 
   return (
     <CardBox>
