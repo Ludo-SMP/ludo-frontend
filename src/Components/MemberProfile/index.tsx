@@ -33,8 +33,15 @@ const MemberProfile = ({
       {isSelf && (
         <OptionsButton onClick={() => console.log('kimo')}>
           <More />
+          {
+            <Menu>
+              <MenuItem>마이 페이지</MenuItem>
+              <MenuItem>스터디 탈퇴하기</MenuItem>
+            </Menu>
+          }
         </OptionsButton>
       )}
+      {}
       <Profile width={120} height={120} />
       <div className="private__info">
         <div className="nickname">{nickname}</div>
@@ -113,6 +120,35 @@ const OptionsButton = styled.button`
   right: 16px;
   padding: 0;
   background-color: transparent;
+`;
+
+const Menu = styled.ul`
+  display: flex;
+  flex-direction: column;
+  border-radius: ${({ theme }) => theme.borderRadius.small};
+  border: 1px solid ${({ theme }) => theme.color.black1};
+  box-shadow: 0px 4px 20px 0px ${({ theme }) => theme.color.black1};
+  width: 184px;
+  padding: 8px 0;
+  background: ${({ theme }) => theme.color.white};
+  position: absolute;
+  top: -8px;
+`;
+
+const MenuItem = styled.li`
+  display: flex;
+  padding: 12px 8px 12px 16px;
+  align-items: center;
+  color: ${({ theme }) => theme.color.black3};
+  font-family: Pretendard600;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 16px;
+
+  &:hover {
+    color: ${({ theme }) => theme.color.black4};
+  }
 `;
 
 const AttendanceBadge = styled.span<{
