@@ -4,7 +4,6 @@ import { InfoField } from '@/Components/Common/InfoField';
 import { ApplicantCard } from '@/Components/ApplicantCard';
 import { Applicant } from '@/Types/study';
 import Button from '@/Components/Common/Button';
-import StudyToken from '@/Components/Common/StudyToken';
 import { useUserStore } from '@/store/user';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useApplicantsDetail } from '@/Hooks/study/useApplicantsDetail';
@@ -39,7 +38,7 @@ export const ApplicantsPage = () => {
         <HeaderInner>
           <TitleBox>
             <Link to="/">
-              <img width={112} src={Logo} alt="Ludo" />
+              <ResponsiveLogo src={Logo} alt="Ludo" />
             </Link>
             <Title>스터디 지원자를 확인해주세요!</Title>
           </TitleBox>
@@ -118,12 +117,30 @@ const HeaderInner = styled.div`
   max-width: 1224px;
   padding: 22px 0px;
   align-items: center;
+
+  ${({ theme }) => theme.media.mobile} {
+    justify-content: center;
+    height: 56px;
+    padding: 16px 0px;
+  }
 `;
 
 const TitleBox = styled.div`
   display: flex;
   align-items: center;
   gap: 24px;
+
+  ${({ theme }) => theme.media.mobile} {
+    gap: 12px;
+  }
+`;
+
+const ResponsiveLogo = styled.img`
+  width: 112px;
+
+  ${({ theme }) => theme.media.mobile} {
+    width: 56px;
+  }
 `;
 
 const Title = styled.h1`
@@ -133,12 +150,21 @@ const Title = styled.h1`
   font-style: normal;
   font-weight: 800;
   line-height: 48px;
+
+  ${({ theme }) => theme.media.mobile} {
+    font-size: 20px;
+    line-height: 24px;
+  }
 `;
 
 const Main = styled.main`
   display: flex;
   padding: 24px;
   justify-content: center;
+
+  ${({ theme }) => theme.media.mobile} {
+    padding: 0px 24px;
+  }
 `;
 
 const MainInner = styled.main`
@@ -148,6 +174,10 @@ const MainInner = styled.main`
   padding: 40px 0px;
   flex-direction: column;
   gap: 24px;
+
+  ${({ theme }) => theme.media.mobile} {
+    padding: 24px 0px;
+  }
 `;
 
 const ParentNav = ({ studyTitle }: { studyTitle: string }) => (
@@ -171,6 +201,10 @@ const ParentNavBox = styled.div`
   padding-right: 933px;
   align-items: center;
   align-self: stretch;
+
+  ${({ theme }) => theme.media.mobile} {
+    padding: 4px 141px 4px 0px;
+  }
 `;
 
 const StudyTitleBox = styled.div`
@@ -199,6 +233,10 @@ const InfoSection = styled.section`
   display: flex;
   flex-direction: column;
   gap: 24px;
+
+  ${({ theme }) => theme.media.mobile} {
+    max-width: 808px;
+  }
 `;
 
 const InfoFields = styled.div`
@@ -210,6 +248,10 @@ const InfoFields = styled.div`
   & > * {
     flex: 1;
   }
+
+  ${({ theme }) => theme.media.mobile} {
+    flex-direction: column;
+  }
 `;
 
 const Applicants = styled.ul`
@@ -218,6 +260,10 @@ const Applicants = styled.ul`
   max-width: 1224px;
   gap: 24px;
   flex-wrap: wrap;
+
+  ${({ theme }) => theme.media.mobile} {
+    gap: 12px;
+  }
 `;
 
 const CloseSection = styled.div`
@@ -232,6 +278,10 @@ const CloseSectionInner = styled.div`
   width: 100%;
   max-width: 1224px;
   padding-bottom: 72px;
+
+  ${({ theme }) => theme.media.mobile} {
+    padding-bottom: 40px;
+  }
 `;
 
 const FooterSection = styled.div`
