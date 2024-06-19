@@ -64,6 +64,7 @@ export default ({ query, mutation }: StudyFormLayoutProps) => {
   const { mutate, isError } = mutation;
 
   const formData = watch();
+  const isOffline = formData?.progressMethod?.value === 'OFFLINE';
 
   if (isError) return <ErrorBoundary />;
 
@@ -175,22 +176,29 @@ export default ({ query, mutation }: StudyFormLayoutProps) => {
                   <Controller
                     control={control}
                     name="platform"
-                    rules={{ required: '진행할 플랫폼을 정해 주세요.' }}
+                    rules={{ required: isOffline || '진행할 플랫폼을 정해 주세요.' }}
                     render={({ field }) => (
                       <CustomSelect
                         label="진행 플랫폼"
                         placeholder="ex) gather"
                         defaultValue={query?.data?.study?.platform}
                         values={PLATFORM_OPTIONS}
+                        isDisabled={isOffline}
                         {...field}
                       />
                     )}
                   />
                 </LabelForm>
-                <LabelForm<StudyCreateForm> name="platformUrl" label="진행 플랫폼 URL" errors={errors}>
+                <LabelForm<StudyCreateForm>
+                  name="platformUrl"
+                  label="진행 플랫폼 URL"
+                  errors={errors}
+                  disabled={isOffline}
+                >
                   <InputText
                     placeholder="ex) gather 주소"
-                    {...register('platformUrl', { required: '진행 플랫폼 URL을 입력해주세요' })}
+                    disabled={isOffline}
+                    {...register('platformUrl', { required: isOffline || '진행 플랫폼 URL을 입력해주세요' })}
                   />
                 </LabelForm>
               </Grid>
