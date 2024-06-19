@@ -56,7 +56,7 @@ export const StudyDetailPage = () => {
     new Date(study?.participants?.find(({ id }) => id === user?.id)?.recentAttendanceDate),
   );
 
-  const attendDays = study.attendanceDay.map((day) => dayMap[day]).join(', ');
+  const attendDays = study?.attendanceDay.map((day) => dayMap[day]).join(', ');
 
   return (
     <Grid>
