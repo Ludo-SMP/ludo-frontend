@@ -3,6 +3,7 @@ import { ColumnDivider } from '../Common/Divider/ColumnDivider';
 import { More, Profile } from '@/Assets';
 import { Member } from '@/Types/study';
 import { ROLE } from '@/Shared/study';
+import { useEffect, useRef, useState } from 'react';
 
 export interface MemberProfileProps extends Member {
   /** 스터디원의 프로필 이미지 URL */
@@ -28,20 +29,16 @@ const MemberProfile = ({
   attended = false,
   isSelf = true,
 }: MemberProfileProps) => {
+  const [isOptionsOpen, setIsOptionsOpen] = useState(false);
+
   return (
     <MemberProfileWrapper>
       {isSelf && (
-        <OptionsButton onClick={() => console.log('kimo')}>
+        <OptionsButton onClick={() => setIsOptionsOpen(true)}>
           <More />
-          {
-            <Menu>
-              <MenuItem>마이 페이지</MenuItem>
-              <MenuItem>스터디 탈퇴하기</MenuItem>
-            </Menu>
-          }
+          {isOptionsOpen && <Options onClose={() => setIsOptionsOpen(false)} />}
         </OptionsButton>
       )}
-      {}
       <Profile width={120} height={120} />
       <div className="private__info">
         <div className="nickname">{nickname}</div>
@@ -56,6 +53,24 @@ const MemberProfile = ({
         <div className="position">{position.name}</div>
       </div>
     </MemberProfileWrapper>
+  );
+};
+
+const Options = ({ onClose = () => void 0 }: { onClose?: () => void }) => {
+  const ref = useRef<null | HTMLUListElement>(null);
+
+  const blur = ({ target }: MouseEvent) => ref.current?.contains(target as Node) || onClose();
+
+  useEffect(
+    () => (document.addEventListener('mousedown', blur), () => document.removeEventListener('mousedown', blur)),
+    [onClose],
+  );
+
+  return (
+    <Menu ref={ref}>
+      <MenuItem>마이 페이지</MenuItem>
+      <MenuItem>스터디 탈퇴하기</MenuItem>
+    </Menu>
   );
 };
 
