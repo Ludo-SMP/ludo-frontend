@@ -14,12 +14,12 @@ export interface ToggleSwitchProps {
   disabled?: boolean;
 
   /* 초기 checked 상태 */
-  checked?: boolean;
+  defaultChecked?: boolean;
 }
 
 /** 토글 스위치 */
 const ToggleSwitch = React.forwardRef<boolean, ToggleSwitchProps>(
-  ({ disabled = false, toggleMutate, type, checked }, ref) => {
+  ({ disabled = false, toggleMutate, type, defaultChecked }, ref) => {
     const { setAllOffSettingConfigs, setSettingConfig, settingConfigs } = useClickedNotificationSettingConfig();
     // console.log(settingConfigs[type], type);
 
@@ -29,7 +29,7 @@ const ToggleSwitch = React.forwardRef<boolean, ToggleSwitchProps>(
       }
       if (type === 'ALL_CONFIG' || type === 'RECRUITMENT_CONFIG') {
         setAllOffSettingConfigs();
-        toggleMutate({ on: !checked });
+        toggleMutate({ on: !defaultChecked });
         return;
       }
       setSettingConfig({ configType: type, on: !settingConfigs[type] });
@@ -41,7 +41,7 @@ const ToggleSwitch = React.forwardRef<boolean, ToggleSwitchProps>(
         <Switch
           type="checkbox"
           role="switch"
-          checked={checked ? !settingConfigs[type] : settingConfigs[type]}
+          checked={defaultChecked ? !settingConfigs[type] : settingConfigs[type]}
           onChange={handleChange}
           disabled={disabled}
         />

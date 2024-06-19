@@ -15,7 +15,7 @@ export interface ToggleSwitchListProps {
   description?: string;
 
   /* 초기 checked 상태 */
-  checked?: boolean;
+  defaultChecked?: boolean;
 
   /** 비활성 여부 */
   disabled?: boolean;
@@ -23,7 +23,7 @@ export interface ToggleSwitchListProps {
 
 /** 토글 스위치 리스트 */
 const ToggleSwitchList = React.forwardRef<boolean, ToggleSwitchListProps>(
-  ({ label, description, checked = false, type, disabled }, ref) => {
+  ({ label, description, defaultChecked = false, type, disabled }, ref) => {
     const { mutate } = useOnOffNotifications({ notificationConfigGroup: type });
 
     return (
@@ -32,7 +32,7 @@ const ToggleSwitchList = React.forwardRef<boolean, ToggleSwitchListProps>(
           <Label>{label}</Label>
           <Description>{description}</Description>
         </ContainerText>
-        <ToggleSwitch ref={ref} checked={checked} type={type} toggleMutate={mutate} disabled={disabled} />
+        <ToggleSwitch ref={ref} defaultChecked={defaultChecked} type={type} toggleMutate={mutate} disabled={disabled} />
       </Container>
     );
   },
