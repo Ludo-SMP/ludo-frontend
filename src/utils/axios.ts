@@ -32,7 +32,9 @@ export const createClient = (config?: AxiosRequestConfig) => {
         try {
           const data = await logOut();
           if (data) window.location.href = '/';
-        } catch {}
+        } catch (e) {
+          console.log(e);
+        }
       }
       // Login Provider에서 에러 핸들링하도록 reject
       return Promise.reject(error);
