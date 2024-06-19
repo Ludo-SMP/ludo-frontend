@@ -4,6 +4,8 @@ import { More, Profile } from '@/Assets';
 import { Member } from '@/Types/study';
 import { ROLE } from '@/Shared/study';
 import { useEffect, useRef, useState } from 'react';
+import { ROUTES } from '@/Constants/route';
+import { Link } from 'react-router-dom';
 
 export interface MemberProfileProps extends Member {
   /** 스터디원의 프로필 이미지 URL */
@@ -68,7 +70,9 @@ const Options = ({ onClose = () => void 0 }: { onClose?: () => void }) => {
 
   return (
     <Menu ref={ref}>
-      <MenuItem>마이 페이지</MenuItem>
+      <MenuItem>
+        <Link to={ROUTES.MYPAGE.HOME}>마이 페이지</Link>
+      </MenuItem>
       <MenuItem>스터디 탈퇴하기</MenuItem>
     </Menu>
   );
