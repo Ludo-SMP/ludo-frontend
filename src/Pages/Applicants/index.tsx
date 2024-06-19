@@ -50,8 +50,8 @@ export const ApplicantsPage = () => {
           <ParentNav studyTitle={study.title} id={studyId} />
           <InfoSection>
             <InfoFields>
-              <InfoField title="현재 인원수" content={'현재 인원수'} flexDirection="column" />
-              <InfoField title="현재 인원수" content={'현재 인원수'} flexDirection="column" />
+              <InfoField title="현재 인원수" content={study.participantCount} flexDirection="column" />
+              <InfoField title="목표 인원수" content={study.participantLimit} flexDirection="column" />
             </InfoFields>
             <Applicants>
               {applicants.map((applicant) => (
