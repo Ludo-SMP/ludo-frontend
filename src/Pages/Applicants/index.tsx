@@ -6,7 +6,7 @@ import { Applicant } from '@/Types/study';
 import Button from '@/Components/Common/Button';
 import StudyToken from '@/Components/Common/StudyToken';
 import { useUserStore } from '@/store/user';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useApplicantsDetail } from '@/Hooks/study/useApplicantsDetail';
 import { useCloseRecruitmentMutation } from '@/Hooks/recruitments/useCloseRecruitmentMutation';
 import { useEffect } from 'react';
@@ -19,6 +19,7 @@ export const ApplicantsPage = () => {
   const { data: ApplicantsDetail, isLoading } = useApplicantsDetail(studyId);
   const study = ApplicantsDetail?.study;
   const applicants: Applicant[] = ApplicantsDetail?.applicants;
+  const navigate = useNavigate();
 
   const { mutate: closeRecruitmentMutate } = useCloseRecruitmentMutation(studyId);
 
@@ -47,7 +48,7 @@ export const ApplicantsPage = () => {
       <RowDivider />
       <Main>
         <MainInner>
-          <ParentNav studyTitle={study.title} id={studyId} />
+          <ParentNav studyTitle={study.title} />
           <InfoSection>
             <InfoFields>
               <InfoField title="현재 인원수" content={study.participantCount} flexDirection="column" />
@@ -74,7 +75,9 @@ export const ApplicantsPage = () => {
       {isOwner && (
         <CloseSection>
           <CloseSectionInner>
-            <Button scheme="secondary">모집 마감하기</Button>
+            <Button scheme="secondary" onClick={() => (closeRecruitmentMutate(), navigate('./..'))}>
+              모집 마감하기
+            </Button>
           </CloseSectionInner>
         </CloseSection>
       )}
@@ -141,8 +144,8 @@ const MainInner = styled.main`
   gap: 24px;
 `;
 
-const ParentNav = ({ studyTitle, id }: { studyTitle: string; id: number }) => (
-  <Link to={`/studies/${id}`}>
+const ParentNav = ({ studyTitle }: { studyTitle: string }) => (
+  <Link to="./..">
     <ParentNavBox>
       <StudyTitleBox>
         <Left />
