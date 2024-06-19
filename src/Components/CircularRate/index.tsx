@@ -1,5 +1,5 @@
 import { theme } from '@/Styles/theme';
-import { useRef } from 'react';
+import { useId, useRef } from 'react';
 import styled from 'styled-components';
 
 export interface CircularRateProps {
@@ -19,11 +19,6 @@ export interface CircularRateProps {
   label: string;
 }
 
-let x = 0;
-
-// 고유 id 생성용 훅
-const useMaskId = () => useRef(++x).current;
-
 /** 사용자 평가 지수를 원형 그래프로 표현하는 컴포넌트 */
 export const CircularRate = ({
   percentage,
@@ -32,7 +27,7 @@ export const CircularRate = ({
   gradientColors = [theme.color.purple1, theme.color.orange1],
   label,
 }: CircularRateProps) => {
-  const maskId = useMaskId();
+  const maskId = useId();
 
   // 내접원의 지름 / 반지름
   const diameter = size - barWeight,
