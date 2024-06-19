@@ -26,3 +26,9 @@ export const Primary: Story = {};
 //     name: 'positionIds',
 //   },
 // };
+
+export const Disabled: Story = {
+  args: {
+    disabled: true,
+  },
+};
