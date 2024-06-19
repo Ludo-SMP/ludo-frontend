@@ -265,6 +265,7 @@ const Applicants = styled.ul`
 // <li> 요소를 넣기 위해 추가적으로 만든 레이어
 const ApplicantLi = styled.li`
   display: flex;
+  justify-content: center;
 
   & > * {
     flex: 1;
