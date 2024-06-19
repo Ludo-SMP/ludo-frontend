@@ -1,7 +1,6 @@
 import { Profile } from '@/Assets';
 import { ApplyStatus, Applicant } from '@/Types/study';
 import styled from 'styled-components';
-import { InfoField } from '../Common/InfoField';
 import Button from '../Common/Button';
 import { useState } from 'react';
 import { useAcceptApplyMutation } from '@/Hooks/study/useAcceptApplyMutation';
@@ -105,24 +104,20 @@ export const ApplicantCard = ({
           </Button>
           {isRefuseModalOpen && (
             <Modal
-              title="스터디 지원자를 거절했습니다!"
+              title={APPLY.REFUSE.title}
               approveBtnText="확인하기"
               handleApprove={() => setIsRefuseModalOpen(false)}
             >
-              스터디 지원자를 거절했습니다.
-              <br />
-              다음에 더 좋은 인연으로 만날 수 있길 바랍니다.
+              {APPLY.REFUSE.content}
             </Modal>
           )}
           {isAcceptModalOpen && (
             <Modal
-              title="스터디 지원자를 수락했습니다!"
+              title={APPLY.ACCEPT.title}
               approveBtnText="확인하기"
               handleApprove={() => setIsAcceptModalOpen(false)}
             >
-              수락된 지원자는 '스터디' 항목에 업로드 되었습니다.
-              <br />
-              확인 부탁드립니다.
+              {APPLY.ACCEPT.content}
             </Modal>
           )}
         </Buttons>
