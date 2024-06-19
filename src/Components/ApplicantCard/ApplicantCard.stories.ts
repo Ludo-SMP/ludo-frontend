@@ -16,6 +16,13 @@ const meta = {
     totalAttendance: 20,
     recentAttendanceDate: '2024-05-21',
     isOwner: false,
+    reviewStatistics: {
+      activeness: 35,
+      professionalism: 93,
+      communication: 11,
+      together: 55,
+      recommend: 64,
+    },
   },
 } satisfies Meta<typeof ApplicantCard>;
 
@@ -31,5 +38,20 @@ export const Primary: Story = {};
 export const Owner: Story = {
   args: {
     isOwner: true,
+  },
+};
+
+/**
+ * 신규 사용자의 경우, 리뷰 통계 데이터가 표시되지 않습니다.
+ */
+export const Newbie: Story = {
+  args: {
+    reviewStatistics: {
+      activeness: 0,
+      professionalism: 0,
+      communication: 0,
+      together: 0,
+      recommend: 0,
+    },
   },
 };
