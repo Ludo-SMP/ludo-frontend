@@ -11,7 +11,7 @@ export const useNotifications = () => {
   return useQuery({
     queryKey: [...NOTIFICATIONS.NOTIFICATIONS],
     queryFn: () => getNotifications(),
-    select: (data: { data: { data: NotificationSSEType[] } }) => data?.data?.data,
+    select: (data: { data: { data: NotificationResponse } }) => data?.data?.data?.notification,
     staleTime: 60 * 60 * 1000,
     gcTime: 60 * 60 * 1000,
   });

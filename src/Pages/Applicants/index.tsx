@@ -1,22 +1,24 @@
 import styled from 'styled-components';
-import { Loading, StudyInfo } from '@/Assets';
+import { Left, Loading, Logo, StudyInfo } from '@/Assets';
 import { InfoField } from '@/Components/Common/InfoField';
-import ApplicantCard from '@/Components/ApplicantCard';
+import { ApplicantCard } from '@/Components/ApplicantCard';
 import { Applicant } from '@/Types/study';
 import Button from '@/Components/Common/Button';
-import StudyToken from '@/Components/Common/StudyToken';
 import { useUserStore } from '@/store/user';
-import { useLocation, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useApplicantsDetail } from '@/Hooks/study/useApplicantsDetail';
 import { useCloseRecruitmentMutation } from '@/Hooks/recruitments/useCloseRecruitmentMutation';
 import { useEffect } from 'react';
+import { RowDivider } from '@/Components/Common/Divider/RowDivider';
+import Footer from '@/Components/Footer';
 
-const ApplicantsPage = () => {
+export const ApplicantsPage = () => {
   const studyId = Number(useParams().studyId);
   const { user } = useUserStore();
   const { data: ApplicantsDetail, isLoading } = useApplicantsDetail(studyId);
   const study = ApplicantsDetail?.study;
   const applicants: Applicant[] = ApplicantsDetail?.applicants;
+  const navigate = useNavigate();
 
   const { mutate: closeRecruitmentMutate } = useCloseRecruitmentMutation(studyId);
 
@@ -26,117 +28,271 @@ const ApplicantsPage = () => {
     window.scrollTo(0, 0);
   }, [pathname]);
 
+  if (isLoading) return <Loading />;
+
+  const isOwner = user?.id === study.owner.id;
+
   return (
-    <ApplicantsWrapper>
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <>
-          <ApplicantsTitleWrapper>스터디 지원자를 확인해주세요!</ApplicantsTitleWrapper>
-          <StudyDetailWrapper>
-            <StudyTitleWrapper>
-              <StudyInfo width="48" height="48" />
-              <span className="title">{study.title}</span>
-              <div className="study__tokens">
-                {study?.status !== 'COMPLETED' && <StudyToken status={'PARTICIPATED'} />}
-                <StudyToken status={study?.status} />
-              </div>
-            </StudyTitleWrapper>
-            <StudyInfoWrapper>
-              <InfoField title="현재 인원수" content={study.participantCount} />
-              <InfoField title="목표 인원수" content={study.participantLimit} />
-            </StudyInfoWrapper>
-            <ApplicantsInfoWrapper>
-              {applicants?.map((applicant: Applicant) => (
-                <ApplicantCard
-                  {...applicant}
-                  title={study.title}
-                  studyId={studyId}
-                  key={applicant?.email}
-                  isOwner={study.owner.id === user?.id}
-                />
+    <Page>
+      <Header>
+        <HeaderInner>
+          <TitleBox>
+            <Link to="/">
+              <ResponsiveLogo src={Logo} alt="Ludo" />
+            </Link>
+            <Title>스터디 지원자를 확인해주세요!</Title>
+          </TitleBox>
+        </HeaderInner>
+      </Header>
+      <RowDivider />
+      <Main>
+        <MainInner>
+          <ParentNav studyTitle={study.title} />
+          <InfoSection>
+            <InfoFields>
+              <InfoField title="현재 인원수" content={study.participantCount} flexDirection="column" />
+              <InfoField title="목표 인원수" content={study.participantLimit} flexDirection="column" />
+            </InfoFields>
+            <Applicants>
+              {applicants.map((applicant) => (
+                <ApplicantLi key={applicant.id}>
+                  <ApplicantCard
+                    studyId={studyId}
+                    id={applicant.id}
+                    title={study.title}
+                    nickname={applicant.nickname}
+                    email={applicant.email}
+                    position={applicant.position}
+                    isOwner={isOwner}
+                    reviewStatistics={applicant.reviewStatistics}
+                  />
+                </ApplicantLi>
               ))}
-            </ApplicantsInfoWrapper>
-          </StudyDetailWrapper>
-          {study.owner.id === user?.id && (
-            <ApplicantButtonsWrapper>
-              <Button onClick={() => closeRecruitmentMutate()} scheme="secondary" size="fullWidth">
-                스터디원 모집 마감하기
-              </Button>
-            </ApplicantButtonsWrapper>
-          )}
-        </>
+            </Applicants>
+          </InfoSection>
+        </MainInner>
+      </Main>
+      {isOwner && (
+        <CloseSection>
+          <CloseSectionInner>
+            <Button scheme="secondary" onClick={() => (closeRecruitmentMutate(), navigate('./..'))}>
+              모집 마감하기
+            </Button>
+          </CloseSectionInner>
+        </CloseSection>
       )}
-    </ApplicantsWrapper>
+      <FooterSection>
+        <Footer />
+      </FooterSection>
+    </Page>
   );
 };
 
-const ApplicantsWrapper = styled.div`
+const Page = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 1224px;
-  margin: 40px auto 80px auto;
-  gap: 40px;
+  background: ${({ theme }) => theme.color.white2};
+  min-height: 100vh;
+
+  & > *:last-child {
+    margin-top: auto;
+  }
 `;
 
-const ApplicantsTitleWrapper = styled.div`
+const Header = styled.header`
+  display: flex;
+  padding: 0px 24px;
+  justify-content: center;
+`;
+
+const HeaderInner = styled.div`
+  display: flex;
+  height: 92px;
+  width: 100%;
+  max-width: 1224px;
+  padding: 22px 0px;
+  align-items: center;
+
+  ${({ theme }) => theme.media.mobile} {
+    justify-content: center;
+    height: 56px;
+    padding: 16px 0px;
+  }
+`;
+
+const TitleBox = styled.div`
   display: flex;
   align-items: center;
   gap: 24px;
-  flex-shrink: 0;
-  align-self: stretch;
-  color: ${({ theme }) => theme.color.black4};
-  font-family: 'Pretendard800';
-  font-size: ${({ theme }) => theme.font.xxxxlarge};
+
+  ${({ theme }) => theme.media.mobile} {
+    gap: 12px;
+  }
+`;
+
+const ResponsiveLogo = styled.img`
+  width: 112px;
+
+  ${({ theme }) => theme.media.mobile} {
+    width: 56px;
+  }
+`;
+
+const Title = styled.h1`
+  color: ${({ theme }) => theme.color.black5};
+  font-family: Pretendard800;
+  font-size: 40px;
   font-style: normal;
   font-weight: 800;
   line-height: 48px;
+
+  ${({ theme }) => theme.media.mobile} {
+    font-size: 20px;
+    line-height: 24px;
+  }
 `;
 
-const StudyDetailWrapper = styled.div`
+const Main = styled.main`
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 32px;
+  padding: 24px;
+  justify-content: center;
+
+  ${({ theme }) => theme.media.mobile} {
+    padding: 0px 24px;
+  }
 `;
 
-const StudyTitleWrapper = styled.div`
+const MainInner = styled.main`
+  display: flex;
+  max-width: 1224px;
+  width: 100%;
+  padding: 40px 0px;
+  flex-direction: column;
+  gap: 24px;
+
+  ${({ theme }) => theme.media.mobile} {
+    padding: 24px 0px;
+  }
+`;
+
+const ParentNav = ({ studyTitle }: { studyTitle: string }) => (
+  <Link to="./..">
+    <ParentNavBox>
+      <StudyTitleBox>
+        <Left />
+        <StudyTitle>
+          <StudyInfo />
+          <StudyTitleText>{studyTitle}</StudyTitleText>
+        </StudyTitle>
+      </StudyTitleBox>
+    </ParentNavBox>
+  </Link>
+);
+
+const ParentNavBox = styled.div`
+  display: flex;
+  min-width: 300px;
+  max-width: 1224px;
+  padding-right: 933px;
+  align-items: center;
+  align-self: stretch;
+
+  ${({ theme }) => theme.media.mobile} {
+    padding: 4px 141px 4px 0px;
+  }
+`;
+
+const StudyTitleBox = styled.div`
   display: flex;
   align-items: center;
-  gap: 24px;
-  color: ${(props) => props.theme.color.black4};
-  font-size: ${(props) => props.theme.font.xxxxlarge};
-  font-weight: 800;
-  .title {
-    max-width: 800px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .study__tokens {
-    display: flex;
-    gap: 24px;
-  }
+  gap: 12px;
 `;
 
-const StudyInfoWrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  align-items: flex-start;
-  grid-gap: 24px;
-  align-self: stretch;
-  flex-wrap: wrap;
-`;
-
-const ApplicantsInfoWrapper = styled.div`
+const StudyTitle = styled.div`
   display: flex;
-  width: 100%;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 24px;
+  align-items: center;
+  gap: 8px;
 `;
 
-const ApplicantButtonsWrapper = styled.div``;
+const StudyTitleText = styled.span`
+  color: ${({ theme }) => theme.color.black5};
+  font-family: Pretendard600;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 32px;
+  white-space: nowrap;
+`;
 
-export default ApplicantsPage;
+const InfoSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  ${({ theme }) => theme.media.mobile} {
+    max-width: 808px;
+  }
+`;
+
+const InfoFields = styled.div`
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  max-width: 808px;
+
+  & > * {
+    flex: 1;
+  }
+
+  ${({ theme }) => theme.media.mobile} {
+    flex-direction: column;
+  }
+`;
+
+const Applicants = styled.ul`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  min-width: 300px;
+  max-width: 1224px;
+  gap: 24px;
+  flex-wrap: wrap;
+
+  ${({ theme }) => theme.media.mobile} {
+    gap: 12px;
+  }
+`;
+
+// <li> 요소를 넣기 위해 추가적으로 만든 레이어
+const ApplicantLi = styled.li`
+  display: flex;
+  justify-content: center;
+
+  & > * {
+    flex: 1;
+  }
+`;
+
+const CloseSection = styled.div`
+  display: flex;
+  padding: 0px 24px;
+  justify-content: center;
+`;
+
+const CloseSectionInner = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1224px;
+  padding-bottom: 72px;
+
+  ${({ theme }) => theme.media.mobile} {
+    padding-bottom: 40px;
+  }
+`;
+
+const FooterSection = styled.div`
+  display: flex;
+  padding: 0px 24px;
+  justify-content: center;
+  background: ${({ theme }) => theme.color.gray1};
+`;

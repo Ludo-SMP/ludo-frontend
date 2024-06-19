@@ -5,7 +5,7 @@ import MainPage from '@/Pages/Main';
 import RecruitmentDetailPage from '@/Pages/RecruitmentDetail';
 import RecruitmentsPage from '@/Pages/Recruitments';
 import SignUpPage from '@/Pages/SignUp';
-import ApplicantsPage from '@/Pages/Applicants';
+import { ApplicantsPage } from '@/Pages/Applicants';
 import StudyDetailPage from '@/Pages/StudyDetail';
 import CreateStudyPage from '@/Pages/Studies/CreateStudy';
 import ModifyStudyPage from '@/Pages/Studies/EditStudy';
@@ -137,10 +137,6 @@ export const RouterPath = createBrowserRouter([
         element: <SignUpFailPage />,
       },
       {
-        path: ROUTES.STUDY.APPLICNATS,
-        element: <ApplicantsPage />,
-      },
-      {
         path: ROUTES.RECRUITMENT.EDIT,
         element: <EditRecruitmentFetcher />,
       },
@@ -154,5 +150,10 @@ export const RouterPath = createBrowserRouter([
   {
     path: ROUTES.STUDY.CREATE,
     element: <CreateStudyPage />,
+  },
+  {
+    // 스터디 지원자 페이지
+    path: ROUTES.STUDY.APPLICANTS,
+    element: <ApplicantsPage />,
   },
 ]);
