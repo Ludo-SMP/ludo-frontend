@@ -13,11 +13,10 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
-  args: {},
-};
-
-export const Disabled: Story = {
   args: {
-    disabled: true,
+    type: 'ALL_CONFIG',
+    toggleMutate: () => Promise<any>,
+    disabled: false,
+    defaultChecked: true,
   },
-} satisfies Story;
+};
