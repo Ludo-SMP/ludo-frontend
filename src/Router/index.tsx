@@ -113,20 +113,16 @@ export const RouterPath = createBrowserRouter([
         element: <ModifyStudyPage />,
       },
       {
-        path: ROUTES.RECRUITMENT.CREATE,
-        element: <CreateRecruitmentPage />,
-      },
-      {
         path: ROUTES.STUDY.DETAIL,
         element: <StudyDetailPage />,
       },
       {
-        path: ROUTES.RECRUITMENT.DETAIL,
-        element: <RecruitmentDetailPage />,
-      },
-      {
         path: ROUTES.RECRUITMENT.RECRUITMENTS,
         element: <RecruitmentsPage />,
+      },
+      {
+        path: ROUTES.RECRUITMENT.DETAIL,
+        element: <RecruitmentDetailPage />,
       },
       {
         path: ROUTES.AUTH.SIGNUP,
@@ -135,10 +131,6 @@ export const RouterPath = createBrowserRouter([
       {
         path: ROUTES.AUTH.SIGNUPFAIL,
         element: <SignUpFailPage />,
-      },
-      {
-        path: ROUTES.RECRUITMENT.EDIT,
-        element: <EditRecruitmentFetcher />,
       },
     ],
   },
@@ -155,5 +147,15 @@ export const RouterPath = createBrowserRouter([
     // 스터디 지원자 페이지
     path: ROUTES.STUDY.APPLICANTS,
     element: <ApplicantsPage />,
+  },
+  {
+    // 모집공고 생성 페이지
+    path: ROUTES.RECRUITMENT.CREATE,
+    element: <CreateRecruitmentPage />,
+  },
+  // 모집공고 수정 페이지
+  {
+    path: ROUTES.RECRUITMENT.EDIT,
+    element: <EditRecruitmentFetcher />,
   },
 ]);
