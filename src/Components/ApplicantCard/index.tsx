@@ -126,6 +126,7 @@ const CardInner = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
+  flex: 1;
 `;
 
 const Title = styled.p`
@@ -141,6 +142,7 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
+  flex: 1;
 `;
 
 const ProfileSection = styled.section`
@@ -182,6 +184,8 @@ const StatsSection = styled.section`
   display: flex;
   flex-direction: column;
   gap: 16px;
+  flex: 1;
+  justify-content: center;
 `;
 
 const Stats = styled.ul`
