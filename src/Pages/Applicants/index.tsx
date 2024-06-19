@@ -55,12 +55,7 @@ export const ApplicantsPage = () => {
             </InfoFields>
             <Applicants>
               {applicants.map((applicant) => (
-                <li
-                  key={applicant.id}
-                  style={{
-                    display: 'flex',
-                  }}
-                >
+                <ApplicantLi key={applicant.id}>
                   <ApplicantCard
                     studyId={studyId}
                     id={applicant.id}
@@ -71,7 +66,7 @@ export const ApplicantsPage = () => {
                     isOwner={isOwner}
                     reviewStatistics={applicant.reviewStatistics}
                   />
-                </li>
+                </ApplicantLi>
               ))}
             </Applicants>
           </InfoSection>
@@ -255,7 +250,8 @@ const InfoFields = styled.div`
 `;
 
 const Applicants = styled.ul`
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   min-width: 300px;
   max-width: 1224px;
   gap: 24px;
@@ -263,6 +259,15 @@ const Applicants = styled.ul`
 
   ${({ theme }) => theme.media.mobile} {
     gap: 12px;
+  }
+`;
+
+// <li> 요소를 넣기 위해 추가적으로 만든 레이어
+const ApplicantLi = styled.li`
+  display: flex;
+
+  & > * {
+    flex: 1;
   }
 `;
 
