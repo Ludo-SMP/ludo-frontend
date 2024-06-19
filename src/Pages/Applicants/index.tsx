@@ -49,6 +49,10 @@ export const ApplicantsPage = () => {
         <MainInner>
           <ParentNav studyTitle={study.title} id={studyId} />
           <InfoSection>
+            <InfoFields>
+              <InfoField title="현재 인원수" content={'현재 인원수'} flexDirection="column" />
+              <InfoField title="현재 인원수" content={'현재 인원수'} flexDirection="column" />
+            </InfoFields>
             <Applicants>
               {applicants.map((applicant) => (
                 <li key={applicant.id}>
@@ -179,6 +183,17 @@ const InfoSection = styled.section`
   display: flex;
   flex-direction: column;
   gap: 24px;
+`;
+
+const InfoFields = styled.div`
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  max-width: 808px;
+
+  & > * {
+    flex: 1;
+  }
 `;
 
 const Applicants = styled.ul`
