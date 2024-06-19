@@ -31,8 +31,8 @@ interface StudyCreateForm {
   memberLimit: Option<number, string>;
   position: Option<number, Position>;
   progressMethod: Option<ProgressMethod, string>;
-  platform: Option<Platform, string>;
-  platformUrl: string;
+  platform?: Option<Platform, string>;
+  platformUrl?: string;
   progressPeriod: DateRange;
 }
 const memberLimit = Array(10)
@@ -176,7 +176,7 @@ export default ({ query, mutation }: StudyFormLayoutProps) => {
                   <Controller
                     control={control}
                     name="platform"
-                    rules={{ required: isOffline || '진행할 플랫폼을 정해 주세요.' }}
+                    rules={{ required: !isOffline && '진행할 플랫폼을 정해 주세요.' }}
                     render={({ field }) => (
                       <CustomSelect
                         label="진행 플랫폼"
@@ -198,7 +198,9 @@ export default ({ query, mutation }: StudyFormLayoutProps) => {
                   <InputText
                     placeholder="ex) gather 주소"
                     disabled={isOffline}
-                    {...register('platformUrl', { required: isOffline || '진행 플랫폼 URL을 입력해주세요' })}
+                    {...register('platformUrl', {
+                      required: !isOffline && '진행 플랫폼 URL을 입력해주세요',
+                    })}
                   />
                 </LabelForm>
               </Grid>
