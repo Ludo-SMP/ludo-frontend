@@ -166,4 +166,4 @@ export const ATTENDANCE_DAY = [
     id: 7,
     name: '일요일',
   },
-];
+] as const;
