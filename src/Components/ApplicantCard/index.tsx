@@ -121,9 +121,8 @@ export const ApplicantCard = ({
 
 const CardBox = styled.article`
   display: flex;
-  width: 392px;
   min-width: 248px;
-  max-width: 1224px;
+  max-width: 392px;
   padding: 24px;
   flex-direction: column;
   gap: 24px;
