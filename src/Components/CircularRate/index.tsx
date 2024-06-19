@@ -1,5 +1,5 @@
 import { theme } from '@/Styles/theme';
-import { useId, useRef } from 'react';
+import { useId } from 'react';
 import styled from 'styled-components';
 
 export interface CircularRateProps {

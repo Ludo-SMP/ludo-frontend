@@ -13,8 +13,6 @@ const meta = {
     },
     studyId: 1,
     title: '스터디',
-    totalAttendance: 20,
-    recentAttendanceDate: '2024-05-21',
     isOwner: false,
     reviewStatistics: {
       activeness: 35,
