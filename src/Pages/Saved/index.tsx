@@ -31,7 +31,7 @@ const Saved = () => {
   const getTempList = (selectedCard: 'STUDY' | 'RECRUITMENT') => {
     const storageList: Array<Partial<RecruitmentForm> & { savedKey: string }> = [];
     for (const key in window.localStorage) {
-      if (window.localStorage.hasOwnProperty(key) && key.toUpperCase().includes(selectedCard)) {
+      if (Object.prototype.hasOwnProperty.call(window.localStorage, key) && key.toUpperCase().includes(selectedCard)) {
         storageList.push({ ...JSON.parse(localStorage.getItem(key)), savedKey: key });
       }
     }
