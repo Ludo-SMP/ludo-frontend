@@ -202,7 +202,7 @@ export default ({ query, mutation }: StudyFormLayoutProps) => {
                   />
                 </LabelForm>
               </Grid>
-              <Grid col={2}>
+              <Grid $col={2}>
                 <LabelForm<StudyCreateForm> label="진행 기간" name="progressPeriod" errors={errors}>
                   <CalendarButton>
                     <Controller
