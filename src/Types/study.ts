@@ -165,7 +165,15 @@ export interface Participant {
  *
  * NOTE: 추후 Participant/Member 타입이 해당 타입을 상속하도록 구조 변경 필요.
  */
-export interface Applicant extends Omit<Member, 'role' | 'totalAttendance' | 'recentAttendanceDate'> {}
+export interface Applicant extends Omit<Member, 'role' | 'totalAttendance' | 'recentAttendanceDate'> {
+  reviewStatistics: {
+    activeness: number;
+    professionalism: number;
+    communication: number;
+    together: number;
+    recommend: number;
+  };
+}
 
 export interface StudyCreate {
   title: string;
