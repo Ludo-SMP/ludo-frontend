@@ -1,7 +1,8 @@
+import { AttendanceDay } from '@/Types/study';
 import { useState } from 'react';
 
 export interface AttendanceType {
-  id: number;
+  id: AttendanceDay;
   name: string;
 }
 
