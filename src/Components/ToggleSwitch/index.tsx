@@ -1,33 +1,50 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { UseMutateFunction } from '@tanstack/react-query';
+import { NotificationsSettingConfigType } from '@/Types/notifications';
+import { useClickedNotificationSettingConfig } from '@/store/notificationSettingClicked';
 
 export interface ToggleSwitchProps {
-  toggleMutate: UseMutateFunction<unknown, Error, { on: boolean }>;
+  /** 알림 설정 타입 */
+  type: NotificationsSettingConfigType;
 
-  /* 초기 checked 상태 */
-  checked?: boolean;
+  toggleMutate: UseMutateFunction<unknown, Error, { on: boolean }>;
 
   /** 비활성 여부 */
   disabled?: boolean;
+
+  /* 초기 checked 상태 */
+  checked?: boolean;
 }
 
 /** 토글 스위치 */
 const ToggleSwitch = React.forwardRef<boolean, ToggleSwitchProps>(
-  ({ checked = false, disabled = false, toggleMutate }, ref) => {
-    const [clicked, setClicked] = useState<boolean>(disabled ? false : checked);
+  ({ disabled = false, toggleMutate, type, checked }, ref) => {
+    const { setAllOffSettingConfigs, setSettingConfig, settingConfigs } = useClickedNotificationSettingConfig();
+    // console.log(settingConfigs[type], type);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       if (ref && typeof ref !== 'function') {
-        ref.current = !clicked;
+        ref.current = null;
       }
-      setClicked((prev) => !prev);
+      if (type === 'ALL_CONFIG' || type === 'RECRUITMENT_CONFIG') {
+        setAllOffSettingConfigs();
+        toggleMutate({ on: !checked });
+        return;
+      }
+      setSettingConfig({ configType: type, on: !settingConfigs[type] });
       toggleMutate({ on: e.target.checked });
     };
 
     return (
       <Container>
-        <Switch type="checkbox" role="switch" checked={clicked} onChange={handleChange} disabled={disabled} />
+        <Switch
+          type="checkbox"
+          role="switch"
+          checked={checked ? !settingConfigs[type] : settingConfigs[type]}
+          onChange={handleChange}
+          disabled={disabled}
+        />
       </Container>
     );
   },
