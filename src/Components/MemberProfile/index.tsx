@@ -17,9 +17,6 @@ export interface MemberProfileProps extends Member {
   /** 스터디원의 프로필 이미지 URL */
   imgUrl?: string;
 
-  /** 스터디원의 총합 출석 횟수 */
-  totalAttendance: number;
-
   /** 당일 출석 여부 */
   attended?: boolean;
 
@@ -27,7 +24,7 @@ export interface MemberProfileProps extends Member {
   isSelf?: boolean;
 
   /** 해당 멤버가 속한 스터디 ID */
-  studyId: number;
+  studyId?: number;
 }
 
 /** 스터디원의 프로필을 보여줍니다. */
@@ -84,8 +81,8 @@ const MemberProfile = ({
         <LeaveModal
           handleApprove={(value) => (
             value === 'request'
-              ? (mutateRequestLeave(), setIsLeaveRequestSuccessModalOpen(true))
-              : (mutateForceLeave(), setIsForceLeaveSuccessModalOpen(true)),
+              ? (studyId && mutateRequestLeave(), setIsLeaveRequestSuccessModalOpen(true))
+              : (studyId && mutateForceLeave(), setIsForceLeaveSuccessModalOpen(true)),
             setIsLeaveModalOpen(false)
           )}
           handleCancel={() => setIsLeaveModalOpen(false)}
