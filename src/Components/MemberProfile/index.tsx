@@ -8,6 +8,8 @@ import { ROUTES } from '@/Constants/route';
 import { Link } from 'react-router-dom';
 import { LeaveModal } from '../LeaveModal';
 import { match } from 'ts-pattern';
+import { useStudyForceLeaveMutation } from '@/Hooks/study/useStudyForceLeaveMutation';
+import { useStudyLeaveRequestMutation } from '@/Hooks/study/useStudyLeaveRequestMutation';
 
 export interface MemberProfileProps extends Member {
   /** 스터디원의 프로필 이미지 URL */
@@ -21,6 +23,9 @@ export interface MemberProfileProps extends Member {
 
   /** 해당 멤버가 자신인지 나타냅니다. */
   isSelf?: boolean;
+
+  /** 해당 멤버가 속한 스터디 ID */
+  studyId: number;
 }
 
 /** 스터디원의 프로필을 보여줍니다. */
@@ -32,9 +37,13 @@ const MemberProfile = ({
   totalAttendance = 0,
   attended = false,
   isSelf = true,
+  studyId,
 }: MemberProfileProps) => {
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
   const [isLeaveModalOpen, setIsLeaveModalOpen] = useState(false);
+
+  const { mutate: mutateForceLeave } = useStudyForceLeaveMutation(studyId);
+  const { mutate: mutateRequestLeave } = useStudyLeaveRequestMutation(studyId);
 
   return (
     <MemberProfileWrapper>
@@ -68,7 +77,12 @@ const MemberProfile = ({
         <div className="position">{position.name}</div>
       </div>
       {isLeaveModalOpen && (
-        <LeaveModal handleApprove={() => setIsLeaveModalOpen(false)} handleCancel={() => setIsLeaveModalOpen(false)} />
+        <LeaveModal
+          handleApprove={(value) => (
+            value === 'request' ? mutateRequestLeave() : mutateForceLeave(), setIsLeaveModalOpen(false)
+          )}
+          handleCancel={() => setIsLeaveModalOpen(false)}
+        />
       )}
     </MemberProfileWrapper>
   );
