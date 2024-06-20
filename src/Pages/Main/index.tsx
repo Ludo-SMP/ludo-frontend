@@ -146,6 +146,10 @@ const RecruitmentsSectionWrapper = styled.div`
     font-weight: 800;
     line-height: 40px;
     white-space: nowrap;
+
+    ${media.custom(500)} {
+      font-size: ${({ theme }) => theme.font.medium};
+    }
   }
 
   ${media.custom(1224)} {
@@ -155,6 +159,15 @@ const RecruitmentsSectionWrapper = styled.div`
   ${media.custom(800)} {
     width: 400px;
   }
+
+  ${media.custom(500)} {
+    font-size: ${({ theme }) => theme.font.medium};
+  }
+
+  ${media.custom(400)} {
+    width: 100vw;
+    padding: 0 16px;
+  }
 `;
 
 const SelectCategorySectionWrapper = styled.div`
@@ -163,6 +176,7 @@ const SelectCategorySectionWrapper = styled.div`
   width: 100%;
   justify-content: space-between;
   gap: 12px;
+  overflow: scroll;
 `;
 
 const CategoryMenusWrapper = styled.div`
@@ -177,6 +191,10 @@ const RecruitmentCardsWrapper = styled.div`
   gap: 21px;
   min-height: 757px;
   flex-wrap: wrap;
+
+  ${media.custom(500)} {
+    justify-content: center;
+  }
 `;
 
 const MoreSectionWrapper = styled.div`
