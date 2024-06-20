@@ -7,10 +7,22 @@ import { theme } from '@/Styles/theme';
 type OptionValue = 'force' | 'request';
 
 export interface LeaveModalProps {
+  /**
+   * 확인 버튼 클릭 시 실행 함수
+   *
+   * 아무 방법도 선택하지 않았을 경우 실행되지 않습니다.
+   */
   handleApprove?: (value: OptionValue) => void;
+
+  /**
+   * 취소 버튼 클릭 시 실행 함수
+   */
   handleCancel?: ModalProps['handleCancel'];
 }
 
+/*
+ * 탈퇴 방식을 선택하는 모달
+ */
 export const LeaveModal = ({ handleApprove, handleCancel }: LeaveModalProps) => {
   const [selectedOption, setSelectedOption] = useState<OptionValue | null>(null);
 
