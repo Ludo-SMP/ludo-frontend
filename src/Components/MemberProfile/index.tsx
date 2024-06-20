@@ -6,6 +6,8 @@ import { ROLE } from '@/Shared/study';
 import { useEffect, useRef, useState } from 'react';
 import { ROUTES } from '@/Constants/route';
 import { Link } from 'react-router-dom';
+import { LeaveModal } from '../LeaveModal';
+import { match } from 'ts-pattern';
 
 export interface MemberProfileProps extends Member {
   /** 스터디원의 프로필 이미지 URL */
@@ -32,13 +34,24 @@ const MemberProfile = ({
   isSelf = true,
 }: MemberProfileProps) => {
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
+  const [isLeaveModalOpen, setIsLeaveModalOpen] = useState(false);
 
   return (
     <MemberProfileWrapper>
       {isSelf && (
         <OptionsButton onClick={() => setIsOptionsOpen(true)}>
           <More />
-          {isOptionsOpen && <Options onClose={() => setIsOptionsOpen(false)} />}
+          {isOptionsOpen && (
+            <Options
+              onSelect={(action) => (
+                match(action)
+                  .with('leave', () => setIsLeaveModalOpen(true))
+                  .exhaustive(),
+                setIsOptionsOpen(false)
+              )}
+              onClose={() => setIsOptionsOpen(false)}
+            />
+          )}
         </OptionsButton>
       )}
       <Profile width={120} height={120} />
@@ -54,11 +67,20 @@ const MemberProfile = ({
         <ColumnDivider />
         <div className="position">{position.name}</div>
       </div>
+      {isLeaveModalOpen && (
+        <LeaveModal handleApprove={() => setIsLeaveModalOpen(false)} handleCancel={() => setIsLeaveModalOpen(false)} />
+      )}
     </MemberProfileWrapper>
   );
 };
 
-const Options = ({ onClose = () => void 0 }: { onClose?: () => void }) => {
+const Options = ({
+  onClose = () => void 0,
+  onSelect = () => void 0,
+}: {
+  onClose?: () => void;
+  onSelect: (action: 'leave') => void;
+}) => {
   const ref = useRef<null | HTMLUListElement>(null);
 
   const blur = ({ target }: MouseEvent) => ref.current?.contains(target as Node) || onClose();
@@ -73,7 +95,7 @@ const Options = ({ onClose = () => void 0 }: { onClose?: () => void }) => {
       <MenuItem>
         <Link to={ROUTES.MYPAGE.HOME}>마이 페이지</Link>
       </MenuItem>
-      <MenuItem>스터디 탈퇴하기</MenuItem>
+      <MenuItem onClick={() => onSelect('leave')}>스터디 탈퇴하기</MenuItem>
     </Menu>
   );
 };
@@ -139,6 +161,7 @@ const OptionsButton = styled.button`
   right: 16px;
   padding: 0;
   background-color: transparent;
+  text-align: start;
 `;
 
 const Menu = styled.ul`
