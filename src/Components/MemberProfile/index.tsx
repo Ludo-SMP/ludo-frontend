@@ -10,6 +10,8 @@ import { LeaveModal } from '../LeaveModal';
 import { match } from 'ts-pattern';
 import { useStudyForceLeaveMutation } from '@/Hooks/study/useStudyForceLeaveMutation';
 import { useStudyLeaveRequestMutation } from '@/Hooks/study/useStudyLeaveRequestMutation';
+import Modal from '../Common/Modal';
+import { LEAVE } from '@/Constants/messages';
 
 export interface MemberProfileProps extends Member {
   /** 스터디원의 프로필 이미지 URL */
@@ -41,6 +43,8 @@ const MemberProfile = ({
 }: MemberProfileProps) => {
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
   const [isLeaveModalOpen, setIsLeaveModalOpen] = useState(false);
+  const [isForceLeaveSuccessModalOpen, setIsForceLeaveSuccessModalOpen] = useState(false);
+  const [isLeaveRequestSuccessModalOpen, setIsLeaveRequestSuccessModalOpen] = useState(false);
 
   const { mutate: mutateForceLeave } = useStudyForceLeaveMutation(studyId);
   const { mutate: mutateRequestLeave } = useStudyLeaveRequestMutation(studyId);
@@ -79,10 +83,26 @@ const MemberProfile = ({
       {isLeaveModalOpen && (
         <LeaveModal
           handleApprove={(value) => (
-            value === 'request' ? mutateRequestLeave() : mutateForceLeave(), setIsLeaveModalOpen(false)
+            value === 'request'
+              ? (mutateRequestLeave(), setIsLeaveRequestSuccessModalOpen(true))
+              : (mutateForceLeave(), setIsForceLeaveSuccessModalOpen(true)),
+            setIsLeaveModalOpen(false)
           )}
           handleCancel={() => setIsLeaveModalOpen(false)}
         />
+      )}
+      {isForceLeaveSuccessModalOpen && (
+        <Modal title={LEAVE.MEMBER.SUCCESS.force.title} handleApprove={() => setIsForceLeaveSuccessModalOpen(false)}>
+          {LEAVE.MEMBER.SUCCESS.force.content}
+        </Modal>
+      )}
+      {isLeaveRequestSuccessModalOpen && (
+        <Modal
+          title={LEAVE.MEMBER.SUCCESS.request.title}
+          handleApprove={() => setIsLeaveRequestSuccessModalOpen(false)}
+        >
+          {LEAVE.MEMBER.SUCCESS.request.content}
+        </Modal>
       )}
     </MemberProfileWrapper>
   );
