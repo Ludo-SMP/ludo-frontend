@@ -1,3 +1,18 @@
+export const RecruitmentCardDummy = {
+  id: 4,
+  title: '모의 면접 스터디 - 모집공고 4',
+  stacks: [{ id: 44, name: 'Java', imageUrl: '/static/stack/images/java.png' }],
+  positions: [{ id: 1, name: '백엔드' }],
+  category: { id: 1, name: '프로젝트' },
+  ownerNickname: '현',
+  way: 'ONLINE',
+  startDateTime: '2024-02-01T03:16:03.598Z',
+  endDateTime: '2024-02-01T03:16:03.598Z',
+  recruitmentEndDateTime: '2024-02-01T03:16:03.598Z',
+  createdDateTime: '2024-02-01T03:16:03.598Z',
+  hits: 23,
+};
+
 export const bannerDummy = {
   brief: '함께 발견하는 가능성, 기회의 연결',
   title: 'Ludo Study',

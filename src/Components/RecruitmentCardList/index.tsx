@@ -61,7 +61,6 @@ const RecruitmentCardsWrapper = styled.li`
   }
 
   ${media.custom(800)} {
-    width: 400px;
   }
 `;
 
