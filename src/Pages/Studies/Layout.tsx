@@ -1,8 +1,6 @@
 import { ReactNode } from 'react';
 import { One, Three, Two } from '@/Assets';
 import { ProgressPeriod } from '@/Components/Calendar/ProgressPeriod';
-import Button from '@/Components/Common/Button';
-import { Grid } from '@/Components/Common/Grid';
 import InputText from '@/Components/Common/InputText';
 import { ErrorMsg, LabelForm } from '@/Components/Common/LabelForm';
 import { Stack } from '@/Components/Common/Stack';
@@ -12,20 +10,21 @@ import Heading from '@/Components/Heading';
 import { AttendanceModal } from '@/Components/Modal/AttendanceModal';
 import { CalendarButton } from '@/Components/Selectbox/CalendarButton';
 import CustomSelect from '@/Components/Selectbox/CustomSelect';
-import { useTempSaved } from '@/Hooks/useTempSaved';
 import { CATEGORIES_OPTION, PLATFORM_OPTIONS, POSITIONS_OPTIONS, PROGRESS_METHODS_OPTIONS } from '@/Shared/study';
 import { DateRange } from '@/Types/atoms';
 import { Category, Platform, Position, ProgressMethod, StudyCreate, StudyDetail, Option } from '@/Types/study';
-import { saveTemporary } from '@/utils/temporarySavedUtils';
 import { UseMutationResult, UseQueryResult } from '@tanstack/react-query';
 import { AxiosResponse } from 'axios';
 import { Controller, useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useModalStore } from '@/store/modal';
 import { useAttendanceModal } from '@/Hooks/useAttendanceModal';
+import { CreateButtons } from './CreateButtons';
+import { EditButtons } from './EditButtons';
+import { Grid } from '@/Components/Common/Grid';
+import { media } from '@/Styles/theme';
 
-interface StudyCreateForm {
+export interface StudyCreateForm {
   title: string;
   category: Option<number, Category>;
   memberLimit: Option<number, string>;
@@ -42,9 +41,10 @@ const memberLimit = Array(10)
 interface StudyFormLayoutProps {
   query?: UseQueryResult<StudyDetail, Error>;
   mutation: UseMutationResult<AxiosResponse, Error, StudyCreate>;
+  type?: 'CREATE' | 'EDIT';
 }
 
-export default ({ query, mutation }: StudyFormLayoutProps) => {
+export default ({ query, mutation, type }: StudyFormLayoutProps) => {
   const {
     register,
     handleSubmit,
@@ -53,13 +53,9 @@ export default ({ query, mutation }: StudyFormLayoutProps) => {
     control,
   } = useForm<StudyCreateForm>();
 
-  const { savedKey } = useTempSaved();
-
   const { isModalOpen, openModal } = useModalStore();
 
   const { attendanceDay, content, toggleAttendanceDay, isValidAttendanceDay } = useAttendanceModal();
-
-  const navigate = useNavigate();
 
   const { mutate, isError } = mutation;
 
@@ -70,7 +66,7 @@ export default ({ query, mutation }: StudyFormLayoutProps) => {
 
   return (
     <>
-      <HeaderWithLogo title="스터디 생성하기" />
+      <HeaderWithLogo title={`스터디 ${type === 'CREATE' ? '생성' : '수정'}하기`} />
       <PageWrapper>
         <Form
           onSubmit={handleSubmit(
@@ -231,18 +227,7 @@ export default ({ query, mutation }: StudyFormLayoutProps) => {
               </Grid>
             </FormSection>
           </Stack>
-          <Buttons>
-            <Button
-              type="button"
-              onClick={() => {
-                saveTemporary(savedKey, 1, 'STUDY', formData);
-                navigate('/mypage');
-              }}
-            >
-              임시저장
-            </Button>
-            <Button scheme="secondary">등록하기</Button>
-          </Buttons>
+          {type === 'CREATE' ? <CreateButtons formData={formData} /> : <EditButtons />}
         </Form>
       </PageWrapper>
     </>
@@ -258,6 +243,10 @@ const PageWrapper = styled.div`
 `;
 
 const Form = styled.form`
+  ${media.tablet} {
+    margin: 24px;
+  }
+
   display: flex;
   flex-direction: column;
   gap: 40px;
@@ -296,7 +285,7 @@ const FormSectionInnerBody = styled.div`
   flex-direction: column;
 `;
 
-const Buttons = styled.div`
+export const Buttons = styled.div`
   display: flex;
   gap: 8px;
   & > * {
