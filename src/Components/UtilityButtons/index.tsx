@@ -58,7 +58,7 @@ const UtiltiyButtonsWrapper = styled.div`
 
   .scroll__btn {
     svg {
-      width: 72px;
+      width: 50px;
       path {
         fill: ${(props) => props.theme.color.purple1};
       }

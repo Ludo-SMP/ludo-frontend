@@ -55,7 +55,7 @@ const RecruitmentsPage = () => {
       <UtiltiyButtons>
         <Button onClick={handleScroll} className="scroll__btn">
           <Up />
-          <span>위로가기</span>
+          <span>위로 가기</span>
         </Button>
         <Button onClick={isLoggedIn ? () => navigate(ROUTES.STUDY.CREATE) : () => openModal()} className="create__btn">
           <Create />

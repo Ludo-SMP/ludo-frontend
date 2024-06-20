@@ -51,7 +51,7 @@ const DropdownFilter = ({ filterName, items, filterOption }: DropdownFilterProps
     <DropdownFilterWrapper>
       <DropdownSelectWrapper onClick={toggleDropdonwItems} checked={content !== '전체' && content !== filterName}>
         <span className="filter__text">{content}</span>
-        {isOpen ? <Up /> : <Down />}
+        {isOpen ? <Up width={16} height={16} /> : <Down />}
       </DropdownSelectWrapper>
       {isOpen &&
         (filterOption === 'STACK' ? (
