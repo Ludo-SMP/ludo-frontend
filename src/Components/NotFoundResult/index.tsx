@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { ROUTES } from '@/Constants/route';
 import { useModalStore } from '@/store/modal';
 import { NotFound } from '@/Assets';
+import { media } from '@/Styles/theme';
 
 /** 찾고자 하는 스터디가 존재하지 않을 때 대신 보여주는 화면입니다. */
 const NotFoundResult = () => {
@@ -42,6 +43,10 @@ const NotFoundResultWrapper = styled.div`
     margin: 0 auto;
     width: 392px;
     height: 240px;
+
+    ${media.custom(424)} {
+      width: calc(100% - 32px);
+    }
   }
 
   .notFoundResult__text {
@@ -58,6 +63,10 @@ const NotFoundResultWrapper = styled.div`
     font-size: 18px;
     width: 392px;
     padding: 4px 24px;
+
+    ${media.custom(424)} {
+      width: calc(100% - 32px);
+    }
   }
 `;
 

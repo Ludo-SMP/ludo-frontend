@@ -92,6 +92,7 @@ const BannerSectionWrapper = styled.section`
 
 const RecruitmentsSectionWrapper = styled.div`
   display: flex;
+  width: 1224px;
   margin: 0 auto;
   flex-direction: column;
   max-width: 1224px;
@@ -105,15 +106,30 @@ const RecruitmentsSectionWrapper = styled.div`
     font-style: normal;
     font-weight: 800;
     line-height: 40px;
+    white-space: nowrap;
 
-    ${media.custom(1024)} {
-      display: none;
+    ${media.custom(500)} {
+      font-size: ${({ theme }) => theme.font.medium};
     }
+  }
+
+  ${media.custom(1224)} {
+    width: 100vw;
+  }
+
+  ${media.custom(800)} {
+    width: 600px;
+  }
+
+  ${media.custom(600)} {
+    width: 100vw;
+    padding: 0 16px;
   }
 `;
 
 const DropdownFiltersWrapper = styled.div`
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   padding-top: 2px;
   gap: 12px;
@@ -121,22 +137,10 @@ const DropdownFiltersWrapper = styled.div`
 
 const SelectFilterSectionWrapper = styled.div`
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 24px;
   align-self: stretch;
-
-  .filterIcon {
-    display: none;
-  }
-
-  ${media.custom(1224)} {
-    .filters {
-      display: none;
-    }
-    .filterIcon {
-      display: flex;
-    }
-  }
 `;
 
 export default RecruitmentsPage;

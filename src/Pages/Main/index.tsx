@@ -160,10 +160,6 @@ const RecruitmentsSectionWrapper = styled.div`
     width: 400px;
   }
 
-  ${media.custom(500)} {
-    font-size: ${({ theme }) => theme.font.medium};
-  }
-
   ${media.custom(400)} {
     width: 100vw;
     padding: 0 16px;
