@@ -3,10 +3,9 @@ import { useForm, Controller } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 
 import styled, { css } from 'styled-components';
-import { One, Two, Three, Four, Loading } from '@/Assets';
+import { Loading, MemberImage, StudyInfo } from '@/Assets';
 
 // components
-import Spacing from '@/Components/Spacing';
 import Button from '@/Components/Common/Button';
 import { TextArea } from '@/Components/Textarea';
 import InputText from '@/Components/Common/InputText/index';
@@ -18,14 +17,14 @@ import { Stack } from '@/Components/Common/Stack';
 import { RecruitFormWithSelect } from '@/Types/study';
 
 import { CREATE_RECRUITMENT } from '@/Constants/messages';
-import { APPLICATION_CNT, CONTACT, POSITION } from '@/Shared/study';
+import { NEW_APPLICATION_CNT, NEW_CONTACT, NEW_POSITION } from '@/Shared/study';
 import { useCreateRecruitmentMutation } from '@/Hooks/recruitments/useCreateRecruitment';
 import { useStudyDetail } from '@/Hooks/study/useStudyDetail';
-import { getPeriod } from '@/utils/date';
+import { getDayById, getPeriod } from '@/utils/date';
 import { useModalStore } from '@/store/modal';
 import Modal from '@/Components/Common/Modal';
 import { StackModal } from '@/Components/Modal/StackModal';
-import { useSelectDefaultValue } from '@/Hooks/recruitments/useSelectDefaultValue';
+
 import { saveTemporary } from '@/utils/temporarySavedUtils';
 import { ErrorMsg, LabelForm } from '@/Components/Common/LabelForm';
 import { FormSection } from '@/Components/Common/FormSection';
@@ -34,6 +33,8 @@ import { useTempSaved } from '@/Hooks/useTempSaved';
 import { useStack } from '@/Hooks/useStack';
 import { media } from '@/Styles/theme';
 import { HeaderWithLogo } from '@/Components/Header/HeaderWithLogo';
+import { selectObj } from '../EditRecruitment';
+import { RowDivider } from '@/Components/Common/Divider/RowDivider';
 
 const DEF_STACK_PLACEHOLDER = 'ex. Typescript';
 
@@ -46,8 +47,6 @@ const CreateRecruitmentPage = () => {
   // 스택 모달 상태
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { handleSelectedStacks, content, selectedStacks, setSelectedStacks } = useStack(DEF_STACK_PLACEHOLDER);
-
-  const parseSelectValue = useSelectDefaultValue('storage');
 
   // stackId 초기값 채우기
   const getDefStackVal = (formKey: 'stackIds') => {
@@ -85,17 +84,18 @@ const CreateRecruitmentPage = () => {
     return true;
   };
 
-  const onSubmit = () => {
-    if (!isValidStack()) return;
+  const {
+    applicantLimit,
+    callUrl,
+    contact,
+    // content: TempContent,
+    positionIds,
+    recruitmentEndDateTime,
+  } = tempSaved ?? {};
 
-    mutate({
-      ...data,
-      applicantCount: data.applicantCount.value,
-      contact: data.contact.value,
-      positionIds: data.positionIds.map(({ value }) => Number(value)),
-      stackIds: selectedStacks.map((stack) => stack.id),
-    });
-  };
+  const parsedPosition = ((positionIds ?? []) as any[])?.reduce((acc, id) => {
+    return { ...acc, [Number(id)]: NEW_POSITION[Number(id)] };
+  }, {});
 
   return (
     <>
@@ -105,50 +105,57 @@ const CreateRecruitmentPage = () => {
         <>
           <HeaderWithLogo title="스터디 팀원 모집하기" />
           <RecruitmentContainer>
-            {isModalOpen && (
-              <Modal
-                handleApprove={() => {
-                  closeModal();
-                  saveTemporary(savedKey, studyId, 'RECRUITMENT', { ...data, stackIds: selectedStacks });
-                }}
-                cancelBtnText="취소하기"
-                title="작성 중인 스터디 생성 글을 임시 저장 하시겠습니까?"
-                approveBtnText="확인하기"
-              >
-                임시 저장한 글은 ‘마이 페이지 {'>'} 임시 저장된 글’ 에서 확인하실 수 있습니다.
-              </Modal>
-            )}
-
-            <Form onSubmit={handleSubmit(onSubmit, isValidStack)}>
-              <Spacing size={40} />
-              <Stack divider={<Divider />}>
-                <FormSection icon={<One />} title="스터디 모집 공고">
+            <Form
+              onSubmit={handleSubmit(() => {
+                if (!isValidStack()) return;
+                const test = {
+                  ...data,
+                  applicantLimit: Number(data.applicantLimit),
+                  contact: data.contact,
+                  positionIds: data.positionIds.map((value) => Number(value)),
+                  stackIds: selectedStacks.map((stack) => stack.id),
+                };
+                mutate(test);
+              }, isValidStack)}
+            >
+              <Stack divider={<Divider />} gap={24}>
+                <FormSection title="내가 작성한 스터디 정보">
                   <Grid>
-                    <LabelForm name="applicantCount" errors={errors}>
+                    <LabelText label="카테고리" text={studyDetail?.category?.name} />
+                    <LabelText label="진행 방식" text={studyDetail?.way} />
+                    <LabelText label="진행 플랫폼" text={studyDetail?.platform} />
+                    <LabelText
+                      label="진행 기간"
+                      text={getPeriod(studyDetail?.startDateTime, studyDetail?.endDateTime)}
+                    />
+                    <LabelText label="진행 요일" text={getDayById(studyDetail?.attendanceDay)} />
+                  </Grid>
+                </FormSection>
+                <FormSection icon={<MemberImage />} title="스터디 모집 안내">
+                  <Grid>
+                    <LabelForm name="applicantLimit" errors={errors}>
                       <Controller
                         control={control}
-                        name="applicantCount"
-                        rules={{ required: CREATE_RECRUITMENT.applicantCount }}
+                        name="applicantLimit"
+                        rules={{ required: CREATE_RECRUITMENT.applicantLimit }}
                         render={({ field }) => (
                           <CustomSelect
                             label="모집 인원"
                             placeholder="ex) 5명"
-                            defaultValue={parseSelectValue('applicantCount')}
-                            values={APPLICATION_CNT}
+                            defaultValue={selectObj({ applicantLimit: NEW_APPLICATION_CNT[applicantLimit] }) as any}
+                            values={selectObj(NEW_APPLICATION_CNT) as any}
                             {...field}
                           />
                         )}
                       />
                     </LabelForm>
-                    <LabelForm name="applicantCount" label="모집 마감일" errors={errors}>
+                    <LabelForm name="recruitmentEndDateTime" label="모집 마감일" errors={errors}>
                       <CalendarButton>
                         <Controller
                           control={control}
                           name="recruitmentEndDateTime"
                           rules={{ required: CREATE_RECRUITMENT.recruitmentEndDateTime }}
-                          render={({ field }) => (
-                            <EndDate {...field} defaultValue={parseSelectValue('recruitmentEndDateTime') as string} />
-                          )}
+                          render={({ field }) => <EndDate {...field} defaultValue={recruitmentEndDateTime as string} />}
                         />
                       </CalendarButton>
                     </LabelForm>
@@ -161,8 +168,8 @@ const CreateRecruitmentPage = () => {
                           <CustomSelect
                             label="포지션"
                             placeholder="포지션"
-                            defaultValue={parseSelectValue('positionIds')}
-                            values={POSITION}
+                            defaultValue={selectObj(parsedPosition) as any}
+                            values={selectObj(NEW_POSITION) as any}
                             isMulti
                             {...field}
                           />
@@ -193,8 +200,8 @@ const CreateRecruitmentPage = () => {
                           <CustomSelect
                             label="연락방법"
                             placeholder="연락방법"
-                            defaultValue={parseSelectValue('contact')}
-                            values={CONTACT}
+                            defaultValue={selectObj({ contact: NEW_CONTACT[contact] }) as any}
+                            values={selectObj(NEW_CONTACT) as any}
                             {...field}
                           />
                         )}
@@ -203,31 +210,19 @@ const CreateRecruitmentPage = () => {
                     <LabelForm label="연결 url" name="callUrl" errors={errors}>
                       <InputText
                         placeholder="ex) 오픈 카카오톡 링크"
-                        defaultValue={parseSelectValue('callUrl') as string}
+                        defaultValue={callUrl as string}
                         {...register('callUrl', { required: CREATE_RECRUITMENT.contact })}
                       />
                     </LabelForm>
                   </Grid>
                 </FormSection>
-                <FormSection icon={<Two />} title="스터디 진행 관련">
-                  <Box display="row" gap="24px">
-                    <LabelText label="진행 방식" text={studyDetail?.way} />
-                    <LabelText label="진행 플랫폼" text={studyDetail?.platform} />
-                    <LabelText
-                      label="진행 기간"
-                      text={getPeriod(studyDetail?.startDateTime, studyDetail?.endDateTime)}
-                    />
-                  </Box>
-                </FormSection>
-                <FormSection icon={<Three />} title="스터디 기본 구성">
+                <FormSection icon={<StudyInfo />} title="스터디 기본 구성">
                   <Box display="row" gap="24px">
                     <LabelText label="스터디 제목" text={studyDetail?.title} />
-                    <LabelText label="카테고리" text={studyDetail?.category?.name} />
                     <LabelText label="스터디 최대 인원" text={studyDetail?.participantLimit} />
                   </Box>
-                </FormSection>
-                <FormSection icon={<Four />} title="스터디 팀원 모집 공고 제목">
-                  <Box display="column" gap="24px">
+                  <RowDivider margin={24} />
+                  <Box display="column" gap="24px" marginBottom>
                     <InputText
                       label="제목"
                       placeholder="제목을 기입해주세요."
@@ -251,6 +246,19 @@ const CreateRecruitmentPage = () => {
                   <Button type="button" onClick={openModal} scheme="normal" size="fullWidth">
                     임시저장
                   </Button>
+                  {isModalOpen && (
+                    <Modal
+                      handleApprove={() => {
+                        closeModal();
+                        saveTemporary(savedKey, studyId, 'RECRUITMENT', { ...data, stackIds: selectedStacks });
+                      }}
+                      cancelBtnText="취소하기"
+                      title="작성 중인 스터디 생성 글을 임시 저장 하시겠습니까?"
+                      approveBtnText="확인하기"
+                    >
+                      임시 저장한 글은 ‘마이 페이지 {'>'} 임시 저장된 글’ 에서 확인하실 수 있습니다.
+                    </Modal>
+                  )}
                 </div>
                 <div className="button__wrap">
                   <Button scheme="secondary" size="fullWidth">
@@ -272,6 +280,7 @@ export const Form = styled.form`
   ${media.tablet} {
     margin: 24px;
   }
+  margin-top: 24px;
 `;
 
 export const Grid = styled.div`
@@ -279,7 +288,6 @@ export const Grid = styled.div`
     display: flex;
     flex-direction: column;
   }
-
   display: grid;
   grid-template-columns: repeat(3, minmax(auto, 1fr));
   margin-top: 24px;
@@ -292,22 +300,23 @@ export const RecruitmentContainer = styled.section`
   flex-direction: column;
   max-width: 1224px;
   margin: 0 auto;
+  padding-bottom: 40px;
 `;
 
-export const Box = styled.div<{ display: 'row' | 'column'; gap?: string }>`
+export const Box = styled.div<{ display: 'row' | 'column'; gap?: string; marginBottom?: boolean }>`
   display: flex;
   flex-direction: ${(props) => props.display};
   width: 100%;
-  margin-top: 24px;
+  margin: ${({ marginBottom }) => (marginBottom ? '0 0 24px' : '24px 0 0')};
 
   ${media.tablet} {
     flex-direction: column;
   }
 
-  ${(props) =>
-    props.gap &&
+  ${({ gap }) =>
+    gap &&
     css`
-      gap: ${props.gap};
+      gap: ${gap};
     `}
 `;
 
