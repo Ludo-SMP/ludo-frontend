@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { media } from '@/Styles/theme';
 
 /** 스터디 모집 공고 로딩시 보여줄 스켈레톤 */
 const SkeletonRecruitmentCard = () => {
@@ -55,7 +56,7 @@ const RecruitmentCardWrapper = styled.li`
   padding: 32px 40px;
   flex-direction: column;
   align-items: flex-start;
-  border-radius: 20px;
+  border-radius: 12px;
   border: 1px solid ${(props) => props.theme.color.black1};
   background: ${(props) => props.theme.color.white};
   box-shadow: 0px 0px 5px 0px ${(props) => props.theme.color.black1};
@@ -64,6 +65,12 @@ const RecruitmentCardWrapper = styled.li`
   .skeleton {
     background-color: #dddddd;
     border-radius: 8px;
+  }
+
+  ${media.custom(400)} {
+    width: calc(100vw - 32px);
+    padding: 16px;
+    height: auto;
   }
 `;
 
@@ -208,6 +215,12 @@ const StudyAdditionalInfoWrapper = styled.div`
     height: 2px;
     transform: rotate(90deg);
     border: 1px solid rgba(38, 45, 49, 0.2);
+  }
+
+  ${media.custom(400)} {
+    gap: 0;
+    justify-content: space-between;
+    width: 100%;
   }
 `;
 
