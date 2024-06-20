@@ -81,7 +81,7 @@ export const CREATE_STUDY = Object.freeze({
 });
 
 export const CREATE_RECRUITMENT: Omit<Record<keyof RecruitmentForm, string>, 'content'> = Object.freeze({
-  applicantCount: '모집 인원을 정해주세요.',
+  applicantLimit: '모집 인원을 정해주세요.',
   recruitmentEndDateTime: '모집 마감일을 정해주세요.',
   positionIds: '포지션을 정해주세요.',
   stackIds: '기술 스택을 정해주세요.',
