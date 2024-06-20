@@ -56,14 +56,14 @@ export const LeaveModal = ({ handleApprove, handleCancel }: LeaveModalProps) => 
   );
 };
 
-const Options = styled.div`
+const Options = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 24px;
   flex: 1;
 `;
 
-const Option = styled.div<{
+const Option = styled.li<{
   $selected?: boolean;
   $value?: OptionValue;
 }>`
