@@ -3,6 +3,7 @@ import Modal, { ModalProps } from '../Common/Modal';
 import { useState } from 'react';
 import { Radio } from '@/Assets/Radio';
 import { theme } from '@/Styles/theme';
+import { LEAVE } from '@/Constants/messages';
 
 type OptionValue = 'force' | 'request';
 
@@ -28,7 +29,7 @@ export const LeaveModal = ({ handleApprove, handleCancel }: LeaveModalProps) => 
 
   return (
     <Modal
-      title="탈퇴 방식을 골라주시기 바랍니다."
+      title={LEAVE.MEMBER.SELECT.title}
       approveBtnText="선택 완료"
       cancelBtnText="계속 함께하기"
       handleApprove={() => selectedOption && handleApprove(selectedOption)}
@@ -37,17 +38,15 @@ export const LeaveModal = ({ handleApprove, handleCancel }: LeaveModalProps) => 
       <Options>
         <Option $value="request" $selected={selectedOption === 'request'} onClick={() => setSelectedOption('request')}>
           <OptionContent>
-            <OptionTitle>팀장에게 승인 요청 받기</OptionTitle>
-            <OptionText>
-              팀장에게 탈퇴 승인을 요청 하고, 팀장이 이를 수락 할 시 신뢰도에 영향이 가지 않습니다.
-            </OptionText>
+            <OptionTitle>{LEAVE.MEMBER.SELECT.request.title}</OptionTitle>
+            <OptionText>{LEAVE.MEMBER.SELECT.request.content}</OptionText>
           </OptionContent>
           <Radio color={theme.color.purple1} checked={selectedOption === 'request'} />
         </Option>
         <Option $value="force" $selected={selectedOption === 'force'} onClick={() => setSelectedOption('force')}>
           <OptionContent>
-            <OptionTitle>무단 탈퇴 하기</OptionTitle>
-            <OptionText>무단 탈퇴를 하게 되면 빠른 탈퇴가 가능하나, 신뢰도가 깎이게 됩니다.</OptionText>
+            <OptionTitle>{LEAVE.MEMBER.SELECT.force.title}</OptionTitle>
+            <OptionText>{LEAVE.MEMBER.SELECT.force.content}</OptionText>
           </OptionContent>
           <Radio color={theme.color.orange1} checked={selectedOption === 'force'} />
         </Option>
