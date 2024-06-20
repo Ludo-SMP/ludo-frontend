@@ -10,5 +10,5 @@ export default () => {
     window.scrollTo(0, 0);
   }, [pathname]);
 
-  return <Layout mutation={useCreateStudyMutation()} />;
+  return <Layout mutation={useCreateStudyMutation()} type="CREATE" />;
 };
