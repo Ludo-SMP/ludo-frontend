@@ -224,7 +224,7 @@ const CategoryChipsWrapper = styled.div`
   width: 100%;
   align-items: flex-start;
   gap: 8px;
-  overflow-x: hidden;
+  overflow-x: scroll;
 `;
 
 const TechStackListWrapper = styled.div`
