@@ -7,6 +7,7 @@ import { Recruitment } from '@/Types/study';
 import { PROGRESS_METHOD } from '@/Shared/study';
 import Image from '../Common/Image';
 import { Views } from '@/Assets';
+import { media } from '@/Styles/theme';
 
 /** 스터디 모집 공고 */
 const RecruitmentCard = (recruitment: Recruitment) => {
@@ -74,11 +75,17 @@ const RecruitmentCardWrapper = styled.li`
   padding: 32px 40px;
   flex-direction: column;
   align-items: flex-start;
-  border-radius: 20px;
+  border-radius: 12px;
   border: 1px solid ${(props) => props.theme.color.black1};
   background: ${(props) => props.theme.color.white};
   box-shadow: 0px 0px 20px 0px ${(props) => props.theme.color.black1};
   gap: 12px;
+
+  ${media.custom(400)} {
+    width: calc(100vw - 32px);
+    padding: 16px;
+    height: auto;
+  }
 `;
 
 const StudyRecruitInfoWrapper = styled.div`
@@ -199,6 +206,12 @@ const StudyAdditionalInfoWrapper = styled.div`
     height: 2px;
     transform: rotate(90deg);
     border: 1px solid rgba(38, 45, 49, 0.2);
+  }
+
+  ${media.custom(400)} {
+    gap: 0;
+    justify-content: space-between;
+    width: 100%;
   }
 `;
 
