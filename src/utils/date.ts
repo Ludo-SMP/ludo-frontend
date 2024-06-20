@@ -1,3 +1,5 @@
+import { NEW_ATTENDANCE_DAY } from '@/Shared/study';
+
 export const dateFormatter = (date: string) => {
   const [year, month, day] = date.split('-');
   return year.slice(2) + '.' + month + '.' + day.slice(0, 2);
@@ -69,4 +71,11 @@ export const getMillisec = (uuidStr: string) => {
   const intTime = getTimeInt(uuidStr) - 122192928000000000;
   const intMillisec = Math.floor(intTime / 10000);
   return intMillisec;
+};
+
+/**
+ * @description 출석일에 해당하는 숫자를 요일로 변환한다.
+ */
+export const getDayById = (ids: number[]) => {
+  return ids?.map((id: number) => NEW_ATTENDANCE_DAY[id].slice(0, 1)).join(', ');
 };
