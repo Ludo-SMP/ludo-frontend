@@ -97,7 +97,7 @@ const RecruitmentsSectionWrapper = styled.div`
   flex-direction: column;
   max-width: 1224px;
   align-items: flex-start;
-  gap: 16px;
+  gap: 24px;
 
   .section__title {
     color: ${({ theme }) => theme.color.black5};
@@ -122,6 +122,10 @@ const RecruitmentsSectionWrapper = styled.div`
   }
 
   ${media.custom(600)} {
+    width: 100vw;
+  }
+
+  ${media.custom(500)} {
     width: 100vw;
     padding: 0 16px;
   }
