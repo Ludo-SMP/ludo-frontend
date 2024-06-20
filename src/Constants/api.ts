@@ -29,9 +29,14 @@ export const API_END_POINT = {
   STUDY: (studyId: number) => `${API_PREFIX}/studies/${studyId}`,
   EDIT_STUDY: (studyId: number) => `${API_PREFIX}/studies/${studyId}`,
   DELETE_STUDY: (studyId: number) => `${API_PREFIX}/studies/${studyId}`,
-  LEAVE_STUDY: (studyId: number) => `${API_PREFIX}/studies/${studyId}/participants`,
   APPLICANTS: (studyId: number) => `${API_PREFIX}/studies/${studyId}/applicants`,
   ATTEND_STUDY: (studyId: number) => `${API_PREFIX}/studies/${studyId}/attendance`,
+
+  // LEAVE
+  STUDY_FORCE_LEAVE: (studyId: number) => `${API_PREFIX}/studies/${studyId}/participants`,
+  STUDY_LEAVE_REQUEST: (studyId: number) => `${API_PREFIX}/studies/${studyId}/participants/approved/request`,
+  STUDY_LEAVE_REQUEST_APPROVE: (studyId: number) => `${API_PREFIX}/studies/${studyId}/participants/request`,
+  STUDY_LEAVE_REQUEST_REJECT: (studyId: number) => `${API_PREFIX}/studies/${studyId}/participants/request`,
 
   // APPLY
   APPLY: (studyId: number, recruitmentId: number) =>

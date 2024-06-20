@@ -4,7 +4,7 @@ import { useModalStore } from '@/store/modal';
 
 export interface ModalProps {
   /** 모달 안쪽 컴포넌트 */
-  children: React.ReactNode;
+  children?: React.ReactNode;
 
   /** 제목 정렬 방식 */
   alignTitle?: 'flex-start' | 'center';
@@ -13,7 +13,7 @@ export interface ModalProps {
   title?: string;
 
   /** 확인 버튼 클릭 시 실행 함수 */
-  handleApprove: () => void;
+  handleApprove?: () => void;
 
   /** 취소 버튼 클릭 시 실행 함수 */
   handleCancel?: () => void;
@@ -21,7 +21,7 @@ export interface ModalProps {
   data?: object;
 
   /** 확인 버튼 텍스트 */
-  approveBtnText: string;
+  approveBtnText?: string;
 
   /** 취소 버튼 텍스트 */
   cancelBtnText?: string;
@@ -34,10 +34,10 @@ export interface ModalProps {
 const Modal = ({
   children,
   alignTitle = 'flex-start',
-  title,
-  handleApprove,
+  title = '제목',
+  handleApprove = () => void 0,
   handleCancel,
-  approveBtnText,
+  approveBtnText = '확인',
   cancelBtnText,
   isBtnWidthEqual = true,
 }: ModalProps) => {

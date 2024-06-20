@@ -24,7 +24,10 @@ export const STUDY = {
   APPLICNATS: (studyId: number) => [BASE_KEY.STUDY, studyId, 'APPLICANTS'],
   MYPAGE_INFO: () => [BASE_KEY.STUDY, 'MYPAGE'],
   DELETE: (studyId: number) => [BASE_KEY.STUDY, studyId, 'DELETE'],
-  LEAVE: (studyId: number) => [BASE_KEY.STUDY, studyId, 'LEAVE'],
+  FORCE_LEAVE: (studyId: number) => [BASE_KEY.STUDY, studyId],
+  LEAVE_REQUEST: (studyId: number) => [BASE_KEY.STUDY, studyId, 'LEAVE_REQUEST'],
+  LEAVE_REQUEST_APPROVE: (studyId: number) => [BASE_KEY.STUDY, studyId, 'LEAVE_REQUEST', 'APPROVE'],
+  LEAVE_REQUEST_REJECT: (studyId: number) => [BASE_KEY.STUDY, studyId, 'LEAVE_REQUEST', 'REJECT'],
   REVIEWS: [BASE_KEY.STUDY, 'MYPAGE', 'REVIEWS'],
 };
 
