@@ -5,7 +5,6 @@ import { useParams } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import { Loading, MemberImage, StudyInfo } from '@/Assets';
 
-// components
 import Button from '@/Components/Common/Button';
 import { TextArea } from '@/Components/Textarea';
 import InputText from '@/Components/Common/InputText/index';
@@ -13,7 +12,6 @@ import { CalendarButton } from '@/Components/Selectbox/CalendarButton';
 import { EndDate } from '@/Components/Calendar/EndDate';
 import CustomSelect from '@/Components/CustomSelect/CustomSelect';
 import { Stack } from '@/Components/Common/Stack';
-
 import { RecruitFormWithSelect } from '@/Types/study';
 
 import { CREATE_RECRUITMENT } from '@/Constants/messages';
@@ -36,28 +34,19 @@ import { HeaderWithLogo } from '@/Components/Header/HeaderWithLogo';
 import { selectObj } from '../EditRecruitment';
 import { RowDivider } from '@/Components/Common/Divider/RowDivider';
 
-const DEF_STACK_PLACEHOLDER = 'ex. Typescript';
-
 const CreateRecruitmentPage = () => {
   const studyId = Number(useParams().studyId);
   const { isModalOpen, openModal, closeModal } = useModalStore();
 
   const { savedKey, tempSaved } = useTempSaved();
 
-  // 스택 모달 상태
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const { handleSelectedStacks, content, selectedStacks, setSelectedStacks } = useStack(DEF_STACK_PLACEHOLDER);
-
-  // stackId 초기값 채우기
-  const getDefStackVal = (formKey: 'stackIds') => {
-    if (!tempSaved || !tempSaved[formKey]) return;
-
-    handleSelectedStacks(tempSaved[formKey]);
-  };
+  const { handleSelectedStacks, content, selectedStacks, setSelectedStacks } = useStack('ex. Typescript');
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    getDefStackVal('stackIds');
+    // stackId 초기값 채우기
+    tempSaved?.stackIds && handleSelectedStacks(tempSaved['stackIds']);
   }, []);
 
   const {
@@ -69,6 +58,7 @@ const CreateRecruitmentPage = () => {
   } = useForm<RecruitFormWithSelect>({
     defaultValues: tempSaved,
   });
+
   const data = watch();
 
   const { mutate } = useCreateRecruitmentMutation(studyId);
@@ -84,14 +74,7 @@ const CreateRecruitmentPage = () => {
     return true;
   };
 
-  const {
-    applicantLimit,
-    callUrl,
-    contact,
-    // content: TempContent,
-    positionIds,
-    recruitmentEndDateTime,
-  } = tempSaved ?? {};
+  const { applicantLimit, callUrl, contact, positionIds, recruitmentEndDateTime } = tempSaved ?? {};
 
   const parsedPosition = ((positionIds ?? []) as any[])?.reduce((acc, id) => {
     return { ...acc, [Number(id)]: NEW_POSITION[Number(id)] };
@@ -179,8 +162,8 @@ const CreateRecruitmentPage = () => {
                     <LabelForm label="기술 스택">
                       <InputText
                         onClick={() => setIsOpen(!isOpen)}
-                        placeholder={DEF_STACK_PLACEHOLDER}
-                        value={content === DEF_STACK_PLACEHOLDER ? null : content}
+                        placeholder={'ex. Typescript'}
+                        value={content === 'ex. Typescript' ? null : content}
                       />
                       {isOpen && (
                         <StackModal
@@ -217,12 +200,12 @@ const CreateRecruitmentPage = () => {
                   </Grid>
                 </FormSection>
                 <FormSection icon={<StudyInfo />} title="스터디 기본 구성">
-                  <Box display="row" gap="24px">
+                  <Box $display="row" $gap="24px">
                     <LabelText label="스터디 제목" text={studyDetail?.title} />
                     <LabelText label="스터디 최대 인원" text={studyDetail?.participantLimit} />
                   </Box>
                   <RowDivider margin={24} />
-                  <Box display="column" gap="24px" marginBottom>
+                  <Box $display="column" $gap="24px" $marginBottom>
                     <InputText
                       label="제목"
                       placeholder="제목을 기입해주세요."
@@ -242,29 +225,25 @@ const CreateRecruitmentPage = () => {
                 </FormSection>
               </Stack>
               <ButtonBox>
-                <div className="button__wrap">
-                  <Button type="button" onClick={openModal} scheme="normal" size="fullWidth">
-                    임시저장
-                  </Button>
-                  {isModalOpen && (
-                    <Modal
-                      handleApprove={() => {
-                        closeModal();
-                        saveTemporary(savedKey, studyId, 'RECRUITMENT', { ...data, stackIds: selectedStacks });
-                      }}
-                      cancelBtnText="취소하기"
-                      title="작성 중인 스터디 생성 글을 임시 저장 하시겠습니까?"
-                      approveBtnText="확인하기"
-                    >
-                      임시 저장한 글은 ‘마이 페이지 {'>'} 임시 저장된 글’ 에서 확인하실 수 있습니다.
-                    </Modal>
-                  )}
-                </div>
-                <div className="button__wrap">
-                  <Button scheme="secondary" size="fullWidth">
-                    등록하기
-                  </Button>
-                </div>
+                <Button type="button" onClick={openModal} scheme="normal" size="fullWidth">
+                  임시저장
+                </Button>
+                {isModalOpen && (
+                  <Modal
+                    handleApprove={() => {
+                      closeModal();
+                      saveTemporary(savedKey, studyId, 'RECRUITMENT', { ...data, stackIds: selectedStacks });
+                    }}
+                    cancelBtnText="취소하기"
+                    title="작성 중인 스터디 생성 글을 임시 저장 하시겠습니까?"
+                    approveBtnText="확인하기"
+                  >
+                    임시 저장한 글은 ‘마이 페이지 {'>'} 임시 저장된 글’ 에서 확인하실 수 있습니다.
+                  </Modal>
+                )}
+                <Button scheme="secondary" size="fullWidth">
+                  등록하기
+                </Button>
               </ButtonBox>
             </Form>
           </RecruitmentContainer>
@@ -291,7 +270,6 @@ export const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, minmax(auto, 1fr));
   margin-top: 24px;
-
   gap: 24px;
 `;
 
@@ -303,37 +281,35 @@ export const RecruitmentContainer = styled.section`
   padding-bottom: 40px;
 `;
 
-export const Box = styled.div<{ display: 'row' | 'column'; gap?: string; marginBottom?: boolean }>`
-  display: flex;
-  flex-direction: ${(props) => props.display};
-  width: 100%;
-  margin: ${({ marginBottom }) => (marginBottom ? '0 0 24px' : '24px 0 0')};
-
+export const Box = styled.div<{ $display: 'row' | 'column'; $gap?: string; $marginBottom?: boolean }>`
   ${media.tablet} {
     flex-direction: column;
   }
 
-  ${({ gap }) =>
-    gap &&
+  display: flex;
+  width: 100%;
+  flex-direction: ${(props) => props.$display};
+  margin: ${({ $marginBottom }) => ($marginBottom ? '0 0 24px' : '24px 0 0')};
+
+  ${({ $gap }) =>
+    $gap &&
     css`
-      gap: ${gap};
+      gap: ${$gap};
     `}
 `;
 
-export const Divider = styled.div<{ height?: string | number; width?: string | number; $dividerColor?: string }>`
-  height: ${({ height }) => (height ? (typeof height === 'number' ? `${height}px` : `${height}`) : '12px')};
+export const Divider = styled.div<{ $height?: string | number; $width?: string | number; $dividerColor?: string }>`
+  height: ${({ $height }) => ($height ? (typeof $height === 'number' ? `${$height}px` : `${$height}`) : '12px')};
   background: ${({ theme, $dividerColor }) => ($dividerColor ? $dividerColor : theme.color.strokeDividerThick)};
-  max-width: ${({ width }) => (width ? (typeof width === 'number' ? `${width}px` : `${width}`) : '100%')};
+  max-width: ${({ $width }) => ($width ? (typeof $width === 'number' ? `${$width}px` : `${$width}`) : '100%')};
 `;
 
 export const ButtonBox = styled.div`
   width: 100%;
   display: flex;
-  flex-direction: row;
   gap: 24px;
 
-  .button__wrap {
-    display: flex;
-    width: 100%;
+  & > * {
+    flex: 1;
   }
 `;
