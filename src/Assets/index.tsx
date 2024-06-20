@@ -30,6 +30,9 @@ export { default as Study } from './icons/study.svg?react';
 export { default as StudyThumbnail } from './icons/studyThumbnail.svg?react';
 export { default as Setting } from './icons/setting.svg?react';
 export { default as TwoWay } from './icons/twoway.svg?react';
+export { default as PrevArrow } from './icons/prevArrow.svg?react';
+export { default as NextArrow } from './icons/nextArrow.svg?react';
+
 // Logo
 export { default as BlankLogo } from './images/blank-logo.png';
 export { default as Logo } from './images/logo.png';
@@ -47,6 +50,8 @@ export { default as SignUpBackground } from './images/background.png';
 // Banner
 export { default as Banner1 } from './images/banner1.png';
 export { default as Banner2 } from './images/banner2.png';
+export { default as MobileBanner1 } from './images/mobilebanner1.png';
+export { default as MobileBanner2 } from './images/mobilebanner2.png';
 
 // Study
 export { default as DefaultStudyThumbnail } from './icons/studyThumbnail.svg';

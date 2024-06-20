@@ -99,6 +99,10 @@ const HeaderWrapper = styled.section`
   ${media.custom(800)} {
     width: 400px;
   }
+
+  ${media.custom(400)} {
+    width: 100vw;
+  }
 `;
 
 const TopBarWrapper = styled.div`

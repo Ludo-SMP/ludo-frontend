@@ -115,18 +115,21 @@ const MainPage = () => {
 const MainPageWrapper = styled.section`
   display: flex;
   margin: 0 auto;
-  margin-top: 40px;
   flex-direction: column;
   gap: 40px;
 `;
 
 const BannerSectionWrapper = styled.section`
   display: flex;
+  justify-content: center;
   margin: 0 auto;
+  width: 100%;
+  max-width: 1920px;
 `;
 
 const RecruitmentsSectionWrapper = styled.div`
   display: flex;
+  width: 1224px;
   margin: 0 auto;
   max-width: 1224px;
   flex-direction: column;
@@ -143,10 +146,23 @@ const RecruitmentsSectionWrapper = styled.div`
     font-weight: 800;
     line-height: 40px;
     white-space: nowrap;
+
+    ${media.custom(500)} {
+      font-size: ${({ theme }) => theme.font.medium};
+    }
+  }
+
+  ${media.custom(1224)} {
+    width: 100vw;
   }
 
   ${media.custom(800)} {
     width: 400px;
+  }
+
+  ${media.custom(400)} {
+    width: 100vw;
+    padding: 0 16px;
   }
 `;
 
@@ -156,6 +172,7 @@ const SelectCategorySectionWrapper = styled.div`
   width: 100%;
   justify-content: space-between;
   gap: 12px;
+  overflow: scroll;
 `;
 
 const CategoryMenusWrapper = styled.div`
@@ -170,6 +187,10 @@ const RecruitmentCardsWrapper = styled.div`
   gap: 21px;
   min-height: 757px;
   flex-wrap: wrap;
+
+  ${media.custom(500)} {
+    justify-content: center;
+  }
 `;
 
 const MoreSectionWrapper = styled.div`
