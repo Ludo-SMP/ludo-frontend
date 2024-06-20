@@ -8,7 +8,7 @@ import { ReviewQuestion } from '@/Components/ReviewQuestion/ReviewQuestion';
 import { Controller, useForm } from 'react-hook-form';
 import { HeaderWithLogo } from '@/Components/Header/HeaderWithLogo';
 import { useSubmitReviewMutation } from '@/Hooks/review/useSubmitReviewMutation';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const reviewDataList = {
   activenessScore: {
@@ -42,7 +42,8 @@ type ReviewResult = Record<keyof typeof reviewDataList, number>;
 
 export const ReviewPage = () => {
   const { studyId, userId } = useParams();
-  const { mutate } = useSubmitReviewMutation(parseInt(studyId));
+  const navigate = useNavigate();
+  const { mutate } = useSubmitReviewMutation(parseInt(studyId), () => navigate(`/studies/${studyId}`));
   const {
     handleSubmit,
     formState: { errors },
