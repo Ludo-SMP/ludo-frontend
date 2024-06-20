@@ -11,5 +11,5 @@ export default () => {
   const query = useStudyDetail(id);
   const mutation = useEditStudyMutation(id);
 
-  return <Layout query={query} mutation={mutation} />;
+  return <Layout query={query} mutation={mutation} type="EDIT" />;
 };
