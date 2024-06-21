@@ -32,7 +32,7 @@ const AlarmBell = () => {
           <Inner>{data?.filter((alarm) => !alarm?.read)?.length ?? 0}</Inner>
         </AlarmCnt>
       </AlarmSection>
-      {isOpen && <AlarmInbox alarmPreviews={data} handleOpen={handleOpen} />}
+      <AlarmInbox alarmPreviews={data} isOpen={isOpen} handleOpen={handleOpen} />
     </AlarmBox>
   );
 };
