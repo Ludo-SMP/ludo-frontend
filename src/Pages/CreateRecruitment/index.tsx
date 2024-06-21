@@ -4,17 +4,16 @@ import { Loading } from '@/Assets';
 import { useCreateRecruitmentMutation } from '@/Hooks/recruitments/useCreateRecruitment';
 import Layout from './layout';
 import { useTempSaved } from '@/Hooks/useTempSaved';
-import { useRecruitmentDetail } from '@/Hooks/recruitments/useRecruitmentDetail';
+import { useStudyDetail } from '@/Hooks/study/useStudyDetail';
 
 const CreateRecruitmentPage = () => {
   const studyId = Number(useParams().studyId);
-  const recruitmentId = Number(useParams().recruitmentId);
 
   useEffect(function scrollToTop() {
     window.scrollTo(0, 0);
   }, []);
 
-  const { data: recruitmentDetail, isLoading } = useRecruitmentDetail(recruitmentId);
+  const { data: studyDetail, isLoading } = useStudyDetail(studyId);
 
   const { tempSaved } = useTempSaved();
 
@@ -25,7 +24,7 @@ const CreateRecruitmentPage = () => {
       {isLoading ? (
         <Loading />
       ) : (
-        <Layout type="CREATE" mutate={mutate} study={recruitmentDetail?.study} initValue={tempSaved} />
+        <Layout type="CREATE" mutate={mutate} study={studyDetail?.study} initValue={tempSaved} />
       )}
     </>
   );
