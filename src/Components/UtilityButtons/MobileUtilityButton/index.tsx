@@ -24,7 +24,7 @@ export const MobileUtilityBtn = ({ fullWidth = 250, diameter = 56, icon, destUrl
   return (
     <MobileUtilityBtnBox $width={diameter} $height={diameter} $fullWidth={fullWidth}>
       <IconBox $width={diameter} $height={diameter}>
-        {typeof icon === 'string' ? <img src={icon} width={diameter} height={diameter} /> : icon}
+        {typeof icon === 'string' ? <img src={icon} width={24} height={24} /> : icon}
       </IconBox>
       <GuideBtn $fullWidth={fullWidth} $width={diameter} onClick={() => navigate(destUrl)}>
         {content}
@@ -84,6 +84,10 @@ const IconBox = styled.div<{ $width: number; $height: number }>`
   height: ${({ $height }) => `${$height}px`};
   border-radius: ${({ theme }) => theme.borderRadius.xlarge};
   vertical-align: middle;
+
+  img {
+    object-fit: contain;
+  }
 `;
 
 const GuideBtn = styled.button<{ $fullWidth: number; $width: number }>`
