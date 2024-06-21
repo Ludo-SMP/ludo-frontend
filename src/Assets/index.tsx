@@ -22,7 +22,7 @@ export { default as Two } from './icons/two.svg?react';
 export { default as Up } from './icons/up.svg?react';
 export { default as Views } from './icons/views.svg?react';
 export { default as Filter } from './icons/filter.svg?react';
-export { default as Create } from './icons/createstudy.svg?react';
+export { default as Create } from './icons/create.svg?react';
 export { default as Loading } from './icons/lodaing.svg?react';
 export { default as Logout } from './icons/logout.svg?react';
 export { default as Article } from './icons/article.svg?react';
@@ -32,6 +32,7 @@ export { default as Setting } from './icons/setting.svg?react';
 export { default as TwoWay } from './icons/twoway.svg?react';
 export { default as PrevArrow } from './icons/prevArrow.svg?react';
 export { default as NextArrow } from './icons/nextArrow.svg?react';
+export { default as CreateStudy } from './icons/createstudy.svg?react';
 
 // Logo
 export { default as BlankLogo } from './images/blank-logo.png';
