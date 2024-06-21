@@ -89,11 +89,11 @@ export const RouterPath = createBrowserRouter([
               </SettingLayout>
             ),
             children: [
-              {
-                // 프로필 설정
-                path: ROUTES.MYPAGE.PROFILE_SETTINGS,
-                element: <>TODO</>,
-              },
+              // {
+              //   // 프로필 설정
+              //   path: ROUTES.MYPAGE.PROFILE_SETTINGS,
+              //   element: <>TODO</>,
+              // },
               {
                 // 알림 권한 설정
                 path: ROUTES.MYPAGE.NOTIFICATIONS_SETTINGS,
