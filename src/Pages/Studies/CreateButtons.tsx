@@ -5,14 +5,15 @@ import Button from '@/Components/Common/Button';
 import { saveTemporary } from '@/utils/temporarySavedUtils';
 import { useModalStore } from '@/store/modal';
 import Modal from '@/Components/Common/Modal';
+import { RecruitFormWithSelect } from '@/Types/study';
 
 interface CreateButtonsProps {
   type?: 'STUDY' | 'RECRUITMENT';
-  formData?: StudyCreateForm;
+  savedForm?: StudyCreateForm | RecruitFormWithSelect;
   studyId?: number;
 }
 
-const CreateButtons = ({ type = 'STUDY', studyId = 1, formData }: CreateButtonsProps) => {
+const CreateButtons = ({ type = 'STUDY', studyId = 1, savedForm }: CreateButtonsProps) => {
   const navigate = useNavigate();
   const { savedKey } = useTempSaved();
 
@@ -28,7 +29,7 @@ const CreateButtons = ({ type = 'STUDY', studyId = 1, formData }: CreateButtonsP
         <Modal
           handleApprove={() => {
             closeModal();
-            saveTemporary(savedKey, studyId, type, formData);
+            saveTemporary(savedKey, studyId, type, savedForm);
             navigate('/mypage');
           }}
           cancelBtnText="취소하기"
