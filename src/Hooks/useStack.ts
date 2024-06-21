@@ -15,5 +15,13 @@ export const useStack = (initialValue: string) => {
     setContent(stacks.map((stack) => stack.name).join(', '));
   };
 
-  return { handleSelectedStacks, content, selectedStacks, setSelectedStacks };
+  const isValidStack = (): boolean => {
+    if (!selectedStacks || selectedStacks?.length === 0) {
+      setSelectedStacks([]);
+      return false;
+    }
+    return true;
+  };
+
+  return { handleSelectedStacks, content, selectedStacks, setSelectedStacks, isValidStack };
 };
