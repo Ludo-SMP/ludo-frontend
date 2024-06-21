@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-
 import styled, { css } from 'styled-components';
 import { MemberImage, StudyInfo } from '@/Assets';
 
@@ -10,7 +9,7 @@ import { CalendarButton } from '@/Components/Selectbox/CalendarButton';
 import { EndDate } from '@/Components/Calendar/EndDate';
 import CustomSelect from '@/Components/CustomSelect/CustomSelect';
 import { Stack } from '@/Components/Common/Stack';
-import { RecruitFormWithSelect, RecruitmentForm } from '@/Types/study';
+import { RecruitFormWithSelect, RecruitmentDetail, RecruitmentForm } from '@/Types/study';
 
 import { CREATE_RECRUITMENT } from '@/Constants/messages';
 import { NEW_APPLICATION_CNT, NEW_CONTACT, NEW_POSITION } from '@/Shared/study';
@@ -25,26 +24,22 @@ import { media } from '@/Styles/theme';
 import { HeaderWithLogo } from '@/Components/Header/HeaderWithLogo';
 import { RowDivider } from '@/Components/Common/Divider/RowDivider';
 import { makeObjArr } from '@/utils/selectUtil';
-import { RecruitmentProps } from '../EditRecruitment';
+
 import { UseMutateFunction } from '@tanstack/react-query';
 import { CreateButtons } from '../Studies/CreateButtons';
 import { EditButtons } from '../Studies/EditButtons';
 import { useParams } from 'react-router-dom';
 
-// layout
-
 export const selectObj = makeObjArr('value', 'label');
 
-export interface EditRecruitmentPageProps {
-  recruitment?: RecruitmentProps['recruitment'];
-  study: RecruitmentProps['study'];
-  mutate: UseMutateFunction<unknown, Error, RecruitmentForm>;
-  initValue: any;
+export interface LayoutProps {
   type: 'CREATE' | 'EDIT';
+  study: RecruitmentDetail['study'];
+  mutate: UseMutateFunction<unknown, Error, RecruitmentForm>;
+  initValue: RecruitFormWithSelect | null;
 }
 
-// initValue: api / storage
-const Layout = ({ type, mutate, study, initValue }: any) => {
+const Layout = ({ type, mutate, study, initValue }: LayoutProps) => {
   const studyId = Number(useParams()?.studyId);
 
   const { applicantLimit, callUrl, contact, positionIds, recruitmentEndDateTime, stackIds } = initValue ?? {};
