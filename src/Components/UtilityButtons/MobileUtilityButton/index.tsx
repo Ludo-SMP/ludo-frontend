@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 export interface MobileUtilityBtnProps {
@@ -11,19 +12,21 @@ export interface MobileUtilityBtnProps {
   diameter?: number;
 
   /** 아이콘 이미지  */
-  iconImg: React.ReactNode;
+  icon: React.ReactNode;
 
   /** Button에 들에갈 content */
   content: string;
 }
 
-export const MobileUtilityBtn = ({ fullWidth = 250, diameter = 56, iconImg, content }: MobileUtilityBtnProps) => {
+export const MobileUtilityBtn = ({ fullWidth = 250, diameter = 56, icon, destUrl, content }: MobileUtilityBtnProps) => {
+  const navigate = useNavigate();
+
   return (
     <MobileUtilityBtnBox $width={diameter} $height={diameter} $fullWidth={fullWidth}>
       <IconBox $width={diameter} $height={diameter}>
-        {typeof iconImg === 'string' ? <img src={iconImg} width={diameter} height={diameter} /> : iconImg}
+        {typeof icon === 'string' ? <img src={icon} width={diameter} height={diameter} /> : icon}
       </IconBox>
-      <GuideBtn $fullWidth={fullWidth} $width={diameter}>
+      <GuideBtn $fullWidth={fullWidth} $width={diameter} onClick={() => navigate(destUrl)}>
         {content}
       </GuideBtn>
     </MobileUtilityBtnBox>
@@ -51,6 +54,26 @@ const MobileUtilityBtnBox = styled.div<{ $width: number; $height: number; $fullW
     cursor: pointer;
     width: 250px;
   }
+
+  &:active {
+    background: linear-gradient(93deg, #6262b2 0%, #f7a477 100%);
+    box-shadow: 0px 0px 10px 0px ${({ theme }) => theme.color.black0};
+    color: ${({ theme }) => theme.color.white};
+
+    &:first-child {
+      svg > path {
+        fill: ${({ theme }) => theme.color.white};
+      }
+    }
+
+    button {
+      color: ${({ theme }) => theme.color.white};
+    }
+
+    & > * {
+      background: none;
+    }
+  }
 `;
 
 const IconBox = styled.div<{ $width: number; $height: number }>`
@@ -67,10 +90,11 @@ const GuideBtn = styled.button<{ $fullWidth: number; $width: number }>`
   display: inline-block;
   text-align: start;
   padding: 0;
-  margin-left: 4px;
+  padding-left: 4px;
   height: 100%;
   width: calc(100% - ${({ $width }) => $width}px - 4px);
   color: ${({ theme }) => theme.color.black3};
+  background: ${({ theme }) => theme.color.white};
 
   /* Button/Button-SemiBold */
   font-family: 'Pretendard600';
