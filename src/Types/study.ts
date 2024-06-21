@@ -62,6 +62,7 @@ export interface RecruitmentDetail {
     stacks: Stack[];
     positions: Position[];
     applicantCount: number;
+    applicantLimit: number;
     contact: 'KAKAO' | 'EMAIL';
     callUrl: string;
     content: string;
@@ -80,6 +81,7 @@ export interface RecruitmentDetail {
     participantLimit: number;
     startDateTime: string;
     endDateTime: string;
+    attendanceDay: number[];
   };
 }
 
@@ -111,28 +113,24 @@ export interface Recruitments {
 export interface RecruitmentForm {
   title: string;
   stackIds: number[];
-  positionIds: Position[];
-  applicantCount: number;
+  positionIds: number[];
+  applicantLimit: number;
   recruitmentEndDateTime: string;
-  contact: 'KAKAO' | 'EMAIL';
+  contact: string; // 'KAKAO' | 'EMAIL';
   callUrl: string;
   content: string;
 }
 
-// 셀렉트로 관리해야 하는 타입
-export type SingleSelectValue = Pick<RecruitmentForm, 'applicantCount' | 'contact'>;
-export type SelectOptionType = Record<keyof SingleSelectValue, Option<number, string>>;
-export type MultiSelectType = Record<'positionIds', Option<number, string>[]>;
-
-export type SelectType = SelectOptionType & MultiSelectType;
-
 // 셀렉트가 포함된 모집공고 폼 관리 타입
-export interface RecruitFormWithSelect extends SelectType {
+export interface RecruitFormWithSelect {
   title: RecruitmentForm['title'];
   recruitmentEndDateTime: RecruitmentForm['recruitmentEndDateTime'];
   callUrl: RecruitmentForm['callUrl'];
   content: RecruitmentForm['content'];
   stackIds?: Stack[];
+  applicantLimit: number;
+  contact: string;
+  positionIds: number[];
 }
 
 export interface FilterOptionParams {
@@ -248,9 +246,9 @@ export interface ApplicantRecruitment {
   applicantStatus: ApplyStatus;
 }
 
-export interface Option<T, K> {
-  value: T;
-  label: K;
+export interface Option {
+  value: string | number;
+  label: string | number;
 }
 
 export interface CompletedStudy {
