@@ -10,9 +10,9 @@ import Heading from '@/Components/Heading';
 import { AttendanceModal } from '@/Components/Modal/AttendanceModal';
 import { CalendarButton } from '@/Components/Selectbox/CalendarButton';
 import CustomSelect from '@/Components/Selectbox/CustomSelect';
-import { CATEGORIES_OPTION, PLATFORM_OPTIONS, POSITIONS_OPTIONS, PROGRESS_METHODS_OPTIONS } from '@/Shared/study';
+import { CATEGORIES_OPTION, PLATFORM_OPTIONS, POSITION, PROGRESS_METHODS_OPTIONS } from '@/Shared/study';
 import { DateRange } from '@/Types/atoms';
-import { Category, Platform, Position, ProgressMethod, StudyCreate, StudyDetail, Option } from '@/Types/study';
+import { Platform, ProgressMethod, StudyCreate, StudyDetail } from '@/Types/study';
 import { UseMutationResult, UseQueryResult } from '@tanstack/react-query';
 import { AxiosResponse } from 'axios';
 import { Controller, useForm } from 'react-hook-form';
@@ -23,14 +23,15 @@ import { CreateButtons } from './CreateButtons';
 import { EditButtons } from './EditButtons';
 import { Grid } from '@/Components/Common/Grid';
 import { media } from '@/Styles/theme';
+import { Option } from '@/Types/study';
 
 export interface StudyCreateForm {
   title: string;
-  category: Option<number, Category>;
-  memberLimit: Option<number, string>;
-  position: Option<number, Position>;
-  progressMethod: Option<ProgressMethod, string>;
-  platform: Option<Platform, string>;
+  category: number;
+  memberLimit: number;
+  position: number;
+  progressMethod: ProgressMethod;
+  platform: Platform;
   platformUrl: string;
   progressPeriod: DateRange;
 }
@@ -73,11 +74,11 @@ export default ({ query, mutation, type }: StudyFormLayoutProps) => {
               if (!isValidAttendanceDay()) return;
               mutate({
                 title,
-                categoryId: category.value,
-                positionId: position.value,
-                way: progressMethod.value,
-                platform: platform.value,
-                participantLimit: memberLimit.value,
+                categoryId: category,
+                positionId: position,
+                way: progressMethod,
+                platform: platform,
+                participantLimit: memberLimit,
                 startDateTime: progressPeriod[0].toISOString(),
                 endDateTime: progressPeriod[1].toISOString(),
                 attendanceDay: attendanceDay?.map((day) => day.id),
@@ -141,7 +142,7 @@ export default ({ query, mutation, type }: StudyFormLayoutProps) => {
                       <CustomSelect
                         label="나의 포지션"
                         placeholder="ex) 프론트엔드"
-                        values={POSITIONS_OPTIONS}
+                        values={POSITION as Option[]}
                         {...field}
                       />
                     )}
@@ -216,7 +217,7 @@ export default ({ query, mutation, type }: StudyFormLayoutProps) => {
               </Grid>
             </FormSection>
           </Stack>
-          {type === 'CREATE' ? <CreateButtons formData={formData} /> : <EditButtons />}
+          {type === 'CREATE' ? <CreateButtons savedForm={formData} /> : <EditButtons />}
         </Form>
       </PageWrapper>
     </>

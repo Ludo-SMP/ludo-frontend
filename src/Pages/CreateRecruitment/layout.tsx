@@ -23,14 +23,15 @@ import { useStack } from '@/Hooks/useStack';
 import { media } from '@/Styles/theme';
 import { HeaderWithLogo } from '@/Components/Header/HeaderWithLogo';
 import { RowDivider } from '@/Components/Common/Divider/RowDivider';
-import { makeObjArr } from '@/utils/selectUtil';
+import { generateShardObjectByCustomKey } from '@/utils/selectUtil';
 
 import { UseMutateFunction } from '@tanstack/react-query';
 import { CreateButtons } from '../Studies/CreateButtons';
 import { EditButtons } from '../Studies/EditButtons';
 import { useParams } from 'react-router-dom';
+import { Option } from '@/Types/study';
 
-export const selectObj = makeObjArr('value', 'label');
+export const generateSelectOption = generateShardObjectByCustomKey('label', 'value');
 
 export interface LayoutProps {
   type: 'CREATE' | 'EDIT';
@@ -38,6 +39,11 @@ export interface LayoutProps {
   mutate: UseMutateFunction<unknown, Error, RecruitmentForm>;
   initValue: RecruitFormWithSelect | null;
 }
+
+const genPstObjById = (positionIds: number[]) =>
+  (positionIds ?? []).reduce((acc, id) => {
+    return { ...acc, [id]: NEW_POSITION[id] };
+  }, {});
 
 const Layout = ({ type, mutate, study, initValue }: LayoutProps) => {
   const studyId = Number(useParams()?.studyId);
@@ -62,10 +68,6 @@ const Layout = ({ type, mutate, study, initValue }: LayoutProps) => {
   });
 
   const data = watch();
-
-  const parsedPosition = ((positionIds ?? []) as any[])?.reduce((acc, id) => {
-    return { ...acc, [Number(id)]: NEW_POSITION[Number(id)] };
-  }, {});
 
   return (
     <>
@@ -104,8 +106,10 @@ const Layout = ({ type, mutate, study, initValue }: LayoutProps) => {
                       <CustomSelect
                         label="모집 인원"
                         placeholder="ex) 5명"
-                        defaultValue={selectObj({ applicantLimit: NEW_APPLICATION_CNT[applicantLimit] }) as any}
-                        values={selectObj(NEW_APPLICATION_CNT) as any}
+                        defaultValue={
+                          generateSelectOption({ applicantLimit: NEW_APPLICATION_CNT[applicantLimit] }) as Option
+                        }
+                        values={generateSelectOption(NEW_APPLICATION_CNT) as Option[]}
                         {...field}
                       />
                     )}
@@ -130,8 +134,8 @@ const Layout = ({ type, mutate, study, initValue }: LayoutProps) => {
                       <CustomSelect
                         label="포지션"
                         placeholder="포지션"
-                        defaultValue={selectObj(parsedPosition) as any}
-                        values={selectObj(NEW_POSITION) as any}
+                        defaultValue={generateSelectOption(genPstObjById(positionIds)) as Option}
+                        values={generateSelectOption(NEW_POSITION) as Option[]}
                         isMulti
                         {...field}
                       />
@@ -162,8 +166,8 @@ const Layout = ({ type, mutate, study, initValue }: LayoutProps) => {
                       <CustomSelect
                         label="연락방법"
                         placeholder="연락방법"
-                        defaultValue={selectObj({ contact: NEW_CONTACT[contact] }) as any}
-                        values={selectObj(NEW_CONTACT) as any}
+                        defaultValue={generateSelectOption({ contact: NEW_CONTACT[contact] }) as Option}
+                        values={generateSelectOption(NEW_CONTACT) as Option[]}
                         {...field}
                       />
                     )}
@@ -204,7 +208,7 @@ const Layout = ({ type, mutate, study, initValue }: LayoutProps) => {
             </FormSection>
           </Stack>
           {type === 'CREATE' ? (
-            <CreateButtons type="RECRUITMENT" formData={{ ...data, stackIds: selectedStacks }} studyId={studyId} />
+            <CreateButtons type="RECRUITMENT" savedForm={{ ...data, stackIds: selectedStacks }} studyId={studyId} />
           ) : (
             <EditButtons />
           )}
