@@ -33,6 +33,7 @@ export { default as TwoWay } from './icons/twoway.svg?react';
 export { default as PrevArrow } from './icons/prevArrow.svg?react';
 export { default as NextArrow } from './icons/nextArrow.svg?react';
 export { default as CreateStudy } from './icons/createstudy.svg?react';
+export { default as SearchRecruitment } from './icons/recruitment.svg?react';
 
 // Logo
 export { default as BlankLogo } from './images/blank-logo.png';
