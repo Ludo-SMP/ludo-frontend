@@ -139,7 +139,11 @@ export const StudyDetailPage = () => {
                 )}
               </MembersCountBar>
               <MemberList>
-                <MemberSection members={study?.participants} />
+                <MemberSection
+                  isStudyEnd={study?.status === 'COMPLETED'}
+                  members={study?.participants}
+                  userId={user?.id}
+                />
               </MemberList>
             </Members>
           </MainSection>
