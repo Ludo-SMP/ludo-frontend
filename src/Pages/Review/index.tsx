@@ -7,12 +7,8 @@ import { ColumnDivider } from '@/Components/Common/Divider/ColumnDivider';
 import { ReviewQuestion } from '@/Components/ReviewQuestion/ReviewQuestion';
 import { Controller, useForm } from 'react-hook-form';
 import { HeaderWithLogo } from '@/Components/Header/HeaderWithLogo';
-
-// interface ReviewData {
-//   title: string;
-//   yes: string;
-//   no: string;
-// }
+import { useSubmitReviewMutation } from '@/Hooks/review/useSubmitReviewMutation';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const reviewDataList = {
   activenessScore: {
@@ -45,6 +41,9 @@ const reviewDataList = {
 type ReviewResult = Record<keyof typeof reviewDataList, number>;
 
 export const ReviewPage = () => {
+  const { studyId, userId } = useParams();
+  const navigate = useNavigate();
+  const { mutate } = useSubmitReviewMutation(parseInt(studyId), () => navigate(`/studies/${studyId}`));
   const {
     handleSubmit,
     formState: { errors },
@@ -53,7 +52,7 @@ export const ReviewPage = () => {
 
   return (
     <ReviewPageLayout>
-      <form onSubmit={handleSubmit(console.log)}>
+      <form onSubmit={handleSubmit((data) => mutate({ ...data, revieweeId: parseInt(userId) }))}>
         <HeaderWithLogo title="함께했던 스터디원 평가하기" />
         <RowDivider />
         <Main>
