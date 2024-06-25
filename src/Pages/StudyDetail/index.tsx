@@ -139,7 +139,7 @@ export const StudyDetailPage = () => {
                 )}
               </MembersCountBar>
               <MemberList>
-                <MemberSection members={study?.participants} />
+                <MemberSection members={study?.participants} userId={user?.id} />
               </MemberList>
             </Members>
           </MainSection>
