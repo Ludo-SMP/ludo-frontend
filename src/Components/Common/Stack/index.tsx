@@ -13,7 +13,7 @@ export const Stack = ({ divider, gap, children }: StackProps) => {
   return (
     <StackList $gap={gap}>
       {[]
-        .concat(...childrenArr.map((n, i) => [n, divider]))
+        .concat(...childrenArr.map((n) => [n, divider]))
         .slice(0, -1)
         .map((node, i) => (
           <li key={i}>{node}</li>

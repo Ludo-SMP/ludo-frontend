@@ -183,6 +183,7 @@ export interface StudyCreate {
   positionId: number;
   way: ProgressMethod;
   platform: Platform;
+  platformUrl: string;
   participantLimit: number;
   startDateTime: string;
   endDateTime: string;
