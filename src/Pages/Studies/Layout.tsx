@@ -31,8 +31,8 @@ interface StudyCreateForm {
   memberLimit: Option<number, string>;
   position: Option<number, Position>;
   progressMethod: Option<ProgressMethod, string>;
-  platform: Option<Platform, string>;
-  platformUrl: string;
+  platform?: Option<Platform, string>;
+  platformUrl?: string;
   progressPeriod: DateRange;
 }
 const memberLimit = Array(10)
@@ -64,6 +64,7 @@ export default ({ query, mutation }: StudyFormLayoutProps) => {
   const { mutate, isError } = mutation;
 
   const formData = watch();
+  const isOffline = formData?.progressMethod?.value === 'OFFLINE';
 
   if (isError) return <ErrorBoundary />;
 
@@ -73,14 +74,15 @@ export default ({ query, mutation }: StudyFormLayoutProps) => {
       <PageWrapper>
         <Form
           onSubmit={handleSubmit(
-            ({ title, category, memberLimit, position, progressMethod, platform, progressPeriod }) => {
+            ({ title, category, memberLimit, position, progressMethod, platform, platformUrl, progressPeriod }) => {
               if (!isValidAttendanceDay()) return;
               mutate({
                 title,
                 categoryId: category.value,
                 positionId: position.value,
                 way: progressMethod.value,
-                platform: platform.value,
+                platform: progressMethod.value === 'OFFLINE' ? null : platform.value,
+                platformUrl: progressMethod.value === 'OFFLINE' ? null : platformUrl,
                 participantLimit: memberLimit.value,
                 startDateTime: progressPeriod[0].toISOString(),
                 endDateTime: progressPeriod[1].toISOString(),
@@ -175,26 +177,35 @@ export default ({ query, mutation }: StudyFormLayoutProps) => {
                   <Controller
                     control={control}
                     name="platform"
-                    rules={{ required: '진행할 플랫폼을 정해 주세요.' }}
+                    rules={{ required: !isOffline && '진행할 플랫폼을 정해 주세요.' }}
                     render={({ field }) => (
                       <CustomSelect
                         label="진행 플랫폼"
                         placeholder="ex) gather"
                         defaultValue={query?.data?.study?.platform}
                         values={PLATFORM_OPTIONS}
+                        isDisabled={isOffline}
                         {...field}
                       />
                     )}
                   />
                 </LabelForm>
-                <LabelForm<StudyCreateForm> name="platformUrl" label="진행 플랫폼 URL" errors={errors}>
+                <LabelForm<StudyCreateForm>
+                  name="platformUrl"
+                  label="진행 플랫폼 URL"
+                  errors={errors}
+                  disabled={isOffline}
+                >
                   <InputText
                     placeholder="ex) gather 주소"
-                    {...register('platformUrl', { required: '진행 플랫폼 URL을 입력해주세요' })}
+                    disabled={isOffline}
+                    {...register('platformUrl', {
+                      required: !isOffline && '진행 플랫폼 URL을 입력해주세요',
+                    })}
                   />
                 </LabelForm>
               </Grid>
-              <Grid col={2}>
+              <Grid $col={2}>
                 <LabelForm<StudyCreateForm> label="진행 기간" name="progressPeriod" errors={errors}>
                   <CalendarButton>
                     <Controller

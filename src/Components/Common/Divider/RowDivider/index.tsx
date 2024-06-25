@@ -7,17 +7,17 @@ interface RowDividerProps {
 
 /** 가로 구분선 */
 export const RowDivider = ({ rowHeight = 1, margin }: RowDividerProps) => {
-  return <RowDividerWrapper $rowHeight={rowHeight} margin={margin}></RowDividerWrapper>;
+  return <Divider $rowHeight={rowHeight} $margin={margin}></Divider>;
 };
 
-const RowDividerWrapper = styled.div<{ $rowHeight: number; margin?: number }>`
+const Divider = styled.hr<{ $rowHeight: number; $margin?: number }>`
   width: 100%;
   height: ${(props) => `${props.$rowHeight}px`};
   background-color: ${(props) => props.theme.color.black1};
 
-  ${({ margin }) =>
-    margin &&
+  ${({ $margin }) =>
+    $margin &&
     css`
-      margin: ${margin}px 0;
+      margin: ${$margin}px 0;
     `}
 `;

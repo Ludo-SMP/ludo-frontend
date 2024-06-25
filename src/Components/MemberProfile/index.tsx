@@ -12,6 +12,7 @@ import { useStudyForceLeaveMutation } from '@/Hooks/study/useStudyForceLeaveMuta
 import { useStudyLeaveRequestMutation } from '@/Hooks/study/useStudyLeaveRequestMutation';
 import Modal from '../Common/Modal';
 import { LEAVE } from '@/Constants/messages';
+import Button from '../Common/Button';
 
 export interface MemberProfileProps extends Member {
   /** 스터디원의 프로필 이미지 URL */
@@ -25,10 +26,14 @@ export interface MemberProfileProps extends Member {
 
   /** 해당 멤버가 속한 스터디 ID */
   studyId?: number;
+
+  /** 리뷰 작성이 필요한지 여부 */
+  needReview?: boolean;
 }
 
 /** 스터디원의 프로필을 보여줍니다. */
 const MemberProfile = ({
+  id,
   nickname,
   email,
   role,
@@ -37,6 +42,7 @@ const MemberProfile = ({
   attended = false,
   isSelf = true,
   studyId,
+  needReview = false,
 }: MemberProfileProps) => {
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
   const [isLeaveModalOpen, setIsLeaveModalOpen] = useState(false);
@@ -47,7 +53,7 @@ const MemberProfile = ({
   const { mutate: mutateRequestLeave } = useStudyLeaveRequestMutation(studyId);
 
   return (
-    <MemberProfileWrapper>
+    <MemberProfileWrapper $contrast={needReview}>
       {isSelf && (
         <OptionsButton onClick={() => setIsOptionsOpen(true)}>
           <More />
@@ -65,18 +71,35 @@ const MemberProfile = ({
         </OptionsButton>
       )}
       <Profile width={120} height={120} />
-      <div className="private__info">
-        <div className="nickname">{nickname}</div>
-        <div className="email">{email}</div>
-        <AttendanceBadge $attended={attended}>
-          {attended ? `${totalAttendance}일 출석 완료!` : `${totalAttendance}일 출석 중`}
-        </AttendanceBadge>
-      </div>
-      <div className="positions">
-        <div className="position">{ROLE[role]}</div>
-        <ColumnDivider />
-        <div className="position">{position.name}</div>
-      </div>
+      {needReview ? (
+        <>
+          <ContrastDescription>
+            <ContrastDescriptionTitle>'{nickname}'님은 어떠셨나요?</ContrastDescriptionTitle>
+            <ContrastDescriptionBody>
+              함께 스터디를 완주한 팀원에 대해 어땠는지 평가를 남겨주세요.
+            </ContrastDescriptionBody>
+          </ContrastDescription>
+          <Button size="fullWidth" scheme="secondary">
+            {/* TODO: 변수 때문에 ROUTES.STUDY.REVIEW를 사용할 수 없음. */}
+            <Link to={`./${id}/review`}>평가 작성하기</Link>
+          </Button>
+        </>
+      ) : (
+        <>
+          <div className="private__info">
+            <div className="nickname">{nickname}</div>
+            <div className="email">{email}</div>
+            <AttendanceBadge $attended={attended}>
+              {attended ? `${totalAttendance}일 출석 완료!` : `${totalAttendance}일 출석 중`}
+            </AttendanceBadge>
+          </div>
+          <div className="positions">
+            <div className="position">{ROLE[role]}</div>
+            <ColumnDivider />
+            <div className="position">{position.name}</div>
+          </div>
+        </>
+      )}
       {isLeaveModalOpen && (
         <LeaveModal
           handleApprove={(value) => (
@@ -131,18 +154,20 @@ const Options = ({
   );
 };
 
-const MemberProfileWrapper = styled.div`
+const MemberProfileWrapper = styled.div<{
+  $contrast: boolean;
+}>`
   display: flex;
   width: 248px;
   min-width: 248px;
   max-width: 288px;
-  padding: 24px 16px;
+  padding: ${({ $contrast }) => ($contrast ? '24px 16px 16px 16px' : '24px 16px')};
   flex-direction: column;
   align-items: center;
   gap: 16px;
-  border-radius: 16px;
+  border-radius: 12px;
   border: 1px solid ${(props) => props.theme.color.black1};
-  background: ${(props) => props.theme.color.white};
+  background: ${({ theme, $contrast }) => ($contrast ? theme.color.black3 : theme.color.white)};
   box-shadow: 0px 0px 20px 0px ${(props) => props.theme.color.black0};
   position: relative;
 
@@ -241,6 +266,24 @@ const AttendanceBadge = styled.span<{
   font-style: normal;
   font-weight: 400;
   line-height: 24px;
+`;
+
+const ContrastDescription = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const ContrastDescriptionTitle = styled.p`
+  color: ${({ theme }) => theme.color.white};
+  text-align: center;
+  ${({ theme }) => theme.typo.PageTitle};
+`;
+
+const ContrastDescriptionBody = styled.p`
+  color: ${({ theme }) => theme.color.white};
+  text-align: center;
+  ${({ theme }) => theme.typo.ListLabel};
 `;
 
 export default MemberProfile;
