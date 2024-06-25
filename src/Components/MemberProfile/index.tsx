@@ -33,6 +33,7 @@ export interface MemberProfileProps extends Member {
 
 /** 스터디원의 프로필을 보여줍니다. */
 const MemberProfile = ({
+  id,
   nickname,
   email,
   role,
@@ -79,7 +80,8 @@ const MemberProfile = ({
             </ContrastDescriptionBody>
           </ContrastDescription>
           <Button size="fullWidth" scheme="secondary">
-            평가 작성하기
+            {/* TODO: 변수 때문에 ROUTES.STUDY.REVIEW를 사용할 수 없음. */}
+            <Link to={`./${id}/review`}>평가 작성하기</Link>
           </Button>
         </>
       ) : (
