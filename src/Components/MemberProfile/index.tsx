@@ -12,6 +12,7 @@ import { useStudyForceLeaveMutation } from '@/Hooks/study/useStudyForceLeaveMuta
 import { useStudyLeaveRequestMutation } from '@/Hooks/study/useStudyLeaveRequestMutation';
 import Modal from '../Common/Modal';
 import { LEAVE } from '@/Constants/messages';
+import Button from '../Common/Button';
 
 export interface MemberProfileProps extends Member {
   /** 스터디원의 프로필 이미지 URL */
@@ -69,18 +70,34 @@ const MemberProfile = ({
         </OptionsButton>
       )}
       <Profile width={120} height={120} />
-      <div className="private__info">
-        <div className="nickname">{nickname}</div>
-        <div className="email">{email}</div>
-        <AttendanceBadge $attended={attended}>
-          {attended ? `${totalAttendance}일 출석 완료!` : `${totalAttendance}일 출석 중`}
-        </AttendanceBadge>
-      </div>
-      <div className="positions">
-        <div className="position">{ROLE[role]}</div>
-        <ColumnDivider />
-        <div className="position">{position.name}</div>
-      </div>
+      {needReview ? (
+        <>
+          <ContrastDescription>
+            <ContrastDescriptionTitle>'{nickname}'님은 어떠셨나요?</ContrastDescriptionTitle>
+            <ContrastDescriptionBody>
+              함께 스터디를 완주한 팀원에 대해 어땠는지 평가를 남겨주세요.
+            </ContrastDescriptionBody>
+          </ContrastDescription>
+          <Button size="fullWidth" scheme="secondary">
+            평가 작성하기
+          </Button>
+        </>
+      ) : (
+        <>
+          <div className="private__info">
+            <div className="nickname">{nickname}</div>
+            <div className="email">{email}</div>
+            <AttendanceBadge $attended={attended}>
+              {attended ? `${totalAttendance}일 출석 완료!` : `${totalAttendance}일 출석 중`}
+            </AttendanceBadge>
+          </div>
+          <div className="positions">
+            <div className="position">{ROLE[role]}</div>
+            <ColumnDivider />
+            <div className="position">{position.name}</div>
+          </div>
+        </>
+      )}
       {isLeaveModalOpen && (
         <LeaveModal
           handleApprove={(value) => (
@@ -142,7 +159,7 @@ const MemberProfileWrapper = styled.div<{
   width: 248px;
   min-width: 248px;
   max-width: 288px;
-  padding: ${({ $contrast }) => ($contrast ? '24px 16px' : '24px 16px 16px 16px')};
+  padding: ${({ $contrast }) => ($contrast ? '24px 16px 16px 16px' : '24px 16px')};
   flex-direction: column;
   align-items: center;
   gap: 16px;
@@ -247,6 +264,24 @@ const AttendanceBadge = styled.span<{
   font-style: normal;
   font-weight: 400;
   line-height: 24px;
+`;
+
+const ContrastDescription = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const ContrastDescriptionTitle = styled.p`
+  color: ${({ theme }) => theme.color.white};
+  text-align: center;
+  ${({ theme }) => theme.typo.PageTitle};
+`;
+
+const ContrastDescriptionBody = styled.p`
+  color: ${({ theme }) => theme.color.white};
+  text-align: center;
+  ${({ theme }) => theme.typo.ListLabel};
 `;
 
 export default MemberProfile;
