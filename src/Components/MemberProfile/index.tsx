@@ -231,6 +231,7 @@ const Menu = styled.ul`
   background: ${({ theme }) => theme.color.white};
   position: absolute;
   top: -8px;
+  z-index: 10;
 `;
 
 const MenuItem = styled.li`
