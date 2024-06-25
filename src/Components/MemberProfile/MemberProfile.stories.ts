@@ -35,3 +35,10 @@ export const Attended: Story = {
     attended: true,
   },
 };
+
+/** 리뷰 작성이 필요한 경우 */
+export const ReviewNeeded: Story = {
+  args: {
+    needReview: true,
+  },
+};

@@ -109,14 +109,18 @@ export const StudyDetailPage = () => {
                   )}
                 </PlatformTitle>
                 <TopBarSectionText>
-                  <a
-                    href="#"
-                    style={{
-                      textDecoration: 'underline',
-                    }}
-                  >
-                    {study?.platform}
-                  </a>
+                  {study?.way === 'OFFLINE' ? (
+                    '오프라인'
+                  ) : (
+                    <Link
+                      to={study?.platformUrl}
+                      style={{
+                        textDecoration: 'underline',
+                      }}
+                    >
+                      {study?.platform}
+                    </Link>
+                  )}
                 </TopBarSectionText>
               </PlatformSection>
               <WeekdaySection>
@@ -135,7 +139,11 @@ export const StudyDetailPage = () => {
                 )}
               </MembersCountBar>
               <MemberList>
-                <MemberSection members={study?.participants} />
+                <MemberSection
+                  isStudyEnd={study?.status === 'COMPLETED'}
+                  members={study?.participants}
+                  userId={user?.id}
+                />
               </MemberList>
             </Members>
           </MainSection>

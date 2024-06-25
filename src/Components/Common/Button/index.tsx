@@ -31,13 +31,23 @@ const Button = ({
   size = 'normal',
 }: ButtonProps) => {
   return (
-    <ButtonContainer {...{ onClick, type, scheme, disabled, className, size }}>
+    <ButtonContainer
+      onClick={onClick}
+      type={type}
+      $scheme={scheme}
+      disabled={disabled}
+      className={className}
+      $size={size}
+    >
       <>{children}</>
     </ButtonContainer>
   );
 };
 
-const ButtonContainer = styled.button<ButtonProps>`
+const ButtonContainer = styled.button<{
+  $scheme?: 'primary' | 'secondary' | 'third' | 'normal' | 'text';
+  $size?: 'normal' | 'fullWidth';
+}>`
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -46,35 +56,36 @@ const ButtonContainer = styled.button<ButtonProps>`
   cursor: pointer;
   box-sizing: border-box;
   opacity: 1;
-  width: ${({ size, theme }) => (size === 'fullWidth' ? theme.buttonSize.fullWidth : theme.buttonSize.normal)};
+  width: ${({ $size, theme }) => ($size === 'fullWidth' ? theme.buttonSize.fullWidth : theme.buttonSize.normal)};
   font-family: 'Pretendard600';
   ${({ theme }) => theme.typo.ButtonButton};
 
   white-space: nowrap;
-  color: ${({ scheme, theme }) => (scheme === 'primary' ? theme.color.white : theme.color.black3)};
-  background: ${({ scheme, theme }) =>
-    scheme === 'primary'
+  color: ${({ theme, $scheme }) => ($scheme === 'primary' ? theme.color.white : theme.color.black3)};
+  background: ${({ $scheme, theme }) =>
+    $scheme === 'primary'
       ? theme.color.purple1
-      : scheme === 'secondary'
+      : $scheme === 'secondary'
         ? theme.color.purple2
-        : scheme === 'text'
+        : $scheme === 'text'
           ? 'inherit'
           : theme.color.white};
-  border: ${({ scheme, theme }) => (scheme === 'text' ? 'none' : `1px solid ${theme.color.black1}`)};
-  border-radius: ${({ scheme, theme }) => (scheme === 'third' ? theme.borderRadius.xlarge : theme.borderRadius.small)};
+  border: ${({ $scheme, theme }) => ($scheme === 'text' ? 'none' : `1px solid ${theme.color.black1}`)};
+  border-radius: ${({ $scheme, theme }) =>
+    $scheme === 'third' ? theme.borderRadius.xlarge : theme.borderRadius.small};
 
   &:hover {
-    color: ${({ scheme, theme }) => (scheme === 'normal' ? theme.color.black4 : theme.color.white)};
-    background: ${({ scheme, theme }) =>
-      scheme === 'third' ? theme.color.orange4 : scheme === 'normal' ? theme.color.white : theme.color.purple5};
+    color: ${({ $scheme, theme }) => ($scheme === 'normal' ? theme.color.black4 : theme.color.white)};
+    background: ${({ $scheme, theme }) =>
+      $scheme === 'third' ? theme.color.orange4 : $scheme === 'normal' ? theme.color.white : theme.color.purple5};
   }
 
   &:active {
-    color: ${({ scheme, theme }) =>
-      scheme === 'normal' ? theme.color.black : scheme === 'third' ? theme.color.orange3 : theme.color.white};
-    background: ${({ scheme, theme }) =>
-      scheme === 'primary' ? theme.color.purple5 : scheme === 'secondary' ? theme.color.purple1 : theme.color.white};
-    border: 1px solid ${({ scheme, theme }) => (scheme === 'third' ? theme.color.orange3 : theme.color.black1)};
+    color: ${({ $scheme, theme }) =>
+      $scheme === 'normal' ? theme.color.black : $scheme === 'third' ? theme.color.orange3 : theme.color.white};
+    background: ${({ $scheme, theme }) =>
+      $scheme === 'primary' ? theme.color.purple5 : $scheme === 'secondary' ? theme.color.purple1 : theme.color.white};
+    border: 1px solid ${({ $scheme, theme }) => ($scheme === 'third' ? theme.color.orange3 : theme.color.black1)};
   }
 
   &:disabled {

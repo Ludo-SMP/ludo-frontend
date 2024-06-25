@@ -1,6 +1,6 @@
 import { forwardRef, useMemo } from 'react';
 import Select, { ActionMeta, GroupBase, MultiValue, Props, SelectInstance, StylesConfig } from 'react-select';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Option } from '@/Types/study';
 import { theme } from '@/Styles/theme';
 /**
@@ -19,7 +19,7 @@ export type SelectProps = Props & {
 const CustomSelect = forwardRef<
   SelectInstance<Option<unknown, unknown>, boolean, GroupBase<Option<unknown, unknown>>>,
   SelectProps
->(({ onChange, values, label, placeholder, defaultValue, isMulti = false }, ref) => {
+>(({ onChange, values, label, placeholder, defaultValue, isMulti = false, isDisabled }, ref) => {
   const customStyles: StylesConfig<Option<unknown, unknown>> = useMemo(
     () => ({
       control: () => ({
@@ -91,7 +91,7 @@ const CustomSelect = forwardRef<
   );
 
   return (
-    <Label>
+    <Label $disabled={isDisabled}>
       {label}
       <Select
         ref={ref}
@@ -104,6 +104,7 @@ const CustomSelect = forwardRef<
           actionMeta: ActionMeta<Option<unknown, unknown>>,
         ) => onChange(newValue, actionMeta)}
         styles={customStyles}
+        isDisabled={isDisabled}
         components={{
           IndicatorsContainer: () => null,
         }}
@@ -114,7 +115,7 @@ const CustomSelect = forwardRef<
 
 export default CustomSelect;
 
-const Label = styled.label`
+const Label = styled.label<{ $disabled: boolean }>`
   font-family: Pretendard700;
   font-size: 18px;
   font-weight: 700;
@@ -123,4 +124,12 @@ const Label = styled.label`
   display: flex;
   flex-direction: column;
   gap: 12px;
+
+  ${({ $disabled }) =>
+    $disabled &&
+    css`
+      opacity: 0.65;
+      color: ${({ theme }) => theme.color.black2};
+      cursor: not-allowed;
+    `}
 `;
