@@ -27,6 +27,15 @@ const dayMap = {
   7: '일요일',
 };
 
+const isValidUrl = (url: string) => {
+  try {
+    new URL(url);
+    return true;
+  } catch {
+    return false;
+  }
+};
+
 export const StudyDetailPage = () => {
   const studyId = Number(useParams().studyId);
   const { user } = useUserStore();
@@ -111,15 +120,17 @@ export const StudyDetailPage = () => {
                 <TopBarSectionText>
                   {study?.way === 'OFFLINE' ? (
                     '오프라인'
-                  ) : (
-                    <Link
-                      to={study?.platformUrl}
+                  ) : isValidUrl(study?.platformUrl) ? (
+                    <a
+                      href={study?.platformUrl}
                       style={{
                         textDecoration: 'underline',
                       }}
                     >
                       {study?.platform}
-                    </Link>
+                    </a>
+                  ) : (
+                    <span>{study?.platform}</span>
                   )}
                 </TopBarSectionText>
               </PlatformSection>
