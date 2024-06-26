@@ -32,13 +32,27 @@ export const IsSelf: Story = {
 /** 당일 출석을 완료한 경우 */
 export const Attended: Story = {
   args: {
-    attended: true,
+    state: 'attended',
+  },
+};
+
+/** 스터디 탈퇴를 요청한 경우 */
+export const NeedLeaveApproval: Story = {
+  args: {
+    state: 'needLeaveApproval',
   },
 };
 
 /** 리뷰 작성이 필요한 경우 */
 export const ReviewNeeded: Story = {
   args: {
-    needReview: true,
+    state: 'needReview',
+  },
+};
+
+/** 리뷰를 완료한 경우 */
+export const ReviewEnd: Story = {
+  args: {
+    state: 'reviewEnd',
   },
 };
