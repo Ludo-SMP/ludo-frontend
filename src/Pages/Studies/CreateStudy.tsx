@@ -1,7 +1,8 @@
 import { useCreateStudyMutation } from '@/Hooks/study/useCreateStudy';
-import Layout from './Layout';
+import Layout, { StudyCreateForm } from './Layout';
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
+import { useTempSaved } from '@/Hooks/useTempSaved';
 
 export default () => {
   const { pathname } = useLocation();
@@ -10,5 +11,7 @@ export default () => {
     window.scrollTo(0, 0);
   }, [pathname]);
 
-  return <Layout mutation={useCreateStudyMutation()} type="CREATE" />;
+  const { tempSaved } = useTempSaved();
+
+  return <Layout mutation={useCreateStudyMutation()} type="CREATE" initValue={tempSaved as StudyCreateForm} />;
 };
