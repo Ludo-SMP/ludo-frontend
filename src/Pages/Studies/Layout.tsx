@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { One, Three, Two } from '@/Assets';
 import { ProgressPeriod } from '@/Components/Calendar/ProgressPeriod';
 import InputText from '@/Components/Common/InputText';
@@ -9,8 +9,21 @@ import { HeaderWithLogo } from '@/Components/Header/HeaderWithLogo';
 import Heading from '@/Components/Heading';
 import { AttendanceModal } from '@/Components/Modal/AttendanceModal';
 import { CalendarButton } from '@/Components/Selectbox/CalendarButton';
-import CustomSelect from '@/Components/Selectbox/CustomSelect';
-import { CATEGORIES_OPTION, PLATFORM_OPTIONS, POSITION, PROGRESS_METHODS_OPTIONS } from '@/Shared/study';
+
+import {
+  APPLICATION_CNT,
+  CATEGORIES_OPTION,
+  CATEGORY,
+  NEW_APPLICATION_CNT,
+  PLATFORM,
+  PLATFORM_OPTIONS,
+  POSITION,
+  PROGRESS_METHOD,
+  PROGRESS_METHODS_OPTIONS,
+  generateSelectOption,
+  generateDropdownOption,
+  NEW_POSITION,
+} from '@/Shared/study';
 import { DateRange } from '@/Types/atoms';
 import { Platform, ProgressMethod, StudyCreate, StudyDetail } from '@/Types/study';
 import { UseMutationResult, UseQueryResult } from '@tanstack/react-query';
@@ -23,21 +36,21 @@ import { CreateButtons } from './CreateButtons';
 import { EditButtons } from './EditButtons';
 import { Grid } from '@/Components/Common/Grid';
 import { media } from '@/Styles/theme';
-import { Option } from '@/Types/study';
+import CustomSelect from '@/Components/CustomSelect/CustomSelect';
+import { getSharedDayObjectById } from '@/utils/date';
 
 export interface StudyCreateForm {
   title: string;
   category: number;
-  memberLimit: number;
-  position: number;
-  progressMethod: ProgressMethod;
+  participantLimit: number;
+  positionId: number;
+  way: ProgressMethod;
   platform: Platform;
   platformUrl: string;
+  createdDateTime: string;
+  endDateTime: string;
   progressPeriod: DateRange;
 }
-const memberLimit = Array(10)
-  .fill(void 0)
-  .map((_, i) => ({ value: i + 1, label: `${i + 1}` }));
 
 interface StudyFormLayoutProps {
   query?: UseQueryResult<StudyDetail, Error>;
@@ -47,21 +60,55 @@ interface StudyFormLayoutProps {
 
 export default ({ query, mutation, type }: StudyFormLayoutProps) => {
   const {
+    title,
+    category,
+    participantLimit,
+    way,
+    platform,
+    platformUrl,
+    createdDateTime,
+    endDateTime,
+    attendanceDay: defAttendanceDay,
+    owner,
+    participants,
+  } = query?.data?.study ?? {};
+
+  const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
     control,
-  } = useForm<StudyCreateForm>();
+  } = useForm<StudyCreateForm>({
+    defaultValues: {
+      title,
+      category: category?.id,
+      participantLimit,
+      way,
+      platformUrl,
+      createdDateTime,
+      endDateTime,
+    },
+  });
+
+  const positionId = participants?.find((participant) => participant.id === owner.id)?.position?.id ?? 0;
 
   const { isModalOpen, openModal } = useModalStore();
 
   const { attendanceDay, content, toggleAttendanceDay, isValidAttendanceDay } = useAttendanceModal();
 
+  useEffect(function initAttendanceModal() {
+    // API 응답값으로 받은 출석일이 있는 경우 값을 세팅해준다.
+    if (defAttendanceDay?.length > 0) {
+      const defAttendanceDayObject: any = generateDropdownOption(getSharedDayObjectById(defAttendanceDay));
+      defAttendanceDayObject?.map((day: any) => toggleAttendanceDay(day));
+    }
+  }, []);
+
   const { mutate, isError } = mutation;
 
   const formData = watch();
-  const isOffline = formData?.progressMethod?.value === 'OFFLINE';
+  const isOffline = formData?.way === 'OFFLINE';
 
   if (isError) return <ErrorBoundary />;
 
@@ -71,18 +118,19 @@ export default ({ query, mutation, type }: StudyFormLayoutProps) => {
       <PageWrapper>
         <Form
           onSubmit={handleSubmit(
-            ({ title, category, memberLimit, position, progressMethod, platform, platformUrl, progressPeriod }) => {
+            ({ title, category, participantLimit, positionId, way, platform, platformUrl, progressPeriod }) => {
               if (!isValidAttendanceDay()) return;
               mutate({
                 title,
                 categoryId: category,
-                positionId: position,
-                way: progressMethod,
+                positionId,
+                way,
                 platform: platform,
-                participantLimit: memberLimit,
+                participantLimit,
                 startDateTime: progressPeriod[0].toISOString(),
                 endDateTime: progressPeriod[1].toISOString(),
                 attendanceDay: attendanceDay?.map((day) => day.id),
+                platformUrl,
               });
             },
             isValidAttendanceDay,
@@ -93,7 +141,7 @@ export default ({ query, mutation, type }: StudyFormLayoutProps) => {
               <LabelForm<StudyCreateForm> label="제목" name="title" errors={errors}>
                 <InputText
                   placeholder="제목을 기입해주세요."
-                  defaultValue={query?.data?.study?.title}
+                  defaultValue={title}
                   maxLength={50}
                   currentLength={formData.title?.length ?? 0}
                   {...register('title', { required: '제목을 기입해주세요.', maxLength: 50 })}
@@ -111,39 +159,44 @@ export default ({ query, mutation, type }: StudyFormLayoutProps) => {
                       <CustomSelect
                         label="카테고리"
                         placeholder="ex) 코딩테스트 스터디"
-                        defaultValue={query?.data?.study?.category}
-                        values={CATEGORIES_OPTION}
+                        defaultValue={generateSelectOption({ category: CATEGORY[category?.id] }) as any}
+                        values={CATEGORIES_OPTION as any}
                         {...field}
                       />
                     )}
                   />
                 </LabelForm>
-                <LabelForm<StudyCreateForm> name="memberLimit" errors={errors}>
+                <LabelForm<StudyCreateForm> name="participantLimit" errors={errors}>
                   <Controller
                     control={control}
-                    name="memberLimit"
+                    name="participantLimit"
                     rules={{ required: '스터디 최대 인원을 정해주세요.' }}
                     render={({ field }) => (
                       <CustomSelect
                         label="스터디 최대 인원"
                         placeholder="ex) 5명"
-                        defaultValue={query?.data?.study?.participantLimit}
-                        values={memberLimit}
+                        defaultValue={
+                          generateSelectOption({
+                            participantLimit: NEW_APPLICATION_CNT[participantLimit],
+                          }) as any
+                        }
+                        values={APPLICATION_CNT as any}
                         {...field}
                       />
                     )}
                   />
                 </LabelForm>
-                <LabelForm<StudyCreateForm> name="position" errors={errors}>
+                <LabelForm<StudyCreateForm> name="positionId" errors={errors}>
                   <Controller
                     control={control}
-                    name="position"
+                    name="positionId"
                     rules={{ required: '포지션을 정해주세요' }}
                     render={({ field }) => (
                       <CustomSelect
                         label="나의 포지션"
                         placeholder="ex) 프론트엔드"
-                        values={POSITION as Option[]}
+                        defaultValue={generateSelectOption({ positionId: NEW_POSITION[positionId] }) as any}
+                        values={POSITION as any}
                         {...field}
                       />
                     )}
@@ -153,17 +206,17 @@ export default ({ query, mutation, type }: StudyFormLayoutProps) => {
             </FormSection>
             <FormSection icon={<Three />} header="스터디 진행 관련">
               <Grid>
-                <LabelForm<StudyCreateForm> name="progressMethod" errors={errors}>
+                <LabelForm<StudyCreateForm> name="way" errors={errors}>
                   <Controller
                     control={control}
-                    name="progressMethod"
+                    name="way"
                     rules={{ required: '진행방식을 정해주세요.' }}
                     render={({ field }) => (
                       <CustomSelect
                         label="진행 방식"
                         placeholder="ex) 온/오프라인"
-                        defaultValue={query?.data?.study?.way}
-                        values={PROGRESS_METHODS_OPTIONS}
+                        defaultValue={generateSelectOption({ way: PROGRESS_METHOD[way as any] }) as any}
+                        values={PROGRESS_METHODS_OPTIONS as any}
                         {...field}
                       />
                     )}
@@ -178,8 +231,8 @@ export default ({ query, mutation, type }: StudyFormLayoutProps) => {
                       <CustomSelect
                         label="진행 플랫폼"
                         placeholder="ex) gather"
-                        defaultValue={query?.data?.study?.platform}
-                        values={PLATFORM_OPTIONS}
+                        defaultValue={generateSelectOption({ platform: PLATFORM[platform] }) as any}
+                        values={PLATFORM_OPTIONS as any}
                         isDisabled={isOffline}
                         {...field}
                       />
@@ -195,20 +248,23 @@ export default ({ query, mutation, type }: StudyFormLayoutProps) => {
                   <InputText
                     placeholder="ex) gather 주소"
                     disabled={isOffline}
+                    defaultValue={platformUrl}
                     {...register('platformUrl', {
                       required: !isOffline && '진행 플랫폼 URL을 입력해주세요',
                     })}
                   />
                 </LabelForm>
               </Grid>
-              <Grid $col={2}>
+              <Grid col={2}>
                 <LabelForm<StudyCreateForm> label="진행 기간" name="progressPeriod" errors={errors}>
                   <CalendarButton>
                     <Controller
                       control={control}
                       name="progressPeriod"
                       rules={{ required: '스터디 진행 기간을 정해 주세요.' }}
-                      render={({ field }) => <ProgressPeriod {...field} />}
+                      render={({ field }) => (
+                        <ProgressPeriod {...field} defaultValue={[createdDateTime, endDateTime]} />
+                      )}
                     />
                   </CalendarButton>
                 </LabelForm>
