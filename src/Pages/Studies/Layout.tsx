@@ -50,15 +50,17 @@ export interface StudyCreateForm {
   createdDateTime: string;
   endDateTime: string;
   progressPeriod: DateRange;
+  attendanceDay: number[];
 }
 
 interface StudyFormLayoutProps {
+  initValue?: Partial<StudyCreateForm> | null;
   query?: UseQueryResult<StudyDetail, Error>;
   mutation: UseMutationResult<AxiosResponse, Error, StudyCreate>;
   type?: 'CREATE' | 'EDIT';
 }
 
-export default ({ query, mutation, type }: StudyFormLayoutProps) => {
+export default ({ initValue, mutation, type }: StudyFormLayoutProps) => {
   const {
     title,
     category,
@@ -68,10 +70,9 @@ export default ({ query, mutation, type }: StudyFormLayoutProps) => {
     platformUrl,
     createdDateTime,
     endDateTime,
+    positionId,
     attendanceDay: defAttendanceDay,
-    owner,
-    participants,
-  } = query?.data?.study ?? {};
+  } = initValue ?? {};
 
   const {
     register,
@@ -80,18 +81,8 @@ export default ({ query, mutation, type }: StudyFormLayoutProps) => {
     formState: { errors },
     control,
   } = useForm<StudyCreateForm>({
-    defaultValues: {
-      title,
-      category: category?.id,
-      participantLimit,
-      way,
-      platformUrl,
-      createdDateTime,
-      endDateTime,
-    },
+    defaultValues: initValue,
   });
-
-  const positionId = participants?.find((participant) => participant.id === owner.id)?.position?.id ?? 0;
 
   const { isModalOpen, openModal } = useModalStore();
 
@@ -159,7 +150,7 @@ export default ({ query, mutation, type }: StudyFormLayoutProps) => {
                       <CustomSelect
                         label="카테고리"
                         placeholder="ex) 코딩테스트 스터디"
-                        defaultValue={generateSelectOption({ category: CATEGORY[category?.id] }) as any}
+                        defaultValue={generateSelectOption({ category: CATEGORY[category] }) as any}
                         values={CATEGORIES_OPTION as any}
                         {...field}
                       />
