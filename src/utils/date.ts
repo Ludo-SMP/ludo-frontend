@@ -1,4 +1,4 @@
-import { NEW_ATTENDANCE_DAY } from '@/Shared/study';
+import { NEW_ATTENDANCE_DAY, OriginalShared } from '@/Shared/study';
 
 export const dateFormatter = (date: string) => {
   const [year, month, day] = date.split('-');
@@ -77,5 +77,18 @@ export const getMillisec = (uuidStr: string) => {
  * @description 출석일에 해당하는 숫자를 요일로 변환한다.
  */
 export const getDayById = (ids: number[]) => {
-  return ids?.map((id: number) => NEW_ATTENDANCE_DAY[id].slice(0, 1)).join(', ');
+  return ids?.map((id: number) => NEW_ATTENDANCE_DAY[id].toString().slice(0, 1)).join(', ');
+};
+
+/**
+ * @description 출석일 id 배열을 shared object 형태로 가공한다.
+ * ex. [1, 2, 3] -> { 1: 월요일, 2: 화요일, 3: 수요일 }
+ */
+export const getSharedDayObjectById = (ids: number[]): OriginalShared => {
+  return ids.reduce((acc, id) => {
+    return {
+      ...acc,
+      [id]: NEW_ATTENDANCE_DAY[id],
+    };
+  }, {});
 };
