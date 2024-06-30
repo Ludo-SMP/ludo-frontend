@@ -135,12 +135,12 @@ const CustomSelect = forwardRef<SelectInstance<Option, boolean, GroupBase<Option
           options={values}
           defaultValue={defaultValue}
           onChange={(newValue: Option | MultiValue<Option>, actionMeta: ActionMeta<Option>) => {
-            if (isMulti)
+            if (isMulti) {
               return onChange(
-                (newValue as { label: unknown; value: unknown }[])?.map((values) => values.value),
+                (newValue as { label: unknown; value: unknown }[])?.map((values) => values?.value),
                 actionMeta,
               );
-            else return onChange((newValue as { label: unknown; value: unknown })?.value, actionMeta);
+            } else return onChange((newValue as { label: unknown; value: unknown })?.value, actionMeta);
           }}
           styles={customStyles}
           components={{
