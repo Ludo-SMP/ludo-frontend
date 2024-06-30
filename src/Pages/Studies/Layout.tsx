@@ -91,8 +91,8 @@ export default ({ initValue, mutation, type }: StudyFormLayoutProps) => {
   useEffect(function initAttendanceModal() {
     // API 응답값으로 받은 출석일이 있는 경우 값을 세팅해준다.
     if (defAttendanceDay?.length > 0) {
-      const defAttendanceDayObject: any = generateDropdownOption(getSharedDayObjectById(defAttendanceDay));
-      defAttendanceDayObject?.map((day: any) => toggleAttendanceDay(day));
+      const defAttendanceDayObject = generateDropdownOption(getSharedDayObjectById(defAttendanceDay));
+      defAttendanceDayObject?.map((day) => toggleAttendanceDay(day));
     }
   }, []);
 
@@ -120,7 +120,7 @@ export default ({ initValue, mutation, type }: StudyFormLayoutProps) => {
                 participantLimit,
                 startDateTime: progressPeriod[0].toISOString(),
                 endDateTime: progressPeriod[1].toISOString(),
-                attendanceDay: attendanceDay?.map((day) => day.id),
+                attendanceDay: attendanceDay?.map((day) => Number(day.id)),
                 platformUrl,
               });
             },
@@ -150,8 +150,8 @@ export default ({ initValue, mutation, type }: StudyFormLayoutProps) => {
                       <CustomSelect
                         label="카테고리"
                         placeholder="ex) 코딩테스트 스터디"
-                        defaultValue={generateSelectOption({ category: CATEGORY[category] }) as any}
-                        values={CATEGORIES_OPTION as any}
+                        defaultValue={generateSelectOption({ category: CATEGORY[category] })}
+                        values={CATEGORIES_OPTION}
                         {...field}
                       />
                     )}
@@ -186,8 +186,8 @@ export default ({ initValue, mutation, type }: StudyFormLayoutProps) => {
                       <CustomSelect
                         label="나의 포지션"
                         placeholder="ex) 프론트엔드"
-                        defaultValue={generateSelectOption({ positionId: NEW_POSITION[positionId] }) as any}
-                        values={POSITION as any}
+                        defaultValue={generateSelectOption({ positionId: NEW_POSITION[positionId] })}
+                        values={POSITION}
                         {...field}
                       />
                     )}
@@ -206,8 +206,8 @@ export default ({ initValue, mutation, type }: StudyFormLayoutProps) => {
                       <CustomSelect
                         label="진행 방식"
                         placeholder="ex) 온/오프라인"
-                        defaultValue={generateSelectOption({ way: PROGRESS_METHOD[way as any] }) as any}
-                        values={PROGRESS_METHODS_OPTIONS as any}
+                        defaultValue={generateSelectOption({ way: PROGRESS_METHOD[way] })}
+                        values={PROGRESS_METHODS_OPTIONS}
                         {...field}
                       />
                     )}
@@ -222,8 +222,8 @@ export default ({ initValue, mutation, type }: StudyFormLayoutProps) => {
                       <CustomSelect
                         label="진행 플랫폼"
                         placeholder="ex) gather"
-                        defaultValue={generateSelectOption({ platform: PLATFORM[platform] }) as any}
-                        values={PLATFORM_OPTIONS as any}
+                        defaultValue={generateSelectOption({ platform: PLATFORM[platform] })}
+                        values={PLATFORM_OPTIONS}
                         isDisabled={isOffline}
                         {...field}
                       />

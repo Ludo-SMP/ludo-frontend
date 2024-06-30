@@ -29,9 +29,8 @@ import { UseMutateFunction } from '@tanstack/react-query';
 import { CreateButtons } from '../Studies/CreateButtons';
 import { EditButtons } from '../Studies/EditButtons';
 import { useParams } from 'react-router-dom';
-import { Option } from '@/Types/study';
 
-export const generateSelectOption = generateShardObjectByCustomKey('label', 'value');
+export const generateSelectOption = generateShardObjectByCustomKey('value', 'label');
 
 export interface LayoutProps {
   type: 'CREATE' | 'EDIT';
@@ -106,10 +105,8 @@ const Layout = ({ type, mutate, study, initValue }: LayoutProps) => {
                       <CustomSelect
                         label="모집 인원"
                         placeholder="ex) 5명"
-                        defaultValue={
-                          generateSelectOption({ applicantLimit: NEW_APPLICATION_CNT[applicantLimit] }) as Option
-                        }
-                        values={generateSelectOption(NEW_APPLICATION_CNT) as Option[]}
+                        defaultValue={generateSelectOption({ applicantLimit: NEW_APPLICATION_CNT[applicantLimit] })}
+                        values={generateSelectOption(NEW_APPLICATION_CNT)}
                         {...field}
                       />
                     )}
@@ -134,8 +131,8 @@ const Layout = ({ type, mutate, study, initValue }: LayoutProps) => {
                       <CustomSelect
                         label="포지션"
                         placeholder="포지션"
-                        defaultValue={generateSelectOption(genPstObjById(positionIds)) as Option}
-                        values={generateSelectOption(NEW_POSITION) as Option[]}
+                        defaultValue={generateSelectOption(genPstObjById(positionIds))}
+                        values={generateSelectOption(NEW_POSITION)}
                         isMulti
                         {...field}
                       />
@@ -166,8 +163,8 @@ const Layout = ({ type, mutate, study, initValue }: LayoutProps) => {
                       <CustomSelect
                         label="연락방법"
                         placeholder="연락방법"
-                        defaultValue={generateSelectOption({ contact: NEW_CONTACT[contact] }) as Option}
-                        values={generateSelectOption(NEW_CONTACT) as Option[]}
+                        defaultValue={generateSelectOption({ contact: NEW_CONTACT[contact] })}
+                        values={generateSelectOption(NEW_CONTACT)}
                         {...field}
                       />
                     )}
