@@ -1,6 +1,6 @@
 import { generateShardObjectByCustomKey } from '@/utils/selectUtil';
 
-interface OriginalShared {
+export interface OriginalShared {
   [key: number | string]: number | string;
 }
 
@@ -29,11 +29,8 @@ export const NEW_POSITION: OriginalShared = {
   4: '데브옵스',
 };
 
-export type TCustomLabelKey = 'label' | 'name';
-export type TCustomValueKey = 'value' | 'id';
-
-export const generateSelectOption = generateShardObjectByCustomKey('label', 'value');
-export const generateDropdownOption = generateShardObjectByCustomKey('name', 'id');
+export const generateSelectOption = generateShardObjectByCustomKey('value', 'label');
+export const generateDropdownOption = generateShardObjectByCustomKey('id', 'name');
 
 export const POSITIONS = generateDropdownOption(NEW_POSITION);
 export const POSITION = generateSelectOption(NEW_POSITION);
@@ -78,7 +75,7 @@ export const ALL = {
   name: '전체',
 };
 
-export const CATEGORY = {
+export const CATEGORY: OriginalShared = {
   1: '프로젝트',
   2: '코딩 테스트',
   3: '모의 면접',
@@ -111,12 +108,12 @@ export const CATEGORIES_OPTION = generateSelectOption(CATEGORY);
 //   { value: 'OFFLINE', label: '오프라인' },
 // ];
 
-export const PROGRESS_METHOD = {
+export const PROGRESS_METHOD: OriginalShared = {
   ONLINE: '온라인',
   OFFLINE: '오프라인',
 };
 
-export const WAY = {
+export const WAY: OriginalShared = {
   1: 'ONLINE',
   2: 'OFFLINE',
 };
@@ -140,34 +137,3 @@ export const NEW_ATTENDANCE_DAY: OriginalShared = {
 };
 
 export const ATTENDANCE_DAY = generateDropdownOption(NEW_ATTENDANCE_DAY);
-
-// export const ATTENDANCE_DAY = [
-//   {
-//     id: 1,
-//     name: '월요일',
-//   },
-//   {
-//     id: 2,
-//     name: '화요일',
-//   },
-//   {
-//     id: 3,
-//     name: '수요일',
-//   },
-//   {
-//     id: 4,
-//     name: '목요일',
-//   },
-//   {
-//     id: 5,
-//     name: '금요일',
-//   },
-//   {
-//     id: 6,
-//     name: '토요일',
-//   },
-//   {
-//     id: 7,
-//     name: '일요일',
-//   },
-// ];
