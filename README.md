@@ -114,14 +114,14 @@ yarn install
   ```
 - 인증서 생성
   ```
-    mkcert local.ludoapi.store
+    mkcert local.ludo.study
   ``` 
-- 생성된 local.ludoapi.store.pem, local.ludoapi.store-key.pem 키를 루트의 cert 폴더로 이동
+- 생성된 local.ludo.study.pem, local.ludo.study-key.pem 키를 루트의 cert 폴더로 이동
     ```
     ludo-frontend
     └── cert                         # 인증서 key를 보관하는 폴더
-        └── local.ludoapi.store.pem
-        └── local.ludoapi.store-key.pem
+        └── local.ludo.study.pem
+        └── local.ludo.study-key.pem
    ```
   
 
@@ -173,16 +173,35 @@ ludo-frontend
 
 
 ## 🙋🏻‍♂️ FE 팀원
-<table >
+<table>
   <tbody>
       <td align="center">
         <a href="https://github.com/kmin-jeong">
             <img src="https://avatars.githubusercontent.com/u/53456037?v=4" width="200px;" height="200px;" alt="타로"/>
-<h3><b>타로</b></h3></a></td>
-        <td align="center">
+            <h3><b>타로</b></h3>
+        </a>
+      </td>
+        
+      <td align="center">
         <a href="https://github.com/SungHyun627">
             <img src="https://github.com/Ludo-SMP/ludo-frontend/assets/62270427/17abec8f-0a5b-4993-83ce-05b5bebbc2fa" width="200px;" height="200px;" alt="김성현"/>
-<h3><b>김성현</b></h3></a></td>
+            <h3><b>김성현</b></h3>
+        </a>
+      </td>
+
+      <td align="center">
+        <a href="https://github.com/hyosin-Jang">
+            <img src="https://github.com/Ludo-SMP/ludo-frontend/assets/71035113/af24be48-bbc1-4453-a9d9-3ffab2c60c09" width="200px;" height="200px;" alt="hyosin-Jang"/>
+            <h3><b>Hyosin-Jang</b></h3>
+        </a>
+      </td>
+        
+      <td align="center">
+        <a href="https://github.com/abiriadev">
+            <img src="https://github.com/Ludo-SMP/ludo-frontend/assets/71035113/c0de056b-7a11-4f16-ae1c-7140e8bba14c" width="200px;" height="200px;" alt="Abiria"/>
+            <h3><b>Abiria</b></h3>
+        </a>
+      </td>
   </tbody>
 </table>
 
