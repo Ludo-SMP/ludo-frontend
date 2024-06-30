@@ -85,29 +85,6 @@ export const CATEGORIES = generateDropdownOption(CATEGORY);
 export const CATEGORIES_OPTION = generateSelectOption(CATEGORY);
 
 // category
-// export const CATEGORIES = [
-//   { id: 1, name: '프로젝트' },
-//   { id: 2, name: '코딩 테스트' },
-//   { id: 3, name: '모의 면접' },
-// ];
-
-// export const CATEGORIES_OPTION = [
-//   { value: 1, label: '프로젝트' },
-//   { value: 2, label: '코딩 테스트' },
-//   { value: 3, label: '모의 면접' },
-// ];
-
-// progress_method
-// export const PROGRESS_METHODS = [
-//   { id: 1, name: 'ONLINE' },
-//   { id: 2, name: 'OFFLINE' },
-// ];
-
-// export const PROGRESS_METHODS_OPTIONS = [
-//   { value: 'ONLINE', label: '온라인' },
-//   { value: 'OFFLINE', label: '오프라인' },
-// ];
-
 export const PROGRESS_METHOD: OriginalShared = {
   ONLINE: '온라인',
   OFFLINE: '오프라인',
