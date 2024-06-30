@@ -11,5 +11,32 @@ export default () => {
   const query = useStudyDetail(id);
   const mutation = useEditStudyMutation(id);
 
-  return <Layout query={query} mutation={mutation} type="EDIT" />;
+  const {
+    attendanceDay,
+    category,
+    startDateTime,
+    endDateTime,
+    participantLimit,
+    platform,
+    platformUrl,
+    title,
+    way,
+    owner,
+    participants,
+  } = query?.data?.study ?? {};
+
+  const studyProps = {
+    attendanceDay,
+    category: category?.id,
+    startDateTime,
+    endDateTime,
+    participantLimit,
+    platform,
+    platformUrl,
+    title,
+    way,
+    positionId: participants?.find((participant) => participant.id === owner.id)?.position?.id ?? 0,
+  };
+
+  return <Layout query={query} mutation={mutation} type="EDIT" initValue={studyProps} />;
 };
