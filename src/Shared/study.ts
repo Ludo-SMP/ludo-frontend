@@ -57,11 +57,6 @@ export const NEW_APPLICATION_CNT: OriginalShared = {
 
 export const APPLICATION_CNT = generateSelectOption(NEW_APPLICATION_CNT);
 
-export const ROLE = {
-  OWNER: '팀장',
-  MEMBER: '팀원',
-};
-
 // platform
 export const PLATFORM = {
   GATHER: 'Gather',
@@ -101,6 +96,11 @@ export const PROGRESS_METHODS_OPTIONS = generateSelectOption(PROGRESS_METHOD);
 export const SORT = {
   1: '최신순',
   2: '조회순',
+};
+
+export const ROLE = {
+  OWNER: '팀장',
+  MEMBER: '팀원',
 };
 
 export const NEW_ATTENDANCE_DAY: OriginalShared = {
