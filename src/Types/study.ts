@@ -185,7 +185,7 @@ export interface StudyCreate {
   participantLimit: number;
   startDateTime: string;
   endDateTime: string;
-  attendanceDay: AttendanceDay[];
+  attendanceDay: number[];
 }
 
 export interface StudyDetail {
