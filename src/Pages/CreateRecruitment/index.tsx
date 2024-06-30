@@ -5,6 +5,7 @@ import { useCreateRecruitmentMutation } from '@/Hooks/recruitments/useCreateRecr
 import Layout from './layout';
 import { useTempSaved } from '@/Hooks/useTempSaved';
 import { useStudyDetail } from '@/Hooks/study/useStudyDetail';
+import { RecruitFormWithSelect } from '@/Types/study';
 
 const CreateRecruitmentPage = () => {
   const studyId = Number(useParams().studyId);
@@ -24,7 +25,12 @@ const CreateRecruitmentPage = () => {
       {isLoading ? (
         <Loading />
       ) : (
-        <Layout type="CREATE" mutate={mutate} study={studyDetail?.study} initValue={tempSaved} />
+        <Layout
+          type="CREATE"
+          mutate={mutate}
+          study={studyDetail?.study}
+          initValue={tempSaved as RecruitFormWithSelect}
+        />
       )}
     </>
   );
