@@ -181,21 +181,18 @@ ludo-frontend
             <h3><b>타로</b></h3>
         </a>
       </td>
-        
       <td align="center">
         <a href="https://github.com/SungHyun627">
             <img src="https://github.com/Ludo-SMP/ludo-frontend/assets/62270427/17abec8f-0a5b-4993-83ce-05b5bebbc2fa" width="200px;" height="200px;" alt="김성현"/>
             <h3><b>김성현</b></h3>
         </a>
       </td>
-
       <td align="center">
         <a href="https://github.com/hyosin-Jang">
             <img src="https://github.com/Ludo-SMP/ludo-frontend/assets/71035113/af24be48-bbc1-4453-a9d9-3ffab2c60c09" width="200px;" height="200px;" alt="hyosin-Jang"/>
             <h3><b>Hyosin-Jang</b></h3>
         </a>
       </td>
-        
       <td align="center">
         <a href="https://github.com/abiriadev">
             <img src="https://github.com/Ludo-SMP/ludo-frontend/assets/71035113/c0de056b-7a11-4f16-ae1c-7140e8bba14c" width="200px;" height="200px;" alt="Abiria"/>
