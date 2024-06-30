@@ -14,6 +14,7 @@ const Divider = styled.hr<{ $rowHeight: number; $margin?: number }>`
   width: 100%;
   height: ${(props) => `${props.$rowHeight}px`};
   background-color: ${(props) => props.theme.color.black1};
+  border: 0;
 
   ${({ $margin }) =>
     $margin &&
