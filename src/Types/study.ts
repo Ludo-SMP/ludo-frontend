@@ -274,6 +274,7 @@ export interface MyStudies {
  *
  * @property {number} finishStudy - 진행한 스터디
  * @property {number} perfectStudy - 완주한 스터디
+ * @property {number} leftStudyCount - 탈퇴한 스터디
  * @property {number} accumulatedTeamMembers - 누적 팀원 수
  * @property {number} averageAttendanceRate - 평균 출석률
  * @property {number} activeness - 적극성
@@ -286,6 +287,7 @@ export interface MyStudies {
 export interface Trust {
   finishStudy: number;
   perfectStudy: number;
+  leftStudyCount: number;
   accumulatedTeamMembers: number;
   averageAttendanceRate: number;
   activeness: number;
