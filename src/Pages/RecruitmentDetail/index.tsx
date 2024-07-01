@@ -14,6 +14,7 @@ import { useUserStore } from '@/store/user';
 import { Loading } from '@/Assets';
 import { LeftArrow } from '@/Assets/LeftArrow';
 import Button from '@/Components/Common/Button';
+import { media } from '@/Styles/theme';
 
 const RecruitmentDetailPage = () => {
   const recruitmentId = Number(useParams().recruitmentId);
@@ -93,6 +94,10 @@ const RecruitmentDetailLayout = styled.div`
   margin: 0 auto;
   padding: 24px 0 40px;
   gap: 24px;
+
+  ${media.custom(800)} {
+    padding: 24px 24px 24px 40px;
+  }
 `;
 
 const TitleRows = styled.div`
@@ -120,6 +125,10 @@ const GreyText = styled.span`
 const Title = styled.h1`
   font-family: 'Pretendard800';
   ${({ theme }) => theme.typo.PageHeadWeb};
+
+  ${media.custom(600)} {
+    ${({ theme }) => theme.typo.PageHeadApp};
+  }
 `;
 
 const StudyInfoSection = styled.section`
@@ -137,6 +146,12 @@ const RecruitmentTitleBox = styled.div`
     width: 40px;
     height: 40px;
     padding: 8px;
+
+    ${media.custom(600)} {
+      width: 24px;
+      height: 24px;
+      padding: 0;
+    }
   }
 `;
 
@@ -144,6 +159,10 @@ const RecruitmentInfoBox = styled.div`
   display: flex;
   gap: 24px;
   padding-bottom: 20px;
+
+  ${media.custom(600)} {
+    flex-direction: column-reverse;
+  }
 `;
 
 export default RecruitmentDetailPage;
