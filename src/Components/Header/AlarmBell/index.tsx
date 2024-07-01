@@ -42,6 +42,7 @@ export { AlarmBell };
 const AlarmBox = styled.div`
   display: flex;
   position: relative;
+  cursor: pointer;
 `;
 
 const AlarmSection = styled.section``;
@@ -55,7 +56,6 @@ const AlarmCnt = styled.div`
   right: 8px;
   background-color: ${({ theme }) => theme.color.buttonHoverSecondary};
   border-radius: 50%;
-  cursor: pointer;
 `;
 
 const Inner = styled.div`
