@@ -12,7 +12,7 @@ export const Sidebar = () => {
         <Tab title="임시 저장된 글" to={ROUTES.MYPAGE.SAVED} />
       </TabGroup>
       <TabGroup name="설정">
-        <Tab title="프로필 설정" to={ROUTES.MYPAGE.PROFILE_SETTINGS} />
+        {/* <Tab title="프로필 설정" to={ROUTES.MYPAGE.PROFILE_SETTINGS} /> */}
         <Tab title="알림 권한 설정" to={ROUTES.MYPAGE.NOTIFICATIONS_SETTINGS} />
       </TabGroup>
       <TabGroup name="알림">
@@ -28,7 +28,7 @@ const Navigation = styled.nav`
   gap: 12px;
   padding: 0 32px;
   border-radius: 12px;
-  background: ${({ theme }) => theme.color.white};
+  background: ${({ theme }) => theme.color.white2};
 `;
 
 const TabGroup = ({ name, children }: PropsWithChildren<{ name: string }>) => {

@@ -14,9 +14,10 @@ import { useReadNotification } from '@/Hooks/notifications/useReadNotification';
 export interface AlarmInboxProps {
   handleOpen?: (prev: boolean) => void;
   alarmPreviews?: NotificationSSEType[];
+  isOpen: boolean;
 }
 
-export const AlarmInbox = ({ alarmPreviews, handleOpen }: AlarmInboxProps) => {
+export const AlarmInbox = ({ alarmPreviews, handleOpen, isOpen }: AlarmInboxProps) => {
   const inboxRef = useRef<HTMLDivElement>(null);
 
   useOutSideClick(inboxRef, () => {
@@ -28,7 +29,7 @@ export const AlarmInbox = ({ alarmPreviews, handleOpen }: AlarmInboxProps) => {
   const { mutate } = useReadNotification([...(notReadAlarm ?? []).map((alarm) => alarm?.notificationId)]);
 
   return (
-    <AlarmInboxBox ref={inboxRef}>
+    <AlarmInboxBox ref={inboxRef} $isOpen={isOpen}>
       <AlarmBox>
         <TopBar $isReadAll={isReadAll()}>
           <Title>알림</Title>
@@ -58,8 +59,9 @@ export const AlarmInbox = ({ alarmPreviews, handleOpen }: AlarmInboxProps) => {
   );
 };
 
-const AlarmInboxBox = styled.div`
+const AlarmInboxBox = styled.div<{ $isOpen: boolean }>`
   display: flex;
+  visibility: ${({ $isOpen }) => ($isOpen ? 'visible' : 'hidden')};
   flex-direction: column;
   width: 100%;
   min-width: 350px;
@@ -71,6 +73,9 @@ const AlarmInboxBox = styled.div`
   top: 60px;
   right: -40px;
   z-index: 100;
+  opacity: ${({ $isOpen }) => ($isOpen ? 1 : 0)};
+  transform: ${({ $isOpen }) => ($isOpen ? 'translateY(0)' : 'translateY(-20px)')};
+  transition: all 0.2s ease-out;
 `;
 
 const AlarmBox = styled.div`

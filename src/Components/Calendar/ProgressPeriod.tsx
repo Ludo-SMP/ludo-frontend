@@ -12,6 +12,9 @@ registerLocale('ko', ko);
 export interface ProgressPeriodProps {
   /** input 요소가 가질 폼 필드 이름 속성 */
   name?: string;
+
+  /** 초기값으로 설정될 기간 범위 */
+  defaultValue?: [string, string];
 }
 
 interface IProgressPeriodForm {
@@ -28,18 +31,18 @@ interface IProgressPeriodForm {
 export const ProgressPeriod = forwardRef<
   DatePicker,
   ProgressPeriodProps & Partial<ControllerRenderProps<IProgressPeriodForm, 'progressPeriod'>>
->(({ name, onChange, onBlur }, ref) => {
+>(({ name, defaultValue, onChange, onBlur }, ref) => {
   const now = new Date();
-
-  const [startDate, setStartDate] = useState(now);
-  const [endDate, setEndDate] = useState(null);
+  const [defStartDate, defEndDate] = defaultValue;
+  const [startDate, setStartDate] = useState(defStartDate && new Date(defStartDate));
+  const [endDate, setEndDate] = useState(defEndDate && new Date(defEndDate));
 
   return (
     <DateContainer
       ref={ref}
       name={name}
       locale="ko"
-      // 기본값은 오늘부터 시작하는 것으로 가정
+      // 기본값은 초기값이 있는 경우 초기값으로 시작하는 것으로 가정
       selected={startDate}
       onBlur={onBlur}
       onChange={([start, end]: [Date, Date]) => {

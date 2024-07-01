@@ -1,5 +1,5 @@
 import { Stack } from '@/Components/Common/Stack';
-import { Divider } from '../CreateRecruitment/page';
+import { Divider } from '../CreateRecruitment/layout';
 import styled from 'styled-components';
 import { useNotifications } from '@/Hooks/notifications/useNotifications';
 import { Notification } from '@/Components/Notification';

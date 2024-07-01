@@ -30,7 +30,11 @@ const UserInfoSection = ({ myPageInfo }: UserInfoSectionProps) => {
               <br /> 달려왔어요!
             </InfoItem>
             <InfoItem>
-              <StudyProgress totalStudy={trust?.finishStudy} completedStudy={trust?.perfectStudy} />
+              {/* 전체 스터디 = 진행한 스터디 + 탈퇴한 스터디 */}
+              <StudyProgress
+                totalStudy={(trust?.finishStudy ?? 0) + (trust?.leftStudyCount ?? 0)}
+                completedStudy={trust?.perfectStudy}
+              />
               <InfoText>
                 <span className="info__label">누적 팀원 수</span>
                 <span className="info__description">{trust?.accumulatedTeamMembers || 0}명</span>

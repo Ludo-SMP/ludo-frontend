@@ -1,10 +1,7 @@
-import { AttendanceDay } from '@/Types/study';
+import { CustomObject } from '@/utils/selectUtil';
 import { useState } from 'react';
 
-export interface AttendanceType {
-  id: AttendanceDay;
-  name: string;
-}
+export type AttendanceType = CustomObject<'id', 'name'>;
 
 /** 출석일 모달 관련 훅 */
 const useAttendanceModal = () => {

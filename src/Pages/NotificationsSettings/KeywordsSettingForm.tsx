@@ -1,4 +1,4 @@
-import { CATEGORY_KEYWORD_OPTIONS, POSITION_KEYWORD_OPTIONS } from '@/Shared/study';
+import { CATEGORIES_OPTION, POSITION } from '@/Shared/study';
 import { KeywordForm } from '@/Components/Common/KeywordForm';
 import ChipMenu from '@/Components/Common/ChipMenu';
 import Button from '@/Components/Common/Button';
@@ -8,7 +8,7 @@ import { RecruitmentKeywordsForm } from '@/Types/notifications';
 import { useEditNotificationsKeywords } from '@/Hooks/notifications/useEditNotificationsKeywords';
 import { useState } from 'react';
 import { StackModal } from '@/Components/Modal/StackModal';
-import { Stack } from '@/Types/study';
+import { Stack, Option } from '@/Types/study';
 
 const handleValues = (selectedValues: number[], id: number) => {
   return selectedValues.includes(id)
@@ -89,12 +89,12 @@ export const KeywordsSettingForm = ({ values, disabled }: KeywordsSettingFormPro
           )}
         </KeywordForm>
         <KeywordForm label="포지션" type="positionIds">
-          {POSITION_KEYWORD_OPTIONS.map(({ value: id, label }) => (
+          {(POSITION as Option[]).map(({ value: id, label }) => (
             <ChipMenu
               key={label}
-              checked={watch('positionIds').includes(id)}
-              onClick={() => setValue('positionIds', handleValues(watch('positionIds'), id))}
-              id={id}
+              checked={watch('positionIds').includes(Number(id))}
+              onClick={() => setValue('positionIds', handleValues(watch('positionIds'), Number(id)))}
+              id={Number(id)}
               disabled={disabled}
             >
               {label}
@@ -102,7 +102,7 @@ export const KeywordsSettingForm = ({ values, disabled }: KeywordsSettingFormPro
           ))}
         </KeywordForm>
         <KeywordForm label="카테고리" type="categoryIds">
-          {CATEGORY_KEYWORD_OPTIONS.map(({ value: id, label }) => (
+          {CATEGORIES_OPTION.map(({ value: id, label }) => (
             <ChipMenu
               key={label}
               checked={watch('categoryIds').includes(id)}
