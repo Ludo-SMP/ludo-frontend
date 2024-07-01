@@ -3,157 +3,163 @@ import { FooterLogo } from '@/Assets';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '@/Constants/route';
 import { useLoginStore } from '@/store/auth';
-import { media } from '@/Styles/theme';
+// import { media } from '@/Styles/theme';
+import Button from '../Common/Button';
+import { RowDivider } from '../Common/Divider/RowDivider';
+import { NOTION_URL } from '@/Constants/common';
 
 const Footer = () => {
   const navigate = useNavigate();
   const { isLoggedIn } = useLoginStore();
   return (
-    <FooterWrapper>
-      <FooterContentWrapper>
-        <NavigationSectionWrapper>
-          <div className="navigate" onClick={() => navigate(ROUTES.MAIN)}>
+    <FooterSection>
+      <ContentBox>
+        <NavBtnList>
+          <NavBtn scheme="text" onClick={() => navigate(ROUTES.MAIN)}>
             메인 페이지
-          </div>
-          <div className="navigate" onClick={() => navigate(ROUTES.RECRUITMENT.RECRUITMENTS)}>
+          </NavBtn>
+          <NavBtn scheme="text" onClick={() => navigate(ROUTES.RECRUITMENT.RECRUITMENTS)}>
             스터디 모집 공고 모아보기
-          </div>
+          </NavBtn>
           {isLoggedIn && (
-            <div className="navigate" onClick={() => navigate(ROUTES.MYPAGE.HOME)}>
+            <Button scheme="text" onClick={() => navigate(ROUTES.MYPAGE.HOME)}>
               마이 페이지
-            </div>
+            </Button>
           )}
-        </NavigationSectionWrapper>
-        <DescriptionSectionWrapper>
-          <DescriptionContentWrapper>
-            <img src={FooterLogo} alt="logo" />
-            <ServiceMainContentWrapper>
-              <div className="slogan">함께 하는 가능성, 기회의 연결!</div>
-              <div className="copyright">Copyright ⓒ Ludo All rights reserved.</div>
-              <div className="member">[BE] 빽, 아카, 휴 | [FE] 타로, 현 | [DE] 포키</div>
-            </ServiceMainContentWrapper>
-          </DescriptionContentWrapper>
-          <ServiceRuleContentWrapper>
-            <div className="navigate" onClick={() => {}}>
-              소개
-            </div>
-            <div className="navigate" onClick={() => {}}>
-              이용약관
-            </div>
-            <div className="navigate" onClick={() => {}}>
-              개인정보 처리방침
-            </div>
-          </ServiceRuleContentWrapper>
-        </DescriptionSectionWrapper>
-      </FooterContentWrapper>
-    </FooterWrapper>
+        </NavBtnList>
+        <ServiceIntroBox>
+          <SummaryBox>
+            <img src={FooterLogo} alt="logo" width={112} height={40} />
+            <SloganText>함께 발견하는 가능성, 기회의 연결!</SloganText>
+          </SummaryBox>
+          <DescriptionBox>
+            <DescText>Copyright ⓒ Ludo All rights reserved.</DescText>
+            <MemberTextList>
+              <DescText>[BE] 빽, 아카, 휴</DescText>
+              <DescText>[FE] 아비리아, 클레어, 현, 타로</DescText>
+              <DescText>[UXUI] 포키</DescText>
+            </MemberTextList>
+          </DescriptionBox>
+        </ServiceIntroBox>
+        <RowDivider />
+        <ServiceDetailBtnList>
+          <NavBtn scheme="text" onClick={() => window.open(NOTION_URL)}>
+            서비스 소개
+          </NavBtn>
+          <NavBtn scheme="text" onClick={() => window.open(NOTION_URL)}>
+            문의하기
+          </NavBtn>
+          <NavBtn scheme="text" onClick={() => window.open(NOTION_URL)}>
+            자주하는 질문
+          </NavBtn>
+          <NavBtn scheme="text" onClick={() => window.open(NOTION_URL)}>
+            이용약관
+          </NavBtn>
+          <NavBtn scheme="text" onClick={() => window.open(NOTION_URL)}>
+            개인정보 처리방침
+          </NavBtn>
+        </ServiceDetailBtnList>
+      </ContentBox>
+    </FooterSection>
   );
 };
 
-const FooterWrapper = styled.footer`
+const FooterSection = styled.footer`
   display: flex;
-  flex-direction: column;
-
-  max-width: 1920px;
-  padding: 24px 40px;
-  margin: 80px auto 0 auto;
-  background-color: ${({ theme }) => theme.color.gray1};
-
-  ${media.custom(800)} {
-    width: 100%;
-    margin: 20px auto 0 auto;
-  }
-`;
-
-const FooterContentWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 0 auto;
-  gap: 32px;
-  width: 1224px;
-  justify-content: flex-start;
-
-  ${media.custom(1224)} {
-    width: 100%;
-    justify-content: flex-start;
-  }
-
-  .navigate {
-    &:hover {
-      cursor: pointer;
-    }
-    color: ${({ theme }) => theme.color.black4};
-    text-align: center;
-    font-family: 'Pretendard600';
-    font-size: ${({ theme }) => theme.font.xsmall};
-    font-style: normal;
-    font-weight: 600;
-    line-height: 32px;
-  }
-`;
-
-const NavigationSectionWrapper = styled.div`
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-`;
-
-const DescriptionSectionWrapper = styled.div`
-  display: flex;
+  justify-content: center;
+  padding: 0px var(--Spacing-24, 24px);
   align-items: center;
-  gap: 24px;
-
-  img {
-    padding-bottom: 9px;
-  }
+  align-self: stretch;
+  width: 100%;
+  background-color: ${({ theme }) => theme.color.gray1};
 `;
 
-const DescriptionContentWrapper = styled.div`
+const ContentBox = styled.div`
   display: flex;
+  width: 100%;
+  min-width: 300px;
+  max-width: 1224px;
+  padding: 24px 0 40px 0;
+  flex-direction: column;
+  align-items: flex-start;
   gap: 24px;
 `;
 
-const ServiceMainContentWrapper = styled.div`
+const NavBtnList = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+  gap: 12px;
+  align-self: stretch;
+`;
+
+const ServiceIntroBox = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+  align-content: flex-start;
+  gap: 8px;
+  align-self: stretch;
+  flex-wrap: wrap;
+`;
+
+const SummaryBox = styled.div`
+  display: flex;
+  width: 300px;
+  min-width: 300px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+`;
+
+const DescriptionBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  align-content: center;
-  gap: 4px;
-
-  ${media.custom(1000)} {
-    display: none;
-  }
-
-  .slogan {
-    color: ${({ theme }) => theme.color.black5};
-    font-family: 'Pretendard600';
-    font-size: ${({ theme }) => theme.font.medium};
-    font-style: normal;
-    font-weight: 600;
-    line-height: 30px;
-  }
-
-  .copyright,
-  .member {
-    color: ${({ theme }) => theme.color.black2};
-    text-align: center;
-    font-family: 'Pretendard500';
-    font-size: ${({ theme }) => theme.font.xsmall};
-    font-style: normal;
-    font-weight: 500;
-    line-height: 20px;
-  }
+  gap: 2px;
+  flex: 1 0 0;
 `;
 
-const ServiceRuleContentWrapper = styled.div`
+const MemberTextList = styled.div`
   display: flex;
   align-items: flex-start;
-  gap: 12px;
-  margin-left: 15rem;
+  align-content: flex-start;
+  gap: 2px 12px;
+  align-self: stretch;
+  flex-wrap: wrap;
+`;
 
-  ${media.custom(800)} {
-    display: none;
-  }
+const ServiceDetailBtnList = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  align-content: center;
+  gap: 4px 12px;
+  align-self: stretch;
+  flex-wrap: wrap;
+`;
+
+const SloganText = styled.p`
+  color: ${({ theme }) => theme.color.black5};
+  font-family: 'Pretendard600';
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 32px;
+`;
+
+const DescText = styled.p`
+  color: ${({ theme }) => theme.color.black2};
+  text-align: center;
+  font-family: 'Pretendard500';
+  font-size: ${({ theme }) => theme.font.xsmall};
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+`;
+
+const NavBtn = styled(Button)`
+  padding: 12px 0;
 `;
 
 export default Footer;
