@@ -15,12 +15,12 @@ const Footer = () => {
     <FooterSection>
       <ContentBox>
         <NavBtnList>
-          <NavBtn scheme="text" onClick={() => navigate(ROUTES.MAIN)}>
+          <Button scheme="text" onClick={() => navigate(ROUTES.MAIN)}>
             메인 페이지
-          </NavBtn>
-          <NavBtn scheme="text" onClick={() => navigate(ROUTES.RECRUITMENT.RECRUITMENTS)}>
+          </Button>
+          <Button scheme="text" onClick={() => navigate(ROUTES.RECRUITMENT.RECRUITMENTS)}>
             스터디 모집 공고 모아보기
-          </NavBtn>
+          </Button>
           {isLoggedIn && (
             <Button scheme="text" onClick={() => navigate(ROUTES.MYPAGE.HOME)}>
               마이 페이지
@@ -43,21 +43,21 @@ const Footer = () => {
         </ServiceIntroBox>
         <RowDivider />
         <ServiceDetailBtnList>
-          <NavBtn scheme="text" onClick={() => window.open(NOTION_URL)}>
+          <Button scheme="text" onClick={() => window.open(NOTION_URL)}>
             서비스 소개
-          </NavBtn>
-          <NavBtn scheme="text" onClick={() => window.open(NOTION_URL)}>
+          </Button>
+          <Button scheme="text" onClick={() => window.open(NOTION_URL)}>
             문의하기
-          </NavBtn>
-          <NavBtn scheme="text" onClick={() => window.open(NOTION_URL)}>
+          </Button>
+          <Button scheme="text" onClick={() => window.open(NOTION_URL)}>
             자주하는 질문
-          </NavBtn>
-          <NavBtn scheme="text" onClick={() => window.open(NOTION_URL)}>
+          </Button>
+          <Button scheme="text" onClick={() => window.open(NOTION_URL)}>
             이용약관
-          </NavBtn>
-          <NavBtn scheme="text" onClick={() => window.open(NOTION_URL)}>
+          </Button>
+          <Button scheme="text" onClick={() => window.open(NOTION_URL)}>
             개인정보 처리방침
-          </NavBtn>
+          </Button>
         </ServiceDetailBtnList>
       </ContentBox>
     </FooterSection>
@@ -83,6 +83,10 @@ const ContentBox = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 24px;
+
+  hr {
+    margin: 0;
+  }
 `;
 
 const NavBtnList = styled.div`
@@ -160,10 +164,6 @@ const DescText = styled.p`
   font-style: normal;
   font-weight: 500;
   line-height: 24px;
-`;
-
-const NavBtn = styled(Button)`
-  padding: 12px 0;
 `;
 
 export default Footer;
