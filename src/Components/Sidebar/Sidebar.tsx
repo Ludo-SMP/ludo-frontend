@@ -28,7 +28,7 @@ const Navigation = styled.nav`
   gap: 12px;
   padding: 0 32px;
   border-radius: 12px;
-  background: ${({ theme }) => theme.color.white};
+  background: ${({ theme }) => theme.color.white2};
 `;
 
 const TabGroup = ({ name, children }: PropsWithChildren<{ name: string }>) => {
