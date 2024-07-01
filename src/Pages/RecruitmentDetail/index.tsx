@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { RowDivider } from '../../Components/Common/Divider/RowDivider';
 import { ColumnDivider } from '../../Components/Common/Divider/ColumnDivider';
 import { useRecruitmentDetail } from '@/Hooks/recruitments/useRecruitmentDetail';
@@ -7,16 +7,17 @@ import { Stack } from '@/Components/Common/Stack';
 import { ApplySection } from './ApplySection';
 import { RecruitInfoSection } from './RecruitInfoSection';
 import { StudyBasicInfoSection } from './StudyBasicInfoSection';
-
 import { dateFormatter, isEdited } from '@/utils/date';
 import styled from 'styled-components';
 import { useModalStore } from '@/store/modal';
 import { useUserStore } from '@/store/user';
 import { Loading } from '@/Assets';
 import { LeftArrow } from '@/Assets/LeftArrow';
+import Button from '@/Components/Common/Button';
 
 const RecruitmentDetailPage = () => {
   const recruitmentId = Number(useParams().recruitmentId);
+  const navigate = useNavigate();
 
   const { closeModal } = useModalStore();
   const { user } = useUserStore();
@@ -42,7 +43,9 @@ const RecruitmentDetailPage = () => {
       ) : (
         <>
           <RecruitmentTitleBox>
-            <LeftArrow />
+            <Button scheme="text" onClick={() => navigate(-1)}>
+              <LeftArrow />
+            </Button>
             <TitleRows>
               <TitleRow>
                 <Title>{recruitment.title}</Title>
@@ -129,6 +132,12 @@ const StudyInfoSection = styled.section`
 const RecruitmentTitleBox = styled.div`
   display: flex;
   gap: 12px;
+
+  button {
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+  }
 `;
 
 const RecruitmentInfoBox = styled.div`
