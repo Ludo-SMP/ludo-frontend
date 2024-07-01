@@ -86,13 +86,15 @@ export default ({ initValue, mutation, type }: StudyFormLayoutProps) => {
 
   const { isModalOpen, openModal } = useModalStore();
 
-  const { attendanceDay, content, toggleAttendanceDay, isValidAttendanceDay } = useAttendanceModal();
+  const { attendanceDay, content, toggleAttendanceDay, isValidAttendanceDay, setAttendanceDay, setContent } =
+    useAttendanceModal();
 
   useEffect(function initAttendanceModal() {
     // API 응답값으로 받은 출석일이 있는 경우 값을 세팅해준다.
     if (defAttendanceDay?.length > 0) {
       const defAttendanceDayObject = generateDropdownOption(getSharedDayObjectById(defAttendanceDay));
-      defAttendanceDayObject?.map((day) => toggleAttendanceDay(day));
+      setAttendanceDay(defAttendanceDayObject);
+      setContent(defAttendanceDayObject.map((day) => day.name).join(', '));
     }
   }, []);
 
@@ -166,12 +168,10 @@ export default ({ initValue, mutation, type }: StudyFormLayoutProps) => {
                       <CustomSelect
                         label="스터디 최대 인원"
                         placeholder="ex) 5명"
-                        defaultValue={
-                          generateSelectOption({
-                            participantLimit: NEW_APPLICATION_CNT[participantLimit],
-                          }) as any
-                        }
-                        values={APPLICATION_CNT as any}
+                        defaultValue={generateSelectOption({
+                          participantLimit: NEW_APPLICATION_CNT[participantLimit],
+                        })}
+                        values={APPLICATION_CNT}
                         {...field}
                       />
                     )}
@@ -274,7 +274,11 @@ export default ({ initValue, mutation, type }: StudyFormLayoutProps) => {
               </Grid>
             </FormSection>
           </Stack>
-          {type === 'CREATE' ? <CreateButtons savedForm={formData} /> : <EditButtons />}
+          {type === 'CREATE' ? (
+            <CreateButtons savedForm={{ ...formData, attendanceDay: attendanceDay?.map((day) => Number(day.id)) }} />
+          ) : (
+            <EditButtons />
+          )}
         </Form>
       </PageWrapper>
     </>

@@ -26,7 +26,7 @@ const useAttendanceModal = () => {
     return true;
   };
 
-  return { attendanceDay, content, setContent, toggleAttendanceDay, isValidAttendanceDay };
+  return { attendanceDay, content, setContent, toggleAttendanceDay, isValidAttendanceDay, setAttendanceDay };
 };
 
 export { useAttendanceModal };

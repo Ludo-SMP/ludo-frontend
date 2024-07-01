@@ -13,5 +13,11 @@ export default () => {
 
   const { tempSaved } = useTempSaved();
 
-  return <Layout mutation={useCreateStudyMutation()} type="CREATE" initValue={tempSaved as StudyCreateForm} />;
+  const studyProps = {
+    ...tempSaved,
+    createdDateTime: (tempSaved as StudyCreateForm)?.progressPeriod?.[0].toString(),
+    endDateTime: (tempSaved as StudyCreateForm)?.progressPeriod?.[1].toString(),
+  };
+
+  return <Layout mutation={useCreateStudyMutation()} type="CREATE" initValue={studyProps} />;
 };
