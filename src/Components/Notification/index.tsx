@@ -162,7 +162,7 @@ const DescBox = styled.p<{ $isRead: boolean }>`
   color: ${({ theme, $isRead }) => ($isRead ? theme.color.black2 : theme.color.black4)};
 
   /* Page/Body-Medium */
-  font-family: Pretendard;
+  font-family: 'Pretendard400';
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
