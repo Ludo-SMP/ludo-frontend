@@ -12,9 +12,16 @@ import { AttendanceType } from '@/Hooks/useAttendanceModal';
 export interface AttendanceModalProps {
   attendanceDay: AttendanceType[] | null;
   toggleAttendanceDay: (day: AttendanceType) => void;
+  saveAttendanceDay?: () => void;
+  resetAttendanceDay?: () => void;
 }
 
-const AttendanceModal = ({ attendanceDay, toggleAttendanceDay }: AttendanceModalProps) => {
+const AttendanceModal = ({
+  attendanceDay,
+  toggleAttendanceDay,
+  saveAttendanceDay,
+  resetAttendanceDay,
+}: AttendanceModalProps) => {
   const { closeModal } = useModalStore();
 
   const modalRef = useRef<HTMLDivElement>(null);
@@ -51,10 +58,10 @@ const AttendanceModal = ({ attendanceDay, toggleAttendanceDay }: AttendanceModal
           </FormSection>
         </ModalBody>
         <ModalFooter onClick={closeModal}>
-          <Button scheme="normal" className="button__cancel">
+          <Button scheme="normal" type="button" className="button__cancel" onClick={resetAttendanceDay}>
             선택 취소
           </Button>
-          <Button scheme="primary" className="button__approve">
+          <Button scheme="primary" type="submit" className="button__approve" onClick={saveAttendanceDay}>
             선택 완료
           </Button>
         </ModalFooter>

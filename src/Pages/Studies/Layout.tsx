@@ -21,7 +21,6 @@ import {
   PROGRESS_METHOD,
   PROGRESS_METHODS_OPTIONS,
   generateSelectOption,
-  generateDropdownOption,
   NEW_POSITION,
 } from '@/Shared/study';
 import { DateRange } from '@/Types/atoms';
@@ -37,7 +36,6 @@ import { EditButtons } from './EditButtons';
 import { Grid } from '@/Components/Common/Grid';
 import { media } from '@/Styles/theme';
 import CustomSelect from '@/Components/CustomSelect/CustomSelect';
-import { getSharedDayObjectById } from '@/utils/date';
 
 export interface StudyCreateForm {
   title: string;
@@ -47,7 +45,7 @@ export interface StudyCreateForm {
   way: ProgressMethod;
   platform: Platform;
   platformUrl: string;
-  createdDateTime: string;
+  startDateTime: string;
   endDateTime: string;
   progressPeriod: DateRange;
   attendanceDay: number[];
@@ -68,7 +66,7 @@ export default ({ initValue, mutation, type }: StudyFormLayoutProps) => {
     way,
     platform,
     platformUrl,
-    createdDateTime,
+    startDateTime,
     endDateTime,
     positionId,
     attendanceDay: defAttendanceDay,
@@ -86,16 +84,19 @@ export default ({ initValue, mutation, type }: StudyFormLayoutProps) => {
 
   const { isModalOpen, openModal } = useModalStore();
 
-  const { attendanceDay, content, toggleAttendanceDay, isValidAttendanceDay, setAttendanceDay, setContent } =
-    useAttendanceModal();
+  const {
+    savedAttendanceDay,
+    tmpAttendanceDay,
+    content,
+    toggleAttendanceDay,
+    isValidAttendanceDay,
+    saveAttendanceDay,
+    resetAttendanceDay,
+    initAttendanceModal,
+  } = useAttendanceModal();
 
-  useEffect(function initAttendanceModal() {
-    // API 응답값으로 받은 출석일이 있는 경우 값을 세팅해준다.
-    if (defAttendanceDay?.length > 0) {
-      const defAttendanceDayObject = generateDropdownOption(getSharedDayObjectById(defAttendanceDay));
-      setAttendanceDay(defAttendanceDayObject);
-      setContent(defAttendanceDayObject.map((day) => day.name).join(', '));
-    }
+  useEffect(() => {
+    initAttendanceModal(defAttendanceDay);
   }, []);
 
   const { mutate, isError } = mutation;
@@ -122,7 +123,7 @@ export default ({ initValue, mutation, type }: StudyFormLayoutProps) => {
                 participantLimit,
                 startDateTime: progressPeriod[0].toISOString(),
                 endDateTime: progressPeriod[1].toISOString(),
-                attendanceDay: attendanceDay?.map((day) => Number(day.id)),
+                attendanceDay: savedAttendanceDay?.map((day) => Number(day.id)),
                 platformUrl,
               });
             },
@@ -253,9 +254,7 @@ export default ({ initValue, mutation, type }: StudyFormLayoutProps) => {
                       control={control}
                       name="progressPeriod"
                       rules={{ required: '스터디 진행 기간을 정해 주세요.' }}
-                      render={({ field }) => (
-                        <ProgressPeriod {...field} defaultValue={[createdDateTime, endDateTime]} />
-                      )}
+                      render={({ field }) => <ProgressPeriod {...field} defaultValue={[startDateTime, endDateTime]} />}
                     />
                   </CalendarButton>
                 </LabelForm>
@@ -267,15 +266,22 @@ export default ({ initValue, mutation, type }: StudyFormLayoutProps) => {
                     value={content === 'ex) 화요일, 목요일' ? null : content}
                   />
                   {isModalOpen && (
-                    <AttendanceModal attendanceDay={attendanceDay} toggleAttendanceDay={toggleAttendanceDay} />
+                    <AttendanceModal
+                      attendanceDay={tmpAttendanceDay}
+                      toggleAttendanceDay={toggleAttendanceDay}
+                      saveAttendanceDay={saveAttendanceDay}
+                      resetAttendanceDay={resetAttendanceDay}
+                    />
                   )}
-                  {attendanceDay?.length === 0 && <ErrorMsg>{'출석일을 선택해주세요'}</ErrorMsg>}
+                  {savedAttendanceDay?.length === 0 && <ErrorMsg>{'출석일을 선택해주세요'}</ErrorMsg>}
                 </LabelForm>
               </Grid>
             </FormSection>
           </Stack>
           {type === 'CREATE' ? (
-            <CreateButtons savedForm={{ ...formData, attendanceDay: attendanceDay?.map((day) => Number(day.id)) }} />
+            <CreateButtons
+              savedForm={{ ...formData, attendanceDay: savedAttendanceDay?.map((day) => Number(day.id)) }}
+            />
           ) : (
             <EditButtons />
           )}
