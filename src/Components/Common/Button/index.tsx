@@ -1,5 +1,5 @@
 import { MouseEventHandler } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export type ButtonProps = {
   onClick?: MouseEventHandler<HTMLButtonElement>;
@@ -75,17 +75,38 @@ const ButtonContainer = styled.button<{
     $scheme === 'third' ? theme.borderRadius.xlarge : theme.borderRadius.small};
 
   &:hover {
-    color: ${({ $scheme, theme }) => ($scheme === 'normal' ? theme.color.black4 : theme.color.white)};
+    color: ${({ $scheme, theme }) =>
+      $scheme === 'normal' || $scheme === 'text' ? theme.color.black4 : theme.color.white};
     background: ${({ $scheme, theme }) =>
-      $scheme === 'third' ? theme.color.orange4 : $scheme === 'normal' ? theme.color.white : theme.color.purple5};
+      $scheme === 'third'
+        ? theme.color.orange4
+        : $scheme === 'normal'
+          ? theme.color.white
+          : $scheme === 'text'
+            ? 'inherit'
+            : theme.color.purple5};
   }
 
   &:active {
     color: ${({ $scheme, theme }) =>
-      $scheme === 'normal' ? theme.color.black : $scheme === 'third' ? theme.color.orange3 : theme.color.white};
+      $scheme === 'normal' || $scheme === 'text'
+        ? theme.color.black
+        : $scheme === 'third'
+          ? theme.color.orange3
+          : theme.color.white};
     background: ${({ $scheme, theme }) =>
-      $scheme === 'primary' ? theme.color.purple5 : $scheme === 'secondary' ? theme.color.purple1 : theme.color.white};
-    border: 1px solid ${({ $scheme, theme }) => ($scheme === 'third' ? theme.color.orange3 : theme.color.black1)};
+      $scheme === 'primary'
+        ? theme.color.purple5
+        : $scheme === 'secondary'
+          ? theme.color.purple1
+          : $scheme === 'text'
+            ? 'none'
+            : theme.color.white};
+    ${({ $scheme, theme }) =>
+      $scheme !== 'text' &&
+      css`
+        border: 1px solid ${$scheme === 'third' ? theme.color.orange3 : theme.color.black1};
+      `}
   }
 
   &:disabled {
