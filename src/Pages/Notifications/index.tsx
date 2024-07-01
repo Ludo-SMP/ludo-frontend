@@ -38,7 +38,7 @@ export const Notifications = () => {
         {isLoading ? (
           <Loading />
         ) : (
-          <Stack divider={<Divider height={2} $dividerColor="#e5e6e8" />} gap={'0px'}>
+          <Stack divider={<Divider $height={2} $dividerColor="#e5e6e8" />} gap={'0px'}>
             {notifications
               ?.filter((notification: NotificationSSEType) => {
                 if (selectedNotificationType === 'STUDY')
