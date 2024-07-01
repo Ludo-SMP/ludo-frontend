@@ -38,7 +38,7 @@ const GnbWrapper = styled.div`
   display: flex;
   align-items: center;
   padding: 8px 0;
-  background: ${(props) => props.theme.color.white};
+  background: ${(props) => props.theme.color.white2};
   gap: 12px;
 
   ${media.custom(800)} {
