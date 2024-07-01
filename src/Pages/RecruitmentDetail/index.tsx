@@ -79,6 +79,7 @@ const RecruitmentDetailPage = () => {
                 />
               </Stack>
             </StudyInfoSection>
+            <RowDivider rowHeight={12} margin={24} />
             <ApplySection isMine={isMine} recruitment={recruitment} study={study} />
           </RecruitmentInfoBox>
         </>
@@ -160,8 +161,15 @@ const RecruitmentInfoBox = styled.div`
   gap: 24px;
   padding-bottom: 20px;
 
+  & > hr {
+    display: none;
+  }
+
   ${media.custom(600)} {
     flex-direction: column-reverse;
+    & > hr {
+      display: flex;
+    }
   }
 `;
 
