@@ -3,7 +3,7 @@ import { FooterLogo } from '@/Assets';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '@/Constants/route';
 import { useLoginStore } from '@/store/auth';
-// import { media } from '@/Styles/theme';
+import { media } from '@/Styles/theme';
 import Button from '../Common/Button';
 import { RowDivider } from '../Common/Divider/RowDivider';
 import { NOTION_URL } from '@/Constants/common';
@@ -67,7 +67,7 @@ const Footer = () => {
 const FooterSection = styled.footer`
   display: flex;
   justify-content: center;
-  padding: 0px var(--Spacing-24, 24px);
+  padding: 0px 24px;
   align-items: center;
   align-self: stretch;
   width: 100%;
@@ -101,6 +101,10 @@ const ServiceIntroBox = styled.div`
   gap: 8px;
   align-self: stretch;
   flex-wrap: wrap;
+
+  ${media.custom(600)} {
+    flex-direction: column;
+  }
 `;
 
 const SummaryBox = styled.div`
