@@ -1,3 +1,4 @@
+import { useModalStore } from '@/store/modal';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -16,17 +17,33 @@ export interface MobileUtilityBtnProps {
 
   /** Button에 들에갈 content */
   content: string;
+
+  /** 다른 페이지로 navigate 할 수 있는 지에 대한 props */
+  canNavigate?: boolean;
 }
 
-export const MobileUtilityBtn = ({ fullWidth = 250, diameter = 56, icon, destUrl, content }: MobileUtilityBtnProps) => {
+export const MobileUtilityBtn = ({
+  fullWidth = 250,
+  diameter = 56,
+  icon,
+  destUrl,
+  content,
+  canNavigate = true,
+}: MobileUtilityBtnProps) => {
   const navigate = useNavigate();
+
+  const { openModal } = useModalStore();
 
   return (
     <MobileUtilityBtnBox $width={diameter} $height={diameter} $fullWidth={fullWidth}>
       <IconBox $width={diameter} $height={diameter}>
         {typeof icon === 'string' ? <img src={icon} width={24} height={24} /> : icon}
       </IconBox>
-      <GuideBtn $fullWidth={fullWidth} $width={diameter} onClick={() => navigate(destUrl)}>
+      <GuideBtn
+        $fullWidth={fullWidth}
+        $width={diameter}
+        onClick={canNavigate ? () => navigate(destUrl) : () => openModal()}
+      >
         {content}
       </GuideBtn>
     </MobileUtilityBtnBox>

@@ -65,7 +65,12 @@ const RecruitmentsPage = () => {
         </Button>
       </UtiltiyButtons>
       <MobileUtilityBtnsSection>
-        <MobileUtilityBtn destUrl={ROUTES.STUDY.CREATE} icon={<CreateStudy />} content="스터디 생성" />
+        <MobileUtilityBtn
+          destUrl={ROUTES.STUDY.CREATE}
+          icon={<CreateStudy />}
+          content="스터디 생성"
+          canNavigate={isLoggedIn}
+        />
       </MobileUtilityBtnsSection>
 
       {!isLoggedIn && isModalOpen && (
