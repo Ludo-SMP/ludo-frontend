@@ -23,14 +23,14 @@ import { useStack } from '@/Hooks/useStack';
 import { media } from '@/Styles/theme';
 import { HeaderWithLogo } from '@/Components/Header/HeaderWithLogo';
 import { RowDivider } from '@/Components/Common/Divider/RowDivider';
-import { generateShardObjectByCustomKey } from '@/utils/selectUtil';
+import { generateSharedObjectByCustomKey } from '@/utils/selectUtil';
 
 import { UseMutateFunction } from '@tanstack/react-query';
 import { CreateButtons } from '../Studies/CreateButtons';
 import { EditButtons } from '../Studies/EditButtons';
 import { useParams } from 'react-router-dom';
 
-export const generateSelectOption = generateShardObjectByCustomKey('value', 'label');
+export const generateSelectOption = generateSharedObjectByCustomKey('value', 'label');
 
 export interface LayoutProps {
   type: 'CREATE' | 'EDIT';
