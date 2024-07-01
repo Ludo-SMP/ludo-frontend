@@ -43,14 +43,19 @@ const AlarmBox = styled.div`
   display: flex;
   position: relative;
   cursor: pointer;
+
+  svg:hover {
+    background-color: ${({ theme }) => theme.color.gray1};
+    border-radius: 50%;
+  }
 `;
 
 const AlarmSection = styled.section``;
 
 const AlarmCnt = styled.div`
   ${flexCenter};
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
   position: absolute;
   top: 6px;
   right: 8px;
