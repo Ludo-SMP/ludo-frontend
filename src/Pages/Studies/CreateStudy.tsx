@@ -15,7 +15,7 @@ export default () => {
 
   const studyProps = {
     ...tempSaved,
-    createdDateTime: (tempSaved as StudyCreateForm)?.progressPeriod?.[0].toString(),
+    startDateTime: (tempSaved as StudyCreateForm)?.progressPeriod?.[0].toString(),
     endDateTime: (tempSaved as StudyCreateForm)?.progressPeriod?.[1].toString(),
   };
 
