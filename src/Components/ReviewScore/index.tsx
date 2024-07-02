@@ -7,13 +7,15 @@ export interface ReviewScoreProps {
   standard: ReviewStandard;
   /** 평가 점수 */
   score: number;
+  /** 스터디 Id */
+  studyId: number;
 }
 
-export const ReviewScore = ({ standard, score }: ReviewScoreProps) => {
+export const ReviewScore = ({ standard, score, studyId }: ReviewScoreProps) => {
   return (
     <ReviewScoreBox>
       <ReviewScoreRow>
-        <StarScore score={score} />
+        <StarScore studyId={studyId} score={score} />
         <ReviewScoreText $score={score}>{score}</ReviewScoreText>
       </ReviewScoreRow>
       <ReviewStandardText>{standard}</ReviewStandardText>
