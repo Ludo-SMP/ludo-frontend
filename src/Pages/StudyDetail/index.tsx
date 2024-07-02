@@ -303,7 +303,7 @@ const Members = styled.div`
 const MembersCountBar = styled.div`
   display: flex;
   align-items: center;
-  gap: 632px;
+  justify-content: space-between;
   align-self: stretch;
 `;
 
@@ -318,7 +318,7 @@ const MemberCounts = ({ count }: { count: number }) => (
 
 const MemberCountsBox = styled.div`
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 8px;
 `;
 
