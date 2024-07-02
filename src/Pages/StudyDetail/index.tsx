@@ -41,7 +41,7 @@ export const StudyDetailPage = () => {
     mutate: attendStudyMutate,
     isSuccess: isAttendStudyMutationSuccess,
     isError: isAttendStudyMutationError,
-  } = useAttendStudyMutation(studyId);
+  } = useAttendStudyMutation(studyId, user?.id);
 
   const [isAttendanceModalOpen, setIsAttendanceModalOpen] = useState(true);
   const [isErrorModalOpen, setIsErrorModalOpen] = useState(true);
@@ -211,7 +211,7 @@ const StudyTitle = styled.div`
 
 const StudyTitleText = styled.span`
   color: ${({ theme }) => theme.color.black5};
-  font-family: Pretendard600;
+  font-family: 'Pretendard600';
   font-size: 18px;
   font-style: normal;
   font-weight: 600;
@@ -275,7 +275,7 @@ const WeekdaySection = styled.div`
 
 const TopBarSectionTitle = styled.span`
   color: ${({ theme }) => theme.color.black5};
-  font-family: Pretendard500;
+  font-family: 'Pretendard500';
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
@@ -284,7 +284,7 @@ const TopBarSectionTitle = styled.span`
 
 const TopBarSectionText = styled.span`
   color: ${({ theme }) => theme.color.black2};
-  font-family: Pretendard500;
+  font-family: 'Pretendard500';
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
@@ -303,7 +303,7 @@ const Members = styled.div`
 const MembersCountBar = styled.div`
   display: flex;
   align-items: center;
-  gap: 632px;
+  justify-content: space-between;
   align-self: stretch;
 `;
 
@@ -311,20 +311,20 @@ const MemberCounts = ({ count }: { count: number }) => (
   <MemberCountsBox>
     <MemberImage />
     <MemberCountsText>
-      구성원 <MemberCountsTextCaption>({count})</MemberCountsTextCaption>
+      구성원 <MemberCountsTextCaption>({count}명)</MemberCountsTextCaption>
     </MemberCountsText>
   </MemberCountsBox>
 );
 
 const MemberCountsBox = styled.div`
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 8px;
 `;
 
 const MemberCountsText = styled.span`
   color: ${({ theme }) => theme.color.black5};
-  font-family: Pretendard600;
+  font-family: 'Pretendard600';
   font-size: 18px;
   font-style: normal;
   font-weight: 600;
@@ -332,8 +332,8 @@ const MemberCountsText = styled.span`
 `;
 
 const MemberCountsTextCaption = styled.span`
-  color: #00000080;
-  font-family: Pretendard600;
+  color: rgba(0, 0, 0, 0.5);
+  font-family: 'Pretendard600';
   font-size: 18px;
   font-style: normal;
   font-weight: 600;
