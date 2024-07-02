@@ -6,6 +6,7 @@ import { ReviewScore } from '@/Components/ReviewScore';
 export interface ReviewProps extends Partial<ReviewType> {
   /** 리뷰를 작성한 사람(reviewer) 기준으로 분류하는 type  */
   type: 'SELF' | 'PEER';
+  studyId: number;
 }
 
 const getReviewTitleTexts = (type: 'SELF' | 'PEER', reviewerId?: number) => {
@@ -22,7 +23,7 @@ const getReviewTitleTexts = (type: 'SELF' | 'PEER', reviewerId?: number) => {
 };
 
 export const Review = (reviewProps: ReviewProps) => {
-  const { revieweeId, reviewerId, type, ...reviewScores } = reviewProps;
+  const { studyId, revieweeId, reviewerId, type, ...reviewScores } = reviewProps;
   const { revieweeText, descText } = getReviewTitleTexts(type, reviewerId);
   return (
     <ReviewBox>
@@ -35,11 +36,11 @@ export const Review = (reviewProps: ReviewProps) => {
       </ReviewRow>
       {revieweeId ? (
         <ReviewScoreList>
-          <ReviewScore standard="적극성" score={reviewScores.activeness} />
-          <ReviewScore standard="전문성" score={reviewScores.professionalism} />
-          <ReviewScore standard="소통력" score={reviewScores.communication} />
-          <ReviewScore standard="만족도" score={reviewScores.together} />
-          <ReviewScore standard="추천도" score={reviewScores.recommend} />
+          <ReviewScore studyId={studyId} standard="적극성" score={reviewScores.activeness} />
+          <ReviewScore studyId={studyId} standard="전문성" score={reviewScores.professionalism} />
+          <ReviewScore studyId={studyId} standard="소통력" score={reviewScores.communication} />
+          <ReviewScore studyId={studyId} standard="만족도" score={reviewScores.together} />
+          <ReviewScore studyId={studyId} standard="추천도" score={reviewScores.recommend} />
         </ReviewScoreList>
       ) : (
         <EmptyReviewText>

@@ -24,7 +24,7 @@ export const StudyReviews = ({ id: studyId, title, reviews: peerTopeerReviews }:
             const uniqueKey = peerReview
               ? `${peerReview.reviewerId}-${peerReview.revieweeId}`
               : `${selfReview.reviewerId}-${selfReview.revieweeId}`;
-            return <PeerToPeerReview {...peerTopeerReview} key={`review-${studyId}-${uniqueKey}`} />;
+            return <PeerToPeerReview studyId={studyId} {...peerTopeerReview} key={`review-${studyId}-${uniqueKey}`} />;
           })}
         </PeerToPeerReviewList>
       </Accordion>
