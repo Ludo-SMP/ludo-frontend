@@ -5,6 +5,7 @@ const meta = {
   component: StarScore,
   args: {
     score: 0,
+    studyId: 1,
   },
 } satisfies Meta<typeof StarScore>;
 

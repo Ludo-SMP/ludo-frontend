@@ -1,9 +1,10 @@
 interface StarScoreProps {
   score: number;
+  studyId: number;
 }
 
 const MASK_COLOR: Record<number, string> = {
-  0: '#FFFFF',
+  0: '#FFFFFF',
   1: '#F7A477',
   2: '#E1A193',
   3: '#CB9FAE',
@@ -12,7 +13,7 @@ const MASK_COLOR: Record<number, string> = {
 };
 const calcFillHeight = (score: number) => (score <= 2 ? score * 10 : score <= 4 ? score * 10 - 1 : 48);
 
-export const StarScore = ({ score }: StarScoreProps) => {
+export const StarScore = ({ score, studyId }: StarScoreProps) => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
       <path
@@ -21,7 +22,7 @@ export const StarScore = ({ score }: StarScoreProps) => {
         strokeOpacity="0.1"
       />
       <mask
-        id={`star-${score}`}
+        id={`star-${studyId}-${score}`}
         type="luminance"
         maskUnits="userSpaceOnUse"
         x="0"
@@ -31,7 +32,7 @@ export const StarScore = ({ score }: StarScoreProps) => {
       >
         <path d="M48 0H0.000518799V48H48V0Z" fill="white" />
       </mask>
-      <g mask={`url(#star-${score})`}>
+      <g mask={`url(#star-${studyId}-${score})`}>
         <path
           d="M25.5539 2.40252L31.6282 14.7105C31.8802 15.2217 32.3682 15.5761 32.933 15.6585L46.5152 17.6321C47.936 17.8385 48.504 19.5849 47.4752 20.5873L37.6473 30.1673C37.2393 30.5657 37.053 31.1385 37.1489 31.7009L39.4689 45.2281C39.7113 46.6433 38.2257 47.7225 36.9554 47.0545L24.8075 40.6681C24.3027 40.4025 23.6995 40.4025 23.1947 40.6681L11.0468 47.0545C9.77565 47.7225 8.29006 46.6433 8.53326 45.2281L10.8532 31.7009C10.9492 31.1385 10.7636 30.5657 10.3548 30.1673L0.525346 20.5873C-0.502643 19.5849 0.0645512 17.8385 1.48534 17.6321L15.0676 15.6585C15.6316 15.5761 16.1196 15.2217 16.3724 14.7105L22.4467 2.40252C23.0819 1.11452 24.9187 1.11452 25.5539 2.40252Z"
           fill={MASK_COLOR[score]}
