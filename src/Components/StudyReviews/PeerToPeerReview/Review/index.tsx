@@ -1,6 +1,6 @@
 import { ReviewType } from '@/Types/review';
 import styled from 'styled-components';
-import { Profile } from '@/Assets';
+import { Profile } from '@/Assets/Profile';
 import { ReviewScore } from '@/Components/ReviewScore';
 
 export interface ReviewProps extends Partial<ReviewType> {
@@ -28,7 +28,7 @@ export const Review = (reviewProps: ReviewProps) => {
   return (
     <ReviewBox>
       <ReviewRow>
-        <Profile width={24} height={24} />
+        <Profile id={studyId} width={24} height={24} />
         <ReviewTitle>
           <RevieweeText>{revieweeText}</RevieweeText>
           <DescText>{descText}</DescText>
