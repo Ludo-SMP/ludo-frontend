@@ -2,6 +2,7 @@ import { Sidebar } from '@/Components/Sidebar/Sidebar';
 import { TopBar } from '@/Components/Topbar';
 import { media } from '@/Styles/theme';
 import { getTabTitle } from '@/utils/getText';
+import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -11,6 +12,10 @@ export interface MyPageLayoutProps {
 
 const MyPageLayout = ({ children }: MyPageLayoutProps) => {
   const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   return (
     <Layout>
