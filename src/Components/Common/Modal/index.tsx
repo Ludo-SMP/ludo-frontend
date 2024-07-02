@@ -45,11 +45,11 @@ const Modal = ({
   return (
     <ModalBackDropWrapper>
       <ModalWrapper>
-        <ModalInfoWrapper alignTitle={alignTitle}>
+        <ModalInfoWrapper $alignTitle={alignTitle}>
           <div className="title">{title}</div>
           <ModalContentWrapper>{children}</ModalContentWrapper>
         </ModalInfoWrapper>
-        <ModalBtnsWrapper onClick={closeModal} isBtnWidthEqual={isBtnWidthEqual} cancelBtnText={cancelBtnText}>
+        <ModalBtnsWrapper onClick={closeModal} $isBtnWidthEqual={isBtnWidthEqual} cancelBtnText={cancelBtnText}>
           {cancelBtnText && (
             <Button className="cancel__btn" onClick={handleCancel ? handleCancel : closeModal}>
               {cancelBtnText}
@@ -89,7 +89,7 @@ const ModalWrapper = styled.div`
   border: 1px solid ${({ theme }) => theme.color.black1};
 `;
 
-const ModalInfoWrapper = styled.div<{ alignTitle: 'flex-start' | 'center' }>`
+const ModalInfoWrapper = styled.div<{ $alignTitle: 'flex-start' | 'center' }>`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -100,7 +100,7 @@ const ModalInfoWrapper = styled.div<{ alignTitle: 'flex-start' | 'center' }>`
     justify-content: center;
     height: 40px;
     padding: 5px 0px;
-    justify-content: ${(props) => props.alignTitle};
+    justify-content: ${(props) => props.$alignTitle};
     align-items: center;
     align-self: stretch;
     color: ${({ theme }) => theme.color.black5};
@@ -135,10 +135,10 @@ const ModalContentWrapper = styled.div`
   }
 `;
 
-const ModalBtnsWrapper = styled.div<{ isBtnWidthEqual: boolean; cancelBtnText: string }>`
+const ModalBtnsWrapper = styled.div<{ $isBtnWidthEqual: boolean; cancelBtnText: string }>`
   display: grid;
   grid-template-columns: ${(props) =>
-    props.cancelBtnText ? (props.isBtnWidthEqual ? `1fr 1fr` : `158fr 338fr`) : '1fr'};
+    props.cancelBtnText ? (props.$isBtnWidthEqual ? `1fr 1fr` : `158fr 338fr`) : '1fr'};
   align-items: flex-start;
   grid-gap: 24px;
   align-self: stretch;
