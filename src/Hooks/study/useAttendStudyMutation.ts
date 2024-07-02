@@ -15,10 +15,15 @@ export const useAttendStudyMutation = (studyId: number, userId: number) => {
         newvStudyDetailData.data.data.study.participants = newvStudyDetailData?.data?.data?.study?.participants
           ? newvStudyDetailData?.data?.data?.study?.participants.map((participant: Participant) => {
               return participant.id === userId
-                ? { ...participant, recentAttendanceDate: new Date().toISOString() }
+                ? {
+                    ...participant,
+                    recentAttendanceDate: new Date().toISOString(),
+                    totalAttendance: participant.totalAttendance + 1,
+                  }
                 : { ...participant };
             })
           : [];
+
         return newvStudyDetailData;
       });
     },
