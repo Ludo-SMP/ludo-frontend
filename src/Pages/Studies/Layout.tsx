@@ -219,6 +219,7 @@ export default ({ initValue, mutation, type }: StudyFormLayoutProps) => {
                     control={control}
                     name="platform"
                     rules={{ required: !isOffline && '진행할 플랫폼을 정해 주세요.' }}
+                    disabled={isOffline}
                     render={({ field }) => (
                       <CustomSelect
                         label="진행 플랫폼"

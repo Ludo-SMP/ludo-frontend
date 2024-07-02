@@ -8,7 +8,7 @@ import Select, {
   SelectInstance,
   StylesConfig,
 } from 'react-select';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Option } from '@/Types/study';
 import { theme } from '@/Styles/theme';
 import { SelectArrow } from '@/Assets/SelectArrow';
@@ -32,10 +32,13 @@ export type SelectProps = Props & {
 
   /** 여러 개 선택 가능 여부 */
   isMulti?: boolean;
+
+  /** 비활성화 여부 */
+  isDisabled?: boolean;
 };
 
 const CustomSelect = forwardRef<SelectInstance<Option, boolean, GroupBase<Option>>, SelectProps>(
-  ({ onChange, values, label, placeholder, defaultValue, isMulti = false }, ref) => {
+  ({ onChange, values, label, placeholder, defaultValue, isMulti = false, isDisabled }, ref) => {
     const customStyles: StylesConfig<Option> = useMemo(
       () => ({
         control: (provided) => ({
@@ -126,7 +129,7 @@ const CustomSelect = forwardRef<SelectInstance<Option, boolean, GroupBase<Option
     );
 
     return (
-      <Label>
+      <Label $isDisabled={isDisabled}>
         {label}
         <Select
           ref={ref}
@@ -143,6 +146,7 @@ const CustomSelect = forwardRef<SelectInstance<Option, boolean, GroupBase<Option
             } else return onChange((newValue as { label: unknown; value: unknown })?.value, actionMeta);
           }}
           styles={customStyles}
+          isDisabled={isDisabled}
           components={{
             IndicatorsContainer: () => <SelectArrow />,
           }}
@@ -154,7 +158,7 @@ const CustomSelect = forwardRef<SelectInstance<Option, boolean, GroupBase<Option
 
 export default CustomSelect;
 
-const Label = styled.label`
+const Label = styled.label<{ $isDisabled?: boolean }>`
   font-family: 'Pretendard700';
   font-size: 18px;
   font-weight: 700;
@@ -163,4 +167,12 @@ const Label = styled.label`
   display: flex;
   flex-direction: column;
   gap: 12px;
+
+  ${({ $isDisabled, theme }) =>
+    typeof $isDisabled === 'boolean' &&
+    $isDisabled &&
+    css`
+      color: ${theme.color.black2};
+      opacity: 0.65;
+    `}
 `;
