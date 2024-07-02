@@ -30,7 +30,7 @@ const CreateButtons = ({ type = 'STUDY', studyId = 1, savedForm }: CreateButtons
           handleApprove={() => {
             setModalOpen(false);
             saveTemporary(savedKey, studyId, type, savedForm);
-            navigate('/mypage');
+            navigate('/mypage/saved');
           }}
           approveBtnText="확인하기"
           handleCancel={() => setModalOpen(false)}

@@ -61,13 +61,13 @@ export const ProgressPeriod = forwardRef<
       showDisabledMonthNavigation
       // 한국인에게 익숙한 날짜 순서
       dateFormat="yy.MM.dd"
+      autoComplete="off"
     />
   );
 });
 
-// TODO: ./EndDate.tsx 랑 똑같은 Styled Component인데 한쪽으로 빼서 공용 컴포넌트로 사용하기
-const DateContainer = styled(DatePicker)`
-  width: 328px;
+export const DateContainer = styled(DatePicker)`
+  width: 100%;
   height: 24px;
   align-items: center;
   align-self: stretch;

@@ -71,6 +71,8 @@ const AlarmPreviewItem = styled.li`
 
   &:hover {
     cursor: pointer;
+    background-color: ${({ theme }) => theme.color.gray1};
+    transition: all 0.05s ease-in-out;
   }
 `;
 
@@ -94,7 +96,7 @@ const SummaryWrapper = styled.div`
 const Title = styled.p`
   color: ${({ theme }) => theme.color.black5};
   font-family: 'Pretendard600';
-  font-size: 18px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 600;
   line-height: 32px;
@@ -104,10 +106,10 @@ const Title = styled.p`
 const Description = styled.p`
   color: ${({ theme }) => theme.color.black4};
   font-family: 'Pretendard400';
-  font-size: ${({ theme }) => theme.font.medium};
+  font-size: ${({ theme }) => theme.font.small};
   font-style: normal;
   font-weight: 400;
-  line-height: 32px;
+  line-height: 24px;
   align-self: stretch;
 `;
 

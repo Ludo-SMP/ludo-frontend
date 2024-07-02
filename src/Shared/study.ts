@@ -1,4 +1,4 @@
-import { generateShardObjectByCustomKey } from '@/utils/selectUtil';
+import { generateSharedObjectByCustomKey } from '@/utils/selectUtil';
 
 export interface OriginalShared {
   [key: number | string]: number | string;
@@ -29,8 +29,8 @@ export const NEW_POSITION: OriginalShared = {
   4: '데브옵스',
 };
 
-export const generateSelectOption = generateShardObjectByCustomKey('value', 'label');
-export const generateDropdownOption = generateShardObjectByCustomKey('id', 'name');
+export const generateSelectOption = generateSharedObjectByCustomKey('value', 'label');
+export const generateDropdownOption = generateSharedObjectByCustomKey('id', 'name');
 
 export const POSITIONS = generateDropdownOption(NEW_POSITION);
 export const POSITION = generateSelectOption(NEW_POSITION);

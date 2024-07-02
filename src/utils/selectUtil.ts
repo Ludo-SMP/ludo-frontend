@@ -11,7 +11,7 @@ export type TCustomValueKey = 'value' | 'id';
 
 export type CustomObject<T extends TCustomValueKey, U extends TCustomLabelKey> = { [key in T | U]: any };
 
-export const generateShardObjectByCustomKey =
+export const generateSharedObjectByCustomKey =
   <T extends TCustomValueKey, U extends TCustomLabelKey>(customValueKey: T, customLabelKey: U) =>
   (customKeyObject: OriginalShared): CustomObject<T, U>[] =>
     Object.entries(customKeyObject)?.map(([value, key]) => {
@@ -22,4 +22,4 @@ export const generateShardObjectByCustomKey =
       } as CustomObject<T, U>;
     });
 
-export type CustomObjectType = ReturnType<typeof generateShardObjectByCustomKey>;
+export type CustomObjectType = ReturnType<typeof generateSharedObjectByCustomKey>;

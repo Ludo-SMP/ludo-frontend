@@ -137,9 +137,9 @@ const BottomBar = styled.div`
 const Title = styled.div`
   color: ${({ theme }) => theme.color.black5};
   font-family: 'Pretendard600';
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
-  line-height: 32px;
+  line-height: 24px;
 `;
 
 const AlarmList = styled.ul`
