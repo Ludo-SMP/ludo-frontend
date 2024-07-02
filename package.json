@@ -5,11 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite --port 3000",
-    "start:mac": "HOST=local.ludoapi.store HTTPS=true SSL_CRT_FILE=cert/local.ludoapi.store.pem SSL_KEY_FILE=cert/local.ludoapi.store-key.pem && yarn dev ",
+    "start:mac": "HOST=local.ludo.study HTTPS=true SSL_CRT_FILE=cert/local.ludo.study.pem SSL_KEY_FILE=cert/local.ludo.study-key.pem && yarn dev ",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "start:windows": "set HOST=local.ludoapi.store &&yarn dev",
+    "start:windows": "set HOST=local.ludo.study &&yarn dev",
     "test": "jest",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",

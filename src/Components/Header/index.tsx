@@ -111,7 +111,7 @@ const TopBarWrapper = styled.div`
   height: 160px;
   align-items: center;
   padding: 60px 0 16px 0;
-  background-color: ${(props) => props.theme.color.white};
+  background-color: ${(props) => props.theme.color.white2};
 
   button {
     justify-content: center;

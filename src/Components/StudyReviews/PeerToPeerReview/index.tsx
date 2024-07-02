@@ -5,16 +5,17 @@ import { Review } from './Review';
 import { media } from '@/Styles/theme';
 
 export interface PeerToPeerReviewProps {
+  studyId: number;
   selfReview: ReviewType | null;
   peerReview: ReviewType | null;
 }
 
-export const PeerToPeerReview = ({ selfReview, peerReview }: PeerToPeerReviewProps) => {
+export const PeerToPeerReview = ({ studyId, selfReview, peerReview }: PeerToPeerReviewProps) => {
   return (
     <PeerToPeerReviewBox>
-      <Review {...selfReview} type="SELF" />
+      <Review studyId={studyId} {...selfReview} type="SELF" />
       <TwoWay />
-      <Review {...peerReview} type="PEER" />
+      <Review studyId={studyId} {...peerReview} type="PEER" />
     </PeerToPeerReviewBox>
   );
 };

@@ -1,5 +1,5 @@
 import { Stack } from '@/Components/Common/Stack';
-import { Divider } from '../CreateRecruitment/page';
+import { Divider } from '../CreateRecruitment/layout';
 import styled from 'styled-components';
 import { useNotifications } from '@/Hooks/notifications/useNotifications';
 import { Notification } from '@/Components/Notification';
@@ -38,7 +38,7 @@ export const Notifications = () => {
         {isLoading ? (
           <Loading />
         ) : (
-          <Stack divider={<Divider height={2} $dividerColor="#e5e6e8" />} gap={'0px'}>
+          <Stack divider={<Divider $height={2} $dividerColor="#e5e6e8" />} gap={'0px'}>
             {notifications
               ?.filter((notification: NotificationSSEType) => {
                 if (selectedNotificationType === 'STUDY')

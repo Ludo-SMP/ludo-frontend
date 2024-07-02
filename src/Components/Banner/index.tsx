@@ -43,6 +43,9 @@ export const createCarouselOptions = (handleSlideIdx: React.Dispatch<SetStateAct
 
     /** 슬라이더의 인덱스가 변경되기 직전에 호출되는 콜백함수 */
     beforeChange: (_, next) => handleSlideIdx(next + 1),
+
+    /** CSS Transform 사용 유무 */
+    useTransform: false,
   };
 };
 

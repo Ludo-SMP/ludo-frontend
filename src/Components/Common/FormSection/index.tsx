@@ -1,3 +1,4 @@
+import { flexCenter } from '@/Styles/theme';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -18,22 +19,23 @@ export const FormSection = ({ icon, title, children }: FormSectionProps) => {
   );
 };
 
-const Heading = styled.h1`
+const Heading = styled.div`
   ${({ theme }) => theme.typo.PageTitle};
   display: flex;
   align-items: center;
 `;
 
 const AssetContainer = styled.image`
+  ${flexCenter}
   padding-right: 12px;
 `;
 
 const FormSectionWrap = styled.section`
   display: flex;
   flex-direction: column;
-  margin: 24px 0;
+  // margin: 24px 0;
 
   & ~ & {
-    margin-top: 20px;
+    // margin-top: 20px;
   }
 `;

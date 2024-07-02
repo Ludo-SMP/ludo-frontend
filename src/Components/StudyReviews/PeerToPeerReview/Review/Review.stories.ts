@@ -4,6 +4,7 @@ import { Review } from '.';
 const meta = {
   component: Review,
   args: {
+    studyId: 1,
     type: 'SELF',
   },
 } satisfies Meta<typeof Review>;

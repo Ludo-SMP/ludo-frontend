@@ -48,7 +48,7 @@ const RecruitmentCardList = () => {
   );
 };
 
-const RecruitmentCardsWrapper = styled.li`
+const RecruitmentCardsWrapper = styled.ul`
   display: flex;
   flex-wrap: wrap;
   width: 1224px;

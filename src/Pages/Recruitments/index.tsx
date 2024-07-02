@@ -14,6 +14,8 @@ import { CREATE_STUDY } from '@/Constants/messages';
 import Modal from '@/Components/Common/Modal';
 import { ROUTES } from '@/Constants/route';
 import { useEffect } from 'react';
+import { MobileUtilityBtn } from '@/Components/UtilityButtons/MobileUtilityButton';
+import { CreateStudy } from '@/Assets';
 
 const RecruitmentsPage = () => {
   const navigate = useNavigate();
@@ -62,6 +64,15 @@ const RecruitmentsPage = () => {
           <span>스터디 생성</span>
         </Button>
       </UtiltiyButtons>
+      <MobileUtilityBtnsSection>
+        <MobileUtilityBtn
+          destUrl={ROUTES.STUDY.CREATE}
+          icon={<CreateStudy />}
+          content="스터디 생성"
+          canNavigate={isLoggedIn}
+        />
+      </MobileUtilityBtnsSection>
+
       {!isLoggedIn && isModalOpen && (
         <Modal
           title={CREATE_STUDY.LOGIN.title}
@@ -81,6 +92,7 @@ const RecruitmentsPageWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+  background-color: ${({ theme }) => theme.color.white2};
   gap: 40px;
 `;
 const BannerSectionWrapper = styled.section`
@@ -96,6 +108,7 @@ const RecruitmentsSectionWrapper = styled.div`
   margin: 0 auto;
   flex-direction: column;
   max-width: 1224px;
+  padding-bottom: 72px;
   align-items: flex-start;
   gap: 24px;
 
@@ -127,7 +140,7 @@ const RecruitmentsSectionWrapper = styled.div`
 
   ${media.custom(500)} {
     width: 100vw;
-    padding: 0 16px;
+    padding: 0 24px 40px 24px;
   }
 `;
 
@@ -145,6 +158,20 @@ const SelectFilterSectionWrapper = styled.div`
   align-items: center;
   gap: 24px;
   align-self: stretch;
+`;
+
+const MobileUtilityBtnsSection = styled.div`
+  display: none;
+
+  ${media.custom(500)} {
+    display: flex;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    display: inline-flex;
+    padding: 0px 24px 24px 0px;
+    align-items: flex-start;
+  }
 `;
 
 export default RecruitmentsPage;

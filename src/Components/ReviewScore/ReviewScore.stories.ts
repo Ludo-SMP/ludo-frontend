@@ -4,6 +4,7 @@ import { ReviewScore } from '.';
 const meta = {
   component: ReviewScore,
   args: {
+    studyId: 1,
     standard: '적극성',
     score: 1,
   },

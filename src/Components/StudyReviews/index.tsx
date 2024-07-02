@@ -22,9 +22,9 @@ export const StudyReviews = ({ id: studyId, title, reviews: peerTopeerReviews }:
           {peerTopeerReviews.map((peerTopeerReview: PeerToPeerReviewType) => {
             const { peerReview, selfReview } = peerTopeerReview;
             const uniqueKey = peerReview
-              ? `${peerReview.revieweeId}-${peerReview.revieweeId}`
-              : `${selfReview.revieweeId}-${selfReview.revieweeId}`;
-            return <PeerToPeerReview {...peerTopeerReview} key={`review-${studyId}-${uniqueKey}`} />;
+              ? `${peerReview.reviewerId}-${peerReview.revieweeId}`
+              : `${selfReview.reviewerId}-${selfReview.revieweeId}`;
+            return <PeerToPeerReview studyId={studyId} {...peerTopeerReview} key={`review-${studyId}-${uniqueKey}`} />;
           })}
         </PeerToPeerReviewList>
       </Accordion>

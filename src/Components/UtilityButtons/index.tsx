@@ -18,7 +18,7 @@ const UtiltiyButtonsWrapper = styled.div`
   right: 24px;
   bottom: 24px;
 
-  ${media.custom(800)} {
+  ${media.custom(500)} {
     display: none;
   }
 

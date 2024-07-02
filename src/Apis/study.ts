@@ -11,7 +11,7 @@ export const getApplicantsDetail = (studyId: number): Promise<{ data: { data: Ap
 export const createStudy = async (data: StudyCreate) => httpClient.post(API_END_POINT.CREATE_STUDY, { ...data });
 
 export const editStudy = async (studyId: number, data: Partial<StudyCreate>) =>
-  httpClient.post(API_END_POINT.EDIT_STUDY(studyId), { ...data });
+  httpClient.put(API_END_POINT.EDIT_STUDY(studyId), { ...data });
 
 export const applyStudy = async (studyId: number, recruitmentId: number, data: { positionId: number }) =>
   httpClient.post(API_END_POINT.APPLY(studyId, recruitmentId), { ...data });

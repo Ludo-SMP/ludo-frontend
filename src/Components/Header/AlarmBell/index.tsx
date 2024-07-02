@@ -32,7 +32,7 @@ const AlarmBell = () => {
           <Inner>{data?.filter((alarm) => !alarm?.read)?.length ?? 0}</Inner>
         </AlarmCnt>
       </AlarmSection>
-      {isOpen && <AlarmInbox alarmPreviews={data} handleOpen={handleOpen} />}
+      <AlarmInbox alarmPreviews={data} isOpen={isOpen} handleOpen={handleOpen} />
     </AlarmBox>
   );
 };
@@ -42,20 +42,25 @@ export { AlarmBell };
 const AlarmBox = styled.div`
   display: flex;
   position: relative;
+  cursor: pointer;
+
+  svg:hover {
+    background-color: ${({ theme }) => theme.color.gray1};
+    border-radius: 50%;
+  }
 `;
 
 const AlarmSection = styled.section``;
 
 const AlarmCnt = styled.div`
   ${flexCenter};
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
   position: absolute;
   top: 6px;
   right: 8px;
   background-color: ${({ theme }) => theme.color.buttonHoverSecondary};
   border-radius: 50%;
-  cursor: pointer;
 `;
 
 const Inner = styled.div`
