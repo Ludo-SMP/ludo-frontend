@@ -4,6 +4,7 @@ import { PeerToPeerReview } from '.';
 const meta = {
   component: PeerToPeerReview,
   args: {
+    studyId: 1,
     selfReview: {
       reviewerId: 1,
       revieweeId: 2,
@@ -34,6 +35,7 @@ export const ReviewBetweenPeers: Story = {};
 /* 자신만 다른 스터디원에게 리뷰를 남겼을 때 */
 export const OnlyReviewToPeer: Story = {
   args: {
+    studyId: 1,
     selfReview: {
       reviewerId: 1,
       revieweeId: 2,
