@@ -41,7 +41,7 @@ export const StudyDetailPage = () => {
     mutate: attendStudyMutate,
     isSuccess: isAttendStudyMutationSuccess,
     isError: isAttendStudyMutationError,
-  } = useAttendStudyMutation(studyId);
+  } = useAttendStudyMutation(studyId, user?.id);
 
   const [isAttendanceModalOpen, setIsAttendanceModalOpen] = useState(true);
   const [isErrorModalOpen, setIsErrorModalOpen] = useState(true);
