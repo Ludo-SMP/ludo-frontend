@@ -126,6 +126,7 @@ const MainPageWrapper = styled.section`
   display: flex;
   margin: 0 auto;
   flex-direction: column;
+  background-color: ${({ theme }) => theme.color.white2};
   gap: 40px;
 `;
 
@@ -137,12 +138,13 @@ const BannerSectionWrapper = styled.section`
   max-width: 1920px;
 `;
 
-const RecruitmentsSectionWrapper = styled.div`
+const RecruitmentsSectionWrapper = styled.section`
   display: flex;
   width: 1224px;
   margin: 0 auto;
-  max-width: 1224px;
   flex-direction: column;
+  max-width: 1224px;
+  padding-bottom: 72px;
   justify-content: center;
   align-items: flex-start;
   gap: 21px;
@@ -170,9 +172,13 @@ const RecruitmentsSectionWrapper = styled.div`
     width: 400px;
   }
 
+  ${media.custom(500)} {
+    padding-bottom: 40px;
+  }
+
   ${media.custom(400)} {
     width: 100vw;
-    padding: 0 16px;
+    padding: 0 24px 40px 24px;
   }
 `;
 

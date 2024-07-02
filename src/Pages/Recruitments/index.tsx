@@ -65,7 +65,12 @@ const RecruitmentsPage = () => {
         </Button>
       </UtiltiyButtons>
       <MobileUtilityBtnsSection>
-        <MobileUtilityBtn destUrl={ROUTES.STUDY.CREATE} icon={<CreateStudy />} content="스터디 생성" />
+        <MobileUtilityBtn
+          destUrl={ROUTES.STUDY.CREATE}
+          icon={<CreateStudy />}
+          content="스터디 생성"
+          canNavigate={isLoggedIn}
+        />
       </MobileUtilityBtnsSection>
 
       {!isLoggedIn && isModalOpen && (
@@ -87,6 +92,7 @@ const RecruitmentsPageWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+  background-color: ${({ theme }) => theme.color.white2};
   gap: 40px;
 `;
 const BannerSectionWrapper = styled.section`
@@ -102,6 +108,7 @@ const RecruitmentsSectionWrapper = styled.div`
   margin: 0 auto;
   flex-direction: column;
   max-width: 1224px;
+  padding-bottom: 72px;
   align-items: flex-start;
   gap: 24px;
 
@@ -133,7 +140,7 @@ const RecruitmentsSectionWrapper = styled.div`
 
   ${media.custom(500)} {
     width: 100vw;
-    padding: 0 16px;
+    padding: 0 24px 40px 24px;
   }
 `;
 

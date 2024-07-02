@@ -13,6 +13,7 @@ import { useLoginStore } from '@/store/auth';
 import { useModalStore } from '@/store/modal';
 import styled from 'styled-components';
 import { getPeriod } from '@/utils/date';
+import { media } from '@/Styles/theme';
 
 export interface ApplySectionProps {
   isMine: boolean;
@@ -69,6 +70,15 @@ const ApplySection = ({ isMine, recruitment, study }: ApplySectionProps) => {
               스터디 지원하기
             </Button>
           )}
+          <Button
+            scheme="normal"
+            onClick={() => {
+              setCloseRecruitment(true);
+              openModal();
+            }}
+          >
+            모집 마감하기
+          </Button>
         </ButtonBox>
       )}
 
@@ -157,6 +167,12 @@ const ApplySectionBox = styled.section`
   height: 100%;
   border-radius: 16px;
   border: 1px solid ${({ theme }) => theme.color.black1};
+
+  ${media.custom(600)} {
+    border: none;
+    padding: 0;
+    max-width: 100%;
+  }
 `;
 
 const ButtonBox = styled.div`
@@ -171,6 +187,20 @@ const ButtonBox = styled.div`
     align-items: center;
     gap: 8px;
     flex: 1 0 0;
+  }
+
+  ${media.custom(500)} {
+    flex-direction: row;
+    gap: 0;
+    position: fixed;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+
+    button {
+      border-radius: 0px;
+      box-shadow: 0px 0px 10px 0px ${({ theme }) => theme.color.black0};
+    }
   }
 `;
 

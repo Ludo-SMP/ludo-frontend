@@ -30,7 +30,7 @@ const LoginPage = () => {
 const LoginWrapper = styled.div`
   display: flex;
   max-width: 1224px;
-  margin: 40px auto 0 auto;
+  margin: 40px auto 72px auto;
   flex-direction: column;
   justify-content: center;
   align-items: center;

@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { RowDivider } from '../../Components/Common/Divider/RowDivider';
 import { ColumnDivider } from '../../Components/Common/Divider/ColumnDivider';
 import { useRecruitmentDetail } from '@/Hooks/recruitments/useRecruitmentDetail';
@@ -7,16 +7,18 @@ import { Stack } from '@/Components/Common/Stack';
 import { ApplySection } from './ApplySection';
 import { RecruitInfoSection } from './RecruitInfoSection';
 import { StudyBasicInfoSection } from './StudyBasicInfoSection';
-
 import { dateFormatter, isEdited } from '@/utils/date';
 import styled from 'styled-components';
 import { useModalStore } from '@/store/modal';
 import { useUserStore } from '@/store/user';
 import { Loading } from '@/Assets';
 import { LeftArrow } from '@/Assets/LeftArrow';
+import Button from '@/Components/Common/Button';
+import { media } from '@/Styles/theme';
 
 const RecruitmentDetailPage = () => {
   const recruitmentId = Number(useParams().recruitmentId);
+  const navigate = useNavigate();
 
   const { closeModal } = useModalStore();
   const { user } = useUserStore();
@@ -42,7 +44,9 @@ const RecruitmentDetailPage = () => {
       ) : (
         <>
           <RecruitmentTitleBox>
-            <LeftArrow />
+            <Button scheme="text" onClick={() => navigate(-1)}>
+              <LeftArrow />
+            </Button>
             <TitleRows>
               <TitleRow>
                 <Title>{recruitment.title}</Title>
@@ -75,6 +79,7 @@ const RecruitmentDetailPage = () => {
                 />
               </Stack>
             </StudyInfoSection>
+            <RowDivider rowHeight={12} margin={24} />
             <ApplySection isMine={isMine} recruitment={recruitment} study={study} />
           </RecruitmentInfoBox>
         </>
@@ -90,6 +95,10 @@ const RecruitmentDetailLayout = styled.div`
   margin: 0 auto;
   padding: 24px 0 40px;
   gap: 24px;
+
+  ${media.custom(800)} {
+    padding: 24px 24px 24px 40px;
+  }
 `;
 
 const TitleRows = styled.div`
@@ -117,6 +126,10 @@ const GreyText = styled.span`
 const Title = styled.h1`
   font-family: 'Pretendard800';
   ${({ theme }) => theme.typo.PageHeadWeb};
+
+  ${media.custom(600)} {
+    ${({ theme }) => theme.typo.PageHeadApp};
+  }
 `;
 
 const StudyInfoSection = styled.section`
@@ -129,12 +142,35 @@ const StudyInfoSection = styled.section`
 const RecruitmentTitleBox = styled.div`
   display: flex;
   gap: 12px;
+
+  button {
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+
+    ${media.custom(600)} {
+      width: 24px;
+      height: 24px;
+      padding: 0;
+    }
+  }
 `;
 
 const RecruitmentInfoBox = styled.div`
   display: flex;
   gap: 24px;
   padding-bottom: 20px;
+
+  & > hr {
+    display: none;
+  }
+
+  ${media.custom(600)} {
+    flex-direction: column-reverse;
+    & > hr {
+      display: flex;
+    }
+  }
 `;
 
 export default RecruitmentDetailPage;

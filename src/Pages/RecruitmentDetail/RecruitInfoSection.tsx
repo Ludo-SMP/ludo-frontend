@@ -50,7 +50,7 @@ const RecruitInfoSection = ({
 
 export const GridLayout = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(232px, 1fr));
   grid-gap: 24px;
   margin-top: 24px;
 `;
