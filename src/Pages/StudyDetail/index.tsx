@@ -154,6 +154,7 @@ export const StudyDetailPage = () => {
                   isStudyEnd={study?.status === 'COMPLETED'}
                   members={study?.participants}
                   userId={user?.id}
+                  studyId={study?.id}
                 />
               </MemberList>
             </Members>
