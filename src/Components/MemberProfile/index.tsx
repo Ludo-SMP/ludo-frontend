@@ -6,8 +6,8 @@ import { ROLE } from '@/Shared/study';
 import { useEffect, useRef, useState } from 'react';
 import { ROUTES } from '@/Constants/route';
 import { Link } from 'react-router-dom';
-import { LeaveModal } from '../LeaveModal';
-import { match } from 'ts-pattern';
+import { LeaveModal } from '@/Components/LeaveModal';
+import { P, match } from 'ts-pattern';
 import { useStudyForceLeaveMutation } from '@/Hooks/study/useStudyForceLeaveMutation';
 import { useStudyLeaveRequestMutation } from '@/Hooks/study/useStudyLeaveRequestMutation';
 import Modal from '../Common/Modal';
@@ -18,17 +18,22 @@ export interface MemberProfileProps extends Member {
   /** 스터디원의 프로필 이미지 URL */
   imgUrl?: string;
 
-  /** 당일 출석 여부 */
-  attended?: boolean;
-
   /** 해당 멤버가 자신인지 나타냅니다. */
   isSelf?: boolean;
 
   /** 해당 멤버가 속한 스터디 ID */
   studyId?: number;
 
-  /** 리뷰 작성이 필요한지 여부 */
-  needReview?: boolean;
+  /**
+   * 스터디원 카드의 상태를 나타냅니다.
+   *
+   * - `unattended`: 당일 출석을 하지 않은 상태
+   * - `attended`: 당일 출석을 완료한 상태
+   * - `needReview`: 해당 스터디원에게 리뷰를 남기지 않았을 때
+   * - `needLeaveApproval`: 해당 스터디원이 스터디 탈퇴를 신청했을 때
+   * - `reviewEnd`: 해당 스터디원에게 리뷰 작성을 완료한 상태
+   */
+  state?: 'unattended' | 'attended' | 'needReview' | 'needLeaveApproval' | 'reviewEnd';
 }
 
 /** 스터디원의 프로필을 보여줍니다. */
@@ -39,10 +44,9 @@ const MemberProfile = ({
   role,
   position,
   totalAttendance = 0,
-  attended = false,
-  isSelf = true,
+  isSelf = false,
   studyId,
-  needReview = false,
+  state = 'unattended',
 }: MemberProfileProps) => {
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
   const [isLeaveModalOpen, setIsLeaveModalOpen] = useState(false);
@@ -53,7 +57,11 @@ const MemberProfile = ({
   const { mutate: mutateRequestLeave } = useStudyLeaveRequestMutation(studyId);
 
   return (
-    <MemberProfileWrapper $contrast={needReview}>
+    <MemberProfileWrapper
+      $contrast={match(state)
+        .with(P.union('needReview', 'needLeaveApproval'), () => true)
+        .otherwise(() => false)}
+    >
       {isSelf && (
         <OptionsButton onClick={() => setIsOptionsOpen(true)}>
           <More />
@@ -71,35 +79,58 @@ const MemberProfile = ({
         </OptionsButton>
       )}
       <Profile width={120} height={120} />
-      {needReview ? (
-        <>
-          <ContrastDescription>
-            <ContrastDescriptionTitle>'{nickname}'님은 어떠셨나요?</ContrastDescriptionTitle>
-            <ContrastDescriptionBody>
-              함께 스터디를 완주한 팀원에 대해 어땠는지 평가를 남겨주세요.
-            </ContrastDescriptionBody>
-          </ContrastDescription>
-          <Button size="fullWidth" scheme="secondary">
-            {/* TODO: 변수 때문에 ROUTES.STUDY.REVIEW를 사용할 수 없음. */}
-            <Link to={`./${id}/review`}>평가 작성하기</Link>
-          </Button>
-        </>
-      ) : (
-        <>
-          <div className="private__info">
-            <div className="nickname">{nickname}</div>
-            <div className="email">{email}</div>
-            <AttendanceBadge $attended={attended}>
-              {attended ? `${totalAttendance}일 출석 완료!` : `${totalAttendance}일 출석 중`}
-            </AttendanceBadge>
-          </div>
-          <div className="positions">
-            <div className="position">{ROLE[role]}</div>
-            <ColumnDivider />
-            <div className="position">{position.name}</div>
-          </div>
-        </>
-      )}
+      {match(state)
+        .with(P.union('needLeaveApproval', 'needReview'), () => (
+          <>
+            <ContrastDescription>
+              <ContrastDescriptionTitle>
+                {state === 'needReview' ? `'${nickname}'님은 어떠셨나요?` : '탈퇴 승인해주세요!'}
+              </ContrastDescriptionTitle>
+              <ContrastDescriptionBody>
+                {state === 'needReview'
+                  ? '함께 스터디를 완주한 팀원에 대해 어땠는지 평가를 남겨주세요.'
+                  : `‘${nickname}'이 스터디 탈퇴 요청을 보냈습니다. 승인하시겠습니까?`}
+              </ContrastDescriptionBody>
+            </ContrastDescription>
+            <Buttons>
+              {state === 'needReview' ? (
+                <Button scheme="secondary">
+                  {/* TODO: 변수 때문에 ROUTES.STUDY.REVIEW를 사용할 수 없음. */}
+                  <Link to={`./${id}/review`}>평가 작성하기</Link>
+                </Button>
+              ) : (
+                <>
+                  <Button>거절</Button>
+                  <Button scheme="secondary">승인</Button>
+                </>
+              )}
+            </Buttons>
+          </>
+        ))
+        .otherwise(() => (
+          <>
+            <div className="private__info">
+              <div className="nickname">{nickname}</div>
+              <div className="email">{email}</div>
+              <AttendanceBadge
+                $attended={match(state)
+                  .with(P.union('attended', 'reviewEnd'), () => true)
+                  .otherwise(() => false)}
+              >
+                {match(state)
+                  .with('unattended', () => `${totalAttendance}일 출석 중`)
+                  .with('attended', () => `${totalAttendance}일 출석 완료!`)
+                  .with('reviewEnd', () => '팀원 평가 완료!')
+                  .otherwise(() => null)}
+              </AttendanceBadge>
+            </div>
+            <div className="positions">
+              <div className="position">{ROLE[role]}</div>
+              <ColumnDivider />
+              <div className="position">{position.name}</div>
+            </div>
+          </>
+        ))}
       {isLeaveModalOpen && (
         <LeaveModal
           handleApprove={(value) => (
@@ -285,6 +316,16 @@ const ContrastDescriptionBody = styled.p`
   color: ${({ theme }) => theme.color.white};
   text-align: center;
   ${({ theme }) => theme.typo.ListLabel};
+`;
+
+const Buttons = styled.div`
+  align-self: stretch;
+  display: flex;
+  gap: 12px;
+
+  & > button {
+    flex: 1;
+  }
 `;
 
 export default MemberProfile;
