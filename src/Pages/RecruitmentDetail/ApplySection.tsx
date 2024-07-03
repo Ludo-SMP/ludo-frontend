@@ -70,15 +70,6 @@ const ApplySection = ({ isMine, recruitment, study }: ApplySectionProps) => {
               스터디 지원하기
             </Button>
           )}
-          <Button
-            scheme="normal"
-            onClick={() => {
-              setCloseRecruitment(true);
-              openModal();
-            }}
-          >
-            모집 마감하기
-          </Button>
         </ButtonBox>
       )}
 
