@@ -15,10 +15,19 @@ export const MemberSection = ({ members, userId, isStudyEnd }: MemberSectionProp
       <li key={member.id}>
         <MemberProfile
           totalAttendance={member.totalAttendance}
-          // 참고: new Date(null) 은 UNIX epoch time인 1970년 1월 1일 00:00:00 UTC를 반환한다.
-          attended={isToday(new Date(member.recentAttendanceDate))}
           isSelf={member.id === userId}
-          needReview={isStudyEnd && member.id !== userId}
+          state={
+            isStudyEnd
+              ? member.isReviewedParticipant
+                ? 'reviewEnd'
+                : 'needReview'
+              : member.role === 'PENDING'
+                ? 'needLeaveApproval'
+                : // 참고: new Date(null) 은 UNIX epoch time인 1970년 1월 1일 00:00:00 UTC를 반환한다.
+                  isToday(new Date(member.recentAttendanceDate))
+                  ? 'attended'
+                  : 'unattended'
+          }
           {...member}
         />
       </li>

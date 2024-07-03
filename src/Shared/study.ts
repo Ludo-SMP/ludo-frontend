@@ -101,6 +101,7 @@ export const SORT = {
 export const ROLE = {
   OWNER: '팀장',
   MEMBER: '팀원',
+  PENDING: '탈퇴 요청',
 };
 
 export const NEW_ATTENDANCE_DAY: OriginalShared = {
