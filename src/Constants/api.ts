@@ -35,8 +35,10 @@ export const API_END_POINT = {
   // LEAVE
   STUDY_FORCE_LEAVE: (studyId: number) => `${API_PREFIX}/studies/${studyId}/participants`,
   STUDY_LEAVE_REQUEST: (studyId: number) => `${API_PREFIX}/studies/${studyId}/participants/approved/request`,
-  STUDY_LEAVE_REQUEST_APPROVE: (studyId: number) => `${API_PREFIX}/studies/${studyId}/participants/request`,
-  STUDY_LEAVE_REQUEST_REJECT: (studyId: number) => `${API_PREFIX}/studies/${studyId}/participants/request`,
+  STUDY_LEAVE_REQUEST_APPROVE: (studyId: number, userId: number) =>
+    `${API_PREFIX}/studies/${studyId}/participants/${userId}/approved`,
+  STUDY_LEAVE_REQUEST_REJECT: (studyId: number, userId: number) =>
+    `${API_PREFIX}/studies/${studyId}/participants/${userId}/rejected`,
 
   // APPLY
   APPLY: (studyId: number, recruitmentId: number) =>
