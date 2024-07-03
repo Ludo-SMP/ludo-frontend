@@ -37,7 +37,7 @@ export interface Member extends User {
   /** 지원 포지션 */
   position: Position;
 
-  /** 스터디원 역할, 스터디장 또는 스터디원 */
+  /** 스터디원 역할, 스터디장, 스터디원, 또는 탈퇴 요청 */
   role: Role;
 
   /** 총합 출석일 */
