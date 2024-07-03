@@ -22,22 +22,32 @@ export interface Category {
   name: '프로젝트' | '코딩 테스트' | '모의 면접';
 }
 
-// WARN: 해당 타입과 `Participant` 타입은 중복됨.
-// 이에 대한 타입 merge 및 삭제, 참조 코드 수정 등등이 필요.
-export interface Member {
+export interface User {
+  /** 사용자 고유 ID */
   id: number;
+
+  /** 사용자 닉네임 */
   nickname: string;
+
+  /** 사용자 이메일 */
   email: string;
-  position: Position;
-  role: Role;
-  totalAttendance: number;
-  recentAttendanceDate: string | null;
 }
 
-export interface User {
-  id: number;
-  nickname: string;
-  email: string;
+export interface Member extends User {
+  /** 지원 포지션 */
+  position: Position;
+
+  /** 스터디원 역할, 스터디장, 스터디원, 또는 탈퇴 요청 */
+  role: Role;
+
+  /** 총합 출석일 */
+  totalAttendance: number;
+
+  /** 최근 출석일 */
+  recentAttendanceDate: string | null;
+
+  /** 해당 팀원에게 리뷰를 남겼는지 여부 */
+  isReviewedParticipant: boolean;
 }
 
 export type MainCategoryNameType = '스터디 유형' | '기술 스택' | '포지션' | '진행 방식' | '목록 정렬 기준';
@@ -144,26 +154,14 @@ export interface FilterOptionParams {
   sort?: Sort[];
 }
 
-// WARN: 해당 타입과 `Member` 타입은 중복됨.
-// 이에 대한 타입 merge 및 삭제, 참조 코드 수정 등등이 필요.
-export interface Participant {
-  id: number;
-  nickname: string;
-  role: Role;
-  email: string;
-  position: Position;
-  // 총합 출석일
-  totalAttendance: number;
-  // 최근 출석일
-  recentAttendanceDate: string | null;
-}
-
 /**
  * 스터디 지원자 타입
- *
- * NOTE: 추후 Participant/Member 타입이 해당 타입을 상속하도록 구조 변경 필요.
  */
-export interface Applicant extends Omit<Member, 'role' | 'totalAttendance' | 'recentAttendanceDate'> {
+export interface Applicant extends User {
+  /** 지원 포지션 */
+  position: Position;
+
+  /** 해당 지원자의 평가 지표 */
   reviewStatistics: {
     activeness: number;
     professionalism: number;
@@ -173,6 +171,11 @@ export interface Applicant extends Omit<Member, 'role' | 'totalAttendance' | 're
   };
 }
 
+/**
+ * 출석요일
+ *
+ * 1: 월요일 ~ 7: 일요일
+ */
 export type AttendanceDay = 1 | 2 | 3 | 4 | 5 | 6 | 7;
 
 export interface StudyCreate {
@@ -204,7 +207,7 @@ export interface StudyDetail {
     endDateTime: string;
     category: Category;
     owner: User;
-    participants: Participant[];
+    participants: Member[];
     hasRecruitment: boolean;
     createdDateTime: string;
     updatedDateTime: string;

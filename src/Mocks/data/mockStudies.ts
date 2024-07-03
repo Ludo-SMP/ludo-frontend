@@ -33,6 +33,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           position: { id: 3, name: '디자이너' },
           totalAttendance: 8,
           recentAttendanceDate: new Date().toISOString(),
+          isReviewedParticipant: true,
         },
         {
           id: 2,
@@ -42,6 +43,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           position: { id: 1, name: '백엔드' },
           totalAttendance: 0,
           recentAttendanceDate: null,
+          isReviewedParticipant: true,
         },
         {
           id: 3,
@@ -51,6 +53,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           position: { id: 1, name: '백엔드' },
           totalAttendance: 6,
           recentAttendanceDate: new Date().toISOString(),
+          isReviewedParticipant: true,
         },
         {
           id: 4,
@@ -60,6 +63,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           position: { id: 1, name: '백엔드' },
           totalAttendance: 9,
           recentAttendanceDate: new Date().toISOString(),
+          isReviewedParticipant: true,
         },
         {
           id: 5,
@@ -69,6 +73,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           position: { id: 2, name: '프론트엔드' },
           totalAttendance: 2,
           recentAttendanceDate: new Date().toISOString(),
+          isReviewedParticipant: true,
         },
         {
           id: 6,
@@ -78,6 +83,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           position: { id: 2, name: '프론트엔드' },
           totalAttendance: 0,
           recentAttendanceDate: null,
+          isReviewedParticipant: true,
         },
       ],
     },
@@ -114,6 +120,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           position: { id: 3, name: '디자이너' },
           totalAttendance: 8,
           recentAttendanceDate: new Date().toISOString(),
+          isReviewedParticipant: true,
         },
         {
           id: 2,
@@ -123,6 +130,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           position: { id: 1, name: '백엔드' },
           totalAttendance: 0,
           recentAttendanceDate: new Date().toISOString(),
+          isReviewedParticipant: true,
         },
         {
           id: 3,
@@ -132,6 +140,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           position: { id: 1, name: '백엔드' },
           totalAttendance: 6,
           recentAttendanceDate: new Date().toISOString(),
+          isReviewedParticipant: true,
         },
         {
           id: 4,
@@ -141,6 +150,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           position: { id: 1, name: '백엔드' },
           totalAttendance: 9,
           recentAttendanceDate: new Date().toISOString(),
+          isReviewedParticipant: true,
         },
         {
           id: 5,
@@ -150,6 +160,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           position: { id: 2, name: '프론트엔드' },
           totalAttendance: 2,
           recentAttendanceDate: new Date().toISOString(),
+          isReviewedParticipant: true,
         },
         {
           id: 6,
@@ -159,6 +170,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           position: { id: 2, name: '프론트엔드' },
           totalAttendance: 0,
           recentAttendanceDate: null,
+          isReviewedParticipant: true,
         },
       ],
     },
@@ -193,9 +205,9 @@ export const studyDetailMockData: Array<StudyDetail> = [
           role: 'OWNER',
           email: 'aaa@bb1.cc',
           position: { id: 3, name: '디자이너' },
-
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
+          isReviewedParticipant: true,
         },
         {
           id: 2,
@@ -203,9 +215,9 @@ export const studyDetailMockData: Array<StudyDetail> = [
           role: 'MEMBER',
           email: 'aaa@2bb.cc',
           position: { id: 1, name: '백엔드' },
-
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
+          isReviewedParticipant: true,
         },
         {
           id: 3,
@@ -213,9 +225,9 @@ export const studyDetailMockData: Array<StudyDetail> = [
           role: 'MEMBER',
           email: 'aaa@3bb.cc',
           position: { id: 1, name: '백엔드' },
-
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
+          isReviewedParticipant: true,
         },
         {
           id: 4,
@@ -223,9 +235,9 @@ export const studyDetailMockData: Array<StudyDetail> = [
           role: 'MEMBER',
           email: 'aaa4@bb.cc',
           position: { id: 1, name: '백엔드' },
-
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
+          isReviewedParticipant: true,
         },
         {
           id: 5,
@@ -235,6 +247,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           position: { id: 2, name: '프론트엔드' },
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
+          isReviewedParticipant: true,
         },
         {
           id: 6,
@@ -244,6 +257,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           position: { id: 2, name: '프론트엔드' },
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
+          isReviewedParticipant: true,
         },
       ],
     },
@@ -280,6 +294,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 3, name: '디자이너' },
+          isReviewedParticipant: true,
         },
         {
           id: 2,
@@ -289,6 +304,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 3,
@@ -298,6 +314,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 4,
@@ -307,6 +324,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 5,
@@ -316,6 +334,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 2, name: '프론트엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 6,
@@ -325,6 +344,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 2, name: '프론트엔드' },
+          isReviewedParticipant: true,
         },
       ],
     },
@@ -361,6 +381,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 3, name: '디자이너' },
+          isReviewedParticipant: true,
         },
         {
           id: 2,
@@ -370,6 +391,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 3,
@@ -379,6 +401,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 4,
@@ -388,6 +411,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 5,
@@ -397,6 +421,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 2, name: '프론트엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 6,
@@ -406,6 +431,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 2, name: '프론트엔드' },
+          isReviewedParticipant: true,
         },
       ],
     },
@@ -442,6 +468,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 3, name: '디자이너' },
+          isReviewedParticipant: true,
         },
         {
           id: 2,
@@ -451,6 +478,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 3,
@@ -460,6 +488,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 4,
@@ -469,6 +498,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 5,
@@ -478,6 +508,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 2, name: '프론트엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 6,
@@ -487,6 +518,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 2, name: '프론트엔드' },
+          isReviewedParticipant: true,
         },
       ],
     },
@@ -523,6 +555,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 3, name: '디자이너' },
+          isReviewedParticipant: true,
         },
         {
           id: 2,
@@ -532,6 +565,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 3,
@@ -541,6 +575,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 4,
@@ -550,6 +585,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 5,
@@ -559,6 +595,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 2, name: '프론트엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 6,
@@ -568,6 +605,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 2, name: '프론트엔드' },
+          isReviewedParticipant: true,
         },
       ],
     },
@@ -604,6 +642,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 3, name: '디자이너' },
+          isReviewedParticipant: true,
         },
         {
           id: 2,
@@ -613,6 +652,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 3,
@@ -622,6 +662,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 4,
@@ -631,6 +672,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 5,
@@ -640,6 +682,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 2, name: '프론트엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 6,
@@ -649,6 +692,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 2, name: '프론트엔드' },
+          isReviewedParticipant: true,
         },
       ],
     },
@@ -685,6 +729,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 3, name: '디자이너' },
+          isReviewedParticipant: true,
         },
         {
           id: 2,
@@ -694,6 +739,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 3,
@@ -703,6 +749,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 4,
@@ -712,6 +759,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 5,
@@ -721,6 +769,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 2, name: '프론트엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 6,
@@ -730,6 +779,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 2, name: '프론트엔드' },
+          isReviewedParticipant: true,
         },
       ],
     },
@@ -767,6 +817,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 3, name: '디자이너' },
+          isReviewedParticipant: true,
         },
         {
           id: 2,
@@ -776,6 +827,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 3,
@@ -785,6 +837,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 4,
@@ -794,6 +847,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 5,
@@ -803,6 +857,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 2, name: '프론트엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 6,
@@ -812,6 +867,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 2, name: '프론트엔드' },
+          isReviewedParticipant: true,
         },
       ],
     },
@@ -848,6 +904,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 3, name: '디자이너' },
+          isReviewedParticipant: true,
         },
         {
           id: 2,
@@ -857,6 +914,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 3,
@@ -866,6 +924,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 4,
@@ -875,6 +934,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 5,
@@ -884,6 +944,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 2, name: '프론트엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 6,
@@ -893,6 +954,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 2, name: '프론트엔드' },
+          isReviewedParticipant: true,
         },
       ],
     },
@@ -929,6 +991,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 3, name: '디자이너' },
+          isReviewedParticipant: true,
         },
         {
           id: 2,
@@ -938,6 +1001,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 3,
@@ -947,6 +1011,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 4,
@@ -956,6 +1021,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 5,
@@ -965,6 +1031,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 2, name: '프론트엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 6,
@@ -974,6 +1041,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 2, name: '프론트엔드' },
+          isReviewedParticipant: true,
         },
       ],
     },
@@ -1010,6 +1078,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 3, name: '디자이너' },
+          isReviewedParticipant: true,
         },
         {
           id: 2,
@@ -1019,6 +1088,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 3,
@@ -1028,6 +1098,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 4,
@@ -1037,6 +1108,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 5,
@@ -1046,6 +1118,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 2, name: '프론트엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 6,
@@ -1055,6 +1128,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 2, name: '프론트엔드' },
+          isReviewedParticipant: true,
         },
       ],
     },
@@ -1091,6 +1165,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 3, name: '디자이너' },
+          isReviewedParticipant: true,
         },
         {
           id: 2,
@@ -1100,6 +1175,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 3,
@@ -1109,6 +1185,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 4,
@@ -1118,6 +1195,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 5,
@@ -1127,6 +1205,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 2, name: '프론트엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 6,
@@ -1136,6 +1215,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 2, name: '프론트엔드' },
+          isReviewedParticipant: true,
         },
       ],
     },
@@ -1172,6 +1252,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 3, name: '디자이너' },
+          isReviewedParticipant: true,
         },
         {
           id: 2,
@@ -1181,6 +1262,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 3,
@@ -1190,6 +1272,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 4,
@@ -1199,6 +1282,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 5,
@@ -1208,6 +1292,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 2, name: '프론트엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 6,
@@ -1217,6 +1302,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 2, name: '프론트엔드' },
+          isReviewedParticipant: true,
         },
       ],
     },
@@ -1253,6 +1339,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 3, name: '디자이너' },
+          isReviewedParticipant: true,
         },
         {
           id: 2,
@@ -1262,6 +1349,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 3,
@@ -1271,6 +1359,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 4,
@@ -1280,6 +1369,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 5,
@@ -1289,6 +1379,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 2, name: '프론트엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 6,
@@ -1298,6 +1389,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 2, name: '프론트엔드' },
+          isReviewedParticipant: true,
         },
       ],
     },
@@ -1334,6 +1426,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 3, name: '디자이너' },
+          isReviewedParticipant: true,
         },
         {
           id: 2,
@@ -1343,6 +1436,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 3,
@@ -1352,6 +1446,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 4,
@@ -1361,6 +1456,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 5,
@@ -1370,6 +1466,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 2, name: '프론트엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 6,
@@ -1379,6 +1476,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 2, name: '프론트엔드' },
+          isReviewedParticipant: true,
         },
       ],
     },
@@ -1415,6 +1513,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 3, name: '디자이너' },
+          isReviewedParticipant: true,
         },
         {
           id: 2,
@@ -1424,6 +1523,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 3,
@@ -1433,6 +1533,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 4,
@@ -1442,6 +1543,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 5,
@@ -1451,6 +1553,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 2, name: '프론트엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 6,
@@ -1460,6 +1563,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 2, name: '프론트엔드' },
+          isReviewedParticipant: true,
         },
       ],
     },
@@ -1496,6 +1600,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 3, name: '디자이너' },
+          isReviewedParticipant: true,
         },
         {
           id: 2,
@@ -1505,6 +1610,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 3,
@@ -1514,6 +1620,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 4,
@@ -1523,6 +1630,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 5,
@@ -1532,6 +1640,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 2, name: '프론트엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 6,
@@ -1541,6 +1650,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 2, name: '프론트엔드' },
+          isReviewedParticipant: true,
         },
       ],
     },
@@ -1577,6 +1687,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 3, name: '디자이너' },
+          isReviewedParticipant: true,
         },
         {
           id: 2,
@@ -1586,6 +1697,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 3,
@@ -1595,6 +1707,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 4,
@@ -1604,6 +1717,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 5,
@@ -1613,6 +1727,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 2, name: '프론트엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 6,
@@ -1622,6 +1737,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 2, name: '프론트엔드' },
+          isReviewedParticipant: true,
         },
       ],
     },
@@ -1658,6 +1774,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 3, name: '디자이너' },
+          isReviewedParticipant: true,
         },
         {
           id: 2,
@@ -1667,6 +1784,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 3,
@@ -1676,6 +1794,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 4,
@@ -1685,6 +1804,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 5,
@@ -1694,6 +1814,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 2, name: '프론트엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 6,
@@ -1703,6 +1824,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 2, name: '프론트엔드' },
+          isReviewedParticipant: true,
         },
       ],
     },
@@ -1739,6 +1861,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 3, name: '디자이너' },
+          isReviewedParticipant: true,
         },
         {
           id: 2,
@@ -1748,6 +1871,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 3,
@@ -1757,6 +1881,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 4,
@@ -1766,6 +1891,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 1, name: '백엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 5,
@@ -1775,6 +1901,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 2, name: '프론트엔드' },
+          isReviewedParticipant: true,
         },
         {
           id: 6,
@@ -1784,6 +1911,7 @@ export const studyDetailMockData: Array<StudyDetail> = [
           totalAttendance: 20,
           recentAttendanceDate: '2024-03-16T09:35:06.174',
           position: { id: 2, name: '프론트엔드' },
+          isReviewedParticipant: true,
         },
       ],
     },

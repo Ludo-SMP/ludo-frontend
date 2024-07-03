@@ -14,6 +14,7 @@ const meta = {
     role: 'MEMBER',
     totalAttendance: 10,
     recentAttendanceDate: '2024-5-21',
+    isReviewedParticipant: false,
   },
 } satisfies Meta<typeof MemberProfile>;
 
