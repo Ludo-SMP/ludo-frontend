@@ -13,6 +13,8 @@ import { useStudyLeaveRequestMutation } from '@/Hooks/study/useStudyLeaveRequest
 import Modal from '../Common/Modal';
 import { LEAVE } from '@/Constants/messages';
 import Button from '../Common/Button';
+import { useApproveStudyLeaveRequest } from '@/Hooks/study/useApproveStudyLeaveRequest';
+import { useRejectStudyLeaveMutation } from '@/Hooks/study/useRejectStudyLeaveRequest';
 
 export interface MemberProfileProps extends Member {
   /** 스터디원의 프로필 이미지 URL */
@@ -55,6 +57,8 @@ const MemberProfile = ({
 
   const { mutate: mutateForceLeave } = useStudyForceLeaveMutation(studyId);
   const { mutate: mutateRequestLeave } = useStudyLeaveRequestMutation(studyId);
+  const { mutate: mutateApproveLeave } = useApproveStudyLeaveRequest(studyId, id);
+  const { mutate: mutateRejectLeave } = useRejectStudyLeaveMutation(studyId, id);
 
   return (
     <MemberProfileWrapper
@@ -100,8 +104,10 @@ const MemberProfile = ({
                 </Button>
               ) : (
                 <>
-                  <Button>거절</Button>
-                  <Button scheme="secondary">승인</Button>
+                  <Button onClick={() => mutateApproveLeave()}>거절</Button>
+                  <Button onClick={() => mutateRejectLeave()} scheme="secondary">
+                    승인
+                  </Button>
                 </>
               )}
             </Buttons>
