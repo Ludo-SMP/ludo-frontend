@@ -22,7 +22,11 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {};
 
-/** 해당 스터디원이 본인인 경우 */
+/**
+ * 해당 스터디원이 본인인 경우
+ *
+ * 우측 상단에 선택 가능한 메뉴가 표시됩니다.
+ */
 export const IsSelf: Story = {
   args: {
     isSelf: true,
