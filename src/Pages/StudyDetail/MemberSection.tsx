@@ -7,15 +7,17 @@ export interface MemberSectionProps {
   members: Member[];
   userId: number;
   isStudyEnd: boolean;
+  studyId: number;
 }
 
-export const MemberSection = ({ members, userId, isStudyEnd }: MemberSectionProps) => (
+export const MemberSection = ({ members, userId, isStudyEnd, studyId }: MemberSectionProps) => (
   <MemberSectionBox>
     {members?.map((member) => (
       <li key={member.id}>
         <MemberProfile
           totalAttendance={member.totalAttendance}
           isSelf={member.id === userId}
+          studyId={studyId}
           state={
             isStudyEnd
               ? member.isReviewedParticipant
