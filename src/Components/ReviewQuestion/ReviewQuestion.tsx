@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { CustomRadio } from '../CustomRadio/CustomRadio';
-import { useState } from 'react';
 
 interface ReviewQuestionProps {
   /** 설문 문항 */
@@ -11,31 +10,33 @@ interface ReviewQuestionProps {
 
   /** 숫자 선택지 개수 */
   optionCnt?: number;
+
+  /** 선택된 값 */
+  value?: number;
+
+  /** 선택지 변경 시 호출되는 콜백 */
+  onChange?: (value: number) => void;
+
+  /** 항목이 미완성 상태인지 여부 */
+  error?: boolean;
 }
 
 const errorMessageContent = '해당 항목이 체크되지 않았습니다.';
 
-export const ReviewQuestion = ({ title, contents, optionCnt = 5 }: ReviewQuestionProps) => {
-  const [selectedValue, setSelectedValue] = useState(null);
-
+export const ReviewQuestion = ({ title, contents, optionCnt = 5, value, onChange, error }: ReviewQuestionProps) => {
   return (
     <ReviewQuestionWrapper>
       <QuestionTitle>{title}</QuestionTitle>
       <SelectSection>
         <QuestionContent alignEnd>{contents[0]}</QuestionContent>
         <RadioButtonsSection>
-          {Array.from({ length: optionCnt }, (_, i) => i + 1).map((value: number) => (
-            <CustomRadio
-              value={value}
-              key={value}
-              setSelectedValue={setSelectedValue}
-              checked={value === selectedValue}
-            />
+          {Array.from({ length: optionCnt }, (_, i) => i + 1).map((i: number) => (
+            <CustomRadio value={i} key={i} setSelectedValue={(v) => onChange?.(v)} checked={i === value} />
           ))}
         </RadioButtonsSection>
         <QuestionContent>{contents[1]}</QuestionContent>
       </SelectSection>
-      <ErrorMessageWrapper>{!selectedValue && errorMessageContent}</ErrorMessageWrapper>
+      <ErrorMessageWrapper>{error && errorMessageContent}</ErrorMessageWrapper>
     </ReviewQuestionWrapper>
   );
 };

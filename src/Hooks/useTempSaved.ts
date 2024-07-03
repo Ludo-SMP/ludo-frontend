@@ -1,5 +1,6 @@
 // 임시저장 관련 훅
 
+import { StudyCreateForm } from '@/Pages/Studies/Layout';
 import { RecruitFormWithSelect } from '@/Types/study';
 import { useSavedKeyStore } from '@/store/study';
 import { useEffect } from 'react';
@@ -7,7 +8,7 @@ import { useEffect } from 'react';
 export const useTempSaved = () => {
   const savedKey = useSavedKeyStore((state) => state.savedKey);
   const setSavedKey = useSavedKeyStore((state) => state.setSavedKey);
-  const tempSaved: RecruitFormWithSelect | null = JSON.parse(localStorage.getItem(savedKey)) ?? null;
+  const tempSaved: RecruitFormWithSelect | StudyCreateForm | null = JSON.parse(localStorage.getItem(savedKey)) ?? null;
 
   useEffect(() => {
     return () => {

@@ -5,7 +5,6 @@ import DropdownItem from './DropdownItem';
 import { useOutSideClick } from '@/Hooks/useOutsideClick';
 import { Up, Down } from '@/Assets';
 import { useFilterOptionsStore } from '@/store/filter';
-import { media } from '@/Styles/theme';
 import { StackModal } from '../Modal/StackModal';
 
 export interface DropdownFilterProps {
@@ -52,7 +51,7 @@ const DropdownFilter = ({ filterName, items, filterOption }: DropdownFilterProps
     <DropdownFilterWrapper>
       <DropdownSelectWrapper onClick={toggleDropdonwItems} checked={content !== '전체' && content !== filterName}>
         <span className="filter__text">{content}</span>
-        {isOpen ? <Up width={24} height={24} /> : <Down />}
+        {isOpen ? <Up width={16} height={16} /> : <Down />}
       </DropdownSelectWrapper>
       {isOpen &&
         (filterOption === 'STACK' ? (
@@ -93,20 +92,16 @@ const DropdownFilterWrapper = styled.ul`
     overflow: hidden;
     text-overflow: ellipsis;
   }
-
-  ${media.custom(800)} {
-    width: 90px;
-  }
 `;
 
 const DropdownSelectWrapper = styled.div<{ checked?: boolean }>`
   display: flex;
-  padding: 2px 12px 0px 16px;
-  width: 130px;
+  padding: 4px 12px 4px 16px;
+  width: 114px;
   justify-content: center;
   align-items: center;
   gap: 8px;
-  border-radius: 24px;
+  border-radius: ${({ theme }) => theme.borderRadius.xlarge};
   color: ${(props) => (props.checked ? props.theme.color.orange2 : props.theme.color.black3)};
   border: 1px solid ${(props) => (props.checked ? props.theme.color.orange2 : props.theme.color.black2)};
   background: ${(props) => (props.checked ? props.theme.color.white : props.theme.color.white)};
@@ -124,17 +119,12 @@ const DropdownSelectWrapper = styled.div<{ checked?: boolean }>`
   svg > path {
     fill: ${({ theme, checked }) => (checked ? theme.color.orange2 : theme.color.black3)};
   }
-
-  ${media.custom(800)} {
-    svg {
-      display: none;
-    }
-  }
 `;
 
 const DropdownItemsWrapper = styled.div<{ filterOption: FilterOption }>`
   position: absolute;
   width: 100%;
+  z-index: 100;
   height: ${({ filterOption }) => (filterOption === 'STACK' ? '240px' : 'auto')};
   display: flex;
   border-radius: 18px;

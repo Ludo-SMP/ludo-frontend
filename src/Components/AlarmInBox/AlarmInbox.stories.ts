@@ -1,8 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { AlarmInbox } from '.';
+import { mockNotifications } from '@/Mocks/data/mockNotifications';
 
 const meta = {
   component: AlarmInbox,
+  args: {
+    isOpen: true,
+    alarmPreviews: mockNotifications.slice(0, 3),
+  },
 } satisfies Meta<typeof AlarmInbox>;
 
 export default meta;
@@ -10,29 +15,28 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
-  args: { alarmPreviews: [] },
+  args: { isOpen: true },
 } satisfies Story;
+
+export const Close: Story = {
+  args: {
+    isOpen: false,
+  },
+};
 
 export const AlarmInboxWithSeveralAlarms: Story = {
   args: {
     alarmPreviews: [
       {
-        alarmType: 'STUDY',
-        title: '스터디',
-        description: '산토끼토끼야어디를가느냐깡총깡총뛰면서어디를가느냐산고개고개를나혼자넘어서토실토실알밤을주워',
-        createdAt: '2024-05-14T02:16:03.598Z',
-      },
-      {
-        alarmType: 'LUDO',
-        title: '루도루도루도',
-        description: '산토끼토끼야어디를가느냐깡총깡총뛰면서어디를가느냐산고개고개를나혼자넘어서토실토실알밤을주워',
-        createdAt: '2024-05-14T02:16:03.598Z',
-      },
-      {
-        alarmType: 'LUDO',
-        title: '루도루도루도~~~',
-        description: '루도루도루돌두로',
-        createdAt: '2024-05-12T02:16:03.598Z',
+        notificationId: 1,
+        title: '스터디 지원 현황 알림',
+        content: '스터디 지원 현황 알림',
+        type: 'STUDY_APPLICANT',
+        read: false,
+        params: {
+          studyId: 3,
+        },
+        createdAt: '2024-05-21T20:34:19.884948',
       },
     ],
   },

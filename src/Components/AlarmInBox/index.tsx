@@ -1,106 +1,152 @@
-import styled from 'styled-components';
-import { AlarmPreview, AlarmPreviewProps } from './AlarmPreview';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
+import { AlarmPreview } from './AlarmPreview';
+import { useOutSideClick } from '@/Hooks/useOutsideClick';
+import styled, { css } from 'styled-components';
+import { Close } from '@/Assets';
+import { NotificationSSEType } from '@/Types/notifications';
+import { Link } from 'react-router-dom';
+import { ROUTES } from '@/Constants/route';
+import { RightArrow } from '@/Assets/RightArrow';
+import { flexCenter } from '@/Styles/theme';
+import { RowDivider } from '../Common/Divider/RowDivider';
+import { useReadNotification } from '@/Hooks/notifications/useReadNotification';
 
-interface AlarmInboxProps {
-  alarmPreviews?: AlarmPreviewProps[];
+export interface AlarmInboxProps {
+  handleOpen?: (prev: boolean) => void;
+  alarmPreviews?: NotificationSSEType[];
+  isOpen: boolean;
 }
 
-const dropdownContent = '알림 (원래 해당 버튼은 ‘종 버튼’ 아래에 드랍다운으로 보여집니다)';
+export const AlarmInbox = ({ alarmPreviews, handleOpen, isOpen }: AlarmInboxProps) => {
+  const inboxRef = useRef<HTMLDivElement>(null);
 
-export const AlarmInbox = ({ alarmPreviews }: AlarmInboxProps) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const alarmPreiviewsRef = useRef<HTMLDivElement>(null);
+  useOutSideClick(inboxRef, () => {
+    handleOpen && handleOpen(false);
+  });
+
+  const notReadAlarm = alarmPreviews?.filter((alarm) => !alarm?.read);
+  const isReadAll = () => notReadAlarm?.length === 0;
+  const { mutate } = useReadNotification([...(notReadAlarm ?? []).map((alarm) => alarm?.notificationId)]);
 
   return (
-    <AlarmInboxWrapper>
-      {/* 해당 Topbar 컴포넌트는 추후에, 종 버튼 아래의 숫자 또는 버튼으로 교체 또는 분리 예정 */}
-      <Topbar isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
-        {dropdownContent}
-      </Topbar>
-      <RowDivider />
-      <AlarmPreviewsWrapper isOpen={isOpen} ref={alarmPreiviewsRef} onClick={(prev) => setIsOpen(!prev)}>
-        <Title alarmLength={alarmPreviews.length}>루도가 알려요</Title>
-        <PreviewListWrapper>
-          {alarmPreviews?.map((alarmPreview: AlarmPreviewProps) => (
-            <AlarmPreview {...alarmPreview} key={alarmPreview.createdAt} />
-          ))}
-        </PreviewListWrapper>
-      </AlarmPreviewsWrapper>
-    </AlarmInboxWrapper>
+    <AlarmInboxBox ref={inboxRef} $isOpen={isOpen}>
+      <AlarmBox>
+        <TopBar $isReadAll={isReadAll()}>
+          <Title>알림</Title>
+          <Close onClick={() => handleOpen(false)} />
+        </TopBar>
+        <TopBar $isReadAll={isReadAll()}>
+          <Title>루도가 알려요</Title>
+          <LinkBox to={ROUTES.MYPAGE.NOTIFICATIONS} onClick={() => handleOpen(false)}>
+            알림페이지 이동
+            <RightArrow />
+          </LinkBox>
+        </TopBar>
+        {/* 페이지 이동 후 알림 인박스 닫기 */}
+        <AlarmList onClick={() => handleOpen(false)}>
+          {alarmPreviews
+            ?.filter((alarm: NotificationSSEType) => !alarm?.read)
+            ?.map((alarm) => <AlarmPreview key={`${alarm?.notificationId}`} {...alarm} />)}
+        </AlarmList>
+        <RowDivider rowHeight={1} />
+        {!isReadAll() && (
+          <BottomBar>
+            <GreyTextBox onClick={() => mutate()}>전체 읽음 처리하기</GreyTextBox>
+          </BottomBar>
+        )}
+      </AlarmBox>
+    </AlarmInboxBox>
   );
 };
 
-const AlarmInboxWrapper = styled.div`
+const AlarmInboxBox = styled.div<{ $isOpen: boolean }>`
   display: flex;
+  visibility: ${({ $isOpen }) => ($isOpen ? 'visible' : 'hidden')};
   flex-direction: column;
   width: 100%;
+  min-width: 350px;
   max-width: 600px;
   border: 1px solid ${({ theme }) => theme.color.black1};
   border-radius: ${({ theme }) => theme.borderRadius.small};
+  background: ${({ theme }) => theme.color.white};
+  position: absolute;
+  top: 60px;
+  right: -40px;
+  z-index: 100;
+  opacity: ${({ $isOpen }) => ($isOpen ? 1 : 0)};
+  transform: ${({ $isOpen }) => ($isOpen ? 'translateY(0)' : 'translateY(-20px)')};
+  transition: all 0.2s ease-out;
 `;
 
-const Topbar = styled.div<{ isOpen: boolean }>`
+const AlarmBox = styled.div`
   display: flex;
-  height: 40px;
+  flex-direction: column;
+  box-shadow: 0px 0px 10px 0px ${({ theme }) => theme.color.black0};
+`;
+
+/** 알림 페이지 이동, 전체 읽음 처리하기 text */
+const GreyText = css`
+  display: flex;
+  align-items: center;
+  ${({ theme }) => theme.typo.ButtonButton};
+  color: ${({ theme }) => theme.color.black3};
+  font: none !important;
+`;
+
+const LinkBox = styled(Link)`
+  ${GreyText}
+  gap: 8px;
+`;
+
+const GreyTextBox = styled.div`
+  ${GreyText}
+  cursor: pointer;
+`;
+
+const TopBar = styled.div<{ $isReadAll: boolean }>`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   min-width: 348px;
   max-width: 600px;
+  height: 40px;
   padding: 4px 24px;
-  align-items: flex-start;
-  gap: 10px;
-  align-self: stretch;
-  background: ${({ theme }) => theme.color.white};
-  border-top-left-radius: ${({ theme }) => theme.borderRadius.small};
-  border-top-right-radius: ${({ theme }) => theme.borderRadius.small};
-  border-bottom-left-radius: ${({ theme, isOpen }) => !isOpen && theme.borderRadius.small};
-  border-bottom-right-radius: ${({ theme, isOpen }) => !isOpen && theme.borderRadius.small};
-  color: ${({ theme }) => theme.color.black5};
-  font-family: 'Pretendard600';
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 32px;
+  border-top-left-radius: ${({ theme, $isReadAll }) => $isReadAll && theme.borderRadius.small};
+  border-top-right-radius: ${({ theme, $isReadAll }) => $isReadAll && theme.borderRadius.small};
+  border-bottom: ${({ theme }) => `1px solid ${theme.color.black1}`};
 
-  &:hover {
+  svg {
     cursor: pointer;
   }
 `;
 
-const RowDivider = styled.div`
-  height: 0px;
-  align-self: stretch;
-  border: 0.5px solid #e5e6e8;
+const BottomBar = styled.div`
+  ${flexCenter}
+  width: 100%;
+  height: 40px;
+  padding: 2px;
+  ${({ theme }) => theme.typo.ButtonButton};
+  color: ${({ theme }) => theme.color.black3};
+
+  /* Header에서 적용한 button box-shadow 속성 무효화시키기 */
+  button {
+    box-shadow: none !important;
+  }
 `;
 
-const Title = styled.div<{ alarmLength: number }>`
-  display: flex;
-  height: 40px;
-  min-width: 348px;
-  max-width: 600px;
-  padding: 4px 24px;
-  align-items: flex-start;
-  gap: 10px;
-  align-self: stretch;
-  background: ${({ theme }) => theme.color.white};
-  border-bottom-left-radius: ${({ theme, alarmLength }) => alarmLength === 0 && theme.borderRadius.small};
-  border-bottom-right-radius: ${({ theme, alarmLength }) => alarmLength === 0 && theme.borderRadius.small};
-  border-bottom: ${({ theme, alarmLength }) => alarmLength !== 0 && `1px solid ${theme.color.black1}`};
+const Title = styled.div`
   color: ${({ theme }) => theme.color.black5};
   font-family: 'Pretendard600';
-  font-size: 18px;
-  font-style: normal;
+  font-size: 16px;
   font-weight: 600;
-  line-height: 32px;
+  line-height: 24px;
 `;
 
-const AlarmPreviewsWrapper = styled.div<{ isOpen: boolean }>`
-  display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
-  flex-direction: column;
-`;
-
-const PreviewListWrapper = styled.div`
+const AlarmList = styled.ul`
   display: flex;
   flex-direction: column;
+  max-height: 500px;
+  overflow: auto;
 
   & > div {
     border-bottom: 1px solid ${({ theme }) => theme.color.black1};

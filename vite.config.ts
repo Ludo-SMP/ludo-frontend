@@ -10,7 +10,7 @@ export default defineConfig({
     alias: [{ find: '@', replacement: path.resolve(__dirname, 'src') }],
   },
   server: {
-    host: 'local.ludoapi.store',
+    host: 'local.ludo.study',
     port: 3000,
   },
 });

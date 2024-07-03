@@ -1,5 +1,6 @@
 // theme.ts
 import { DefaultTheme, css } from 'styled-components';
+import { typo } from './typography';
 
 export const color = {
   white: '#ffffff',
@@ -32,6 +33,7 @@ export const color = {
   kakaoFontColor: '#521010',
   negative: '#FD3D51',
   strokeDividerThick: '#F2F3F3',
+  buttonHoverSecondary: `rgba(222, 114, 58)`,
 };
 
 export const font = {
@@ -66,6 +68,7 @@ const borderRadius = {
   medium: '20px',
   large: '24px',
   xlarge: '999px',
+  cornerRadius12: '12px',
 };
 
 export const theme: DefaultTheme = {
@@ -74,10 +77,17 @@ export const theme: DefaultTheme = {
   media,
   borderRadius,
   buttonSize,
+  typo,
 };
 
 export const textEllipsis = css`
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+`;
+
+export const flexCenter = css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

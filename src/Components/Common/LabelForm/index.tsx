@@ -1,6 +1,5 @@
-import Heading from '@/Components/Heading';
 import { FieldErrors, FieldValues } from 'react-hook-form';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export interface LabelFormProps<T extends FieldValues = FieldValues> {
   /** 라벨 */
@@ -14,6 +13,9 @@ export interface LabelFormProps<T extends FieldValues = FieldValues> {
 
   /** RHF 필드 키 */
   name?: keyof T;
+
+  /** 비활성화 여부 */
+  disabled?: boolean;
 }
 
 export const LabelForm = <T extends FieldValues = FieldValues>({
@@ -21,19 +23,28 @@ export const LabelForm = <T extends FieldValues = FieldValues>({
   children,
   name,
   errors,
+  disabled,
 }: LabelFormProps<T>) => {
   return (
     <GridItem>
-      {label && (
-        <Heading type={'Title'} component={'Input'}>
-          {label}
-        </Heading>
-      )}
+      {label && <Heading $disabled={disabled}>{label}</Heading>}
       {children}
       {errors?.[name]?.message && <ErrorMsg>{(errors?.[name] as FieldErrors)?.message?.toString()}</ErrorMsg>}
     </GridItem>
   );
 };
+
+const Heading = styled.h3<{
+  $disabled?: boolean;
+}>`
+  ${({ theme }) => theme.typo.InputTitle};
+  ${({ $disabled }) =>
+    $disabled &&
+    css`
+      opacity: 0.65;
+      color: ${({ theme }) => theme.color.black2};
+    `}
+`;
 
 const GridItem = styled.div`
   display: flex;

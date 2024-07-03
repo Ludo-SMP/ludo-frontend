@@ -11,18 +11,13 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    alarmType: 'LUDO',
-    title: '루도가 알려요',
-    description: '산토끼토끼야어디를가느냐깡총깡총뛰면서어디를가느냐산고개고개를나혼자넘어서토실토실알밤을주워',
-    createdAt: '2024-05-01T03:16:03.598Z',
+    notificationId: 1,
+    title: '스터디 지원 현황 알림',
+    content: '스터디 지원 현황 알림',
+    type: 'STUDY_APPLICANT',
+    params: {
+      studyId: 3,
+    },
+    createdAt: '2024-05-21T20:34:19.884948',
   },
 } satisfies Story;
-
-export const StudyAlarmPreview: Story = {
-  args: {
-    alarmType: 'STUDY',
-    title: '스터디',
-    description: '산토끼토끼야어디를가느냐깡총깡총뛰면서어디를가느냐산고개고개를나혼자넘어서토실토실알밤을주워',
-    createdAt: '2024-05-14T03:16:03.598Z',
-  },
-};

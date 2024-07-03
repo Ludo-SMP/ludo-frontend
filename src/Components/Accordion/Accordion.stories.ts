@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Accordion } from '.';
+import { DefaultStudyThumbnail } from '@/Assets';
 
 const meta = {
   component: Accordion,
@@ -12,14 +13,7 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     title: '알림 제목',
-    children: '알림 내용',
-  },
-} satisfies Story;
-
-export const Description: Story = {
-  args: {
-    title: '알림 제목',
-    description: '알림 설명',
+    imgUrl: DefaultStudyThumbnail,
     children: '알림 내용',
   },
 } satisfies Story;

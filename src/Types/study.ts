@@ -10,7 +10,7 @@ export type Platform = keyof typeof PLATFORM;
 export type PositionId = typeof POSITION;
 export type Card = 'STUDY' | 'RECRUITMENT';
 export type Sort = '최신순' | '조회순';
-export type ApplyTryStatus = 'NOT APPLY' | 'SUCCESS' | 'CLOSED' | 'ALREDAY_APPLY' | 'ALREDY_PARTICIPATED';
+export type ApplyTryStatus = 'NOT APPLY' | 'SUCCESS' | 'CLOSED' | 'ALREADY_APPLY' | 'ALREADY_PARTICIPATED';
 
 export interface Position {
   id: number;
@@ -22,12 +22,16 @@ export interface Category {
   name: '프로젝트' | '코딩 테스트' | '모의 면접';
 }
 
+// WARN: 해당 타입과 `Participant` 타입은 중복됨.
+// 이에 대한 타입 merge 및 삭제, 참조 코드 수정 등등이 필요.
 export interface Member {
   id: number;
   nickname: string;
   email: string;
   position: Position;
   role: Role;
+  totalAttendance: number;
+  recentAttendanceDate: string | null;
 }
 
 export interface User {
@@ -51,7 +55,6 @@ export interface Stack {
   imageUrl: string;
 }
 
-// TODO: 타입 구조 개선
 export interface RecruitmentDetail {
   recruitment: {
     id: number;
@@ -59,6 +62,7 @@ export interface RecruitmentDetail {
     stacks: Stack[];
     positions: Position[];
     applicantCount: number;
+    applicantLimit: number;
     contact: 'KAKAO' | 'EMAIL';
     callUrl: string;
     content: string;
@@ -72,10 +76,12 @@ export interface RecruitmentDetail {
     category: Category;
     owner: User;
     platform: Platform;
+    platformUrl: string;
     way: ProgressMethod;
     participantLimit: number;
     startDateTime: string;
     endDateTime: string;
+    attendanceDay: number[];
   };
 }
 
@@ -107,28 +113,24 @@ export interface Recruitments {
 export interface RecruitmentForm {
   title: string;
   stackIds: number[];
-  positionIds: Position[];
-  applicantCount: number;
+  positionIds: number[];
+  applicantLimit: number;
   recruitmentEndDateTime: string;
-  contact: 'KAKAO' | 'EMAIL';
+  contact: string; // 'KAKAO' | 'EMAIL';
   callUrl: string;
   content: string;
 }
 
-// 셀렉트로 관리해야 하는 타입
-export type SingleSelectValue = Pick<RecruitmentForm, 'applicantCount' | 'contact'>;
-export type SelectOptionType = Record<keyof SingleSelectValue, Option<number, string>>;
-export type MultiSelectType = Record<'positionIds', Option<number, string>[]>;
-
-export type SelectType = SelectOptionType & MultiSelectType;
-
 // 셀렉트가 포함된 모집공고 폼 관리 타입
-export interface RecruitFormWithSelect extends SelectType {
+export interface RecruitFormWithSelect {
   title: RecruitmentForm['title'];
   recruitmentEndDateTime: RecruitmentForm['recruitmentEndDateTime'];
   callUrl: RecruitmentForm['callUrl'];
   content: RecruitmentForm['content'];
   stackIds?: Stack[];
+  applicantLimit: number;
+  contact: string;
+  positionIds: number[];
 }
 
 export interface FilterOptionParams {
@@ -142,14 +144,36 @@ export interface FilterOptionParams {
   sort?: Sort[];
 }
 
+// WARN: 해당 타입과 `Member` 타입은 중복됨.
+// 이에 대한 타입 merge 및 삭제, 참조 코드 수정 등등이 필요.
 export interface Participant {
   id: number;
   nickname: string;
   role: Role;
   email: string;
   position: Position;
+  // 총합 출석일
+  totalAttendance: number;
+  // 최근 출석일
+  recentAttendanceDate: string | null;
 }
-export interface Applicant extends Omit<Member, 'role'> {}
+
+/**
+ * 스터디 지원자 타입
+ *
+ * NOTE: 추후 Participant/Member 타입이 해당 타입을 상속하도록 구조 변경 필요.
+ */
+export interface Applicant extends Omit<Member, 'role' | 'totalAttendance' | 'recentAttendanceDate'> {
+  reviewStatistics: {
+    activeness: number;
+    professionalism: number;
+    communication: number;
+    together: number;
+    recommend: number;
+  };
+}
+
+export type AttendanceDay = 1 | 2 | 3 | 4 | 5 | 6 | 7;
 
 export interface StudyCreate {
   title: string;
@@ -157,9 +181,11 @@ export interface StudyCreate {
   positionId: number;
   way: ProgressMethod;
   platform: Platform;
+  platformUrl: string;
   participantLimit: number;
   startDateTime: string;
   endDateTime: string;
+  attendanceDay: number[];
 }
 
 export interface StudyDetail {
@@ -168,9 +194,12 @@ export interface StudyDetail {
     status: StudyStatus;
     title: string;
     platform: Platform;
+    platformUrl: string;
     way: ProgressMethod;
     participantCount: number;
     participantLimit: number;
+    // 출석요일
+    attendanceDay: Array<AttendanceDay>;
     startDateTime: string;
     endDateTime: string;
     category: Category;
@@ -179,6 +208,8 @@ export interface StudyDetail {
     hasRecruitment: boolean;
     createdDateTime: string;
     updatedDateTime: string;
+    // 스터디 지원자 수
+    applicantCount: number;
   };
 }
 
@@ -215,9 +246,9 @@ export interface ApplicantRecruitment {
   applicantStatus: ApplyStatus;
 }
 
-export interface Option<T, K> {
-  value: T;
-  label: K;
+export interface Option {
+  value: string | number;
+  label: string | number;
 }
 
 export interface CompletedStudy {
@@ -238,6 +269,35 @@ export interface MyStudies {
   completedStudies: CompletedStudy[];
 }
 
+/**
+ * @description 마이페이지 신뢰도 항목 타입
+ *
+ * @property {number} finishStudy - 진행한 스터디
+ * @property {number} perfectStudy - 완주한 스터디
+ * @property {number} leftStudyCount - 탈퇴한 스터디
+ * @property {number} accumulatedTeamMembers - 누적 팀원 수
+ * @property {number} averageAttendanceRate - 평균 출석률
+ * @property {number} activeness - 적극성
+ * @property {number} professionalism - 전문성
+ * @property {number} communication - 의사소통능력
+ * @property {number} together - 협업능력 (80% 이상)
+ * @property {number} recommend - 추천도 (80% 이상)
+ *
+ */
+export interface Trust {
+  finishStudy: number;
+  perfectStudy: number;
+  leftStudyCount: number;
+  accumulatedTeamMembers: number;
+  averageAttendanceRate: number;
+  activeness: number;
+  professionalism: number;
+  communication: number;
+  together: number;
+  recommend: number;
+}
+
 export interface MyPageInfo extends MyStudies {
   user: User;
+  trust: Trust;
 }
