@@ -12,6 +12,9 @@ registerLocale('ko', ko);
 export interface ProgressPeriodProps {
   /** input 요소가 가질 폼 필드 이름 속성 */
   name?: string;
+
+  /** 초기값으로 설정될 기간 범위 */
+  defaultValue?: [string, string];
 }
 
 interface IProgressPeriodForm {
@@ -28,18 +31,18 @@ interface IProgressPeriodForm {
 export const ProgressPeriod = forwardRef<
   DatePicker,
   ProgressPeriodProps & Partial<ControllerRenderProps<IProgressPeriodForm, 'progressPeriod'>>
->(({ name, onChange, onBlur }, ref) => {
+>(({ name, defaultValue, onChange, onBlur }, ref) => {
   const now = new Date();
-
-  const [startDate, setStartDate] = useState(now);
-  const [endDate, setEndDate] = useState(null);
+  const [defStartDate, defEndDate] = defaultValue;
+  const [startDate, setStartDate] = useState(defStartDate && new Date(defStartDate));
+  const [endDate, setEndDate] = useState(defEndDate && new Date(defEndDate));
 
   return (
     <DateContainer
       ref={ref}
       name={name}
       locale="ko"
-      // 기본값은 오늘부터 시작하는 것으로 가정
+      // 기본값은 초기값이 있는 경우 초기값으로 시작하는 것으로 가정
       selected={startDate}
       onBlur={onBlur}
       onChange={([start, end]: [Date, Date]) => {
@@ -58,13 +61,13 @@ export const ProgressPeriod = forwardRef<
       showDisabledMonthNavigation
       // 한국인에게 익숙한 날짜 순서
       dateFormat="yy.MM.dd"
+      autoComplete="off"
     />
   );
 });
 
-// TODO: ./EndDate.tsx 랑 똑같은 Styled Component인데 한쪽으로 빼서 공용 컴포넌트로 사용하기
-const DateContainer = styled(DatePicker)`
-  width: 328px;
+export const DateContainer = styled(DatePicker)`
+  width: 100%;
   height: 24px;
   align-items: center;
   align-self: stretch;

@@ -26,7 +26,7 @@ export const ROUTES = {
     CREATE: '/studies/create',
     DETAIL: '/studies/:studyId',
     MODIFY: '/studies/:studyId/edit',
-    APPLICNATS: '/studies/:studyId/applicants',
-    REVIEW: '/studies/:studyId/:userId/reivew',
+    APPLICANTS: '/studies/:studyId/applicants',
+    REVIEW: '/studies/:studyId/:userId/review',
   },
 } as const;

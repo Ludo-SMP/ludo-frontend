@@ -1,14 +1,14 @@
-// react-datepicker를 사용해서 마감날짜 구현 328px, 44px, ex) 24.01.23
+// react-datepicker를 사용해서 마감날짜 구현 100%, 44px, ex) 24.01.23
 import React, { useState } from 'react';
 import { ControllerRenderProps } from 'react-hook-form';
 
 // date-picker
-import DatePicker, { ReactDatePicker } from 'react-datepicker';
+import { ReactDatePicker } from 'react-datepicker';
 import { registerLocale } from 'react-datepicker';
 import ko from 'date-fns/locale/ko';
 import 'react-datepicker/dist/react-datepicker.css';
 import { parseISOString } from '@/utils/date';
-import styled from 'styled-components';
+import { DateContainer } from './ProgressPeriod';
 
 registerLocale('ko', ko);
 
@@ -46,16 +46,3 @@ export const EndDate = React.forwardRef<ReactDatePicker<string, boolean>, Contro
     );
   },
 );
-
-const DateContainer = styled(DatePicker)`
-  width: 100%;
-  height: 24px;
-  align-items: center;
-  align-self: stretch;
-  resize: none;
-  flex: 1 0 0;
-
-  &::placeholder {
-    color: ${(props) => props.theme.color.black2};
-  }
-`;

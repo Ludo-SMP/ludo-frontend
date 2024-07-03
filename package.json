@@ -5,21 +5,23 @@
   "type": "module",
   "scripts": {
     "dev": "vite --port 3000",
-    "start:mac": "HOST=local.ludoapi.store HTTPS=true SSL_CRT_FILE=cert/local.ludoapi.store.pem SSL_KEY_FILE=cert/local.ludoapi.store-key.pem && yarn dev ",
+    "start:mac": "HOST=local.ludo.study HTTPS=true SSL_CRT_FILE=cert/local.ludo.study.pem SSL_KEY_FILE=cert/local.ludo.study-key.pem && yarn dev ",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "start:windows": "set HOST=local.ludoapi.store &&yarn dev",
+    "start:windows": "set HOST=local.ludo.study &&yarn dev",
     "test": "jest",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "chromatic": "chromatic"
+    "chromatic": "chromatic",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@hookform/error-message": "^2.0.1",
     "@tanstack/react-query": "^5.17.9",
     "@tanstack/react-query-devtools": "^5.18.1",
     "@types/react-datepicker": "^4.19.5",
+    "@types/react-slick": "^0.23.13",
     "@types/styled-components": "^5.1.34",
     "axios": "^1.6.7",
     "date-fns": "^3.6.0",
@@ -27,6 +29,7 @@
     "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-prettier": "^5.1.2",
     "eslint-plugin-react": "^7.33.2",
+    "event-source-polyfill": "^1.0.31",
     "msw": "^2.2.4",
     "react": "^18.2.0",
     "react-datepicker": "^5.0.0",
@@ -35,8 +38,11 @@
     "react-hook-form": "^7.50.1",
     "react-router-dom": "^6.22.0",
     "react-select": "^5.8.0",
+    "react-slick": "^0.30.2",
+    "slick-carousel": "^1.8.1",
     "styled-components": "^6.1.8",
     "styled-reset": "^4.5.2",
+    "ts-pattern": "^5.1.1",
     "uuid": "^9.0.1",
     "vite-plugin-mkcert": "^1.17.3",
     "zustand": "^4.5.0"
@@ -55,6 +61,7 @@
     "@storybook/test": "^8.0.8",
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^15.0.2",
+    "@types/event-source-polyfill": "^1.0.5",
     "@types/jest": "^29.5.12",
     "@types/node": "^20.11.10",
     "@types/react": "^18.2.43",
@@ -68,12 +75,13 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
     "eslint-plugin-storybook": "^0.8.0",
-    "husky": "^8.0.3",
+    "husky": "^9.0.11",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "jest-styled-components": "^7.2.0",
     "jest-svg-transformer": "^1.0.0",
+    "lint-staged": "^15.2.7",
     "msw-storybook-addon": "^2.0.0",
     "prettier": "^3.2.5",
     "storybook": "^8.0.8",
@@ -91,5 +99,12 @@
       "public"
     ]
   },
-  "packageManager": "yarn@1.22.19"
+  "packageManager": "yarn@1.22.19",
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ]
+  }
 }

@@ -10,11 +10,20 @@ export interface StackProps {
 export const Stack = ({ divider, gap, children }: StackProps) => {
   const childrenArr = Children.toArray(children);
 
-  return <Box gap={gap}>{[].concat(...childrenArr.map((n) => [n, divider])).slice(0, -1)}</Box>;
+  return (
+    <StackList $gap={gap}>
+      {[]
+        .concat(...childrenArr.map((n) => [n, divider]))
+        .slice(0, -1)
+        .map((node, i) => (
+          <li key={i}>{node}</li>
+        ))}
+    </StackList>
+  );
 };
 
-const Box = styled.div<{ gap?: number | string }>`
+const StackList = styled.ul<{ $gap?: number | string }>`
   display: flex;
   flex-direction: column;
-  gap: ${({ gap }) => (gap ? (typeof gap === 'number' ? `${gap}px` : gap) : '16px')};
+  gap: ${({ $gap }) => ($gap ? (typeof $gap === 'number' ? `${$gap}px` : $gap) : '16px')};
 `;

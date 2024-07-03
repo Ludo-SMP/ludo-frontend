@@ -13,14 +13,22 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** 유효하지 않을 경우, 에러메시지를 표시합니다. */
-export const Errors: Story = {
+export const Primary: Story = {};
+
+/** 유효하지 않을 경우, 에러메시지를 표시합니다. 추후 작성*/
+// export const Errors: Story = {
+//   args: {
+//     errors: {
+//       positionIds: {
+//         message: '포지션을 선택해주세요.',
+//       },
+//     },
+//     name: 'positionIds',
+//   },
+// };
+
+export const Disabled: Story = {
   args: {
-    errors: {
-      positionIds: {
-        message: '포지션을 선택해주세요.',
-      },
-    },
-    name: 'positionIds',
+    disabled: true,
   },
 };

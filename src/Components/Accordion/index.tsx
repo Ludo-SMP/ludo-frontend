@@ -7,16 +7,22 @@ export interface AccordionProps {
   /** 아코디언 써머리 영역에 나타날 제목 */
   title: string;
 
+  /** 아코디언 Summary 영역의 이미지의 URL */
+  imgUrl?: string;
+
   /** 아코디언 제목 아래의 설명 */
   description?: string;
 
   /** 아코디언을 펼쳤을 때 나타날 내용 */
   children?: React.ReactNode;
+
+  /** breakPoint*/
+  breakPoint?: number;
 }
 
 /** 마이페이지 아코디언 */
 const Accordion = (props: AccordionProps) => {
-  const { title, description, children } = props;
+  const { title, imgUrl, description, children } = props;
 
   const [isOpen, setIsOpen] = useState<boolean | null>(null);
 
@@ -25,66 +31,84 @@ const Accordion = (props: AccordionProps) => {
   const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        setContentHeight(entry.contentRect.height);
+      }
+    });
+
+    if (contentRef.current) resizeObserver.observe(contentRef.current, { box: 'content-box' });
+
     setContentHeight(contentRef?.current?.clientHeight ?? 0);
     setIsOpen(null);
+
+    return () => {
+      resizeObserver.disconnect();
+    };
   }, []);
 
   return (
-    <Container>
-      <AccordionSummary onClick={() => setIsOpen((prev) => !prev)}>
-        <SummaryWrap>
+    <List>
+      <Box onClick={() => setIsOpen((prev) => !prev)}>
+        <Item $imgUrl={imgUrl}>
+          {imgUrl && <Image src={imgUrl} />}
           <Title>{title}</Title>
           {description && <Description>{description}</Description>}
-        </SummaryWrap>
+        </Item>
         <SelectArrow isOpen={isOpen} />
-      </AccordionSummary>
+      </Box>
 
-      <AccordionDetail ref={contentRef} isOpen={isOpen} contentHeight={contentHeight}>
+      <AccordionDetail ref={contentRef} $isOpen={isOpen} $contentHeight={contentHeight}>
         {children}
       </AccordionDetail>
-    </Container>
+    </List>
   );
 };
 
-const SummaryWrap = styled.div`
+export const Item = styled.div<{ $imgUrl: string | null }>`
   display: flex;
-  flex-direction: column;
+  flex-direction: ${({ $imgUrl }) => ($imgUrl ? 'row' : 'column')};
+  align-items: ${({ $imgUrl }) => $imgUrl && 'flex-start'};
+  gap: ${({ $imgUrl }) => $imgUrl && '8px'};
   flex: 1;
   width: calc(100% - 24px);
 `;
 
-const Container = styled.div`
+export const List = styled.li`
   display: flex;
   flex-direction: column;
-  max-width: 808px;
+  max-width: 912px;
   padding: 16px 0px;
-  gap: 10px;
 `;
 
-const AccordionSummary = styled.div`
+export const Box = styled.div`
   display: flex;
   width: 100%;
   align-items: center;
   cursor: pointer;
   min-width: 300px;
-  background-color: ${({ theme }) => theme.color.white};
-  min-height: 56px;
+  background-color: inherit;
+  min-height: 40px;
 `;
 
-export const Title = styled.div`
-  color: ${({ theme }) => theme.color.black5};
+export const Image = styled.img`
+  border-radius: ${({ theme }) => theme.borderRadius.xlarge};
+`;
+
+export const Title = styled.span`
+  color: ${({ theme }) => theme.color.black4};
 
   /* TODO: 타이포 브랜치 머지 후, typo 적용 */
   /* Page/Sub Title-Medium */
   font-family: 'Pretendard500';
   font-size: 18px;
   font-weight: 500;
-  line-height: 32px;
+  line-height: 24px;
 
   ${textEllipsis}
 `;
 
-export const Description = styled.div`
+export const Description = styled.p`
   color: ${({ theme }) => theme.color.black2};
 
   /* TODO: 타이포 브랜치 머지 후, typo 적용 */
@@ -96,18 +120,18 @@ export const Description = styled.div`
   ${textEllipsis}
 `;
 
-const AccordionDetail = styled.p<{ isOpen?: null | boolean; contentHeight: number }>`
+const AccordionDetail = styled.div<{ $isOpen?: null | boolean; $contentHeight: number }>`
   min-width: 300px;
   padding: 8px 64px 8px 0px;
   gap: 16px;
 
-  visibility: ${({ isOpen }) => (isOpen ? 'visible' : 'hidden')};
+  visibility: ${({ $isOpen }) => ($isOpen ? 'visible' : 'hidden')};
   opacity: 0;
 
-  margin-top: -${({ contentHeight }) => contentHeight}px;
+  margin-top: -${({ $contentHeight }) => $contentHeight}px;
 
-  ${({ isOpen }) =>
-    isOpen
+  ${({ $isOpen }) =>
+    $isOpen
       ? css`
           opacity: 1;
           margin-top: 0;
@@ -116,7 +140,7 @@ const AccordionDetail = styled.p<{ isOpen?: null | boolean; contentHeight: numbe
             opacity 0.7s ease-in-out,
             visibility 0.4s ease-in-out;
         `
-      : typeof isOpen === 'boolean' &&
+      : typeof $isOpen === 'boolean' &&
         css`
           transition:
             margin-top 0.2s ease-in-out,

@@ -22,13 +22,18 @@ export { default as Two } from './icons/two.svg?react';
 export { default as Up } from './icons/up.svg?react';
 export { default as Views } from './icons/views.svg?react';
 export { default as Filter } from './icons/filter.svg?react';
-export { default as Create } from './icons/createstudy.svg?react';
+export { default as Create } from './icons/create.svg?react';
 export { default as Loading } from './icons/lodaing.svg?react';
 export { default as Logout } from './icons/logout.svg?react';
 export { default as Article } from './icons/article.svg?react';
 export { default as Study } from './icons/study.svg?react';
 export { default as StudyThumbnail } from './icons/studyThumbnail.svg?react';
 export { default as Setting } from './icons/setting.svg?react';
+export { default as TwoWay } from './icons/twoway.svg?react';
+export { default as PrevArrow } from './icons/prevArrow.svg?react';
+export { default as NextArrow } from './icons/nextArrow.svg?react';
+export { default as CreateStudy } from './icons/createstudy.svg?react';
+export { default as SearchRecruitment } from './icons/recruitment.svg?react';
 
 // Logo
 export { default as BlankLogo } from './images/blank-logo.png';
@@ -47,3 +52,8 @@ export { default as SignUpBackground } from './images/background.png';
 // Banner
 export { default as Banner1 } from './images/banner1.png';
 export { default as Banner2 } from './images/banner2.png';
+export { default as MobileBanner1 } from './images/mobilebanner1.png';
+export { default as MobileBanner2 } from './images/mobilebanner2.png';
+
+// Study
+export { default as DefaultStudyThumbnail } from './icons/studyThumbnail.svg';

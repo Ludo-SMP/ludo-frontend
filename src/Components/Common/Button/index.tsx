@@ -1,5 +1,5 @@
 import { MouseEventHandler } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export type ButtonProps = {
   onClick?: MouseEventHandler<HTMLButtonElement>;
@@ -8,7 +8,7 @@ export type ButtonProps = {
   type?: 'button' | 'submit';
 
   /** 버튼의 의미를 결정합니다. */
-  scheme?: 'primary' | 'secondary' | 'third' | 'normal';
+  scheme?: 'primary' | 'secondary' | 'third' | 'normal' | 'text';
 
   /** 버튼을 비활성화합니다. */
   disabled?: boolean;
@@ -31,13 +31,23 @@ const Button = ({
   size = 'normal',
 }: ButtonProps) => {
   return (
-    <ButtonContainer {...{ onClick, type, scheme, disabled, className, size }}>
+    <ButtonContainer
+      onClick={onClick}
+      type={type}
+      $scheme={scheme}
+      disabled={disabled}
+      className={className}
+      $size={size}
+    >
       <>{children}</>
     </ButtonContainer>
   );
 };
 
-const ButtonContainer = styled.button<ButtonProps>`
+const ButtonContainer = styled.button<{
+  $scheme?: 'primary' | 'secondary' | 'third' | 'normal' | 'text';
+  $size?: 'normal' | 'fullWidth';
+}>`
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -46,31 +56,57 @@ const ButtonContainer = styled.button<ButtonProps>`
   cursor: pointer;
   box-sizing: border-box;
   opacity: 1;
-  width: ${({ size, theme }) => (size === 'fullWidth' ? theme.buttonSize.fullWidth : theme.buttonSize.normal)};
-  font-size: ${({ theme }) => theme.font.small};
+  width: ${({ $size, theme }) => ($size === 'fullWidth' ? theme.buttonSize.fullWidth : theme.buttonSize.normal)};
   font-family: 'Pretendard600';
-  font-style: normal;
-  font-weight: 600;
-  line-height: 40px;
+  ${({ theme }) => theme.typo.ButtonButton};
+
   white-space: nowrap;
-  color: ${({ scheme, theme }) => (scheme === 'primary' ? theme.color.white : theme.color.black3)};
-  background: ${({ scheme, theme }) =>
-    scheme === 'primary' ? theme.color.purple1 : scheme === 'secondary' ? theme.color.purple2 : theme.color.white};
-  border: 1px solid ${({ theme }) => theme.color.black1};
-  border-radius: ${({ scheme, theme }) => (scheme === 'third' ? theme.borderRadius.xlarge : theme.borderRadius.small)};
+  color: ${({ theme, $scheme }) => ($scheme === 'primary' ? theme.color.white : theme.color.black3)};
+  background: ${({ $scheme, theme }) =>
+    $scheme === 'primary'
+      ? theme.color.purple1
+      : $scheme === 'secondary'
+        ? theme.color.purple2
+        : $scheme === 'text'
+          ? 'inherit'
+          : theme.color.white};
+  border: ${({ $scheme, theme }) => ($scheme === 'text' ? 'none' : `1px solid ${theme.color.black1}`)};
+  border-radius: ${({ $scheme, theme }) =>
+    $scheme === 'third' ? theme.borderRadius.xlarge : theme.borderRadius.small};
 
   &:hover {
-    color: ${({ scheme, theme }) => (scheme === 'normal' ? theme.color.black4 : theme.color.white)};
-    background: ${({ scheme, theme }) =>
-      scheme === 'third' ? theme.color.orange4 : scheme === 'normal' ? theme.color.white : theme.color.purple5};
+    color: ${({ $scheme, theme }) =>
+      $scheme === 'normal' || $scheme === 'text' ? theme.color.black4 : theme.color.white};
+    background: ${({ $scheme, theme }) =>
+      $scheme === 'third'
+        ? theme.color.orange4
+        : $scheme === 'normal'
+          ? theme.color.white
+          : $scheme === 'text'
+            ? 'inherit'
+            : theme.color.purple5};
   }
 
   &:active {
-    color: ${({ scheme, theme }) =>
-      scheme === 'normal' ? theme.color.black : scheme === 'third' ? theme.color.orange3 : theme.color.white};
-    background: ${({ scheme, theme }) =>
-      scheme === 'primary' ? theme.color.purple5 : scheme === 'secondary' ? theme.color.purple1 : theme.color.white};
-    border: 1px solid ${({ scheme, theme }) => (scheme === 'third' ? theme.color.orange3 : theme.color.black1)};
+    color: ${({ $scheme, theme }) =>
+      $scheme === 'normal' || $scheme === 'text'
+        ? theme.color.black
+        : $scheme === 'third'
+          ? theme.color.orange3
+          : theme.color.white};
+    background: ${({ $scheme, theme }) =>
+      $scheme === 'primary'
+        ? theme.color.purple5
+        : $scheme === 'secondary'
+          ? theme.color.purple1
+          : $scheme === 'text'
+            ? 'none'
+            : theme.color.white};
+    ${({ $scheme, theme }) =>
+      $scheme !== 'text' &&
+      css`
+        border: 1px solid ${$scheme === 'third' ? theme.color.orange3 : theme.color.black1};
+      `}
   }
 
   &:disabled {

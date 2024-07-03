@@ -11,7 +11,11 @@ export interface TabProps {
 
 /** 사이드바의 여러 탭 중 하나를 표현하는 컴포넌트 */
 export const Tab = ({ title, to }: TabProps) => {
-  return <NavLink to={to}>{({ isActive }) => <Box $active={isActive}>{title}</Box>}</NavLink>;
+  return (
+    <NavLink to={to} end>
+      {({ isActive }) => <Box $active={isActive}>{title}</Box>}
+    </NavLink>
+  );
 };
 
 const Box = styled.div<{

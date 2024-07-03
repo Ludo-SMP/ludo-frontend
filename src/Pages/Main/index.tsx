@@ -4,7 +4,7 @@ import Banner from '../../Components/Banner';
 import { usePopularRecruitments } from '@/Hooks/recruitments/usePopularRecruitments';
 import Button from '@/Components/Common/Button';
 import ChipMenu from '@/Components/Common/ChipMenu';
-import { Right, Create } from '@/Assets';
+import { Right, Create, SearchRecruitment } from '@/Assets';
 import UtiltiyButtons from '@/Components/UtilityButtons';
 import { useSelectedCategoryStore } from '@/store/category';
 import RecruitmentCard from '@/Components/RecruitmentCard';
@@ -17,6 +17,7 @@ import { CREATE_STUDY } from '@/Constants/messages';
 import SkeletonRecruitmentCardList from '@/Components/Skeleton/SkeletonRecruitmentCardList';
 import { useEffect } from 'react';
 import { media } from '@/Styles/theme';
+import { MobileUtilityBtn } from '@/Components/UtilityButtons/MobileUtilityButton';
 
 const MainPage = () => {
   const { data: popularRecruitments, isLoading } = usePopularRecruitments();
@@ -97,6 +98,15 @@ const MainPage = () => {
           <span>스터디 생성</span>
         </Button>
       </UtiltiyButtons>
+
+      <MobileUtilityBtnsSection>
+        <MobileUtilityBtn
+          destUrl={ROUTES.RECRUITMENT.RECRUITMENTS}
+          icon={<SearchRecruitment />}
+          content="스터디 모집공고 보러가기"
+        />
+      </MobileUtilityBtnsSection>
+
       {!isLoggedIn && isModalOpen && (
         <Modal
           title={CREATE_STUDY.LOGIN.title}
@@ -115,21 +125,26 @@ const MainPage = () => {
 const MainPageWrapper = styled.section`
   display: flex;
   margin: 0 auto;
-  margin-top: 40px;
   flex-direction: column;
+  background-color: ${({ theme }) => theme.color.white2};
   gap: 40px;
 `;
 
 const BannerSectionWrapper = styled.section`
   display: flex;
+  justify-content: center;
   margin: 0 auto;
+  width: 100%;
+  max-width: 1920px;
 `;
 
-const RecruitmentsSectionWrapper = styled.div`
+const RecruitmentsSectionWrapper = styled.section`
   display: flex;
+  width: 1224px;
   margin: 0 auto;
-  max-width: 1224px;
   flex-direction: column;
+  max-width: 1224px;
+  padding-bottom: 72px;
   justify-content: center;
   align-items: flex-start;
   gap: 21px;
@@ -143,10 +158,27 @@ const RecruitmentsSectionWrapper = styled.div`
     font-weight: 800;
     line-height: 40px;
     white-space: nowrap;
+
+    ${media.custom(500)} {
+      font-size: ${({ theme }) => theme.font.medium};
+    }
+  }
+
+  ${media.custom(1224)} {
+    width: 100vw;
   }
 
   ${media.custom(800)} {
     width: 400px;
+  }
+
+  ${media.custom(500)} {
+    padding-bottom: 40px;
+  }
+
+  ${media.custom(400)} {
+    width: 100vw;
+    padding: 0 24px 40px 24px;
   }
 `;
 
@@ -156,6 +188,7 @@ const SelectCategorySectionWrapper = styled.div`
   width: 100%;
   justify-content: space-between;
   gap: 12px;
+  overflow: scroll;
 `;
 
 const CategoryMenusWrapper = styled.div`
@@ -170,6 +203,10 @@ const RecruitmentCardsWrapper = styled.div`
   gap: 21px;
   min-height: 757px;
   flex-wrap: wrap;
+
+  ${media.custom(500)} {
+    justify-content: center;
+  }
 `;
 
 const MoreSectionWrapper = styled.div`
@@ -192,6 +229,20 @@ const MoreSectionWrapper = styled.div`
   .more__text {
     color: ${({ theme }) => theme.color.black3};
     padding-top: 2px;
+  }
+`;
+
+const MobileUtilityBtnsSection = styled.div`
+  display: none;
+
+  ${media.custom(500)} {
+    display: flex;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    display: inline-flex;
+    padding: 0px 24px 24px 0px;
+    align-items: flex-start;
   }
 `;
 

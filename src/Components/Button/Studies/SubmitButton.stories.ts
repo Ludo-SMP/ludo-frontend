@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { SubmitButton } from './SubmitButton';
-import { fn } from '@storybook/test';
 
 const meta = {
   component: SubmitButton,

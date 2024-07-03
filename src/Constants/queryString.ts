@@ -24,7 +24,11 @@ export const STUDY = {
   APPLICNATS: (studyId: number) => [BASE_KEY.STUDY, studyId, 'APPLICANTS'],
   MYPAGE_INFO: () => [BASE_KEY.STUDY, 'MYPAGE'],
   DELETE: (studyId: number) => [BASE_KEY.STUDY, studyId, 'DELETE'],
-  LEAVE: (studyId: number) => [BASE_KEY.STUDY, studyId, 'LEAVE'],
+  FORCE_LEAVE: (studyId: number) => [BASE_KEY.STUDY, studyId],
+  LEAVE_REQUEST: (studyId: number) => [BASE_KEY.STUDY, studyId, 'LEAVE_REQUEST'],
+  LEAVE_REQUEST_APPROVE: (studyId: number) => [BASE_KEY.STUDY, studyId, 'LEAVE_REQUEST', 'APPROVE'],
+  LEAVE_REQUEST_REJECT: (studyId: number) => [BASE_KEY.STUDY, studyId, 'LEAVE_REQUEST', 'REJECT'],
+  REVIEWS: [BASE_KEY.STUDY, 'MYPAGE', 'REVIEWS'],
 };
 
 export const USER = {
@@ -33,4 +37,17 @@ export const USER = {
 
 export const STACK = {
   STACK: ['STACK'],
+};
+
+export const NOTIFICATIONS = {
+  NOTIFICATIONS: ['NOTIFICATIONS'],
+  SUBSCRIBE_NOTIFICATIONS: ['NOTIFICATIONS', 'SUBSCRIBE'],
+  READ_NOTIFICATIONS: ['NOTIFICATIONS', 'READ'],
+  NOTIFICATIONS_SETTING: ['NOTIFICATIONS', 'SETTING'],
+  EDIT_NOTIFICATIONS_KEYWORDS: ['NOTIFICATIONS', 'SETTING', 'KEYWORDS'],
+  NOTIFICATIONS_ON_OFF: ['NOTIFICATIONS', 'SETTING', 'ON_OFF'],
+};
+
+export const REVIEW = {
+  SUBMIT: (studyId: number) => [BASE_KEY.STUDY, studyId, 'REVIEW'],
 };
