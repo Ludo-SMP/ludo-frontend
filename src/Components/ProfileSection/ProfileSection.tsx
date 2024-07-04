@@ -1,11 +1,11 @@
-import { Profile } from '@/Assets';
+import { Profile } from '@/Assets/Profile';
 import styled from 'styled-components';
 import { SettingButton } from './SettingButton';
 
 export interface ProfileSectionProps {
   /** 사용자 이름 */
   nickname: string;
-  
+
   /** 사용자 이메일 주소 */
   email: string;
 }
@@ -15,7 +15,7 @@ export const ProfileSection = ({ nickname, email }: ProfileSectionProps) => {
   return (
     <Box>
       <ProfileBox>
-        <Profile width={160} height={160} />
+        <Profile width={160} height={160} email={email} />
         <SettingButton nickname="nickname" />
       </ProfileBox>
       <NameBox>

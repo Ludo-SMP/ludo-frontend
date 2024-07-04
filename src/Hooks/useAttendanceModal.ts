@@ -2,6 +2,7 @@ import { CustomObject } from '@/utils/selectUtil';
 import { useState } from 'react';
 import { getSharedDayObjectById } from '@/utils/date';
 import { generateDropdownOption } from '@/Shared/study';
+import { AttendanceDay } from '@/Types/atoms';
 
 export type AttendanceType = CustomObject<'id', 'name'>;
 
@@ -42,7 +43,7 @@ const useAttendanceModal = () => {
   };
 
   /** API 응답값의 출석일이 있는 경우 값을 세팅 */
-  const initAttendanceModal = (defAttendanceDay: number[]) => {
+  const initAttendanceModal = (defAttendanceDay: AttendanceDay[]) => {
     if (defAttendanceDay?.length > 0) {
       const defAttendanceDayObject = generateDropdownOption(getSharedDayObjectById(defAttendanceDay));
       setTmpAttendanceDay(defAttendanceDayObject);

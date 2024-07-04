@@ -20,7 +20,7 @@ const GnbMenuWrapper = styled.button`
   align-items: center;
   flex-shrink: 0;
   color: ${(props) => props.theme.color.black3};
-  background-color: ${(props) => props.theme.color.white};
+  background-color: ${(props) => props.theme.color.white2};
   color: var(--Font-text-default, rgba(0, 0, 0, 0.65));
   font-family: 'Pretendard600';
   font-size: calc((${(props) => props.theme.font.small} + ${(props) => props.theme.font.medium}) / 2);

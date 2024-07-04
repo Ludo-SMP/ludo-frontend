@@ -41,7 +41,7 @@ const UserInfoSection = ({ myPageInfo }: UserInfoSectionProps) => {
               </InfoText>
               <InfoText>
                 <span className="info__label">평균 출석률</span>
-                <span className="info__description">{trust?.averageAttendanceRate || 0} 퍼센트</span>
+                <span className="info__description">{trust?.averageAttendanceRate.toFixed(2) || 0}%</span>
               </InfoText>
             </InfoItem>
           </UserInfoRow>

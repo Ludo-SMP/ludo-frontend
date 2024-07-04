@@ -1,14 +1,15 @@
-import { Profile } from '@/Assets';
+import { Profile } from '@/Assets/Profile';
 import Button from '@/Components/Common/Button';
 import { RowDivider } from '@/Components/Common/Divider/RowDivider';
 import styled from 'styled-components';
-import { MemberImage } from '@/Assets';
+import { Loading, MemberImage } from '@/Assets';
 import { ColumnDivider } from '@/Components/Common/Divider/ColumnDivider';
 import { ReviewQuestion } from '@/Components/ReviewQuestion/ReviewQuestion';
 import { Controller, useForm } from 'react-hook-form';
 import { HeaderWithLogo } from '@/Components/Header/HeaderWithLogo';
 import { useSubmitReviewMutation } from '@/Hooks/review/useSubmitReviewMutation';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useStudyDetail } from '@/Hooks/study/useStudyDetail';
 
 const reviewDataList = {
   activenessScore: {
@@ -43,12 +44,25 @@ type ReviewResult = Record<keyof typeof reviewDataList, number>;
 export const ReviewPage = () => {
   const { studyId, userId } = useParams();
   const navigate = useNavigate();
+
+  const { data: study, isLoading } = useStudyDetail(parseInt(studyId));
   const { mutate } = useSubmitReviewMutation(parseInt(studyId), () => navigate(`/studies/${studyId}`));
   const {
     handleSubmit,
     formState: { errors },
     control,
   } = useForm<ReviewResult>();
+
+  if (isLoading) return <Loading />;
+
+  const {
+    study: { title, participants },
+  } = study;
+  const {
+    nickname,
+    email,
+    position: { name },
+  } = participants.find((participant) => participant.id === parseInt(userId));
 
   return (
     <ReviewPageLayout>
@@ -63,13 +77,13 @@ export const ReviewPage = () => {
                 <MemberTitleText>함께한 스터디원</MemberTitleText>
               </MemberTitle>
               <MemberProfile>
-                <Profile width={80} height={80} />
+                <Profile width={80} height={80} email={email} />
                 <MemberProfileBox>
-                  <MemberName>닉네임</MemberName>
+                  <MemberName>{nickname}</MemberName>
                   <MemberStudyInfo>
-                    <MemberStudyInfoText>스터디 이름</MemberStudyInfoText>
+                    <MemberStudyInfoText>{title}</MemberStudyInfoText>
                     <ColumnDivider />
-                    <MemberStudyInfoText>포지션</MemberStudyInfoText>
+                    <MemberStudyInfoText>{name}</MemberStudyInfoText>
                   </MemberStudyInfo>
                 </MemberProfileBox>
               </MemberProfile>

@@ -7,7 +7,7 @@ import { Recruitment } from '@/Types/study';
 import { PROGRESS_METHOD } from '@/Shared/study';
 import Image from '../Common/Image';
 import { Views } from '@/Assets';
-import { media } from '@/Styles/theme';
+import { media, textEllipsis } from '@/Styles/theme';
 
 /** 스터디 모집 공고 */
 const RecruitmentCard = (recruitment: Recruitment) => {
@@ -55,7 +55,7 @@ const RecruitmentCard = (recruitment: Recruitment) => {
         <StudyAdditionalInfoWrapper>
           <div className="creation__info">
             <div className="study__creator">{recruitment.ownerNickname}</div>
-            <div className="division-line"></div>
+            <div className="division-line" />
             <div className="study__createdAt">{dateFormatter(recruitment.createdDateTime)}</div>
           </div>
           <div className="views__info">
@@ -162,8 +162,8 @@ const StudyDetailInfoWrapper = styled.div`
 const StudyAdditionalInfoWrapper = styled.div`
   display: flex;
   align-items: center;
+  height: 24px;
   justify-content: space-between;
-  gap: 120px;
   align-self: stretch;
   font-size: ${(props) => props.theme.font.xsmall};
   font-weight: 500;
@@ -171,9 +171,7 @@ const StudyAdditionalInfoWrapper = styled.div`
 
   .creation__info {
     display: flex;
-    padding: 2px 0px;
     align-items: center;
-    width: 1000px;
     gap: 12px;
   }
 
@@ -190,9 +188,10 @@ const StudyAdditionalInfoWrapper = styled.div`
 
   .study {
     &__creator {
-      white-space: nowrap;
+      max-width: 170px;
       padding-top: 2px;
       color: ${(props) => props.theme.color.black4};
+      ${textEllipsis}
     }
 
     &__createdAt {
@@ -202,9 +201,8 @@ const StudyAdditionalInfoWrapper = styled.div`
   }
 
   .division-line {
-    width: 1rem;
-    height: 2px;
-    transform: rotate(90deg);
+    width: 1px;
+    height: 16px;
     border: 1px solid rgba(38, 45, 49, 0.2);
   }
 

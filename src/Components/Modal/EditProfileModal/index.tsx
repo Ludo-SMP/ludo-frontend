@@ -74,10 +74,10 @@ export const EditProfileModal = ({ userNickname, handleEdit }: EdiptProfileModal
               </ErrorWrapper>
             </fieldset>
             <ModalBtnsWrapper>
-              <Button type="submit" scheme="normal" className="approve__btn" onClick={closeModal}>
+              <Button scheme="normal" className="approve__btn" onClick={closeModal}>
                 취소하기
               </Button>
-              <Button className="submit__btn" scheme="primary" onClick={() => {}}>
+              <Button type="submit" className="submit__btn" scheme="primary" onClick={() => {}}>
                 변경하기
               </Button>
             </ModalBtnsWrapper>
@@ -178,7 +178,8 @@ const ErrorWrapper = styled.div<{ isError: boolean }>`
 
 const ModalBtnsWrapper = styled.div`
   display: grid;
-  grid-template-columns: 158fr 338fr;
+  grid-template-columns: 158fr 354fr;
+  gap: 24px;
   margin-top: 32px;
   align-items: flex-start;
   align-self: stretch;

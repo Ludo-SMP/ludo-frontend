@@ -1,19 +1,43 @@
+import { useId } from 'react';
+import CryptoJS from 'crypto-js';
+import styled from 'styled-components';
+
 export interface ProfileProps {
+  /** 프로필 이미지 너비 */
   width?: number;
+
+  /** 프로필 이미지 높이 */
   height?: number;
-  id?: number;
+
+  /**
+   * Gravatar 이미지를 위한 이메일 주소
+   *
+   * 해당 이메일 주소에 해당하는 고유한 Gravatar 이미지가 생성 또는 불러와집니다.
+   */
+  email?: string;
 }
 
-export const Profile = ({ width = 60, height = 60, id = 0 }) => {
+const toGravatar = (email: string) =>
+  `https://gravatar.com/avatar/${CryptoJS.MD5(email.trim().toLowerCase()).toString()}?d=identicon`;
+
+/**
+ * 프로필 이미지 컴포넌트
+ */
+export const Profile = ({ width = 60, height = 60, email }: ProfileProps) => {
+  // NOTE: 채움 프로필 이미지 관련 코드는 임시 구현이며, 추후 이미지 업로드 기능이 구현되면 제거될 예정입니다.
+  if (email) return <ClippedImage src={toGravatar(email)} width={width} height={height} />;
+
+  const maskId = useId();
+
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox="0 0 60 60" fill="none">
-      <mask id={`profile-${id}`} type="luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="60" height="60">
+      <mask id={`profile-${maskId}`} type="luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="60" height="60">
         <path
           d="M30 60C46.5685 60 60 46.5685 60 30C60 13.4315 46.5685 0 30 0C13.4315 0 0 13.4315 0 30C0 46.5685 13.4315 60 30 60Z"
           fill="white"
         />
       </mask>
-      <g mask={`url(#profile-${id})`}>
+      <g mask={`url(#profile-${maskId})`}>
         <path
           d="M30 60C46.5685 60 60 46.5685 60 30C60 13.4315 46.5685 0 30 0C13.4315 0 0 13.4315 0 30C0 46.5685 13.4315 60 30 60Z"
           fill="#BCC0C4"
@@ -64,3 +88,7 @@ export const Profile = ({ width = 60, height = 60, id = 0 }) => {
     </svg>
   );
 };
+
+const ClippedImage = styled.img`
+  border-radius: 50%;
+`;

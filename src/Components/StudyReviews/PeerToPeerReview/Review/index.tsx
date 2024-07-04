@@ -28,7 +28,7 @@ export const Review = (reviewProps: ReviewProps) => {
   return (
     <ReviewBox>
       <ReviewRow>
-        <Profile id={studyId} width={24} height={24} />
+        <Profile width={24} height={24} />
         <ReviewTitle>
           <RevieweeText>{revieweeText}</RevieweeText>
           <DescText>{descText}</DescText>

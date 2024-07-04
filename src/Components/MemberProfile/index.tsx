@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { ColumnDivider } from '../Common/Divider/ColumnDivider';
-import { More, Profile } from '@/Assets';
+import { Profile } from '@/Assets/Profile';
 import { Member } from '@/Types/study';
 import { ROLE } from '@/Shared/study';
 import { useEffect, useRef, useState } from 'react';
@@ -15,6 +15,7 @@ import { LEAVE } from '@/Constants/messages';
 import Button from '../Common/Button';
 import { useApproveStudyLeaveRequest } from '@/Hooks/study/useApproveStudyLeaveRequest';
 import { useRejectStudyLeaveMutation } from '@/Hooks/study/useRejectStudyLeaveRequest';
+import { More } from '@/Assets';
 
 export interface MemberProfileProps extends Member {
   /** 스터디원의 프로필 이미지 URL */
@@ -71,6 +72,7 @@ const MemberProfile = ({
           <More />
           {isOptionsOpen && (
             <Options
+              enableLeaveButton={role !== 'OWNER' && state !== 'needReview' && state !== 'reviewEnd'}
               onSelect={(action) => (
                 match(action)
                   .with('leave', () => setIsLeaveModalOpen(true))
@@ -82,7 +84,7 @@ const MemberProfile = ({
           )}
         </OptionsButton>
       )}
-      <Profile width={120} height={120} />
+      <Profile width={120} height={120} email={email} />
       {match(state)
         .with(P.union('needLeaveApproval', 'needReview'), () => (
           <>
@@ -166,9 +168,11 @@ const MemberProfile = ({
 };
 
 const Options = ({
+  enableLeaveButton = false,
   onClose = () => void 0,
   onSelect = () => void 0,
 }: {
+  enableLeaveButton?: boolean;
   onClose?: () => void;
   onSelect: (action: 'leave') => void;
 }) => {
@@ -186,7 +190,7 @@ const Options = ({
       <MenuItem>
         <Link to={ROUTES.MYPAGE.HOME}>마이 페이지</Link>
       </MenuItem>
-      <MenuItem onClick={() => onSelect('leave')}>스터디 탈퇴하기</MenuItem>
+      {enableLeaveButton && <MenuItem onClick={() => onSelect('leave')}>스터디 탈퇴하기</MenuItem>}
     </Menu>
   );
 };

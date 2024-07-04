@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import { media } from '@/Styles/theme';
 import { ROUTES } from '@/Constants/route';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
-import { Logo, Profile } from '@/Assets';
+import { Logo } from '@/Assets';
+import { Profile } from '@/Assets/Profile';
 import { useLoginStore } from '@/store/auth';
 import Button from '../Common/Button';
 import StudyButtonSection from './StudyButtonSection';
@@ -13,10 +14,12 @@ import { useModalStore } from '@/store/modal';
 import { useLogOutMutation } from '@/Hooks/auth/useLogOutMutation';
 import DropdownItem from '../Common/DropdownItem';
 import { AlarmBell } from './AlarmBell';
+import { useUserStore } from '@/store/user';
 
 /** 사이트 메인 헤더 */
 const Header = () => {
   const { isLoggedIn } = useLoginStore();
+  const user = useUserStore(({ user }) => user);
   const { openModal } = useModalStore();
   const navigate = useNavigate();
   const currentLocation = useLocation()?.pathname;
@@ -50,7 +53,7 @@ const Header = () => {
               )}
               <UserInfoWrapper>
                 <AlarmBell />
-                <Dropdown image={<Profile width={40} height={40} />}>
+                <Dropdown image={<Profile width={40} height={40} email={user?.email} />}>
                   <DropdownItem
                     onClick={() => {
                       navigate(ROUTES.MYPAGE.HOME);

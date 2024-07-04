@@ -26,11 +26,13 @@ import { ReviewPage } from '@/Pages/Review';
 import { Notifications } from '@/Pages/Notifications';
 import { MyPageReviews } from '@/Pages/MyPageReviews';
 import { ProfileLayout } from '@/Layout/ProfileLayout';
+import UTbanner from '@/Components/UTbanner';
 
 export const RouterPath = createBrowserRouter([
   {
     element: (
       <>
+        <UTbanner />
         <Header />
         <Outlet />
         <Footer />
