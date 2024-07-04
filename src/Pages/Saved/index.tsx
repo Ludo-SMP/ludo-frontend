@@ -1,11 +1,11 @@
-import { useCallback, useEffect, useState } from 'react';
+import { Children, PropsWithChildren, ReactNode, useCallback, useEffect, useState } from 'react';
 import ChipMenu from '@/Components/Common/ChipMenu';
 import TemporarySavedCard from '@/Components/TemporarySavedCard';
 import Modal from '@/Components/Common/Modal';
 import { RecruitmentForm } from '@/Types/study';
 import { useModalStore } from '@/store/modal';
 import { useSavedKeyStore, useSelectedCardStore } from '@/store/study';
-import { Study } from '@/Assets';
+import { SignUpFail, Study } from '@/Assets';
 import styled from 'styled-components';
 import { DELETE } from '@/Constants/messages';
 import { getMillisec } from '@/utils/date';
@@ -70,7 +70,14 @@ const Saved = () => {
             스터디 모집공고
           </ChipMenu>
         </ChipMenuBox>
-        <CardList>
+        <CardList
+          placeholder={
+            <PlaceHolder>
+              <PlaceHolderTitle>아직 작성 중인 게시글이 없습니다.</PlaceHolderTitle>
+              <img src={SignUpFail} width={392} height={240} alt="no saved items" />
+            </PlaceHolder>
+          }
+        >
           {savedList?.map((form: Partial<RecruitmentForm> & { savedKey: string }) => (
             <TemporarySavedCard key={form.savedKey} onRemove={onRemove} {...form} />
           ))}
@@ -106,7 +113,14 @@ const ChipMenuBox = styled.div`
   overflow-x: hidden;
 `;
 
-const CardList = styled.ul`
+const CardList = ({
+  placeholder,
+  children,
+}: PropsWithChildren<{
+  placeholder?: ReactNode;
+}>) => (Children.toArray(children).length !== 0 ? <CardListInner>{children}</CardListInner> : placeholder);
+
+const CardListInner = styled.ul`
   display: flex;
   width: 100%;
   flex-direction: column;
