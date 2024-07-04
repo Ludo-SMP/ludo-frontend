@@ -1,14 +1,18 @@
 /** 스따-디 섹션 */
 
 import { StudyInfo } from '@/Assets';
+import Button from '@/Components/Common/Button';
 import ChipMenu from '@/Components/Common/ChipMenu';
 import { MyStudyCard } from '@/Components/MyStudyCard';
 import { useMyPageInfo } from '@/Hooks/study/useMyPageInfo';
 import { ApplicantRecruitment, CompletedStudy, ParticipateStudy } from '@/Types/study';
 import { useSelectedMyStudyStore } from '@/store/study';
 import { getPeriod } from '@/utils/date';
+import { Children, PropsWithChildren, ReactNode } from 'react';
 import styled from 'styled-components';
 import { match } from 'ts-pattern';
+import { LoginFail } from '@/Assets';
+import { Link } from 'react-router-dom';
 
 const StudiesSection = () => {
   const { data: myPageInfo } = useMyPageInfo();
@@ -39,7 +43,19 @@ const StudiesSection = () => {
           진행 완료된 스터디
         </ChipMenu>
       </ChipMenusWrapper>
-      <CardListWrapper>
+      <StudyList
+        placeholder={
+          <PlaceHolder>
+            <PlaceHolderInner>
+              <img src={LoginFail} width={294} height={180} alt="no study" />
+              <PlaceHolderTitle>아직 참여 중인 스터디가 없습니다.</PlaceHolderTitle>
+            </PlaceHolderInner>
+            <Button scheme="primary">
+              <Link to="/studies">참여할만한 스터디 찾아보기</Link>
+            </Button>
+          </PlaceHolder>
+        }
+      >
         {match(selectedMyStudyStatus)
           .with('PARTICIPATED', () =>
             participateStudies.map(
@@ -54,29 +70,26 @@ const StudiesSection = () => {
                 isOwner,
                 hasRecruitment,
               }) => (
-                <MyStudyCard
-                  key={studyId}
-                  id={studyId}
-                  title={title}
-                  status={status}
-                  position={position}
-                  period={getPeriod(startDateTime, endDateTime)}
-                  participantCount={participantCount}
-                  isOwner={isOwner}
-                  hasRecruitment={hasRecruitment}
-                />
+                <li key={studyId}>
+                  <MyStudyCard
+                    id={studyId}
+                    title={title}
+                    status={status}
+                    position={position}
+                    period={getPeriod(startDateTime, endDateTime)}
+                    participantCount={participantCount}
+                    isOwner={isOwner}
+                    hasRecruitment={hasRecruitment}
+                  />
+                </li>
               ),
             ),
           )
           .with('APPLIED', () =>
             applicantRecruitments.map(({ recruitmentId, title, applicantStatus, position }) => (
-              <MyStudyCard
-                key={recruitmentId}
-                id={recruitmentId}
-                title={title}
-                status={applicantStatus}
-                position={position}
-              />
+              <li key={recruitmentId}>
+                <MyStudyCard id={recruitmentId} title={title} status={applicantStatus} position={position} />
+              </li>
             )),
           )
           .with('COMPLETED', () =>
@@ -92,22 +105,23 @@ const StudiesSection = () => {
                 isOwner,
                 hasRecruitment,
               }) => (
-                <MyStudyCard
-                  key={studyId}
-                  id={studyId}
-                  title={title}
-                  status={status}
-                  position={position}
-                  period={getPeriod(startDateTime, endDateTime)}
-                  participantCount={participantCount}
-                  isOwner={isOwner}
-                  hasRecruitment={hasRecruitment}
-                />
+                <li key={studyId}>
+                  <MyStudyCard
+                    id={studyId}
+                    title={title}
+                    status={status}
+                    position={position}
+                    period={getPeriod(startDateTime, endDateTime)}
+                    participantCount={participantCount}
+                    isOwner={isOwner}
+                    hasRecruitment={hasRecruitment}
+                  />
+                </li>
               ),
             ),
           )
           .exhaustive()}
-      </CardListWrapper>
+      </StudyList>
     </CardsWrapper>
   );
 };
@@ -117,17 +131,13 @@ export { StudiesSection };
 const CardsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   min-height: 368px;
   gap: 24px;
-  align-self: stretch;
 `;
 
 const MyStudyTitleWrapper = styled.div`
   display: flex;
-  align-items: center;
   gap: 8px;
-  align-self: stretch;
 
   span {
     color: ${({ theme }) => theme.color.black5};
@@ -139,15 +149,36 @@ const MyStudyTitleWrapper = styled.div`
   }
 `;
 
-const CardListWrapper = styled.div`
+const StudyList = ({
+  placeholder,
+  children,
+}: PropsWithChildren<{
+  placeholder: ReactNode;
+}>) => (Children.toArray(children).length !== 0 ? <StudyListInner>{children}</StudyListInner> : placeholder);
+const StudyListInner = styled.ul`
   display: flex;
-  width: 100%;
   flex-direction: column;
-  flex-wrap: wrap;
-  align-items: center;
-  align-content: center;
   gap: 12px;
-  align-self: stretch;
+`;
+
+const PlaceHolder = styled.div`
+  padding-top: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+`;
+
+const PlaceHolderInner = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+`;
+
+const PlaceHolderTitle = styled.span`
+  color: ${({ theme }) => theme.color.black4};
+  ${({ theme }) => theme.typo.ListLabel};
 `;
 
 const ChipMenusWrapper = styled.div`
