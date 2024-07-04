@@ -72,7 +72,7 @@ const SettingButtonBox = styled.div`
   display: flex;
   align-items: flex-start;
 
-  button {
+  & > button {
     padding: 0;
     border: none;
     &:hover {
