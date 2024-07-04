@@ -23,7 +23,7 @@ import {
   generateSelectOption,
   NEW_POSITION,
 } from '@/Shared/study';
-import { DateRange } from '@/Types/atoms';
+import { AttendanceDay, DateRange } from '@/Types/atoms';
 import { Platform, ProgressMethod, StudyCreate, StudyDetail } from '@/Types/study';
 import { UseMutationResult, UseQueryResult } from '@tanstack/react-query';
 import { AxiosResponse } from 'axios';
@@ -48,7 +48,7 @@ export interface StudyCreateForm {
   startDateTime: string;
   endDateTime: string;
   progressPeriod: DateRange;
-  attendanceDay: number[];
+  attendanceDay: AttendanceDay[];
 }
 
 interface StudyFormLayoutProps {
