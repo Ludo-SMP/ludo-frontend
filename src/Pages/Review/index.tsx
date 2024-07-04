@@ -59,7 +59,6 @@ export const ReviewPage = () => {
     study: { title, participants },
   } = study;
   const {
-    id,
     nickname,
     email,
     position: { name },
