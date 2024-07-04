@@ -1,4 +1,4 @@
-import { Profile } from '@/Assets';
+import { Profile } from '@/Assets/Profile';
 import { Applicant } from '@/Types/study';
 import styled from 'styled-components';
 import Button from '../Common/Button';
@@ -47,7 +47,7 @@ export const ApplicantCard = ({
         <Title>{title}</Title>
         <Content>
           <ProfileSection>
-            <Profile width={100} height={100} />
+            <Profile width={100} height={100} id={applicantId} />
             <ProfileInfoBox>
               <Nickname>{nickname}</Nickname>
               <Fields>

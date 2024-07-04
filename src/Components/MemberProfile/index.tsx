@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { ColumnDivider } from '../Common/Divider/ColumnDivider';
-import { More, Profile } from '@/Assets';
+import { More } from '@/Assets';
+import { Profile } from '@/Assets/Profile';
 import { Member } from '@/Types/study';
 import { ROLE } from '@/Shared/study';
 import { useEffect, useRef, useState } from 'react';
@@ -82,7 +83,7 @@ const MemberProfile = ({
           )}
         </OptionsButton>
       )}
-      <Profile width={120} height={120} />
+      <Profile width={120} height={120} id={id} />
       {match(state)
         .with(P.union('needLeaveApproval', 'needReview'), () => (
           <>

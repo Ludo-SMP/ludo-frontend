@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import { media } from '@/Styles/theme';
 import { ROUTES } from '@/Constants/route';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
-import { Logo, Profile } from '@/Assets';
+import { Logo } from '@/Assets';
+import { Profile } from '@/Assets/Profile';
 import { useLoginStore } from '@/store/auth';
 import Button from '../Common/Button';
 import StudyButtonSection from './StudyButtonSection';
@@ -50,7 +51,7 @@ const Header = () => {
               )}
               <UserInfoWrapper>
                 <AlarmBell />
-                <Dropdown image={<Profile width={40} height={40} />}>
+                <Dropdown image={<Profile width={40} height={40} id={`user`} />}>
                   <DropdownItem
                     onClick={() => {
                       navigate(ROUTES.MYPAGE.HOME);

@@ -1,4 +1,4 @@
-import { Profile } from '@/Assets';
+import { Profile } from '@/Assets/Profile';
 import Button from '@/Components/Common/Button';
 import { RowDivider } from '@/Components/Common/Divider/RowDivider';
 import styled from 'styled-components';
@@ -63,7 +63,7 @@ export const ReviewPage = () => {
                 <MemberTitleText>함께한 스터디원</MemberTitleText>
               </MemberTitle>
               <MemberProfile>
-                <Profile width={80} height={80} />
+                <Profile width={80} height={80} id={userId} />
                 <MemberProfileBox>
                   <MemberName>닉네임</MemberName>
                   <MemberStudyInfo>
