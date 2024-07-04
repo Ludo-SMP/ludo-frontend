@@ -4,7 +4,7 @@ import CryptoJS from 'crypto-js';
 export interface ProfileProps {
   width?: number;
   height?: number;
-  email: string;
+  email?: string;
 }
 
 const toGravatar = (email: string) =>
