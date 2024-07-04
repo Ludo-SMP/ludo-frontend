@@ -1,9 +1,9 @@
 import { UTLogo } from '@/Assets';
-import { media } from '@/Styles/theme';
 import styled from 'styled-components';
+import { media } from '@/Styles/theme';
 
 const GOOGLEFORM_URL =
-  'https://docs.google.com/forms/d/1TEohqnq2Nl2HcCXdd1Sd_mroMnLKxAV2dd7ufPyRK1M/viewform?edit_requested=true';
+  'https://docs.google.com/forms/d/10ip7-e60WrrzalT253IysxO3QRsWgibrMTX-CRcOSqI/viewform?edit_requested=true';
 const UT_GUIDE = '서비스를 이용해보시고, 소중한 의견을 공유해주세요! 추첨을 통해 소정의 상품을 드립니다 :)';
 
 /** 유저테스트 배너 */
@@ -13,7 +13,7 @@ const UTbanner = () => {
       <ContentWrapper>
         <img src={UTLogo} alt="로고" />
         <div className="ut__guide">{UT_GUIDE}</div>
-        <div className="ut__period">기간 : 03.26~03.30</div>
+        <div className="ut__period">기간 : 07.04~07.11</div>
       </ContentWrapper>
     </UTbannerWrapper>
   );
@@ -27,25 +27,28 @@ const UTbannerWrapper = styled.a`
   justify-content: center;
   width: 100vw;
   max-width: 1920px;
-  padding: 8px 0;
+  padding: 8px;
   margin: 0 auto;
   background: linear-gradient(93deg, #6f6f6f 0%, #313131 100%);
 
   &:hover {
     cursor: pointer;
   }
-
-  ${media.custom(800)} {
-    display: none;
-  }
 `;
 
 const ContentWrapper = styled.div`
   display: flex;
   align-items: center;
-  width: 744px;
   margin: 0 auto;
   gap: 32px;
+
+  ${media.mobile} {
+    gap: 15px;
+
+    img {
+      display: none;
+    }
+  }
 
   .ut__guide {
     color: ${({ theme }) => theme.color.white};
