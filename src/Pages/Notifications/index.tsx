@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useNotifications } from '@/Hooks/notifications/useNotifications';
 import { Notification } from '@/Components/Notification';
 import { NotificationSSEType } from '@/Types/notifications';
-import { Loading } from '@/Assets';
+import { Loading, SignUpFail } from '@/Assets';
 import ChipMenu from '@/Components/Common/ChipMenu';
 import { useState } from 'react';
 import { media } from '@/Styles/theme';
@@ -34,23 +34,30 @@ export const Notifications = () => {
           기타
         </ChipMenu> */}
       </NotificationTypeChipsBox>
-      <NotificationList>
-        {isLoading ? (
-          <Loading />
-        ) : (
-          <Stack divider={<Divider $height={2} $dividerColor="#e5e6e8" />} gap={'0px'}>
-            {notifications
-              ?.filter((notification: NotificationSSEType) => {
-                if (selectedNotificationType === 'STUDY')
-                  return !notification.type.includes('REVIEW') && !notification.type.includes('RECRUITMENT');
-                return notification.type.includes(selectedNotificationType);
-              })
-              ?.map((notification: NotificationSSEType) => (
-                <Notification {...notification} key={notification.notificationId} />
-              ))}
-          </Stack>
-        )}
-      </NotificationList>
+      {notifications.length === 0 ? (
+        <PlaceHolder>
+          <PlaceHolderTitle>아직 받은 리뷰가 없습니다.</PlaceHolderTitle>
+          <img src={SignUpFail} width={392} height={240} alt="no saved items" />
+        </PlaceHolder>
+      ) : (
+        <NotificationList>
+          {isLoading ? (
+            <Loading />
+          ) : (
+            <Stack divider={<Divider $height={2} $dividerColor="#e5e6e8" />} gap={'0px'}>
+              {notifications
+                ?.filter((notification: NotificationSSEType) => {
+                  if (selectedNotificationType === 'STUDY')
+                    return !notification.type.includes('REVIEW') && !notification.type.includes('RECRUITMENT');
+                  return notification.type.includes(selectedNotificationType);
+                })
+                ?.map((notification: NotificationSSEType) => (
+                  <Notification {...notification} key={notification.notificationId} />
+                ))}
+            </Stack>
+          )}
+        </NotificationList>
+      )}
     </NotificationsLayout>
   );
 };
@@ -58,9 +65,7 @@ export const Notifications = () => {
 const NotificationsLayout = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
   max-width: 912px;
-  align-items: flex-start;
   gap: 24px;
   flex: 1 0 0;
 `;
@@ -74,6 +79,18 @@ const NotificationTypeChipsBox = styled.div`
 
   ${media.mobile} {
     padding-top: 24px;
+  }
+`;
+
+const StudyReviewsListInner = styled.ul`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 12px;
+  overflow: auto;
+
+  ${media.mobile} {
+    gap: 0;
   }
 `;
 
@@ -91,4 +108,20 @@ const NotificationList = styled.ul`
   ${media.mobile} {
     padding: 0 0 24px 0;
   }
+`;
+
+const PlaceHolder = styled.div`
+  padding: 72px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  border-radius: ${({ theme }) => theme.borderRadius.cornerRadius12};
+  border: 1px solid ${({ theme }) => theme.color.black1};
+  background: ${({ theme }) => theme.color.white};
+`;
+
+const PlaceHolderTitle = styled.span`
+  color: ${({ theme }) => theme.color.black4};
+  ${({ theme }) => theme.typo.ListLabel};
 `;
