@@ -34,7 +34,7 @@ const SettingButton = ({ nickname }: SettingButtonProps) => {
           >
             닉네임 변경하기
           </DropdownItem>
-          <DropdownItem
+          {/* <DropdownItem
             onClick={() => {
               setIsOpened(false);
             }}
@@ -47,7 +47,7 @@ const SettingButton = ({ nickname }: SettingButtonProps) => {
             }}
           >
             설정
-          </DropdownItem>
+          </DropdownItem> */}
         </DropdownList>
       )}
       {editState === 'EDIT' && isModalOpen && <EditProfileModal userNickname={nickname} handleEdit={setEditState} />}
