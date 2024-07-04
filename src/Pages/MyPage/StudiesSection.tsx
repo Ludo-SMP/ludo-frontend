@@ -6,12 +6,12 @@ import ChipMenu from '@/Components/Common/ChipMenu';
 import { MyStudyCard } from '@/Components/MyStudyCard';
 import { useMyPageInfo } from '@/Hooks/study/useMyPageInfo';
 import { ApplicantRecruitment, CompletedStudy, ParticipateStudy } from '@/Types/study';
-import { useSelectedMyStudyStore } from '@/store/study';
+import { SelectedMyStudyStatus, useSelectedMyStudyStore } from '@/store/study';
 import { getPeriod } from '@/utils/date';
 import { Children, PropsWithChildren, ReactNode } from 'react';
 import styled from 'styled-components';
 import { match } from 'ts-pattern';
-import { LoginFail } from '@/Assets';
+import { LoginFail, SignUpFail } from '@/Assets';
 import { Link } from 'react-router-dom';
 
 const StudiesSection = () => {
@@ -43,19 +43,7 @@ const StudiesSection = () => {
           진행 완료된 스터디
         </ChipMenu>
       </ChipMenusWrapper>
-      <StudyList
-        placeholder={
-          <PlaceHolder>
-            <PlaceHolderInner>
-              <img src={LoginFail} width={294} height={180} alt="no study" />
-              <PlaceHolderTitle>아직 참여 중인 스터디가 없습니다.</PlaceHolderTitle>
-            </PlaceHolderInner>
-            <Button scheme="primary">
-              <Link to="/studies">참여할만한 스터디 찾아보기</Link>
-            </Button>
-          </PlaceHolder>
-        }
-      >
+      <StudyList placeholder={<PlaceHolder tab={selectedMyStudyStatus} />}>
         {match(selectedMyStudyStatus)
           .with('PARTICIPATED', () =>
             participateStudies.map(
@@ -161,7 +149,33 @@ const StudyListInner = styled.ul`
   gap: 12px;
 `;
 
-const PlaceHolder = styled.div`
+const HidableButton = styled(Button)<{
+  $hide?: boolean;
+}>`
+  visibility: ${({ $hide }) => ($hide ? 'hidden' : 'visible')};
+`;
+
+const PlaceHolder = ({ tab }: { tab: SelectedMyStudyStatus['selectedMyStudyStatus'] }) => (
+  <PlaceHolderBox>
+    <PlaceHolderInner>
+      <PlaceHolderTitle>
+        {match(tab)
+          .with('PARTICIPATED', () => '아직 참여 중인 스터디가 없습니다.')
+          .with('APPLIED', () => '지원한 스터디가 없습니다.')
+          .with('COMPLETED', () => '진행 완료된 스터디가 아직 없습니다.')
+          .exhaustive()}
+      </PlaceHolderTitle>
+      <img src={tab === 'COMPLETED' ? SignUpFail : LoginFail} width={294} height={180} alt="no study" />
+    </PlaceHolderInner>
+    {
+      <HidableButton scheme="primary" $hide={tab === 'COMPLETED'}>
+        <Link to="/studies">참여할만한 스터디 찾아보기</Link>
+      </HidableButton>
+    }
+  </PlaceHolderBox>
+);
+
+const PlaceHolderBox = styled.div`
   padding-top: 32px;
   display: flex;
   flex-direction: column;
