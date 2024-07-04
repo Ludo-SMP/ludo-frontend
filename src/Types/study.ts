@@ -92,7 +92,7 @@ export interface RecruitmentDetail {
     participantLimit: number;
     startDateTime: string;
     endDateTime: string;
-    attendanceDay: number[];
+    attendanceDay: AttendanceDay[];
   };
 }
 
