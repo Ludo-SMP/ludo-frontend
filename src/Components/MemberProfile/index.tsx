@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { ColumnDivider } from '../Common/Divider/ColumnDivider';
-import { More, Profile } from '@/Assets';
+import { More } from '@/Assets';
+import { Profile } from '@/Assets/Profile';
 import { Member } from '@/Types/study';
 import { ROLE } from '@/Shared/study';
 import { useEffect, useRef, useState } from 'react';

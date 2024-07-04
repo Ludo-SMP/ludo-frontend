@@ -1,4 +1,4 @@
-import { Profile } from '@/Assets';
+import { Profile } from '@/Assets/Profile';
 import { Applicant } from '@/Types/study';
 import styled from 'styled-components';
 import Button from '../Common/Button';

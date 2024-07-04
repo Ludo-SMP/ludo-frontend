@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { useCancelAppyMutation } from '@/Hooks/study/useCancelAppyMutation';
 import { useQueryClient } from '@tanstack/react-query';
 import { STUDY } from '@/Constants/queryString';
-import { media } from '@/Styles/theme';
+import { media, textEllipsis } from '@/Styles/theme';
 
 interface MyStudyCardProps {
   id: number;
@@ -61,7 +61,7 @@ export const MyStudyCard = ({
       }}
       isApplyStatus={isApplyStatus}
     >
-      {!isApplyStatus && <StudyThumbnail width="244px" height="100%" />}
+      {!isApplyStatus && <StudyThumbnail width={244} height={244} />}
 
       <StudyInfoWrapper status={status} hasRecruitment={hasRecruitment} isOwner={isOwner} isApplyStatus={isApplyStatus}>
         <StudyDetailWrapper status={status}>
@@ -137,10 +137,6 @@ const MyStudyCardWrapper = styled.div<{
   align-items: flex-start;
   align-content: flex-start;
   align-self: stretch;
-  flex-wrap: wrap;
-  align-content: flex-start;
-  align-self: stretch;
-  flex-wrap: wrap;
   border-radius: 16px;
   border: 1px solid ${({ theme }) => theme.color.black1};
   box-shadow: 0px 0px 20px 0px ${({ theme }) => theme.color.black0};
@@ -162,25 +158,8 @@ const MyStudyCardWrapper = styled.div<{
     height: auto;
 
     svg {
-      width: 100%;
-      border-radius: 16px 16px 0 0;
-    }
-  }
-
-  svg {
-    border-radius: 16px 0 0 16px;
-  }
-
-  ${media.mobile} {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    align-self: stretch;
-    width: 302px;
-    height: auto;
-
-    svg {
-      width: 100%;
+      width: 300px;
+      height: 300px;
       border-radius: 16px 16px 0 0;
     }
   }
@@ -194,6 +173,7 @@ const StudyInfoWrapper = styled.div<{
 }>`
   display: flex;
   height: 100%;
+  width: calc(100% - 244px);
   padding: 24px 32px;
   flex-direction: column;
   align-items: flex-start;
@@ -219,7 +199,7 @@ const StudyDetailWrapper = styled.div<{ status: StudyStatus | ApplyStatus }>`
   flex-direction: column;
   align-items: flex-start;
   gap: 12px;
-  flex: 1 0 0;
+  width: 100%;
   flex: 1 0 0;
 
   .study__status {
@@ -229,15 +209,15 @@ const StudyDetailWrapper = styled.div<{ status: StudyStatus | ApplyStatus }>`
     align-self: stretch;
 
     .title {
+      max-width: 500px;
       color: ${({ theme }) => theme.color.black5};
-      font-family: 'Pretendard700';
-      font-size: ${({ theme }) => theme.font.medium};
       font-family: 'Pretendard700';
       font-size: ${({ theme }) => theme.font.medium};
       font-style: normal;
       font-weight: 700;
-      font-weight: 700;
       line-height: 32px;
+
+      ${textEllipsis}
     }
 
     .studyTokens {
@@ -283,27 +263,6 @@ const StudyDetailWrapper = styled.div<{ status: StudyStatus | ApplyStatus }>`
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
-  }
-
-  ${media.mobile} {
-    .study__status {
-      display: flex;
-      align-items: center;
-      align-content: center;
-      gap: 16px;
-      align-self: stretch;
-      flex-wrap: wrap;
-    }
-
-    .detail__info {
-      display: flex;
-      gap: 12px;
-
-      & > div {
-        width: 252px;
-        gap: 0;
-      }
-    }
   }
 `;
 
