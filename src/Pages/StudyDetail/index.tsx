@@ -16,16 +16,7 @@ import { match, P } from 'ts-pattern';
 import { Sidebar } from './Sidebar';
 import { useAttendStudyMutation } from '@/Hooks/study/useAttendStudyMutation';
 import { isToday } from 'date-fns';
-
-const dayMap = {
-  1: '월요일',
-  2: '화요일',
-  3: '수요일',
-  4: '목요일',
-  5: '금요일',
-  6: '토요일',
-  7: '일요일',
-};
+import { getDayById, isTodayAttendanceDay } from '@/utils/date';
 
 const isValidUrl = (url: string) => {
   try {
@@ -65,7 +56,7 @@ export const StudyDetailPage = () => {
     new Date(study?.participants?.find(({ id }) => id === user?.id)?.recentAttendanceDate),
   );
 
-  const attendDays = study?.attendanceDay?.map((day) => dayMap[day]).join(', ') ?? '출석 요일';
+  const attendDays = getDayById(study?.attendanceDay);
 
   return (
     <Grid>
@@ -85,13 +76,18 @@ export const StudyDetailPage = () => {
               <PlatformSection>
                 <PlatformTitle>
                   <TopBarSectionTitle>진행 플랫폼</TopBarSectionTitle>
-                  {didIAttendToday ? (
-                    <Button disabled>출석 완료</Button>
-                  ) : (
-                    <Button scheme="secondary" onClick={async () => attendStudyMutate()}>
-                      출석 체크
-                    </Button>
-                  )}
+                  {study.status !== 'COMPLETED' &&
+                    (isTodayAttendanceDay(study.attendanceDay) ? (
+                      didIAttendToday ? (
+                        <Button disabled>출석 완료</Button>
+                      ) : (
+                        <Button scheme="secondary" onClick={async () => attendStudyMutate()}>
+                          출석 체크
+                        </Button>
+                      )
+                    ) : (
+                      <Button disabled>출석 없음</Button>
+                    ))}
                   {isAttendanceModalOpen && isAttendStudyMutationSuccess && (
                     <Modal
                       title="해당 스터디 출석이 체크되었습니다!"

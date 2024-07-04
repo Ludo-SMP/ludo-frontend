@@ -1,4 +1,5 @@
 import { APPLY_STATUS, POSITION, MEMBER_STATUS, PLATFORM, PROGRESS_METHOD, ROLE, STUDY_STATUS } from '@/Shared/study';
+import { AttendanceDay } from './atoms';
 
 export type CategoryPropertyType = 'category' | 'stacks' | 'positions' | 'way' | 'sort';
 export type StudyStatus = keyof typeof STUDY_STATUS;
@@ -170,13 +171,6 @@ export interface Applicant extends User {
     recommend: number;
   };
 }
-
-/**
- * 출석요일
- *
- * 1: 월요일 ~ 7: 일요일
- */
-export type AttendanceDay = 1 | 2 | 3 | 4 | 5 | 6 | 7;
 
 export interface StudyCreate {
   title: string;
