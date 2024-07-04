@@ -12,6 +12,7 @@ export const APPLY = Object.freeze({
   },
   SUCCESS: {
     title: '스터디 지원을 완료했습니다!',
+    content: `지원 결과는 알림과 함께\n‘스따-디’ > ‘내가 지원한 스터디’ 에서 확인하실 수 있습니다.`,
   },
   CLOSED: {
     title: '앗, 지원이 마감된 스터디입니다ㅠㅠ',

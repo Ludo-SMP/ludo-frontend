@@ -105,7 +105,7 @@ const ApplySection = ({ isMine, recruitment, study }: ApplySectionProps) => {
           approveBtnText="확인"
           alignTitle="center"
         >
-          <div className="approve__image"></div>
+          {APPLY?.[applyTryStatus]?.content}
         </Modal>
       )}
 
