@@ -13,6 +13,7 @@ export { default as MemberImage } from './icons/member.svg?react';
 export { default as More } from './icons/more.svg?react';
 export { default as Naver } from './icons/naver.svg?react';
 export { default as One } from './icons/one.svg?react';
+export { default as Profile } from './icons/profile.svg?react';
 export { default as Right } from './icons/right.svg?react';
 export { default as Search } from './icons/search.svg?react';
 export { default as StudyInfo } from './icons/studyInfo.svg?react';

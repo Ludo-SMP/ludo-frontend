@@ -15,7 +15,7 @@ export const ProfileSection = ({ nickname, email }: ProfileSectionProps) => {
   return (
     <Box>
       <ProfileBox>
-        <Profile width={160} height={160} id={nickname} />
+        <Profile width={160} height={160} />
         <SettingButton nickname="nickname" />
       </ProfileBox>
       <NameBox>

@@ -83,7 +83,7 @@ const MemberProfile = ({
           )}
         </OptionsButton>
       )}
-      <Profile width={120} height={120} id={id} />
+      <Profile width={120} height={120} />
       {match(state)
         .with(P.union('needLeaveApproval', 'needReview'), () => (
           <>

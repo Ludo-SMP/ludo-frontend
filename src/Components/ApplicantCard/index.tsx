@@ -47,7 +47,7 @@ export const ApplicantCard = ({
         <Title>{title}</Title>
         <Content>
           <ProfileSection>
-            <Profile width={100} height={100} id={applicantId} />
+            <Profile width={100} height={100} />
             <ProfileInfoBox>
               <Nickname>{nickname}</Nickname>
               <Fields>

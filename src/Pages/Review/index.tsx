@@ -63,7 +63,7 @@ export const ReviewPage = () => {
                 <MemberTitleText>함께한 스터디원</MemberTitleText>
               </MemberTitle>
               <MemberProfile>
-                <Profile width={80} height={80} id={userId} />
+                <Profile width={80} height={80} />
                 <MemberProfileBox>
                   <MemberName>닉네임</MemberName>
                   <MemberStudyInfo>
