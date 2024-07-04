@@ -72,6 +72,7 @@ const MemberProfile = ({
           <More />
           {isOptionsOpen && (
             <Options
+              enableLeaveButton={role !== 'OWNER' && state !== 'needReview' && state !== 'reviewEnd'}
               onSelect={(action) => (
                 match(action)
                   .with('leave', () => setIsLeaveModalOpen(true))
@@ -167,9 +168,11 @@ const MemberProfile = ({
 };
 
 const Options = ({
+  enableLeaveButton = false,
   onClose = () => void 0,
   onSelect = () => void 0,
 }: {
+  enableLeaveButton?: boolean;
   onClose?: () => void;
   onSelect: (action: 'leave') => void;
 }) => {
@@ -187,7 +190,7 @@ const Options = ({
       <MenuItem>
         <Link to={ROUTES.MYPAGE.HOME}>마이 페이지</Link>
       </MenuItem>
-      <MenuItem onClick={() => onSelect('leave')}>스터디 탈퇴하기</MenuItem>
+      {enableLeaveButton && <MenuItem onClick={() => onSelect('leave')}>스터디 탈퇴하기</MenuItem>}
     </Menu>
   );
 };
