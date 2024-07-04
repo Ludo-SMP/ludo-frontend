@@ -115,3 +115,19 @@ const CardList = styled.ul`
   align-content: center;
   gap: 12px;
 `;
+
+const PlaceHolder = styled.div`
+  padding: 72px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  border-radius: ${({ theme }) => theme.borderRadius.cornerRadius12};
+  border: 1px solid ${({ theme }) => theme.color.black1};
+  background: ${({ theme }) => theme.color.white};
+`;
+
+const PlaceHolderTitle = styled.span`
+  color: ${({ theme }) => theme.color.black4};
+  ${({ theme }) => theme.typo.ListLabel};
+`;
