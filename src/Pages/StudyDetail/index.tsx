@@ -16,16 +16,7 @@ import { match, P } from 'ts-pattern';
 import { Sidebar } from './Sidebar';
 import { useAttendStudyMutation } from '@/Hooks/study/useAttendStudyMutation';
 import { isToday } from 'date-fns';
-
-const dayMap = {
-  1: '월요일',
-  2: '화요일',
-  3: '수요일',
-  4: '목요일',
-  5: '금요일',
-  6: '토요일',
-  7: '일요일',
-};
+import { getDayById } from '@/utils/date';
 
 const isValidUrl = (url: string) => {
   try {
@@ -65,7 +56,7 @@ export const StudyDetailPage = () => {
     new Date(study?.participants?.find(({ id }) => id === user?.id)?.recentAttendanceDate),
   );
 
-  const attendDays = study?.attendanceDay?.map((day) => dayMap[day]).join(', ') ?? '출석 요일';
+  const attendDays = getDayById(study?.attendanceDay);
 
   return (
     <Grid>
