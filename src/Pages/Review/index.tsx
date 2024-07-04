@@ -59,7 +59,9 @@ export const ReviewPage = () => {
     study: { title, participants },
   } = study;
   const {
+    id,
     nickname,
+    email,
     position: { name },
   } = participants.find((participant) => participant.id === parseInt(userId));
 
@@ -76,7 +78,7 @@ export const ReviewPage = () => {
                 <MemberTitleText>함께한 스터디원</MemberTitleText>
               </MemberTitle>
               <MemberProfile>
-                <Profile width={80} height={80} />
+                <Profile width={80} height={80} email={email} />
                 <MemberProfileBox>
                   <MemberName>{nickname}</MemberName>
                   <MemberStudyInfo>
