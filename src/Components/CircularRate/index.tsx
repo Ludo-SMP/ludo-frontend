@@ -59,7 +59,7 @@ export const CircularRate = ({
         </foreignObject>
       </svg>
       <InnerBox $size={size}>
-        <ProgressText>{percentage}%</ProgressText>
+        <ProgressText>{Math.floor(percentage)}%</ProgressText>
         <LabelText>{label}</LabelText>
       </InnerBox>
     </Box>
