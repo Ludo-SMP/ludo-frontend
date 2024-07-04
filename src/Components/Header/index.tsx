@@ -19,9 +19,7 @@ import { useUserStore } from '@/store/user';
 /** 사이트 메인 헤더 */
 const Header = () => {
   const { isLoggedIn } = useLoginStore();
-  const {
-    user: { email },
-  } = useUserStore();
+  const user = useUserStore(({ user }) => user);
   const { openModal } = useModalStore();
   const navigate = useNavigate();
   const currentLocation = useLocation()?.pathname;
@@ -55,7 +53,7 @@ const Header = () => {
               )}
               <UserInfoWrapper>
                 <AlarmBell />
-                <Dropdown image={<Profile width={40} height={40} email={email} />}>
+                <Dropdown image={<Profile width={40} height={40} email={user?.email} />}>
                   <DropdownItem
                     onClick={() => {
                       navigate(ROUTES.MYPAGE.HOME);
