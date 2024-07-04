@@ -1,4 +1,6 @@
 import { NEW_ATTENDANCE_DAY, OriginalShared } from '@/Shared/study';
+import { AttendanceDay } from '@/Types/atoms';
+import { getDay } from 'date-fns';
 
 export const dateFormatter = (date: string) => {
   const [year, month, day] = date.split('-');
@@ -92,3 +94,9 @@ export const getSharedDayObjectById = (ids: number[]): OriginalShared => {
     };
   }, {});
 };
+
+/**
+ * 오늘이 출석일인지 확인한다.
+ */
+export const isTodayAttendanceDay = (attendanceDay: Array<AttendanceDay>) =>
+  attendanceDay.includes(getDay(new Date()) || 7);
