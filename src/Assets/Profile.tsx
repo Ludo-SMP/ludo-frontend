@@ -90,5 +90,5 @@ export const Profile = ({ width = 60, height = 60, email }: ProfileProps) => {
 };
 
 const ClippedImage = styled.img`
-  borderradius: 50%;
+  border-radius: 50%;
 `;
