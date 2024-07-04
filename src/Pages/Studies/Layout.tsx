@@ -281,7 +281,10 @@ export default ({ initValue, mutation, type }: StudyFormLayoutProps) => {
           </Stack>
           {type === 'CREATE' ? (
             <CreateButtons
-              savedForm={{ ...formData, attendanceDay: savedAttendanceDay?.map((day) => Number(day.id)) }}
+              savedForm={{
+                ...formData,
+                attendanceDay: savedAttendanceDay?.map((day) => Number(day.id) as AttendanceDay),
+              }}
             />
           ) : (
             <EditButtons />
