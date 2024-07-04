@@ -16,7 +16,7 @@ import { match, P } from 'ts-pattern';
 import { Sidebar } from './Sidebar';
 import { useAttendStudyMutation } from '@/Hooks/study/useAttendStudyMutation';
 import { isToday } from 'date-fns';
-import { getDayById } from '@/utils/date';
+import { getDayById, isTodayAttendanceDay } from '@/utils/date';
 
 const isValidUrl = (url: string) => {
   try {
@@ -76,13 +76,18 @@ export const StudyDetailPage = () => {
               <PlatformSection>
                 <PlatformTitle>
                   <TopBarSectionTitle>진행 플랫폼</TopBarSectionTitle>
-                  {didIAttendToday ? (
-                    <Button disabled>출석 완료</Button>
-                  ) : (
-                    <Button scheme="secondary" onClick={async () => attendStudyMutate()}>
-                      출석 체크
-                    </Button>
-                  )}
+                  {study.status !== 'COMPLETED' &&
+                    (isTodayAttendanceDay(study.attendanceDay) ? (
+                      didIAttendToday ? (
+                        <Button disabled>출석 완료</Button>
+                      ) : (
+                        <Button scheme="secondary" onClick={async () => attendStudyMutate()}>
+                          출석 체크
+                        </Button>
+                      )
+                    ) : (
+                      <Button disabled>출석 없음</Button>
+                    ))}
                   {isAttendanceModalOpen && isAttendStudyMutationSuccess && (
                     <Modal
                       title="해당 스터디 출석이 체크되었습니다!"
