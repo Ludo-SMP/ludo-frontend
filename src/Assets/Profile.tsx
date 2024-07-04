@@ -3,8 +3,17 @@ import CryptoJS from 'crypto-js';
 import styled from 'styled-components';
 
 export interface ProfileProps {
+  /** 프로필 이미지 너비 */
   width?: number;
+
+  /** 프로필 이미지 높이 */
   height?: number;
+
+  /**
+   * Gravatar 이미지를 위한 이메일 주소
+   *
+   * 해당 이메일 주소에 해당하는 고유한 Gravatar 이미지가 생성 또는 불러와집니다.
+   */
   email?: string;
 }
 
