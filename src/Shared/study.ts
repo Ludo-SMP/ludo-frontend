@@ -1,3 +1,4 @@
+import { AttendanceDay } from '@/Types/atoms';
 import { generateSharedObjectByCustomKey } from '@/utils/selectUtil';
 
 export interface OriginalShared {
@@ -104,7 +105,7 @@ export const ROLE = {
   PENDING: '탈퇴 요청',
 };
 
-export const NEW_ATTENDANCE_DAY: OriginalShared = {
+export const NEW_ATTENDANCE_DAY = {
   1: '월요일',
   2: '화요일',
   3: '수요일',
@@ -112,6 +113,6 @@ export const NEW_ATTENDANCE_DAY: OriginalShared = {
   5: '금요일',
   6: '토요일',
   7: '일요일',
-};
+} satisfies Record<AttendanceDay, string>;
 
 export const ATTENDANCE_DAY = generateDropdownOption(NEW_ATTENDANCE_DAY);
