@@ -36,7 +36,7 @@ export const Notifications = () => {
       </NotificationTypeChipsBox>
       {notifications.length === 0 ? (
         <PlaceHolder>
-          <PlaceHolderTitle>아직 받은 리뷰가 없습니다.</PlaceHolderTitle>
+          <PlaceHolderTitle>아직 받은 알림이 없습니다.</PlaceHolderTitle>
           <img src={SignUpFail} width={392} height={240} alt="no saved items" />
         </PlaceHolder>
       ) : (
@@ -79,18 +79,6 @@ const NotificationTypeChipsBox = styled.div`
 
   ${media.mobile} {
     padding-top: 24px;
-  }
-`;
-
-const StudyReviewsListInner = styled.ul`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: 12px;
-  overflow: auto;
-
-  ${media.mobile} {
-    gap: 0;
   }
 `;
 
