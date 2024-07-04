@@ -1,12 +1,30 @@
 import { useId } from 'react';
+import CryptoJS from 'crypto-js';
 
 export interface ProfileProps {
   width?: number;
   height?: number;
+  email: string;
 }
 
-export const Profile = ({ width = 60, height = 60 }: ProfileProps) => {
+const toGravatar = (email: string) =>
+  `https://gravatar.com/avatar/${CryptoJS.MD5(email.trim().toLowerCase()).toString()}?d=identicon`;
+
+export const Profile = ({ width = 60, height = 60, email }: ProfileProps) => {
+  if (email)
+    return (
+      <img
+        src={toGravatar(email)}
+        width={width}
+        height={height}
+        style={{
+          borderRadius: '50%',
+        }}
+      />
+    );
+
   const maskId = useId();
+
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox="0 0 60 60" fill="none">
       <mask id={`profile-${maskId}`} type="luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="60" height="60">
