@@ -12,3 +12,12 @@
 
 /** 특정한 시간 범위를 나타내는 타입입니다. */
 export type DateRange = [Date, Date];
+
+/**
+ * 출석요일
+ *
+ * 1: 월요일 ~ 7: 일요일
+ *
+ * 0이 일요일이 아님에 주의.
+ */
+export type AttendanceDay = 1 | 2 | 3 | 4 | 5 | 6 | 7;
