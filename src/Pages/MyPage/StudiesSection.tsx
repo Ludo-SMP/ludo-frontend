@@ -8,6 +8,7 @@ import { ApplicantRecruitment, CompletedStudy, ParticipateStudy } from '@/Types/
 import { useSelectedMyStudyStore } from '@/store/study';
 import { getPeriod } from '@/utils/date';
 import styled from 'styled-components';
+import { match } from 'ts-pattern';
 
 const StudiesSection = () => {
   const { data: myPageInfo } = useMyPageInfo();
@@ -39,43 +40,73 @@ const StudiesSection = () => {
         </ChipMenu>
       </ChipMenusWrapper>
       <CardListWrapper>
-        {selectedMyStudyStatus === 'PARTICIPATED'
-          ? participateStudies?.map((participateStudy: ParticipateStudy) => (
+        {match(selectedMyStudyStatus)
+          .with('PARTICIPATED', () =>
+            participateStudies.map(
+              ({
+                studyId,
+                title,
+                status,
+                position,
+                startDateTime,
+                endDateTime,
+                participantCount,
+                isOwner,
+                hasRecruitment,
+              }) => (
+                <MyStudyCard
+                  key={studyId}
+                  id={studyId}
+                  title={title}
+                  status={status}
+                  position={position}
+                  period={getPeriod(startDateTime, endDateTime)}
+                  participantCount={participantCount}
+                  isOwner={isOwner}
+                  hasRecruitment={hasRecruitment}
+                />
+              ),
+            ),
+          )
+          .with('APPLIED', () =>
+            applicantRecruitments.map(({ recruitmentId, title, applicantStatus, position }) => (
               <MyStudyCard
-                id={participateStudy?.studyId}
-                title={participateStudy?.title}
-                status={participateStudy.status}
-                position={participateStudy?.position}
-                period={getPeriod(participateStudy?.startDateTime, participateStudy?.endDateTime)}
-                participantCount={participateStudy?.participantCount}
-                isOwner={participateStudy?.isOwner}
-                hasRecruitment={participateStudy?.hasRecruitment}
-                key={participateStudy?.studyId}
+                key={recruitmentId}
+                id={recruitmentId}
+                title={title}
+                status={applicantStatus}
+                position={position}
               />
-            ))
-          : selectedMyStudyStatus === 'APPLIED'
-            ? applicantRecruitments.map((applicantRecruitment: ApplicantRecruitment) => (
+            )),
+          )
+          .with('COMPLETED', () =>
+            completedStudies.map(
+              ({
+                studyId,
+                title,
+                status,
+                position,
+                startDateTime,
+                endDateTime,
+                participantCount,
+                isOwner,
+                hasRecruitment,
+              }) => (
                 <MyStudyCard
-                  id={applicantRecruitment?.recruitmentId}
-                  title={applicantRecruitment?.title}
-                  status={applicantRecruitment?.applicantStatus}
-                  position={applicantRecruitment?.position}
-                  key={applicantRecruitment?.recruitmentId}
+                  key={studyId}
+                  id={studyId}
+                  title={title}
+                  status={status}
+                  position={position}
+                  period={getPeriod(startDateTime, endDateTime)}
+                  participantCount={participantCount}
+                  isOwner={isOwner}
+                  hasRecruitment={hasRecruitment}
                 />
-              ))
-            : completedStudies.map((completedStudy: CompletedStudy) => (
-                <MyStudyCard
-                  id={completedStudy?.studyId}
-                  title={completedStudy?.title}
-                  status={completedStudy?.status}
-                  position={completedStudy?.position}
-                  period={getPeriod(completedStudy?.startDateTime, completedStudy?.endDateTime)}
-                  participantCount={completedStudy?.participantCount}
-                  isOwner={completedStudy?.isOwner}
-                  hasRecruitment={completedStudy?.hasRecruitment}
-                  key={completedStudy?.studyId}
-                />
-              ))}
+              ),
+            ),
+          )
+          .exhaustive()}
       </CardListWrapper>
     </CardsWrapper>
   );
