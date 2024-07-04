@@ -14,10 +14,14 @@ import { useModalStore } from '@/store/modal';
 import { useLogOutMutation } from '@/Hooks/auth/useLogOutMutation';
 import DropdownItem from '../Common/DropdownItem';
 import { AlarmBell } from './AlarmBell';
+import { useUserStore } from '@/store/user';
 
 /** 사이트 메인 헤더 */
 const Header = () => {
   const { isLoggedIn } = useLoginStore();
+  const {
+    user: { email },
+  } = useUserStore();
   const { openModal } = useModalStore();
   const navigate = useNavigate();
   const currentLocation = useLocation()?.pathname;
@@ -51,7 +55,7 @@ const Header = () => {
               )}
               <UserInfoWrapper>
                 <AlarmBell />
-                <Dropdown image={<Profile width={40} height={40} />}>
+                <Dropdown image={<Profile width={40} height={40} email={email} />}>
                   <DropdownItem
                     onClick={() => {
                       navigate(ROUTES.MYPAGE.HOME);

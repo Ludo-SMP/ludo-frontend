@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { ColumnDivider } from '../Common/Divider/ColumnDivider';
-import { More } from '@/Assets';
 import { Profile } from '@/Assets/Profile';
 import { Member } from '@/Types/study';
 import { ROLE } from '@/Shared/study';
@@ -16,6 +15,7 @@ import { LEAVE } from '@/Constants/messages';
 import Button from '../Common/Button';
 import { useApproveStudyLeaveRequest } from '@/Hooks/study/useApproveStudyLeaveRequest';
 import { useRejectStudyLeaveMutation } from '@/Hooks/study/useRejectStudyLeaveRequest';
+import { More } from '@/Assets';
 
 export interface MemberProfileProps extends Member {
   /** 스터디원의 프로필 이미지 URL */
@@ -83,7 +83,7 @@ const MemberProfile = ({
           )}
         </OptionsButton>
       )}
-      <Profile width={120} height={120} />
+      <Profile width={120} height={120} email={email} />
       {match(state)
         .with(P.union('needLeaveApproval', 'needReview'), () => (
           <>
