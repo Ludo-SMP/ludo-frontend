@@ -1,5 +1,6 @@
 import { useId } from 'react';
 import CryptoJS from 'crypto-js';
+import styled from 'styled-components';
 
 export interface ProfileProps {
   width?: number;
@@ -10,10 +11,14 @@ export interface ProfileProps {
 const toGravatar = (email: string) =>
   `https://gravatar.com/avatar/${CryptoJS.MD5(email.trim().toLowerCase()).toString()}?d=identicon`;
 
+/**
+ * 프로필 이미지 컴포넌트
+ */
 export const Profile = ({ width = 60, height = 60, email }: ProfileProps) => {
+  // NOTE: 채움 프로필 이미지 관련 코드는 임시 구현이며, 추후 이미지 업로드 기능이 구현되면 제거될 예정입니다.
   if (email)
     return (
-      <img
+      <ClippedImage
         src={toGravatar(email)}
         width={width}
         height={height}
@@ -84,3 +89,7 @@ export const Profile = ({ width = 60, height = 60, email }: ProfileProps) => {
     </svg>
   );
 };
+
+const ClippedImage = styled.img`
+  borderradius: 50%;
+`;
