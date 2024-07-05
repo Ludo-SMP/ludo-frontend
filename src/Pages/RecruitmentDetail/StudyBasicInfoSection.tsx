@@ -28,7 +28,7 @@ const StudyBasicInfoSection = ({ studyTitle, participantLimit, content }: StudyB
         />
       </GridLayout>
       <RowDivider rowHeight={1} margin={24} />
-      <Accordion title="상세 내용" description="상세 내용">
+      <Accordion title="상세 내용">
         <Content>{content}</Content>
       </Accordion>
     </StudyInfoBox>
