@@ -251,7 +251,7 @@ const InfoFields = styled.div`
 
 const Applicants = styled.ul`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(248px, 392px));
   min-width: 300px;
   max-width: 1224px;
   gap: 24px;
@@ -265,7 +265,6 @@ const Applicants = styled.ul`
 // <li> 요소를 넣기 위해 추가적으로 만든 레이어
 const ApplicantLi = styled.li`
   display: flex;
-  justify-content: center;
 
   & > * {
     flex: 1;
