@@ -139,9 +139,10 @@ export const StudyDetailPage = () => {
             <Members>
               <MembersCountBar>
                 <MemberCounts count={study?.participants?.length} />
-                {isOwner && (
+                {/* 모집공고 기작성 && 방장인 경우만 지원자 확인 가능 */}
+                {study?.hasRecruitment && isOwner && (
                   <ApplicationButton>
-                    <Link to={'./applicants'}>스터디원 모집</Link>
+                    <Link to={'./applicants'}>스터디 지원자 확인하기 ({study?.participants?.length ?? 0}명)</Link>
                   </ApplicationButton>
                 )}
               </MembersCountBar>
@@ -310,8 +311,8 @@ const Members = styled.div`
 
 const MembersCountBar = styled.div`
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 632px;
   align-self: stretch;
 `;
 
