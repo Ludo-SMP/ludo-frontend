@@ -19,7 +19,7 @@ export const useReadNotification = (notificationIds: number[]) => {
         notificationIds?.map((notificationId) => {
           const alarmArrIdx = prev?.data?.data?.findIndex((alarm) => alarm?.notificationId === notificationId);
           if (alarmArrIdx !== -1) {
-            newData.data.data.notification[alarmArrIdx].read = true;
+            newData.data.data[alarmArrIdx].read = true;
           }
         });
         return newData;
