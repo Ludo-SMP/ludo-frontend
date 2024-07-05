@@ -41,4 +41,5 @@ const Content = styled.div`
   ${({ theme }) => theme.typo.ListChip};
   color: ${({ theme }) => theme.color.black2};
   padding: 10px;
+  white-space: pre-wrap;
 `;
