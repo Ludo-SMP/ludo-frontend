@@ -1,17 +1,18 @@
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import { Left, Loading, Logo, StudyInfo } from '@/Assets';
 import { InfoField } from '@/Components/Common/InfoField';
 import { ApplicantCard } from '@/Components/ApplicantCard';
-import { Applicant } from '@/Types/study';
 import Button from '@/Components/Common/Button';
 import { useUserStore } from '@/store/user';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useApplicantsDetail } from '@/Hooks/study/useApplicantsDetail';
 import { useCloseRecruitmentMutation } from '@/Hooks/recruitments/useCloseRecruitmentMutation';
 import { RowDivider } from '@/Components/Common/Divider/RowDivider';
 import Footer from '@/Components/Footer';
 import { P, match } from 'ts-pattern';
 import { useStudyDetail } from '@/Hooks/study/useStudyDetail';
+import { Applicant } from '@/Types/study';
 
 export const ApplicantsPage = () => {
   const studyId = Number(useParams().studyId);
@@ -24,6 +25,12 @@ export const ApplicantsPage = () => {
   const navigate = useNavigate();
 
   const { mutate: closeRecruitmentMutate } = useCloseRecruitmentMutation(studyId);
+
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   return (
     <Page>

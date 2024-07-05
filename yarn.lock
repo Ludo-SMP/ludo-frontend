@@ -10312,6 +10312,11 @@ vite-plugin-mkcert@^1.17.3:
     debug "^4.3.4"
     picocolors "^1.0.0"
 
+vite-plugin-radar@^0.9.6:
+  version "0.9.6"
+  resolved "https://registry.yarnpkg.com/vite-plugin-radar/-/vite-plugin-radar-0.9.6.tgz#59ae700d478e495cad0c46f7b968550690dbd234"
+  integrity sha512-tLvUt7+iZznxYa8GmCrZBV3Q0fLQApsyg9EIJgaen8DjGky3vFIq9KoDWAoVMs9FZ5qbsSBb3YfSvoqwVV+5xw==
+
 vite-plugin-svgr@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/vite-plugin-svgr/-/vite-plugin-svgr-4.2.0.tgz#9f3bf5206b0ec510287e56d16f1915e729bb4e6b"
