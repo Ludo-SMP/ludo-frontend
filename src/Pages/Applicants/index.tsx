@@ -5,10 +5,9 @@ import { ApplicantCard } from '@/Components/ApplicantCard';
 import { Applicant } from '@/Types/study';
 import Button from '@/Components/Common/Button';
 import { useUserStore } from '@/store/user';
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useApplicantsDetail } from '@/Hooks/study/useApplicantsDetail';
 import { useCloseRecruitmentMutation } from '@/Hooks/recruitments/useCloseRecruitmentMutation';
-import { useEffect } from 'react';
 import { RowDivider } from '@/Components/Common/Divider/RowDivider';
 import Footer from '@/Components/Footer';
 
@@ -21,16 +20,6 @@ export const ApplicantsPage = () => {
   const navigate = useNavigate();
 
   const { mutate: closeRecruitmentMutate } = useCloseRecruitmentMutation(studyId);
-
-  const { pathname } = useLocation();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
-
-  if (isLoading) return <Loading />;
-
-  const isOwner = user?.id === study.owner.id;
 
   return (
     <Page>
@@ -46,33 +35,37 @@ export const ApplicantsPage = () => {
       </Header>
       <RowDivider />
       <Main>
-        <MainInner>
-          <ParentNav studyTitle={study.title} />
-          <InfoSection>
-            <InfoFields>
-              <InfoField title="현재 인원수" content={study.participantCount} flexDirection="column" />
-              <InfoField title="목표 인원수" content={study.participantLimit} flexDirection="column" />
-            </InfoFields>
-            <Applicants>
-              {applicants.map((applicant) => (
-                <ApplicantLi key={applicant.id}>
-                  <ApplicantCard
-                    studyId={studyId}
-                    id={applicant.id}
-                    title={study.title}
-                    nickname={applicant.nickname}
-                    email={applicant.email}
-                    position={applicant.position}
-                    isOwner={isOwner}
-                    reviewStatistics={applicant.reviewStatistics}
-                  />
-                </ApplicantLi>
-              ))}
-            </Applicants>
-          </InfoSection>
-        </MainInner>
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <MainInner>
+            <ParentNav studyTitle={study.title} />
+            <InfoSection>
+              <InfoFields>
+                <InfoField title="현재 인원수" content={study.participantCount} flexDirection="column" />
+                <InfoField title="목표 인원수" content={study.participantLimit} flexDirection="column" />
+              </InfoFields>
+              <Applicants>
+                {applicants.map((applicant) => (
+                  <ApplicantLi key={applicant.id}>
+                    <ApplicantCard
+                      studyId={studyId}
+                      id={applicant.id}
+                      title={study.title}
+                      nickname={applicant.nickname}
+                      email={applicant.email}
+                      position={applicant.position}
+                      isOwner={user?.id === study.owner.id}
+                      reviewStatistics={applicant.reviewStatistics}
+                    />
+                  </ApplicantLi>
+                ))}
+              </Applicants>
+            </InfoSection>
+          </MainInner>
+        )}
       </Main>
-      {isOwner && (
+      {user?.id === study?.owner.id && (
         <CloseSection>
           <CloseSectionInner>
             <Button scheme="secondary" onClick={() => (closeRecruitmentMutate(), navigate('./..'))}>
