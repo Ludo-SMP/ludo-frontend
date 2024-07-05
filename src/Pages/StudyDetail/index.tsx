@@ -141,7 +141,7 @@ export const StudyDetailPage = () => {
                 <MemberCounts count={study?.participants?.length} />
                 {isOwner && (
                   <ApplicationButton>
-                    <Link to={'./applicants'}>스터디원 모집</Link>
+                    <Link to={'./applicants'}>스터디 지원자 확인하기</Link>
                   </ApplicationButton>
                 )}
               </MembersCountBar>
