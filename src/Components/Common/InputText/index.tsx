@@ -72,6 +72,7 @@ const InputWrapper = styled.input`
   display: block;
   white-space: nowrap;
   overflow: hidden;
+  background-color: ${({ theme }) => theme.color.white};
 
   &:disabled {
     opacity: 0.65;
