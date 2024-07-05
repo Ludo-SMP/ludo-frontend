@@ -5,6 +5,7 @@ import { Loading } from '@/Assets';
 import { useEditRecruitmentMutation } from '@/Hooks/recruitments/useEditRecruitment';
 import { RecruitFormWithSelect } from '@/Types/study';
 import Layout from '../CreateRecruitment/layout';
+import { useEffect } from 'react';
 
 export const EditRecruitmentPage = () => {
   const recruitmentId = Number(useParams().recruitmentId);
@@ -26,6 +27,10 @@ export const EditRecruitmentPage = () => {
     positionIds: recruitment?.positions?.map((position) => position?.id),
     stackIds: recruitment?.stacks,
   };
+
+  useEffect(function scrollToTop() {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>
