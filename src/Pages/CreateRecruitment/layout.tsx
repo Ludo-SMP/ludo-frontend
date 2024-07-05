@@ -75,6 +75,7 @@ const Layout = ({ type, mutate, study, initValue }: LayoutProps) => {
         <Form
           onSubmit={handleSubmit(() => {
             if (!isValidStack()) return;
+
             mutate({
               ...data,
               applicantLimit: Number(data.applicantLimit),
@@ -91,7 +92,7 @@ const Layout = ({ type, mutate, study, initValue }: LayoutProps) => {
                 <LabelText label="진행 방식" text={study?.way} />
                 <LabelText label="진행 플랫폼" text={study?.platform} />
                 <LabelText label="진행 기간" text={getPeriod(study?.startDateTime, study?.endDateTime)} />
-                <LabelText label="진행 요일" text={getDayById(study?.attendanceDay)} />
+                <LabelText label="진행 요일" text={getDayById(study?.attendanceDay ?? [])} />
               </Grid>
             </FormSection>
             <FormSection icon={<MemberImage />} title="스터디 모집 안내">
