@@ -25,7 +25,7 @@ export const GlobalStyle = createGlobalStyle`
       color: inherit;
       font: inherit;
       margin: 0;
-      background: #fff;
+      background: inherit;
       border: none;
       box-shadow: none;
   }

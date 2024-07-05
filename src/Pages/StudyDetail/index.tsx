@@ -139,11 +139,9 @@ export const StudyDetailPage = () => {
             <Members>
               <MembersCountBar>
                 <MemberCounts count={study?.participants?.length} />
-                {isOwner && (
-                  <ApplicationButton>
-                    <Link to={'./applicants'}>스터디 지원자 확인하기</Link>
-                  </ApplicationButton>
-                )}
+                <ApplicationButton>
+                  <Link to={'./applicants'}>스터디 지원자 확인하기</Link>
+                </ApplicationButton>
               </MembersCountBar>
               <MemberList>
                 <MemberSection
@@ -310,8 +308,8 @@ const Members = styled.div`
 
 const MembersCountBar = styled.div`
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 632px;
   align-self: stretch;
 `;
 

@@ -17,7 +17,11 @@ export const EditRecruitmentPage = () => {
   const recruitment = recruitmentDetail?.recruitment;
 
   const recruitmentProps: RecruitFormWithSelect = {
-    ...recruitment,
+    applicantLimit: recruitment?.applicantLimit,
+    contact: recruitment?.contact,
+    callUrl: recruitment?.callUrl,
+    title: recruitment?.title,
+    content: recruitment?.content,
     recruitmentEndDateTime: recruitment?.endDateTime,
     positionIds: recruitment?.positions?.map((position) => position?.id),
     stackIds: recruitment?.stacks,
