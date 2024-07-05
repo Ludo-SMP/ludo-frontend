@@ -29,7 +29,7 @@ export const InfoField = ({
       width={width}
       titleWidth={titleWidth}
       contentWidth={contentWidth}
-      flexDirection={flexDirection}
+      $flexDirection={flexDirection}
       gap={gap}
       disabled={disabled}
       fontSize={fontSize}
@@ -44,16 +44,16 @@ const InfoFieldWrapper = styled.div<{
   width?: string;
   titleWidth?: number;
   contentWidth?: string;
-  flexDirection?: string;
+  $flexDirection?: string;
   gap?: number;
   disabled?: boolean;
   fontSize?: number;
 }>`
   display: flex;
-  flex-direction: ${(props) => props.flexDirection || 'row'};
+  flex-direction: ${(props) => props.$flexDirection || 'row'};
   width: ${(props) => props.width};
   text-align: start;
-  gap: ${(props) => (props.flexDirection ? '8px' : '24px')};
+  gap: ${(props) => (props.$flexDirection ? '8px' : '24px')};
   font-size: ${(props) => (props.fontSize ? props.fontSize : props.theme.font.medium)};
   font-weight: 500;
   line-height: 24px;
@@ -61,7 +61,7 @@ const InfoFieldWrapper = styled.div<{
   .field {
     &__title {
       text-align: start;
-      width: ${(props) => props.flexDirection || '184px'};
+      width: ${(props) => props.$flexDirection || '184px'};
       color: ${({ theme, disabled }) => (disabled ? 'rgba(0, 0, 0, 0.25)' : theme.color.black4)};
       ${media.tablet} {
         width: auto;
