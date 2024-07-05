@@ -139,12 +139,9 @@ export const StudyDetailPage = () => {
             <Members>
               <MembersCountBar>
                 <MemberCounts count={study?.participants?.length} />
-                {/* 모집공고 기작성 && 방장인 경우만 지원자 확인 가능 */}
-                {study?.hasRecruitment && isOwner && (
-                  <ApplicationButton>
-                    <Link to={'./applicants'}>스터디 지원자 확인하기</Link>
-                  </ApplicationButton>
-                )}
+                <ApplicationButton>
+                  <Link to={'./applicants'}>스터디 지원자 확인하기</Link>
+                </ApplicationButton>
               </MembersCountBar>
               <MemberList>
                 <MemberSection
