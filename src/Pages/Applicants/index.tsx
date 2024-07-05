@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { Left, Loading, Logo, StudyInfo } from '@/Assets';
 import { InfoField } from '@/Components/Common/InfoField';
 import { ApplicantCard } from '@/Components/ApplicantCard';
-import { Applicant } from '@/Types/study';
 import Button from '@/Components/Common/Button';
 import { useUserStore } from '@/store/user';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
@@ -16,8 +15,9 @@ export const ApplicantsPage = () => {
   const studyId = Number(useParams().studyId);
   const { user } = useUserStore();
   const { data: ApplicantsDetail, isLoading } = useApplicantsDetail(studyId);
-  const study = ApplicantsDetail?.study;
-  const applicants: Applicant[] = ApplicantsDetail?.applicants;
+
+  const { study, applicants = [] } = ApplicantsDetail ?? {};
+
   const navigate = useNavigate();
 
   const { mutate: closeRecruitmentMutate } = useCloseRecruitmentMutation(studyId);
@@ -30,7 +30,7 @@ export const ApplicantsPage = () => {
 
   if (isLoading) return <Loading />;
 
-  const isOwner = user?.id === study.owner.id;
+  const isOwner = user?.id === study?.owner?.id;
 
   return (
     <Page>
@@ -47,14 +47,14 @@ export const ApplicantsPage = () => {
       <RowDivider />
       <Main>
         <MainInner>
-          <ParentNav studyTitle={study.title} />
+          <ParentNav studyTitle={study?.title} />
           <InfoSection>
             <InfoFields>
-              <InfoField title="현재 인원수" content={study.participantCount} flexDirection="column" />
-              <InfoField title="목표 인원수" content={study.participantLimit} flexDirection="column" />
+              <InfoField title="현재 인원수" content={study?.participantCount} flexDirection="column" />
+              <InfoField title="목표 인원수" content={study?.participantLimit} flexDirection="column" />
             </InfoFields>
             <Applicants>
-              {applicants.map((applicant) => (
+              {applicants?.map((applicant) => (
                 <ApplicantLi key={applicant.id}>
                   <ApplicantCard
                     studyId={studyId}
