@@ -10,11 +10,15 @@ import { useApplicantsDetail } from '@/Hooks/study/useApplicantsDetail';
 import { useCloseRecruitmentMutation } from '@/Hooks/recruitments/useCloseRecruitmentMutation';
 import { RowDivider } from '@/Components/Common/Divider/RowDivider';
 import Footer from '@/Components/Footer';
+import { P, match } from 'ts-pattern';
+import { useStudyDetail } from '@/Hooks/study/useStudyDetail';
 
 export const ApplicantsPage = () => {
   const studyId = Number(useParams().studyId);
   const { user } = useUserStore();
-  const { data: ApplicantsDetail, isLoading } = useApplicantsDetail(studyId);
+  const { data: ApplicantsDetail, status } = useApplicantsDetail(studyId);
+  const { data: studyDetail, isSuccess } = useStudyDetail(studyId);
+
   const study = ApplicantsDetail?.study;
   const applicants: Applicant[] = ApplicantsDetail?.applicants;
   const navigate = useNavigate();
@@ -35,35 +39,52 @@ export const ApplicantsPage = () => {
       </Header>
       <RowDivider />
       <Main>
-        {isLoading ? (
-          <Loading />
-        ) : (
-          <MainInner>
-            <ParentNav studyTitle={study.title} />
-            <InfoSection>
-              <InfoFields>
-                <InfoField title="현재 인원수" content={study.participantCount} flexDirection="column" />
-                <InfoField title="목표 인원수" content={study.participantLimit} flexDirection="column" />
-              </InfoFields>
-              <Applicants>
-                {applicants.map((applicant) => (
-                  <ApplicantLi key={applicant.id}>
-                    <ApplicantCard
-                      studyId={studyId}
-                      id={applicant.id}
-                      title={study.title}
-                      nickname={applicant.nickname}
-                      email={applicant.email}
-                      position={applicant.position}
-                      isOwner={user?.id === study.owner.id}
-                      reviewStatistics={applicant.reviewStatistics}
-                    />
-                  </ApplicantLi>
-                ))}
-              </Applicants>
-            </InfoSection>
-          </MainInner>
-        )}
+        {match([status, isSuccess])
+          .with(['pending', P._], () => <Loading />)
+          .with(['success', P._], () => (
+            <MainInner>
+              <ParentNav studyTitle={study.title} />
+              <InfoSection>
+                <InfoFields>
+                  <InfoField title="현재 인원수" content={study.participantCount} flexDirection="column" />
+                  <InfoField title="목표 인원수" content={study.participantLimit} flexDirection="column" />
+                </InfoFields>
+                <Applicants>
+                  {applicants.map((applicant) => (
+                    <ApplicantLi key={applicant.id}>
+                      <ApplicantCard
+                        studyId={studyId}
+                        id={applicant.id}
+                        title={study.title}
+                        nickname={applicant.nickname}
+                        email={applicant.email}
+                        position={applicant.position}
+                        isOwner={user?.id === study.owner.id}
+                        reviewStatistics={applicant.reviewStatistics}
+                      />
+                    </ApplicantLi>
+                  ))}
+                </Applicants>
+              </InfoSection>
+            </MainInner>
+          ))
+          .with(['error', true], () => (
+            <MainInner>
+              <ParentNav studyTitle={studyDetail.study.title} />
+              <InfoSection>
+                <InfoFields>
+                  <InfoField title="현재 인원수" content={studyDetail.study.participantCount} flexDirection="column" />
+                </InfoFields>
+                <PlaceHolder>
+                  <PlaceHolderTitle>아직 스터디 모집 공고를 작성하지 않았어요!</PlaceHolderTitle>
+                  <Button scheme="primary">
+                    <Link to={`/studies/${studyDetail.study.id}/recruitments/create`}>모집공고 작성하기</Link>
+                  </Button>
+                </PlaceHolder>
+              </InfoSection>
+            </MainInner>
+          ))
+          .run()}
       </Main>
       {user?.id === study?.owner.id && (
         <CloseSection>
@@ -287,4 +308,17 @@ const FooterSection = styled.div`
   padding: 0px 24px;
   justify-content: center;
   background: ${({ theme }) => theme.color.gray1};
+`;
+
+const PlaceHolder = styled.div`
+  padding: 72px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+`;
+
+const PlaceHolderTitle = styled.span`
+  color: ${({ theme }) => theme.color.black4};
+  ${({ theme }) => theme.typo.ListLabel};
 `;
