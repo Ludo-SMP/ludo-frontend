@@ -11,7 +11,7 @@ export const useAcceptApplyMutation = (studyId: number, applicantId: number, suc
     mutationKey: [...STUDY.APPLY_ACCEPT(studyId, applicantId)],
     mutationFn: () => acceptApply(studyId, applicantId),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [STUDY.APPLICNATS(studyId)] });
+      queryClient.invalidateQueries({ queryKey: [...STUDY.APPLICNATS(studyId)] });
       successHandler();
       openModal();
     },
