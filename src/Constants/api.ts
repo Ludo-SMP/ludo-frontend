@@ -20,7 +20,8 @@ export const API_END_POINT = {
   POPULAR_RECRUITMENTS: `${API_PREFIX}/recruitments/popular`,
   RECRUITMENT: (recruitmentId: number) => `${API_PREFIX}/recruitments/${recruitmentId}`,
   CREATE_RECRUITMENT: (studyId: number) => `${API_PREFIX}/studies/${studyId}/recruitments`,
-  EDIT_RECRUITMENT: (studyId: number) => `${API_PREFIX}/studies/${studyId}/recruitments`,
+  EDIT_RECRUITMENT: (studyId: number, recruitmentId: number) =>
+    `${API_PREFIX}/studies/${studyId}/recruitments/${recruitmentId}`,
   DELETE_RECRUITMENT: (studyId: number) => `${API_PREFIX}/studies/${studyId}/recruitments`,
   CLOSE_RECRUITMENT: (studyId: number) => `${API_PREFIX}/studies/${studyId}`,
 

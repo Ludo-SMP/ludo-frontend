@@ -33,11 +33,12 @@ export const createRecruitment = (
   body: RecruitmentForm,
 ): Promise<{ data: { data: RecruitmentDetail } }> => httpClient.post(API_END_POINT.CREATE_RECRUITMENT(studyId), body);
 
-// TODO: 모집공고 수정 - 추후 data type 변경, location 헤더만 내리는 방식으로 개선 예정
 export const editRecruitment = (
   studyId: number,
+  recruitmentId: number,
   body: RecruitmentForm,
-): Promise<{ data: { data: RecruitmentDetail } }> => httpClient.put(API_END_POINT.EDIT_RECRUITMENT(studyId), body);
+): Promise<{ data: { data: RecruitmentDetail } }> =>
+  httpClient.put(API_END_POINT.EDIT_RECRUITMENT(studyId, recruitmentId), body);
 
 // 모집공고 조회
 export const getRecruitmentDetail = (recruitmentId: number): Promise<{ data: { data: RecruitmentDetail } }> =>

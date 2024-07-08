@@ -13,7 +13,7 @@ export const EditRecruitmentPage = () => {
 
   const { data: recruitmentDetail, isLoading } = useRecruitmentDetail(recruitmentId);
 
-  const { mutate } = useEditRecruitmentMutation(studyId);
+  const { mutate } = useEditRecruitmentMutation(studyId, recruitmentId);
 
   const recruitment = recruitmentDetail?.recruitment;
 
