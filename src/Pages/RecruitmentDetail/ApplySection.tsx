@@ -12,7 +12,7 @@ import { ApplyTryStatus, RecruitmentDetail } from '@/Types/study';
 import { useLoginStore } from '@/store/auth';
 import { useModalStore } from '@/store/modal';
 import styled from 'styled-components';
-import { getPeriod } from '@/utils/date';
+import { getDayById, getPeriod } from '@/utils/date';
 import { media } from '@/Styles/theme';
 
 export interface ApplySectionProps {
@@ -39,7 +39,7 @@ const ApplySection = ({ isMine, recruitment, study }: ApplySectionProps) => {
         platform={study.platform}
         period={getPeriod(study.startDateTime, study.endDateTime)}
         category={study.category?.name}
-        // TODO: 진행요일 추가
+        day={getDayById(study.attendanceDay ?? [])}
       />
       {isMine ? (
         <ButtonBox>
