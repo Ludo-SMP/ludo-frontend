@@ -47,7 +47,7 @@ export const LH_MONITORING_PAGE_NAMES = [
   '스터디 생성',
   '스터디 지원자 확인',
   '스터디원 리뷰',
-] as const;
+];
 
 export const LH_MONITORING_PAGE_ROUTES: Record<(typeof LH_MONITORING_PAGE_NAMES)[number], string> = {
   메인: PAGE_ROUTES.MAIN,
