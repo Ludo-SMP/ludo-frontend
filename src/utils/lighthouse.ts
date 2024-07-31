@@ -31,7 +31,7 @@ const PAGE_ROUTES = {
     APPLICANTS: '/studies/:studyId/applicants',
     REVIEW: '/studies/:studyId/:userId/review',
   },
-} as const;
+};
 
 export const LH_MONITORING_PAGE_NAMES = [
   '메인',
