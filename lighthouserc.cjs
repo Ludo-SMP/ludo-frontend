@@ -1,4 +1,4 @@
-import { getLighthouseMonitoringPageUrls } from './src/utils/lighthouse';
+const { getLighthouseMonitoringPageUrls } = require('./src/utils/lighthouse');
 
 const urls = getLighthouseMonitoringPageUrls();
 

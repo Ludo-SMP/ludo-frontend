@@ -20,5 +20,6 @@ module.exports = {
     'react/jsx-key': 'off',
     // 디버그 허용
     'no-debugger': 'off',
+    '@typescript-eslint/no-var-requires': 'off',
   },
 };
