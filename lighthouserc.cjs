@@ -1,4 +1,4 @@
-const { getLighthouseMonitoringPageUrls } = require('./src/utils/lighthouse');
+const { getLighthouseMonitoringPageUrls } = require('./src/utils/lighthouse.js');
 
 const urls = getLighthouseMonitoringPageUrls();
 
