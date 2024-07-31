@@ -1,0 +1,36 @@
+name: Run lighthouse CI When Push on PR to dev branch
+on: 
+  pull_request:
+    branches:
+      - dev
+    types: [opened, edited, synchronize, reopened]
+
+permissions:
+    contents: read
+    pull-requests: write 
+jobs:
+  lhci:
+    name: Lighthouse CI
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+      - uses: actions/checkout@v4
+      - name: Use Node.js 20.10.0
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.10.0
+
+      - name: Install dependencies
+        run: |
+          yarn install --immutable --immutable-cache --check-cache
+
+      - name: Build
+        run: |
+          yarn build
+
+      - name: Run Lighthouse CI
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+        run: |
+          yarn global add @lhci/cli
+          lhci autorun || echo "Fail to Run Lighthouse CI!"'
