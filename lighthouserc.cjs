@@ -65,11 +65,7 @@ const LH_MONITORING_PAGE_ROUTES = {
   '스터디원 리뷰': PAGE_ROUTES.STUDY.REVIEW,
 };
 
-const getLighthouseMonitoringPageUrls = LH_MONITORING_PAGE_NAMES.map(
-  (pageName) => `${DEV_ORIGIN_URL}${LH_MONITORING_PAGE_ROUTES[pageName]}`,
-);
-
-const urls = getLighthouseMonitoringPageUrls();
+const urls = LH_MONITORING_PAGE_NAMES.map((pageName) => `${DEV_ORIGIN_URL}${LH_MONITORING_PAGE_ROUTES[pageName]}`);
 
 module.exports = {
   ci: {
