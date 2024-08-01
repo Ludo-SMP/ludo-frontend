@@ -24,6 +24,9 @@ jobs:
       - name: Install dependencies
         run: |
           yarn install --immutable --immutable-cache --check-cache
+
+      - name: Add host "local.ludo.study"
+        run: sudo echo "127.0.0.1 local.ludo.study" | sudo tee -a /etc/hosts
       
       - name: Install mkcert and set up certificates
         run: |
