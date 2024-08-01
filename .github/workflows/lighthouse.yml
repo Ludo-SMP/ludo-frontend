@@ -24,6 +24,31 @@ jobs:
       - name: Install dependencies
         run: |
           yarn install --immutable --immutable-cache --check-cache
+      
+      - name: Install mkcert and set up certificates
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libnss3-tools
+          curl -JLO https://github.com/FiloSottile/mkcert/releases/download/v1.4.4/mkcert-v1.4.4-linux-amd64
+          chmod +x mkcert-v1.4.4-linux-amd64
+          sudo mv mkcert-v1.4.4-linux-amd64 /usr/local/bin/mkcert
+          mkcert -install
+          mkcert local.ludo.study
+
+      - name: Build the project
+        run: |
+          yarn build
+
+      - name: Start server
+        run: |
+          # Export environment variables for mkcert
+          export SSL_CRT_FILE=cert/local.ludo.study.pem
+          export SSL_KEY_FILE=cert/local.ludo.study-key.pem
+          export HOST=0.0.0.0
+          export HTTPS=true
+          
+          # Start the server using the existing start:mac command
+          yarn start:mac
 
       - name: Build
         run: |
