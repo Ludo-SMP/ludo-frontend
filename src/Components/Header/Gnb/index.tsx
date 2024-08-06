@@ -31,16 +31,18 @@ const Gnb = () => {
 const GnbWrapper = styled.div`
   display: flex;
   align-items: center;
+  width: 100%;
   padding: 8px 0;
   background: ${(props) => props.theme.color.white2};
   gap: 12px;
 
-  ${media.custom(800)} {
+  ${media.custom(500)} {
     display: none;
   }
 `;
 
 const GnbMenuListWrapper = styled.div`
   display: flex;
+  width: 100%;
 `;
 export default Gnb;
