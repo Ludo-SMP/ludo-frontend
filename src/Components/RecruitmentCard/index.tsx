@@ -225,5 +225,6 @@ const StackCountText = styled.span`
   font-weight: 500;
   line-height: 40px;
   color: ${(props) => props.theme.color.black2};
+  padding-left: 0.5rem;
 `;
 export default RecruitmentCard;
