@@ -65,7 +65,7 @@ const StudyButtonSectionWrapper = styled.div`
     }
   }
 
-  ${media.custom(920)} {
+  ${media.custom(800)} {
     display: none;
   }
 `;

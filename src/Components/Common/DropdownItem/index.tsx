@@ -14,7 +14,7 @@ const DropDownItemWrapper = styled.div`
   gap: 10px;
   width: 184px;
   height: 40px;
-  padding: 8px 8px 8px 16px;
+  padding: 12px 8px 12px 16px;
   justify-content: flex-start;
   align-items: center;
   background: ${({ theme }) => theme.color.white};

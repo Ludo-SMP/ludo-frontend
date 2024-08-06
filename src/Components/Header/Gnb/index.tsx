@@ -9,7 +9,7 @@ export interface GnbMenuType {
   page: string;
 }
 
-const gnbMenus: GnbMenuType[] = [
+export const gnbMenus: GnbMenuType[] = [
   { name: '메인 페이지', page: ROUTES.MAIN },
   { name: '스터디 모집 공고 모아보기', page: ROUTES.RECRUITMENT.RECRUITMENTS },
   { name: '마이페이지', page: ROUTES.MYPAGE.HOME },
