@@ -8,6 +8,7 @@ import { PROGRESS_METHOD } from '@/Shared/study';
 import Image from '../Common/Image';
 import { Views } from '@/Assets';
 import { media, textEllipsis } from '@/Styles/theme';
+import { VISIBLE_STACK_COUNT } from '@/Constants/common';
 
 /** 스터디 모집 공고 */
 const RecruitmentCard = (recruitment: Recruitment) => {
@@ -53,7 +54,9 @@ const RecruitmentCard = (recruitment: Recruitment) => {
             ) : (
               <Image size={32} />
             )}
-            {recruitment.stacks.length > 5 && <StackCountText> 외 {recruitment.stacks.length - 5}개</StackCountText>}
+            {recruitment.stacks.length > VISIBLE_STACK_COUNT && (
+              <StackCountText> 외 {recruitment.stacks.length - 5}개</StackCountText>
+            )}
           </div>
         </StudyDetailInfoWrapper>
         <StudyAdditionalInfoWrapper>
