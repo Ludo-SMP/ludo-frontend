@@ -15,7 +15,7 @@ export const Sidebar = () => {
       <RowDivider />
       <TabGroup name="설정">
         {/* <Tab title="프로필 설정" to={ROUTES.MYPAGE.PROFILE_SETTINGS} /> */}
-        <Tab title="알림 권한 설정" to={ROUTES.MYPAGE.NOTIFICATIONS_SETTINGS} />
+        <Tab title="알림 설정" to={ROUTES.MYPAGE.NOTIFICATIONS_SETTINGS} />
       </TabGroup>
       <RowDivider />
       <TabGroup name="알림">
