@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Hamburger } from '@/Assets';
 import GnbMenu from './GnbMenu';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '@/Constants/route';
@@ -20,11 +19,6 @@ const Gnb = () => {
   const navigate = useNavigate();
   return (
     <GnbWrapper>
-      <GnbBtnWrapper>
-        <button>
-          <Hamburger />
-        </button>
-      </GnbBtnWrapper>
       <GnbMenuListWrapper>
         {gnbMenus.map((gnbMenu: GnbMenuType) => (
           <GnbMenu name={gnbMenu.name} key={gnbMenu.name} onClick={() => navigate(gnbMenu.page)} />
@@ -44,12 +38,6 @@ const GnbWrapper = styled.div`
   ${media.custom(800)} {
     display: none;
   }
-`;
-
-const GnbBtnWrapper = styled.div`
-  display: flex-;
-  align-items: center;
-  gap: 12px;
 `;
 
 const GnbMenuListWrapper = styled.div`
