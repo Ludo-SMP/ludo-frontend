@@ -35,9 +35,13 @@ const Layout = styled.div`
   margin: 0 auto;
   padding: 40px 0 72px 0;
 
-  ${media.mobile} {
+  ${media.custom(800)} {
     display: block;
-    padding: 0;
+    padding: 24px;
+
+    nav {
+      display: none;
+    }
   }
 
   & > div:first-child {
@@ -45,14 +49,6 @@ const Layout = styled.div`
 
     ${media.mobile} {
       display: flex;
-    }
-  }
-
-  nav {
-    width: 288px;
-
-    ${({ theme }) => theme.media.mobile} {
-      display: none;
     }
   }
 `;

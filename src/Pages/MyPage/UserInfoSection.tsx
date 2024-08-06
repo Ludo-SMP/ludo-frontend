@@ -6,6 +6,7 @@ import { MyPageInfo, Trust, User } from '@/Types/study';
 import styled from 'styled-components';
 import { RightArrow } from '@/Assets/RightArrow';
 import { MemberImage } from '@/Assets';
+import { media } from '@/Styles/theme';
 
 interface UserInfoSectionProps {
   myPageInfo: MyPageInfo;
@@ -92,19 +93,28 @@ const UserInfoSectionBox = styled.section`
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;
+  ${media.custom(1100)} {
+    width: calc(100vw - 196px);
+  }
 `;
 
 const UserInfoBox = styled.div`
   display: flex;
-  padding: 32px 40px;
+  justify-content: center;
   gap: 40px;
+  padding: 32px 40px;
   border: 1px solid ${({ theme }) => theme.color.black1};
   background-color: ${({ theme }) => theme.color.white};
+  width: 100%;
+
+  ${media.custom(1100)} {
+    flex-wrap: wrap;
+  }
 `;
 
 const UserInfoRow = styled.div`
-  height: 100%;
   display: flex;
+  height: 100%;
   gap: 24px;
 
   & > div:first-child {
@@ -116,6 +126,11 @@ const UserInfoRow = styled.div`
 
   & > div:nth-child(2) {
     width: 400px;
+  }
+
+  ${media.custom(1100)} {
+    width: 100%;
+    justify-content: flex-start;
   }
 `;
 

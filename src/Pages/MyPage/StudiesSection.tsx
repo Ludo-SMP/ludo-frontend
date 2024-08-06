@@ -13,6 +13,7 @@ import styled from 'styled-components';
 import { match } from 'ts-pattern';
 import { LoginFail, SignUpFail } from '@/Assets';
 import { Link } from 'react-router-dom';
+import { media } from '@/Styles/theme';
 
 const StudiesSection = () => {
   const { data: myPageInfo } = useMyPageInfo();
@@ -121,6 +122,14 @@ const CardsWrapper = styled.div`
   flex-direction: column;
   min-height: 368px;
   gap: 24px;
+
+  ${media.custom(1100)} {
+    width: calc(100vw - 192px);
+  }
+
+  ${media.custom(800)} {
+    width: 100%;
+  }
 `;
 
 const MyStudyTitleWrapper = styled.div`

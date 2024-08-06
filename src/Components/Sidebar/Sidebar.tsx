@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Tab } from './Tab';
 import { PropsWithChildren } from 'react';
 import { ROUTES } from '@/Constants/route';
+import { RowDivider } from '../Common/Divider/RowDivider';
 
 export const Sidebar = () => {
   return (
@@ -11,10 +12,12 @@ export const Sidebar = () => {
         <Tab title="스터디원이 남긴 나의 리뷰" to={ROUTES.MYPAGE.REVIEWS} />
         <Tab title="임시 저장된 글" to={ROUTES.MYPAGE.SAVED} />
       </TabGroup>
+      <RowDivider />
       <TabGroup name="설정">
         {/* <Tab title="프로필 설정" to={ROUTES.MYPAGE.PROFILE_SETTINGS} /> */}
         <Tab title="알림 권한 설정" to={ROUTES.MYPAGE.NOTIFICATIONS_SETTINGS} />
       </TabGroup>
+      <RowDivider />
       <TabGroup name="알림">
         <Tab title="루도가 알려요" to={ROUTES.MYPAGE.NOTIFICATIONS} />
       </TabGroup>
@@ -25,8 +28,9 @@ export const Sidebar = () => {
 const Navigation = styled.nav`
   display: flex;
   flex-direction: column;
+  min-width: 172px;
   gap: 12px;
-  padding: 0 32px;
+  padding-left: 24px;
   border-radius: 12px;
   background: ${({ theme }) => theme.color.white2};
 `;
