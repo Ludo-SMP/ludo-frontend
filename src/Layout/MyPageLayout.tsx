@@ -1,7 +1,5 @@
 import { Sidebar } from '@/Components/Sidebar/Sidebar';
-import { TopBar } from '@/Components/Topbar';
 import { media } from '@/Styles/theme';
-import { getTabTitle } from '@/utils/getText';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
@@ -19,7 +17,6 @@ const MyPageLayout = ({ children }: MyPageLayoutProps) => {
 
   return (
     <Layout>
-      <TopBar>{getTabTitle(pathname)}</TopBar>
       <Sidebar />
       {children}
     </Layout>
@@ -36,8 +33,7 @@ const Layout = styled.div`
   padding: 40px 0 72px 0;
 
   ${media.custom(800)} {
-    display: block;
-    padding: 24px;
+    padding: 0 24px;
 
     nav {
       display: none;

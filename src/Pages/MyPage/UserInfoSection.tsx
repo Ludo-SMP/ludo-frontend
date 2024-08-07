@@ -85,6 +85,10 @@ const InfoItemBox = styled.div`
   gap: 12px;
   svg:last-child {
     margin-left: 24px;
+
+    ${media.custom(800)} {
+      display: none;
+    }
   }
 `;
 
@@ -93,8 +97,13 @@ const UserInfoSectionBox = styled.section`
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;
+
   ${media.custom(1100)} {
     width: calc(100vw - 196px);
+  }
+
+  ${media.custom(800)} {
+    width: 100%;
   }
 `;
 
@@ -131,6 +140,10 @@ const UserInfoRow = styled.div`
   ${media.custom(1100)} {
     width: 100%;
     justify-content: flex-start;
+  }
+
+  ${media.custom(800)} {
+    flex-direction: column;
   }
 `;
 

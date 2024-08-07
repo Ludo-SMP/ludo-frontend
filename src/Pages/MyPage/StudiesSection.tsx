@@ -25,7 +25,7 @@ const StudiesSection = () => {
   const { selectedMyStudyStatus, setSelectedMyStudyStatus } = useSelectedMyStudyStore();
 
   return (
-    <CardsWrapper>
+    <StudiesSectionBox>
       <MyStudyTitleWrapper>
         <StudyInfo width={32} height={32} />
         <span className="title">스따-디</span>
@@ -111,13 +111,13 @@ const StudiesSection = () => {
           )
           .exhaustive()}
       </StudyList>
-    </CardsWrapper>
+    </StudiesSectionBox>
   );
 };
 
 export { StudiesSection };
 
-const CardsWrapper = styled.div`
+const StudiesSectionBox = styled.section`
   display: flex;
   flex-direction: column;
   min-height: 368px;

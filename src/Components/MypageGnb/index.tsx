@@ -27,11 +27,11 @@ const MypageGnbBox = styled.div`
   display: none;
   align-items: center;
   width: 100%;
-  padding: 8px 0;
   background: ${(props) => props.theme.color.white2};
   gap: 12px;
   border-top: 1px solid #e5e6e8;
   border-bottom: 1px solid #e5e6e8;
+
   ${media.custom(800)} {
     display: flex;
   }
@@ -39,18 +39,17 @@ const MypageGnbBox = styled.div`
 
 const GnbMenu = styled.button`
   display: flex;
-  height: 56px;
+  height: 48px;
   width: 288px;
-  padding: 4px 12px;
+  padding: 16px 12px;
   justify-content: center;
   text-align: center;
   align-items: center;
   flex-shrink: 0;
-  color: ${(props) => props.theme.color.black3};
   background-color: ${(props) => props.theme.color.white2};
-  color: var(--Font-text-default, rgba(0, 0, 0, 0.65));
+  color: ${({ theme }) => theme.color.black3};
   font-family: 'Pretendard600';
-  font-size: calc((${(props) => props.theme.font.small} + ${(props) => props.theme.font.medium}) / 2);
+  font-size: 16px;
   font-style: normal;
   font-weight: 600;
   line-height: 30px;
