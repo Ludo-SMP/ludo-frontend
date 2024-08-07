@@ -16,25 +16,26 @@ export const ProfileSection = ({ nickname, email }: ProfileSectionProps) => {
     <Box>
       <ProfileBox>
         <Profile width={160} height={160} email={email} />
-        <SettingButton nickname="nickname" />
+        <NameBox>
+          <Nickname>{nickname}</Nickname>
+          <Email>{email}</Email>
+        </NameBox>
       </ProfileBox>
-      <NameBox>
-        <Nickname>{nickname}</Nickname>
-        <Email>{email}</Email>
-      </NameBox>
+      <SettingButton nickname="nickname" />
     </Box>
   );
 };
 
 const Box = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
+  align-items: flex-start;
 `;
 
 const ProfileBox = styled.div`
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
 `;
 
 const NameBox = styled.div`
