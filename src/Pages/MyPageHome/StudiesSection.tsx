@@ -220,5 +220,5 @@ const ChipMenusWrapper = styled.div`
   align-items: flex-start;
   gap: 12px;
   align-self: stretch;
-  overflow-x: hidden;
+  overflow-x: scroll;
 `;
