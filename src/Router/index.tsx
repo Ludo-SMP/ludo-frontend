@@ -12,7 +12,7 @@ import ModifyStudyPage from '@/Pages/Studies/EditStudy';
 import CreateRecruitmentPage from '@/Pages/CreateRecruitment';
 import LoginFailPage from '@/Pages/LoginFail';
 import SignUpFailPage from '@/Pages/SignUpFail';
-import MyPage from '@/Pages/MyPage/index';
+import MyPageHome from '@/Pages/MyPageHome/index';
 import { Saved } from '@/Pages/Saved';
 
 import Header from '@/Components/Header';
@@ -64,7 +64,7 @@ export const RouterPath = createBrowserRouter([
           {
             // 회원 정보
             index: true,
-            element: <MyPage />,
+            element: <MyPageHome />,
           },
           {
             // 스터디원이 남긴 나의 리뷰

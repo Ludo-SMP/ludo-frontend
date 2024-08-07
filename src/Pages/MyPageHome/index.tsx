@@ -9,7 +9,7 @@ import { media } from '@/Styles/theme';
 import { MypageGnb } from '@/Components/MypageGnb';
 import { MypageGnbMenu } from '@/Components/MypageGnb';
 
-const MyPage = () => {
+const MyPageHome = () => {
   const { data: myPageInfo, isLoading } = useMyPageInfo();
   const { pathname } = useLocation();
 
@@ -21,7 +21,7 @@ const MyPage = () => {
   }, [pathname]);
 
   return (
-    <MyPageLayout $selectedMenu={selectedMenu}>
+    <MyPageHomeLayout $selectedMenu={selectedMenu}>
       {isLoading ? (
         <Loading />
       ) : (
@@ -31,11 +31,11 @@ const MyPage = () => {
           <StudiesSection />
         </>
       )}
-    </MyPageLayout>
+    </MyPageHomeLayout>
   );
 };
 
-const MyPageLayout = styled.div<{ $selectedMenu: MypageGnbMenu }>`
+const MyPageHomeLayout = styled.div<{ $selectedMenu: MypageGnbMenu }>`
   display: flex;
   flex-direction: column;
   max-width: 912px;
@@ -85,4 +85,4 @@ const MyPageLayout = styled.div<{ $selectedMenu: MypageGnbMenu }>`
   }
 `;
 
-export default MyPage;
+export default MyPageHome;
