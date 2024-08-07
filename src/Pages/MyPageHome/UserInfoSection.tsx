@@ -134,7 +134,7 @@ const UserInfoRow = styled.div`
   }
 
   & > div:nth-child(2) {
-    width: 400px;
+    width: 60%;
   }
 
   ${media.custom(1100)} {
@@ -144,6 +144,9 @@ const UserInfoRow = styled.div`
 
   ${media.custom(800)} {
     flex-direction: column;
+    & > div:nth-child(2) {
+      width: 100%;
+    }
   }
 `;
 
