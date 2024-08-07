@@ -38,7 +38,7 @@ export const getTabTitle = (pathName: string) => {
   let tabTitle = '';
   switch (pathName) {
     case ROUTES.MYPAGE.NOTIFICATIONS:
-      tabTitle = '알림';
+      tabTitle = '루도가 알려요';
       break;
     case ROUTES.MYPAGE.REVIEWS:
       tabTitle = '스터디원 상호 평가';
@@ -50,7 +50,7 @@ export const getTabTitle = (pathName: string) => {
       tabTitle = '프로필 설정';
       break;
     case ROUTES.MYPAGE.NOTIFICATIONS_SETTINGS:
-      tabTitle = '알림 권한 설정';
+      tabTitle = '알림 설정';
       break;
     default:
       tabTitle = '회원 정보';

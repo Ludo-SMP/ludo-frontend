@@ -95,6 +95,12 @@ const NavBtnList = styled.div`
   align-items: flex-start;
   gap: 12px;
   align-self: stretch;
+
+  ${media.mobile} {
+    button {
+      padding: 0;
+    }
+  }
 `;
 
 const ServiceIntroBox = styled.div`

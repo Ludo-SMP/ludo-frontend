@@ -25,8 +25,10 @@ const Bar = styled.div<{ $ratio: number }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px ${({ theme }) => theme.color.black2} solid;
+  border: 1px ${({ theme }) => theme.color.gray2} solid;
   border-radius: 9999px;
+  width: 100%;
+  max-width: 400px;
   background-image: linear-gradient(
     to right,
     ${({ theme, $ratio }) => `${theme.color.purple1} ${$ratio}%, ${theme.color.gray1} ${$ratio}%`}

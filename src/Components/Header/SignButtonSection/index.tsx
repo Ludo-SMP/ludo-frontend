@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useLogOutMutation } from '@/Hooks/auth/useLogOutMutation';
 import { useLoginStore } from '@/store/auth';
+import { media } from '@/Styles/theme';
 
 /** 로그인, 회원가입 버튼 */
 const SignButtonSection = () => {
@@ -61,6 +62,10 @@ const SignButtonSectionWrapper = styled.div<{ $isLoggedIn: boolean }>`
       color: ${(props) => props.theme.color.purple1};
       border: 1px solid ${(props) => props.theme.color.purple5};
       background: ${(props) => props.theme.color.white};
+    }
+
+    ${media.custom(800)} {
+      display: none;
     }
   }
 

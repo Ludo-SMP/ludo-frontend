@@ -25,8 +25,8 @@ const Box = styled.div<{
   font-size: 16px;
   font-family: Pretendard600;
   font-weight: 600;
-  line-height: 16px;
-  padding: 16px;
+  line-height: 25px;
+  padding: 12px 16px;
   background: ${({ theme, $active }) => $active && theme.color.purple2};
   border-radius: 8px;
   display: flex;

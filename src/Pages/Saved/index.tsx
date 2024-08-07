@@ -9,6 +9,7 @@ import { SignUpFail, Study } from '@/Assets';
 import styled from 'styled-components';
 import { DELETE } from '@/Constants/messages';
 import { getMillisec } from '@/utils/date';
+import { media } from '@/Styles/theme';
 
 const Saved = () => {
   const { selectedCard, setSelectedCard } = useSelectedCardStore();
@@ -124,10 +125,15 @@ const CardListInner = styled.ul`
   display: flex;
   width: 100%;
   flex-direction: column;
-  flex-wrap: wrap;
-  align-items: center;
-  align-content: center;
   gap: 12px;
+
+  ${media.custom(600)} {
+    align-items: center;
+  }
+
+  ${media.custom(350)} {
+    align-items: flex-start;
+  }
 `;
 
 const PlaceHolder = styled.div`

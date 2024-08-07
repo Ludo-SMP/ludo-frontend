@@ -149,10 +149,10 @@ const MyStudyCardWrapper = styled.div<{
     border-radius: 16px 0 0 16px;
   }
 
-  ${media.mobile} {
+  ${media.custom(600)} {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     align-self: stretch;
     width: 302px;
     height: auto;
@@ -177,9 +177,10 @@ const StudyInfoWrapper = styled.div<{
   padding: 24px 32px;
   flex-direction: column;
   align-items: flex-start;
+  gap: 8px;
   flex: 1 0 0;
 
-  ${media.mobile} {
+  ${media.custom(600)} {
     display: flex;
     width: 100%;
     padding: 16px 24px;
@@ -235,7 +236,7 @@ const StudyDetailWrapper = styled.div<{ status: StudyStatus | ApplyStatus }>`
     gap: 12px;
   }
 
-  ${media.mobile} {
+  ${media.custom(600)} {
     .study__status {
       display: flex;
       align-items: center;
@@ -252,6 +253,10 @@ const StudyDetailWrapper = styled.div<{ status: StudyStatus | ApplyStatus }>`
       & > div {
         width: 252px;
         gap: 0;
+
+        & > div {
+          width: 120px;
+        }
       }
       gap: 4px;
     }
@@ -275,7 +280,7 @@ const MyStudyCardButtonsWrapper = styled.div<{ isApplyStatus: boolean }>`
     padding: ${(props) => (props.isApplyStatus ? `0 16px` : `8px 24px`)};
   }
 
-  ${media.mobile} {
+  ${media.custom(600)} {
     justify-content: center;
   }
 `;

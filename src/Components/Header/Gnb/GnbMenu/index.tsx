@@ -26,7 +26,7 @@ const GnbMenuWrapper = styled.button`
   font-size: calc((${(props) => props.theme.font.small} + ${(props) => props.theme.font.medium}) / 2);
   font-style: normal;
   font-weight: 600;
-  line-height: 48px;
+  line-height: 30px;
 
   &:hover,
   &:active {
@@ -38,7 +38,7 @@ const GnbMenuWrapper = styled.button`
   }
 
   ${media.custom(900)} {
-    width: 250px;
+    width: calc((100% / 3))    
   }
 `;
 
