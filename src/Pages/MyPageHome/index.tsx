@@ -9,6 +9,7 @@ import { media } from '@/Styles/theme';
 import { MypageGnb } from '@/Components/MypageGnb';
 import { MypageGnbMenu } from '@/Components/MypageGnb';
 import { Sidebar } from '@/Components/Sidebar/Sidebar';
+import { RowDivider } from '@/Components/Common/Divider/RowDivider';
 
 const MyPageHome = () => {
   const { data: myPageInfo, isLoading } = useMyPageInfo();
@@ -29,6 +30,7 @@ const MyPageHome = () => {
           <MypageGnb handleMypageGnbMenu={setSelectedMenu} />
           <UserInfoSection myPageInfo={myPageInfo} />
           <StudiesSection />
+          <RowDivider rowHeight={12} margin={24} />
           <Sidebar />
         </>
       )}
@@ -59,8 +61,16 @@ const MyPageHomeLayout = styled.div<{ $selectedMenu: MypageGnbMenu }>`
         $selectedMenu === '회원 정보' &&
         css`
           display: flex;
-          padding: 0%;
+          padding: 0;
           background: ${({ theme }) => theme.color.white};
+        `};
+    }
+
+    & > hr {
+      ${({ $selectedMenu }) =>
+        $selectedMenu === '회원 정보' &&
+        css`
+          display: flex;
         `};
     }
 
