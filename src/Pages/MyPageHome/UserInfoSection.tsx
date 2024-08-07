@@ -7,6 +7,9 @@ import styled from 'styled-components';
 import { RightArrow } from '@/Assets/RightArrow';
 import { MemberImage } from '@/Assets';
 import { media } from '@/Styles/theme';
+import Button from '@/Components/Common/Button';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '@/Constants/route';
 
 interface UserInfoSectionProps {
   myPageInfo: MyPageInfo;
@@ -15,6 +18,7 @@ interface UserInfoSectionProps {
 const UserInfoSection = ({ myPageInfo }: UserInfoSectionProps) => {
   const user: User = myPageInfo?.user;
   const trust: Trust = myPageInfo?.trust;
+  const navigate = useNavigate();
 
   return (
     <UserInfoSectionBox>
@@ -52,13 +56,18 @@ const UserInfoSection = ({ myPageInfo }: UserInfoSectionProps) => {
               함께했던 팀원들이
               <br />
               이렇게 얘기했어요 :)
+              <Button scheme="text" onClick={() => navigate(ROUTES.MYPAGE.REVIEWS)}>
+                <RightArrow />
+              </Button>
             </InfoItem>
             <InfoItem>
               <InfoItemBox>
                 <CircularRate percentage={trust?.activeness || 0} label="적극성" />
                 <CircularRate percentage={trust?.professionalism || 0} label="전문성" />
                 <CircularRate percentage={trust?.communication || 0} label="소통력" />
-                <RightArrow />
+                <Button scheme="text" onClick={() => navigate(ROUTES.MYPAGE.REVIEWS)}>
+                  <RightArrow />
+                </Button>
               </InfoItemBox>
               {trust?.together >= 80 && (
                 <InfoDesc>
@@ -79,18 +88,6 @@ const UserInfoSection = ({ myPageInfo }: UserInfoSectionProps) => {
 };
 
 export { UserInfoSection };
-
-const InfoItemBox = styled.div`
-  display: flex;
-  gap: 12px;
-  svg:last-child {
-    margin-left: 24px;
-
-    ${media.custom(800)} {
-      display: none;
-    }
-  }
-`;
 
 const UserInfoSectionBox = styled.section`
   display: flex;
@@ -121,12 +118,19 @@ const UserInfoBox = styled.div`
   }
 `;
 
+const UserInfoRows = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+
 const UserInfoRow = styled.div`
   display: flex;
   height: 100%;
   gap: 24px;
 
   & > div:first-child {
+    display: flex;
     width: 160px;
     font-family: 'Pretendard600';
     font-weight: 600;
@@ -144,21 +148,54 @@ const UserInfoRow = styled.div`
 
   ${media.custom(800)} {
     flex-direction: column;
+
+    & > div:first-child {
+      width: 270px;
+      justify-content: space-between;
+      font-family: 'Pretendard600';
+      font-weight: 600;
+      line-height: 32px;
+    }
+
     & > div:nth-child(2) {
+      width: 100%;
+    }
+  }
+
+  ${media.custom(500)} {
+    & > div:first-child {
       width: 100%;
     }
   }
 `;
 
-const UserInfoRows = styled.div`
+const InfoItemBox = styled.div`
   display: flex;
-  flex-direction: column;
-  width: 100%;
+  gap: 12px;
+
+  ${media.custom(800)} {
+    & > button {
+      display: none;
+    }
+  }
 `;
 
 const InfoItem = styled.div`
   & > div:first-child {
     margin-bottom: 16px;
+  }
+
+  button {
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+  }
+
+  & > button {
+    display: none;
+    ${media.custom(800)} {
+      display: flex;
+    }
   }
 `;
 
