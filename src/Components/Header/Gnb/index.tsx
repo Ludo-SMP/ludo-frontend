@@ -33,6 +33,7 @@ const GnbWrapper = styled.div`
   align-items: center;
   width: 100%;
   padding: 8px 0;
+  white-space: nowrap;
   background: ${(props) => props.theme.color.white2};
   gap: 12px;
 
