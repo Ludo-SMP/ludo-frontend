@@ -14,7 +14,6 @@ import LoginFailPage from '@/Pages/LoginFail';
 import SignUpFailPage from '@/Pages/SignUpFail';
 import MyPageHome from '@/Pages/MyPageHome/index';
 import { Saved } from '@/Pages/Saved';
-
 import Header from '@/Components/Header';
 import Footer from '@/Components/Footer';
 import ErrorBoundary from '@/Components/ErrorBoundary';

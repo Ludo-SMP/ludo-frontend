@@ -35,7 +35,7 @@ const Layout = styled.div`
   ${media.custom(800)} {
     padding: 0 24px;
 
-    nav {
+    & > nav:first-child {
       display: none;
     }
   }

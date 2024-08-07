@@ -8,13 +8,13 @@ import { StudiesSection } from './StudiesSection';
 import { media } from '@/Styles/theme';
 import { MypageGnb } from '@/Components/MypageGnb';
 import { MypageGnbMenu } from '@/Components/MypageGnb';
+import { Sidebar } from '@/Components/Sidebar/Sidebar';
 
 const MyPageHome = () => {
   const { data: myPageInfo, isLoading } = useMyPageInfo();
   const { pathname } = useLocation();
 
   const [selectedMenu, setSelectedMenu] = useState<MypageGnbMenu>('회원 정보');
-  console.log(selectedMenu);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -29,6 +29,7 @@ const MyPageHome = () => {
           <MypageGnb handleMypageGnbMenu={setSelectedMenu} />
           <UserInfoSection myPageInfo={myPageInfo} />
           <StudiesSection />
+          <Sidebar />
         </>
       )}
     </MyPageHomeLayout>
@@ -42,13 +43,25 @@ const MyPageHomeLayout = styled.div<{ $selectedMenu: MypageGnbMenu }>`
   width: 100%;
   gap: 32px;
 
-  & > div:first-child {
+  & > div:first-child,
+  & > div:last-child,
+  & > nav {
     display: none;
   }
 
   ${media.custom(800)} {
     & > div:first-child {
       display: flex;
+    }
+
+    & > nav {
+      ${({ $selectedMenu }) =>
+        $selectedMenu === '회원 정보' &&
+        css`
+          display: flex;
+          padding: 0%;
+          background: ${({ theme }) => theme.color.white};
+        `};
     }
 
     & > section:nth-child(2) {

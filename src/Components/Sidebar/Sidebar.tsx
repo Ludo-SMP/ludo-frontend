@@ -54,7 +54,7 @@ const TabGroupInnerText = styled.div`
   align-self: stretch;
   color: ${({ theme }) => theme.color.black2};
   font-size: 18px;
-  font-family: Pretendard500;
+  font-family: 'Pretendard500';
   font-weight: 500;
   line-height: 32px;
 `;
