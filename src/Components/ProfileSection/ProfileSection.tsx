@@ -1,6 +1,7 @@
 import { Profile } from '@/Assets/Profile';
 import styled from 'styled-components';
 import { SettingButton } from './SettingButton';
+import { media } from '@/Styles/theme';
 
 export interface ProfileSectionProps {
   /** 사용자 이름 */
@@ -36,6 +37,10 @@ const ProfileBox = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 16px;
+
+  ${media.custom(1100)} {
+    padding-left: 30px;
+  }
 `;
 
 const NameBox = styled.div`
