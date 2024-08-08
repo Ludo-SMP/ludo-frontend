@@ -72,7 +72,7 @@ module.exports = {
     collect: {
       startServerCommand: 'yarn start:mac',
       url: urls,
-      numberOfRuns: 5,
+      numberOfRuns: 1,
     },
 
     upload: {
