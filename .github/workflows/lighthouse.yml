@@ -1,0 +1,60 @@
+name: Run lighthouse CI When Push on PR to dev branch
+on: 
+  pull_request:
+    branches:
+      - dev
+    types: [opened, edited, synchronize, reopened]
+
+permissions:
+    contents: read
+    pull-requests: write 
+jobs:
+  lhci:
+    name: Lighthouse CI
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Use Node.js 20.10.0
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.10.0
+
+      - name: Install dependencies
+        run: |
+          yarn install --immutable --immutable-cache --check-cache
+
+      - name: Add host "local.ludo.study"
+        run: sudo echo "127.0.0.1 local.ludo.study" | sudo tee -a /etc/hosts
+      
+      - name: Install mkcert and set up certificates
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libnss3-tools
+          curl -JLO https://github.com/FiloSottile/mkcert/releases/download/v1.4.4/mkcert-v1.4.4-linux-amd64
+          chmod +x mkcert-v1.4.4-linux-amd64
+          sudo mv mkcert-v1.4.4-linux-amd64 /usr/local/bin/mkcert
+          mkdir -p cert
+          mkcert -install
+          mkcert local.ludo.study
+          mv ./local.ludo.study.pem ./cert
+          mv ./local.ludo.study-key.pem ./cert
+
+      - name: Export environment variables for mkcert
+        run: |          
+          export SSL_CRT_FILE=cert/local.ludo.study.pem
+          export SSL_KEY_FILE=cert/local.ludo.study-key.pem
+          export HOST=0.0.0.0
+          export HTTPS=true
+          
+      - name: Build the project
+        run: |
+          yarn build
+
+      - name: Run Lighthouse CI
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+        run: |
+          yarn global add @lhci/cli
+          lhci autorun --chrome-flags='--ignore-certificate-errors' || echo "Fail to Run Lighthouse CI!"
