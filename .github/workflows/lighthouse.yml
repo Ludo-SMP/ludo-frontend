@@ -37,7 +37,9 @@ jobs:
           sudo mv mkcert-v1.4.4-linux-amd64 /usr/local/bin/mkcert
           mkcert -install
           mkcert local.ludo.study
-
+          mv ./local.ludo.study.pem ./cert
+          mv ./local.ludo.study-key.pem ./cert
+          
       - name: Build the project
         run: |
           yarn build
