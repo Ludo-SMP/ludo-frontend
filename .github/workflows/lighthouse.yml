@@ -35,10 +35,18 @@ jobs:
           curl -JLO https://github.com/FiloSottile/mkcert/releases/download/v1.4.4/mkcert-v1.4.4-linux-amd64
           chmod +x mkcert-v1.4.4-linux-amd64
           sudo mv mkcert-v1.4.4-linux-amd64 /usr/local/bin/mkcert
+          mkcert -p cert
           mkcert -install
           mkcert local.ludo.study
           mv ./local.ludo.study.pem ./cert
           mv ./local.ludo.study-key.pem ./cert
+
+      - name: Export environment variables for mkcert
+        run: |          
+          export SSL_CRT_FILE=cert/local.ludo.study.pem
+          export SSL_KEY_FILE=cert/local.ludo.study-key.pem
+          export HOST=0.0.0.0
+          export HTTPS=true
           
       - name: Build the project
         run: |
