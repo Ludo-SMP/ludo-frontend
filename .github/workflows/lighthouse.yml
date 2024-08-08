@@ -44,21 +44,6 @@ jobs:
         run: |
           yarn build
 
-      - name: Start server
-        run: |
-          # Export environment variables for mkcert
-          export SSL_CRT_FILE=cert/local.ludo.study.pem
-          export SSL_KEY_FILE=cert/local.ludo.study-key.pem
-          export HOST=0.0.0.0
-          export HTTPS=true
-          
-          # Start the server using the existing start:mac command
-          yarn start:mac
-
-      - name: Build
-        run: |
-          yarn build
-
       - name: Run Lighthouse CI
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
