@@ -8,6 +8,7 @@ import { PROGRESS_METHOD } from '@/Shared/study';
 import Image from '../Common/Image';
 import { Views } from '@/Assets';
 import { media, textEllipsis } from '@/Styles/theme';
+import { VISIBLE_STACK_COUNT } from '@/Constants/common';
 
 /** 스터디 모집 공고 */
 const RecruitmentCard = (recruitment: Recruitment) => {
@@ -44,11 +45,17 @@ const RecruitmentCard = (recruitment: Recruitment) => {
           </div>
           <div className="study__stacks">
             {recruitment.stacks.length !== 0 ? (
-              recruitment.stacks.map((stack: Stack) => (
-                <Image key={stack.id} size={32} src={`${import.meta.env.VITE_BASE_API_URL}${stack.imageUrl}`} />
-              ))
+              recruitment.stacks.map(
+                (stack: Stack, idx) =>
+                  idx < 5 && (
+                    <Image key={stack.id} size={32} src={`${import.meta.env.VITE_BASE_API_URL}${stack.imageUrl}`} />
+                  ),
+              )
             ) : (
               <Image size={32} />
+            )}
+            {recruitment.stacks.length > VISIBLE_STACK_COUNT && (
+              <StackCountText> 외 {recruitment.stacks.length - 5}개</StackCountText>
             )}
           </div>
         </StudyDetailInfoWrapper>
@@ -213,4 +220,11 @@ const StudyAdditionalInfoWrapper = styled.div`
   }
 `;
 
+const StackCountText = styled.span`
+  font-size: ${(props) => props.theme.font.small};
+  font-weight: 500;
+  line-height: 40px;
+  color: ${(props) => props.theme.color.black2};
+  padding-left: 0.5rem;
+`;
 export default RecruitmentCard;
