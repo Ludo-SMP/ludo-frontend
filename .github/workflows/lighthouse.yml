@@ -38,23 +38,28 @@ jobs:
           mkdir -p cert
           mkcert -install
           mkcert local.ludo.study
-          mv ./local.ludo.study.pem ./cert
-          mv ./local.ludo.study-key.pem ./cert
+          mv ./local.ludo.study.pem cert/
+          mv ./local.ludo.study-key.pem ./cert/
+          # Add mkcert CA to the system trust store
+          sudo cp $(mkcert -CAROOT)/rootCA.pem /usr/local/share/ca-certificates/mkcert-rootCA.crt
+          sudo update-ca-certificates
 
-      - name: Export environment variables for mkcert
-        run: |          
-          export SSL_CRT_FILE=cert/local.ludo.study.pem
-          export SSL_KEY_FILE=cert/local.ludo.study-key.pem
-          export HOST=0.0.0.0
-          export HTTPS=true
-          
+      - name: Verify CA installation
+        run: |
+            ls /usr/local/share/ca-certificates/
+            openssl x509 -in /usr/local/share/ca-certificates/mkcert-rootCA.crt -text -noout
+        
       - name: Build the project
         run: |
           yarn build
 
       - name: Run Lighthouse CI
         env:
+          HOST: local.ludo.study
+          HTTPS: true
+          SSL_CRT_FILE: cert/local.ludo.study.pem
+          SSL_KEY_FILE: cert/local.ludo.study-key.pem
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
         run: |
           yarn global add @lhci/cli
-          lhci autorun --chrome-flags='--ignore-certificate-errors' || echo "Fail to Run Lighthouse CI!"
+          lhci autorun || echo "Fail to Run Lighthouse CI!"
