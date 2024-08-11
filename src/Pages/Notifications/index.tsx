@@ -76,10 +76,6 @@ const NotificationTypeChipsBox = styled.div`
   width: 100%;
   gap: 12px;
   overflow: scroll;
-
-  ${media.mobile} {
-    padding-top: 24px;
-  }
 `;
 
 const NotificationList = styled.ul`

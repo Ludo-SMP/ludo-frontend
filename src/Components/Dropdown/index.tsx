@@ -5,9 +5,10 @@ interface DropdownProps {
   children: React.ReactNode;
   image: React.ReactNode;
   isOpened?: boolean;
+  itemsPosition?: 'LEFT' | 'RIGHT';
 }
 
-const Dropdown = ({ children, image, isOpened = false }: DropdownProps) => {
+const Dropdown = ({ children, image, isOpened = false, itemsPosition = 'LEFT' }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(isOpened);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -26,7 +27,7 @@ const Dropdown = ({ children, image, isOpened = false }: DropdownProps) => {
   }, [dropdownRef]);
 
   return (
-    <DropdownWrapper ref={dropdownRef}>
+    <DropdownBox ref={dropdownRef} $position={itemsPosition}>
       <div className="toggle" onClick={() => setIsOpen(!isOpen)}>
         {image}
       </div>
@@ -35,11 +36,11 @@ const Dropdown = ({ children, image, isOpened = false }: DropdownProps) => {
           {children}
         </div>
       )}
-    </DropdownWrapper>
+    </DropdownBox>
   );
 };
 
-const DropdownWrapper = styled.div`
+const DropdownBox = styled.div<{ $position: 'LEFT' | 'RIGHT' }>`
   border: none;
   box-shadow: none;
   position: relative;
@@ -61,13 +62,15 @@ const DropdownWrapper = styled.div`
     display: flex;
     flex-direction: column;
     padding: 8px 0;
+    background: ${({ theme }) => theme.color.white};
     border: 1px solid ${({ theme }) => theme.color.gray1};
     border-radius: ${({ theme }) => theme.borderRadius.small};
     box-shadow: none;
     position: absolute;
     white-space: nowrap;
     top: 50px;
-    right: 0;
+    right: ${({ $position }) => $position === 'LEFT' && 0};
+    left: ${({ $position }) => $position === 'RIGHT' && 0};
     z-index: 100;
   }
 `;

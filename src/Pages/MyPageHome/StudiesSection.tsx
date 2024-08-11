@@ -13,6 +13,7 @@ import styled from 'styled-components';
 import { match } from 'ts-pattern';
 import { LoginFail, SignUpFail } from '@/Assets';
 import { Link } from 'react-router-dom';
+import { media } from '@/Styles/theme';
 
 const StudiesSection = () => {
   const { data: myPageInfo } = useMyPageInfo();
@@ -24,7 +25,7 @@ const StudiesSection = () => {
   const { selectedMyStudyStatus, setSelectedMyStudyStatus } = useSelectedMyStudyStore();
 
   return (
-    <CardsWrapper>
+    <StudiesSectionBox>
       <MyStudyTitleWrapper>
         <StudyInfo width={32} height={32} />
         <span className="title">스따-디</span>
@@ -110,17 +111,26 @@ const StudiesSection = () => {
           )
           .exhaustive()}
       </StudyList>
-    </CardsWrapper>
+    </StudiesSectionBox>
   );
 };
 
 export { StudiesSection };
 
-const CardsWrapper = styled.div`
+const StudiesSectionBox = styled.section`
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   min-height: 368px;
   gap: 24px;
+
+  ${media.custom(1100)} {
+    width: calc(100vw - 192px);
+  }
+
+  ${media.custom(800)} {
+    width: 100%;
+  }
 `;
 
 const MyStudyTitleWrapper = styled.div`
@@ -143,10 +153,20 @@ const StudyList = ({
 }: PropsWithChildren<{
   placeholder: ReactNode;
 }>) => (Children.toArray(children).length !== 0 ? <StudyListInner>{children}</StudyListInner> : placeholder);
+
 const StudyListInner = styled.ul`
   display: flex;
+  width: 100%;
   flex-direction: column;
   gap: 12px;
+
+  ${media.custom(600)} {
+    align-items: center;
+  }
+
+  ${media.custom(350)} {
+    align-items: flex-start;
+  }
 `;
 
 const HidableButton = styled(Button)<{
@@ -200,5 +220,5 @@ const ChipMenusWrapper = styled.div`
   align-items: flex-start;
   gap: 12px;
   align-self: stretch;
-  overflow-x: hidden;
+  overflow-x: scroll;
 `;

@@ -1,6 +1,7 @@
 import { Profile } from '@/Assets/Profile';
 import styled from 'styled-components';
 import { SettingButton } from './SettingButton';
+import { media } from '@/Styles/theme';
 
 export interface ProfileSectionProps {
   /** 사용자 이름 */
@@ -16,25 +17,30 @@ export const ProfileSection = ({ nickname, email }: ProfileSectionProps) => {
     <Box>
       <ProfileBox>
         <Profile width={160} height={160} email={email} />
-        <SettingButton nickname="nickname" />
+        <NameBox>
+          <Nickname>{nickname}</Nickname>
+          <Email>{email}</Email>
+        </NameBox>
       </ProfileBox>
-      <NameBox>
-        <Nickname>{nickname}</Nickname>
-        <Email>{email}</Email>
-      </NameBox>
+      <SettingButton nickname="nickname" />
     </Box>
   );
 };
 
 const Box = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
+  align-items: flex-start;
 `;
 
 const ProfileBox = styled.div`
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+
+  ${media.custom(1100)} {
+    padding-left: 30px;
+  }
 `;
 
 const NameBox = styled.div`

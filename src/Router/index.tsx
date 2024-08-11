@@ -12,9 +12,8 @@ import ModifyStudyPage from '@/Pages/Studies/EditStudy';
 import CreateRecruitmentPage from '@/Pages/CreateRecruitment';
 import LoginFailPage from '@/Pages/LoginFail';
 import SignUpFailPage from '@/Pages/SignUpFail';
-import MyPage from '@/Pages/MyPage/index';
+import MyPageHome from '@/Pages/MyPageHome/index';
 import { Saved } from '@/Pages/Saved';
-
 import Header from '@/Components/Header';
 import Footer from '@/Components/Footer';
 import ErrorBoundary from '@/Components/ErrorBoundary';
@@ -26,13 +25,11 @@ import { ReviewPage } from '@/Pages/Review';
 import { Notifications } from '@/Pages/Notifications';
 import { MyPageReviews } from '@/Pages/MyPageReviews';
 import { ProfileLayout } from '@/Layout/ProfileLayout';
-import UTbanner from '@/Components/UTbanner';
 
 export const RouterPath = createBrowserRouter([
   {
     element: (
       <>
-        <UTbanner />
         <Header />
         <Outlet />
         <Footer />
@@ -66,7 +63,7 @@ export const RouterPath = createBrowserRouter([
           {
             // 회원 정보
             index: true,
-            element: <MyPage />,
+            element: <MyPageHome />,
           },
           {
             // 스터디원이 남긴 나의 리뷰
