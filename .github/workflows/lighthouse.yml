@@ -44,7 +44,7 @@ jobs:
       - name: Check If CA and key exist
         run: |
           [ -f cert/local.ludo.study.pem ] && echo "local.ludo.study.pem exist." || echo "local.ludo.study.pem does not exist."
-           [ -f cert/local.ludo.study-key.pem ] && echo "local.ludo.study-key.pem exist." || echo "local.ludo.study-key.pem does not exist."
+          [ -f cert/local.ludo.study-key.pem ] && echo "local.ludo.study-key.pem exist." || echo "local.ludo.study-key.pem does not exist."
 
       - name: Build the project
         run: |
@@ -58,6 +58,5 @@ jobs:
           SSL_KEY_FILE: cert/local.ludo.study-key.pem
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
         run: |
-          curl -v https://local.ludo.study:3000/
           yarn global add @lhci/cli
           lhci autorun || echo "Fail to Run Lighthouse CI!"
