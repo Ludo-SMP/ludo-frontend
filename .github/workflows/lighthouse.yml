@@ -39,16 +39,13 @@ jobs:
           mkcert -install
           mkcert local.ludo.study
           mv ./local.ludo.study.pem cert/
-          mv ./local.ludo.study-key.pem ./cert/
-          # Add mkcert CA to the system trust store
-          sudo cp $(mkcert -CAROOT)/rootCA.pem /usr/local/share/ca-certificates/mkcert-rootCA.crt
-          sudo update-ca-certificates
-
-      - name: Verify CA installation
+          mv ./local.ludo.study-key.pem cert/
+      
+      - name: Check File
         run: |
-            ls /usr/local/share/ca-certificates/
-            openssl x509 -in /usr/local/share/ca-certificates/mkcert-rootCA.crt -text -noout
-        
+          [ -f /cert/local.ludo.study.pem ] && echo "local.ludo.study.pem exist." || echo "local.ludo.study.pem does not exist."
+           [ -f /cert/local.ludo.study-key.pem ] && echo "local.ludo.study-key.pem exist." || echo "local.ludo.study-key.pem does not exist."
+
       - name: Build the project
         run: |
           yarn build
