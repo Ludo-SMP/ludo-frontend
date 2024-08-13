@@ -48,7 +48,12 @@ const RecruitmentCard = (recruitment: Recruitment) => {
               recruitment.stacks.map(
                 (stack: Stack, idx) =>
                   idx < 5 && (
-                    <Image key={stack.id} size={32} src={`${import.meta.env.VITE_BASE_API_URL}${stack.imageUrl}`} />
+                    <Image
+                      key={stack.id}
+                      size={32}
+                      src={`${import.meta.env.VITE_BASE_API_URL}${stack.imageUrl}`}
+                      alt="stack-image"
+                    />
                   ),
               )
             ) : (
