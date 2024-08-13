@@ -33,28 +33,26 @@ export { default as TwoWay } from './icons/twoway.svg?react';
 export { default as PrevArrow } from './icons/prevArrow.svg?react';
 export { default as NextArrow } from './icons/nextArrow.svg?react';
 export { default as CreateStudy } from './icons/createstudy.svg?react';
+export { default as DefaultStudyThumbnail } from './icons/studyThumbnail.svg';
 export { default as SearchRecruitment } from './icons/recruitment.svg?react';
 
 // Logo
-export { default as BlankLogo } from './images/blank-logo.png';
-export { default as Logo } from './images/logo.png';
-export { default as FooterLogo } from './images/logo2.png';
-export { default as UTLogo } from './images/logo3.png';
+export { default as BlankLogo } from './images/blank-logo.webp';
+export { default as Logo } from './images/logo.webp';
+export { default as FooterLogo } from './images/logo2.webp';
+export { default as UTLogo } from './images/logo3.webp';
 
 // Character
-export { default as NotFound } from './images/character1.png';
-export { default as LoginFail } from './images/character2.png';
-export { default as SignUpFail } from './images/character3.png';
-export { default as ErrorBoundaryImage } from './images/character4.png';
+export { default as NotFound } from './images/character1.webp';
+export { default as LoginFail } from './images/character2.webp';
+export { default as SignUpFail } from './images/character3.webp';
+export { default as ErrorBoundaryImage } from './images/character4.webp';
 
 // Background
-export { default as SignUpBackground } from './images/background.png';
+export { default as SignUpBackground } from './images/background.webp';
 
 // Banner
-export { default as Banner1 } from './images/banner1.png';
-export { default as Banner2 } from './images/banner2.png';
-export { default as MobileBanner1 } from './images/mobilebanner1.png';
-export { default as MobileBanner2 } from './images/mobilebanner2.png';
-
-// Study
-export { default as DefaultStudyThumbnail } from './icons/studyThumbnail.svg';
+export { default as Banner1 } from './images/banner1.webp';
+export { default as Banner2 } from './images/banner2.webp';
+export { default as MobileBanner1 } from './images/mobilebanner1.webp';
+export { default as MobileBanner2 } from './images/mobilebanner2.webp';
