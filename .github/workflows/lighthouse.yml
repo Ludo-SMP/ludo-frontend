@@ -58,5 +58,13 @@ jobs:
           SSL_KEY_FILE: cert/local.ludo.study-key.pem
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
         run: |
+          ## Print Environment Variables
+          echo "HOST: $HOST"
+          echo "HTTPS: $HTTPS"
+          echo "SSL_CRT_FILE: $SSL_CRT_FILE"
+          echo "SSL_KEY_FILE: $SSL_KEY_FILE"
+          echo "LHCI_GITHUB_APP_TOKEN: $LHCI_GITHUB_APP_TOKEN"
+
+
           yarn global add @lhci/cli
-          lhci autorun || echo "Fail to Run Lighthouse CI!"
+          lhci autorun --verbose || echo "Fail to Run Lighthouse CI!"
