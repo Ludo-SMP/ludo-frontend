@@ -38,13 +38,13 @@ jobs:
           mkdir -p cert
           mkcert -install
           mkcert local.ludo.study
-          mv local.ludo.study.pem cert
-          mv local.ludo.study-key.pem cert
+          mv local.ludo.study.pem ${{ github.workspace }}/cert/
+          mv local.ludo.study-key.pem ${{ github.workspace }}/cert/
       
       - name: Check If CA and key exist
         run: |
-          [ -f cert/local.ludo.study.pem ] && echo "local.ludo.study.pem exist." || echo "local.ludo.study.pem does not exist."
-          [ -f cert/local.ludo.study-key.pem ] && echo "local.ludo.study-key.pem exist." || echo "local.ludo.study-key.pem does not exist."
+          [ -f ${{ github.workspace }}/cert/local.ludo.study.pem ] && echo "local.ludo.study.pem exist." || echo "local.ludo.study.pem does not exist."
+          [ -f ${{ github.workspace }}/cert/local.ludo.study-key.pem ] && echo "local.ludo.study-key.pem exist." || echo "local.ludo.study-key.pem does not exist."
 
       - name: Build the project
         run: |
