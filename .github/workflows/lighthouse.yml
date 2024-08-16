@@ -50,17 +50,12 @@ jobs:
         run: |
           yarn build
 
-      - name: Start server with HTTPS
+      - name: Run Lighthouse CI
         env:
           HOST: local.ludo.study
           HTTPS: true
-          SSL_CRT_FILE: cert/local.ludo.study.pem
-          SSL_KEY_FILE: cert/local.ludo.study-key.pem
-        run: |
-          yarn start:mac
-
-      - name: Run Lighthouse CI
-        env:
+          SSL_CRT_FILE: ${{ github.workspace }}/cert/local.ludo.study.pem
+          SSL_KEY_FILE: ${{ github.workspace }}/cert/local.ludo.study-key.pem
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
         run: |
           yarn global add @lhci/cli
