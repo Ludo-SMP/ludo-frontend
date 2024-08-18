@@ -79,7 +79,7 @@ module.exports = {
     },
     upload: {
       target: 'filesystem',
-      outputDir: './lhci',
+      outputDir: './lhci_reports',
       reportFilenamePattern: '%%PATHNAME%%-%%DATETIME%%.%%EXTENSION%%',
     },
   },
