@@ -3,8 +3,10 @@ on:
   pull_request:
     branches:
       - dev
-      - feat/SP-668-setup-lighthouse-ci
     types: [opened, edited, synchronize, reopened]
+  push:
+    branches:
+      - feat/SP-668-setup-lighthouse-ci
 
 permissions:
     contents: read
