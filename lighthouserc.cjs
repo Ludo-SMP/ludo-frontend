@@ -77,7 +77,6 @@ module.exports = {
         chromeFlags: '--ignore-certificate-errors',
       },
     },
-
     upload: {
       target: 'filesystem',
       outputDir: './lhci',
