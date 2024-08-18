@@ -73,6 +73,9 @@ module.exports = {
       startServerCommand: 'yarn start:mac',
       url: urls,
       numberOfRuns: 1,
+      settings: {
+        chromeFlags: '--ignore-certificate-errors',
+      },
     },
 
     upload: {

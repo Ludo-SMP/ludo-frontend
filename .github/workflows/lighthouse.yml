@@ -46,16 +46,6 @@ jobs:
           [ -f ${{ github.workspace }}/cert/local.ludo.study.pem ] && echo "local.ludo.study.pem exist." || echo "local.ludo.study.pem does not exist."
           [ -f ${{ github.workspace }}/cert/local.ludo.study-key.pem ] && echo "local.ludo.study-key.pem exist." || echo "local.ludo.study-key.pem does not exist."
 
-      - name: Start server and wait
-        run: |
-          yarn start:mac & # Run server in background
-          echo "Waiting for server to start..."
-          sleep 30 # Adjust sleep duration as needed
-
-      - name: Test server accessibility
-        run: |
-          curl -I https://local.ludo.study:3000/ || echo "Server is not accessible or SSL/TLS certificate might be invalid."
-        
       - name: Build the project
         run: |
           yarn build
@@ -70,11 +60,3 @@ jobs:
         run: |
           yarn global add @lhci/cli
           lhci autorun || echo "Fail to Run Lighthouse CI!"
-          
-          
-      - name: Collect and Display Server Logs
-        run: |
-            echo "Collecting server logs..."
-            # Assuming the logs are available in a specific location or can be extracted
-            # Adjust the log file location according to your setup
-            cat /path/to/server/logs.log || echo "No server logs found."
