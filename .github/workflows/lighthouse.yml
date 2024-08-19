@@ -56,16 +56,16 @@ jobs:
           script: |
             const fs = require('fs')
             
-            let comments = '💡 Lighthouse Reports (Desktop, Mobile)!'
+            let comments = '💡 Lighthouse Reports!'
 
-            const desktopResults = fs.readfileSync(`${{ github.workspace}}/lhci_reports/desktop/manifest.json`)
-            const mobileResults = fs.readfileSync(`${{ github.workspace}}/lhci_reports/mobile/manifest.json`)
+            const desktopResults = fs.readfileSync(`${{github.workspace}}/lhci_reports/desktop/manifest.json`)
+            const mobileResults = fs.readfileSync(`${{github.workspace}}/lhci_reports/mobile/manifest.json`)
 
             comments = `🖥 Desktop Reports`
             
             ### 데스크탑 포매팅
 
-            desktopResults.forEach((result,index) => {
+            desktopResults.forEach((result, index) => {
               const { summary } = result;
  
               const formatResult = (res) => Math.round(res * 100);
