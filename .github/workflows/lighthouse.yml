@@ -1,4 +1,4 @@
-name: Run lighthouse CI When Push on PR to dev branch
+name: Run lighthouse CI When Push on PR
 on: 
   pull_request:
     branches:
@@ -32,10 +32,21 @@ jobs:
       - name: Build the project
         run: |
           yarn build
-
-      - name: Run Lighthouse CI
+      
+      - name: Run Lighthouse CI - Desktop
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
         run: |
           yarn global add @lhci/cli
-          lhci autorun || echo "Fail to Run Lighthouse CI!"
+          lhci collect --config=lighthouserc-desktop.cjs || echo "Fail to Run Lighthouse CI!"
+          lhci upload --config=lighthouserc-desktop.cjs || echo "Fail to Run Lighthouse CI!"
+
+      - name: Run Lighthouse CI - Mobile
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+        run: |
+          lhci collect --config=lighthouserc-mobile.cjs || echo "Fail to Run Lighthouse CI!"
+          lhci upload --config=lighthouserc-mobile.cjs || echo "Fail to Run Lighthouse CI!"
+      
+
+    
