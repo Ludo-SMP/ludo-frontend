@@ -4,13 +4,11 @@ on:
     branches:
       - dev
     types: [opened, edited, synchronize, reopened]
-  push:
-    branches:
-      - feat/SP-668-setup-lighthouse-ci
 
 permissions:
     contents: read
-    pull-requests: write 
+    pull-requests: write
+
 jobs:
   lhci:
     name: Lighthouse CI
@@ -30,24 +28,6 @@ jobs:
 
       - name: Add host "local.ludo.study"
         run: sudo echo "127.0.0.1 local.ludo.study" | sudo tee -a /etc/hosts
-      
-      - name: Install mkcert and set up certificates
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libnss3-tools
-          curl -JLO https://github.com/FiloSottile/mkcert/releases/download/v1.4.4/mkcert-v1.4.4-linux-amd64
-          chmod +x mkcert-v1.4.4-linux-amd64
-          sudo mv mkcert-v1.4.4-linux-amd64 /usr/local/bin/mkcert
-          mkdir -p cert
-          mkcert -install
-          mkcert local.ludo.study
-          mv local.ludo.study.pem ${{ github.workspace }}/cert/
-          mv local.ludo.study-key.pem ${{ github.workspace }}/cert/
-      
-      - name: Check If CA and key exist
-        run: |
-          [ -f ${{ github.workspace }}/cert/local.ludo.study.pem ] && echo "local.ludo.study.pem exist." || echo "local.ludo.study.pem does not exist."
-          [ -f ${{ github.workspace }}/cert/local.ludo.study-key.pem ] && echo "local.ludo.study-key.pem exist." || echo "local.ludo.study-key.pem does not exist."
 
       - name: Build the project
         run: |
@@ -55,10 +35,6 @@ jobs:
 
       - name: Run Lighthouse CI
         env:
-          HOST: local.ludo.study
-          HTTPS: true
-          SSL_CRT_FILE: ${{ github.workspace }}/cert/local.ludo.study.pem
-          SSL_KEY_FILE: ${{ github.workspace }}/cert/local.ludo.study-key.pem
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
         run: |
           yarn global add @lhci/cli
