@@ -58,8 +58,8 @@ jobs:
             
             let comments = '💡 Lighthouse Reports!'
 
-            const desktopResults = fs.readfileSync(`${{github.workspace}}/lhci_reports/desktop/manifest.json`)
-            const mobileResults = fs.readfileSync(`${{github.workspace}}/lhci_reports/mobile/manifest.json`)
+            const desktopResults = JSON.parse(fs.readfileSync(`${{github.workspace}}/lhci_reports/desktop/manifest.json`))
+            const mobileResults = JSON.parse(fs.readfileSync(`${{github.workspace}}/lhci_reports/mobile/manifest.json`))
 
             comments = `🖥 Desktop Reports`
             
