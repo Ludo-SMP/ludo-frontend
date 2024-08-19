@@ -47,6 +47,57 @@ jobs:
         run: |
           lhci collect --config=lighthouserc-mobile.cjs || echo "Fail to Run Lighthouse CI!"
           lhci upload --config=lighthouserc-mobile.cjs || echo "Fail to Run Lighthouse CI!"
+
+      
+      - name: Format Lighthouse Score
+        id: format_lighthouse_score
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs')
+            
+            let comments = '💡 Lighthouse Reports (Desktop, Mobile)!'
+
+            const desktopResults = fs.readfileSync(`${{ github.workspace}}/lhci_reports/desktop/manifest.json`)
+            const mobileResults = fs.readfileSync(`${{ github.workspace}}/lhci_reports/mobile/manifest.json`)
+
+            comments = `🖥 Desktop Reports`
+            
+            ### 데스크탑 포매팅
+
+            desktopResults.forEach((result,index) => {
+              const { summary } = result;
+ 
+              const formatResult = (res) => Math.round(res * 100);
+
+              Object.keys(summary).forEach(
+                  (key) => (summary[key] = formatResult(summary[key]))
+              );
+
+              const score = (res) => (res >= 90 ? "🟢" : res >= 70 ? "🟠" : "🔴");
+
+              const comment = [
+                `⚡️ Lighthouse report ${index}`,
+                `| Category | Score |`,
+                `| --- | --- |`,
+                `| ${score(summary.performance)} Performance | ${summary.performance} |`,
+                `| ${score(summary.accessibility)} Accessibility | ${summary.accessibility} |`,
+                `| ${score(summary['best-practices'])} Best practices | ${summary['best-practices']} |`,
+                `| ${score(summary.seo)} SEO | ${summary.seo} |`,
+                `| ${score(summary.pwa)} PWA | ${summary.pwa} |`,
+                `\n`,
+              ].join("\n");
+
+              comments += comment + "\n";
+            }); 
+            
+            core.setOutput('comments', comments)
+
       
 
-    
+
+
+
+            
+            
+
