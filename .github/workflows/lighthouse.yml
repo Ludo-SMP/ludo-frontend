@@ -58,8 +58,13 @@ jobs:
             
             let comments = '💡 Lighthouse Reports!'
 
-            const desktopResults = JSON.parse(fs.readFileSync(`${{github.workspace}}/lhci_reports/desktop/manifest.json`))
-            const mobileResults = JSON.parse(fs.readFileSync(`${{github.workspace}}/lhci_reports/mobile/manifest.json`))
+            const workspace = process.env.GITHUB_WORKSPACE;
+
+            const desktopResultsPath = path.join(workspace, 'lhci_reports/desktop/manifest.json');
+            const mobileResultsPath = path.join(workspace, 'lhci_reports/mobile/manifest.json');
+
+            const desktopResults = JSON.parse(fs.readFileSync(desktopResultsPath))
+            const mobileResults = JSON.parse(fs.readFileSync(mobileResultsPath)
 
             comments = `🖥 Desktop Reports`
             
