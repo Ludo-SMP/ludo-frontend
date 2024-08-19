@@ -74,7 +74,7 @@ jobs:
                   (key) => (summary[key] = formatResult(summary[key]))
               );
 
-              const score = (res) => (res >= 90 ? "🟢" : res >= 70 ? "🟠" : "🔴");
+              const score = (res) => (res >= 90 ? "🟢" : res >= 50 ? "🟠" : "🔴");
 
               const comment = [
                 `⚡️ Lighthouse report ${index}`,
