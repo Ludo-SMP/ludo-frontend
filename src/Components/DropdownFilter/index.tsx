@@ -25,7 +25,11 @@ const DropdownFilter = ({ filterName, items, filterOption }: DropdownFilterProps
 
   const handleSelectedItem = (item: { id: number; name: string }, filterOption: FilterOption) => {
     setContent(
-      filterOption === 'PROGRESS_METHOD' && item.id !== 0 ? (item.id === 1 ? '온라인' : '오프라인') : item.name,
+      filterOption === 'PROGRESS_METHOD' && Number(item.id) !== 0
+        ? Number(item.id) === 1
+          ? '온라인'
+          : '오프라인'
+        : item.name,
     );
     setFilterOptions(filterOption, item.id !== 0 ? item.id : 0);
     setIsOpen(!isOpen);
