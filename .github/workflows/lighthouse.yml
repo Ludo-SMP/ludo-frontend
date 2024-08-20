@@ -162,5 +162,5 @@ jobs:
                 repo: repo.repo,
                 issue_number: payload.pull__request__number,
                 body: newComment,
-             }
-
+              });
+            }
