@@ -1,0 +1,166 @@
+name: Run lighthouse CI When Push on PR to Dev Branch
+on: 
+  pull_request:
+    branches:
+      - dev
+    types: [synchronize, opened]
+
+permissions:
+    contents: read
+    pull-requests: write
+
+jobs:
+  lhci:
+    name: Lighthouse CI
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Use Node.js 20.10.0
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+
+      - name: Install dependencies
+        run: |
+          yarn install --immutable --immutable-cache --check-cache
+
+      - name: Add host "local.ludo.study"
+        run: sudo echo "127.0.0.1 local.ludo.study" | sudo tee -a /etc/hosts
+
+      - name: Build the project
+        run: |
+          yarn build
+      
+      - name: Run Lighthouse CI - Desktop
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+        run: |
+          yarn global add @lhci/cli
+          lhci collect --config=lighthouserc-desktop.cjs || echo "Fail to Run Lighthouse CI!"
+          lhci upload --config=lighthouserc-desktop.cjs || echo "Fail to Run Lighthouse CI!"
+
+      - name: Run Lighthouse CI - Mobile
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+        run: |
+          lhci collect --config=lighthouserc-mobile.cjs || echo "Fail to Run Lighthouse CI!"
+          lhci upload --config=lighthouserc-mobile.cjs || echo "Fail to Run Lighthouse CI!"
+
+      
+      - name: Format Lighthouse Score
+        id: format_lighthouse_score
+        uses: actions/github-script@v7
+        env:
+          working-directory: ${{ github.workspace }}
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+
+            const {
+              LH_MONITORING_PAGE_NAMES,
+              DEV_ORIGIN_URL,
+              LH_MONITORING_PAGE_ROUTES,
+              LH_MIN_SCORES,
+            } = require('./src/Constants/lighthouse.ts');
+
+            const desktopLightHouseResults = JSON.parse(fs.readFileSync('lhci_reports/desktop/manifest.json'));
+            const mobileLightHouseResults = JSON.parse(fs.readFileSync('lhci_reports/mobile/manifest.json'));
+
+            let comments = `### 💡 LightHouse Reports\n\n`;
+            comments += `#### 🟢 90 ~ 100 &nbsp;&nbsp; 🟠 50 ~ 89 &nbsp;&nbsp; 🔴 0 ~ 49 \n\n`;
+
+            const getFormattingScore = (res) => Math.round(res * 100);
+
+            const getScoreColor = (score) => (score >= LH_MIN_SCORES.GREEN ? '🟢' : score >= LH_MIN_SCORES.ORANGE ? '🟠' : '🔴');
+
+            const getMonitoringPageName = (url) => {
+              const route = url.replace(DEV_ORIGIN_URL, '');
+
+              for (let pageName of LH_MONITORING_PAGE_NAMES) {
+                if (route === LH_MONITORING_PAGE_ROUTES[pageName]) return pageName;
+              }
+            };
+
+            const getFormattingResultByPage = (result) => {
+              const { url, summary, jsonPath } = result;
+              const { audits } = JSON.parse(fs.readFileSync(jsonPath));
+
+              const { performance, accessibility, 'best-practices': bestPractices, seo } = summary;
+
+              const {
+                'first-contentful-paint': firstContentfulPaint,
+                'largest-contentful-paint': largestContentfulPaint,
+                'speed-index': speedIndex,
+                'total-blocking-time': totalBlockingTime,
+                'cumulative-layout-shift': cumulativeLayoutShift,
+              } = audits;
+
+              const formattingTable = [
+                `| Category | Score |`,
+                `| --- | --- |`,
+                `| ${getScoreColor(getFormattingScore(performance))} Performance | ${getFormattingScore(performance)} |`,
+                `| ${getScoreColor(getFormattingScore(accessibility))} Accessibility | ${getFormattingScore(accessibility)} |`,
+                `| ${getScoreColor(getFormattingScore(bestPractices))} Best practices | ${getFormattingScore(bestPractices)} |`,
+                `| ${getScoreColor(getFormattingScore(seo))} SEO | ${getFormattingScore(seo)} |`,
+                `| ${getScoreColor(getFormattingScore(firstContentfulPaint.score))} First Contentful Paint | ${firstContentfulPaint.displayValue} |`,
+                `| ${getScoreColor(getFormattingScore(largestContentfulPaint.score))} Largest Contentful Paint | ${largestContentfulPaint.displayValue} |`,
+                `| ${getScoreColor(getFormattingScore(speedIndex.score))} Speed Index | ${speedIndex.displayValue} |`,
+                `| ${getScoreColor(getFormattingScore(totalBlockingTime.score))} Total Blocking Time | ${totalBlockingTime.displayValue} |`,
+                `| ${getScoreColor(getFormattingScore(cumulativeLayoutShift.score))} Cumulative Layout Shift | ${cumulativeLayoutShift.displayValue} |`,
+                `\n`,
+              ].join('\n');
+
+              return `<details>\n<summary>${`📄 ${getMonitoringPageName(url)}\n`}</summary>\n\n${formattingTable}\n</details>\n\n`;
+            };
+
+            const getLightHouseFormattingResult = (results, type) => {
+              let comment = type === 'mobile' ? `#### 📱 Mobile\n` : `#### 🖥  Desktop\n`;
+              results.forEach((result) => (comment += getFormattingResultByPage(result)));
+
+              return comment + '\n';
+            };
+
+            comments += getLightHouseFormattingResult(desktopLightHouseResults, 'desktop');
+            comments += getLightHouseFormattingResult(mobileLightHouseResults, 'mobile');
+            
+            core.setOutput('comments', comments)
+
+      - name: Comment PR
+        id: add_pr_comment
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { Octokit } = require('@octokit/rest');
+            const octokit = new Octokit({ auth: `${{ secrets.GITHUB_TOKEN }}` });
+
+            const { payload, repo } = context
+
+            const newComment = `${{ steps.format_lighthouse_score.outputs.comments }}`
+
+            const { data: prevComments } = await octokit.rest.issues.listComments({
+              owner: repo.owner,
+              repo: repo.repo,
+              issue_number : payload.pull_request.number,
+            })
+
+            const prevReportComment = prevComments.find(comment => comment.body.includes(`### 💡 LightHouse Reports\n\n`));
+
+            if (prevReportComment) {
+                await octokit.rest.issues.updateComment({
+                  owner: repo.owner,
+                  repo: repo.repo,
+                  comment_id: prevReportComment.id,
+                  body: newComment,
+              });
+            } else {
+                await octokit.rest.issues.createComment({
+                owner: repo.owner,
+                repo: repo.repo,
+                issue_number: payload.pull_request.number,
+                body: newComment,
+              });
+            }
