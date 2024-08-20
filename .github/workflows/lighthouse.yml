@@ -157,7 +157,7 @@ jobs:
                   body: newComment,
               });
             } else {
-                await octokit.rest.issues.updateComment({
+                await octokit.rest.issues.createComment({
                 owner: repo.owner,
                 repo: repo.repo,
                 issue_number: payload.pull_request.number,
