@@ -144,7 +144,7 @@ jobs:
             const prevComments = await octokit.rest.issues.listComments({
               owner: repo.owner,
               repo: repo.repo,
-              issue_number : payload.pull__request__number,
+              issue_number : payload.pull_request.number,
             })
 
             const prevComment = comments.find(comment => comment.body.includes(`### 💡 LightHouse Reports\n\n`));
@@ -160,7 +160,7 @@ jobs:
                 await octokit.rest.issues.updateComment({
                 owner: repo.owner,
                 repo: repo.repo,
-                issue_number: payload.pull__request__number,
+                issue_number: payload.pull_request.number,
                 body: newComment,
               });
             }
