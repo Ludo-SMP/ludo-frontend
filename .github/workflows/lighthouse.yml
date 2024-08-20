@@ -142,7 +142,7 @@ jobs:
             const newComment = `${{ steps.format_lighthouse_score.outputs.comments }}`
 
             const prevComments = await ocktokit.rest.issues.listComments({
-              owner: repo.owner
+              owner: repo.owner,
               repo: repo.repo,
               issue_number : payload.pull__request__number,
             })
@@ -151,16 +151,16 @@ jobs:
 
             if (prevComment) {
                 await octokit.rest.issues.updateComment({
-                  owner: repo.owner
+                  owner: repo.owner,
                   repo: repo.repo,
                   comment_id: prevComment.id,
                   body: newComment,
               });
             } else {
                 await octokit.rest.issues.updateComment({
-                owner: repo.owner
+                owner: repo.owner,
                 repo: repo.repo,
-                issue_number : payload.pull__request__number,
+                issue_number: payload.pull__request__number,
                 body: newComment,
              }
 
