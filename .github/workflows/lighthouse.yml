@@ -1,4 +1,4 @@
-name: Run lighthouse CI When Push on PR
+name: Run lighthouse CI When Push on PR to Dev Branch
 on: 
   pull_request:
     branches:
