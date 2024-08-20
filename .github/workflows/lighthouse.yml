@@ -57,40 +57,74 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const fs = require('fs')
-            
-            let comments = '💡 Lighthouse Reports!'
+            const fs = require('fs');
 
-            const desktopResults = JSON.parse(fs.readFileSync(`${{ env.working-directory }}/lhci_reports/desktop/manifest.json`))
-            const mobileResults = JSON.parse(fs.readFileSync(`${{ env.working-directory }}/lhci_reports/mobile/manifest.json`))
+            const {
+              LH_MONITORING_PAGE_NAMES,
+              DEV_ORIGIN_URL,
+              LH_MONITORING_PAGE_ROUTES,
+              LH_MIN_SCORES,
+            } = require('./src/Constants/lighthouse.ts');
 
-            comments = `🖥 Desktop Reports`
+            const desktopLightHouseResults = JSON.parse(fs.readFileSync('lhci_reports/desktop/manifest.json'));
+            const mobileLightHouseResults = JSON.parse(fs.readFileSync('lhci_reports/mobile/manifest.json'));
 
-            desktopResults.forEach((result, index) => {
-              const { summary } = result;
- 
-              const formatResult = (res) => Math.round(res * 100);
+            let comments = `💡 LightHouse Reports\n\n`;
+            comments += `'🟢' 90 ~ 100, '🟠' 50 ~ 89 '🔴' 0 ~ 49 \n\n`;
 
-              Object.keys(summary).forEach(
-                (key) => (summary[key] = formatResult(summary[key]))
-              );
+            const getFormattingScore = (res) => Math.round(res * 100);
 
-              const score = (res) => (res >= 90 ? "🟢" : res >= 50 ? "🟠" : "🔴");
+            const getScoreColor = (score) => (score >= LH_MIN_SCORES.GREEN ? '🟢' : score >= LH_MIN_SCORES.ORANGE ? '🟠' : '🔴');
 
-              const comment = [
-                `⚡️ Lighthouse report ${index}`,
+            const getMonitoringPageName = (url) => {
+              const route = url.replace(DEV_ORIGIN_URL, '');
+
+              for (let pageName of LH_MONITORING_PAGE_NAMES) {
+                if (route === LH_MONITORING_PAGE_ROUTES[pageName]) return pageName;
+              }
+            };
+
+            const getFormattingResultByPage = (result) => {
+              const { url, summary, jsonPath } = result;
+              const { audits } = JSON.parse(fs.readFileSync(jsonPath));
+
+              const { performance, accessibility, 'best-practices': bestPractices, seo } = summary;
+
+              const {
+                'first-contentful-paint': firstContentfulPaint,
+                'largest-contentful-paint': largestContentfulPaint,
+                'speed-index': speedIndex,
+                'total-blocking-time': totalBlockingTime,
+                'cumulative-layout-shift': cumulativeLayoutShift,
+              } = audits;
+
+              const formattingTable = [
                 `| Category | Score |`,
                 `| --- | --- |`,
-                `| ${score(summary.performance)} Performance | ${summary.performance} |`,
-                `| ${score(summary.accessibility)} Accessibility | ${summary.accessibility} |`,
-                `| ${score(summary['best-practices'])} Best practices | ${summary['best-practices']} |`,
-                `| ${score(summary.seo)} SEO | ${summary.seo} |`,
-                `| ${score(summary.pwa)} PWA | ${summary.pwa} |`,
+                `| ${getScoreColor(getFormattingScore(performance))} Performance | ${getFormattingScore(performance)} |`,
+                `| ${getScoreColor(getFormattingScore(accessibility))} Accessibility | ${getFormattingScore(accessibility)} |`,
+                `| ${getScoreColor(getFormattingScore(bestPractices))} Best practices | ${getFormattingScore(bestPractices)} |`,
+                `| ${getScoreColor(getFormattingScore(seo))} SEO | ${getFormattingScore(seo)} |`,
+                `| ${getScoreColor(getFormattingScore(firstContentfulPaint.score))} First Contentful Paint | ${firstContentfulPaint.displayValue} |`,
+                `| ${getScoreColor(getFormattingScore(largestContentfulPaint.score))} Largest Contentful Paint | ${largestContentfulPaint.displayValue} |`,
+                `| ${getScoreColor(getFormattingScore(speedIndex.score))} Speed Index | ${speedIndex.displayValue} |`,
+                `| ${getScoreColor(getFormattingScore(totalBlockingTime.score))} Total Blocking Time | ${totalBlockingTime.displayValue} |`,
+                `| ${getScoreColor(getFormattingScore(cumulativeLayoutShift.score))} Cumulative Layout Shift | ${cumulativeLayoutShift.displayValue} |`,
                 `\n`,
-              ].join("\n");
+              ].join('\n');
 
-              comments += comment + "\n";
-            }); 
+              return `<details>\n<summary>${`📄 ${getMonitoringPageName(url)}\n`}</summary>\n\n${formattingTable}\n</details>\n\n`;
+            };
+
+            const getLightHouseFormattingResult = (results, type) => {
+              let comment = type === 'mobile' ? `📱 Mobile` : `🖥  Desktop\n`;
+              results.forEach((result) => (comment += getFormattingResultByPage(result)));
+
+              return comment + '\n';
+            };
+
+            comments += getLightHouseFormattingResult(desktopLightHouseResults, 'desktop');
+            comments += getLightHouseFormattingResult(mobileLightHouseResults, 'mobile');
             
             core.setOutput('comments', comments)
 
