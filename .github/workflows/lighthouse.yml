@@ -147,13 +147,13 @@ jobs:
               issue_number : payload.pull_request.number,
             })
 
-            const prevComment = comments.find(comment => comment.body.includes(`### 💡 LightHouse Reports\n\n`));
+            const prevReportComment = prevComments.find(comment => comment.body.includes(`### 💡 LightHouse Reports\n\n`));
 
-            if (prevComment) {
+            if (prevReportComment) {
                 await octokit.rest.issues.updateComment({
                   owner: repo.owner,
                   repo: repo.repo,
-                  comment_id: prevComment.id,
+                  comment_id: prevReportComment.id,
                   body: newComment,
               });
             } else {
