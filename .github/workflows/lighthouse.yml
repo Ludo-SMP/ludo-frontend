@@ -3,7 +3,7 @@ on:
   pull_request:
     branches:
       - dev
-    types: [opened, edited, synchronize, reopened]
+    types: [synchronize, opened]
 
 permissions:
     contents: read
