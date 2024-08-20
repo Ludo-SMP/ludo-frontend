@@ -64,11 +64,7 @@ jobs:
             const desktopResults = JSON.parse(fs.readFileSync(`${{ env.working-directory }}/lhci_reports/desktop/manifest.json`))
             const mobileResults = JSON.parse(fs.readFileSync(`${{ env.working-directory }}/lhci_reports/mobile/manifest.json`))
 
-            console.log(desktopResults)
-
             comments = `🖥 Desktop Reports`
-            
-            ### 데스크탑 포매팅
 
             desktopResults.forEach((result, index) => {
               const { summary } = result;
