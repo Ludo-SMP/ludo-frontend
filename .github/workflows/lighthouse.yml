@@ -70,7 +70,7 @@ jobs:
             const mobileLightHouseResults = JSON.parse(fs.readFileSync('lhci_reports/mobile/manifest.json'));
 
             let comments = `### 💡 LightHouse Reports\n\n`;
-            comments += `#### 🟢 90 ~ 100   🟠 50 ~ 89   🔴 0 ~ 49 \n\n`;
+            comments += `#### 🟢 90 ~ 100 &nbsp;&nbsp; 🟠 50 ~ 89 &nbsp;&nbsp; 🔴 0 ~ 49 \n\n`;
 
             const getFormattingScore = (res) => Math.round(res * 100);
 
