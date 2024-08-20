@@ -141,7 +141,7 @@ jobs:
 
             const newComment = `${{ steps.format_lighthouse_score.outputs.comments }}`
 
-            const prevComments = await ocktokit.rest.issues.listComments({
+            const prevComments = await octokit.rest.issues.listComments({
               owner: repo.owner,
               repo: repo.repo,
               issue_number : payload.pull__request__number,
