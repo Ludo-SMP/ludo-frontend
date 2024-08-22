@@ -6,7 +6,7 @@ export default create({
   base: 'light',
 
   brandTitle: 'Ludo',
-  brandUrl: 'https://ludoapi.store',
+  brandUrl: 'https://ludo.study',
   brandImage: Logo,
   brandTarget: '_self',
 
