@@ -4,7 +4,6 @@ import react from '@vitejs/plugin-react';
 import * as path from 'path';
 import mkcert from 'vite-plugin-mkcert';
 import { VitePluginRadar } from 'vite-plugin-radar';
-import { analyzer } from 'vite-bundle-analyzer';
 
 export default defineConfig({
   plugins: [
@@ -21,7 +20,6 @@ export default defineConfig({
         id: 'GTM-WLWBHQRJ',
       },
     }),
-    analyzer(),
   ],
   resolve: {
     alias: [{ find: '@', replacement: path.resolve(__dirname, 'src') }],
