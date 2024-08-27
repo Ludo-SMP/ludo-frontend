@@ -35,6 +35,11 @@ const LoginWrapper = styled.div`
   justify-content: center;
   align-items: center;
   gap: 40px;
+
+  ${media.custom(600)} {
+    margin: 0;
+    padding: 40px 24px 72px 24px;
+  }
 `;
 const LoginGuideWrapper = styled.div`
   display: inline-flex;
@@ -45,9 +50,6 @@ const LoginGuideWrapper = styled.div`
   margin: 0 auto;
   align-self: stretch;
 
-  ${media.custom(600)} {
-    width: 400px;
-  }
   .title {
     color: ${({ theme }) => theme.color.black5};
     text-align: center;
@@ -56,6 +58,14 @@ const LoginGuideWrapper = styled.div`
     font-style: normal;
     font-weight: 800;
     line-height: 48px;
+
+    ${media.custom(500)} {
+      font-size: ${({ theme }) => theme.font.medium};
+      font-family: 'Pretendard600';
+      font-style: normal;
+      font-weight: 600;
+      line-height: 32px;
+    }
   }
 
   .content {
@@ -67,6 +77,16 @@ const LoginGuideWrapper = styled.div`
     font-weight: 500;
     line-height: 40px;
     white-space: pre-line;
+
+    ${media.custom(500)} {
+      color: ${({ theme }) => theme.color.black5};
+      text-align: center;
+      font-family: 'Pretendard400';
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 24px;
+    }
   }
 `;
 
@@ -75,6 +95,7 @@ const LoginBtnsWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 16px;
+  width: 100%;
 `;
 
 export default LoginPage;

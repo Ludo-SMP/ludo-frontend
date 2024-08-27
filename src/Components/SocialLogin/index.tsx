@@ -82,7 +82,7 @@ const SocialLoginWrapper = styled.a<{ $socialType: SocialType; $signType: SignTy
   }
 
   ${media.custom(600)} {
-    width: 400px;
+    width: 100%;
   }
 `;
 
