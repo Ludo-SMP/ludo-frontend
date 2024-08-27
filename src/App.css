@@ -1,41 +1,41 @@
 @font-face {
   font-family: 'Pretendard800';
   font-weight: 800;
-  src: url('./Assets/fonts/Pretendard-ExtraBold.woff2') format('woff2');
+  src: url('./Assets/fonts/Pretendard-ExtraBold-subset.woff2') format('woff2'), url('./Assets/fonts/Pretendard-ExtraBold-subset.woff') format('woff');
 }
 
 @font-face {
   font-family: 'Pretendard700';
   font-weight: 700;
-  src: url('./Assets/fonts/Pretendard-Bold.woff2') format('woff2');
+  src: url('./Assets/fonts/Pretendard-Bold-subset.woff2') format('woff2'), url('./Assets/fonts/Pretendard-Bold-subset.woff') format('woff');
 }
 
 @font-face {
   font-family: 'Pretendard600';
   font-weight: 600;
-  src: url('./Assets/fonts/Pretendard-SemiBold.woff2') format('woff2');
+  src: url('./Assets/fonts/Pretendard-SemiBold-subset.woff2') format('woff2'), url('./Assets/fonts/Pretendard-SemiBold-subset.woff') format('woff');
 }
 
 @font-face {
   font-family: 'Pretendard500';
   font-weight: 500;
-  src: url('./Assets/fonts/Pretendard-Medium.woff2') format('woff2');
+  src: url('./Assets/fonts/Pretendard-Medium-subset.woff2') format('woff2'), url('./Assets/fonts/Pretendard-Medium-subset.woff') format('woff');
 }
 
 @font-face {
   font-family: 'Pretendard400';
   font-weight: 400;
-  src: url('./Assets/fonts/Pretendard-Regular.woff2') format('woff2');
+  src: url('./Assets/fonts/Pretendard-Regular-subset.woff2') format('woff2'), url('./Assets/fonts/Pretendard-Regular-subset.woff') format('woff');
 }
 
 @font-face {
   font-family: 'Pretendard300';
   font-weight: 300;
-  src: url('./Assets/fonts/Pretendard-Light.woff2') format('woff2');
+  src: url('./Assets/fonts/Pretendard-Light-subset.woff2') format('woff2'), url('./Assets/fonts/Pretendard-Light-subset.woff') format('woff');
 }
 
 @font-face {
   font-family: 'Pretendard200';
   font-weight: 200;
-  src: url('./Assets/fonts/Pretendard-ExtraLight.woff2') format('woff2');
+  src: url('./Assets/fonts/Pretendard-ExtraLight-subset.woff2') format('woff2'), url('./Assets/fonts/Pretendard-ExtraLight-subset.woff') format('woff');
 }
