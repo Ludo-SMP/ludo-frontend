@@ -29,7 +29,8 @@ const SocialLogin = ({ socialType, signType }: SocialLoginType) => {
   const { isLoggedIn, setIsLoggedIn } = useLoginStore();
   return (
     <SocialLoginWrapper
-      {...{ socialType, signType }}
+      $socialType={socialType}
+      $signType={signType}
       href={
         signType === 'login'
           ? `${import.meta.env.VITE_BASE_API_URL}/${API_END_POINT.LOGIN(socialType)}`
@@ -47,7 +48,7 @@ const SocialLogin = ({ socialType, signType }: SocialLoginType) => {
   );
 };
 
-const SocialLoginWrapper = styled.a<{ socialType: SocialType; signType: SignType }>`
+const SocialLoginWrapper = styled.a<{ $socialType: SocialType; $signType: SignType }>`
   display: flex;
   align-items: center;
   width: 600px;
@@ -59,17 +60,17 @@ const SocialLoginWrapper = styled.a<{ socialType: SocialType; signType: SignType
   border: 1px solid rgba(0, 0, 0, 0.1);
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.05);
   background-color: ${(props) =>
-    props.socialType === 'naver'
+    props.$socialType === 'naver'
       ? props.theme.color.naver
-      : props.socialType === 'kakao'
+      : props.$socialType === 'kakao'
         ? props.theme.color.kakao
         : props.theme.color.white};
 
   span {
     color: ${(props) =>
-      props.socialType === 'naver'
+      props.$socialType === 'naver'
         ? props.theme.color.white
-        : props.socialType === 'kakao'
+        : props.$socialType === 'kakao'
           ? props.theme.color.kakaoFontColor
           : props.theme.color.black};
     text-align: center;
