@@ -5,7 +5,7 @@ import { media } from '@/Styles/theme';
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { SignUpBackground } from '@/Assets';
+import { MobileSignUpBackground, SignUpBackground } from '@/Assets';
 
 const SignUpPage = () => {
   const navigate = useNavigate();
@@ -55,11 +55,20 @@ const SignUpGuideWrapper = styled.div`
   margin: 0 auto;
   padding-top: 28px;
   align-self: stretch;
+  width: 600px;
   background-image: url(${SignUpBackground});
   background-repeat: no-repeat;
+  background-position: center;
 
   ${media.custom(600)} {
+    width: 100%;
     background-image: none;
+  }
+
+  ${media.custom(500)} {
+    background-image: url(${MobileSignUpBackground});
+    background-repeat: no-repeat;
+    background-position: center 10%;
   }
 
   .title {

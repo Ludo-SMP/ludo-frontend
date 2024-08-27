@@ -1,3 +1,4 @@
+import { LoginBackground, MobileLoginBackground } from '@/Assets';
 import SocialLogin from '@/Components/SocialLogin';
 import { AUTH } from '@/Constants/messages';
 import { media } from '@/Styles/theme';
@@ -49,6 +50,19 @@ const LoginGuideWrapper = styled.div`
   gap: 24px;
   margin: 0 auto;
   align-self: stretch;
+  background-image: url(${LoginBackground});
+  background-repeat: no-repeat;
+  background-position: center;
+
+  ${media.custom(600)} {
+    background-image: none;
+  }
+
+  ${media.custom(500)} {
+    background-image: url(${MobileLoginBackground});
+    background-repeat: no-repeat;
+    background-position: 60% -90%;
+  }
 
   .title {
     color: ${({ theme }) => theme.color.black5};

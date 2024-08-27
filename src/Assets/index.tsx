@@ -49,7 +49,10 @@ export { default as SignUpFail } from './images/character3.webp';
 export { default as ErrorBoundaryImage } from './images/character4.webp';
 
 // Background
-export { default as SignUpBackground } from './images/background.webp';
+export { default as SignUpBackground } from './images/background1.webp';
+export { default as MobileSignUpBackground } from './images/background2.webp';
+export { default as LoginBackground } from './images/background3.webp';
+export { default as MobileLoginBackground } from './images/background4.webp';
 
 // Banner
 export { default as Banner1 } from './images/banner1.webp';
