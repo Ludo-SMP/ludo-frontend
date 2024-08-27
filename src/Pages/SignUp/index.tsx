@@ -40,6 +40,11 @@ const SignUpWrapper = styled.div`
   justify-content: center;
   align-items: center;
   gap: 72px;
+
+  ${media.custom(600)} {
+    margin: 0;
+    padding: 40px 24px 72px 24px;
+  }
 `;
 
 const SignUpGuideWrapper = styled.div`
@@ -49,12 +54,11 @@ const SignUpGuideWrapper = styled.div`
   gap: 24px;
   margin: 0 auto;
   padding-top: 28px;
-  width: 600px;
   align-self: stretch;
   background-image: url(${SignUpBackground});
   background-repeat: no-repeat;
+
   ${media.custom(600)} {
-    width: 400px;
     background-image: none;
   }
 
@@ -66,6 +70,14 @@ const SignUpGuideWrapper = styled.div`
     font-style: normal;
     font-weight: 800;
     line-height: 48px;
+
+    ${media.custom(500)} {
+      font-size: ${({ theme }) => theme.font.medium};
+      font-family: 'Pretendard600';
+      font-style: normal;
+      font-weight: 600;
+      line-height: 32px;
+    }
   }
 
   .content {
@@ -77,6 +89,16 @@ const SignUpGuideWrapper = styled.div`
     font-weight: 500;
     line-height: 40px;
     white-space: pre-line;
+
+    ${media.custom(500)} {
+      color: ${({ theme }) => theme.color.black5};
+      text-align: center;
+      font-family: 'Pretendard400';
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 24px;
+    }
   }
 `;
 
@@ -85,6 +107,7 @@ const SignUpBtnsWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 16px;
+  width: 100%;
 `;
 
 const LoginWrapper = styled.div`
