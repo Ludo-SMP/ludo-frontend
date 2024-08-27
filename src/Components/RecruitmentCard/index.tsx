@@ -94,7 +94,7 @@ const RecruitmentCardWrapper = styled.li`
   gap: 12px;
 
   ${media.custom(400)} {
-    width: calc(100vw - 32px);
+    width: calc(100vw - 48px);
     padding: 16px;
     height: auto;
   }
@@ -115,7 +115,9 @@ const StudyRecruitInfoWrapper = styled.div`
 `;
 
 const StudyNameWrapper = styled.div`
+  width: 100%;
   .study__name {
+    width: 100%;
     max-width: 314px;
     white-space: nowrap;
     overflow: hidden;
