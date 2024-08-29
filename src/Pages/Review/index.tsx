@@ -41,7 +41,7 @@ const reviewDataList = {
 
 type ReviewResult = Record<keyof typeof reviewDataList, number>;
 
-export const ReviewPage = () => {
+const ReviewPage = () => {
   const { studyId, userId } = useParams();
   const navigate = useNavigate();
 
@@ -238,3 +238,5 @@ const FooterInner = styled.div`
     flex: 1;
   }
 `;
+
+export default ReviewPage;

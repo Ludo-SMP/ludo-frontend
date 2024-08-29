@@ -9,7 +9,7 @@ import ChipMenu from '@/Components/Common/ChipMenu';
 import { useState } from 'react';
 import { media } from '@/Styles/theme';
 
-export const Notifications = () => {
+const Notifications = () => {
   const { data: notifications, isLoading } = useNotifications();
 
   const [selectedNotificationType, setSelectedNotificationType] = useState<'REVIEW' | 'RECRUITMENT' | 'STUDY'>('STUDY');
@@ -109,3 +109,5 @@ const PlaceHolderTitle = styled.span`
   color: ${({ theme }) => theme.color.black4};
   ${({ theme }) => theme.typo.ListLabel};
 `;
+
+export default Notifications;
