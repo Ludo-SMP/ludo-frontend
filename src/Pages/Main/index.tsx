@@ -196,7 +196,7 @@ const CategoryMenusWrapper = styled.div`
   gap: 12px;
 `;
 
-const RecruitmentCardsWrapper = styled.div`
+const RecruitmentCardsWrapper = styled.ul`
   display: flex;
   align-items: flex-start;
   align-content: flex-start;
