@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import Button from '../Button';
 import { useModalStore } from '@/store/modal';
+import { media } from '@/Styles/theme';
 
 export interface ModalProps {
   /** 모달 안쪽 컴포넌트 */
@@ -87,6 +88,10 @@ const ModalWrapper = styled.div`
   background-color: ${({ theme }) => theme.color.white};
   border-radius: ${({ theme }) => theme.borderRadius.medium};
   border: 1px solid ${({ theme }) => theme.color.black1};
+
+  ${media.custom(600)} {
+    width: calc(100vw - 20px);
+  }
 `;
 
 const ModalInfoWrapper = styled.div<{ alignTitle: 'flex-start' | 'center' }>`
@@ -132,6 +137,10 @@ const ModalContentWrapper = styled.div`
     height: 160px;
     align-self: stretch;
     background: ${({ theme }) => theme.color.gray1};
+  }
+
+  ${media.custom(600)} {
+    width: calc(100vw - 100px);
   }
 `;
 
