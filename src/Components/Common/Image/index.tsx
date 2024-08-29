@@ -12,8 +12,12 @@ export interface ImageProps {
 }
 
 /** 정사각형 형태의 이미지를 보여줍니다. */
-const Image = ({ src, size }: ImageProps) => {
-  return src ? <img src={src} width={`${size}px`} height={`${size}px`} /> : <SkeletonImage size={size} />;
+const Image = ({ src, size, alt }: ImageProps) => {
+  return src ? (
+    <img src={src} width={`${size}px`} height={`${size}px`} alt={alt || 'image'} />
+  ) : (
+    <SkeletonImage size={size} />
+  );
 };
 
 const SkeletonImage = styled.div<{ size: number }>`

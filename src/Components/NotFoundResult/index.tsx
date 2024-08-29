@@ -23,7 +23,7 @@ const NotFoundResult = () => {
   return (
     <NotFoundResultWrapper>
       <div className="notFoundResult__text">{SEARCH.NOT_FONND_RESULT.content}</div>
-      <img className="notFoundResult__image" src={NotFound} />
+      <img className="notFoundResult__image" src={NotFound} alt="not found" />
       <Button scheme="primary" onClick={() => handleNotFoundResult()}>
         <span>스터디 직접 생성하기</span>
       </Button>

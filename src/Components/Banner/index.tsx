@@ -43,9 +43,6 @@ export const createCarouselOptions = (handleSlideIdx: React.Dispatch<SetStateAct
 
     /** 슬라이더의 인덱스가 변경되기 직전에 호출되는 콜백함수 */
     beforeChange: (_, next) => handleSlideIdx(next + 1),
-
-    /** CSS Transform 사용 유무 */
-    useTransform: false,
   };
 };
 
@@ -82,9 +79,15 @@ const BannerBox = styled.div`
     display: flex;
     width: 100%;
 
-    div {
+    & > div {
       width: 100%;
     }
+  }
+
+  .slick-slider .slick-track,
+  .slick-slider .slick-list {
+    will-change: transform;
+    transition-delay: 10ms;
   }
 
   ${media.custom(500)} {

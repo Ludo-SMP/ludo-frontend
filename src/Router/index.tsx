@@ -1,11 +1,10 @@
+import { lazy, Suspense } from 'react';
 import { Outlet, createBrowserRouter } from 'react-router-dom';
 import { ROUTES } from '@/Constants/route';
-import LoginPage from '@/Pages/Login';
-import MainPage from '@/Pages/Main';
-import RecruitmentDetailPage from '@/Pages/RecruitmentDetail';
-import RecruitmentsPage from '@/Pages/Recruitments';
 import SignUpPage from '@/Pages/SignUp';
 import { ApplicantsPage } from '@/Pages/Applicants';
+import MainPage from '@/Pages/Main';
+import RecruitmentsPage from '@/Pages/Recruitments';
 import StudyDetailPage from '@/Pages/StudyDetail';
 import CreateStudyPage from '@/Pages/Studies/CreateStudy';
 import ModifyStudyPage from '@/Pages/Studies/EditStudy';
@@ -25,6 +24,14 @@ import { ReviewPage } from '@/Pages/Review';
 import { Notifications } from '@/Pages/Notifications';
 import { MyPageReviews } from '@/Pages/MyPageReviews';
 import { ProfileLayout } from '@/Layout/ProfileLayout';
+import { Loading } from '@/Assets';
+
+const LoginPage = lazy(() => import('@/Pages/Login'));
+const RecruitmentDetailPage = lazy(() => import('@/Pages/RecruitmentDetail'));
+
+const SuspenseWrapper = ({ children }: { children: React.ReactNode }) => (
+  <Suspense fallback={<Loading />}>{children}</Suspense>
+);
 
 export const RouterPath = createBrowserRouter([
   {
@@ -44,7 +51,11 @@ export const RouterPath = createBrowserRouter([
       },
       {
         path: ROUTES.AUTH.LOGIN,
-        element: <LoginPage />,
+        element: (
+          <SuspenseWrapper>
+            <LoginPage />
+          </SuspenseWrapper>
+        ),
       },
       {
         path: ROUTES.AUTH.LOGINFAIL,
@@ -88,11 +99,6 @@ export const RouterPath = createBrowserRouter([
               </SettingLayout>
             ),
             children: [
-              // {
-              //   // 프로필 설정
-              //   path: ROUTES.MYPAGE.PROFILE_SETTINGS,
-              //   element: <>TODO</>,
-              // },
               {
                 // 알림 권한 설정
                 path: ROUTES.MYPAGE.NOTIFICATIONS_SETTINGS,
@@ -117,7 +123,11 @@ export const RouterPath = createBrowserRouter([
       },
       {
         path: ROUTES.RECRUITMENT.DETAIL,
-        element: <RecruitmentDetailPage />,
+        element: (
+          <SuspenseWrapper>
+            <RecruitmentDetailPage />
+          </SuspenseWrapper>
+        ),
       },
       {
         path: ROUTES.AUTH.SIGNUP,

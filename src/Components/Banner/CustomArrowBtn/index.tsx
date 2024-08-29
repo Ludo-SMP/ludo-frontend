@@ -12,7 +12,7 @@ export const CustomArrowBtn = ({
   onClick,
 }: CustomArrowBtnprops & Pick<CustomArrowProps, 'onClick' | 'style'>) => {
   return (
-    <CustomArrowBtnWrapper $type={type} onClick={onClick}>
+    <CustomArrowBtnWrapper $type={type} aria-label="arrow" onClick={onClick} type="button">
       {type === 'PREV' ? <PrevArrow /> : <NextArrow />}
     </CustomArrowBtnWrapper>
   );

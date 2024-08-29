@@ -10302,6 +10302,11 @@ vfile@^6.0.0:
     unist-util-stringify-position "^4.0.0"
     vfile-message "^4.0.0"
 
+vite-bundle-analyzer@^0.10.5:
+  version "0.10.5"
+  resolved "https://registry.yarnpkg.com/vite-bundle-analyzer/-/vite-bundle-analyzer-0.10.5.tgz#a0fee795b9a57b8084ab4b68588a2c35f39d4fea"
+  integrity sha512-gxIFQ6ifoQjDXaVWJmXHwI2VEVqyz6FXHKicNpTe4Pr2MAka6NQVRcmgznziRzbl9rhMP0qIc5Be8PxfGXUhgQ==
+
 vite-plugin-mkcert@^1.17.3:
   version "1.17.5"
   resolved "https://registry.yarnpkg.com/vite-plugin-mkcert/-/vite-plugin-mkcert-1.17.5.tgz#175f1a2a99c110fa87b2f2e6390b22656674a67b"

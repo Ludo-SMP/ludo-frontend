@@ -37,7 +37,7 @@ export const MobileUtilityBtn = ({
   return (
     <MobileUtilityBtnBox $width={diameter} $height={diameter} $fullWidth={fullWidth}>
       <IconBox $width={diameter} $height={diameter}>
-        {typeof icon === 'string' ? <img src={icon} width={24} height={24} /> : icon}
+        {typeof icon === 'string' ? <img src={icon} width={24} height={24} alt="mobile utility button" /> : icon}
       </IconBox>
       <GuideBtn
         $fullWidth={fullWidth}
