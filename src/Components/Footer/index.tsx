@@ -95,6 +95,7 @@ const NavBtnList = styled.div`
   align-items: flex-start;
   gap: 12px;
   align-self: stretch;
+  flex-wrap: wrap;
 
   ${media.mobile} {
     button {

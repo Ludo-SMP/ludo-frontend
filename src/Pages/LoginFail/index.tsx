@@ -22,7 +22,7 @@ const LoginFailPage = () => {
         <div className="content">{AUTH.LOGIN_FAIL.content}</div>
       </LoginFailGuideWrapper>
       <LoginFailImageWrapper>
-        <img src={LoginFail} />
+        <img src={LoginFail} alt="login fail" />
       </LoginFailImageWrapper>
 
       <LoginFailBtnsWrapper>

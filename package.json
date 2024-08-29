@@ -92,6 +92,7 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.2.2",
     "vite": "^5.0.8",
+    "vite-bundle-analyzer": "^0.10.5",
     "vite-plugin-mkcert": "^1.17.3",
     "vite-plugin-radar": "^0.9.6",
     "vite-plugin-svgr": "^4.2.0"

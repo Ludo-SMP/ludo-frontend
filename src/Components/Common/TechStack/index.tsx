@@ -12,7 +12,7 @@ export const TechStack = ({ name, imageUrl, selected = false, onClick }: TechSta
   return (
     <TechStackWrapper selected={selected} imageUrl={imageUrl} onClick={onClick}>
       {imageUrl ? (
-        <img className="stack__image" src={`${import.meta.env.VITE_BASE_API_URL}${imageUrl}`} />
+        <img className="stack__image" src={`${import.meta.env.VITE_BASE_API_URL}${imageUrl}`} alt="tech stack" />
       ) : (
         <div className="blank__image" />
       )}

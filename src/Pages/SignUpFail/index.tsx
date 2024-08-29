@@ -22,7 +22,7 @@ const SignUpFailPage = () => {
         <div className="content">{AUTH.SIGNUP_FAIL.content}</div>
       </SignUpFailGuideWrapper>
       <SignUpFailImageWrapper>
-        <img src={SignUpFail} />
+        <img src={SignUpFail} alt="signup fail" />
       </SignUpFailImageWrapper>
       <SignUpFailBtnsWrapper>
         <Button scheme="primary" size="fullWidth" onClick={() => navigate(ROUTES.AUTH.LOGIN)}>
