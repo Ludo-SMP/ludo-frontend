@@ -6,7 +6,7 @@ import { Loading } from '@/Assets';
 import { KeywordsSettingForm } from './KeywordsSettingForm';
 import { NOTIFICATIONS_SETTINGS_CONTENTS } from '@/Constants/messages';
 
-export const NotificationsSettings = () => {
+const NotificationsSettings = () => {
   const { data: notificationsSetting, isLoading } = useNotificationsSetting();
 
   return (
@@ -139,3 +139,5 @@ const ToggleSwitches = styled.div`
   width: 100%;
   flex-direction: column;
 `;
+
+export default NotificationsSettings;

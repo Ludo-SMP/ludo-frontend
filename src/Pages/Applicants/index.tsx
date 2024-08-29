@@ -14,7 +14,7 @@ import { P, match } from 'ts-pattern';
 import { useStudyDetail } from '@/Hooks/study/useStudyDetail';
 import { Applicant } from '@/Types/study';
 
-export const ApplicantsPage = () => {
+const ApplicantsPage = () => {
   const studyId = Number(useParams().studyId);
   const { user } = useUserStore();
   const { data: ApplicantsDetail, status } = useApplicantsDetail(studyId);
@@ -329,3 +329,5 @@ const PlaceHolderTitle = styled.span`
   color: ${({ theme }) => theme.color.black4};
   ${({ theme }) => theme.typo.ListLabel};
 `;
+
+export default ApplicantsPage;
