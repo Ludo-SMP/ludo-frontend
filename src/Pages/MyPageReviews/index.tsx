@@ -6,7 +6,7 @@ import { StudyReviewsType } from '@/Types/review';
 import { Children, PropsWithChildren, ReactNode } from 'react';
 import styled from 'styled-components';
 
-export const MyPageReviews = () => {
+const MyPageReviews = () => {
   const { data: allStudyreviews, isLoading } = useReviews();
 
   return (
@@ -71,3 +71,5 @@ const PlaceHolderTitle = styled.span`
   color: ${({ theme }) => theme.color.black4};
   ${({ theme }) => theme.typo.ListLabel};
 `;
+
+export default MyPageReviews;
