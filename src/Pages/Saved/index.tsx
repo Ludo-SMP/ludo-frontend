@@ -88,7 +88,7 @@ const Saved = () => {
   );
 };
 
-export { Saved };
+export default Saved;
 
 const SavedLayout = styled.div`
   display: flex;
