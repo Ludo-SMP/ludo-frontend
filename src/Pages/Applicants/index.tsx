@@ -13,6 +13,7 @@ import Footer from '@/Components/Footer';
 import { P, match } from 'ts-pattern';
 import { useStudyDetail } from '@/Hooks/study/useStudyDetail';
 import { Applicant } from '@/Types/study';
+import { media } from '@/Styles/theme';
 
 const ApplicantsPage = () => {
   const studyId = Number(useParams().studyId);
@@ -274,12 +275,17 @@ const Applicants = styled.ul`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(248px, 392px));
   min-width: 300px;
+  min-height: 444px;
   max-width: 1224px;
   gap: 24px;
   flex-wrap: wrap;
 
   ${({ theme }) => theme.media.mobile} {
     gap: 12px;
+  }
+
+  ${media.custom(500)} {
+    min-height: 364px;
   }
 `;
 
