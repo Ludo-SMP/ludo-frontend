@@ -1,13 +1,12 @@
 import { useRecruitmentDetail } from '@/Hooks/recruitments/useRecruitmentDetail';
 import { useParams } from 'react-router-dom';
-
 import { Loading } from '@/Assets';
 import { useEditRecruitmentMutation } from '@/Hooks/recruitments/useEditRecruitment';
 import { RecruitFormWithSelect } from '@/Types/study';
 import Layout from '../CreateRecruitment/layout';
 import { useEffect } from 'react';
 
-export const EditRecruitmentPage = () => {
+const EditRecruitmentPage = () => {
   const recruitmentId = Number(useParams().recruitmentId);
   const studyId = Number(useParams().studyId);
 
@@ -42,3 +41,5 @@ export const EditRecruitmentPage = () => {
     </>
   );
 };
+
+export default EditRecruitmentPage;

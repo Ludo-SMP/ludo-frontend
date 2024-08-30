@@ -132,6 +132,7 @@ const MainPageWrapper = styled.section`
   display: flex;
   margin: 0 auto;
   flex-direction: column;
+  min-height: 912px;
   background-color: ${({ theme }) => theme.color.white2};
   gap: 40px;
 `;

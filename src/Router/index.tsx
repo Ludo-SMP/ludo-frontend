@@ -1,18 +1,16 @@
 import { lazy, Suspense } from 'react';
 import { Outlet, createBrowserRouter } from 'react-router-dom';
 import { ROUTES } from '@/Constants/route';
-import { Saved } from '@/Pages/Saved';
 import Header from '@/Components/Header';
 import Footer from '@/Components/Footer';
-import { Loading } from '@/Assets';
 import ErrorBoundary from '@/Components/ErrorBoundary';
-import { EditRecruitmentPage } from '@/Pages/EditRecruitment';
 import { MyPageLayout } from '@/Layout/MyPageLayout';
 import { ProfileLayout } from '@/Layout/ProfileLayout';
 import { SettingLayout } from '@/Layout/SettingLayout';
-import MainPage from '@/Pages/Main';
-import RecruitmentsPage from '@/Pages/Recruitments';
+import { LoadingSpinner } from '@/Components/LoadingSpinner';
 
+const MainPage = lazy(() => import('@/Pages/Main'));
+const RecruitmentsPage = lazy(() => import('@/Pages/Recruitments'));
 const LoginPage = lazy(() => import('@/Pages/Login'));
 const SignUpPage = lazy(() => import('@/Pages/SignUp'));
 const RecruitmentDetailPage = lazy(() => import('@/Pages/RecruitmentDetail'));
@@ -28,18 +26,18 @@ const NotificationsSettings = lazy(() => import('@/Pages/NotificationsSettings')
 const ReviewPage = lazy(() => import('@/Pages/Review'));
 const Notifications = lazy(() => import('@/Pages/Notifications'));
 const MyPageReviews = lazy(() => import('@/Pages/MyPageReviews'));
-
-const SuspenseWrapper = ({ children }: { children: React.ReactNode }) => (
-  <Suspense fallback={<Loading />}>{children}</Suspense>
-);
+const EditRecruitmentPage = lazy(() => import('@/Pages/EditRecruitment'));
+const SavedPage = lazy(() => import('@/Pages/Saved'));
 
 export const RouterPath = createBrowserRouter([
   {
     element: (
       <>
         <Header />
-        <Outlet />
-        <Footer />
+        <Suspense fallback={<LoadingSpinner />}>
+          <Outlet />
+          <Footer />
+        </Suspense>
       </>
     ),
 
@@ -51,19 +49,11 @@ export const RouterPath = createBrowserRouter([
       },
       {
         path: ROUTES.AUTH.LOGIN,
-        element: (
-          <SuspenseWrapper>
-            <LoginPage />
-          </SuspenseWrapper>
-        ),
+        element: <LoginPage />,
       },
       {
         path: ROUTES.AUTH.LOGINFAIL,
-        element: (
-          <SuspenseWrapper>
-            <LoginFailPage />
-          </SuspenseWrapper>
-        ),
+        element: <LoginFailPage />,
       },
       {
         // 마이페이지
@@ -71,9 +61,7 @@ export const RouterPath = createBrowserRouter([
         // 마이페이지 공통 사이드바
         element: (
           <MyPageLayout>
-            <SuspenseWrapper>
-              <Outlet />
-            </SuspenseWrapper>
+            <Outlet />
           </MyPageLayout>
         ),
         children: [
@@ -94,7 +82,7 @@ export const RouterPath = createBrowserRouter([
           {
             // 임시 저장된 글
             path: ROUTES.MYPAGE.SAVED,
-            element: <Saved />,
+            element: <SavedPage />,
           },
           {
             path: ROUTES.MYPAGE.SETTINGS,
@@ -121,43 +109,23 @@ export const RouterPath = createBrowserRouter([
       },
       {
         path: ROUTES.STUDY.DETAIL,
-        element: (
-          <SuspenseWrapper>
-            <StudyDetailPage />
-          </SuspenseWrapper>
-        ),
+        element: <StudyDetailPage />,
       },
       {
         path: ROUTES.RECRUITMENT.RECRUITMENTS,
-        element: (
-          <SuspenseWrapper>
-            <RecruitmentsPage />
-          </SuspenseWrapper>
-        ),
+        element: <RecruitmentsPage />,
       },
       {
         path: ROUTES.RECRUITMENT.DETAIL,
-        element: (
-          <SuspenseWrapper>
-            <RecruitmentDetailPage />
-          </SuspenseWrapper>
-        ),
+        element: <RecruitmentDetailPage />,
       },
       {
         path: ROUTES.AUTH.SIGNUP,
-        element: (
-          <SuspenseWrapper>
-            <SignUpPage />
-          </SuspenseWrapper>
-        ),
+        element: <SignUpPage />,
       },
       {
         path: ROUTES.AUTH.SIGNUPFAIL,
-        element: (
-          <SuspenseWrapper>
-            <SignUpFailPage />
-          </SuspenseWrapper>
-        ),
+        element: <SignUpFailPage />,
       },
     ],
   },
@@ -165,54 +133,54 @@ export const RouterPath = createBrowserRouter([
     // 스터디원 평가 페이지
     path: ROUTES.STUDY.REVIEW,
     element: (
-      <SuspenseWrapper>
+      <Suspense>
         <ReviewPage />
-      </SuspenseWrapper>
+      </Suspense>
     ),
   },
   {
     // 스터디 생성 페이지
     path: ROUTES.STUDY.CREATE,
     element: (
-      <SuspenseWrapper>
+      <Suspense>
         <CreateStudyPage />
-      </SuspenseWrapper>
+      </Suspense>
     ),
   },
   {
     // 스터디 수정 페이지
     path: ROUTES.STUDY.MODIFY,
     element: (
-      <SuspenseWrapper>
+      <Suspense>
         <ModifyStudyPage />
-      </SuspenseWrapper>
+      </Suspense>
     ),
   },
   {
     // 스터디 지원자 페이지
     path: ROUTES.STUDY.APPLICANTS,
     element: (
-      <SuspenseWrapper>
+      <Suspense>
         <ApplicantsPage />
-      </SuspenseWrapper>
+      </Suspense>
     ),
   },
   {
     // 모집공고 생성 페이지
     path: ROUTES.RECRUITMENT.CREATE,
     element: (
-      <SuspenseWrapper>
+      <Suspense>
         <CreateRecruitmentPage />
-      </SuspenseWrapper>
+      </Suspense>
     ),
   },
   // 모집공고 수정 페이지
   {
     path: ROUTES.RECRUITMENT.EDIT,
     element: (
-      <SuspenseWrapper>
+      <Suspense>
         <EditRecruitmentPage />
-      </SuspenseWrapper>
+      </Suspense>
     ),
   },
 ]);
