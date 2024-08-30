@@ -36,7 +36,9 @@ const RecruitmentCardList = () => {
       ) : recruitmentsPages?.length && recruitmentsPages[0]?.recruitments?.length ? (
         recruitmentsPages.map((recruitmentsPage) =>
           recruitmentsPage?.recruitments.map((recruitment: Recruitment) => (
-            <RecruitmentCard key={recruitment.id} {...recruitment} />
+            <li key={recruitment.id}>
+              <RecruitmentCard key={recruitment.id} {...recruitment} />
+            </li>
           )),
         )
       ) : (

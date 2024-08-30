@@ -79,15 +79,21 @@ const MainPage = () => {
             <SkeletonRecruitmentCardList />
           ) : selectedCategory.name === '코딩 테스트' ? (
             popularCodingRecruitments?.map((recruitment: Recruitment) => (
-              <RecruitmentCard {...recruitment} key={recruitment.id} />
+              <li key={recruitment.id}>
+                <RecruitmentCard {...recruitment} key={recruitment.id} />
+              </li>
             ))
           ) : selectedCategory.name === '모의 면접' ? (
             popularInterviewRecruitments?.map((recruitment: Recruitment) => (
-              <RecruitmentCard {...recruitment} key={recruitment.id} />
+              <li key={recruitment.id}>
+                <RecruitmentCard {...recruitment} key={recruitment.id} />
+              </li>
             ))
           ) : (
             popularProjectRecruitments?.map((recruitment: Recruitment) => (
-              <RecruitmentCard {...recruitment} key={recruitment.id} />
+              <li key={recruitment.id}>
+                <RecruitmentCard {...recruitment} key={recruitment.id} />
+              </li>
             ))
           )}
         </RecruitmentCardsWrapper>

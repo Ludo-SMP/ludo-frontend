@@ -80,7 +80,7 @@ const RecruitmentCard = (recruitment: Recruitment) => {
   );
 };
 
-const RecruitmentCardWrapper = styled.li`
+const RecruitmentCardWrapper = styled.div`
   width: 394px;
   height: 368px;
   display: flex;
