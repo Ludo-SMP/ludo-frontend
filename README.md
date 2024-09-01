@@ -20,7 +20,7 @@
 
 ## 📎 [Ludo 바로가기](https://ludo.study/)
 ### 🧑‍🎨 [Ludo 소개 페이지](https://github.com/Ludo-SMP)
-### 🧰 [Ludo Backend 저장소](https://github.com/Ludo-SMP/ludo-backend)
+### 🗂 [Ludo Backend 저장소](https://github.com/Ludo-SMP/ludo-backend)
 
 
 ## 💡 프로젝트 소개
@@ -41,8 +41,6 @@
     - ✔︎ [3차 유저 테스트 : 2024.07.04 ~ 2024.07.11 [32건]](https://github.com/Ludo-SMP/ludo/blob/main/user-feedbacks/Ludo%203%E1%84%8E%E1%85%A1%20%E1%84%89%E1%85%A1%E1%84%8B%E1%85%AD%E1%86%BC%E1%84%8C%E1%85%A1%20%E1%84%91%E1%85%B5%E1%84%83%E1%85%B3%E1%84%87%E1%85%A2%E1%86%A8_%E1%84%8B%E1%85%B3%E1%86%BC%E1%84%83%E1%85%A1%E1%86%B8%E1%84%8C%E1%85%A1%E1%84%85%E1%85%AD.pdf)
 
   - ✔︎ **3차 마일스톤 : 2024.07.16 ~ 2024.09.03**
-
-<br>
 
 ## 📋 프로젝트 자료
 ### 🖌 기획
@@ -66,10 +64,15 @@
 ![프론트_기술스택](https://github.com/user-attachments/assets/ad896334-d01a-429c-9f2f-ede2e266fe0d)
 
 ### Collaboration
-![협업_기술스택](https://github.com/user-attachments/assets/e62d7974-5667-4b04-b5b9-be0865170618)
+![협업 기술스택](https://github.com/user-attachments/assets/fb1bc184-3a70-4666-bca0-fc82365b443a)
 
 
-## 🔨 [주요 기능](https://github.com/Ludo-SMP)
+
+## 🔨 [주요 기능 및 특장점](https://github.com/Ludo-SMP)
+
+## 🛠 아키텍처
+
+![Ludo-아키텍처 구조 (1201 x 601 px)](https://github.com/user-attachments/assets/3648a3ff-b92e-4db0-aa1d-123e024b4569)
 
 
 ## ⚙️ 개발환경 설정 
@@ -135,7 +138,7 @@ yarn storybook
 ludo-frontend
 ├── .github                         # Feature, PR, Bug template
 ├── .husky                          # pre-commit hook
-├── .storybook                      # Storybook 설정 파일
+├── .storybook                      # Storybook setting
 ├── public                          # public
 └── src
     ├── Apis                        # api 호출 Function
