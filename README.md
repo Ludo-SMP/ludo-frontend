@@ -1,9 +1,10 @@
 <div align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" width="300" srcset="https://github.com/user-attachments/assets/04abc2c4-c50b-498c-b2ee-ced751ade965">
-    <source media="(prefers-color-scheme: light)" width="300" srcset="https://github.com/user-attachments/assets/479c81f7-358e-4e33-ad67-66fba7ed9452">
-    <img alt="IMAGE" src="https://github.com/user-attachments/assets/479c81f7-358e-4e33-ad67-66fba7ed9452">
-  </picture>
+ <picture>
+  <source media="(prefers-color-scheme: dark)" width="300" srcset="https://github.com/user-attachments/assets/04abc2c4-c50b-498c-b2ee-ced751ade965">
+  <source media="(prefers-color-scheme: light)" width="300" srcset="https://github.com/user-attachments/assets/479c81f7-358e-4e33-ad67-66fba7ed9452">
+  <img alt="IMAGE" src="https://github.com/user-attachments/assets/479c81f7-358e-4e33-ad67-66fba7ed9452">
+</picture>
+
  
   <h1>나도 배운걸 활용하고 싶다</h1>
   배운걸 활용하고 싶은데 고민이신가요?
@@ -12,27 +13,44 @@
   <br/>
   걱정마세요. 당신이 원하는 스터디 Ludo가 찾아드릴게요.
   <br/><br/>
+
+  
+[<img src="https://img.shields.io/badge/-ludo.study-9999FF?style=flat&logo=google-chrome&logoColor=white" />](https://ludo.study) [<img src="https://img.shields.io/badge/introduction-FFA116?style=flat&logo=notion&logoColor=white" />](https://coherent-stool-91c.notion.site/Ludo-3b08f55b652b475c991bfadf372e6f33) [<img src="https://img.shields.io/badge/license-MIT-0ABF53?style=flat" />](https://github.com/Ludo-SMP/.github/blob/main/LICENSE) [<img src="https://img.shields.io/badge/release-v2.0.0-0ABF53?style=flat" />]()
 </div>
 
-## 📎 [Ludo 바로가기](https://ludoapi.store/)
+## 📎 [Ludo 바로가기](https://ludo.study/)
+### 🧑‍🎨 [Ludo 소개 페이지](https://github.com/Ludo-SMP)
+### 🗂 [Ludo Backend 저장소](https://github.com/Ludo-SMP/ludo-backend)
+
 
 ## 💡 프로젝트 소개
-**스터디 지원부터 참여, 관리까지**<br>
-**누구나 쉽고 빠르게 지속 가능한 스터디에 참여할 수 있는 스터디 플랫폼입니다.**
+**누구나 쉽고 빠르게 지속 가능한 스터디에 참여할 수 있는 플랫폼입니다. 스터디 지원부터 참여, 관리까지 모든 과정을 한 곳에서 통합적으로 관리해 지속 가능한 학습 환경을 제공합니다.**
 
-## 🎬 프로젝트 진행상황
+## 🎬 프로젝트 타임라인
+
 ### ✔︎ 진행기간 : 2023.12.15 ~ 진행 중
-### ✔︎ MVP 구현 후, 1차 유저 테스트 : 2024.3.26~2024.3.30
+
+  - ✔︎ **1차 마일스톤 : 2023.12.15 ~ 2024.03.15**
+
+    - ✔︎ [1차 유저 테스트 : 2024.03.26 ~ 2024.03.30 [21건]](https://github.com/Ludo-SMP/ludo/blob/main/user-feedbacks/Ludo%201%E1%84%8E%E1%85%A1%20%E1%84%89%E1%85%A1%E1%84%8B%E1%85%AD%E1%86%BC%E1%84%8C%E1%85%A1%20%E1%84%91%E1%85%B5%E1%84%83%E1%85%B3%E1%84%87%E1%85%A2%E1%86%A8_%E1%84%8B%E1%85%B3%E1%86%BC%E1%84%83%E1%85%A1%E1%86%B8%E1%84%8C%E1%85%A1%E1%84%85%E1%85%AD.pdf)
+
+  - ✔︎ **2차 마일스톤 : 2024.04.02 ~ 2024.07.11**
+
+    - ✔︎ [2차 유저 테스트 : 2024.05.04 ~ 2024.05.11 [9건]](https://github.com/Ludo-SMP/ludo/blob/main/user-feedbacks/Ludo%202%E1%84%8E%E1%85%A1%20%E1%84%89%E1%85%A1%E1%84%8B%E1%85%AD%E1%86%BC%E1%84%89%E1%85%A5%E1%86%BC%20%E1%84%80%E1%85%A5%E1%86%B7%E1%84%8C%E1%85%B3%E1%86%BC%20%E1%84%91%E1%85%B5%E1%84%83%E1%85%B3%E1%84%87%E1%85%A2%E1%86%A8_%E1%84%8B%E1%85%B3%E1%86%BC%E1%84%83%E1%85%A1%E1%86%B8%E1%84%8C%E1%85%A1%E1%84%85%E1%85%AD.pdf) . [랜딩 페이지 [링크]](https://www.figma.com/proto/8ok7UVNbYMUeEEohRKDylX/%EB%9E%9C%EB%94%A9%ED%8E%98%EC%9D%B4%EC%A7%80?type=design&node-id=1-132&t=1jpikPUnpZNdRckS-1&scaling=min-zoom&page-id=0%3A1)
+
+    - ✔︎ [3차 유저 테스트 : 2024.07.04 ~ 2024.07.11 [32건]](https://github.com/Ludo-SMP/ludo/blob/main/user-feedbacks/Ludo%203%E1%84%8E%E1%85%A1%20%E1%84%89%E1%85%A1%E1%84%8B%E1%85%AD%E1%86%BC%E1%84%8C%E1%85%A1%20%E1%84%91%E1%85%B5%E1%84%83%E1%85%B3%E1%84%87%E1%85%A2%E1%86%A8_%E1%84%8B%E1%85%B3%E1%86%BC%E1%84%83%E1%85%A1%E1%86%B8%E1%84%8C%E1%85%A1%E1%84%85%E1%85%AD.pdf)
+
+  - ✔︎ **3차 마일스톤 : 2024.07.16 ~ 2024.09.03**
 
 ## 📋 프로젝트 자료
 ### 🖌 기획
 #### 📓 [유저 스토리](https://docs.google.com/spreadsheets/d/14xlWLKUEV8hrthsYjRFmHcRLDtWRKmthFgiiYNGrhwA/edit#gid=0) 
-#### 📓 [페이지 Flow Chart](https://www.figma.com/file/aCw6w4LCjTczfRGlmD1bhV/Page-flow-chart?type=whiteboard&node-id=0-1&t=99pRF5UZwzy7u5i5-0) <br>
+#### 📓 [페이지 Flow Chart](https://www.figma.com/file/aCw6w4LCjTczfRGlmD1bhV/Page-flow-chart?type=whiteboard&node-id=0-1&t=99pRF5UZwzy7u5i5-0)
 #### 📓 [브레인 스토밍](https://www.figma.com/file/VSxOLuyKKZobloOcFja93N/Brain-storming?type=whiteboard&node-id=2-94&t=UZ5vevbuqABdPsBq-0)
 #### 📓 [IA(정보 구조도)](https://www.figma.com/file/Sho4QHn0XqEptYBBlbf704/Page-Layout?type=design&node-id=206-31&mode=design&t=YTrENpZjUN2rJ4Dj-0)
 
 ### 📄 기능 명세
-#### 📓 [API 설계서](http://34.82.109.226/swagger-ui/index.html#/)
+#### 📓 [API 설계서](http://35.227.190.157/api/swagger-ui/index.html#/)
 #### 📓 [페이지 기능명세서](https://docs.google.com/spreadsheets/d/1TejPT93Gi3ztsGqPt5lpAY1UMFvruP80D9pFmkwy1fI/edit?invite=CLS0q4EH#gid=0)
 
 ### 🎨 디자인
@@ -40,59 +58,22 @@
 #### 📓 [디자인 시스템](https://www.figma.com/file/OLgSF11mOFN5MpcYzpD3N3/Design-System?type=design&node-id=1121-950&mode=design&t=2ZrFmOMMTcunVk5h-0)
 
 
-## 🛠 사용한 기술 스택
-<img src="https://img.shields.io/badge/React-18.2.0-blue?logo=react"> <img src="https://img.shields.io/badge/TypeSript-5.2.2-blue?logo=typescript"><br>
-<img src="https://img.shields.io/badge/ReactQuery-5.17.9-blue?logo=react-query"> <img src="https://img.shields.io/badge/Zustand-4.5.0-blue?logo=Zustand"><br>
-<img src="https://img.shields.io/badge/StyledComponents-6.1.8-blue?logo=styledcomponents"> <img src="https://img.shields.io/badge/MSW-2.2.4-blue?logo=msw"> <br>
-<img src="https://img.shields.io/badge/Prettier-3.2.5-blue?logo=prettier"> <img src="https://img.shields.io/badge/Eslint-8.55.0-blue?logo=esLint"> <br>
-<img src="https://img.shields.io/badge/Vite-5.0.8-blue?logo=vite"> <img src="https://img.shields.io/badge/Nelify--blue?logo=netlify"> <br>
-<img src="https://img.shields.io/badge/ReactHookForm-7.50.1-blue?logo=react-hook-form"> <img src="https://img.shields.io/badge/ReactRouterDom-6.22.0-blue?logo=react-router-dom"><br>
+## 🛠 기술 스택
+### FE
 
-<img src="https://github.com/Ludo-SMP/ludo-frontend/assets/62270427/d347aa15-be96-4343-b41a-783ba1c4d7b8"/>
+![프론트_기술스택](https://github.com/user-attachments/assets/ad896334-d01a-429c-9f2f-ede2e266fe0d)
 
-## 🛠 주요 기능
+### Collaboration
+![협업 기술스택](https://github.com/user-attachments/assets/fb1bc184-3a70-4666-bca0-fc82365b443a)
 
-### ✔︎ 스터디 모집공고 조회
-메인페이지에서 원하는 카테고리의 스터디 모집공고를 확인할 수 있어요.
-<details markdown="1">
-<summary>메인페이지에서 스터디 조회</summary>
-  <img width="600" src="src/Assets/images/search1.gif">
-</details>
 
-모집공고 모아보기 페이지에서는 필터를 통해 원하는 스터디 모집공고를 확인할 수 있어요.
 
-<details markdown="1">
-<summary>모집공고 모아보기 페이지에서 필터링을 통한 스터디 모집공고 조회</summary>
-  <img width="600" src="src/Assets/images/search2.gif">
-</details>
+## 🔨 [주요 기능 및 특장점](https://github.com/Ludo-SMP)
 
-### ✔︎ 스터디 지원
-스터디 모집공고 상세 페이지에서 원하는 스터디 모집공고에 지원할 수 있어요.
-<details markdown="1">
-<summary>스터디 지원</summary>
-  <img width="600" src="src/Assets/images/apply.gif">
-</details>
+## 🛠 아키텍처
 
-### ✔︎ 스터디 생성
-로그인한 사용자는 스터디 생성페이지에서 스터디를 생성할 수 있어요.
-<details markdown="1">
-<summary>스터디 생성</summary>
-  <img width="600" src="src/Assets/images/study.gif">
-</details>
+![Ludo-아키텍처 구조 (1201 x 601 px)](https://github.com/user-attachments/assets/3648a3ff-b92e-4db0-aa1d-123e024b4569)
 
-### ✔︎ 스터디 모집공고 생성
-생성된 스터디에 대한 모집공고를 생성할 수 있어요.
-<details markdown="1">
-<summary>스터디 모집공고 생성</summary>
-  <img width="600" src="src/Assets/images/recruitment.gif">
-</details>
-
-### ✔︎ 마이페이지
-마이페이지에서 참여중인 스터디, 지원한 스터디, 진행 완료된 스터디를 확인할 수 있어요.
-<details markdown="1">
-<summary>마이페이지</summary>
-  <img width="600" src="src/Assets/images/mypage.gif">
-</details>
 
 ## ⚙️ 개발환경 설정 
 
@@ -157,6 +138,7 @@ yarn storybook
 ludo-frontend
 ├── .github                         # Feature, PR, Bug template
 ├── .husky                          # pre-commit hook
+├── .storybook                      # Storybook setting
 ├── public                          # public
 └── src
     ├── Apis                        # api 호출 Function
@@ -181,27 +163,21 @@ ludo-frontend
 <table>
   <tbody>
       <td align="center">
-        <a href="https://github.com/kmin-jeong">
-            <img src="https://avatars.githubusercontent.com/u/53456037?v=4" width="200px;" height="200px;" alt="타로"/>
-            <h3><b>타로</b></h3>
-        </a>
-      </td>
-      <td align="center">
         <a href="https://github.com/SungHyun627">
             <img src="https://github.com/Ludo-SMP/ludo-frontend/assets/62270427/17abec8f-0a5b-4993-83ce-05b5bebbc2fa" width="200px;" height="200px;" alt="김성현"/>
-            <h3><b>김성현</b></h3>
+            <h3><b>성현(Hyun)</b></h3>
         </a>
       </td>
       <td align="center">
         <a href="https://github.com/hyosin-Jang">
             <img src="https://github.com/Ludo-SMP/ludo-frontend/assets/71035113/af24be48-bbc1-4453-a9d9-3ffab2c60c09" width="200px;" height="200px;" alt="hyosin-Jang"/>
-            <h3><b>Hyosin-Jang</b></h3>
+            <h3><b>효신(Claire)</b></h3>
         </a>
       </td>
       <td align="center">
         <a href="https://github.com/abiriadev">
             <img src="https://github.com/Ludo-SMP/ludo-frontend/assets/71035113/c0de056b-7a11-4f16-ae1c-7140e8bba14c" width="200px;" height="200px;" alt="Abiria"/>
-            <h3><b>Abiria</b></h3>
+            <h3><b>현의(Abiria)</b></h3>
         </a>
       </td>
   </tbody>

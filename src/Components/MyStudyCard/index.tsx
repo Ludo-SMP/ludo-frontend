@@ -102,7 +102,7 @@ export const MyStudyCard = ({
         <MyStudyCardButtonsWrapper isApplyStatus={isApplyStatus}>
           {(status === 'PROGRESS' || status === 'RECRUITING') && !hasRecruitment && isOwner && (
             <Button
-              scheme="primary"
+              scheme="secondary"
               onClick={(e) => {
                 e.stopPropagation();
                 navigate(`/studies/${id}/recruitments/create`);
@@ -275,10 +275,6 @@ const MyStudyCardButtonsWrapper = styled.div<{ isApplyStatus: boolean }>`
   display: flex;
   width: 100%;
   justify-content: flex-end;
-
-  button {
-    padding: ${(props) => (props.isApplyStatus ? `0 16px` : `8px 24px`)};
-  }
 
   ${media.custom(600)} {
     justify-content: center;
