@@ -9,6 +9,8 @@ import { useCancelAppyMutation } from '@/Hooks/study/useCancelAppyMutation';
 import { useQueryClient } from '@tanstack/react-query';
 import { STUDY } from '@/Constants/queryString';
 import { media, textEllipsis } from '@/Styles/theme';
+import { RecruitmentDetailModal } from '../Modal/RecruitmentDetailModal';
+import { useState } from 'react';
 
 interface MyStudyCardProps {
   id: number;
@@ -48,12 +50,15 @@ export const MyStudyCard = ({
   participantCount,
   isOwner,
   hasRecruitment,
+  recruitmnetId,
 }: MyStudyCardProps) => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const cancelApplySuccessHandler = () => {
     queryClient.invalidateQueries({ queryKey: [...STUDY.MYPAGE_INFO()] });
   };
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
   const { mutate: cancelMutate } = useCancelAppyMutation(1, id, cancelApplySuccessHandler);
   const isApplyStatus = status === 'UNCHECKED' || status === 'REFUSED' || status === 'ACCEPTED';
 
@@ -79,7 +84,7 @@ export const MyStudyCard = ({
               title="나의 포지션"
               content={position?.name || '나의 포지션'}
               disabled={status === 'COMPLETED'}
-              fontSize={18}
+              fontSize={16}
               titleWidth={120}
             />
             {period && (
@@ -87,7 +92,7 @@ export const MyStudyCard = ({
                 title="진행 기간"
                 content={period || '진행 기간'}
                 disabled={status === 'COMPLETED'}
-                fontSize={18}
+                fontSize={16}
                 titleWidth={120}
               />
             )}
@@ -96,7 +101,7 @@ export const MyStudyCard = ({
                 title="팀원 수"
                 content={participantCount || '팀원 수'}
                 disabled={status === 'COMPLETED'}
-                fontSize={18}
+                fontSize={16}
                 titleWidth={120}
               />
             )}
@@ -119,6 +124,7 @@ export const MyStudyCard = ({
               scheme="normal"
               onClick={(e) => {
                 e.stopPropagation();
+                setIsOpen(true);
               }}
             >
               <Clip width="18" height="100%" />
@@ -138,6 +144,7 @@ export const MyStudyCard = ({
           {(status === 'REFUSED' || status === 'ACCEPTED') && <Button onClick={() => {}}>지원 기록 삭제하기</Button>}
         </MyStudyCardButtonsWrapper>
       </StudyInfoWrapper>
+      {isOpen && <RecruitmentDetailModal recruitmentId={recruitmnetId} handleModal={setIsOpen} />}
     </MyStudyCardWrapper>
   );
 };

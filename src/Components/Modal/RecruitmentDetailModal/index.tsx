@@ -3,21 +3,26 @@ import { ColumnDivider } from '@/Components/Common/Divider/ColumnDivider';
 import { RowDivider } from '@/Components/Common/Divider/RowDivider';
 import { InfoField } from '@/Components/Common/InfoField';
 import { useRecruitmentDetail } from '@/Hooks/recruitments/useRecruitmentDetail';
+import { useOutSideClick } from '@/Hooks/useOutsideClick';
 import { Position, Stack } from '@/Types/study';
 import { dateFormatter, getDayById, getPeriod, isEdited } from '@/utils/date';
+import { SetStateAction, useRef } from 'react';
 import styled from 'styled-components';
 
 export interface RecruitmentDetailModlProps {
   recruitmentId: number;
+  handleModal: React.Dispatch<SetStateAction<boolean>>;
 }
 
-export const RecruitmentDetailModal = ({ recruitmentId }: RecruitmentDetailModlProps) => {
+export const RecruitmentDetailModal = ({ recruitmentId, handleModal }: RecruitmentDetailModlProps) => {
   const { data: recruitmentDetail, isLoading } = useRecruitmentDetail(recruitmentId);
   const studyInfo = recruitmentDetail?.study;
   const recruitmentInfo = recruitmentDetail?.recruitment;
+  const modalRef = useRef<HTMLDivElement>(null);
+  useOutSideClick(modalRef, () => handleModal(false));
 
   return (
-    <ModalLayout>
+    <ModalLayout ref={modalRef}>
       {isLoading ? (
         <Loading />
       ) : (
