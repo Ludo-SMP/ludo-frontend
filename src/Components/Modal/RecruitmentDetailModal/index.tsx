@@ -9,6 +9,7 @@ import { useOutSideClick } from '@/Hooks/useOutsideClick';
 import { Position, Stack } from '@/Types/study';
 import { dateFormatter, getDayById, getPeriod, isEdited } from '@/utils/date';
 import { SetStateAction, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 export interface RecruitmentDetailModlProps {
@@ -18,6 +19,7 @@ export interface RecruitmentDetailModlProps {
 
 export const RecruitmentDetailModal = ({ recruitmentId, handleModal }: RecruitmentDetailModlProps) => {
   const { data: recruitmentDetail, isLoading } = useRecruitmentDetail(recruitmentId);
+  const navigate = useNavigate();
   const studyInfo = recruitmentDetail?.study;
   const recruitmentInfo = recruitmentDetail?.recruitment;
 
@@ -28,7 +30,7 @@ export const RecruitmentDetailModal = ({ recruitmentId, handleModal }: Recruitme
   useOutSideClick(modalRef, () => handleModal(false));
 
   return (
-    <ModalLayout ref={modalRef}>
+    <ModalLayout ref={modalRef} onClick={(e) => e.stopPropagation()}>
       {isLoading ? (
         <Loading />
       ) : (
@@ -45,7 +47,12 @@ export const RecruitmentDetailModal = ({ recruitmentId, handleModal }: Recruitme
                 </CreationInfoRow>
               </CreationInfoRows>
             </HeaderContentBox>
-            <CloseIcon onClick={() => {}}>
+            <CloseIcon
+              onClick={(e) => {
+                e.stopPropagation();
+                handleModal(false);
+              }}
+            >
               <Close width={24} height={24} />
             </CloseIcon>
           </ModalHeader>
@@ -139,14 +146,23 @@ export const RecruitmentDetailModal = ({ recruitmentId, handleModal }: Recruitme
       <ModalBtns>
         <Button
           size="fullWidth"
-          onClick={() => {
-            closeRecruitmentMutate();
+          onClick={(e) => {
+            e.stopPropagation();
             handleModal(false);
+            closeRecruitmentMutate();
           }}
         >
           모집 마감하기
         </Button>
-        <Button size="fullWidth" scheme="secondary" onClick={() => {}}>
+        <Button
+          size="fullWidth"
+          scheme="secondary"
+          onClick={(e) => {
+            e.stopPropagation();
+            handleModal(false);
+            navigate(`/studies/${studyInfo.id}/recruitments/${recruitmentInfo.id}/edit`);
+          }}
+        >
           모집 공고 수정하기
         </Button>
       </ModalBtns>
