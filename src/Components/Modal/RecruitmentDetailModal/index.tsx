@@ -1,7 +1,9 @@
 import { Close, Loading, MemberImage } from '@/Assets';
+import Button from '@/Components/Common/Button';
 import { ColumnDivider } from '@/Components/Common/Divider/ColumnDivider';
 import { RowDivider } from '@/Components/Common/Divider/RowDivider';
 import { InfoField } from '@/Components/Common/InfoField';
+import { useCloseRecruitmentMutation } from '@/Hooks/recruitments/useCloseRecruitmentMutation';
 import { useRecruitmentDetail } from '@/Hooks/recruitments/useRecruitmentDetail';
 import { useOutSideClick } from '@/Hooks/useOutsideClick';
 import { Position, Stack } from '@/Types/study';
@@ -18,7 +20,11 @@ export const RecruitmentDetailModal = ({ recruitmentId, handleModal }: Recruitme
   const { data: recruitmentDetail, isLoading } = useRecruitmentDetail(recruitmentId);
   const studyInfo = recruitmentDetail?.study;
   const recruitmentInfo = recruitmentDetail?.recruitment;
+
+  const { mutate: closeRecruitmentMutate } = useCloseRecruitmentMutation(studyInfo?.id);
+
   const modalRef = useRef<HTMLDivElement>(null);
+
   useOutSideClick(modalRef, () => handleModal(false));
 
   return (
@@ -130,7 +136,20 @@ export const RecruitmentDetailModal = ({ recruitmentId, handleModal }: Recruitme
           </ModalBody>
         </ModalInner>
       )}
-      {/* <ModalBtns></ModalBtns> */}
+      <ModalBtns>
+        <Button
+          size="fullWidth"
+          onClick={() => {
+            closeRecruitmentMutate();
+            handleModal(false);
+          }}
+        >
+          모집 마감하기
+        </Button>
+        <Button size="fullWidth" scheme="secondary" onClick={() => {}}>
+          모집 공고 수정하기
+        </Button>
+      </ModalBtns>
     </ModalLayout>
   );
 };
@@ -277,4 +296,11 @@ const StudyInfoLayout = styled.section`
   flex-wrap: wrap;
   grid-gap: 24px;
   width: 100%;
+`;
+
+const ModalBtns = styled.div`
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  align-self: stretch;
 `;
