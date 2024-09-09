@@ -166,7 +166,7 @@ const MyStudyCardWrapper = styled.div<{
     cursor: pointer;
   }
 
-  svg {
+  & > svg:first-child {
     border-radius: 16px 0 0 16px;
   }
 
@@ -178,7 +178,7 @@ const MyStudyCardWrapper = styled.div<{
     width: 302px;
     height: auto;
 
-    svg {
+    & > svg:first-child {
       width: 300px;
       height: 300px;
       border-radius: 16px 16px 0 0;
@@ -207,11 +207,7 @@ const StudyInfoWrapper = styled.div<{
     padding: 16px 24px;
     flex-direction: column;
     align-items: center;
-    gap: ${(props) =>
-      ((props.status === 'PROGRESS' || props.status === 'RECRUITING') && !props.hasRecruitment && props.isOwner) ||
-      props.isApplyStatus
-        ? '24px'
-        : 0};
+    gap: 24px;
     align-self: stretch;
   }
 `;
@@ -299,5 +295,6 @@ const MyStudyCardButtonsWrapper = styled.div<{ isApplyStatus: boolean }>`
 
   ${media.custom(600)} {
     justify-content: center;
+    gap: 24px;
   }
 `;

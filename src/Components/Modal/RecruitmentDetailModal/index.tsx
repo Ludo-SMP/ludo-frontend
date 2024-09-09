@@ -6,6 +6,7 @@ import { InfoField } from '@/Components/Common/InfoField';
 import { useCloseRecruitmentMutation } from '@/Hooks/recruitments/useCloseRecruitmentMutation';
 import { useRecruitmentDetail } from '@/Hooks/recruitments/useRecruitmentDetail';
 import { useOutSideClick } from '@/Hooks/useOutsideClick';
+import { media } from '@/Styles/theme';
 import { Position, Stack } from '@/Types/study';
 import { dateFormatter, getDayById, getPeriod, isEdited } from '@/utils/date';
 import { SetStateAction, useRef } from 'react';
@@ -172,10 +173,9 @@ export const RecruitmentDetailModal = ({ recruitmentId, handleModal }: Recruitme
 
 const ModalLayout = styled.div`
   display: flex;
-  padding: 40px;
+  padding: 30px;
   flex-direction: column;
   align-items: flex-end;
-  flex-wrap: wrap;
   position: fixed;
   z-index: 100;
   top: 50%;
@@ -184,7 +184,14 @@ const ModalLayout = styled.div`
   gap: 40px;
   width: 90%;
   border-radius: ${({ theme }) => theme.borderRadius.small};
+  border: 1px solid ${({ theme }) => theme.color.black1};
   background: ${({ theme }) => theme.color.white2};
+  overflow-y: scroll;
+
+  ${media.custom(700)} {
+    gap: 30px;
+    height: 90%;
+  }
 `;
 
 const ModalInner = styled.div`
@@ -225,6 +232,10 @@ const Title = styled.div`
   font-style: normal;
   font-weight: 800;
   line-height: 40px;
+
+  ${media.custom(500)} {
+    font-size: ${({ theme }) => theme.font.large};
+  }
 `;
 
 const CreationInfoRows = styled.div`
@@ -250,6 +261,13 @@ const CreationInfoRow = styled.span`
 
 const CloseIcon = styled.div`
   padding: 8px;
+
+  ${media.custom(600)} {
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
 `;
 
 const ModalBody = styled.div`
@@ -292,6 +310,13 @@ const RecruitmentInfoLayout = styled.div`
   flex-wrap: wrap;
   grid-gap: 24px;
   width: 100%;
+
+  ${media.custom(700)} {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  ${media.custom(500)} {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `;
 
 const StudyInfoBox = styled.section`
@@ -312,6 +337,14 @@ const StudyInfoLayout = styled.section`
   flex-wrap: wrap;
   grid-gap: 24px;
   width: 100%;
+
+  ${media.custom(700)} {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  ${media.custom(500)} {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `;
 
 const ModalBtns = styled.div`
