@@ -51,6 +51,7 @@ const StudiesSection = () => {
               ({
                 studyId,
                 title,
+                recruitmentId,
                 status,
                 position,
                 startDateTime,
@@ -62,6 +63,7 @@ const StudiesSection = () => {
                 <li key={studyId}>
                   <MyStudyCard
                     id={studyId}
+                    recruitmnetId={recruitmentId && recruitmentId}
                     title={title}
                     status={status}
                     position={position}

@@ -35,6 +35,7 @@ export { default as NextArrow } from './icons/nextArrow.svg?react';
 export { default as CreateStudy } from './icons/createstudy.svg?react';
 export { default as DefaultStudyThumbnail } from './icons/studyThumbnail.svg';
 export { default as SearchRecruitment } from './icons/recruitment.svg?react';
+export { default as Clip } from './icons/clip.svg?react';
 
 // Logo
 export { default as BlankLogo } from './images/blank-logo.webp';

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { StudyThumbnail } from '@/Assets';
+import { Clip, StudyThumbnail } from '@/Assets';
 import StudyToken from '../Common/StudyToken';
 import { InfoField } from '../Common/InfoField';
 import Button from '../Common/Button';
@@ -15,6 +15,9 @@ interface MyStudyCardProps {
 
   /** 스터디 제목 */
   title: string;
+
+  /** 모집공고 Id */
+  recruitmnetId?: number;
 
   /** 현재 상태 */
   status: StudyStatus | ApplyStatus;
@@ -109,6 +112,17 @@ export const MyStudyCard = ({
               }}
             >
               스터디원 모집 공고 작성하기
+            </Button>
+          )}
+          {(status === 'PROGRESS' || status === 'RECRUITING') && hasRecruitment && isOwner && (
+            <Button
+              scheme="normal"
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+            >
+              <Clip width="18" height="100%" />
+              작성된 스터디원 모집 공고
             </Button>
           )}
           {status === 'UNCHECKED' && (
