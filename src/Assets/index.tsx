@@ -48,7 +48,7 @@ export { default as NotFound } from './images/character1.webp';
 export { default as LoginFail } from './images/character2.webp';
 export { default as SignUpFail } from './images/character3.webp';
 export { default as ErrorBoundaryImage } from './images/character4.webp';
-export { default as LoadingImage } from './images/character1.webp';
+export { default as LoadingImage } from './images/loading.gif';
 
 // Background
 export { default as SignUpBackground } from './images/background1.webp';
