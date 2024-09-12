@@ -48,6 +48,6 @@ export const getRecruitmentDetail = (recruitmentId: number): Promise<{ data: { d
 export const deleteRecruitment = (studyId: number): Promise<{ data: { data: RecruitmentDetail } }> =>
   httpClient.get(API_END_POINT.DELETE_RECRUITMENT(studyId));
 
-// ???
+// 모집공고 마감
 export const closeRecruitment = (studyId: number) =>
   httpClient.patch(API_END_POINT.CLOSE_RECRUITMENT(studyId), null, { params: { status: 'RECRUITED' } });

@@ -226,6 +226,7 @@ export interface ApplicantsDetail {
 
 export interface ParticipateStudy {
   studyId: number;
+  recruitmentId?: number;
   title: string;
   position: Position;
   startDateTime: string;
