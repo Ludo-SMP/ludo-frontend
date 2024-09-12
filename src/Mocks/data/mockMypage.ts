@@ -18,7 +18,7 @@ export const mockMypage = {
   participateStudies: [
     {
       studyId: 1,
-      title: 'string',
+      title: '스터디 주인 / 모집공고 없는 경우',
       position: {
         id: 0,
         name: 'string',
@@ -32,7 +32,8 @@ export const mockMypage = {
     },
     {
       studyId: 2,
-      title: 'stringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstring',
+      title: '스터디 주인 / 모집공고 있는 경우',
+      recruitmentId: 2,
       position: {
         id: 0,
         name: 'string',
@@ -42,7 +43,21 @@ export const mockMypage = {
       endDateTime: '2024-03-06T01:19:09.182Z',
       participantCount: 2,
       isOwner: true,
-      hasRecruitment: false,
+      hasRecruitment: true,
+    },
+    {
+      studyId: 3,
+      title: '스터디 주인이 아닌 경우',
+      position: {
+        id: 0,
+        name: 'string',
+      },
+      status: 'RECRUITING',
+      startDateTime: '2024-03-06T01:19:09.182Z',
+      endDateTime: '2024-03-06T01:19:09.182Z',
+      participantCount: 2,
+      isOwner: false,
+      hasRecruitment: true,
     },
   ],
   applicantRecruitments: [
@@ -66,8 +81,8 @@ export const mockMypage = {
       },
       status: 'COMPLETED',
       startDateTime: '2024-03-06T01:19:09.182Z',
-      endDateTime: '2024-03-06T01:19:09.182Z',
-      participantCount: 0,
+      endDateTime: '2024-03-06T01:19:10.182Z',
+      participantCount: 1,
       isOwner: true,
       hasRecruitment: false,
     },

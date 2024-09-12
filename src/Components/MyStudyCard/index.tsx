@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { StudyThumbnail } from '@/Assets';
+import { Clip, StudyThumbnail } from '@/Assets';
 import StudyToken from '../Common/StudyToken';
 import { InfoField } from '../Common/InfoField';
 import Button from '../Common/Button';
@@ -9,12 +9,17 @@ import { useCancelAppyMutation } from '@/Hooks/study/useCancelAppyMutation';
 import { useQueryClient } from '@tanstack/react-query';
 import { STUDY } from '@/Constants/queryString';
 import { media, textEllipsis } from '@/Styles/theme';
+import { RecruitmentDetailModal } from '../Modal/RecruitmentDetailModal';
+import { useState } from 'react';
 
 interface MyStudyCardProps {
   id: number;
 
   /** 스터디 제목 */
   title: string;
+
+  /** 모집공고 Id */
+  recruitmnetId?: number;
 
   /** 현재 상태 */
   status: StudyStatus | ApplyStatus;
@@ -45,12 +50,15 @@ export const MyStudyCard = ({
   participantCount,
   isOwner,
   hasRecruitment,
+  recruitmnetId,
 }: MyStudyCardProps) => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const cancelApplySuccessHandler = () => {
     queryClient.invalidateQueries({ queryKey: [...STUDY.MYPAGE_INFO()] });
   };
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
   const { mutate: cancelMutate } = useCancelAppyMutation(1, id, cancelApplySuccessHandler);
   const isApplyStatus = status === 'UNCHECKED' || status === 'REFUSED' || status === 'ACCEPTED';
 
@@ -76,7 +84,7 @@ export const MyStudyCard = ({
               title="나의 포지션"
               content={position?.name || '나의 포지션'}
               disabled={status === 'COMPLETED'}
-              fontSize={18}
+              fontSize={16}
               titleWidth={120}
             />
             {period && (
@@ -84,7 +92,7 @@ export const MyStudyCard = ({
                 title="진행 기간"
                 content={period || '진행 기간'}
                 disabled={status === 'COMPLETED'}
-                fontSize={18}
+                fontSize={16}
                 titleWidth={120}
               />
             )}
@@ -93,7 +101,7 @@ export const MyStudyCard = ({
                 title="팀원 수"
                 content={participantCount || '팀원 수'}
                 disabled={status === 'COMPLETED'}
-                fontSize={18}
+                fontSize={16}
                 titleWidth={120}
               />
             )}
@@ -111,6 +119,18 @@ export const MyStudyCard = ({
               스터디원 모집 공고 작성하기
             </Button>
           )}
+          {(status === 'PROGRESS' || status === 'RECRUITING') && hasRecruitment && isOwner && (
+            <Button
+              scheme="normal"
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsOpen(true);
+              }}
+            >
+              <Clip width="18" height="100%" />
+              작성된 스터디원 모집 공고
+            </Button>
+          )}
           {status === 'UNCHECKED' && (
             <Button
               onClick={(e) => {
@@ -124,6 +144,7 @@ export const MyStudyCard = ({
           {(status === 'REFUSED' || status === 'ACCEPTED') && <Button onClick={() => {}}>지원 기록 삭제하기</Button>}
         </MyStudyCardButtonsWrapper>
       </StudyInfoWrapper>
+      {isOpen && <RecruitmentDetailModal recruitmentId={recruitmnetId} handleModal={setIsOpen} />}
     </MyStudyCardWrapper>
   );
 };
@@ -145,7 +166,7 @@ const MyStudyCardWrapper = styled.div<{
     cursor: pointer;
   }
 
-  svg {
+  & > svg:first-child {
     border-radius: 16px 0 0 16px;
   }
 
@@ -157,7 +178,7 @@ const MyStudyCardWrapper = styled.div<{
     width: 302px;
     height: auto;
 
-    svg {
+    & > svg:first-child {
       width: 300px;
       height: 300px;
       border-radius: 16px 16px 0 0;
@@ -186,11 +207,7 @@ const StudyInfoWrapper = styled.div<{
     padding: 16px 24px;
     flex-direction: column;
     align-items: center;
-    gap: ${(props) =>
-      ((props.status === 'PROGRESS' || props.status === 'RECRUITING') && !props.hasRecruitment && props.isOwner) ||
-      props.isApplyStatus
-        ? '24px'
-        : 0};
+    gap: 24px;
     align-self: stretch;
   }
 `;
@@ -278,5 +295,6 @@ const MyStudyCardButtonsWrapper = styled.div<{ isApplyStatus: boolean }>`
 
   ${media.custom(600)} {
     justify-content: center;
+    gap: 24px;
   }
 `;
