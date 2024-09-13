@@ -64,6 +64,7 @@ const Modal = ({
     </ModalBackDropWrapper>
   );
 };
+
 const ModalBackDropWrapper = styled.div`
   position: fixed;
   z-index: 999;
@@ -74,6 +75,7 @@ const ModalBackDropWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  backdrop-filter: brightness(0.9);
 `;
 
 const ModalWrapper = styled.div`
